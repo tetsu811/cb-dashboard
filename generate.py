@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-可轉債策略儀表板
-- CB 資料：thefew.tw/cb（全部 400+ 筆）+ /cb/recent（含掛牌日，策略一用）
-- 融券+借券：TWSE TWT93U（每日盤後自動更新，無需登入）
-- 策略一：CBAS新上市（需掛牌日，來自 /cb/recent）
-- 策略二：轉換套利（全部 CB）
+å¯è½åµç­ç¥åè¡¨æ¿
+- CB è³æï¼thefew.tw/cbï¼å¨é¨ 400+ ç­ï¼+ /cb/recentï¼å«æçæ¥ï¼ç­ç¥ä¸ç¨ï¼
+- èå¸+åå¸ï¼TWSE TWT93Uï¼æ¯æ¥ç¤å¾èªåæ´æ°ï¼ç¡éç»å¥ï¼
+- ç­ç¥ä¸ï¼CBASæ°ä¸å¸ï¼éæçæ¥ï¼ä¾èª /cb/recentï¼
+- ç­ç¥äºï¼è½æå¥å©ï¼å¨é¨ CBï¼
 """
 
 import requests
@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from playwright.sync_api import sync_playwright
 
-# ── 路徑設定（GitHub Actions 用）─────────────────────────
+# ââ è·¯å¾è¨­å®ï¼GitHub Actions ç¨ï¼âââââââââââââââââââââââââ
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_HTML = os.path.join(BASE_DIR, 'index.html')
 
@@ -30,26 +30,35 @@ HEADERS = {
     'Referer': 'https://thefew.tw/',
 }
 
-# ─────────────────────────────────────────────────────────────
-# # 共用：解析數字（含負數）
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# # å±ç¨ï¼è§£ææ¸å­ï¼å«è² æ¸ï¼
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def parse_num(txt):
     m = re.match(r'^(-?[\d.]+)', txt.strip())
     return float(m.group(1)) if m else None
 
 
-# ─────────────────────────────────────────────────────────────
-# 1. 抓全部 CB（Playwright 載入 thefew.tw/cb，取得 400+ 筆完整資料）
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 1. æå¨é¨ CBï¼Playwright è¼å¥ thefew.tw/cbï¼åå¾ 400+ ç­å®æ´è³æï¼
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def fetch_all_cbs():
-    print("[1/3] 抓取全部CB (thefew.tw/cb) — Playwright...")
+    print("[1/3] æåå¨é¨CB (thefew.tw/cb) â Playwright...")
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto('https://thefew.tw/cb', timeout=60000)
-            page.wait_for_selector('#cb-table tbody tr', timeout=30000)
-            page.wait_for_timeout(3000)
+            page.goto('https://thefew.tw/cb', wait_until='networkidle', timeout=90000)
+            # Wait until JS renders 100+ data rows (8 cells each)
+            page.wait_for_function(
+                """() => {
+                    const rows = document.querySelectorAll('#cb-table tbody tr');
+                    let n = 0;
+                    for (const r of rows) { if (r.querySelectorAll('td').length === 8) n++; }
+                    return n > 100;
+                }""",
+                timeout=60000
+            )
+            page.wait_for_timeout(2000)
             html = page.content()
             browser.close()
 
@@ -79,47 +88,50 @@ def fetch_all_cbs():
                 'maturity_date':    cells[7].get_text(strip=True),
                 'listing_date':     None,
             })
-        print(f"  → 全部CB: {len(data)} 筆")
+        print(f"  â å¨é¨CB: {len(data)} ç­")
         if len(data) < 50:
-            raise ValueError(f"資料不足，僅 {len(data)} 筆（預期 400+）")
+            raise ValueError(f"è³æä¸è¶³ï¼å {len(data)} ç­ï¼é æ 400+ï¼")
         return data
     except Exception as e:
-        print(f"  ⚠ 無法抓取 thefew.tw/cb: {e}")
+        print(f"  â  ç¡æ³æå thefew.tw/cb: {e}")
         raise
 
 
-# ─────────────────────────────────────────────────────────────
-# 2. 抓近期CB（thefew.tw/cb/recent → 含掛牌日，策略一必需）
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 2. æè¿æCBï¼thefew.tw/cb/recent â å«æçæ¥ï¼ç­ç¥ä¸å¿éï¼
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def fetch_recent_cbs():
-    print("[2/3] 抓取近期CB (thefew.tw/cb/recent) — Playwright...")
+    print("[2/3] æåè¿æCB (thefew.tw/cb/recent) â Playwright...")
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()
-            page.goto('https://thefew.tw/cb/recent', timeout=60000)
-            page.wait_for_selector('table tbody tr', timeout=30000)
-            page.wait_for_timeout(3000)
+            page.goto('https://thefew.tw/cb/recent', wait_until='networkidle', timeout=90000)
+            page.wait_for_function(
+                "() => document.querySelectorAll('table tbody tr').length > 5",
+                timeout=60000
+            )
+            page.wait_for_timeout(2000)
             html = page.content()
             browser.close()
         soup = BeautifulSoup(html, 'html.parser')
 
-        # 找含掛牌日的 JSON 資料（嵌在頁面 script 或 table 裡）
+        # æ¾å«æçæ¥ç JSON è³æï¼åµå¨é é¢ script æ table è£¡ï¼
         data = []
         rows = soup.select('table tbody tr')
         for tr in rows:
             cells = tr.select('td')
             if len(cells) < 7:
                 continue
-            # 結構可能不同，依實際頁面調整
+            # çµæ§å¯è½ä¸åï¼ä¾å¯¦éé é¢èª¿æ´
             texts = [c.get_text(strip=True) for c in cells]
-            # 嘗試抓 cb_code（通常在第一欄）
+            # åè©¦æ cb_codeï¼éå¸¸å¨ç¬¬ä¸æ¬ï¼
             code_match = re.match(r'(\d{4,6})', texts[0])
             if not code_match:
                 continue
             cb_code = code_match.group(1)
 
-            # 找掛牌日（格式 YYYY-MM-DD）
+            # æ¾æçæ¥ï¼æ ¼å¼ YYYY-MM-DDï¼
             listing_date = None
             for t in texts:
                 m = re.search(r'(\d{4}-\d{2}-\d{2})', t)
@@ -135,27 +147,27 @@ def fetch_recent_cbs():
             })
 
         if data:
-            print(f"  → 近期CB: {len(data)} 筆")
+            print(f"  â è¿æCB: {len(data)} ç­")
             return {d['cb_code']: d for d in data}
         else:
-            raise ValueError("解析到 0 筆")
+            raise ValueError("è§£æå° 0 ç­")
 
     except Exception as e:
-        print(f"  ⚠ 無法抓取 /cb/recent: {e}")
+        print(f"  â  ç¡æ³æå /cb/recent: {e}")
         return {}
 
 
-# ─────────────────────────────────────────────────────────────
-# 3. 抓融券+借券賣出餘額
-#    TWSE TWT93U：上市股票 1,262 支（date 參數）
-#    TPEX SBL   ：上櫃股票  903 支（自動最新日）
-#    兩者欄位相同（單位：股，/1000 = 張）：
-#    [0]代號 [1]名稱
-#    融資: [2-7]
-#    融券+借券: [8]前日餘額 [9]當日賣出 [10]當日還券 [11]調整 [12]今日餘額 [13]限額
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 3. æèå¸+åå¸è³£åºé¤é¡
+#    TWSE TWT93Uï¼ä¸å¸è¡ç¥¨ 1,262 æ¯ï¼date åæ¸ï¼
+#    TPEX SBL   ï¼ä¸æ«è¡ç¥¨  903 æ¯ï¼èªåææ°æ¥ï¼
+#    å©èæ¬ä½ç¸åï¼å®ä½ï¼è¡ï¼/1000 = å¼µï¼ï¼
+#    [0]ä»£è [1]åç¨±
+#    èè³: [2-7]
+#    èå¸+åå¸: [8]åæ¥é¤é¡ [9]ç¶æ¥è³£åº [10]ç¶æ¥éå¸ [11]èª¿æ´ [12]ä»æ¥é¤é¡ [13]éé¡
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def _parse_short_rows(rows, data_date):
-    """共用解析邏輯：把 TWSE/TPEX 的 row 陣列轉成 short_map"""
+    """å±ç¨è§£æéè¼¯ï¼æ TWSE/TPEX ç row é£åè½æ short_map"""
     def ti(s):
         try:
             return round(int(str(s).replace(',', '').strip() or '0') / 1000)
@@ -164,7 +176,7 @@ def _parse_short_rows(rows, data_date):
     short_map = {}
     for row in rows:
         code = row[0]
-        if not code or code == '合計':
+        if not code or code == 'åè¨':
             continue
         prev    = ti(row[8])
         today_v = ti(row[12])
@@ -182,11 +194,11 @@ def _parse_short_rows(rows, data_date):
 
 
 def fetch_short_data():
-    print("[3/3] 抓取融券+借券資料 (TWSE + TPEX)...")
+    print("[3/3] æåèå¸+åå¸è³æ (TWSE + TPEX)...")
     short_map = {}
     data_date = 'N/A'
 
-    # ── TWSE TWT93U（上市，需帶 date 參數）──────────────────
+    # ââ TWSE TWT93Uï¼ä¸å¸ï¼éå¸¶ date åæ¸ï¼ââââââââââââââââââ
     for delta in range(0, 5):
         try_date = (TODAY - timedelta(days=delta)).strftime('%Y%m%d')
         try:
@@ -198,12 +210,12 @@ def fetch_short_data():
                 twse_map = _parse_short_rows(d['data'], try_date)
                 short_map.update(twse_map)
                 data_date = try_date
-                print(f"  → TWSE: {len(twse_map)} 支（{try_date}）")
+                print(f"  â TWSE: {len(twse_map)} æ¯ï¼{try_date}ï¼")
                 break
         except Exception as e:
-            print(f"  ⚠ TWSE {try_date}: {e}")
+            print(f"  â  TWSE {try_date}: {e}")
 
-    # ── TPEX SBL（上櫃，自動返回最新日）────────────────────
+    # ââ TPEX SBLï¼ä¸æ«ï¼èªåè¿åææ°æ¥ï¼ââââââââââââââââââââ
     try:
         url = 'https://www.tpex.org.tw/www/zh-tw/margin/sbl'
         r = requests.get(url, headers=HEADERS, timeout=20)
@@ -212,29 +224,29 @@ def fetch_short_data():
             rows = d['tables'][0]['data']
             tpex_date = d.get('date', data_date)
             tpex_map = _parse_short_rows(rows, tpex_date)
-            # TPEX 補上市場沒有的上櫃股（不覆蓋 TWSE 已有資料）
+            # TPEX è£ä¸å¸å ´æ²æçä¸æ«è¡ï¼ä¸è¦è TWSE å·²æè³æï¼
             added = 0
             for code, v in tpex_map.items():
                 if code not in short_map:
                     short_map[code] = v
                     added += 1
-            print(f"  → TPEX: {len(tpex_map)} 支，新增 {added} 支上櫃（{tpex_date}）")
+            print(f"  â TPEX: {len(tpex_map)} æ¯ï¼æ°å¢ {added} æ¯ä¸æ«ï¼{tpex_date}ï¼")
             if data_date == 'N/A':
                 data_date = tpex_date
     except Exception as e:
-        print(f"  ⚠ TPEX: {e}")
+        print(f"  â  TPEX: {e}")
 
     if short_map:
-        print(f"  → 合計: {len(short_map)} 支股票")
+        print(f"  â åè¨: {len(short_map)} æ¯è¡ç¥¨")
         return short_map, data_date
 
-    print("  ⚠ 無融券資料")
+    print("  â  ç¡èå¸è³æ")
     return {}, 'N/A'
 
 
-# ─────────────────────────────────────────────────────────────
-# 4. 計算交易日數（只數週一～五，不含週末）
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 4. è¨ç®äº¤ææ¥æ¸ï¼åªæ¸é±ä¸ï½äºï¼ä¸å«é±æ«ï¼
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def trading_days_between(start_str, end_date=None):
     if not start_str:
         return None
@@ -247,10 +259,10 @@ def trading_days_between(start_str, end_date=None):
         count = 0
         cur = start
         while cur <= end_date:
-            if cur.weekday() < 5:  # 週一=0 週五=4
+            if cur.weekday() < 5:  # é±ä¸=0 é±äº=4
                 count += 1
             cur += timedelta(days=1)
-        return count - 1  # 掛牌當天算 Day 0
+        return count - 1  # æçç¶å¤©ç® Day 0
     except:
         return None
 
@@ -264,49 +276,49 @@ def calendar_days_to(maturity_str, end_date=None):
         return 0
 
 
-# ─────────────────────────────────────────────────────────────
-# 5. 策略訊號邏輯
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 5. ç­ç¥è¨èéè¼¯
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def evaluate_s1(cb, short_map, recent_map):
-    """策略一：CBAS 新上市（3 條件）"""
+    """ç­ç¥ä¸ï¼CBAS æ°ä¸å¸ï¼3 æ¢ä»¶ï¼"""
     rec = recent_map.get(cb['cb_code'], {})
     listing_date = rec.get('listing_date') or cb.get('listing_date')
     if not listing_date:
-        return None  # 沒有掛牌日，無法判斷
+        return None  # æ²ææçæ¥ï¼ç¡æ³å¤æ·
 
     td = trading_days_between(listing_date)
     if td is None or td < 0:
-        return {'signal': '即將上市', 'cls': 'info', 'td': td,
+        return {'signal': 'å³å°ä¸å¸', 'cls': 'info', 'td': td,
                 'c1': False, 'c2': False, 'c3': None}
 
     cbp  = cb.get('cb_price') or 0
     sc   = cb['stock_code']
     sh   = short_map.get(sc)
 
-    c1 = 4 <= td <= 8         # 條件一：掛牌日 D4-D8
-    c2 = cbp >= 98             # 條件二：CB ≥ 98
+    c1 = 4 <= td <= 8         # æ¢ä»¶ä¸ï¼æçæ¥ D4-D8
+    c2 = cbp >= 98             # æ¢ä»¶äºï¼CB â¥ 98
     if sh is None:
-        c3 = None              # 無融券資料（真的不可放空）
+        c3 = None              # ç¡èå¸è³æï¼ççä¸å¯æ¾ç©ºï¼
     else:
-        c3 = sh['increasing']  # 條件三：融券+借券增加
+        c3 = sh['increasing']  # æ¢ä»¶ä¸ï¼èå¸+åå¸å¢å 
 
     n_ok = sum(x for x in [c1, c2] if x) + (1 if c3 else 0)
 
     if not c1:
         if td <= 3:
-            sig, cls = f'觀察 D{td}', 'watch'
+            sig, cls = f'è§å¯ D{td}', 'watch'
         elif 8 < td <= 20:
-            sig, cls = f'出場 D{td}', 'sell'
+            sig, cls = f'åºå ´ D{td}', 'sell'
         else:
-            sig, cls = '─', 'neutral'
+            sig, cls = 'â', 'neutral'
     elif c1 and c2 and c3:
-        sig, cls = f'★ 買入 D{td} (3/3)', 'buy'
+        sig, cls = f'â è²·å¥ D{td} (3/3)', 'buy'
     elif c1 and c2 and c3 is None:
-        sig, cls = f'◑ 不可放空 D{td}', 'watch'
+        sig, cls = f'â ä¸å¯æ¾ç©º D{td}', 'watch'
     elif c1 and c2:
-        sig, cls = f'✗ 融券未增 D{td}', 'sell'
+        sig, cls = f'â èå¸æªå¢ D{td}', 'sell'
     else:
-        sig, cls = f'─ D{td}', 'neutral'
+        sig, cls = f'â D{td}', 'neutral'
 
     return {'signal': sig, 'cls': cls, 'td': td,
             'c1': c1, 'c2': c2, 'c3': c3,
@@ -316,17 +328,17 @@ def evaluate_s1(cb, short_map, recent_map):
 
 
 def evaluate_s2(cb, short_map):
-    """策略二：轉換套利（4 條件）"""
+    """ç­ç¥äºï¼è½æå¥å©ï¼4 æ¢ä»¶ï¼"""
     prem  = cb.get('premium_rate') or 0
     conv  = cb.get('converted_pct') or 0
     dtm   = calendar_days_to(cb.get('maturity_date', ''))
     sc    = cb['stock_code']
     sh    = short_map.get(sc)
 
-    d1 = prem <= 2            # 溢價 ≤ 2%
-    d2 = conv < 60            # 已轉換 < 60%
-    d3 = dtm >= 90            # 距到期 ≥ 90 天
-    d4 = sh['increasing'] if sh else None  # 融券+借券增加
+    d1 = prem <= 2            # æº¢å¹ â¤ 2%
+    d2 = conv < 60            # å·²è½æ < 60%
+    d3 = dtm >= 90            # è·å°æ â¥ 90 å¤©
+    d4 = sh['increasing'] if sh else None  # èå¸+åå¸å¢å 
 
     if sh is None:
         short_today = None; short_change = None
@@ -334,15 +346,15 @@ def evaluate_s2(cb, short_map):
         short_today = sh['short_today']; short_change = sh['short_change']
 
     if d1 and d2 and d3 and d4:
-        sig, cls = '★ 套利 (4/4)', 'buy'
+        sig, cls = 'â å¥å© (4/4)', 'buy'
     elif d1 and d2 and d3 and d4 is None:
-        sig, cls = '◑ 不可放空 (3+?/4)', 'watch'
+        sig, cls = 'â ä¸å¯æ¾ç©º (3+?/4)', 'watch'
     elif d1 and d2 and d3:
-        sig, cls = '✗ 融券未增 (3/4)', 'sell'
+        sig, cls = 'â èå¸æªå¢ (3/4)', 'sell'
     elif prem <= 5 and d2 and d3:
-        sig, cls = '接近套利區', 'watch'
+        sig, cls = 'æ¥è¿å¥å©å', 'watch'
     else:
-        sig, cls = '─', 'neutral'
+        sig, cls = 'â', 'neutral'
 
     return {'signal': sig, 'cls': cls,
             'c1': d1, 'c2': d2, 'c3': d3, 'c4': d4,
@@ -350,20 +362,20 @@ def evaluate_s2(cb, short_map):
             'short_today': short_today, 'short_change': short_change}
 
 
-# ─────────────────────────────────────────────────────────────
-# 6. 生成 HTML
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 6. çæ HTML
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def chk(ok, na=False):
     if na:  return '<span class="chk chk-na">?</span>'
-    return '<span class="chk chk-y">✓</span>' if ok else '<span class="chk chk-n">✗</span>'
+    return '<span class="chk chk-y">â</span>' if ok else '<span class="chk chk-n">â</span>'
 
 def fmt(v, d=1):
-    if v is None: return '─'
+    if v is None: return 'â'
     try: return f'{float(v):.{d}f}'
-    except: return '─'
+    except: return 'â'
 
 def sc_fmt(v):
-    if v is None: return '─'
+    if v is None: return 'â'
     return f'+{v}' if v > 0 else str(v)
 
 def sc_cls(v):
@@ -371,66 +383,66 @@ def sc_cls(v):
     return 'short-up' if v > 0 else 'short-dn'
 
 def generate_html(all_cbs, recent_map, short_map, short_date):
-    # 計算所有訊號
+    # è¨ç®ææè¨è
     results = []
     for cb in all_cbs:
         s1 = evaluate_s1(cb, short_map, recent_map)
         s2 = evaluate_s2(cb, short_map)
         results.append({**cb, 's1': s1, 's2': s2})
 
-    # 分類
+    # åé¡
     s1_items = [r for r in results if r['s1'] and r['s1']['td'] is not None and r['s1']['td'] >= 0 and r['s1']['td'] <= 20]
     s1_items.sort(key=lambda x: x['s1']['td'])
     s2_items = sorted(results, key=lambda x: (
-        0 if '★' in x['s2']['signal'] else 1 if '◑' in x['s2']['signal'] else 2 if '✗' not in x['s2']['signal'] and x['s2']['signal'] != '─' else 3,
+        0 if 'â' in x['s2']['signal'] else 1 if 'â' in x['s2']['signal'] else 2 if 'â' not in x['s2']['signal'] and x['s2']['signal'] != 'â' else 3,
         x.get('premium_rate') or 99
     ))
 
-    s1_buy   = sum(1 for r in results if r['s1'] and '★' in r['s1']['signal'])
-    s1_pend  = sum(1 for r in results if r['s1'] and '◑' in r['s1']['signal'])
-    s2_buy   = sum(1 for r in results if '★' in r['s2']['signal'])
-    s2_pend  = sum(1 for r in results if '◑' in r['s2']['signal'])
+    s1_buy   = sum(1 for r in results if r['s1'] and 'â' in r['s1']['signal'])
+    s1_pend  = sum(1 for r in results if r['s1'] and 'â' in r['s1']['signal'])
+    s2_buy   = sum(1 for r in results if 'â' in r['s2']['signal'])
+    s2_pend  = sum(1 for r in results if 'â' in r['s2']['signal'])
 
-    # ── S1 rows ──
+    # ââ S1 rows ââ
     s1_rows_html = ''
     for r in s1_items:
         s1 = r['s1']
-        cbas = '✓ 可拆' if s1['td'] >= 6 else f'D6可拆'
-        s1_rows_html += f"""<tr class="{'row-buy' if '★' in s1['signal'] else 'row-watch' if '◑' in s1['signal'] else 'row-sell' if '✗' in s1['signal'] else ''}">
+        cbas = 'â å¯æ' if s1['td'] >= 6 else f'D6å¯æ'
+        s1_rows_html += f"""<tr class="{'row-buy' if 'â' in s1['signal'] else 'row-watch' if 'â' in s1['signal'] else 'row-sell' if 'â' in s1['signal'] else ''}">
   <td><b>{r['cb_code']}</b></td><td>{r['cb_name']}</td><td>{r['stock_code']}</td>
   <td class="num">{fmt(r.get('cb_price'))}</td>
   <td class="center">D{s1['td']}</td>
   <td class="center">{cbas}</td>
-  <td class="center cond">{chk(s1['c1'])} 掛牌初期<br>{chk(s1['c2'])} CB價達標<br>{chk(s1['c3'], s1['c3'] is None)} 融+借↑</td>
-  <td class="num">{fmt(s1.get('short_today'),0)}張</td>
+  <td class="center cond">{chk(s1['c1'])} æçåæ<br>{chk(s1['c2'])} CBå¹éæ¨<br>{chk(s1['c3'], s1['c3'] is None)} è+åâ</td>
+  <td class="num">{fmt(s1.get('short_today'),0)}å¼µ</td>
   <td class="num {sc_cls(s1.get('short_change'))}">{sc_fmt(s1.get('short_change'))}</td>
   <td class="center"><span class="badge {s1['cls']}">{s1['signal']}</span></td>
 </tr>"""
 
-    # ── S2 rows ──
+    # ââ S2 rows ââ
     s2_rows_html = ''
     for r in s2_items:
         s2 = r['s2']
         pc = 'prem-neg' if (r.get('premium_rate') or 0) < 0 else ''
-        s2_rows_html += f"""<tr class="{'row-buy' if '★' in s2['signal'] else 'row-watch' if '◑' in s2['signal'] or '接近' in s2['signal'] else ''}">
+        s2_rows_html += f"""<tr class="{'row-buy' if 'â' in s2['signal'] else 'row-watch' if 'â' in s2['signal'] or 'æ¥è¿' in s2['signal'] else ''}">
   <td><b>{r['cb_code']}</b></td><td>{r['cb_name']}</td><td>{r['stock_code']}</td>
   <td class="num">{fmt(r.get('cb_price'))}</td>
   <td class="num {pc}">{fmt(r.get('premium_rate'))}%</td>
   <td class="num">{fmt(r.get('stock_price'))}</td>
   <td class="num">{fmt(r.get('conversion_price'))}</td>
-  <td class="center cond">{chk(s2['c1'])} 低溢價<br>{chk(s2['c2'])} 轉換比例低<br>{chk(s2['c3'])} 距到期充裕<br>{chk(s2['c4'], s2['c4'] is None)} 融+借↑</td>
-  <td class="num">{s2['days_to_mat']}天</td>
-  <td class="num">{fmt(s2.get('short_today'),0)}張</td>
+  <td class="center cond">{chk(s2['c1'])} ä½æº¢å¹<br>{chk(s2['c2'])} è½ææ¯ä¾ä½<br>{chk(s2['c3'])} è·å°æåè£<br>{chk(s2['c4'], s2['c4'] is None)} è+åâ</td>
+  <td class="num">{s2['days_to_mat']}å¤©</td>
+  <td class="num">{fmt(s2.get('short_today'),0)}å¼µ</td>
   <td class="num {sc_cls(s2.get('short_change'))}">{sc_fmt(s2.get('short_change'))}</td>
   <td class="center"><span class="badge {s2['cls']}">{s2['signal']}</span></td>
 </tr>"""
 
-    # ── All rows ──
+    # ââ All rows ââ
     all_rows_html = ''
     for r in results:
         s1 = r['s1']
         s2 = r['s2']
-        s1sig = s1['signal'] if s1 else '─'
+        s1sig = s1['signal'] if s1 else 'â'
         s1cls = s1['cls'] if s1 else 'neutral'
         pc = 'prem-neg' if (r.get('premium_rate') or 0) < 0 else ''
         sh = short_map.get(r['stock_code'])
@@ -440,8 +452,8 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
   <td class="num {pc}">{fmt(r.get('premium_rate'))}%</td>
   <td class="num">{fmt(r.get('stock_price'))}</td>
   <td class="num">{fmt(r.get('conversion_price'))}</td>
-  <td>{r.get('maturity_date','─')}</td>
-  <td class="num">{fmt(sh['short_today'],0) if sh else '─'}張</td>
+  <td>{r.get('maturity_date','â')}</td>
+  <td class="num">{fmt(sh['short_today'],0) if sh else 'â'}å¼µ</td>
   <td class="num {sc_cls(sh['short_change'] if sh else None)}">{sc_fmt(sh['short_change'] if sh else None)}</td>
   <td class="center"><span class="badge {s1cls}">{s1sig}</span></td>
   <td class="center"><span class="badge {s2['cls']}">{s2['signal']}</span></td>
@@ -499,69 +511,69 @@ tr.row-sell td{background:#fff7ed}
     html = f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>可轉債策略儀表板</title>
+<title>å¯è½åµç­ç¥åè¡¨æ¿</title>
 <style>{CSS}</style></head><body>
 <div class="hdr">
-  <h1>📊 可轉債策略儀表板</h1>
-  <div class="sub">更新：{TODAY}</div>
+  <h1>ð å¯è½åµç­ç¥åè¡¨æ¿</h1>
+  <div class="sub">æ´æ°ï¼{TODAY}</div>
 </div>
 <div class="stats">
-  <div class="sc"><div class="n">{len(all_cbs)}</div><div class="l">全部CB數</div></div>
-  <div class="sc gr"><div class="n">{s1_buy}</div><div class="l">S1全條件買入</div></div>
-  <div class="sc am"><div class="n">{s1_pend}</div><div class="l">S1不可放空</div></div>
-  <div class="sc gr"><div class="n">{s2_buy}</div><div class="l">S2套利(4/4)</div></div>
-  <div class="sc am"><div class="n">{s2_pend}</div><div class="l">S2不可放空</div></div>
+  <div class="sc"><div class="n">{len(all_cbs)}</div><div class="l">å¨é¨CBæ¸</div></div>
+  <div class="sc gr"><div class="n">{s1_buy}</div><div class="l">S1å¨æ¢ä»¶è²·å¥</div></div>
+  <div class="sc am"><div class="n">{s1_pend}</div><div class="l">S1ä¸å¯æ¾ç©º</div></div>
+  <div class="sc gr"><div class="n">{s2_buy}</div><div class="l">S2å¥å©(4/4)</div></div>
+  <div class="sc am"><div class="n">{s2_pend}</div><div class="l">S2ä¸å¯æ¾ç©º</div></div>
 </div>
 <div class="tabs">
-  <div class="tab active" onclick="showTab('s1',this)">策略一：CBAS新上市</div>
-  <div class="tab" onclick="showTab('s2',this)">策略二：轉換套利（{len(all_cbs)}筆）</div>
-  <div class="tab" onclick="showTab('all',this)">全部可轉債</div>
+  <div class="tab active" onclick="showTab('s1',this)">ç­ç¥ä¸ï¼CBASæ°ä¸å¸</div>
+  <div class="tab" onclick="showTab('s2',this)">ç­ç¥äºï¼è½æå¥å©ï¼{len(all_cbs)}ç­ï¼</div>
+  <div class="tab" onclick="showTab('all',this)">å¨é¨å¯è½åµ</div>
 </div>
 <div id="pane-s1" class="pane active">
-  <div class="ttl">策略一：CBAS 新上市短壓</div>
-  <div class="desc">法人買CB → 放空股票 (D1–5) → D6 CBAS拆解 → 融券+借券回補 → 股價反彈<br>
-    <span class="tag">條件1</span>掛牌初期交易日
-    <span class="tag">條件2</span>CB現價達一定水準
-    <span class="tag">條件3</span>融券+借券餘額增加</div>
-  <div class="box"><b>融券+借券 說明：</b>
-    <span class="chk chk-y">✓</span>達標 &nbsp;
-    <span class="chk chk-n">✗</span>未達標 &nbsp;
-    <span class="chk chk-na">?</span>該股目前不可放空（TWSE TWT93U 無此股記錄）<br>
-    資料來源：TWSE「融券借券賣出餘額」每日盤後自動更新，同時包含融券和借券。</div>
+  <div class="ttl">ç­ç¥ä¸ï¼CBAS æ°ä¸å¸ç­å£</div>
+  <div class="desc">æ³äººè²·CB â æ¾ç©ºè¡ç¥¨ (D1â5) â D6 CBASæè§£ â èå¸+åå¸åè£ â è¡å¹åå½<br>
+    <span class="tag">æ¢ä»¶1</span>æçåæäº¤ææ¥
+    <span class="tag">æ¢ä»¶2</span>CBç¾å¹éä¸å®æ°´æº
+    <span class="tag">æ¢ä»¶3</span>èå¸+åå¸é¤é¡å¢å </div>
+  <div class="box"><b>èå¸+åå¸ èªªæï¼</b>
+    <span class="chk chk-y">â</span>éæ¨ &nbsp;
+    <span class="chk chk-n">â</span>æªéæ¨ &nbsp;
+    <span class="chk chk-na">?</span>è©²è¡ç®åä¸å¯æ¾ç©ºï¼TWSE TWT93U ç¡æ­¤è¡è¨éï¼<br>
+    è³æä¾æºï¼TWSEãèå¸åå¸è³£åºé¤é¡ãæ¯æ¥ç¤å¾èªåæ´æ°ï¼åæåå«èå¸ååå¸ã</div>
   <table><thead><tr>
-    <th>CB代號</th><th>CB名稱</th><th>股票</th><th class="num">CB價</th>
-    <th class="center">天數</th><th class="center">CBAS</th>
-    <th class="center">條件1/2/3</th>
-    <th class="num">融+借餘額</th><th class="num">日變化</th><th class="center">訊號</th>
+    <th>CBä»£è</th><th>CBåç¨±</th><th>è¡ç¥¨</th><th class="num">CBå¹</th>
+    <th class="center">å¤©æ¸</th><th class="center">CBAS</th>
+    <th class="center">æ¢ä»¶1/2/3</th>
+    <th class="num">è+åé¤é¡</th><th class="num">æ¥è®å</th><th class="center">è¨è</th>
   </tr></thead><tbody>{s1_rows_html}</tbody></table>
 </div>
 <div id="pane-s2" class="pane">
-  <div class="ttl">策略二：轉換套利（全部 {len(all_cbs)} 支 CB）</div>
-  <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
-    <span class="tag">條件1</span>轉換溢價率低 <span class="tag">條件2</span>已轉換比例低
-    <span class="tag">條件3</span>距到期日充裕 <span class="tag">條件4</span>融券+借券增加</div>
-  <div class="box warn"><b>注意：</b>溢價率顯示<span style="color:#16a34a;font-weight:700">綠色</span>（負值）代表CB低於轉換價值，套利空間最大。
-    需確認：融+借是否充足、有無提前轉換限制。</div>
+  <div class="ttl">ç­ç¥äºï¼è½æå¥å©ï¼å¨é¨ {len(all_cbs)} æ¯ CBï¼</div>
+  <div class="desc">è²·CB + æ¾ç©ºè¡ç¥¨ â ç­å¾è½æ â è½æè¡ç¥¨åè£ â å¥å©<br>
+    <span class="tag">æ¢ä»¶1</span>è½ææº¢å¹çä½ <span class="tag">æ¢ä»¶2</span>å·²è½ææ¯ä¾ä½
+    <span class="tag">æ¢ä»¶3</span>è·å°ææ¥åè£ <span class="tag">æ¢ä»¶4</span>èå¸+åå¸å¢å </div>
+  <div class="box warn"><b>æ³¨æï¼</b>æº¢å¹çé¡¯ç¤º<span style="color:#16a34a;font-weight:700">ç¶ è²</span>ï¼è² å¼ï¼ä»£è¡¨CBä½æ¼è½æå¹å¼ï¼å¥å©ç©ºéæå¤§ã
+    éç¢ºèªï¼è+åæ¯å¦åè¶³ãæç¡æåè½æéå¶ã</div>
   <table><thead><tr>
-    <th>CB代號</th><th>CB名稱</th><th>股票</th><th class="num">CB價</th>
-    <th class="num">溢價率</th><th class="num">股價</th><th class="num">轉換價</th>
-    <th class="center">條件1/2/3/4</th>
-    <th class="num">距到期</th><th class="num">融+借餘額</th><th class="num">日變化</th>
-    <th class="center">訊號</th>
+    <th>CBä»£è</th><th>CBåç¨±</th><th>è¡ç¥¨</th><th class="num">CBå¹</th>
+    <th class="num">æº¢å¹ç</th><th class="num">è¡å¹</th><th class="num">è½æå¹</th>
+    <th class="center">æ¢ä»¶1/2/3/4</th>
+    <th class="num">è·å°æ</th><th class="num">è+åé¤é¡</th><th class="num">æ¥è®å</th>
+    <th class="center">è¨è</th>
   </tr></thead><tbody>{s2_rows_html}</tbody></table>
 </div>
 <div id="pane-all" class="pane">
-  <div class="ttl">全部 {len(all_cbs)} 支可轉債</div>
-  <div class="desc">資料來源：thefew.tw｜融券+借券：TWSE TWT93U {short_date}</div>
+  <div class="ttl">å¨é¨ {len(all_cbs)} æ¯å¯è½åµ</div>
+  <div class="desc">è³æä¾æºï¼thefew.twï½èå¸+åå¸ï¼TWSE TWT93U {short_date}</div>
   <table><thead><tr>
-    <th>CB代號</th><th>CB名稱</th><th>股票</th><th class="num">CB價</th>
-    <th class="num">溢價率</th><th class="num">股價</th><th class="num">轉換價</th>
-    <th>到期日</th><th class="num">融+借餘額</th><th class="num">日變化</th>
+    <th>CBä»£è</th><th>CBåç¨±</th><th>è¡ç¥¨</th><th class="num">CBå¹</th>
+    <th class="num">æº¢å¹ç</th><th class="num">è¡å¹</th><th class="num">è½æå¹</th>
+    <th>å°ææ¥</th><th class="num">è+åé¤é¡</th><th class="num">æ¥è®å</th>
     <th class="center">S1</th><th class="center">S2</th>
   </tr></thead><tbody>{all_rows_html}</tbody></table>
 </div>
-<div class="ft">本工具僅供學習研究，不構成投資建議。<br>
-融券+借券資料來源：TWSE「融券借券賣出餘額(TWT93U)」，每日盤後約17:30更新。不在名單內代表該股目前不可放空。</div>
+<div class="ft">æ¬å·¥å·åä¾å­¸ç¿ç ç©¶ï¼ä¸æ§ææè³å»ºè­°ã<br>
+èå¸+åå¸è³æä¾æºï¼TWSEãèå¸åå¸è³£åºé¤é¡(TWT93U)ãï¼æ¯æ¥ç¤å¾ç´17:30æ´æ°ãä¸å¨åå®å§ä»£è¡¨è©²è¡ç®åä¸å¯æ¾ç©ºã</div>
 <script>
 function showTab(id,el){{
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -573,16 +585,16 @@ function showTab(id,el){{
     return html
 
 
-# ─────────────────────────────────────────────────────────────
-# 7. 主程式
-# ─────────────────────────────────────────────────────────────
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# 7. ä¸»ç¨å¼
+# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def main():
-    print(f"\n=== 可轉債策略掃描 {TODAY} ===")
+    print(f"\n=== å¯è½åµç­ç¥ææ {TODAY} ===")
     all_cbs    = fetch_all_cbs()
     recent_map = fetch_recent_cbs()
     short_map, short_date = fetch_short_data()
 
-    # 補上掛牌日（從 recent_map 合併到 all_cbs）
+    # è£ä¸æçæ¥ï¼å¾ recent_map åä½µå° all_cbsï¼
     rec_ld = {cb_code: d.get('listing_date') for cb_code, d in recent_map.items()}
     for cb in all_cbs:
         if cb['cb_code'] in rec_ld:
@@ -592,18 +604,18 @@ def main():
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
 
-    print(f"\n✅ 儀表板已產生：{OUTPUT_HTML}")
-    print(f"   全部CB: {len(all_cbs)} 筆")
-    print(f"   融券+借券資料: {len(short_map)} 支股票（{short_date}）")
+    print(f"\nâ åè¡¨æ¿å·²ç¢çï¼{OUTPUT_HTML}")
+    print(f"   å¨é¨CB: {len(all_cbs)} ç­")
+    print(f"   èå¸+åå¸è³æ: {len(short_map)} æ¯è¡ç¥¨ï¼{short_date}ï¼")
 
-    # 統計
+    # çµ±è¨
     s1_buy = s2_buy = 0
     for cb in all_cbs:
         s1 = evaluate_s1(cb, short_map, recent_map)
         s2 = evaluate_s2(cb, short_map)
-        if s1 and '★' in s1['signal']: s1_buy += 1
-        if '★' in s2['signal']: s2_buy += 1
-    print(f"   S1買入: {s1_buy} 筆 | S2套利: {s2_buy} 筆")
+        if s1 and 'â' in s1['signal']: s1_buy += 1
+        if 'â' in s2['signal']: s2_buy += 1
+    print(f"   S1è²·å¥: {s1_buy} ç­ | S2å¥å©: {s2_buy} ç­")
 
 if __name__ == '__main__':
     main()
