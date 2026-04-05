@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>可轉債策略儀表板 v4</title>
+<title>可轉債策略儀表板</title>
 <style>
 :root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -51,7 +51,7 @@ tr.row-sell td{background:#fff7ed}
 @media(max-width:768px){.hdr,.stats,.pane{padding-left:14px;padding-right:14px}.tabs{padding:0 14px;overflow-x:auto}th,td{padding:7px 7px}}
 </style></head><body>
 <div class="hdr">
-  <h1>📊 可轉債策略儀表板 v4</h1>
+  <h1>📊 可轉債策略儀表板</h1>
   <div class="sub">CB資料：thefew.tw（12筆）｜融券+借券：TWSE TWT93U（20260402）｜更新：2026-04-05</div>
 </div>
 <div class="stats">
@@ -69,8 +69,8 @@ tr.row-sell td{background:#fff7ed}
 <div id="pane-s1" class="pane active">
   <div class="ttl">策略一：CBAS 新上市短壓</div>
   <div class="desc">法人買CB → 放空股票 (D1–5) → D6 CBAS拆解 → 融券+借券回補 → 股價反彈<br>
-    <span class="tag">條件1</span>掛牌後第4–8交易日
-    <span class="tag">條件2</span>CB現價≥98元
+    <span class="tag">條件1</span>掛牌初期交易日
+    <span class="tag">條件2</span>CB現價達一定水準
     <span class="tag">條件3</span>融券+借券餘額增加</div>
   <div class="box"><b>融券+借券 說明：</b>
     <span class="chk chk-y">✓</span>達標 &nbsp;
@@ -87,8 +87,8 @@ tr.row-sell td{background:#fff7ed}
 <div id="pane-s2" class="pane">
   <div class="ttl">策略二：轉換套利（全部 12 支 CB）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
-    <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
-    <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加</div>
+    <span class="tag">條件1</span>轉換溢價率低 <span class="tag">條件2</span>已轉換比例低
+    <span class="tag">條件3</span>距到期日充裕 <span class="tag">條件4</span>融券+借券增加</div>
   <div class="box warn"><b>注意：</b>溢價率顯示<span style="color:#16a34a;font-weight:700">綠色</span>（負值）代表CB低於轉換價值，套利空間最大。
     需確認：融+借是否充足、有無提前轉換限制。</div>
   <table><thead><tr>
@@ -103,7 +103,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">6.8%</td>
   <td class="num">95.9</td>
   <td class="num">105.0</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-n">✗</span> 融+借↑</td>
   <td class="num">438天</td>
   <td class="num">58張</td>
   <td class="num ">0</td>
@@ -114,7 +114,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">11.7%</td>
   <td class="num">95.9</td>
   <td class="num">102.0</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-n">✗</span> 融+借↑</td>
   <td class="num">419天</td>
   <td class="num">58張</td>
   <td class="num ">0</td>
@@ -125,7 +125,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">23.2%</td>
   <td class="num">146.5</td>
   <td class="num">190.0</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-n">✗</span> 融+借↑</td>
   <td class="num">551天</td>
   <td class="num">217張</td>
   <td class="num ">0</td>
@@ -136,7 +136,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">24.4%</td>
   <td class="num">26.6</td>
   <td class="num">33.7</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">490天</td>
   <td class="num">114574張</td>
   <td class="num short-up">+5738</td>
@@ -147,7 +147,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">24.4%</td>
   <td class="num">16.6</td>
   <td class="num">18.8</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-n">✗</span> 融+借↑</td>
   <td class="num">807天</td>
   <td class="num">891張</td>
   <td class="num ">0</td>
@@ -158,7 +158,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">50.9%</td>
   <td class="num">23.7</td>
   <td class="num">36.5</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">614天</td>
   <td class="num">236034張</td>
   <td class="num short-up">+1758</td>
@@ -169,7 +169,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">58.0%</td>
   <td class="num">12.1</td>
   <td class="num">17.8</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-n">✗</span> 融+借↑</td>
   <td class="num">266天</td>
   <td class="num">15453張</td>
   <td class="num short-dn">-111</td>
@@ -180,7 +180,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">76.3%</td>
   <td class="num">26.6</td>
   <td class="num">45.4</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">490天</td>
   <td class="num">114574張</td>
   <td class="num short-up">+5738</td>
@@ -191,7 +191,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">134.3%</td>
   <td class="num">16.3</td>
   <td class="num">38.8</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">240天</td>
   <td class="num">282張</td>
   <td class="num short-up">+1</td>
@@ -202,7 +202,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">145.7%</td>
   <td class="num">53.5</td>
   <td class="num">140.3</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">347天</td>
   <td class="num">2207張</td>
   <td class="num short-up">+6</td>
@@ -213,7 +213,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">145.8%</td>
   <td class="num">28.0</td>
   <td class="num">57.5</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-n">✗</span> 融+借↑</td>
   <td class="num">623天</td>
   <td class="num">200張</td>
   <td class="num ">0</td>
@@ -224,7 +224,7 @@ tr.row-sell td{background:#fff7ed}
   <td class="num ">240.1%</td>
   <td class="num">53.5</td>
   <td class="num">182.5</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> 低溢價<br><span class="chk chk-y">✓</span> 轉換比例低<br><span class="chk chk-y">✓</span> 距到期充裕<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">144天</td>
   <td class="num">2207張</td>
   <td class="num short-up">+6</td>
