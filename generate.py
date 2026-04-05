@@ -13,6 +13,11 @@ from io import StringIO
 import requests
 from bs4 import BeautifulSoup
 
+# Constants
+TODAY = datetime.now().date()
+OUTPUT_HTML = 'index.html'
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
+
 # TPEX data source URLs
 TPEX_CB_INFO_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/cb/{year}/{yearmonth}/RSdrs001.{yearmonthday}-C.csv"
 TPEX_CB_TRADING_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/cb/{year}/{yearmonth}/RSta0113.{yearmonthday}-C.csv"
