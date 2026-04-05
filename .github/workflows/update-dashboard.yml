@@ -20,7 +20,9 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 lxml html5lib
+        run: |
+          pip install requests beautifulsoup4 lxml html5lib playwright
+          playwright install chromium --with-deps
 
       - name: Generate dashboard
         run: python generate.py
