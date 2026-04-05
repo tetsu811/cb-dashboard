@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-可轉債策略儀表板 v4
+可轉債策略儀表板
 - CB 資料：thefew.tw/cb（全部 400+ 筆）+ /cb/recent（含掛牌日，策略一用）
 - 融券+借券：TWSE TWT93U（每日盤後自動更新，無需登入）
 - 策略一：CBAS新上市（需掛牌日，來自 /cb/recent）
@@ -382,7 +382,7 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
   <td class="num">{fmt(r.get('cb_price'))}</td>
   <td class="center">D{s1['td']}</td>
   <td class="center">{cbas}</td>
-  <td class="center cond">{chk(s1['c1'])} D4-D8<br>{chk(s1['c2'])} CB≥98<br>{chk(s1['c3'], s1['c3'] is None)} 融+借↑</td>
+  <td class="center cond">{chk(s1['c1'])} 掛牌初期<br>{chk(s1['c2'])} CB價達標<br>{chk(s1['c3'], s1['c3'] is None)} 融+借↑</td>
   <td class="num">{fmt(s1.get('short_today'),0)}張</td>
   <td class="num {sc_cls(s1.get('short_change'))}">{sc_fmt(s1.get('short_change'))}</td>
   <td class="center"><span class="badge {s1['cls']}">{s1['signal']}</span></td>
@@ -399,7 +399,7 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
   <td class="num {pc}">{fmt(r.get('premium_rate'))}%</td>
   <td class="num">{fmt(r.get('stock_price'))}</td>
   <td class="num">{fmt(r.get('conversion_price'))}</td>
-  <td class="center cond">{chk(s2['c1'])} 溢價≤2%<br>{chk(s2['c2'])} 已轉&lt;60%<br>{chk(s2['c3'])} 距到期≥90天<br>{chk(s2['c4'], s2['c4'] is None)} 融+借↑</td>
+  <td class="center cond">{chk(s2['c1'])} 低溢價<br>{chk(s2['c2'])} 轉換比例低<br>{chk(s2['c3'])} 距到期充裕<br>{chk(s2['c4'], s2['c4'] is None)} 融+借↑</td>
   <td class="num">{s2['days_to_mat']}天</td>
   <td class="num">{fmt(s2.get('short_today'),0)}張</td>
   <td class="num {sc_cls(s2.get('short_change'))}">{sc_fmt(s2.get('short_change'))}</td>
@@ -480,10 +480,10 @@ tr.row-sell td{background:#fff7ed}
     html = f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>可轉債策略儀表板 v4</title>
+<title>可轉債策略儀表板</title>
 <style>{CSS}</style></head><body>
 <div class="hdr">
-  <h1>📊 可轉債策略儀表板 v4</h1>
+  <h1>📊 可轉債策略儀表板</h1>
   <div class="sub">CB資料：thefew.tw（{len(all_cbs)}筆）｜融券+借券：TWSE TWT93U（{short_date}）｜更新：{TODAY}</div>
 </div>
 <div class="stats">
@@ -501,8 +501,8 @@ tr.row-sell td{background:#fff7ed}
 <div id="pane-s1" class="pane active">
   <div class="ttl">策略一：CBAS 新上市短壓</div>
   <div class="desc">法人買CB → 放空股票 (D1–5) → D6 CBAS拆解 → 融券+借券回補 → 股價反彈<br>
-    <span class="tag">條件1</span>掛牌後第4–8交易日
-    <span class="tag">條件2</span>CB現價≥98元
+    <span class="tag">條件1</span>掛牌初期交易日
+    <span class="tag">條件2</span>CB現價達一定水準
     <span class="tag">條件3</span>融券+借券餘額增加</div>
   <div class="box"><b>融券+借券 說明：</b>
     <span class="chk chk-y">✓</span>達標 &nbsp;
@@ -519,8 +519,8 @@ tr.row-sell td{background:#fff7ed}
 <div id="pane-s2" class="pane">
   <div class="ttl">策略二：轉換套利（全部 {len(all_cbs)} 支 CB）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
-    <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
-    <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加</div>
+    <span class="tag">條件1</span>轉換溢價率低 <span class="tag">條件2</span>已轉換比例低
+    <span class="tag">條件3</span>距到期日充裕 <span class="tag">條件4</span>融券+借券增加</div>
   <div class="box warn"><b>注意：</b>溢價率顯示<span style="color:#16a34a;font-weight:700">綠色</span>（負值）代表CB低於轉換價值，套利空間最大。
     需確認：融+借是否充足、有無提前轉換限制。</div>
   <table><thead><tr>
