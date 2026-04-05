@@ -1,233 +1,207 @@
 #!/usr/bin/env python3
 """
-ÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¨ÃÂÃÂ½ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂµÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¥ÃÂÃÂÃÂÃÂÃÂÃÂ¨ÃÂÃÂ¡ÃÂÃÂ¨ÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¿
-- CB ÃÂÃÂ¨ÃÂÃÂ³ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂthefew.tw/cbÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ©ÃÂÃÂÃÂÃÂ¨ 400+ ÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ+ /cb/recentÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ«ÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¤ÃÂÃÂ¸ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
-- ÃÂÃÂ¨ÃÂÃÂÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¸+ÃÂÃÂ¥ÃÂÃÂÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¸ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂTWSE TWT93UÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¦ÃÂÃÂ¯ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ§ÃÂÃÂÃÂÃÂ¤ÃÂÃÂ¥ÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¨ÃÂÃÂÃÂÃÂªÃÂÃÂ¥ÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ´ÃÂÃÂ¦ÃÂÃÂÃÂÃÂ°ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¡ÃÂÃÂ©ÃÂÃÂÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ»ÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
-- ÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¤ÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂCBASÃÂÃÂ¦ÃÂÃÂÃÂÃÂ°ÃÂÃÂ¤ÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¤ÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¨ÃÂÃÂÃÂÃÂª /cb/recentÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
-- ÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¤ÃÂÃÂºÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ½ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ©ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ©ÃÂÃÂÃÂÃÂ¨ CBÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
+可轉債策略儀表板資料產生器 - TPEX data source
 """
-
-import requests
+import csv
 import json
 import os
 import re
-import time
+import sys
+from datetime import datetime, timedelta
+from io import StringIO
+
+import requests
 from bs4 import BeautifulSoup
-from datetime import datetime, date, timedelta
-try:
-    from curl_cffi import requests as cffi_requests
-    HAS_CFFI = True
-except ImportError:
-    HAS_CFFI = False
 
-try:
-    from playwright.sync_api import sync_playwright
-    HAS_PLAYWRIGHT = True
-except ImportError:
-    HAS_PLAYWRIGHT = False
+# TPEX data source URLs
+TPEX_CB_INFO_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/cb/{year}/{yearmonth}/RSdrs001.{yearmonthday}-C.csv"
+TPEX_CB_TRADING_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/cb/{year}/{yearmonth}/RSta0113.{yearmonthday}-C.csv"
+TPEX_ISSUANCE_API = "https://www.tpex.org.tw/openapi/v1/bond_ISSBD5_data"
 
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂ¨ÃÂÃÂ·ÃÂÃÂ¯ÃÂÃÂ¥ÃÂÃÂ¾ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ¨ÃÂÃÂ­ÃÂÃÂ¥ÃÂÃÂ®ÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂGitHub Actions ÃÂÃÂ§ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
-BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_HTML = os.path.join(BASE_DIR, 'index.html')
-
-TODAY = date.today()
-TODAY_STR = TODAY.strftime('%Y%m%d')
-
-HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-                  'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36',
-    'Accept-Language': 'zh-TW,zh;q=0.9',
-    'Referer': 'https://thefew.tw/',
+# Field indices for CB info CSV (after BODY prefix)
+CB_INFO = {
+    "cb_code": 1, "cb_name": 2,
+    "conversion_start": 3, "conversion_end": 4, "conversion_price": 5,
+    "buyback_start": 7, "buyback_end": 8, "buyback_price": 9,
+    "original_issue_amount": 14, "outstanding_amount": 15,
+    "cb_reference_price": 16, "stock_price": 17,
+    "trading_stop_end": 19, "coupon_rate": 20,
 }
 
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
-# # ÃÂÃÂ¥ÃÂÃÂÃÂÃÂ±ÃÂÃÂ§ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ§ÃÂÃÂ£ÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¸ÃÂÃÂ¥ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ«ÃÂÃÂ¨ÃÂÃÂ²ÃÂÃÂ ÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¸ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
+# Field indices for CB trading CSV
+CB_TRADE = {
+    "cb_code": 1, "cb_name": 2,
+    "close_price": 3, "open_price": 5, "high_price": 6, "low_price": 7,
+    "volume": 9, "amount": 10,
+}
+
 def parse_num(txt):
-    m = re.match(r'^(-?[\d.]+)', txt.strip())
-    return float(m.group(1)) if m else None
+    """Parse number from string, handling commas and whitespace."""
+    if not txt or not txt.strip():
+        return None
+    cleaned = txt.strip().replace(",", "").replace("，", "")
+    if not cleaned:
+        return None
+    try:
+        return float(cleaned)
+    except ValueError:
+        return None
 
 
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
-# 1. ÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¨ÃÂÃÂ©ÃÂÃÂÃÂÃÂ¨ CBÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂPlaywright ÃÂÃÂ¨ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂ¥ thefew.tw/cbÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ¥ÃÂÃÂÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¾ÃÂÃÂ 400+ ÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ®ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ´ÃÂÃÂ¨ÃÂÃÂ³ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
+def parse_date_tw(s):
+    """Parse YYYY/MM/DD to YYYY-MM-DD."""
+    if not s or not s.strip():
+        return None
+    try:
+        return datetime.strptime(s.strip(), "%Y/%m/%d").strftime("%Y-%m-%d")
+    except ValueError:
+        return None
+
+
+def _fetch_tpex_csv(url):
+    """Fetch Big5-encoded CSV from TPEX, return BODY rows."""
+    resp = requests.get(url, timeout=15)
+    resp.encoding = "big5"
+    rows = []
+    for row in csv.reader(StringIO(resp.text)):
+        if row and row[0].strip() == "BODY":
+            rows.append(row)
+    return rows
+
+
+def _get_latest_tpex_csv(pattern, max_days=7):
+    """Try fetching TPEX CSV going back up to max_days."""
+    base = datetime.now()
+    for d in range(max_days):
+        dt = base - timedelta(days=d)
+        url = pattern.format(
+            year=dt.strftime("%Y"),
+            yearmonth=dt.strftime("%Y%m"),
+            yearmonthday=dt.strftime("%Y%m%d"),
+        )
+        try:
+            rows = _fetch_tpex_csv(url)
+            if rows:
+                print(f"✓ TPEX CSV fetched ({dt.strftime('%Y-%m-%d')})")
+                return rows
+        except Exception:
+            continue
+    return []
+
+
+def fetch_issuance_dates():
+    """從TPEX API取得CB上市日期與到期日期"""
+    listing_map, maturity_map = {}, {}
+    try:
+        data = requests.get(TPEX_ISSUANCE_API, timeout=10).json()
+        if isinstance(data, list):
+            for item in data:
+                code = item.get("BondCode", "").strip()
+                if not code:
+                    continue
+                ld = item.get("ListingDate", "")
+                md = item.get("MaturityDate", "")
+                if ld:
+                    try:
+                        listing_map[code] = datetime.strptime(ld, "%Y/%m/%d").strftime("%Y-%m-%d")
+                    except ValueError:
+                        pass
+                if md:
+                    try:
+                        maturity_map[code] = datetime.strptime(md, "%Y/%m/%d").strftime("%Y-%m-%d")
+                    except ValueError:
+                        pass
+    except Exception:
+        pass
+    return listing_map, maturity_map
+
+
+def derive_stock_code(cb_code):
+    """Derive stock code from CB code."""
+    if not cb_code:
+        return None
+    code = cb_code.strip()
+    if len(code) == 5:
+        return code[:4]
+    if len(code) == 6 and code[0] in ("1", "2"):
+        return code[:4]
+    return None
+
+
 def fetch_all_cbs():
-    """Fetch all CBs from thefew.tw/cb using curl_cffi (Chrome TLS impersonation)."""
-    print("[1/3] \u6293\u53d6\u5168\u90e8CB (thefew.tw/cb)...")
-    
-    html = None
-    
-    # Method 1: curl_cffi with Chrome impersonation (bypasses TLS fingerprinting)
-    if HAS_CFFI:
-        try:
-            print("  \u2192 \u5617\u8a66 curl_cffi (Chrome impersonation)...")
-            resp = cffi_requests.get(
-                'https://thefew.tw/cb',
-                impersonate='chrome131',
-                timeout=60,
-                headers={
-                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-                    'Accept-Language': 'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7',
-                    'Accept-Encoding': 'gzip, deflate, br',
-                    'Cache-Control': 'no-cache',
-                    'Sec-Fetch-Dest': 'document',
-                    'Sec-Fetch-Mode': 'navigate',
-                    'Sec-Fetch-Site': 'none',
-                    'Sec-Fetch-User': '?1',
-                    'Upgrade-Insecure-Requests': '1',
-                }
-            )
-            html = resp.text
-            print(f"  \u2192 curl_cffi HTML size: {len(html)}")
-        except Exception as e:
-            print(f"  \u26a0 curl_cffi failed: {e}")
-    
-    # Method 2: Playwright with anti-detection
-    if html is None or len(html) < 500000:
-        if HAS_PLAYWRIGHT:
+    """從TPEX取得所有可轉債資料"""
+    listing_map, maturity_map = fetch_issuance_dates()
+    info_rows = _get_latest_tpex_csv(TPEX_CB_INFO_PATTERN)
+    if not info_rows:
+        raise ValueError("Failed to fetch CB info from TPEX")
+    trade_rows = _get_latest_tpex_csv(TPEX_CB_TRADING_PATTERN)
+    trade_map = {}
+    if trade_rows:
+        for row in trade_rows:
             try:
-                print("  \u2192 \u5617\u8a66 Playwright...")
-                with sync_playwright() as p:
-                    browser = p.chromium.launch(headless=True, args=['--disable-blink-features=AutomationControlled', '--no-sandbox'])
-                    ctx = browser.new_context(
-                        user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-                        viewport={'width': 1920, 'height': 1080}
-                    )
-                    page = ctx.new_page()
-                    page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
-                    page.goto('https://thefew.tw/cb', wait_until='networkidle', timeout=120000)
-                    page.wait_for_timeout(5000)
-                    html = page.content()
-                    print(f"  \u2192 Playwright HTML size: {len(html)}")
-                    browser.close()
-            except Exception as e:
-                print(f"  \u26a0 Playwright failed: {e}")
-    
-    # Method 3: plain requests (fallback)
-    if html is None or len(html) < 500000:
+                trade_map[row[CB_TRADE["cb_code"]].strip()] = row
+            except (IndexError, AttributeError):
+                pass
+    cbs = []
+    for row in info_rows:
         try:
-            print("  \u2192 \u5617\u8a66 requests...")
-            import requests as req
-            resp = req.get('https://thefew.tw/cb', timeout=60, headers={
-                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+            cb_code = row[CB_INFO["cb_code"]].strip()
+            cb_name = row[CB_INFO["cb_name"]].strip()
+            cb_price = parse_num(row[CB_INFO["cb_reference_price"]])
+            stock_price = parse_num(row[CB_INFO["stock_price"]])
+            conversion_price = parse_num(row[CB_INFO["conversion_price"]])
+            conversion_end = parse_date_tw(row[CB_INFO["conversion_end"]])
+            original_issue = parse_num(row[CB_INFO["original_issue_amount"]])
+            outstanding = parse_num(row[CB_INFO["outstanding_amount"]])
+            trading_stop_end = parse_date_tw(row[CB_INFO["trading_stop_end"]])
+            maturity_date = maturity_map.get(cb_code) or trading_stop_end or conversion_end
+            volume = None
+            if cb_code in trade_map:
+                volume = parse_num(trade_map[cb_code][CB_TRADE["volume"]])
+            premium = None
+            if cb_price and stock_price and conversion_price and conversion_price > 0:
+                parity = (stock_price / conversion_price) * 100
+                if parity > 0:
+                    premium = (cb_price / parity - 1) * 100
+            converted_pct = None
+            if original_issue and outstanding and original_issue > 0:
+                converted_pct = (1 - outstanding / original_issue) * 100
+            listing_date = listing_map.get(cb_code)
+            stock_code = derive_stock_code(cb_code)
+            cbs.append({
+                "cb_code": cb_code,
+                "cb_name": cb_name,
+                "cb_price": cb_price,
+                "stock_price": stock_price,
+                "premium": premium,
+                "volume": volume,
+                "conversion_price": conversion_price,
+                "converted_pct": converted_pct,
+                "maturity_date": maturity_date,
+                "listing_date": listing_date,
+                "stock_code": stock_code,
             })
-            html = resp.text
-            print(f"  \u2192 requests HTML size: {len(html)}")
-        except Exception as e:
-            print(f"  \u26a0 requests failed: {e}")
-    
-    if html is None:
-        raise RuntimeError("\u7121\u6cd5\u53d6\u5f97 thefew.tw/cb HTML")
-    
-    soup = BeautifulSoup(html, 'html.parser')
-    table = soup.find(id='cb-table')
-    if not table:
-        raise RuntimeError("\u627e\u4e0d\u5230 #cb-table")
-    
-    # The table uses multiple <tbody> elements, one per CB
-    # Each tbody has row1 (8 cells = data) and row2 (expandable detail)
-    data = []
-    for tbody in table.find_all('tbody', recursive=False):
-        rows = tbody.find_all('tr', recursive=False)
-        if not rows:
+        except (IndexError, ValueError, AttributeError):
             continue
-        cells = rows[0].find_all('td', recursive=False)
-        if len(cells) != 8:
-            continue
-        code_div = cells[0].select_one('div[class*="w-1/3"]')
-        name_div = cells[0].select_one('div[class*="w-2/3"]')
-        cb_code  = code_div.get_text(strip=True) if code_div else ''
-        cb_name  = name_div.get_text(strip=True) if name_div else ''
-        if not cb_code:
-            continue
-        data.append({
-            'cb_code':          cb_code,
-            'cb_name':          cb_name,
-            'cb_price':         parse_num(cells[1].get_text()),
-            'stock_price':      parse_num(cells[2].get_text()),
-            'premium':          parse_num(cells[3].get_text().replace('%','')),
-            'volume':           parse_num(cells[4].get_text()),
-            'conversion_price': parse_num(cells[5].get_text()),
-            'converted_pct':    parse_num(cells[6].get_text().replace('%','')) or 0.0,
-            'maturity_date':    cells[7].get_text(strip=True),
-            'listing_date':     None,
-        })
-    print(f"  \u2192 \u5168\u90e8CB: {len(data)} \u7b46")
-    if len(data) < 50:
-        raise ValueError(f"\u8cc7\u6599\u4e0d\u8db3\uff0c\u50c5 {len(data)} \u7b46\uff08\u9810\u671f 400+\uff09")
-    return data
+    if len(cbs) < 100:
+        raise ValueError(f"Only found {len(cbs)} CBs, expected >= 100")
+    print(f"→ 全部CB: {len(cbs)} 筆")
+    return cbs
 
 
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
-# 2. ÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ¨ÃÂÃÂ¿ÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂCBÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂthefew.tw/cb/recent ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ ÃÂÃÂ¥ÃÂÃÂÃÂÃÂ«ÃÂÃÂ¦ÃÂÃÂÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂÃÂÃÂ¦ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂÃÂÃÂ§ÃÂÃÂ­ÃÂÃÂÃÂÃÂ§ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¤ÃÂÃÂ¸ÃÂÃÂÃÂÃÂ¥ÃÂÃÂ¿ÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂÃÂÃÂ¯ÃÂÃÂ¼ÃÂÃÂ
-# ÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂ
-def fetch_recent_cbs():
-    """Fetch recent CBs from thefew.tw/cb/recent (contains listing_date)."""
-    print("[2/3] \u6293\u53d6\u8fd1\u671fCB (thefew.tw/cb/recent)...")
-    
-    html = None
-    url = 'https://thefew.tw/cb/recent'
-    headers = {
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Language': 'zh-TW,zh;q=0.9,en;q=0.7',
-        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-    }
-    
-    if HAS_CFFI:
+def fetch_recent_cbs(days=90):
+    """取得近N天上市的CB"""
+    listing_map, _ = fetch_issuance_dates()
+    cutoff = datetime.now() - timedelta(days=days)
+    recent = {}
+    for code, date_str in listing_map.items():
         try:
-            resp = cffi_requests.get(url, impersonate='chrome131', timeout=60)
-            html = resp.text
-            print(f"  \u2192 curl_cffi HTML size: {len(html)}")
-        except Exception as e:
-            print(f"  \u26a0 curl_cffi failed: {e}")
-    
-    if html is None or len(html) < 10000:
-        if HAS_PLAYWRIGHT:
-            try:
-                with sync_playwright() as p:
-                    browser = p.chromium.launch(headless=True)
-                    ctx = browser.new_context(user_agent=headers['User-Agent'], viewport={'width': 1920, 'height': 1080})
-                    page = ctx.new_page()
-                    page.goto(url, wait_until='networkidle', timeout=90000)
-                    page.wait_for_timeout(3000)
-                    html = page.content()
-                    browser.close()
-            except Exception as e:
-                print(f"  \u26a0 Playwright failed: {e}")
-    
-    if html is None or len(html) < 10000:
-        try:
-            import requests as req
-            resp = req.get(url, timeout=60, headers=headers)
-            html = resp.text
-        except Exception as e:
-            print(f"  \u26a0 requests failed: {e}")
-    
-    if html is None:
-        print("  \u26a0 \u7121\u6cd5\u6293\u53d6 recent CB, \u8df3\u904e")
-        return []
-    
-    soup = BeautifulSoup(html, 'html.parser')
-    data = []
-    rows = soup.select('table tbody tr')
-    for tr in rows:
-        cells = tr.select('td')
-        if len(cells) < 7:
+            if datetime.strptime(date_str, "%Y-%m-%d") >= cutoff:
+                recent[code] = {"listing_date": date_str}
+        except ValueError:
             continue
-        texts = [c.get_text(strip=True) for c in cells]
-        code_match = re.match(r'(\d{4,6})', texts[0])
-        if not code_match:
-            continue
-        cb_code = code_match.group(1)
-        listing_date = None
-        for t in texts:
-            dm = re.match(r'(\d{4}[-/]\d{2}[-/]\d{2})', t)
-            if dm:
-                listing_date = dm.group(1)
-                break
-        data.append({'cb_code': cb_code, 'listing_date': listing_date})
-    print(f"  \u2192 \u8fd1\u671fCB: {len(data)} \u7b46")
-    return data
+    print(f"→ 近{days}天CB: {len(recent)} 筆")
+    return recent
 
 
 def _parse_short_rows(rows, data_date):
