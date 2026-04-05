@@ -14,6 +14,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
+from playwright.sync_api import sync_playwright
 
 # ── 路徑設定（GitHub Actions 用）─────────────────────────
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
@@ -30,20 +31,34 @@ HEADERS = {
 }
 
 # ─────────────────────────────────────────────────────────────
-# 1. 抓全部 CB（thefew.tw/cb → 400+ 筆，含到期日、溢價、已轉換）
+# # 共用：解析數字（含負數）
+# ─────────────────────────────────────────────────────────────
+def parse_num(txt):
+    m = re.match(r'^(-?[\d.]+)', txt.strip())
+    return float(m.group(1)) if m else None
+
+
+# ─────────────────────────────────────────────────────────────
+# 1. 抓全部 CB（Playwright 載入 thefew.tw/cb，取得 400+ 筆完整資料）
 # ─────────────────────────────────────────────────────────────
 def fetch_all_cbs():
-    print("[1/3] 抓取全部CB (thefew.tw/cb)...")
+    print("[1/3] 抓取全部CB (thefew.tw/cb) — Playwright...")
     try:
-        r = requests.get('https://thefew.tw/cb', headers=HEADERS, timeout=20)
-        if r.status_code != 200 or 'login' in r.url.lower():
-            raise ValueError(f"需要登入或失敗 status={r.status_code}")
-        soup = BeautifulSoup(r.text, 'html.parser')
-        rows = soup.select('table tbody tr')
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            page.goto('https://thefew.tw/cb', timeout=60000)
+            page.wait_for_selector('#cb-table tbody tr', timeout=30000)
+            page.wait_for_timeout(3000)
+            html = page.content()
+            browser.close()
+
+        soup = BeautifulSoup(html, 'html.parser')
+        rows = soup.select('#cb-table tbody tr')
         data = []
         for tr in rows:
             cells = tr.select('td')
-            if len(cells) < 8:
+            if len(cells) != 8:
                 continue
             code_div = cells[0].select_one('div[class*="w-1/3"]')
             name_div = cells[0].select_one('div[class*="w-2/3"]')
@@ -51,9 +66,6 @@ def fetch_all_cbs():
             cb_name  = name_div.get_text(strip=True) if name_div else ''
             if not cb_code or len(cb_code) < 4:
                 continue
-            def parse_num(txt):
-                m = re.match(r'^([\d.]+)', txt.strip())
-                return float(m.group(1)) if m else None
             data.append({
                 'cb_code':          cb_code,
                 'cb_name':          cb_name,
@@ -65,9 +77,11 @@ def fetch_all_cbs():
                 'conversion_price': parse_num(cells[5].get_text()),
                 'converted_pct':    parse_num(cells[6].get_text().replace('%','')) or 0.0,
                 'maturity_date':    cells[7].get_text(strip=True),
-                'listing_date':     None,  # /cb 沒有掛牌日
+                'listing_date':     None,
             })
         print(f"  → 全部CB: {len(data)} 筆")
+        if len(data) < 50:
+            raise ValueError(f"資料不足，僅 {len(data)} 筆（預期 400+）")
         return data
     except Exception as e:
         print(f"  ⚠ 無法抓取 thefew.tw/cb: {e}")
@@ -78,12 +92,17 @@ def fetch_all_cbs():
 # 2. 抓近期CB（thefew.tw/cb/recent → 含掛牌日，策略一必需）
 # ─────────────────────────────────────────────────────────────
 def fetch_recent_cbs():
-    print("[2/3] 抓取近期CB (thefew.tw/cb/recent)...")
+    print("[2/3] 抓取近期CB (thefew.tw/cb/recent) — Playwright...")
     try:
-        r = requests.get('https://thefew.tw/cb/recent', headers=HEADERS, timeout=20)
-        if r.status_code != 200:
-            raise ValueError(f"status={r.status_code}")
-        soup = BeautifulSoup(r.text, 'html.parser')
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page()
+            page.goto('https://thefew.tw/cb/recent', timeout=60000)
+            page.wait_for_selector('table tbody tr', timeout=30000)
+            page.wait_for_timeout(3000)
+            html = page.content()
+            browser.close()
+        soup = BeautifulSoup(html, 'html.parser')
 
         # 找含掛牌日的 JSON 資料（嵌在頁面 script 或 table 裡）
         data = []
