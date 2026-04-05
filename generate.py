@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-å¯è½åµç­ç¥åè¡¨æ¿
-- CB è³æï¼thefew.tw/cbï¼å¨é¨ 400+ ç­ï¼+ /cb/recentï¼å«æçæ¥ï¼ç­ç¥ä¸ç¨ï¼
-- èå¸+åå¸ï¼TWSE TWT93Uï¼æ¯æ¥ç¤å¾èªåæ´æ°ï¼ç¡éç»å¥ï¼
-- ç­ç¥ä¸ï¼CBASæ°ä¸å¸ï¼éæçæ¥ï¼ä¾èª /cb/recentï¼
-- ç­ç¥äºï¼è½æå¥å©ï¼å¨é¨ CBï¼
+Ã¥ÂÂ¯Ã¨Â½ÂÃ¥ÂÂµÃ§Â­ÂÃ§ÂÂ¥Ã¥ÂÂÃ¨Â¡Â¨Ã¦ÂÂ¿
+- CB Ã¨Â³ÂÃ¦ÂÂÃ¯Â¼Âthefew.tw/cbÃ¯Â¼ÂÃ¥ÂÂ¨Ã©ÂÂ¨ 400+ Ã§Â­ÂÃ¯Â¼Â+ /cb/recentÃ¯Â¼ÂÃ¥ÂÂ«Ã¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã¯Â¼ÂÃ§Â­ÂÃ§ÂÂ¥Ã¤Â¸ÂÃ§ÂÂ¨Ã¯Â¼Â
+- Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¯Â¼ÂTWSE TWT93UÃ¯Â¼ÂÃ¦Â¯ÂÃ¦ÂÂ¥Ã§ÂÂ¤Ã¥Â¾ÂÃ¨ÂÂªÃ¥ÂÂÃ¦ÂÂ´Ã¦ÂÂ°Ã¯Â¼ÂÃ§ÂÂ¡Ã©ÂÂÃ§ÂÂ»Ã¥ÂÂ¥Ã¯Â¼Â
+- Ã§Â­ÂÃ§ÂÂ¥Ã¤Â¸ÂÃ¯Â¼ÂCBASÃ¦ÂÂ°Ã¤Â¸ÂÃ¥Â¸ÂÃ¯Â¼ÂÃ©ÂÂÃ¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã¯Â¼ÂÃ¤Â¾ÂÃ¨ÂÂª /cb/recentÃ¯Â¼Â
+- Ã§Â­ÂÃ§ÂÂ¥Ã¤ÂºÂÃ¯Â¼ÂÃ¨Â½ÂÃ¦ÂÂÃ¥Â¥ÂÃ¥ÂÂ©Ã¯Â¼ÂÃ¥ÂÂ¨Ã©ÂÂ¨ CBÃ¯Â¼Â
 """
 
 import requests
@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from playwright.sync_api import sync_playwright
 
-# ââ è·¯å¾è¨­å®ï¼GitHub Actions ç¨ï¼âââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂ Ã¨Â·Â¯Ã¥Â¾ÂÃ¨Â¨Â­Ã¥Â®ÂÃ¯Â¼ÂGitHub Actions Ã§ÂÂ¨Ã¯Â¼ÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 BASE_DIR    = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_HTML = os.path.join(BASE_DIR, 'index.html')
 
@@ -30,35 +30,29 @@ HEADERS = {
     'Referer': 'https://thefew.tw/',
 }
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# # å±ç¨ï¼è§£ææ¸å­ï¼å«è² æ¸ï¼
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# # Ã¥ÂÂ±Ã§ÂÂ¨Ã¯Â¼ÂÃ¨Â§Â£Ã¦ÂÂÃ¦ÂÂ¸Ã¥Â­ÂÃ¯Â¼ÂÃ¥ÂÂ«Ã¨Â²Â Ã¦ÂÂ¸Ã¯Â¼Â
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def parse_num(txt):
     m = re.match(r'^(-?[\d.]+)', txt.strip())
     return float(m.group(1)) if m else None
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 1. æå¨é¨ CBï¼Playwright è¼å¥ thefew.tw/cbï¼åå¾ 400+ ç­å®æ´è³æï¼
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 1. Ã¦ÂÂÃ¥ÂÂ¨Ã©ÂÂ¨ CBÃ¯Â¼ÂPlaywright Ã¨Â¼ÂÃ¥ÂÂ¥ thefew.tw/cbÃ¯Â¼ÂÃ¥ÂÂÃ¥Â¾Â 400+ Ã§Â­ÂÃ¥Â®ÂÃ¦ÂÂ´Ã¨Â³ÂÃ¦ÂÂÃ¯Â¼Â
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def fetch_all_cbs():
-    print("[1/3] æåå¨é¨CB (thefew.tw/cb) â Playwright...")
+    print("[1/3] Ã¦ÂÂÃ¥ÂÂÃ¥ÂÂ¨Ã©ÂÂ¨CB (thefew.tw/cb) Ã¢ÂÂ Playwright...")
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
-            page = browser.new_page()
-            page.goto('https://thefew.tw/cb', wait_until='networkidle', timeout=90000)
-            # Wait until JS renders 100+ data rows (8 cells each)
-            page.wait_for_function(
-                """() => {
-                    const rows = document.querySelectorAll('#cb-table tbody tr');
-                    let n = 0;
-                    for (const r of rows) { if (r.querySelectorAll('td').length === 8) n++; }
-                    return n > 100;
-                }""",
-                timeout=60000
+            ctx = browser.new_context(
+                user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+                viewport={'width': 1920, 'height': 1080}
             )
-            page.wait_for_timeout(2000)
+            page = ctx.new_page()
+            page.goto('https://thefew.tw/cb', wait_until='networkidle', timeout=120000)
+            page.wait_for_timeout(5000)
             html = page.content()
             browser.close()
 
@@ -88,50 +82,50 @@ def fetch_all_cbs():
                 'maturity_date':    cells[7].get_text(strip=True),
                 'listing_date':     None,
             })
-        print(f"  â å¨é¨CB: {len(data)} ç­")
+        print(f"  Ã¢ÂÂ Ã¥ÂÂ¨Ã©ÂÂ¨CB: {len(data)} Ã§Â­Â")
         if len(data) < 50:
-            raise ValueError(f"è³æä¸è¶³ï¼å {len(data)} ç­ï¼é æ 400+ï¼")
+            raise ValueError(f"Ã¨Â³ÂÃ¦ÂÂÃ¤Â¸ÂÃ¨Â¶Â³Ã¯Â¼ÂÃ¥ÂÂ {len(data)} Ã§Â­ÂÃ¯Â¼ÂÃ©Â ÂÃ¦ÂÂ 400+Ã¯Â¼Â")
         return data
     except Exception as e:
-        print(f"  â  ç¡æ³æå thefew.tw/cb: {e}")
+        print(f"  Ã¢ÂÂ  Ã§ÂÂ¡Ã¦Â³ÂÃ¦ÂÂÃ¥ÂÂ thefew.tw/cb: {e}")
         raise
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 2. æè¿æCBï¼thefew.tw/cb/recent â å«æçæ¥ï¼ç­ç¥ä¸å¿éï¼
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 2. Ã¦ÂÂÃ¨Â¿ÂÃ¦ÂÂCBÃ¯Â¼Âthefew.tw/cb/recent Ã¢ÂÂ Ã¥ÂÂ«Ã¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã¯Â¼ÂÃ§Â­ÂÃ§ÂÂ¥Ã¤Â¸ÂÃ¥Â¿ÂÃ©ÂÂÃ¯Â¼Â
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def fetch_recent_cbs():
-    print("[2/3] æåè¿æCB (thefew.tw/cb/recent) â Playwright...")
+    print("[2/3] Ã¦ÂÂÃ¥ÂÂÃ¨Â¿ÂÃ¦ÂÂCB (thefew.tw/cb/recent) Ã¢ÂÂ Playwright...")
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
-            page = browser.new_page()
-            page.goto('https://thefew.tw/cb/recent', wait_until='networkidle', timeout=90000)
-            page.wait_for_function(
-                "() => document.querySelectorAll('table tbody tr').length > 5",
-                timeout=60000
+            ctx = browser.new_context(
+                user_agent='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+                viewport={'width': 1920, 'height': 1080}
             )
-            page.wait_for_timeout(2000)
+            page = ctx.new_page()
+            page.goto('https://thefew.tw/cb/recent', wait_until='networkidle', timeout=120000)
+            page.wait_for_timeout(5000)
             html = page.content()
             browser.close()
         soup = BeautifulSoup(html, 'html.parser')
 
-        # æ¾å«æçæ¥ç JSON è³æï¼åµå¨é é¢ script æ table è£¡ï¼
+        # Ã¦ÂÂ¾Ã¥ÂÂ«Ã¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã§ÂÂ JSON Ã¨Â³ÂÃ¦ÂÂÃ¯Â¼ÂÃ¥ÂµÂÃ¥ÂÂ¨Ã©Â ÂÃ©ÂÂ¢ script Ã¦ÂÂ table Ã¨Â£Â¡Ã¯Â¼Â
         data = []
         rows = soup.select('table tbody tr')
         for tr in rows:
             cells = tr.select('td')
             if len(cells) < 7:
                 continue
-            # çµæ§å¯è½ä¸åï¼ä¾å¯¦éé é¢èª¿æ´
+            # Ã§ÂµÂÃ¦Â§ÂÃ¥ÂÂ¯Ã¨ÂÂ½Ã¤Â¸ÂÃ¥ÂÂÃ¯Â¼ÂÃ¤Â¾ÂÃ¥Â¯Â¦Ã©ÂÂÃ©Â ÂÃ©ÂÂ¢Ã¨ÂªÂ¿Ã¦ÂÂ´
             texts = [c.get_text(strip=True) for c in cells]
-            # åè©¦æ cb_codeï¼éå¸¸å¨ç¬¬ä¸æ¬ï¼
+            # Ã¥ÂÂÃ¨Â©Â¦Ã¦ÂÂ cb_codeÃ¯Â¼ÂÃ©ÂÂÃ¥Â¸Â¸Ã¥ÂÂ¨Ã§Â¬Â¬Ã¤Â¸ÂÃ¦Â¬ÂÃ¯Â¼Â
             code_match = re.match(r'(\d{4,6})', texts[0])
             if not code_match:
                 continue
             cb_code = code_match.group(1)
 
-            # æ¾æçæ¥ï¼æ ¼å¼ YYYY-MM-DDï¼
+            # Ã¦ÂÂ¾Ã¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã¯Â¼ÂÃ¦Â Â¼Ã¥Â¼Â YYYY-MM-DDÃ¯Â¼Â
             listing_date = None
             for t in texts:
                 m = re.search(r'(\d{4}-\d{2}-\d{2})', t)
@@ -147,27 +141,27 @@ def fetch_recent_cbs():
             })
 
         if data:
-            print(f"  â è¿æCB: {len(data)} ç­")
+            print(f"  Ã¢ÂÂ Ã¨Â¿ÂÃ¦ÂÂCB: {len(data)} Ã§Â­Â")
             return {d['cb_code']: d for d in data}
         else:
-            raise ValueError("è§£æå° 0 ç­")
+            raise ValueError("Ã¨Â§Â£Ã¦ÂÂÃ¥ÂÂ° 0 Ã§Â­Â")
 
     except Exception as e:
-        print(f"  â  ç¡æ³æå /cb/recent: {e}")
+        print(f"  Ã¢ÂÂ  Ã§ÂÂ¡Ã¦Â³ÂÃ¦ÂÂÃ¥ÂÂ /cb/recent: {e}")
         return {}
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 3. æèå¸+åå¸è³£åºé¤é¡
-#    TWSE TWT93Uï¼ä¸å¸è¡ç¥¨ 1,262 æ¯ï¼date åæ¸ï¼
-#    TPEX SBL   ï¼ä¸æ«è¡ç¥¨  903 æ¯ï¼èªåææ°æ¥ï¼
-#    å©èæ¬ä½ç¸åï¼å®ä½ï¼è¡ï¼/1000 = å¼µï¼ï¼
-#    [0]ä»£è [1]åç¨±
-#    èè³: [2-7]
-#    èå¸+åå¸: [8]åæ¥é¤é¡ [9]ç¶æ¥è³£åº [10]ç¶æ¥éå¸ [11]èª¿æ´ [12]ä»æ¥é¤é¡ [13]éé¡
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 3. Ã¦ÂÂÃ¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¨Â³Â£Ã¥ÂÂºÃ©Â¤ÂÃ©Â¡Â
+#    TWSE TWT93UÃ¯Â¼ÂÃ¤Â¸ÂÃ¥Â¸ÂÃ¨ÂÂ¡Ã§Â¥Â¨ 1,262 Ã¦ÂÂ¯Ã¯Â¼Âdate Ã¥ÂÂÃ¦ÂÂ¸Ã¯Â¼Â
+#    TPEX SBL   Ã¯Â¼ÂÃ¤Â¸ÂÃ¦Â«ÂÃ¨ÂÂ¡Ã§Â¥Â¨  903 Ã¦ÂÂ¯Ã¯Â¼ÂÃ¨ÂÂªÃ¥ÂÂÃ¦ÂÂÃ¦ÂÂ°Ã¦ÂÂ¥Ã¯Â¼Â
+#    Ã¥ÂÂ©Ã¨ÂÂÃ¦Â¬ÂÃ¤Â½ÂÃ§ÂÂ¸Ã¥ÂÂÃ¯Â¼ÂÃ¥ÂÂ®Ã¤Â½ÂÃ¯Â¼ÂÃ¨ÂÂ¡Ã¯Â¼Â/1000 = Ã¥Â¼ÂµÃ¯Â¼ÂÃ¯Â¼Â
+#    [0]Ã¤Â»Â£Ã¨ÂÂ [1]Ã¥ÂÂÃ§Â¨Â±
+#    Ã¨ÂÂÃ¨Â³Â: [2-7]
+#    Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸: [8]Ã¥ÂÂÃ¦ÂÂ¥Ã©Â¤ÂÃ©Â¡Â [9]Ã§ÂÂ¶Ã¦ÂÂ¥Ã¨Â³Â£Ã¥ÂÂº [10]Ã§ÂÂ¶Ã¦ÂÂ¥Ã©ÂÂÃ¥ÂÂ¸ [11]Ã¨ÂªÂ¿Ã¦ÂÂ´ [12]Ã¤Â»ÂÃ¦ÂÂ¥Ã©Â¤ÂÃ©Â¡Â [13]Ã©ÂÂÃ©Â¡Â
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def _parse_short_rows(rows, data_date):
-    """å±ç¨è§£æéè¼¯ï¼æ TWSE/TPEX ç row é£åè½æ short_map"""
+    """Ã¥ÂÂ±Ã§ÂÂ¨Ã¨Â§Â£Ã¦ÂÂÃ©ÂÂÃ¨Â¼Â¯Ã¯Â¼ÂÃ¦ÂÂ TWSE/TPEX Ã§ÂÂ row Ã©ÂÂ£Ã¥ÂÂÃ¨Â½ÂÃ¦ÂÂ short_map"""
     def ti(s):
         try:
             return round(int(str(s).replace(',', '').strip() or '0') / 1000)
@@ -176,7 +170,7 @@ def _parse_short_rows(rows, data_date):
     short_map = {}
     for row in rows:
         code = row[0]
-        if not code or code == 'åè¨':
+        if not code or code == 'Ã¥ÂÂÃ¨Â¨Â':
             continue
         prev    = ti(row[8])
         today_v = ti(row[12])
@@ -194,11 +188,11 @@ def _parse_short_rows(rows, data_date):
 
 
 def fetch_short_data():
-    print("[3/3] æåèå¸+åå¸è³æ (TWSE + TPEX)...")
+    print("[3/3] Ã¦ÂÂÃ¥ÂÂÃ¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¨Â³ÂÃ¦ÂÂ (TWSE + TPEX)...")
     short_map = {}
     data_date = 'N/A'
 
-    # ââ TWSE TWT93Uï¼ä¸å¸ï¼éå¸¶ date åæ¸ï¼ââââââââââââââââââ
+    # Ã¢ÂÂÃ¢ÂÂ TWSE TWT93UÃ¯Â¼ÂÃ¤Â¸ÂÃ¥Â¸ÂÃ¯Â¼ÂÃ©ÂÂÃ¥Â¸Â¶ date Ã¥ÂÂÃ¦ÂÂ¸Ã¯Â¼ÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
     for delta in range(0, 5):
         try_date = (TODAY - timedelta(days=delta)).strftime('%Y%m%d')
         try:
@@ -210,12 +204,12 @@ def fetch_short_data():
                 twse_map = _parse_short_rows(d['data'], try_date)
                 short_map.update(twse_map)
                 data_date = try_date
-                print(f"  â TWSE: {len(twse_map)} æ¯ï¼{try_date}ï¼")
+                print(f"  Ã¢ÂÂ TWSE: {len(twse_map)} Ã¦ÂÂ¯Ã¯Â¼Â{try_date}Ã¯Â¼Â")
                 break
         except Exception as e:
-            print(f"  â  TWSE {try_date}: {e}")
+            print(f"  Ã¢ÂÂ  TWSE {try_date}: {e}")
 
-    # ââ TPEX SBLï¼ä¸æ«ï¼èªåè¿åææ°æ¥ï¼ââââââââââââââââââââ
+    # Ã¢ÂÂÃ¢ÂÂ TPEX SBLÃ¯Â¼ÂÃ¤Â¸ÂÃ¦Â«ÂÃ¯Â¼ÂÃ¨ÂÂªÃ¥ÂÂÃ¨Â¿ÂÃ¥ÂÂÃ¦ÂÂÃ¦ÂÂ°Ã¦ÂÂ¥Ã¯Â¼ÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
     try:
         url = 'https://www.tpex.org.tw/www/zh-tw/margin/sbl'
         r = requests.get(url, headers=HEADERS, timeout=20)
@@ -224,29 +218,29 @@ def fetch_short_data():
             rows = d['tables'][0]['data']
             tpex_date = d.get('date', data_date)
             tpex_map = _parse_short_rows(rows, tpex_date)
-            # TPEX è£ä¸å¸å ´æ²æçä¸æ«è¡ï¼ä¸è¦è TWSE å·²æè³æï¼
+            # TPEX Ã¨Â£ÂÃ¤Â¸ÂÃ¥Â¸ÂÃ¥Â Â´Ã¦Â²ÂÃ¦ÂÂÃ§ÂÂÃ¤Â¸ÂÃ¦Â«ÂÃ¨ÂÂ¡Ã¯Â¼ÂÃ¤Â¸ÂÃ¨Â¦ÂÃ¨ÂÂ TWSE Ã¥Â·Â²Ã¦ÂÂÃ¨Â³ÂÃ¦ÂÂÃ¯Â¼Â
             added = 0
             for code, v in tpex_map.items():
                 if code not in short_map:
                     short_map[code] = v
                     added += 1
-            print(f"  â TPEX: {len(tpex_map)} æ¯ï¼æ°å¢ {added} æ¯ä¸æ«ï¼{tpex_date}ï¼")
+            print(f"  Ã¢ÂÂ TPEX: {len(tpex_map)} Ã¦ÂÂ¯Ã¯Â¼ÂÃ¦ÂÂ°Ã¥Â¢Â {added} Ã¦ÂÂ¯Ã¤Â¸ÂÃ¦Â«ÂÃ¯Â¼Â{tpex_date}Ã¯Â¼Â")
             if data_date == 'N/A':
                 data_date = tpex_date
     except Exception as e:
-        print(f"  â  TPEX: {e}")
+        print(f"  Ã¢ÂÂ  TPEX: {e}")
 
     if short_map:
-        print(f"  â åè¨: {len(short_map)} æ¯è¡ç¥¨")
+        print(f"  Ã¢ÂÂ Ã¥ÂÂÃ¨Â¨Â: {len(short_map)} Ã¦ÂÂ¯Ã¨ÂÂ¡Ã§Â¥Â¨")
         return short_map, data_date
 
-    print("  â  ç¡èå¸è³æ")
+    print("  Ã¢ÂÂ  Ã§ÂÂ¡Ã¨ÂÂÃ¥ÂÂ¸Ã¨Â³ÂÃ¦ÂÂ")
     return {}, 'N/A'
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 4. è¨ç®äº¤ææ¥æ¸ï¼åªæ¸é±ä¸ï½äºï¼ä¸å«é±æ«ï¼
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 4. Ã¨Â¨ÂÃ§Â®ÂÃ¤ÂºÂ¤Ã¦ÂÂÃ¦ÂÂ¥Ã¦ÂÂ¸Ã¯Â¼ÂÃ¥ÂÂªÃ¦ÂÂ¸Ã©ÂÂ±Ã¤Â¸ÂÃ¯Â½ÂÃ¤ÂºÂÃ¯Â¼ÂÃ¤Â¸ÂÃ¥ÂÂ«Ã©ÂÂ±Ã¦ÂÂ«Ã¯Â¼Â
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def trading_days_between(start_str, end_date=None):
     if not start_str:
         return None
@@ -259,10 +253,10 @@ def trading_days_between(start_str, end_date=None):
         count = 0
         cur = start
         while cur <= end_date:
-            if cur.weekday() < 5:  # é±ä¸=0 é±äº=4
+            if cur.weekday() < 5:  # Ã©ÂÂ±Ã¤Â¸Â=0 Ã©ÂÂ±Ã¤ÂºÂ=4
                 count += 1
             cur += timedelta(days=1)
-        return count - 1  # æçç¶å¤©ç® Day 0
+        return count - 1  # Ã¦ÂÂÃ§ÂÂÃ§ÂÂ¶Ã¥Â¤Â©Ã§Â®Â Day 0
     except:
         return None
 
@@ -276,49 +270,49 @@ def calendar_days_to(maturity_str, end_date=None):
         return 0
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 5. ç­ç¥è¨èéè¼¯
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 5. Ã§Â­ÂÃ§ÂÂ¥Ã¨Â¨ÂÃ¨ÂÂÃ©ÂÂÃ¨Â¼Â¯
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def evaluate_s1(cb, short_map, recent_map):
-    """ç­ç¥ä¸ï¼CBAS æ°ä¸å¸ï¼3 æ¢ä»¶ï¼"""
+    """Ã§Â­ÂÃ§ÂÂ¥Ã¤Â¸ÂÃ¯Â¼ÂCBAS Ã¦ÂÂ°Ã¤Â¸ÂÃ¥Â¸ÂÃ¯Â¼Â3 Ã¦Â¢ÂÃ¤Â»Â¶Ã¯Â¼Â"""
     rec = recent_map.get(cb['cb_code'], {})
     listing_date = rec.get('listing_date') or cb.get('listing_date')
     if not listing_date:
-        return None  # æ²ææçæ¥ï¼ç¡æ³å¤æ·
+        return None  # Ã¦Â²ÂÃ¦ÂÂÃ¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã¯Â¼ÂÃ§ÂÂ¡Ã¦Â³ÂÃ¥ÂÂ¤Ã¦ÂÂ·
 
     td = trading_days_between(listing_date)
     if td is None or td < 0:
-        return {'signal': 'å³å°ä¸å¸', 'cls': 'info', 'td': td,
+        return {'signal': 'Ã¥ÂÂ³Ã¥Â°ÂÃ¤Â¸ÂÃ¥Â¸Â', 'cls': 'info', 'td': td,
                 'c1': False, 'c2': False, 'c3': None}
 
     cbp  = cb.get('cb_price') or 0
     sc   = cb['stock_code']
     sh   = short_map.get(sc)
 
-    c1 = 4 <= td <= 8         # æ¢ä»¶ä¸ï¼æçæ¥ D4-D8
-    c2 = cbp >= 98             # æ¢ä»¶äºï¼CB â¥ 98
+    c1 = 4 <= td <= 8         # Ã¦Â¢ÂÃ¤Â»Â¶Ã¤Â¸ÂÃ¯Â¼ÂÃ¦ÂÂÃ§ÂÂÃ¦ÂÂ¥ D4-D8
+    c2 = cbp >= 98             # Ã¦Â¢ÂÃ¤Â»Â¶Ã¤ÂºÂÃ¯Â¼ÂCB Ã¢ÂÂ¥ 98
     if sh is None:
-        c3 = None              # ç¡èå¸è³æï¼ççä¸å¯æ¾ç©ºï¼
+        c3 = None              # Ã§ÂÂ¡Ã¨ÂÂÃ¥ÂÂ¸Ã¨Â³ÂÃ¦ÂÂÃ¯Â¼ÂÃ§ÂÂÃ§ÂÂÃ¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©ÂºÃ¯Â¼Â
     else:
-        c3 = sh['increasing']  # æ¢ä»¶ä¸ï¼èå¸+åå¸å¢å 
+        c3 = sh['increasing']  # Ã¦Â¢ÂÃ¤Â»Â¶Ã¤Â¸ÂÃ¯Â¼ÂÃ¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¥Â¢ÂÃ¥ÂÂ 
 
     n_ok = sum(x for x in [c1, c2] if x) + (1 if c3 else 0)
 
     if not c1:
         if td <= 3:
-            sig, cls = f'è§å¯ D{td}', 'watch'
+            sig, cls = f'Ã¨Â§ÂÃ¥Â¯Â D{td}', 'watch'
         elif 8 < td <= 20:
-            sig, cls = f'åºå ´ D{td}', 'sell'
+            sig, cls = f'Ã¥ÂÂºÃ¥Â Â´ D{td}', 'sell'
         else:
-            sig, cls = 'â', 'neutral'
+            sig, cls = 'Ã¢ÂÂ', 'neutral'
     elif c1 and c2 and c3:
-        sig, cls = f'â è²·å¥ D{td} (3/3)', 'buy'
+        sig, cls = f'Ã¢ÂÂ Ã¨Â²Â·Ã¥ÂÂ¥ D{td} (3/3)', 'buy'
     elif c1 and c2 and c3 is None:
-        sig, cls = f'â ä¸å¯æ¾ç©º D{td}', 'watch'
+        sig, cls = f'Ã¢ÂÂ Ã¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©Âº D{td}', 'watch'
     elif c1 and c2:
-        sig, cls = f'â èå¸æªå¢ D{td}', 'sell'
+        sig, cls = f'Ã¢ÂÂ Ã¨ÂÂÃ¥ÂÂ¸Ã¦ÂÂªÃ¥Â¢Â D{td}', 'sell'
     else:
-        sig, cls = f'â D{td}', 'neutral'
+        sig, cls = f'Ã¢ÂÂ D{td}', 'neutral'
 
     return {'signal': sig, 'cls': cls, 'td': td,
             'c1': c1, 'c2': c2, 'c3': c3,
@@ -328,17 +322,17 @@ def evaluate_s1(cb, short_map, recent_map):
 
 
 def evaluate_s2(cb, short_map):
-    """ç­ç¥äºï¼è½æå¥å©ï¼4 æ¢ä»¶ï¼"""
+    """Ã§Â­ÂÃ§ÂÂ¥Ã¤ÂºÂÃ¯Â¼ÂÃ¨Â½ÂÃ¦ÂÂÃ¥Â¥ÂÃ¥ÂÂ©Ã¯Â¼Â4 Ã¦Â¢ÂÃ¤Â»Â¶Ã¯Â¼Â"""
     prem  = cb.get('premium_rate') or 0
     conv  = cb.get('converted_pct') or 0
     dtm   = calendar_days_to(cb.get('maturity_date', ''))
     sc    = cb['stock_code']
     sh    = short_map.get(sc)
 
-    d1 = prem <= 2            # æº¢å¹ â¤ 2%
-    d2 = conv < 60            # å·²è½æ < 60%
-    d3 = dtm >= 90            # è·å°æ â¥ 90 å¤©
-    d4 = sh['increasing'] if sh else None  # èå¸+åå¸å¢å 
+    d1 = prem <= 2            # Ã¦ÂºÂ¢Ã¥ÂÂ¹ Ã¢ÂÂ¤ 2%
+    d2 = conv < 60            # Ã¥Â·Â²Ã¨Â½ÂÃ¦ÂÂ < 60%
+    d3 = dtm >= 90            # Ã¨Â·ÂÃ¥ÂÂ°Ã¦ÂÂ Ã¢ÂÂ¥ 90 Ã¥Â¤Â©
+    d4 = sh['increasing'] if sh else None  # Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¥Â¢ÂÃ¥ÂÂ 
 
     if sh is None:
         short_today = None; short_change = None
@@ -346,15 +340,15 @@ def evaluate_s2(cb, short_map):
         short_today = sh['short_today']; short_change = sh['short_change']
 
     if d1 and d2 and d3 and d4:
-        sig, cls = 'â å¥å© (4/4)', 'buy'
+        sig, cls = 'Ã¢ÂÂ Ã¥Â¥ÂÃ¥ÂÂ© (4/4)', 'buy'
     elif d1 and d2 and d3 and d4 is None:
-        sig, cls = 'â ä¸å¯æ¾ç©º (3+?/4)', 'watch'
+        sig, cls = 'Ã¢ÂÂ Ã¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©Âº (3+?/4)', 'watch'
     elif d1 and d2 and d3:
-        sig, cls = 'â èå¸æªå¢ (3/4)', 'sell'
+        sig, cls = 'Ã¢ÂÂ Ã¨ÂÂÃ¥ÂÂ¸Ã¦ÂÂªÃ¥Â¢Â (3/4)', 'sell'
     elif prem <= 5 and d2 and d3:
-        sig, cls = 'æ¥è¿å¥å©å', 'watch'
+        sig, cls = 'Ã¦ÂÂ¥Ã¨Â¿ÂÃ¥Â¥ÂÃ¥ÂÂ©Ã¥ÂÂ', 'watch'
     else:
-        sig, cls = 'â', 'neutral'
+        sig, cls = 'Ã¢ÂÂ', 'neutral'
 
     return {'signal': sig, 'cls': cls,
             'c1': d1, 'c2': d2, 'c3': d3, 'c4': d4,
@@ -362,20 +356,20 @@ def evaluate_s2(cb, short_map):
             'short_today': short_today, 'short_change': short_change}
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 6. çæ HTML
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 6. Ã§ÂÂÃ¦ÂÂ HTML
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def chk(ok, na=False):
     if na:  return '<span class="chk chk-na">?</span>'
-    return '<span class="chk chk-y">â</span>' if ok else '<span class="chk chk-n">â</span>'
+    return '<span class="chk chk-y">Ã¢ÂÂ</span>' if ok else '<span class="chk chk-n">Ã¢ÂÂ</span>'
 
 def fmt(v, d=1):
-    if v is None: return 'â'
+    if v is None: return 'Ã¢ÂÂ'
     try: return f'{float(v):.{d}f}'
-    except: return 'â'
+    except: return 'Ã¢ÂÂ'
 
 def sc_fmt(v):
-    if v is None: return 'â'
+    if v is None: return 'Ã¢ÂÂ'
     return f'+{v}' if v > 0 else str(v)
 
 def sc_cls(v):
@@ -383,66 +377,66 @@ def sc_cls(v):
     return 'short-up' if v > 0 else 'short-dn'
 
 def generate_html(all_cbs, recent_map, short_map, short_date):
-    # è¨ç®ææè¨è
+    # Ã¨Â¨ÂÃ§Â®ÂÃ¦ÂÂÃ¦ÂÂÃ¨Â¨ÂÃ¨ÂÂ
     results = []
     for cb in all_cbs:
         s1 = evaluate_s1(cb, short_map, recent_map)
         s2 = evaluate_s2(cb, short_map)
         results.append({**cb, 's1': s1, 's2': s2})
 
-    # åé¡
+    # Ã¥ÂÂÃ©Â¡Â
     s1_items = [r for r in results if r['s1'] and r['s1']['td'] is not None and r['s1']['td'] >= 0 and r['s1']['td'] <= 20]
     s1_items.sort(key=lambda x: x['s1']['td'])
     s2_items = sorted(results, key=lambda x: (
-        0 if 'â' in x['s2']['signal'] else 1 if 'â' in x['s2']['signal'] else 2 if 'â' not in x['s2']['signal'] and x['s2']['signal'] != 'â' else 3,
+        0 if 'Ã¢ÂÂ' in x['s2']['signal'] else 1 if 'Ã¢ÂÂ' in x['s2']['signal'] else 2 if 'Ã¢ÂÂ' not in x['s2']['signal'] and x['s2']['signal'] != 'Ã¢ÂÂ' else 3,
         x.get('premium_rate') or 99
     ))
 
-    s1_buy   = sum(1 for r in results if r['s1'] and 'â' in r['s1']['signal'])
-    s1_pend  = sum(1 for r in results if r['s1'] and 'â' in r['s1']['signal'])
-    s2_buy   = sum(1 for r in results if 'â' in r['s2']['signal'])
-    s2_pend  = sum(1 for r in results if 'â' in r['s2']['signal'])
+    s1_buy   = sum(1 for r in results if r['s1'] and 'Ã¢ÂÂ' in r['s1']['signal'])
+    s1_pend  = sum(1 for r in results if r['s1'] and 'Ã¢ÂÂ' in r['s1']['signal'])
+    s2_buy   = sum(1 for r in results if 'Ã¢ÂÂ' in r['s2']['signal'])
+    s2_pend  = sum(1 for r in results if 'Ã¢ÂÂ' in r['s2']['signal'])
 
-    # ââ S1 rows ââ
+    # Ã¢ÂÂÃ¢ÂÂ S1 rows Ã¢ÂÂÃ¢ÂÂ
     s1_rows_html = ''
     for r in s1_items:
         s1 = r['s1']
-        cbas = 'â å¯æ' if s1['td'] >= 6 else f'D6å¯æ'
-        s1_rows_html += f"""<tr class="{'row-buy' if 'â' in s1['signal'] else 'row-watch' if 'â' in s1['signal'] else 'row-sell' if 'â' in s1['signal'] else ''}">
+        cbas = 'Ã¢ÂÂ Ã¥ÂÂ¯Ã¦ÂÂ' if s1['td'] >= 6 else f'D6Ã¥ÂÂ¯Ã¦ÂÂ'
+        s1_rows_html += f"""<tr class="{'row-buy' if 'Ã¢ÂÂ' in s1['signal'] else 'row-watch' if 'Ã¢ÂÂ' in s1['signal'] else 'row-sell' if 'Ã¢ÂÂ' in s1['signal'] else ''}">
   <td><b>{r['cb_code']}</b></td><td>{r['cb_name']}</td><td>{r['stock_code']}</td>
   <td class="num">{fmt(r.get('cb_price'))}</td>
   <td class="center">D{s1['td']}</td>
   <td class="center">{cbas}</td>
-  <td class="center cond">{chk(s1['c1'])} æçåæ<br>{chk(s1['c2'])} CBå¹éæ¨<br>{chk(s1['c3'], s1['c3'] is None)} è+åâ</td>
-  <td class="num">{fmt(s1.get('short_today'),0)}å¼µ</td>
+  <td class="center cond">{chk(s1['c1'])} Ã¦ÂÂÃ§ÂÂÃ¥ÂÂÃ¦ÂÂ<br>{chk(s1['c2'])} CBÃ¥ÂÂ¹Ã©ÂÂÃ¦Â¨Â<br>{chk(s1['c3'], s1['c3'] is None)} Ã¨ÂÂ+Ã¥ÂÂÃ¢ÂÂ</td>
+  <td class="num">{fmt(s1.get('short_today'),0)}Ã¥Â¼Âµ</td>
   <td class="num {sc_cls(s1.get('short_change'))}">{sc_fmt(s1.get('short_change'))}</td>
   <td class="center"><span class="badge {s1['cls']}">{s1['signal']}</span></td>
 </tr>"""
 
-    # ââ S2 rows ââ
+    # Ã¢ÂÂÃ¢ÂÂ S2 rows Ã¢ÂÂÃ¢ÂÂ
     s2_rows_html = ''
     for r in s2_items:
         s2 = r['s2']
         pc = 'prem-neg' if (r.get('premium_rate') or 0) < 0 else ''
-        s2_rows_html += f"""<tr class="{'row-buy' if 'â' in s2['signal'] else 'row-watch' if 'â' in s2['signal'] or 'æ¥è¿' in s2['signal'] else ''}">
+        s2_rows_html += f"""<tr class="{'row-buy' if 'Ã¢ÂÂ' in s2['signal'] else 'row-watch' if 'Ã¢ÂÂ' in s2['signal'] or 'Ã¦ÂÂ¥Ã¨Â¿Â' in s2['signal'] else ''}">
   <td><b>{r['cb_code']}</b></td><td>{r['cb_name']}</td><td>{r['stock_code']}</td>
   <td class="num">{fmt(r.get('cb_price'))}</td>
   <td class="num {pc}">{fmt(r.get('premium_rate'))}%</td>
   <td class="num">{fmt(r.get('stock_price'))}</td>
   <td class="num">{fmt(r.get('conversion_price'))}</td>
-  <td class="center cond">{chk(s2['c1'])} ä½æº¢å¹<br>{chk(s2['c2'])} è½ææ¯ä¾ä½<br>{chk(s2['c3'])} è·å°æåè£<br>{chk(s2['c4'], s2['c4'] is None)} è+åâ</td>
-  <td class="num">{s2['days_to_mat']}å¤©</td>
-  <td class="num">{fmt(s2.get('short_today'),0)}å¼µ</td>
+  <td class="center cond">{chk(s2['c1'])} Ã¤Â½ÂÃ¦ÂºÂ¢Ã¥ÂÂ¹<br>{chk(s2['c2'])} Ã¨Â½ÂÃ¦ÂÂÃ¦Â¯ÂÃ¤Â¾ÂÃ¤Â½Â<br>{chk(s2['c3'])} Ã¨Â·ÂÃ¥ÂÂ°Ã¦ÂÂÃ¥ÂÂÃ¨Â£Â<br>{chk(s2['c4'], s2['c4'] is None)} Ã¨ÂÂ+Ã¥ÂÂÃ¢ÂÂ</td>
+  <td class="num">{s2['days_to_mat']}Ã¥Â¤Â©</td>
+  <td class="num">{fmt(s2.get('short_today'),0)}Ã¥Â¼Âµ</td>
   <td class="num {sc_cls(s2.get('short_change'))}">{sc_fmt(s2.get('short_change'))}</td>
   <td class="center"><span class="badge {s2['cls']}">{s2['signal']}</span></td>
 </tr>"""
 
-    # ââ All rows ââ
+    # Ã¢ÂÂÃ¢ÂÂ All rows Ã¢ÂÂÃ¢ÂÂ
     all_rows_html = ''
     for r in results:
         s1 = r['s1']
         s2 = r['s2']
-        s1sig = s1['signal'] if s1 else 'â'
+        s1sig = s1['signal'] if s1 else 'Ã¢ÂÂ'
         s1cls = s1['cls'] if s1 else 'neutral'
         pc = 'prem-neg' if (r.get('premium_rate') or 0) < 0 else ''
         sh = short_map.get(r['stock_code'])
@@ -452,8 +446,8 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
   <td class="num {pc}">{fmt(r.get('premium_rate'))}%</td>
   <td class="num">{fmt(r.get('stock_price'))}</td>
   <td class="num">{fmt(r.get('conversion_price'))}</td>
-  <td>{r.get('maturity_date','â')}</td>
-  <td class="num">{fmt(sh['short_today'],0) if sh else 'â'}å¼µ</td>
+  <td>{r.get('maturity_date','Ã¢ÂÂ')}</td>
+  <td class="num">{fmt(sh['short_today'],0) if sh else 'Ã¢ÂÂ'}Ã¥Â¼Âµ</td>
   <td class="num {sc_cls(sh['short_change'] if sh else None)}">{sc_fmt(sh['short_change'] if sh else None)}</td>
   <td class="center"><span class="badge {s1cls}">{s1sig}</span></td>
   <td class="center"><span class="badge {s2['cls']}">{s2['signal']}</span></td>
@@ -511,69 +505,69 @@ tr.row-sell td{background:#fff7ed}
     html = f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>å¯è½åµç­ç¥åè¡¨æ¿</title>
+<title>Ã¥ÂÂ¯Ã¨Â½ÂÃ¥ÂÂµÃ§Â­ÂÃ§ÂÂ¥Ã¥ÂÂÃ¨Â¡Â¨Ã¦ÂÂ¿</title>
 <style>{CSS}</style></head><body>
 <div class="hdr">
-  <h1>ð å¯è½åµç­ç¥åè¡¨æ¿</h1>
-  <div class="sub">æ´æ°ï¼{TODAY}</div>
+  <h1>Ã°ÂÂÂ Ã¥ÂÂ¯Ã¨Â½ÂÃ¥ÂÂµÃ§Â­ÂÃ§ÂÂ¥Ã¥ÂÂÃ¨Â¡Â¨Ã¦ÂÂ¿</h1>
+  <div class="sub">Ã¦ÂÂ´Ã¦ÂÂ°Ã¯Â¼Â{TODAY}</div>
 </div>
 <div class="stats">
-  <div class="sc"><div class="n">{len(all_cbs)}</div><div class="l">å¨é¨CBæ¸</div></div>
-  <div class="sc gr"><div class="n">{s1_buy}</div><div class="l">S1å¨æ¢ä»¶è²·å¥</div></div>
-  <div class="sc am"><div class="n">{s1_pend}</div><div class="l">S1ä¸å¯æ¾ç©º</div></div>
-  <div class="sc gr"><div class="n">{s2_buy}</div><div class="l">S2å¥å©(4/4)</div></div>
-  <div class="sc am"><div class="n">{s2_pend}</div><div class="l">S2ä¸å¯æ¾ç©º</div></div>
+  <div class="sc"><div class="n">{len(all_cbs)}</div><div class="l">Ã¥ÂÂ¨Ã©ÂÂ¨CBÃ¦ÂÂ¸</div></div>
+  <div class="sc gr"><div class="n">{s1_buy}</div><div class="l">S1Ã¥ÂÂ¨Ã¦Â¢ÂÃ¤Â»Â¶Ã¨Â²Â·Ã¥ÂÂ¥</div></div>
+  <div class="sc am"><div class="n">{s1_pend}</div><div class="l">S1Ã¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©Âº</div></div>
+  <div class="sc gr"><div class="n">{s2_buy}</div><div class="l">S2Ã¥Â¥ÂÃ¥ÂÂ©(4/4)</div></div>
+  <div class="sc am"><div class="n">{s2_pend}</div><div class="l">S2Ã¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©Âº</div></div>
 </div>
 <div class="tabs">
-  <div class="tab active" onclick="showTab('s1',this)">ç­ç¥ä¸ï¼CBASæ°ä¸å¸</div>
-  <div class="tab" onclick="showTab('s2',this)">ç­ç¥äºï¼è½æå¥å©ï¼{len(all_cbs)}ç­ï¼</div>
-  <div class="tab" onclick="showTab('all',this)">å¨é¨å¯è½åµ</div>
+  <div class="tab active" onclick="showTab('s1',this)">Ã§Â­ÂÃ§ÂÂ¥Ã¤Â¸ÂÃ¯Â¼ÂCBASÃ¦ÂÂ°Ã¤Â¸ÂÃ¥Â¸Â</div>
+  <div class="tab" onclick="showTab('s2',this)">Ã§Â­ÂÃ§ÂÂ¥Ã¤ÂºÂÃ¯Â¼ÂÃ¨Â½ÂÃ¦ÂÂÃ¥Â¥ÂÃ¥ÂÂ©Ã¯Â¼Â{len(all_cbs)}Ã§Â­ÂÃ¯Â¼Â</div>
+  <div class="tab" onclick="showTab('all',this)">Ã¥ÂÂ¨Ã©ÂÂ¨Ã¥ÂÂ¯Ã¨Â½ÂÃ¥ÂÂµ</div>
 </div>
 <div id="pane-s1" class="pane active">
-  <div class="ttl">ç­ç¥ä¸ï¼CBAS æ°ä¸å¸ç­å£</div>
-  <div class="desc">æ³äººè²·CB â æ¾ç©ºè¡ç¥¨ (D1â5) â D6 CBASæè§£ â èå¸+åå¸åè£ â è¡å¹åå½<br>
-    <span class="tag">æ¢ä»¶1</span>æçåæäº¤ææ¥
-    <span class="tag">æ¢ä»¶2</span>CBç¾å¹éä¸å®æ°´æº
-    <span class="tag">æ¢ä»¶3</span>èå¸+åå¸é¤é¡å¢å </div>
-  <div class="box"><b>èå¸+åå¸ èªªæï¼</b>
-    <span class="chk chk-y">â</span>éæ¨ &nbsp;
-    <span class="chk chk-n">â</span>æªéæ¨ &nbsp;
-    <span class="chk chk-na">?</span>è©²è¡ç®åä¸å¯æ¾ç©ºï¼TWSE TWT93U ç¡æ­¤è¡è¨éï¼<br>
-    è³æä¾æºï¼TWSEãèå¸åå¸è³£åºé¤é¡ãæ¯æ¥ç¤å¾èªåæ´æ°ï¼åæåå«èå¸ååå¸ã</div>
+  <div class="ttl">Ã§Â­ÂÃ§ÂÂ¥Ã¤Â¸ÂÃ¯Â¼ÂCBAS Ã¦ÂÂ°Ã¤Â¸ÂÃ¥Â¸ÂÃ§ÂÂ­Ã¥Â£Â</div>
+  <div class="desc">Ã¦Â³ÂÃ¤ÂºÂºÃ¨Â²Â·CB Ã¢ÂÂ Ã¦ÂÂ¾Ã§Â©ÂºÃ¨ÂÂ¡Ã§Â¥Â¨ (D1Ã¢ÂÂ5) Ã¢ÂÂ D6 CBASÃ¦ÂÂÃ¨Â§Â£ Ã¢ÂÂ Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¥ÂÂÃ¨Â£Â Ã¢ÂÂ Ã¨ÂÂ¡Ã¥ÂÂ¹Ã¥ÂÂÃ¥Â½Â<br>
+    <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶1</span>Ã¦ÂÂÃ§ÂÂÃ¥ÂÂÃ¦ÂÂÃ¤ÂºÂ¤Ã¦ÂÂÃ¦ÂÂ¥
+    <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶2</span>CBÃ§ÂÂ¾Ã¥ÂÂ¹Ã©ÂÂÃ¤Â¸ÂÃ¥Â®ÂÃ¦Â°Â´Ã¦ÂºÂ
+    <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶3</span>Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã©Â¤ÂÃ©Â¡ÂÃ¥Â¢ÂÃ¥ÂÂ </div>
+  <div class="box"><b>Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸ Ã¨ÂªÂªÃ¦ÂÂÃ¯Â¼Â</b>
+    <span class="chk chk-y">Ã¢ÂÂ</span>Ã©ÂÂÃ¦Â¨Â &nbsp;
+    <span class="chk chk-n">Ã¢ÂÂ</span>Ã¦ÂÂªÃ©ÂÂÃ¦Â¨Â &nbsp;
+    <span class="chk chk-na">?</span>Ã¨Â©Â²Ã¨ÂÂ¡Ã§ÂÂ®Ã¥ÂÂÃ¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©ÂºÃ¯Â¼ÂTWSE TWT93U Ã§ÂÂ¡Ã¦Â­Â¤Ã¨ÂÂ¡Ã¨Â¨ÂÃ©ÂÂÃ¯Â¼Â<br>
+    Ã¨Â³ÂÃ¦ÂÂÃ¤Â¾ÂÃ¦ÂºÂÃ¯Â¼ÂTWSEÃ£ÂÂÃ¨ÂÂÃ¥ÂÂ¸Ã¥ÂÂÃ¥ÂÂ¸Ã¨Â³Â£Ã¥ÂÂºÃ©Â¤ÂÃ©Â¡ÂÃ£ÂÂÃ¦Â¯ÂÃ¦ÂÂ¥Ã§ÂÂ¤Ã¥Â¾ÂÃ¨ÂÂªÃ¥ÂÂÃ¦ÂÂ´Ã¦ÂÂ°Ã¯Â¼ÂÃ¥ÂÂÃ¦ÂÂÃ¥ÂÂÃ¥ÂÂ«Ã¨ÂÂÃ¥ÂÂ¸Ã¥ÂÂÃ¥ÂÂÃ¥ÂÂ¸Ã£ÂÂ</div>
   <table><thead><tr>
-    <th>CBä»£è</th><th>CBåç¨±</th><th>è¡ç¥¨</th><th class="num">CBå¹</th>
-    <th class="center">å¤©æ¸</th><th class="center">CBAS</th>
-    <th class="center">æ¢ä»¶1/2/3</th>
-    <th class="num">è+åé¤é¡</th><th class="num">æ¥è®å</th><th class="center">è¨è</th>
+    <th>CBÃ¤Â»Â£Ã¨ÂÂ</th><th>CBÃ¥ÂÂÃ§Â¨Â±</th><th>Ã¨ÂÂ¡Ã§Â¥Â¨</th><th class="num">CBÃ¥ÂÂ¹</th>
+    <th class="center">Ã¥Â¤Â©Ã¦ÂÂ¸</th><th class="center">CBAS</th>
+    <th class="center">Ã¦Â¢ÂÃ¤Â»Â¶1/2/3</th>
+    <th class="num">Ã¨ÂÂ+Ã¥ÂÂÃ©Â¤ÂÃ©Â¡Â</th><th class="num">Ã¦ÂÂ¥Ã¨Â®ÂÃ¥ÂÂ</th><th class="center">Ã¨Â¨ÂÃ¨ÂÂ</th>
   </tr></thead><tbody>{s1_rows_html}</tbody></table>
 </div>
 <div id="pane-s2" class="pane">
-  <div class="ttl">ç­ç¥äºï¼è½æå¥å©ï¼å¨é¨ {len(all_cbs)} æ¯ CBï¼</div>
-  <div class="desc">è²·CB + æ¾ç©ºè¡ç¥¨ â ç­å¾è½æ â è½æè¡ç¥¨åè£ â å¥å©<br>
-    <span class="tag">æ¢ä»¶1</span>è½ææº¢å¹çä½ <span class="tag">æ¢ä»¶2</span>å·²è½ææ¯ä¾ä½
-    <span class="tag">æ¢ä»¶3</span>è·å°ææ¥åè£ <span class="tag">æ¢ä»¶4</span>èå¸+åå¸å¢å </div>
-  <div class="box warn"><b>æ³¨æï¼</b>æº¢å¹çé¡¯ç¤º<span style="color:#16a34a;font-weight:700">ç¶ è²</span>ï¼è² å¼ï¼ä»£è¡¨CBä½æ¼è½æå¹å¼ï¼å¥å©ç©ºéæå¤§ã
-    éç¢ºèªï¼è+åæ¯å¦åè¶³ãæç¡æåè½æéå¶ã</div>
+  <div class="ttl">Ã§Â­ÂÃ§ÂÂ¥Ã¤ÂºÂÃ¯Â¼ÂÃ¨Â½ÂÃ¦ÂÂÃ¥Â¥ÂÃ¥ÂÂ©Ã¯Â¼ÂÃ¥ÂÂ¨Ã©ÂÂ¨ {len(all_cbs)} Ã¦ÂÂ¯ CBÃ¯Â¼Â</div>
+  <div class="desc">Ã¨Â²Â·CB + Ã¦ÂÂ¾Ã§Â©ÂºÃ¨ÂÂ¡Ã§Â¥Â¨ Ã¢ÂÂ Ã§Â­ÂÃ¥Â¾ÂÃ¨Â½ÂÃ¦ÂÂ Ã¢ÂÂ Ã¨Â½ÂÃ¦ÂÂÃ¨ÂÂ¡Ã§Â¥Â¨Ã¥ÂÂÃ¨Â£Â Ã¢ÂÂ Ã¥Â¥ÂÃ¥ÂÂ©<br>
+    <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶1</span>Ã¨Â½ÂÃ¦ÂÂÃ¦ÂºÂ¢Ã¥ÂÂ¹Ã§ÂÂÃ¤Â½Â <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶2</span>Ã¥Â·Â²Ã¨Â½ÂÃ¦ÂÂÃ¦Â¯ÂÃ¤Â¾ÂÃ¤Â½Â
+    <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶3</span>Ã¨Â·ÂÃ¥ÂÂ°Ã¦ÂÂÃ¦ÂÂ¥Ã¥ÂÂÃ¨Â£Â <span class="tag">Ã¦Â¢ÂÃ¤Â»Â¶4</span>Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¥Â¢ÂÃ¥ÂÂ </div>
+  <div class="box warn"><b>Ã¦Â³Â¨Ã¦ÂÂÃ¯Â¼Â</b>Ã¦ÂºÂ¢Ã¥ÂÂ¹Ã§ÂÂÃ©Â¡Â¯Ã§Â¤Âº<span style="color:#16a34a;font-weight:700">Ã§Â¶Â Ã¨ÂÂ²</span>Ã¯Â¼ÂÃ¨Â²Â Ã¥ÂÂ¼Ã¯Â¼ÂÃ¤Â»Â£Ã¨Â¡Â¨CBÃ¤Â½ÂÃ¦ÂÂ¼Ã¨Â½ÂÃ¦ÂÂÃ¥ÂÂ¹Ã¥ÂÂ¼Ã¯Â¼ÂÃ¥Â¥ÂÃ¥ÂÂ©Ã§Â©ÂºÃ©ÂÂÃ¦ÂÂÃ¥Â¤Â§Ã£ÂÂ
+    Ã©ÂÂÃ§Â¢ÂºÃ¨ÂªÂÃ¯Â¼ÂÃ¨ÂÂ+Ã¥ÂÂÃ¦ÂÂ¯Ã¥ÂÂ¦Ã¥ÂÂÃ¨Â¶Â³Ã£ÂÂÃ¦ÂÂÃ§ÂÂ¡Ã¦ÂÂÃ¥ÂÂÃ¨Â½ÂÃ¦ÂÂÃ©ÂÂÃ¥ÂÂ¶Ã£ÂÂ</div>
   <table><thead><tr>
-    <th>CBä»£è</th><th>CBåç¨±</th><th>è¡ç¥¨</th><th class="num">CBå¹</th>
-    <th class="num">æº¢å¹ç</th><th class="num">è¡å¹</th><th class="num">è½æå¹</th>
-    <th class="center">æ¢ä»¶1/2/3/4</th>
-    <th class="num">è·å°æ</th><th class="num">è+åé¤é¡</th><th class="num">æ¥è®å</th>
-    <th class="center">è¨è</th>
+    <th>CBÃ¤Â»Â£Ã¨ÂÂ</th><th>CBÃ¥ÂÂÃ§Â¨Â±</th><th>Ã¨ÂÂ¡Ã§Â¥Â¨</th><th class="num">CBÃ¥ÂÂ¹</th>
+    <th class="num">Ã¦ÂºÂ¢Ã¥ÂÂ¹Ã§ÂÂ</th><th class="num">Ã¨ÂÂ¡Ã¥ÂÂ¹</th><th class="num">Ã¨Â½ÂÃ¦ÂÂÃ¥ÂÂ¹</th>
+    <th class="center">Ã¦Â¢ÂÃ¤Â»Â¶1/2/3/4</th>
+    <th class="num">Ã¨Â·ÂÃ¥ÂÂ°Ã¦ÂÂ</th><th class="num">Ã¨ÂÂ+Ã¥ÂÂÃ©Â¤ÂÃ©Â¡Â</th><th class="num">Ã¦ÂÂ¥Ã¨Â®ÂÃ¥ÂÂ</th>
+    <th class="center">Ã¨Â¨ÂÃ¨ÂÂ</th>
   </tr></thead><tbody>{s2_rows_html}</tbody></table>
 </div>
 <div id="pane-all" class="pane">
-  <div class="ttl">å¨é¨ {len(all_cbs)} æ¯å¯è½åµ</div>
-  <div class="desc">è³æä¾æºï¼thefew.twï½èå¸+åå¸ï¼TWSE TWT93U {short_date}</div>
+  <div class="ttl">Ã¥ÂÂ¨Ã©ÂÂ¨ {len(all_cbs)} Ã¦ÂÂ¯Ã¥ÂÂ¯Ã¨Â½ÂÃ¥ÂÂµ</div>
+  <div class="desc">Ã¨Â³ÂÃ¦ÂÂÃ¤Â¾ÂÃ¦ÂºÂÃ¯Â¼Âthefew.twÃ¯Â½ÂÃ¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¯Â¼ÂTWSE TWT93U {short_date}</div>
   <table><thead><tr>
-    <th>CBä»£è</th><th>CBåç¨±</th><th>è¡ç¥¨</th><th class="num">CBå¹</th>
-    <th class="num">æº¢å¹ç</th><th class="num">è¡å¹</th><th class="num">è½æå¹</th>
-    <th>å°ææ¥</th><th class="num">è+åé¤é¡</th><th class="num">æ¥è®å</th>
+    <th>CBÃ¤Â»Â£Ã¨ÂÂ</th><th>CBÃ¥ÂÂÃ§Â¨Â±</th><th>Ã¨ÂÂ¡Ã§Â¥Â¨</th><th class="num">CBÃ¥ÂÂ¹</th>
+    <th class="num">Ã¦ÂºÂ¢Ã¥ÂÂ¹Ã§ÂÂ</th><th class="num">Ã¨ÂÂ¡Ã¥ÂÂ¹</th><th class="num">Ã¨Â½ÂÃ¦ÂÂÃ¥ÂÂ¹</th>
+    <th>Ã¥ÂÂ°Ã¦ÂÂÃ¦ÂÂ¥</th><th class="num">Ã¨ÂÂ+Ã¥ÂÂÃ©Â¤ÂÃ©Â¡Â</th><th class="num">Ã¦ÂÂ¥Ã¨Â®ÂÃ¥ÂÂ</th>
     <th class="center">S1</th><th class="center">S2</th>
   </tr></thead><tbody>{all_rows_html}</tbody></table>
 </div>
-<div class="ft">æ¬å·¥å·åä¾å­¸ç¿ç ç©¶ï¼ä¸æ§ææè³å»ºè­°ã<br>
-èå¸+åå¸è³æä¾æºï¼TWSEãèå¸åå¸è³£åºé¤é¡(TWT93U)ãï¼æ¯æ¥ç¤å¾ç´17:30æ´æ°ãä¸å¨åå®å§ä»£è¡¨è©²è¡ç®åä¸å¯æ¾ç©ºã</div>
+<div class="ft">Ã¦ÂÂ¬Ã¥Â·Â¥Ã¥ÂÂ·Ã¥ÂÂÃ¤Â¾ÂÃ¥Â­Â¸Ã§Â¿ÂÃ§Â ÂÃ§Â©Â¶Ã¯Â¼ÂÃ¤Â¸ÂÃ¦Â§ÂÃ¦ÂÂÃ¦ÂÂÃ¨Â³ÂÃ¥Â»ÂºÃ¨Â­Â°Ã£ÂÂ<br>
+Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¨Â³ÂÃ¦ÂÂÃ¤Â¾ÂÃ¦ÂºÂÃ¯Â¼ÂTWSEÃ£ÂÂÃ¨ÂÂÃ¥ÂÂ¸Ã¥ÂÂÃ¥ÂÂ¸Ã¨Â³Â£Ã¥ÂÂºÃ©Â¤ÂÃ©Â¡Â(TWT93U)Ã£ÂÂÃ¯Â¼ÂÃ¦Â¯ÂÃ¦ÂÂ¥Ã§ÂÂ¤Ã¥Â¾ÂÃ§Â´Â17:30Ã¦ÂÂ´Ã¦ÂÂ°Ã£ÂÂÃ¤Â¸ÂÃ¥ÂÂ¨Ã¥ÂÂÃ¥ÂÂ®Ã¥ÂÂ§Ã¤Â»Â£Ã¨Â¡Â¨Ã¨Â©Â²Ã¨ÂÂ¡Ã§ÂÂ®Ã¥ÂÂÃ¤Â¸ÂÃ¥ÂÂ¯Ã¦ÂÂ¾Ã§Â©ÂºÃ£ÂÂ</div>
 <script>
 function showTab(id,el){{
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -585,16 +579,16 @@ function showTab(id,el){{
     return html
 
 
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# 7. ä¸»ç¨å¼
-# âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
+# 7. Ã¤Â¸Â»Ã§Â¨ÂÃ¥Â¼Â
+# Ã¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂÃ¢ÂÂ
 def main():
-    print(f"\n=== å¯è½åµç­ç¥ææ {TODAY} ===")
+    print(f"\n=== Ã¥ÂÂ¯Ã¨Â½ÂÃ¥ÂÂµÃ§Â­ÂÃ§ÂÂ¥Ã¦ÂÂÃ¦ÂÂ {TODAY} ===")
     all_cbs    = fetch_all_cbs()
     recent_map = fetch_recent_cbs()
     short_map, short_date = fetch_short_data()
 
-    # è£ä¸æçæ¥ï¼å¾ recent_map åä½µå° all_cbsï¼
+    # Ã¨Â£ÂÃ¤Â¸ÂÃ¦ÂÂÃ§ÂÂÃ¦ÂÂ¥Ã¯Â¼ÂÃ¥Â¾Â recent_map Ã¥ÂÂÃ¤Â½ÂµÃ¥ÂÂ° all_cbsÃ¯Â¼Â
     rec_ld = {cb_code: d.get('listing_date') for cb_code, d in recent_map.items()}
     for cb in all_cbs:
         if cb['cb_code'] in rec_ld:
@@ -604,18 +598,18 @@ def main():
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
 
-    print(f"\nâ åè¡¨æ¿å·²ç¢çï¼{OUTPUT_HTML}")
-    print(f"   å¨é¨CB: {len(all_cbs)} ç­")
-    print(f"   èå¸+åå¸è³æ: {len(short_map)} æ¯è¡ç¥¨ï¼{short_date}ï¼")
+    print(f"\nÃ¢ÂÂ Ã¥ÂÂÃ¨Â¡Â¨Ã¦ÂÂ¿Ã¥Â·Â²Ã§ÂÂ¢Ã§ÂÂÃ¯Â¼Â{OUTPUT_HTML}")
+    print(f"   Ã¥ÂÂ¨Ã©ÂÂ¨CB: {len(all_cbs)} Ã§Â­Â")
+    print(f"   Ã¨ÂÂÃ¥ÂÂ¸+Ã¥ÂÂÃ¥ÂÂ¸Ã¨Â³ÂÃ¦ÂÂ: {len(short_map)} Ã¦ÂÂ¯Ã¨ÂÂ¡Ã§Â¥Â¨Ã¯Â¼Â{short_date}Ã¯Â¼Â")
 
-    # çµ±è¨
+    # Ã§ÂµÂ±Ã¨Â¨Â
     s1_buy = s2_buy = 0
     for cb in all_cbs:
         s1 = evaluate_s1(cb, short_map, recent_map)
         s2 = evaluate_s2(cb, short_map)
-        if s1 and 'â' in s1['signal']: s1_buy += 1
-        if 'â' in s2['signal']: s2_buy += 1
-    print(f"   S1è²·å¥: {s1_buy} ç­ | S2å¥å©: {s2_buy} ç­")
+        if s1 and 'Ã¢ÂÂ' in s1['signal']: s1_buy += 1
+        if 'Ã¢ÂÂ' in s2['signal']: s2_buy += 1
+    print(f"   S1Ã¨Â²Â·Ã¥ÂÂ¥: {s1_buy} Ã§Â­Â | S2Ã¥Â¥ÂÃ¥ÂÂ©: {s2_buy} Ã§Â­Â")
 
 if __name__ == '__main__':
     main()
