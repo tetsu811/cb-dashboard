@@ -514,7 +514,7 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
     # 分類
     s1_items = [r for r in results if r['s1'] and r['s1']['td'] is not None and r['s1']['td'] >= 0 and r['s1']['td'] <= 20]
     s1_items.sort(key=lambda x: x['s1']['td'])
-    s2_items = sorted(results, key=lambda x: (
+    s2_items = sorted([r for r in results if ("★" in r["s2"]["signal"] or "◑" in r["s2"]["signal"])], key=lambda x: (
         0 if '★' in x['s2']['signal'] else 1 if '◑' in x['s2']['signal'] else 2 if '✗' not in x['s2']['signal'] and x['s2']['signal'] != '─' else 3,
         x.get('premium_rate') or 99
     ))
@@ -647,7 +647,7 @@ tr.row-sell td{background:#fff7ed}
 </div>
 <div class="tabs">
   <div class="tab active" onclick="showTab('s1',this)">策略一：CBAS新上市</div>
-  <div class="tab" onclick="showTab('s2',this)">策略二：轉換套利（{len(all_cbs)}筆）</div>
+  <div class="tab" onclick="showTab('s2',this)">策略二：轉換套利（{len(s2_items)}筆）</div>
   <div class="tab" onclick="showTab('all',this)">全部可轉債</div>
 </div>
 <div id="pane-s1" class="pane active">
@@ -669,7 +669,7 @@ tr.row-sell td{background:#fff7ed}
   </tr></thead><tbody>{s1_rows_html}</tbody></table>
 </div>
 <div id="pane-s2" class="pane">
-  <div class="ttl">策略二：轉換套利（全部 {len(all_cbs)} 支 CB）</div>
+  <div class="ttl">策略二：轉換套利（符合條件 {len(s2_items)} 支 CB）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
     <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
     <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加</div>
