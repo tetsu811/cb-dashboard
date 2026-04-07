@@ -514,7 +514,7 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
     # 分類
     s1_items = [r for r in results if r['s1'] and r['s1']['td'] is not None and r['s1']['td'] >= 0 and r['s1']['td'] <= 20]
     s1_items.sort(key=lambda x: x['s1']['td'])
-    s2_items = sorted([r for r in results if ("★" in r["s2"]["signal"] or "◑" in r["s2"]["signal"])], key=lambda x: (
+    s2_items = sorted([r for r in results if "★" in r["s2"]["signal"]], key=lambda x: (
         0 if '★' in x['s2']['signal'] else 1 if '◑' in x['s2']['signal'] else 2 if '✗' not in x['s2']['signal'] and x['s2']['signal'] != '─' else 3,
         x.get('premium_rate') or 99
     ))
