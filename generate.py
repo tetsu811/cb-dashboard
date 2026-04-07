@@ -636,7 +636,7 @@ tr.row-sell td{background:#fff7ed}
 <style>{CSS}</style></head><body>
 <div class="hdr">
   <h1>📊 可轉債策略儀表板 v4</h1>
-  <div class="sub">CB資料：thefew.tw（{len(all_cbs)}筆）｜融券+借券：TWSE TWT93U（{short_date}）｜更新：{TODAY}</div>
+  <div class="sub">更新：{TODAY}（每日晚上六點自動更新一次）</div>
 </div>
 <div class="stats">
   <div class="sc"><div class="n">{len(all_cbs)}</div><div class="l">全部CB數</div></div>
