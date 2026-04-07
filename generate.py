@@ -256,7 +256,7 @@ def fetch_all_cbs():
                 "cb_name": cb_name,
                 "cb_price": cb_price,
                 "stock_price": stock_price,
-                "premium": premium,
+                "premium_rate": premium,
                 "volume": volume,
                 "conversion_price": conversion_price,
                 "converted_pct": converted_pct,
