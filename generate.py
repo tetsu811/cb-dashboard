@@ -94,30 +94,108 @@ def _get_latest_tpex_csv(pattern, max_days=7):
     return []
 
 
+def _parse_any_date(s):
+    """Parse date in many formats: 2026/01/15, 2026-01-15, 20260115, 115/01/15 (ROC), 1150115 (ROC)"""
+    s = str(s).strip()
+    if not s:
+        return None
+    if "/" in s:
+        parts = s.split("/")
+        if len(parts) == 3:
+            try:
+                y, m, d = int(parts[0]), int(parts[1]), int(parts[2])
+                if y < 1911:
+                    y += 1911
+                return datetime(y, m, d)
+            except (ValueError, TypeError):
+                pass
+    if "-" in s and len(s) >= 8:
+        try:
+            return datetime.strptime(s[:10], "%Y-%m-%d")
+        except ValueError:
+            pass
+    if s.isdigit():
+        if len(s) == 8:
+            try:
+                return datetime.strptime(s, "%Y%m%d")
+            except ValueError:
+                pass
+        if len(s) == 7:
+            try:
+                return datetime(int(s[:3]) + 1911, int(s[3:5]), int(s[5:7]))
+            except ValueError:
+                pass
+    return None
+
+
 def fetch_issuance_dates():
-    """從TPEX API取得CB上市日期與到期日期"""
+    """從 TPEX API 取得 CB 上市/到期日期 (defensive: tries multiple field names and date formats)"""
     listing_map, maturity_map = {}, {}
     try:
-        data = requests.get(TPEX_ISSUANCE_API, timeout=10).json()
-        if isinstance(data, list):
-            for item in data:
-                code = item.get("BondCode", "").strip()
-                if not code:
-                    continue
-                ld = item.get("ListingDate", "")
-                md = item.get("MaturityDate", "")
-                if ld:
-                    try:
-                        listing_map[code] = datetime.strptime(ld, "%Y/%m/%d").strftime("%Y-%m-%d")
-                    except ValueError:
-                        pass
-                if md:
-                    try:
-                        maturity_map[code] = datetime.strptime(md, "%Y/%m/%d").strftime("%Y-%m-%d")
-                    except ValueError:
-                        pass
-    except Exception:
-        pass
+        r = requests.get(TPEX_ISSUANCE_API, timeout=20, headers=HEADERS)
+        print(f"  issuance API status={r.status_code} len={len(r.text)}")
+        try:
+            data = r.json()
+        except Exception as e:
+            print(f"  issuance JSON decode failed: {e}; head={r.text[:200]}")
+            return listing_map, maturity_map
+
+        if isinstance(data, dict):
+            print(f"  issuance dict keys={list(data.keys())[:10]}")
+            for wk in ("data", "Data", "result", "Result", "aaData", "rows", "items"):
+                if wk in data and isinstance(data[wk], list):
+                    data = data[wk]
+                    break
+
+        if not isinstance(data, list):
+            print(f"  issuance unexpected type: {type(data).__name__}")
+            return listing_map, maturity_map
+
+        if data:
+            sample = data[0]
+            if isinstance(sample, dict):
+                print(f"  issuance items={len(data)} sample_keys={list(sample.keys())}")
+                print(f"  issuance sample={ {k: sample.get(k) for k in list(sample.keys())[:10]} }")
+
+        code_keys = ["BondCode", "bond_code", "BondID", "BondId", "code", "Code", "bondCode", "證券代號", "債券代碼", "Bond_Code", "BondNo"]
+        list_keys = ["ListingDate", "listing_date", "IssueDate", "issue_date", "上市日期", "發行日期", "listingDate", "issueDate", "Listing_Date", "Issue_Date", "ListedDate", "IssDate"]
+        mat_keys = ["MaturityDate", "maturity_date", "到期日", "到期日期", "MaturityDay", "maturityDate", "Maturity_Date", "ExpireDate", "ExpiryDate"]
+
+        for item in data:
+            if not isinstance(item, dict):
+                continue
+            code = ""
+            for k in code_keys:
+                v = item.get(k)
+                if v:
+                    code = str(v).strip()
+                    break
+            if not code:
+                continue
+            ld_raw = ""
+            for k in list_keys:
+                v = item.get(k)
+                if v:
+                    ld_raw = str(v).strip()
+                    break
+            md_raw = ""
+            for k in mat_keys:
+                v = item.get(k)
+                if v:
+                    md_raw = str(v).strip()
+                    break
+            if ld_raw:
+                d = _parse_any_date(ld_raw)
+                if d:
+                    listing_map[code] = d.strftime("%Y-%m-%d")
+            if md_raw:
+                d = _parse_any_date(md_raw)
+                if d:
+                    maturity_map[code] = d.strftime("%Y-%m-%d")
+
+        print(f"  issuance parsed: listing={len(listing_map)} maturity={len(maturity_map)}")
+    except Exception as e:
+        print(f"  issuance fetch error: {type(e).__name__}: {e}")
     return listing_map, maturity_map
 
 
