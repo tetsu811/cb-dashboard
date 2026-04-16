@@ -23,6 +23,7 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
 
 MONEYDJ_FULL_URL = 'https://www.moneydj.com/etf/x/basic/Basic0007B.xdjhtm?etfid={etf_id}'
 MONEYDJ_TOP10_URL = 'https://www.moneydj.com/etf/x/basic/basic0007.xdjhtm?etfid={etf_id}'
+YAHOO_PROFILE_URL = 'https://tw.stock.yahoo.com/quote/{etf_code}.TW/profile'
 
 WEIGHT_CHANGE_THRESHOLD = 0.5
 MAX_HISTORY_DAYS = 30
@@ -88,6 +89,19 @@ def _scrape_holdings_from_html(html_text, etf_code, allow_na=False):
         if holdings:
             break
     return holdings
+
+
+def fetch_aum_yahoo(etf_code):
+    """Fetch AUM (total assets in TWD) from Yahoo Finance TW. Returns value in 億 (100M TWD)."""
+    try:
+        url = YAHOO_PROFILE_URL.format(etf_code=etf_code)
+        resp = requests.get(url, headers=HEADERS, timeout=10)
+        m = re.search(r'"totalAssets":"([0-9.]+)"', resp.text)
+        if m:
+            return round(float(m.group(1)) / 100_000_000, 2)  # TWD → 億
+    except Exception as e:
+        print(f"  [AUM] {etf_code}: {e}")
+    return None
 
 
 def fetch_holdings_http(etf_code):
@@ -198,16 +212,19 @@ def fetch_all_etf_holdings(etf_list):
         holdings, method = fetch_holdings(code)
         if holdings:
             has_na = any(h.get('weight_na') for h in holdings)
+            aum = fetch_aum_yahoo(code)
             data[code] = {
                 "name": name,
                 "issuer": etf.get('issuer', ''),
                 "status": "partial" if has_na else "ok",
                 "method": method,
                 "holdings_count": len(holdings),
+                "aum_billion": aum,  # In 億 TWD (100M)
                 "holdings": holdings,
             }
             label = f"(partial, weights N/A)" if has_na else ""
-            print(f"  ✓ {code}: {len(holdings)} holdings via {method} {label}")
+            aum_label = f"AUM {aum:.1f}億" if aum else "AUM n/a"
+            print(f"  ✓ {code}: {len(holdings)} holdings via {method} {label} | {aum_label}")
         else:
             data[code] = {
                 "name": name,
@@ -350,23 +367,32 @@ def _build_stock_etf_map(data):
 
 
 def compute_cross_etf_consensus(today_data, prev_data=None):
-    """Find stocks held by multiple active ETFs, with change tracking."""
+    """Find stocks held by multiple active ETFs, with change tracking and capital exposure."""
     stock_map = {}
     for code, etf in today_data.items():
         if etf['status'] not in ('ok', 'partial'):
             continue
+        aum = etf.get('aum_billion')
         for h in etf['holdings']:
             sc = h['stock_code']
             if sc not in stock_map:
                 stock_map[sc] = {
                     "stock_code": sc,
                     "stock_name": h['stock_name'],
-                    "holders": [],  # list of {etf, weight, weight_na}
+                    "holders": [],
                 }
+            # Capital exposure = AUM × weight%
+            na = h.get('weight_na', False)
+            if aum and not na and h['weight_pct']:
+                capital = round(aum * h['weight_pct'] / 100, 2)  # in 億
+            else:
+                capital = None
             stock_map[sc]['holders'].append({
                 "etf": code,
                 "weight": h['weight_pct'],
-                "weight_na": h.get('weight_na', False),
+                "weight_na": na,
+                "aum": aum,
+                "capital": capital,
             })
 
     prev_map = _build_stock_etf_map(prev_data) if prev_data else {}
@@ -374,10 +400,14 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
     result = []
     for sc, info in stock_map.items():
         if len(info['holders']) >= 2:
-            # Sort holders by weight desc (N/A treated as 0)
-            sorted_holders = sorted(info['holders'], key=lambda h: -h['weight'])
+            # Sort holders by capital desc (falls back to weight if capital N/A)
+            sorted_holders = sorted(
+                info['holders'],
+                key=lambda h: -(h['capital'] if h['capital'] is not None else h['weight'] * -0.0001)
+            )
             known_weights = [h['weight'] for h in info['holders'] if not h['weight_na']]
             avg_w = round(sum(known_weights) / len(known_weights), 2) if known_weights else 0
+            total_capital = round(sum(h['capital'] for h in info['holders'] if h['capital']), 2)
             prev_etfs = prev_map.get(sc, set())
             today_etfs = set(h['etf'] for h in info['holders'])
             newly_added = sorted(today_etfs - prev_etfs)
@@ -391,12 +421,13 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
                 "holders": sorted_holders,
                 "etfs": [h['etf'] for h in sorted_holders],
                 "avg_weight": avg_w,
+                "total_capital": total_capital,  # 億 TWD
                 "prev_count": prev_count if prev_data else None,
                 "delta": delta if prev_data else None,
                 "newly_added_by": newly_added,
                 "recently_removed_by": recently_removed,
             })
-    result.sort(key=lambda x: (-x['etf_count'], -x['avg_weight']))
+    result.sort(key=lambda x: (-x['total_capital'], -x['etf_count']))
     return result
 
 
@@ -576,7 +607,7 @@ def _gen_consensus(consensus):
     html = '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">持有ETF數</th>'
     if has_prev:
         html += '<th class="center">變化</th>'
-    html += '<th class="num">平均權重%</th><th>持有ETF（依權重排序）</th></tr>'
+    html += '<th class="num">市場影響力（億）</th><th>持有ETF（依資金量排序）</th></tr>'
 
     for item in consensus:
         row_cls = ''
@@ -586,8 +617,8 @@ def _gen_consensus(consensus):
             row_cls = ' class="row-buy"'
 
         holders = item.get('holders', [])
-        # Find max weight for this stock to scale color intensity
-        max_w = max((h['weight'] for h in holders if not h['weight_na']), default=0)
+        # Scale color intensity by capital (actual TWD invested) rather than weight
+        max_cap = max((h['capital'] for h in holders if h['capital']), default=0)
 
         etf_tags = ''
         newly_added = set(item.get('newly_added_by', []))
@@ -595,27 +626,33 @@ def _gen_consensus(consensus):
             etf = h['etf']
             weight = h['weight']
             na = h['weight_na']
+            capital = h['capital']
             is_new = etf in newly_added
 
-            if na:
+            if na or capital is None:
                 # Partial data: gray with dash
                 label = f'{etf} <span style="opacity:0.6">─</span>'
                 style = 'background:#f1f5f9;color:#64748b;border-color:#e2e8f0'
+                title = f'{etf}：權重資料未揭露'
             else:
-                # Weight-proportional color intensity (0.15 to 0.9 alpha)
-                ratio = (weight / max_w) if max_w > 0 else 0
-                # Interpolate purple: light to dark
+                ratio = (capital / max_cap) if max_cap > 0 else 0
                 alpha = 0.15 + ratio * 0.75
                 bg = f'rgba(109,40,217,{alpha:.2f})'
                 color = '#fff' if alpha > 0.5 else '#4c1d95'
-                label = f'{etf} <b>{weight:.2f}%</b>'
+                # Format capital: >=1 billion → X.X億, else shows millions
+                if capital >= 1:
+                    cap_str = f'{capital:.1f}億'
+                else:
+                    cap_str = f'{capital*100:.0f}百萬'
+                label = f'{etf} <b>{cap_str}</b>'
                 style = f'background:{bg};color:{color};border-color:rgba(109,40,217,0.3)'
+                title = f'{etf}：權重 {weight:.2f}% × 基金規模 {h["aum"]:.1f}億 = {cap_str}'
 
             if is_new:
                 label += ' ✦新'
-                if not na:
+                if not na and capital is not None:
                     style = 'background:#16a34a;color:#fff;border-color:#15803d'
-            etf_tags += f'<span class="badge etf-tag" style="{style}">{label}</span>'
+            etf_tags += f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
 
         delta_cell = ''
         if has_prev:
@@ -626,7 +663,10 @@ def _gen_consensus(consensus):
                 delta_cell = f'<td class="center"><span class="delta-down">{d}</span></td>'
             else:
                 delta_cell = '<td class="center">─</td>'
-        html += f'<tr{row_cls}><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td>{delta_cell}<td class="num">{item["avg_weight"]:.2f}</td><td>{etf_tags}</td></tr>'
+
+        total_cap = item.get('total_capital', 0)
+        cap_display = f'<b>{total_cap:.1f}</b>' if total_cap >= 1 else f'{total_cap*100:.0f}百萬'
+        html += f'<tr{row_cls}><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td>{delta_cell}<td class="num">{cap_display}</td><td>{etf_tags}</td></tr>'
     html += '</table>'
     return html
 
@@ -642,7 +682,9 @@ def _gen_individual_holdings(today_data):
     for code in sorted(ok_etfs.keys()):
         etf = ok_etfs[code]
         html += f'<div class="etf-detail" data-code="{code}">'
-        html += f'<div class="etf-section"><h3>{code} {etf["name"]}（{etf["holdings_count"]} 檔持股）</h3>'
+        aum = etf.get('aum_billion')
+        aum_str = f'，基金規模 {aum:.1f} 億' if aum else ''
+        html += f'<div class="etf-section"><h3>{code} {etf["name"]}（{etf["holdings_count"]} 檔持股{aum_str}）</h3>'
         html += '<table><tr><th>#</th><th>股票代號</th><th>股票名稱</th><th class="num">權重%</th><th class="num">持股數</th></tr>'
         for i, h in enumerate(etf['holdings'], 1):
             w = '─' if h.get('weight_na') else f'{h["weight_pct"]:.2f}'
@@ -721,7 +763,7 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
 </div>
 <div id="t2" class="pane">
   <div class="ttl">跨 ETF 共識持股</div>
-  <div class="desc">被多檔主動式 ETF 同時持有的個股。徽章依權重由大到小排序，顏色越深代表該 ETF 持倉比重越高。標示「✦新」代表該 ETF 近期新買入此標的</div>
+  <div class="desc">被多檔主動式 ETF 同時持有的個股。市場影響力 = 基金規模 × 持倉權重（實際投入的新台幣資金量）。徽章顯示各 ETF 投入該股票的金額，依資金量由大到小排序，顏色越深代表影響力越大。標示「✦新」代表該 ETF 近期新買入。滑鼠懸停查看明細</div>
   {tab_consensus}
 </div>
 <div id="t3" class="pane">
