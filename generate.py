@@ -27,7 +27,7 @@ TPEX_ISSUANCE_API = "https://www.tpex.org.tw/openapi/v1/bond_ISSBD5_data"
 # TWSE codes: 24=半導體 25=電腦週邊 26=光電 27=通信 28=電子零組件 29=電子通路 30=資訊服務 31=其他電子
 # TPEX codes may differ; also include name-based matching as fallback
 AI_SECTOR_CODES = {
-    '24','25','26','27','28','29','30','31',
+    '24','28',  # 24=半導體 28=電子零組件
 }
 AI_SECTOR_NAMES = {
     "半導體業","電子零組件業","光電業","通信網路業",
@@ -577,11 +577,6 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
     # ── AI/electronic sector filter for S2 ──
     industry_map = fetch_industry_map()
     if industry_map:
-        # Debug: show industry codes for all S2 candidates
-        for r in s2_items:
-            sc = r.get('stock_code','')
-            ind = industry_map.get(sc, '?')
-            print(f"    S2 candidate {sc} ({r.get('cb_name','')}) industry={ind}")
         before_s2 = len(s2_items)
         s2_items = [r for r in s2_items if industry_map.get(r.get('stock_code',''), '') in AI_SECTOR_CODES or industry_map.get(r.get('stock_code',''), '') in AI_SECTOR_NAMES]
         print(f"  S2 industry filter: {before_s2} -> {len(s2_items)}")
