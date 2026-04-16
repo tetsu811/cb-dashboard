@@ -361,20 +361,25 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
                 stock_map[sc] = {
                     "stock_code": sc,
                     "stock_name": h['stock_name'],
-                    "etfs": [],
-                    "weights": [],
+                    "holders": [],  # list of {etf, weight, weight_na}
                 }
-            stock_map[sc]['etfs'].append(code)
-            stock_map[sc]['weights'].append(h['weight_pct'])
+            stock_map[sc]['holders'].append({
+                "etf": code,
+                "weight": h['weight_pct'],
+                "weight_na": h.get('weight_na', False),
+            })
 
     prev_map = _build_stock_etf_map(prev_data) if prev_data else {}
 
     result = []
     for sc, info in stock_map.items():
-        if len(info['etfs']) >= 2:
-            avg_w = round(sum(info['weights']) / len(info['weights']), 2)
+        if len(info['holders']) >= 2:
+            # Sort holders by weight desc (N/A treated as 0)
+            sorted_holders = sorted(info['holders'], key=lambda h: -h['weight'])
+            known_weights = [h['weight'] for h in info['holders'] if not h['weight_na']]
+            avg_w = round(sum(known_weights) / len(known_weights), 2) if known_weights else 0
             prev_etfs = prev_map.get(sc, set())
-            today_etfs = set(info['etfs'])
+            today_etfs = set(h['etf'] for h in info['holders'])
             newly_added = sorted(today_etfs - prev_etfs)
             recently_removed = sorted(prev_etfs - today_etfs)
             prev_count = len(prev_etfs)
@@ -382,8 +387,9 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
             result.append({
                 "stock_code": sc,
                 "stock_name": info['stock_name'],
-                "etf_count": len(info['etfs']),
-                "etfs": info['etfs'],
+                "etf_count": len(info['holders']),
+                "holders": sorted_holders,
+                "etfs": [h['etf'] for h in sorted_holders],
                 "avg_weight": avg_w,
                 "prev_count": prev_count if prev_data else None,
                 "delta": delta if prev_data else None,
@@ -570,19 +576,47 @@ def _gen_consensus(consensus):
     html = '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">持有ETF數</th>'
     if has_prev:
         html += '<th class="center">變化</th>'
-    html += '<th class="num">平均權重%</th><th>持有ETF</th></tr>'
+    html += '<th class="num">平均權重%</th><th>持有ETF（依權重排序）</th></tr>'
+
     for item in consensus:
         row_cls = ''
         if item.get('newly_added_by'):
             row_cls = ' class="row-buy"'
         elif item['etf_count'] >= 4:
             row_cls = ' class="row-buy"'
+
+        holders = item.get('holders', [])
+        # Find max weight for this stock to scale color intensity
+        max_w = max((h['weight'] for h in holders if not h['weight_na']), default=0)
+
         etf_tags = ''
-        for e in item['etfs']:
-            if e in item.get('newly_added_by', []):
-                etf_tags += f'<span class="badge etf-tag" style="background:#dcfce7;color:#15803d;border-color:#bbf7d0">{e} ✦新</span>'
+        newly_added = set(item.get('newly_added_by', []))
+        for h in holders:
+            etf = h['etf']
+            weight = h['weight']
+            na = h['weight_na']
+            is_new = etf in newly_added
+
+            if na:
+                # Partial data: gray with dash
+                label = f'{etf} <span style="opacity:0.6">─</span>'
+                style = 'background:#f1f5f9;color:#64748b;border-color:#e2e8f0'
             else:
-                etf_tags += f'<span class="badge etf-tag">{e}</span>'
+                # Weight-proportional color intensity (0.15 to 0.9 alpha)
+                ratio = (weight / max_w) if max_w > 0 else 0
+                # Interpolate purple: light to dark
+                alpha = 0.15 + ratio * 0.75
+                bg = f'rgba(109,40,217,{alpha:.2f})'
+                color = '#fff' if alpha > 0.5 else '#4c1d95'
+                label = f'{etf} <b>{weight:.2f}%</b>'
+                style = f'background:{bg};color:{color};border-color:rgba(109,40,217,0.3)'
+
+            if is_new:
+                label += ' ✦新'
+                if not na:
+                    style = 'background:#16a34a;color:#fff;border-color:#15803d'
+            etf_tags += f'<span class="badge etf-tag" style="{style}">{label}</span>'
+
         delta_cell = ''
         if has_prev:
             d = item.get('delta')
@@ -687,7 +721,7 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
 </div>
 <div id="t2" class="pane">
   <div class="ttl">跨 ETF 共識持股</div>
-  <div class="desc">被多檔主動式 ETF 同時持有的個股，持有數越多代表市場共識度越高。標示「✦新」代表該 ETF 近期新買入此標的</div>
+  <div class="desc">被多檔主動式 ETF 同時持有的個股。徽章依權重由大到小排序，顏色越深代表該 ETF 持倉比重越高。標示「✦新」代表該 ETF 近期新買入此標的</div>
   {tab_consensus}
 </div>
 <div id="t3" class="pane">
