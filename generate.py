@@ -27,7 +27,8 @@ TPEX_ISSUANCE_API = "https://www.tpex.org.tw/openapi/v1/bond_ISSBD5_data"
 # TWSE codes: 24=半導體 25=電腦週邊 26=光電 27=通信 28=電子零組件 29=電子通路 30=資訊服務 31=其他電子
 # TPEX codes may differ; also include name-based matching as fallback
 AI_SECTOR_CODES = {
-    '24','28',  # 24=半導體 28=電子零組件
+    '24','25','26','27','28','29','30','31',
+    # 24=半導體 25=電腦週邊 26=光電 27=通信網路 28=電子零組件 29=電子通路 30=資訊服務 31=其他電子
 }
 AI_SECTOR_NAMES = {
     "半導體業","電子零組件業","光電業","通信網路業",
@@ -741,7 +742,7 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
     <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
     <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加
-    <span class="tag">條件5</span>AI產業（半導體／電子零組件）</div>
+    <span class="tag">條件5</span>AI產業（電子八大類）</div>
   <div class="box warn"><b>注意：</b>溢價率顯示<span style="color:#16a34a;font-weight:700">綠色</span>（負值）代表CB低於轉換價值，套利空間最大。
     需確認：融+借是否充足、有無提前轉換限制。</div>
   <table><thead><tr>
