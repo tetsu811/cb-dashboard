@@ -330,8 +330,27 @@ def compute_holdings_diff(today_data, prev_data):
     return diffs
 
 
-def compute_cross_etf_consensus(today_data):
-    """Find stocks held by multiple active ETFs."""
+def _build_stock_etf_map(data):
+    """Build {stock_code: set(etf_codes)} from snapshot data."""
+    if not data:
+        return {}
+    etfs = data.get('etfs', data) if isinstance(data, dict) else data
+    if 'etfs' in etfs:
+        etfs = etfs['etfs']
+    result = {}
+    for code, etf in etfs.items():
+        if etf.get('status') not in ('ok', 'partial'):
+            continue
+        for h in etf.get('holdings', []):
+            sc = h['stock_code']
+            if sc not in result:
+                result[sc] = set()
+            result[sc].add(code)
+    return result
+
+
+def compute_cross_etf_consensus(today_data, prev_data=None):
+    """Find stocks held by multiple active ETFs, with change tracking."""
     stock_map = {}
     for code, etf in today_data.items():
         if etf['status'] not in ('ok', 'partial'):
@@ -347,16 +366,29 @@ def compute_cross_etf_consensus(today_data):
                 }
             stock_map[sc]['etfs'].append(code)
             stock_map[sc]['weights'].append(h['weight_pct'])
+
+    prev_map = _build_stock_etf_map(prev_data) if prev_data else {}
+
     result = []
     for sc, info in stock_map.items():
         if len(info['etfs']) >= 2:
             avg_w = round(sum(info['weights']) / len(info['weights']), 2)
+            prev_etfs = prev_map.get(sc, set())
+            today_etfs = set(info['etfs'])
+            newly_added = sorted(today_etfs - prev_etfs)
+            recently_removed = sorted(prev_etfs - today_etfs)
+            prev_count = len(prev_etfs)
+            delta = len(today_etfs) - prev_count
             result.append({
                 "stock_code": sc,
                 "stock_name": info['stock_name'],
                 "etf_count": len(info['etfs']),
                 "etfs": info['etfs'],
                 "avg_weight": avg_w,
+                "prev_count": prev_count if prev_data else None,
+                "delta": delta if prev_data else None,
+                "newly_added_by": newly_added,
+                "recently_removed_by": recently_removed,
             })
     result.sort(key=lambda x: (-x['etf_count'], -x['avg_weight']))
     return result
@@ -544,11 +576,33 @@ def _gen_daily_changes(diffs, today_data):
 def _gen_consensus(consensus):
     if not consensus:
         return '<div class="empty-msg">無共識持股資料</div>'
-    html = '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">持有ETF數</th><th class="num">平均權重%</th><th>持有ETF</th></tr>'
+    has_prev = any(item.get('prev_count') is not None for item in consensus)
+    html = '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">持有ETF數</th>'
+    if has_prev:
+        html += '<th class="center">變化</th>'
+    html += '<th class="num">平均權重%</th><th>持有ETF</th></tr>'
     for item in consensus:
-        row_cls = ' class="row-buy"' if item['etf_count'] >= 4 else ''
-        etf_tags = ''.join(f'<span class="badge etf-tag">{e}</span>' for e in item['etfs'])
-        html += f'<tr{row_cls}><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td><td class="num">{item["avg_weight"]:.2f}</td><td>{etf_tags}</td></tr>'
+        row_cls = ''
+        if item.get('newly_added_by'):
+            row_cls = ' class="row-buy"'
+        elif item['etf_count'] >= 4:
+            row_cls = ' class="row-buy"'
+        etf_tags = ''
+        for e in item['etfs']:
+            if e in item.get('newly_added_by', []):
+                etf_tags += f'<span class="badge etf-tag" style="background:#dcfce7;color:#15803d;border-color:#bbf7d0">{e} ✦新</span>'
+            else:
+                etf_tags += f'<span class="badge etf-tag">{e}</span>'
+        delta_cell = ''
+        if has_prev:
+            d = item.get('delta')
+            if d is not None and d > 0:
+                delta_cell = f'<td class="center"><span class="delta-up">+{d}</span></td>'
+            elif d is not None and d < 0:
+                delta_cell = f'<td class="center"><span class="delta-down">{d}</span></td>'
+            else:
+                delta_cell = '<td class="center">─</td>'
+        html += f'<tr{row_cls}><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td>{delta_cell}<td class="num">{item["avg_weight"]:.2f}</td><td>{etf_tags}</td></tr>'
     html += '</table>'
     return html
 
@@ -574,6 +628,8 @@ def _gen_individual_holdings(today_data):
 
 
 def _gen_weekly_changes(weekly_diffs, compare_date):
+    if not compare_date:
+        return '<div class="empty-msg">尚未累積一週的歷史資料，系統運行滿 7 天後將自動產生週度比較</div>'
     if not weekly_diffs:
         return f'<div class="empty-msg">無週度比較資料（比較日期：{compare_date or "無"}）</div>'
     html = f'<div class="desc">與 {compare_date} 相比的持股異動</div>'
@@ -616,7 +672,6 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
     tab_consensus = _gen_consensus(consensus)
     tab_holdings = _gen_individual_holdings(today_data)
     tab_weekly = _gen_weekly_changes(diff_weekly, compare_date)
-    tab_health = _gen_health(health)
 
     return f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
@@ -634,7 +689,6 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
   <div class="tab" onclick="showTab('t2',this)">共識持股</div>
   <div class="tab" onclick="showTab('t3',this)">各ETF持股</div>
   <div class="tab" onclick="showTab('t4',this)">週報比較</div>
-  <div class="tab" onclick="showTab('t5',this)">系統狀態</div>
 </div>
 <div id="t1" class="pane active">
   <div class="ttl">每日持股異動</div>
@@ -643,7 +697,7 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
 </div>
 <div id="t2" class="pane">
   <div class="ttl">跨 ETF 共識持股</div>
-  <div class="desc">被多檔主動式 ETF 同時持有的個股，持有數越多代表市場共識度越高</div>
+  <div class="desc">被多檔主動式 ETF 同時持有的個股，持有數越多代表市場共識度越高。標示「✦新」代表該 ETF 近期新買入此標的</div>
   {tab_consensus}
 </div>
 <div id="t3" class="pane">
@@ -655,11 +709,6 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
   <div class="ttl">週度異動比較</div>
   <div class="desc">與一週前的持股比較，觀察中期持倉策略變化</div>
   {tab_weekly}
-</div>
-<div id="t5" class="pane">
-  <div class="ttl">系統狀態</div>
-  <div class="desc">各 ETF 資料爬取健康狀態</div>
-  {tab_health}
 </div>
 <div class="ft">資料來源：MoneyDJ ｜ 僅供研究參考，不構成投資建議 ｜ 主動式 ETF 持股追蹤系統</div>
 <script>{JS}</script>
@@ -695,7 +744,7 @@ def main():
                 break
     diff_weekly = compute_weekly_diff(today_data, week_ago_data) if week_ago_data else {}
 
-    consensus = compute_cross_etf_consensus(today_data)
+    consensus = compute_cross_etf_consensus(today_data, prev_data)
     health = build_health_report(today_data, prev_data)
 
     html = generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, week_ago_date if week_ago_data else None)
