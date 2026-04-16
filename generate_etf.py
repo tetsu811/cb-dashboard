@@ -303,21 +303,30 @@ def cleanup_old_snapshots(keep_days=MAX_HISTORY_DAYS):
 
 
 def load_first_seen():
-    """Load historical first-seen record: {stock_code: {etf_code: date}}.
-    Returns (data, existed) tuple — `existed` is False on first-ever run."""
+    """Load first-seen record. Returns (data_dict, baseline_date_str).
+    baseline_date is the date the registry was first built — anything recorded
+    on or before that date is treated as 'pre-existing' (NOT new).
+    On first-ever run, baseline_date = TODAY so nothing today is flagged as new."""
     if not os.path.exists(FIRST_SEEN_FILE):
-        return {}, False
+        return {}, TODAY.isoformat()
     with open(FIRST_SEEN_FILE, 'r', encoding='utf-8') as f:
-        return json.load(f), True
+        raw = json.load(f)
+    baseline = raw.pop('_baseline_date', None)
+    if not baseline:
+        # Migration: old format without baseline. Treat all existing records as
+        # pre-existing by setting baseline to today — only future additions count as new.
+        baseline = TODAY.isoformat()
+    return raw, baseline
 
 
-def save_first_seen(first_seen):
+def save_first_seen(first_seen, baseline_date):
+    payload = {'_baseline_date': baseline_date, **first_seen}
     with open(FIRST_SEEN_FILE, 'w', encoding='utf-8') as f:
-        json.dump(first_seen, f, ensure_ascii=False, indent=2, sort_keys=True)
+        json.dump(payload, f, ensure_ascii=False, indent=2, sort_keys=True)
 
 
 def update_first_seen(today_data, first_seen):
-    """Update first_seen record: mark (stock, etf) combos that didn't exist before."""
+    """Record today's date for any (stock, etf) pair we haven't seen before."""
     today_str = TODAY.isoformat()
     for etf_code, etf in today_data.items():
         if etf.get('status') not in ('ok', 'partial'):
@@ -331,19 +340,21 @@ def update_first_seen(today_data, first_seen):
     return first_seen
 
 
-def is_recent_first_buy(first_seen, stock_code, etf_code, window_days=NEW_BUY_WINDOW_DAYS, bootstrap=False):
-    """Check if (stock, etf) was first seen within the last N days.
-    If bootstrap=True, always returns False (first-ever run where registry is being populated today)."""
-    if bootstrap:
-        return False
+def is_recent_first_buy(first_seen, stock_code, etf_code, baseline_date,
+                        window_days=NEW_BUY_WINDOW_DAYS):
+    """Truly-new = first_seen date is strictly AFTER the baseline date AND within window.
+    Anything recorded on or before baseline is treated as pre-existing."""
     record = first_seen.get(stock_code, {}).get(etf_code)
-    if not record:
+    if not record or not baseline_date:
         return False
     try:
         first_date = datetime.strptime(record, '%Y-%m-%d').date()
-        return (TODAY - first_date).days <= window_days
+        baseline = datetime.strptime(baseline_date, '%Y-%m-%d').date()
     except ValueError:
         return False
+    if first_date <= baseline:
+        return False  # was already known when registry was created
+    return (TODAY - first_date).days <= window_days
 
 
 # ── Section 4: Change detection engine ───────────────────────────────────────
@@ -440,7 +451,7 @@ def _build_stock_capital_map(data):
     return result
 
 
-def compute_cross_etf_consensus(today_data, prev_data=None, first_seen=None, bootstrap=False):
+def compute_cross_etf_consensus(today_data, prev_data=None, first_seen=None, baseline_date=None):
     """Find stocks held by multiple active ETFs, with change tracking and capital exposure."""
     stock_map = {}
     for code, etf in today_data.items():
@@ -508,13 +519,13 @@ def compute_cross_etf_consensus(today_data, prev_data=None, first_seen=None, boo
             prev_etfs = prev_map.get(sc, set())
             today_etfs = set(h['etf'] for h in info['holders'])
             # Use first_seen registry for "newly_added" to avoid false positives on first run
-            if first_seen and not bootstrap:
+            if first_seen and baseline_date:
                 newly_added = sorted(
                     etf for etf in today_etfs
-                    if is_recent_first_buy(first_seen, sc, etf, bootstrap=False)
+                    if is_recent_first_buy(first_seen, sc, etf, baseline_date)
                 )
             else:
-                newly_added = []  # first run: nothing is truly "new"
+                newly_added = []
             recently_removed = sorted(prev_etfs - today_etfs) if prev_data else []
             prev_count = len(prev_etfs)
             delta = len(today_etfs) - prev_count
@@ -574,7 +585,7 @@ def _index_prev_etf(prev_data):
     return out
 
 
-def compute_capital_flows(today_data, prev_data, first_seen, bootstrap=False):
+def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
     """
     Core flow engine. For every stock × ETF pair, compute:
       - today's capital, previous capital, delta
@@ -635,7 +646,7 @@ def compute_capital_flows(today_data, prev_data, first_seen, bootstrap=False):
             if prev_w and prev_w > 0:
                 weight_ratio = (today_w - prev_w) / prev_w
 
-            is_new = is_recent_first_buy(first_seen, sc, etf_code, bootstrap=bootstrap)
+            is_new = is_recent_first_buy(first_seen, sc, etf_code, baseline_date)
             is_material = (abs(delta) >= CAPITAL_FLOW_THRESHOLD) or (abs(weight_ratio) >= WEIGHT_RATIO_THRESHOLD)
 
             record = {
@@ -732,7 +743,7 @@ def filter_big_etfs(today_data, threshold=BIG_ETF_AUM_THRESHOLD):
     return big
 
 
-def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, bootstrap=False):
+def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, baseline_date):
     """
     For each big ETF, list its buy/sell/increase/decrease actions.
     Returns: {etf_code: {name, aum, aum_delta, buys, sells, increases, decreases}}
@@ -768,7 +779,7 @@ def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, bo
                     "today_capital": today_cap,
                     "delta": today_cap,
                     "weight": h.get('weight_pct') or 0,
-                    "is_new_buy": is_recent_first_buy(first_seen, sc, code, bootstrap=bootstrap),
+                    "is_new_buy": is_recent_first_buy(first_seen, sc, code, baseline_date),
                 })
             else:
                 prev_etf_for_cap = {'aum_billion': prev_aum}
@@ -930,6 +941,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px;transition:opacity .15s}
 .nav-link:hover{opacity:.7}
 .warn-box{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:8px;padding:10px 14px;font-size:12px;margin:14px 28px 0;line-height:1.7}
+.construction{background:linear-gradient(90deg,#fef3c7,#fde68a);border-bottom:2px solid #f59e0b;color:#78350f;padding:10px 28px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;text-align:center;justify-content:center}
+.construction .icon{font-size:18px}
+.construction .text{line-height:1.5}
+@media(max-width:640px){.construction{padding:10px 16px;font-size:12px;flex-wrap:wrap}}
 .stats{display:flex;gap:12px;padding:16px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
 .sc{background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:14px 20px;min-width:120px;transition:transform .15s,box-shadow .15s;border-left:3px solid var(--bl)}
 .sc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
@@ -1412,6 +1427,11 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
   <h1>主動式 ETF 資金流向監測</h1>
   <div class="sub">更新：{TODAY.isoformat()}（每個交易日收盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
 </div>
+<div class="construction">
+  <span class="icon">🚧</span>
+  <span class="text">本頁面開發測試中，資金流向計算需累積數日歷史資料後才會準確。「✦首次」標記也將從明日起才開始顯示真正新買入。</span>
+  <span class="icon">🚧</span>
+</div>
 {stats}
 <div class="tabs">
   <div class="tab active" onclick="showTab('t1',this)">資金流向</div>
@@ -1460,10 +1480,8 @@ def main():
 
     # Load previous state
     prev_data = load_latest_cache()
-    first_seen, first_seen_existed = load_first_seen()
-    bootstrap = not first_seen_existed  # first-ever run: don't flag anything as "new"
-    if bootstrap:
-        print("⚠ 首次執行：正在建立基準資料（first_seen registry）")
+    first_seen, baseline_date = load_first_seen()
+    print(f"first_seen baseline date: {baseline_date}（早於此日期的記錄視為既有持股）")
 
     # Fetch today
     today_data = fetch_all_etf_holdings(etf_list)
@@ -1475,13 +1493,13 @@ def main():
 
     # Update historical first-seen registry
     first_seen = update_first_seen(today_data, first_seen)
-    save_first_seen(first_seen)
+    save_first_seen(first_seen, baseline_date)
 
     # Health
     health = build_health_report(today_data, prev_data)
 
     # Core flow engine
-    flows = compute_capital_flows(today_data, prev_data, first_seen, bootstrap=bootstrap)
+    flows = compute_capital_flows(today_data, prev_data, first_seen, baseline_date)
 
     # Big ETFs and their actions
     big_etf_list = filter_big_etfs(today_data, BIG_ETF_AUM_THRESHOLD)
@@ -1490,11 +1508,11 @@ def main():
     for code, aum, name in big_etf_list:
         print(f"  {code} {name}: {aum:.1f} 億")
 
-    big_actions = compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, bootstrap=bootstrap)
+    big_actions = compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, baseline_date)
     collective = compute_collective_moves(big_actions)
 
     # Static consensus view (tab 4)
-    consensus = compute_cross_etf_consensus(today_data, prev_data, first_seen, bootstrap=bootstrap)
+    consensus = compute_cross_etf_consensus(today_data, prev_data, first_seen, baseline_date)
 
     # Render
     html = generate_etf_html(today_data, flows, big_actions, collective, consensus, big_etf_list, first_seen)
