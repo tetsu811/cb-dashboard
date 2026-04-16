@@ -1434,7 +1434,6 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
     big_etf_codes = [code for code, _, _ in big_etf_list]
     stats = _gen_flow_stats(flows, big_etf_list, collective, today_data)
     tab_flow = _gen_flow_overview(flows, big_etf_codes)
-    tab_big = _gen_big_etf_actions(big_actions, big_etf_list, today_data)
     tab_collective = _gen_collective_moves(collective)
     tab_consensus = _gen_consensus(consensus)
     tab_holdings = _gen_individual_holdings(today_data)
@@ -1456,7 +1455,6 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
 {stats}
 <div class="tabs">
   <div class="tab active" onclick="showTab('t1',this)">資金流向</div>
-  <div class="tab" onclick="showTab('t2',this)">大 ETF 動向</div>
   <div class="tab" onclick="showTab('t3',this)">集體行為</div>
   <div class="tab" onclick="showTab('t4',this)">持倉總覽</div>
   <div class="tab" onclick="showTab('t5',this)">各 ETF 持股</div>
@@ -1465,11 +1463,6 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
   <div class="ttl">今日資金流向</div>
   <div class="desc">按股票聚合當日所有 ETF 的資金動作。門檻：單筆流入/流出 ≥ {CAPITAL_FLOW_THRESHOLD:.0f} 億 或 權重變化 ≥ {int(WEIGHT_RATIO_THRESHOLD*100)}%。<b>深色徽章 = 大資金 ETF（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）+ 重大異動</b>。「✦首次」= 該 ETF 首次持有此股票（近 {NEW_BUY_WINDOW_DAYS} 天內），「✕撤出」= 昨日持有今日完全賣出</div>
   {tab_flow}
-</div>
-<div id="t2" class="pane">
-  <div class="ttl">大資金 ETF 當日動向（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）</div>
-  <div class="desc">每檔大資金 ETF 的今日買入、賣出、加碼、減碼明細。AUM 變化反映該基金的淨申贖流量</div>
-  {tab_big}
 </div>
 <div id="t3" class="pane">
   <div class="ttl">機構集體行為</div>
