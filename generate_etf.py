@@ -19,15 +19,22 @@ OUTPUT_HTML = 'etf_index.html'
 DATA_DIR = 'etf_data'
 LATEST_CACHE = 'etf_latest.json'
 CONFIG_FILE = 'etf_config.json'
+FIRST_SEEN_FILE = 'etf_first_seen.json'
 HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}
 
 MONEYDJ_FULL_URL = 'https://www.moneydj.com/etf/x/basic/Basic0007B.xdjhtm?etfid={etf_id}'
 MONEYDJ_TOP10_URL = 'https://www.moneydj.com/etf/x/basic/basic0007.xdjhtm?etfid={etf_id}'
 YAHOO_PROFILE_URL = 'https://tw.stock.yahoo.com/quote/{etf_code}.TW/profile'
 
-WEIGHT_CHANGE_THRESHOLD = 0.5
+WEIGHT_CHANGE_THRESHOLD = 0.5       # 百分點（用於舊邏輯）
 MAX_HISTORY_DAYS = 30
 FETCH_DELAY = 1.5
+
+# ── Flow monitoring thresholds ──
+BIG_ETF_AUM_THRESHOLD = 100         # 億 TWD — 大資金 ETF 的門檻
+CAPITAL_FLOW_THRESHOLD = 1.0        # 億 TWD — 重大資金流入/出的絕對門檻
+WEIGHT_RATIO_THRESHOLD = 0.20       # 20% — 權重相對變化門檻（兩者任一達標）
+NEW_BUY_WINDOW_DAYS = 7             # 首見後多少天仍顯示「✦新」
 
 
 # ── Section 2: Data fetching ─────────────────────────────────────────────────
@@ -295,6 +302,50 @@ def cleanup_old_snapshots(keep_days=MAX_HISTORY_DAYS):
             pass
 
 
+def load_first_seen():
+    """Load historical first-seen record: {stock_code: {etf_code: date}}.
+    Returns (data, existed) tuple — `existed` is False on first-ever run."""
+    if not os.path.exists(FIRST_SEEN_FILE):
+        return {}, False
+    with open(FIRST_SEEN_FILE, 'r', encoding='utf-8') as f:
+        return json.load(f), True
+
+
+def save_first_seen(first_seen):
+    with open(FIRST_SEEN_FILE, 'w', encoding='utf-8') as f:
+        json.dump(first_seen, f, ensure_ascii=False, indent=2, sort_keys=True)
+
+
+def update_first_seen(today_data, first_seen):
+    """Update first_seen record: mark (stock, etf) combos that didn't exist before."""
+    today_str = TODAY.isoformat()
+    for etf_code, etf in today_data.items():
+        if etf.get('status') not in ('ok', 'partial'):
+            continue
+        for h in etf.get('holdings', []):
+            sc = h['stock_code']
+            if sc not in first_seen:
+                first_seen[sc] = {}
+            if etf_code not in first_seen[sc]:
+                first_seen[sc][etf_code] = today_str
+    return first_seen
+
+
+def is_recent_first_buy(first_seen, stock_code, etf_code, window_days=NEW_BUY_WINDOW_DAYS, bootstrap=False):
+    """Check if (stock, etf) was first seen within the last N days.
+    If bootstrap=True, always returns False (first-ever run where registry is being populated today)."""
+    if bootstrap:
+        return False
+    record = first_seen.get(stock_code, {}).get(etf_code)
+    if not record:
+        return False
+    try:
+        first_date = datetime.strptime(record, '%Y-%m-%d').date()
+        return (TODAY - first_date).days <= window_days
+    except ValueError:
+        return False
+
+
 # ── Section 4: Change detection engine ───────────────────────────────────────
 
 def _holdings_by_code(holdings_list):
@@ -389,7 +440,7 @@ def _build_stock_capital_map(data):
     return result
 
 
-def compute_cross_etf_consensus(today_data, prev_data=None):
+def compute_cross_etf_consensus(today_data, prev_data=None, first_seen=None, bootstrap=False):
     """Find stocks held by multiple active ETFs, with change tracking and capital exposure."""
     stock_map = {}
     for code, etf in today_data.items():
@@ -456,8 +507,15 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
 
             prev_etfs = prev_map.get(sc, set())
             today_etfs = set(h['etf'] for h in info['holders'])
-            newly_added = sorted(today_etfs - prev_etfs)
-            recently_removed = sorted(prev_etfs - today_etfs)
+            # Use first_seen registry for "newly_added" to avoid false positives on first run
+            if first_seen and not bootstrap:
+                newly_added = sorted(
+                    etf for etf in today_etfs
+                    if is_recent_first_buy(first_seen, sc, etf, bootstrap=False)
+                )
+            else:
+                newly_added = []  # first run: nothing is truly "new"
+            recently_removed = sorted(prev_etfs - today_etfs) if prev_data else []
             prev_count = len(prev_etfs)
             delta = len(today_etfs) - prev_count
             result.append({
@@ -481,6 +539,358 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
 def compute_weekly_diff(today_data, week_ago_data):
     """Same as daily diff but comparing to 7 days ago."""
     return compute_holdings_diff(today_data, week_ago_data)
+
+
+# ── Section 4b: Capital flow engine ──────────────────────────────────────────
+
+def _capital_of(etf_entry, holding):
+    """Compute capital (億) for a holding given the ETF's AUM, or None if unavailable."""
+    aum = etf_entry.get('aum_billion')
+    if not aum:
+        return None
+    if holding.get('weight_na'):
+        return None
+    w = holding.get('weight_pct') or 0
+    if w <= 0:
+        return None
+    return round(aum * w / 100, 2)
+
+
+def _index_prev_etf(prev_data):
+    """Index previous snapshot: {etf_code: {stock_code: holding_dict}}."""
+    if not prev_data:
+        return {}
+    etfs = prev_data.get('etfs', prev_data)
+    if 'etfs' in etfs:
+        etfs = etfs['etfs']
+    out = {}
+    for code, etf in etfs.items():
+        if etf.get('status') not in ('ok', 'partial'):
+            continue
+        out[code] = {
+            "aum_billion": etf.get('aum_billion'),
+            "holdings": {h['stock_code']: h for h in etf.get('holdings', [])},
+        }
+    return out
+
+
+def compute_capital_flows(today_data, prev_data, first_seen, bootstrap=False):
+    """
+    Core flow engine. For every stock × ETF pair, compute:
+      - today's capital, previous capital, delta
+      - is_new_buy (first-seen within window, via first_seen registry)
+      - is_exit (held yesterday, not held today)
+      - is_material (meets capital or weight ratio threshold)
+
+    Returns: {
+        stock_code: {
+            "stock_name": ...,
+            "net_flow": sum of all deltas (億),
+            "inflows": [{etf, delta, today_capital, prev_capital, weight, is_new_buy, is_material}],
+            "outflows": [{etf, delta, today_capital, prev_capital, weight, is_exit, is_material}],
+            "material_count": number of material actions,
+        }
+    }
+    """
+    # First-run guard: no comparison possible without previous data
+    if not prev_data:
+        return {}
+    prev_idx = _index_prev_etf(prev_data)
+    flows = {}
+
+    # 1) Walk today's holdings → compute deltas (inflow or pass-through)
+    for etf_code, etf in today_data.items():
+        if etf.get('status') not in ('ok', 'partial'):
+            continue
+        prev_etf = prev_idx.get(etf_code, {})
+        prev_holdings = prev_etf.get('holdings', {})
+        for h in etf.get('holdings', []):
+            sc = h['stock_code']
+            today_cap = _capital_of(etf, h)
+            if today_cap is None:
+                continue
+
+            prev_h = prev_holdings.get(sc)
+            if prev_h:
+                prev_etf_for_cap = {
+                    'aum_billion': prev_etf.get('aum_billion'),
+                }
+                prev_cap = _capital_of(prev_etf_for_cap, prev_h)
+            else:
+                prev_cap = None
+
+            # Delta: today - yesterday. If not held yesterday → full delta = today_cap.
+            if prev_cap is None:
+                delta = today_cap
+            else:
+                delta = round(today_cap - prev_cap, 2)
+
+            if abs(delta) < 0.005:
+                continue  # skip negligible drift
+
+            # Weight change (for relative threshold)
+            prev_w = prev_h.get('weight_pct') if prev_h else None
+            today_w = h.get('weight_pct') or 0
+            weight_ratio = 0.0
+            if prev_w and prev_w > 0:
+                weight_ratio = (today_w - prev_w) / prev_w
+
+            is_new = is_recent_first_buy(first_seen, sc, etf_code, bootstrap=bootstrap)
+            is_material = (abs(delta) >= CAPITAL_FLOW_THRESHOLD) or (abs(weight_ratio) >= WEIGHT_RATIO_THRESHOLD)
+
+            record = {
+                "etf": etf_code,
+                "etf_name": etf.get('name'),
+                "etf_aum": etf.get('aum_billion'),
+                "today_capital": today_cap,
+                "prev_capital": prev_cap,
+                "delta": delta,
+                "weight": today_w,
+                "prev_weight": prev_w,
+                "weight_ratio": round(weight_ratio, 3),
+                "is_new_buy": is_new,
+                "is_material": is_material,
+            }
+
+            entry = flows.setdefault(sc, {
+                "stock_code": sc,
+                "stock_name": h['stock_name'],
+                "inflows": [],
+                "outflows": [],
+                "net_flow": 0.0,
+                "material_count": 0,
+            })
+            if delta > 0:
+                entry['inflows'].append(record)
+            else:
+                record['is_exit'] = False
+                entry['outflows'].append(record)
+            entry['net_flow'] = round(entry['net_flow'] + delta, 2)
+            if is_material:
+                entry['material_count'] += 1
+
+    # 2) Walk previous holdings to find complete exits (held yesterday, not today)
+    for etf_code, prev_etf in prev_idx.items():
+        today_etf = today_data.get(etf_code)
+        if not today_etf or today_etf.get('status') not in ('ok', 'partial'):
+            continue
+        today_stocks = {h['stock_code'] for h in today_etf.get('holdings', [])}
+        prev_etf_for_cap = {'aum_billion': prev_etf.get('aum_billion')}
+        for sc, prev_h in prev_etf['holdings'].items():
+            if sc in today_stocks:
+                continue  # still held; already processed
+            prev_cap = _capital_of(prev_etf_for_cap, prev_h)
+            if prev_cap is None:
+                continue
+            delta = round(-prev_cap, 2)
+            if abs(delta) < 0.005:
+                continue
+            is_material = abs(delta) >= CAPITAL_FLOW_THRESHOLD
+            record = {
+                "etf": etf_code,
+                "etf_name": today_etf.get('name'),
+                "etf_aum": today_etf.get('aum_billion'),
+                "today_capital": 0,
+                "prev_capital": prev_cap,
+                "delta": delta,
+                "weight": 0,
+                "prev_weight": prev_h.get('weight_pct'),
+                "weight_ratio": -1.0,
+                "is_new_buy": False,
+                "is_exit": True,
+                "is_material": is_material,
+            }
+            entry = flows.setdefault(sc, {
+                "stock_code": sc,
+                "stock_name": prev_h.get('stock_name', sc),
+                "inflows": [],
+                "outflows": [],
+                "net_flow": 0.0,
+                "material_count": 0,
+            })
+            entry['outflows'].append(record)
+            entry['net_flow'] = round(entry['net_flow'] + delta, 2)
+            if is_material:
+                entry['material_count'] += 1
+
+    # 3) Sort each stock's actions by |delta| desc
+    for entry in flows.values():
+        entry['inflows'].sort(key=lambda r: -r['delta'])
+        entry['outflows'].sort(key=lambda r: r['delta'])  # most negative first
+
+    return flows
+
+
+def filter_big_etfs(today_data, threshold=BIG_ETF_AUM_THRESHOLD):
+    """Return list of ETF codes with AUM >= threshold, sorted by AUM desc."""
+    big = []
+    for code, etf in today_data.items():
+        aum = etf.get('aum_billion') or 0
+        if aum >= threshold:
+            big.append((code, aum, etf.get('name')))
+    big.sort(key=lambda x: -x[1])
+    return big
+
+
+def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, bootstrap=False):
+    """
+    For each big ETF, list its buy/sell/increase/decrease actions.
+    Returns: {etf_code: {name, aum, aum_delta, buys, sells, increases, decreases}}
+    """
+    if not prev_data:
+        return {}
+    prev_idx = _index_prev_etf(prev_data)
+    result = {}
+    for code in big_etf_codes:
+        etf = today_data.get(code)
+        if not etf or etf.get('status') not in ('ok', 'partial'):
+            continue
+        prev_etf = prev_idx.get(code, {})
+        prev_aum = prev_etf.get('aum_billion')
+        aum = etf.get('aum_billion')
+        aum_delta = round(aum - prev_aum, 2) if (aum and prev_aum) else None
+
+        today_holdings = {h['stock_code']: h for h in etf.get('holdings', [])}
+        prev_holdings = prev_etf.get('holdings', {})
+
+        buys, sells, increases, decreases = [], [], [], []
+
+        for sc, h in today_holdings.items():
+            today_cap = _capital_of(etf, h)
+            if today_cap is None:
+                continue
+            prev_h = prev_holdings.get(sc)
+            if not prev_h:
+                # Not held yesterday → buy
+                buys.append({
+                    "stock_code": sc,
+                    "stock_name": h['stock_name'],
+                    "today_capital": today_cap,
+                    "delta": today_cap,
+                    "weight": h.get('weight_pct') or 0,
+                    "is_new_buy": is_recent_first_buy(first_seen, sc, code, bootstrap=bootstrap),
+                })
+            else:
+                prev_etf_for_cap = {'aum_billion': prev_aum}
+                prev_cap = _capital_of(prev_etf_for_cap, prev_h)
+                if prev_cap is None:
+                    continue
+                delta = round(today_cap - prev_cap, 2)
+                if abs(delta) < CAPITAL_FLOW_THRESHOLD * 0.1:
+                    continue  # skip tiny drift
+                record = {
+                    "stock_code": sc,
+                    "stock_name": h['stock_name'],
+                    "today_capital": today_cap,
+                    "prev_capital": prev_cap,
+                    "delta": delta,
+                    "weight": h.get('weight_pct') or 0,
+                    "prev_weight": prev_h.get('weight_pct'),
+                }
+                if delta > 0:
+                    increases.append(record)
+                else:
+                    decreases.append(record)
+
+        # Sells: held yesterday, not today
+        for sc, prev_h in prev_holdings.items():
+            if sc in today_holdings:
+                continue
+            prev_etf_for_cap = {'aum_billion': prev_aum}
+            prev_cap = _capital_of(prev_etf_for_cap, prev_h)
+            if prev_cap is None:
+                continue
+            sells.append({
+                "stock_code": sc,
+                "stock_name": prev_h.get('stock_name', sc),
+                "prev_capital": prev_cap,
+                "delta": -prev_cap,
+                "prev_weight": prev_h.get('weight_pct'),
+            })
+
+        buys.sort(key=lambda r: -r['delta'])
+        sells.sort(key=lambda r: r['delta'])
+        increases.sort(key=lambda r: -r['delta'])
+        decreases.sort(key=lambda r: r['delta'])
+
+        result[code] = {
+            "name": etf.get('name'),
+            "aum": aum,
+            "aum_delta": aum_delta,
+            "buys": buys,
+            "sells": sells,
+            "increases": increases,
+            "decreases": decreases,
+        }
+    return result
+
+
+def compute_collective_moves(big_etf_actions, min_count=2):
+    """
+    Detect stocks where ≥ min_count big ETFs simultaneously buy or sell today.
+    Returns: {
+        "buys": [{stock_code, stock_name, etf_count, total_capital, actions}],
+        "sells": [...]
+    }
+    where actions = [{etf, etf_name, action_type, delta}]
+    """
+    stock_buy_actions = {}
+    stock_sell_actions = {}
+
+    for etf_code, actions in big_etf_actions.items():
+        etf_name = actions['name']
+        # Buys + increases = positive actions
+        for action in actions['buys'] + actions['increases']:
+            sc = action['stock_code']
+            entry = stock_buy_actions.setdefault(sc, {
+                "stock_code": sc,
+                "stock_name": action['stock_name'],
+                "actions": [],
+                "total_capital": 0.0,
+            })
+            action_type = "新買入" if action in actions['buys'] else "加碼"
+            entry['actions'].append({
+                "etf": etf_code,
+                "etf_name": etf_name,
+                "action_type": action_type,
+                "delta": action['delta'],
+                "is_new_buy": action.get('is_new_buy', False),
+            })
+            entry['total_capital'] = round(entry['total_capital'] + action['delta'], 2)
+
+        # Sells + decreases = negative actions
+        for action in actions['sells'] + actions['decreases']:
+            sc = action['stock_code']
+            entry = stock_sell_actions.setdefault(sc, {
+                "stock_code": sc,
+                "stock_name": action['stock_name'],
+                "actions": [],
+                "total_capital": 0.0,
+            })
+            action_type = "完全賣出" if action in actions['sells'] else "減碼"
+            entry['actions'].append({
+                "etf": etf_code,
+                "etf_name": etf_name,
+                "action_type": action_type,
+                "delta": action['delta'],
+            })
+            entry['total_capital'] = round(entry['total_capital'] + action['delta'], 2)
+
+    collective_buys = [
+        {**v, "etf_count": len(v['actions'])}
+        for v in stock_buy_actions.values()
+        if len(v['actions']) >= min_count
+    ]
+    collective_sells = [
+        {**v, "etf_count": len(v['actions'])}
+        for v in stock_sell_actions.values()
+        if len(v['actions']) >= min_count
+    ]
+
+    collective_buys.sort(key=lambda x: -x['total_capital'])
+    collective_sells.sort(key=lambda x: x['total_capital'])
+
+    return {"buys": collective_buys, "sells": collective_sells}
 
 
 # ── Section 5: Health check ──────────────────────────────────────────────────
@@ -792,52 +1202,250 @@ def _gen_health(health):
     return html
 
 
-def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, compare_date):
-    warn = _gen_warn_box(health)
-    stats = _gen_stats(today_data, diff_daily, consensus, health)
-    tab_daily = _gen_daily_changes(diff_daily, today_data)
+def _gen_flow_stats(flows, big_etfs, collective):
+    """Top-level stats: big ETF count, material inflows/outflows, collective signals, total flow."""
+    big_count = len(big_etfs)
+    material_in = sum(1 for f in flows.values() if f['net_flow'] > 0 and any(r['is_material'] for r in f['inflows']))
+    material_out = sum(1 for f in flows.values() if f['net_flow'] < 0 and any(r['is_material'] for r in f['outflows']))
+    collective_buys = len(collective.get('buys', []))
+    collective_sells = len(collective.get('sells', []))
+    total_flow = round(sum(abs(f['net_flow']) for f in flows.values()), 1)
+    return f"""<div class="stats">
+  <div class="sc"><div class="n">{big_count}</div><div class="l">大資金 ETF（≥100億）</div></div>
+  <div class="sc gr"><div class="n">{material_in}</div><div class="l">重大資金流入個股</div></div>
+  <div class="sc rd"><div class="n">{material_out}</div><div class="l">重大資金流出個股</div></div>
+  <div class="sc am"><div class="n">{collective_buys}/{collective_sells}</div><div class="l">集體買/賣訊號</div></div>
+  <div class="sc"><div class="n">{total_flow:.0f}億</div><div class="l">今日總資金流動</div></div>
+</div>"""
+
+
+def _gen_flow_overview(flows, big_etf_codes):
+    """Tab 1: Unified capital flow overview per stock, sorted by |net_flow|."""
+    if not flows:
+        return '<div class="empty-msg">系統正在建立基準資料。明日起將開始顯示當日相對於前日的資金流向動作</div>'
+
+    # Filter: only show stocks with at least one material action OR net_flow >= threshold
+    filtered = [
+        f for f in flows.values()
+        if f['material_count'] > 0 or abs(f['net_flow']) >= CAPITAL_FLOW_THRESHOLD
+    ]
+    if not filtered:
+        return '<div class="empty-msg">今日無重大資金流向動作（門檻：單筆 ≥ 1 億 或 權重變化 ≥ 20%）</div>'
+
+    # Sort by absolute net_flow desc
+    filtered.sort(key=lambda f: -abs(f['net_flow']))
+
+    big_set = set(big_etf_codes)
+
+    html = '<table><tr><th>股票代號</th><th>股票名稱</th><th class="num">今日淨流入</th><th>資金流入（來源 ETF）</th><th>資金流出（來源 ETF）</th></tr>'
+    for f in filtered:
+        sc = f['stock_code']
+        name = f['stock_name']
+        net = f['net_flow']
+
+        # Row color based on net flow direction and magnitude
+        row_cls = ''
+        if net >= CAPITAL_FLOW_THRESHOLD:
+            row_cls = ' class="row-buy"'
+        elif net <= -CAPITAL_FLOW_THRESHOLD:
+            row_cls = ' class="row-sell"'
+
+        net_str = _fmt_cap_delta(net) if net != 0 else '─'
+
+        def render_badges(records, is_positive):
+            badges = ''
+            for r in records:
+                etf = r['etf']
+                delta = r['delta']
+                is_big = etf in big_set
+                is_new = r.get('is_new_buy', False)
+                is_exit = r.get('is_exit', False)
+                is_mat = r.get('is_material', False)
+
+                # Capital label
+                label_parts = [etf]
+                sign = '+' if delta > 0 else ''
+                label_parts.append(f'<b>{sign}{_fmt_capital(delta)}</b>')
+                if is_new:
+                    label_parts.append('<span style="font-size:9.5px">✦首次</span>')
+                if is_exit:
+                    label_parts.append('<span style="font-size:9.5px">✕撤出</span>')
+
+                # Badge style
+                if is_positive:
+                    # Green gradient; big ETFs are saturated
+                    if is_big and is_mat:
+                        style = 'background:#16a34a;color:#fff;border-color:#15803d'
+                    elif is_big:
+                        style = 'background:#86efac;color:#14532d;border-color:#4ade80'
+                    elif is_mat:
+                        style = 'background:#bbf7d0;color:#15803d;border-color:#86efac'
+                    else:
+                        style = 'background:#dcfce7;color:#15803d;border-color:#bbf7d0'
+                else:
+                    if is_big and is_mat:
+                        style = 'background:#dc2626;color:#fff;border-color:#b91c1c'
+                    elif is_big:
+                        style = 'background:#fca5a5;color:#7f1d1d;border-color:#f87171'
+                    elif is_mat:
+                        style = 'background:#fecaca;color:#b91c1c;border-color:#fca5a5'
+                    else:
+                        style = 'background:#fee2e2;color:#dc2626;border-color:#fecaca'
+
+                title = f'{etf}：{sign}{_fmt_capital(delta)}'
+                if r.get('prev_weight') is not None:
+                    title += f' | 權重 {r.get("prev_weight", 0):.2f}% → {r.get("weight", 0):.2f}%'
+                if is_big:
+                    title += ' | 大資金 ETF'
+
+                badges += f'<span class="badge etf-tag" style="{style}" title="{title}">{" ".join(label_parts)}</span>'
+            return badges or '<span style="color:#94a3b8">─</span>'
+
+        inflow_badges = render_badges(f['inflows'], True)
+        outflow_badges = render_badges(f['outflows'], False)
+
+        html += f'<tr{row_cls}><td><b>{sc}</b></td><td>{name}</td><td class="num">{net_str}</td><td>{inflow_badges}</td><td>{outflow_badges}</td></tr>'
+    html += '</table>'
+    return html
+
+
+def _gen_big_etf_actions(big_actions, big_etf_list):
+    """Tab 2: Per-big-ETF action report."""
+    if not big_actions:
+        return '<div class="empty-msg">目前無符合大資金 ETF 門檻（AUM ≥ 100 億）的基金</div>'
+
+    html = ''
+    for code, aum, name in big_etf_list:
+        actions = big_actions.get(code)
+        if not actions:
+            continue
+        aum_delta = actions.get('aum_delta')
+        aum_delta_str = ''
+        if aum_delta is not None and abs(aum_delta) >= 0.1:
+            if aum_delta > 0:
+                aum_delta_str = f' <span class="delta-up">▲{_fmt_capital(aum_delta)}</span>'
+            else:
+                aum_delta_str = f' <span class="delta-down">▼{_fmt_capital(abs(aum_delta))}</span>'
+
+        total_actions = len(actions['buys']) + len(actions['sells']) + len(actions['increases']) + len(actions['decreases'])
+        html += f'<div class="etf-section"><h3>{code} {actions["name"]}（AUM {aum:.1f} 億{aum_delta_str}）</h3>'
+
+        if total_actions == 0:
+            html += '<div class="empty-msg">今日無異動</div></div>'
+            continue
+
+        html += '<table><tr><th>股票代號</th><th>股票名稱</th><th>動作</th><th class="num">資金變化</th><th class="num">權重</th></tr>'
+
+        def fmt_delta_cell(v):
+            sign = '+' if v > 0 else ''
+            cls = 'delta-up' if v > 0 else 'delta-down'
+            return f'<span class="{cls}">{sign}{_fmt_capital(v)}</span>'
+
+        for a in actions['buys']:
+            new_mark = ' ✦首次' if a.get('is_new_buy') else ''
+            html += f'<tr class="row-buy"><td><b>{a["stock_code"]}</b></td><td>{a["stock_name"]}</td><td><span class="badge buy">新買入{new_mark}</span></td><td class="num">{fmt_delta_cell(a["delta"])}</td><td class="num">{a["weight"]:.2f}%</td></tr>'
+
+        for a in actions['increases']:
+            html += f'<tr class="row-up"><td><b>{a["stock_code"]}</b></td><td>{a["stock_name"]}</td><td><span class="badge up">加碼</span></td><td class="num">{fmt_delta_cell(a["delta"])}</td><td class="num">{a["prev_weight"]:.2f}% → {a["weight"]:.2f}%</td></tr>'
+
+        for a in actions['decreases']:
+            html += f'<tr class="row-down"><td><b>{a["stock_code"]}</b></td><td>{a["stock_name"]}</td><td><span class="badge down">減碼</span></td><td class="num">{fmt_delta_cell(a["delta"])}</td><td class="num">{a["prev_weight"]:.2f}% → {a["weight"]:.2f}%</td></tr>'
+
+        for a in actions['sells']:
+            html += f'<tr class="row-sell"><td><b>{a["stock_code"]}</b></td><td>{a["stock_name"]}</td><td><span class="badge sell">完全賣出</span></td><td class="num">{fmt_delta_cell(a["delta"])}</td><td class="num">{a.get("prev_weight", 0):.2f}% → ─</td></tr>'
+
+        html += '</table></div>'
+    return html or '<div class="empty-msg">今日大資金 ETF 均無異動</div>'
+
+
+def _gen_collective_moves(collective):
+    """Tab 3: Collective buy/sell signals by ≥2 big ETFs."""
+    html = ''
+
+    html += '<div class="etf-section"><h3 style="color:#15803d">🟢 集體買入訊號（≥2 檔大 ETF 同時買入/加碼）</h3>'
+    if not collective['buys']:
+        html += '<div class="empty-msg">今日無集體買入訊號</div>'
+    else:
+        html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">ETF數</th><th class="num">總流入</th><th>ETF 動作</th></tr>'
+        for item in collective['buys']:
+            actions_html = ''
+            for a in item['actions']:
+                act_color = '#16a34a' if a['action_type'] == '新買入' else '#059669'
+                new_mark = ' ✦' if a.get('is_new_buy') else ''
+                actions_html += f'<span class="badge etf-tag" style="background:{act_color};color:#fff;border-color:{act_color}" title="{a["etf_name"]}">{a["etf"]} {a["action_type"]}{new_mark} +{_fmt_capital(a["delta"])}</span>'
+            html += f'<tr class="row-buy"><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td><td class="num"><span class="delta-up">+{_fmt_capital(item["total_capital"])}</span></td><td>{actions_html}</td></tr>'
+        html += '</table>'
+    html += '</div>'
+
+    html += '<div class="etf-section"><h3 style="color:#b91c1c">🔴 集體賣出訊號（≥2 檔大 ETF 同時賣出/減碼）</h3>'
+    if not collective['sells']:
+        html += '<div class="empty-msg">今日無集體賣出訊號</div>'
+    else:
+        html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">ETF數</th><th class="num">總流出</th><th>ETF 動作</th></tr>'
+        for item in collective['sells']:
+            actions_html = ''
+            for a in item['actions']:
+                act_color = '#dc2626' if a['action_type'] == '完全賣出' else '#ea580c'
+                actions_html += f'<span class="badge etf-tag" style="background:{act_color};color:#fff;border-color:{act_color}" title="{a["etf_name"]}">{a["etf"]} {a["action_type"]} {_fmt_capital(a["delta"])}</span>'
+            html += f'<tr class="row-sell"><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td><td class="num"><span class="delta-down">{_fmt_capital(item["total_capital"])}</span></td><td>{actions_html}</td></tr>'
+        html += '</table>'
+    html += '</div>'
+
+    return html
+
+
+def generate_etf_html(today_data, flows, big_actions, collective, consensus, big_etf_list, first_seen):
+    big_etf_codes = [code for code, _, _ in big_etf_list]
+    stats = _gen_flow_stats(flows, big_etf_list, collective)
+    tab_flow = _gen_flow_overview(flows, big_etf_codes)
+    tab_big = _gen_big_etf_actions(big_actions, big_etf_list)
+    tab_collective = _gen_collective_moves(collective)
     tab_consensus = _gen_consensus(consensus)
     tab_holdings = _gen_individual_holdings(today_data)
-    tab_weekly = _gen_weekly_changes(diff_weekly, compare_date)
 
     return f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>主動式 ETF 持股追蹤儀表板</title>
+<title>主動式 ETF 資金流向監測</title>
 <style>{CSS}</style></head><body>
 <div class="hdr">
-  <h1>主動式 ETF 持股追蹤儀表板</h1>
+  <h1>主動式 ETF 資金流向監測</h1>
   <div class="sub">更新：{TODAY.isoformat()}（每個交易日收盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
 </div>
-{warn}
 {stats}
 <div class="tabs">
-  <div class="tab active" onclick="showTab('t1',this)">每日異動</div>
-  <div class="tab" onclick="showTab('t2',this)">共識持股</div>
-  <div class="tab" onclick="showTab('t3',this)">各ETF持股</div>
-  <div class="tab" onclick="showTab('t4',this)">週報比較</div>
+  <div class="tab active" onclick="showTab('t1',this)">資金流向</div>
+  <div class="tab" onclick="showTab('t2',this)">大 ETF 動向</div>
+  <div class="tab" onclick="showTab('t3',this)">集體行為</div>
+  <div class="tab" onclick="showTab('t4',this)">持倉總覽</div>
+  <div class="tab" onclick="showTab('t5',this)">各 ETF 持股</div>
 </div>
 <div id="t1" class="pane active">
-  <div class="ttl">每日持股異動</div>
-  <div class="desc">偵測每檔主動式 ETF 的新買入、賣出、加碼、減碼動作（權重變化門檻：±{WEIGHT_CHANGE_THRESHOLD}%）</div>
-  {tab_daily}
+  <div class="ttl">今日資金流向</div>
+  <div class="desc">按股票聚合當日所有 ETF 的資金動作。門檻：單筆流入/流出 ≥ {CAPITAL_FLOW_THRESHOLD:.0f} 億 或 權重變化 ≥ {int(WEIGHT_RATIO_THRESHOLD*100)}%。<b>深色徽章 = 大資金 ETF（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）+ 重大異動</b>。「✦首次」= 該 ETF 首次持有此股票（近 {NEW_BUY_WINDOW_DAYS} 天內），「✕撤出」= 昨日持有今日完全賣出</div>
+  {tab_flow}
 </div>
 <div id="t2" class="pane">
-  <div class="ttl">跨 ETF 共識持股</div>
-  <div class="desc">市場影響力 = 基金規模 × 持倉權重（實際投入資金）。徽章顯示各 ETF 投入金額，▲/▼ 為較前日的資金變化（含基金規模與權重變動）。「資金變化」欄為該股票跨所有 ETF 的資金淨流入。標示「✦新」代表該 ETF 近期新買入。滑鼠懸停查看明細</div>
-  {tab_consensus}
+  <div class="ttl">大資金 ETF 當日動向（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）</div>
+  <div class="desc">每檔大資金 ETF 的今日買入、賣出、加碼、減碼明細。AUM 變化反映該基金的淨申贖流量</div>
+  {tab_big}
 </div>
 <div id="t3" class="pane">
+  <div class="ttl">機構集體行為</div>
+  <div class="desc">≥ 2 檔大資金 ETF 今日同時做出相同動作的股票。多家機構同步動作是最強烈的共識訊號</div>
+  {tab_collective}
+</div>
+<div id="t4" class="pane">
+  <div class="ttl">跨 ETF 持倉總覽</div>
+  <div class="desc">當下靜態快照：哪些個股被多檔 ETF 持有、市場影響力多少。徽章依資金量排序</div>
+  {tab_consensus}
+</div>
+<div id="t5" class="pane">
   <div class="ttl">各 ETF 完整持股明細</div>
   <div class="desc">選擇 ETF 查看完整持股清單</div>
   {tab_holdings}
 </div>
-<div id="t4" class="pane">
-  <div class="ttl">週度異動比較</div>
-  <div class="desc">與一週前的持股比較，觀察中期持倉策略變化</div>
-  {tab_weekly}
-</div>
-<div class="ft">資料來源：MoneyDJ ｜ 僅供研究參考，不構成投資建議 ｜ 主動式 ETF 持股追蹤系統</div>
+<div class="ft">資料來源：MoneyDJ（持股）、Yahoo Finance（基金規模）｜ 僅供研究參考，不構成投資建議 ｜ 主動式 ETF 資金流向監測系統</div>
 <script>{JS}</script>
 </body></html>"""
 
@@ -847,42 +1455,65 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
 def main():
     config = load_config()
     etf_list = config['etfs']
-    print(f"=== 主動式 ETF 持股追蹤 ({TODAY.isoformat()}) ===")
+    print(f"=== 主動式 ETF 資金流向監測 ({TODAY.isoformat()}) ===")
     print(f"追蹤 {len(etf_list)} 檔 ETF\n")
 
+    # Load previous state
     prev_data = load_latest_cache()
+    first_seen, first_seen_existed = load_first_seen()
+    bootstrap = not first_seen_existed  # first-ever run: don't flag anything as "new"
+    if bootstrap:
+        print("⚠ 首次執行：正在建立基準資料（first_seen registry）")
 
+    # Fetch today
     today_data = fetch_all_etf_holdings(etf_list)
 
+    # Persist
     save_daily_snapshot(today_data)
     save_latest_cache(today_data)
     cleanup_old_snapshots()
 
-    diff_daily = compute_holdings_diff(today_data, prev_data) if prev_data else {}
+    # Update historical first-seen registry
+    first_seen = update_first_seen(today_data, first_seen)
+    save_first_seen(first_seen)
 
-    week_ago_date = (TODAY - timedelta(days=7)).isoformat()
-    week_ago_data = load_snapshot(week_ago_date)
-    if not week_ago_data:
-        for d in range(6, 10):
-            alt_date = (TODAY - timedelta(days=d)).isoformat()
-            week_ago_data = load_snapshot(alt_date)
-            if week_ago_data:
-                week_ago_date = alt_date
-                break
-    diff_weekly = compute_weekly_diff(today_data, week_ago_data) if week_ago_data else {}
-
-    consensus = compute_cross_etf_consensus(today_data, prev_data)
+    # Health
     health = build_health_report(today_data, prev_data)
 
-    html = generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, week_ago_date if week_ago_data else None)
+    # Core flow engine
+    flows = compute_capital_flows(today_data, prev_data, first_seen, bootstrap=bootstrap)
+
+    # Big ETFs and their actions
+    big_etf_list = filter_big_etfs(today_data, BIG_ETF_AUM_THRESHOLD)
+    big_etf_codes = [code for code, _, _ in big_etf_list]
+    print(f"大資金 ETF（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）: {len(big_etf_list)} 檔")
+    for code, aum, name in big_etf_list:
+        print(f"  {code} {name}: {aum:.1f} 億")
+
+    big_actions = compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, bootstrap=bootstrap)
+    collective = compute_collective_moves(big_actions)
+
+    # Static consensus view (tab 4)
+    consensus = compute_cross_etf_consensus(today_data, prev_data, first_seen, bootstrap=bootstrap)
+
+    # Render
+    html = generate_etf_html(today_data, flows, big_actions, collective, consensus, big_etf_list, first_seen)
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"\nDashboard written to {OUTPUT_HTML}")
 
+    # Summary
+    material_flows = sum(1 for f in flows.values() if f['material_count'] > 0)
+    print(f"\n資金流向統計:")
+    print(f"  有動作的股票: {len(flows)}")
+    print(f"  重大異動股票: {material_flows}")
+    print(f"  集體買入訊號: {len(collective['buys'])}")
+    print(f"  集體賣出訊號: {len(collective['sells'])}")
+
     ok_count = sum(1 for h in health.values() if h['status'] in ('ok', 'partial'))
     err_count = sum(1 for h in health.values() if h['status'] == 'error')
     stale_count = sum(1 for h in health.values() if h['status'] == 'stale')
-    print(f"Status: {ok_count} ok, {stale_count} stale, {err_count} error")
+    print(f"\nStatus: {ok_count} ok, {stale_count} stale, {err_count} error")
 
     if err_count == len(etf_list):
         print("::error::All ETF fetches failed!", file=sys.stderr)
