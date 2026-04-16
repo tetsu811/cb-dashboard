@@ -23,6 +23,59 @@ TPEX_CB_INFO_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/cb/{
 TPEX_CB_TRADING_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/cb/{year}/{yearmonth}/RSta0113.{yearmonthday}-C.csv"
 TPEX_ISSUANCE_API = "https://www.tpex.org.tw/openapi/v1/bond_ISSBD5_data"
 
+# ── Industry sector filter (AI / electronic) ──
+AI_SECTORS = {
+    "半導體業", "電子零組件業", "光電業", "通信網路業",
+    "電腦及週邊設備業", "電子通路業", "資訊服務業", "其他電子業",
+    "電機機械業", "電器電纜業",
+    # short forms (TPEX sometimes omits 業)
+    "半導體", "電子零組件", "光電", "通信網路",
+    "電腦及週邊設備", "電子通路", "資訊服務", "其他電子",
+    "電機機械", "電器電纜",
+}
+TWSE_STOCK_API = "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
+TPEX_STOCK_API = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
+
+
+def fetch_industry_map():
+    """Fetch stock_code -> industry from TWSE + TPEX open APIs"""
+    ind_map = {}
+    code_keys = ["公司代號", "SecuritiesCompanyCode", "Code", "code", "CompanyCode"]
+    ind_keys = ["產業別", "SecuritiesIndustryCode", "Industry", "industry", "IndustryCategory"]
+    for url in [TWSE_STOCK_API, TPEX_STOCK_API]:
+        try:
+            r = requests.get(url, timeout=15, headers=HEADERS)
+            data = r.json()
+            if isinstance(data, dict):
+                for wk in ("data", "Data", "result"):
+                    if wk in data and isinstance(data[wk], list):
+                        data = data[wk]
+                        break
+            if not isinstance(data, list):
+                continue
+            if data and isinstance(data[0], dict):
+                print(f"  industry {url.split('/')[-1]}: {len(data)} items, keys={list(data[0].keys())[:8]}")
+                print(f"  industry sample: { {k: data[0].get(k) for k in list(data[0].keys())[:6]} }")
+            for item in data:
+                if not isinstance(item, dict):
+                    continue
+                code, ind = "", ""
+                for k in code_keys:
+                    if k in item and item[k]:
+                        code = str(item[k]).strip()
+                        break
+                for k in ind_keys:
+                    if k in item and item[k]:
+                        ind = str(item[k]).strip()
+                        break
+                if code and ind:
+                    ind_map[code] = ind
+        except Exception as e:
+            print(f"  industry fetch error ({url.split('/')[-1]}): {e}")
+    print(f"  industry map: {len(ind_map)} stocks")
+    return ind_map
+
+
 # Field indices for CB info CSV (after BODY prefix)
 CB_INFO = {
     "cb_code": 1, "cb_name": 2,
@@ -519,9 +572,16 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
         x.get('premium_rate') or 99
     ))
 
+    # ── AI/electronic sector filter for S2 ──
+    industry_map = fetch_industry_map()
+    if industry_map:
+        before_s2 = len(s2_items)
+        s2_items = [r for r in s2_items if industry_map.get(r.get('stock_code',''), '') in AI_SECTORS]
+        print(f"  S2 industry filter: {before_s2} -> {len(s2_items)}")
+
     s1_buy   = sum(1 for r in results if r['s1'] and '★' in r['s1']['signal'])
     s1_pend  = sum(1 for r in results if r['s1'] and '◑' in r['s1']['signal'])
-    s2_buy   = sum(1 for r in results if '★' in r['s2']['signal'])
+    s2_buy   = len(s2_items)  # already filtered by ★ + industry
     s2_pend  = sum(1 for r in results if '◑' in r['s2']['signal'])
 
     # ── S1 rows ──
@@ -647,7 +707,7 @@ tr.row-sell td{background:#fff7ed}
 </div>
 <div class="tabs">
   <div class="tab active" onclick="showTab('s1',this)">策略一：CBAS新上市</div>
-  <div class="tab" onclick="showTab('s2',this)">策略二：轉換套利（{len(s2_items)}筆）</div>
+  <div class="tab" onclick="showTab('s2',this)">策略二：AI轉換套利（{len(s2_items)}筆）</div>
   <div class="tab" onclick="showTab('all',this)">全部可轉債</div>
 </div>
 <div id="pane-s1" class="pane active">
@@ -669,7 +729,7 @@ tr.row-sell td{background:#fff7ed}
   </tr></thead><tbody>{s1_rows_html}</tbody></table>
 </div>
 <div id="pane-s2" class="pane">
-  <div class="ttl">策略二：轉換套利（符合條件 {len(s2_items)} 支 CB）</div>
+  <div class="ttl">策略二：AI 轉換套利（{len(s2_items)} 支符合條件）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
     <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
     <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加</div>
