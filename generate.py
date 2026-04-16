@@ -24,14 +24,16 @@ TPEX_CB_TRADING_PATTERN = "https://www.tpex.org.tw/storage/bond_zone/tradeinfo/c
 TPEX_ISSUANCE_API = "https://www.tpex.org.tw/openapi/v1/bond_ISSBD5_data"
 
 # ── Industry sector filter (AI / electronic) ──
-AI_SECTORS = {
-    "半導體業", "電子零組件業", "光電業", "通信網路業",
-    "電腦及週邊設備業", "電子通路業", "資訊服務業", "其他電子業",
-    "電機機械業", "電器電纜業",
-    # short forms (TPEX sometimes omits 業)
-    "半導體", "電子零組件", "光電", "通信網路",
-    "電腦及週邊設備", "電子通路", "資訊服務", "其他電子",
-    "電機機械", "電器電纜",
+# TWSE codes: 24=半導體 25=電腦週邊 26=光電 27=通信 28=電子零組件 29=電子通路 30=資訊服務 31=其他電子
+# TPEX codes may differ; also include name-based matching as fallback
+AI_SECTOR_CODES = {
+    '24','25','26','27','28','29','30','31',
+}
+AI_SECTOR_NAMES = {
+    "半導體業","電子零組件業","光電業","通信網路業",
+    "電腦及週邊設備業","電子通路業","資訊服務業","其他電子業",
+    "半導體","電子零組件","光電","通信網路",
+    "電腦及週邊設備","電子通路","資訊服務","其他電子",
 }
 TWSE_STOCK_API = "https://openapi.twse.com.tw/v1/opendata/t187ap03_L"
 TPEX_STOCK_API = "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O"
@@ -575,8 +577,13 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
     # ── AI/electronic sector filter for S2 ──
     industry_map = fetch_industry_map()
     if industry_map:
+        # Debug: show industry codes for all S2 candidates
+        for r in s2_items:
+            sc = r.get('stock_code','')
+            ind = industry_map.get(sc, '?')
+            print(f"    S2 candidate {sc} ({r.get('cb_name','')}) industry={ind}")
         before_s2 = len(s2_items)
-        s2_items = [r for r in s2_items if industry_map.get(r.get('stock_code',''), '') in AI_SECTORS]
+        s2_items = [r for r in s2_items if industry_map.get(r.get('stock_code',''), '') in AI_SECTOR_CODES or industry_map.get(r.get('stock_code',''), '') in AI_SECTOR_NAMES]
         print(f"  S2 industry filter: {before_s2} -> {len(s2_items)}")
 
     s1_buy   = sum(1 for r in results if r['s1'] and '★' in r['s1']['signal'])
