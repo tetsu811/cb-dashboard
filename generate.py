@@ -740,7 +740,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <div class="ttl">策略二：AI 轉換套利（{len(s2_items)} 支符合條件）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
     <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
-    <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加</div>
+    <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加
+    <span class="tag">條件5</span>AI產業（半導體／電子零組件）</div>
   <div class="box warn"><b>注意：</b>溢價率顯示<span style="color:#16a34a;font-weight:700">綠色</span>（負值）代表CB低於轉換價值，套利空間最大。
     需確認：融+借是否充足、有無提前轉換限制。</div>
   <table><thead><tr>
