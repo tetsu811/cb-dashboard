@@ -366,6 +366,29 @@ def _build_stock_etf_map(data):
     return result
 
 
+def _build_stock_capital_map(data):
+    """Build {stock_code: {etf_code: {capital, weight, aum}}} from snapshot data."""
+    if not data:
+        return {}
+    etfs = data.get('etfs', data) if isinstance(data, dict) else data
+    if 'etfs' in etfs:
+        etfs = etfs['etfs']
+    result = {}
+    for code, etf in etfs.items():
+        if etf.get('status') not in ('ok', 'partial'):
+            continue
+        aum = etf.get('aum_billion')
+        for h in etf.get('holdings', []):
+            sc = h['stock_code']
+            w = h.get('weight_pct') or 0
+            na = h.get('weight_na', False)
+            cap = round(aum * w / 100, 2) if (aum and not na and w) else None
+            result.setdefault(sc, {})[code] = {
+                "capital": cap, "weight": w, "aum": aum, "weight_na": na
+            }
+    return result
+
+
 def compute_cross_etf_consensus(today_data, prev_data=None):
     """Find stocks held by multiple active ETFs, with change tracking and capital exposure."""
     stock_map = {}
@@ -396,10 +419,22 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
             })
 
     prev_map = _build_stock_etf_map(prev_data) if prev_data else {}
+    prev_cap_map = _build_stock_capital_map(prev_data) if prev_data else {}
 
     result = []
     for sc, info in stock_map.items():
         if len(info['holders']) >= 2:
+            # Annotate each holder with its capital delta vs previous snapshot
+            prev_caps = prev_cap_map.get(sc, {})
+            for h in info['holders']:
+                prev_holder = prev_caps.get(h['etf'])
+                if prev_holder and prev_holder['capital'] is not None and h['capital'] is not None:
+                    h['prev_capital'] = prev_holder['capital']
+                    h['capital_delta'] = round(h['capital'] - prev_holder['capital'], 2)
+                else:
+                    h['prev_capital'] = None
+                    h['capital_delta'] = None
+
             # Sort holders by capital desc (falls back to weight if capital N/A)
             sorted_holders = sorted(
                 info['holders'],
@@ -408,6 +443,17 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
             known_weights = [h['weight'] for h in info['holders'] if not h['weight_na']]
             avg_w = round(sum(known_weights) / len(known_weights), 2) if known_weights else 0
             total_capital = round(sum(h['capital'] for h in info['holders'] if h['capital']), 2)
+
+            # Previous total capital (only include ETFs present in both snapshots)
+            prev_total = 0
+            comparable = False
+            for h in info['holders']:
+                if h.get('prev_capital') is not None:
+                    prev_total += h['prev_capital']
+                    comparable = True
+            prev_total = round(prev_total, 2)
+            capital_delta = round(total_capital - prev_total, 2) if comparable else None
+
             prev_etfs = prev_map.get(sc, set())
             today_etfs = set(h['etf'] for h in info['holders'])
             newly_added = sorted(today_etfs - prev_etfs)
@@ -422,6 +468,7 @@ def compute_cross_etf_consensus(today_data, prev_data=None):
                 "etfs": [h['etf'] for h in sorted_holders],
                 "avg_weight": avg_w,
                 "total_capital": total_capital,  # 億 TWD
+                "capital_delta": capital_delta,  # 今日 vs 前日 資金變化 億
                 "prev_count": prev_count if prev_data else None,
                 "delta": delta if prev_data else None,
                 "newly_added_by": newly_added,
@@ -600,24 +647,45 @@ def _gen_daily_changes(diffs, today_data):
     return html
 
 
+def _fmt_capital(v):
+    """Format capital in 億/百萬 for display."""
+    if v is None:
+        return '─'
+    if abs(v) >= 1:
+        return f'{v:.1f}億'
+    return f'{v*100:.0f}百萬'
+
+
+def _fmt_cap_delta(v):
+    """Format capital delta with sign and color class."""
+    if v is None or v == 0:
+        return '─'
+    if v > 0:
+        return f'<span class="delta-up">+{_fmt_capital(v)}</span>'
+    return f'<span class="delta-down">{_fmt_capital(v)}</span>'
+
+
 def _gen_consensus(consensus):
     if not consensus:
         return '<div class="empty-msg">無共識持股資料</div>'
-    has_prev = any(item.get('prev_count') is not None for item in consensus)
+    has_prev = any(item.get('capital_delta') is not None for item in consensus)
     html = '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">持有ETF數</th>'
+    html += '<th class="num">市場影響力（億）</th>'
     if has_prev:
-        html += '<th class="center">變化</th>'
-    html += '<th class="num">市場影響力（億）</th><th>持有ETF（依資金量排序）</th></tr>'
+        html += '<th class="num">資金變化</th>'
+    html += '<th>持有ETF（依資金量排序）</th></tr>'
 
     for item in consensus:
         row_cls = ''
+        cap_delta = item.get('capital_delta')
         if item.get('newly_added_by'):
+            row_cls = ' class="row-buy"'
+        elif cap_delta is not None and cap_delta >= 5:
             row_cls = ' class="row-buy"'
         elif item['etf_count'] >= 4:
             row_cls = ' class="row-buy"'
 
         holders = item.get('holders', [])
-        # Scale color intensity by capital (actual TWD invested) rather than weight
         max_cap = max((h['capital'] for h in holders if h['capital']), default=0)
 
         etf_tags = ''
@@ -627,10 +695,10 @@ def _gen_consensus(consensus):
             weight = h['weight']
             na = h['weight_na']
             capital = h['capital']
+            cap_d = h.get('capital_delta')
             is_new = etf in newly_added
 
             if na or capital is None:
-                # Partial data: gray with dash
                 label = f'{etf} <span style="opacity:0.6">─</span>'
                 style = 'background:#f1f5f9;color:#64748b;border-color:#e2e8f0'
                 title = f'{etf}：權重資料未揭露'
@@ -639,14 +707,14 @@ def _gen_consensus(consensus):
                 alpha = 0.15 + ratio * 0.75
                 bg = f'rgba(109,40,217,{alpha:.2f})'
                 color = '#fff' if alpha > 0.5 else '#4c1d95'
-                # Format capital: >=1 billion → X.X億, else shows millions
-                if capital >= 1:
-                    cap_str = f'{capital:.1f}億'
-                else:
-                    cap_str = f'{capital*100:.0f}百萬'
+                cap_str = _fmt_capital(capital)
                 label = f'{etf} <b>{cap_str}</b>'
                 style = f'background:{bg};color:{color};border-color:rgba(109,40,217,0.3)'
                 title = f'{etf}：權重 {weight:.2f}% × 基金規模 {h["aum"]:.1f}億 = {cap_str}'
+                if cap_d is not None and abs(cap_d) >= 0.1:
+                    arrow = '▲' if cap_d > 0 else '▼'
+                    label += f' <span style="opacity:0.85;font-size:9.5px">{arrow}{_fmt_capital(abs(cap_d))}</span>'
+                    title += f'（較前日 {"+" if cap_d > 0 else ""}{_fmt_capital(cap_d)}）'
 
             if is_new:
                 label += ' ✦新'
@@ -654,19 +722,12 @@ def _gen_consensus(consensus):
                     style = 'background:#16a34a;color:#fff;border-color:#15803d'
             etf_tags += f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
 
-        delta_cell = ''
-        if has_prev:
-            d = item.get('delta')
-            if d is not None and d > 0:
-                delta_cell = f'<td class="center"><span class="delta-up">+{d}</span></td>'
-            elif d is not None and d < 0:
-                delta_cell = f'<td class="center"><span class="delta-down">{d}</span></td>'
-            else:
-                delta_cell = '<td class="center">─</td>'
-
         total_cap = item.get('total_capital', 0)
         cap_display = f'<b>{total_cap:.1f}</b>' if total_cap >= 1 else f'{total_cap*100:.0f}百萬'
-        html += f'<tr{row_cls}><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td>{delta_cell}<td class="num">{cap_display}</td><td>{etf_tags}</td></tr>'
+        delta_cell = ''
+        if has_prev:
+            delta_cell = f'<td class="num">{_fmt_cap_delta(cap_delta)}</td>'
+        html += f'<tr{row_cls}><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td><td class="num">{cap_display}</td>{delta_cell}<td>{etf_tags}</td></tr>'
     html += '</table>'
     return html
 
@@ -763,7 +824,7 @@ def generate_etf_html(today_data, diff_daily, diff_weekly, consensus, health, co
 </div>
 <div id="t2" class="pane">
   <div class="ttl">跨 ETF 共識持股</div>
-  <div class="desc">被多檔主動式 ETF 同時持有的個股。市場影響力 = 基金規模 × 持倉權重（實際投入的新台幣資金量）。徽章顯示各 ETF 投入該股票的金額，依資金量由大到小排序，顏色越深代表影響力越大。標示「✦新」代表該 ETF 近期新買入。滑鼠懸停查看明細</div>
+  <div class="desc">市場影響力 = 基金規模 × 持倉權重（實際投入資金）。徽章顯示各 ETF 投入金額，▲/▼ 為較前日的資金變化（含基金規模與權重變動）。「資金變化」欄為該股票跨所有 ETF 的資金淨流入。標示「✦新」代表該 ETF 近期新買入。滑鼠懸停查看明細</div>
   {tab_consensus}
 </div>
 <div id="t3" class="pane">
