@@ -1339,7 +1339,7 @@ def _gen_flow_overview(flows, big_etf_codes):
     return html
 
 
-def _gen_big_etf_actions(big_actions, big_etf_list):
+def _gen_big_etf_actions(big_actions, big_etf_list, today_data):
     """Tab 2: Per-big-ETF action report."""
     if not big_actions:
         return '<div class="empty-msg">目前無符合大資金 ETF 門檻（AUM ≥ 100 億）的基金</div>'
@@ -1357,11 +1357,17 @@ def _gen_big_etf_actions(big_actions, big_etf_list):
             else:
                 aum_delta_str = f' <span class="delta-down">▼{_fmt_capital(abs(aum_delta))}</span>'
 
+        is_partial = today_data.get(code, {}).get('status') == 'partial'
+        partial_note = ' <span style="font-size:11px;color:#3730a3;background:#e0e7ff;padding:2px 7px;border-radius:5px;border:1px solid #c7d2fe;font-weight:600;margin-left:4px">權重未揭露</span>' if is_partial else ''
+
         total_actions = len(actions['buys']) + len(actions['sells']) + len(actions['increases']) + len(actions['decreases'])
-        html += f'<div class="etf-section"><h3>{code} {actions["name"]}（AUM {aum:.1f} 億{aum_delta_str}）</h3>'
+        html += f'<div class="etf-section"><h3>{code} {actions["name"]}（AUM {aum:.1f} 億{aum_delta_str}）{partial_note}</h3>'
 
         if total_actions == 0:
-            html += '<div class="empty-msg">今日無異動</div></div>'
+            if is_partial:
+                html += '<div class="empty-msg">此基金僅揭露持股名稱、未揭露權重，無法計算個股資金流動。基金規模變化請參考上方 AUM 數值。</div></div>'
+            else:
+                html += '<div class="empty-msg">今日無異動</div></div>'
             continue
 
         html += '<table><tr><th>股票代號</th><th>股票名稱</th><th>動作</th><th class="num">資金變化</th><th class="num">權重</th></tr>'
@@ -1428,7 +1434,7 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
     big_etf_codes = [code for code, _, _ in big_etf_list]
     stats = _gen_flow_stats(flows, big_etf_list, collective, today_data)
     tab_flow = _gen_flow_overview(flows, big_etf_codes)
-    tab_big = _gen_big_etf_actions(big_actions, big_etf_list)
+    tab_big = _gen_big_etf_actions(big_actions, big_etf_list, today_data)
     tab_collective = _gen_collective_moves(collective)
     tab_consensus = _gen_consensus(consensus)
     tab_holdings = _gen_individual_holdings(today_data)
