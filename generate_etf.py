@@ -522,21 +522,12 @@ def _signal_badge(signal):
 
 
 def _gen_warn_box(health):
-    stale = [c for c, h in health.items() if h['status'] in ('error', 'stale')]
-    partial = [c for c, h in health.items() if h['status'] == 'partial']
-    parts = []
-    if stale:
-        names = ', '.join(stale)
-        parts.append(f'<div class="warn-box">以下 ETF 資料可能過時或爬取失敗：{names}</div>')
-    if partial:
-        names = ', '.join(partial)
-        parts.append(f'<div class="warn-box" style="background:#eef2ff;border-color:#c7d2fe;color:#3730a3">以下 ETF 僅有持股名稱，無權重資料（仍可追蹤買賣異動）：{names}</div>')
-    return '\n'.join(parts)
+    # No public-facing warnings; monitoring is done via script output only.
+    return ''
 
 
 def _gen_stats(today_data, diffs, consensus, health):
     total = len(today_data)
-    ok_count = sum(1 for h in health.values() if h['status'] in ('ok', 'partial'))
     total_buys = sum(len(d.get('new_buys', [])) for d in diffs.values())
     total_sells = sum(len(d.get('new_sells', [])) for d in diffs.values())
     consensus_count = sum(1 for c in consensus if c['etf_count'] >= 3)
@@ -545,7 +536,6 @@ def _gen_stats(today_data, diffs, consensus, health):
   <div class="sc gr"><div class="n">{total_buys}</div><div class="l">今日新買入</div></div>
   <div class="sc rd"><div class="n">{total_sells}</div><div class="l">今日賣出</div></div>
   <div class="sc am"><div class="n">{consensus_count}</div><div class="l">共識持股(≥3檔)</div></div>
-  <div class="sc"><div class="n">{ok_count}/{total}</div><div class="l">資料狀態</div></div>
 </div>"""
 
 
