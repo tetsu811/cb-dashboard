@@ -622,7 +622,8 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
                 continue
 
             prev_h = prev_holdings.get(sc)
-            if prev_h:
+            prev_was_na = prev_h is not None and prev_h.get('weight_na', False)
+            if prev_h and not prev_was_na:
                 prev_etf_for_cap = {
                     'aum_billion': prev_etf.get('aum_billion'),
                 }
@@ -631,6 +632,9 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
                 prev_cap = None
 
             # Delta: today - yesterday. If not held yesterday → full delta = today_cap.
+            # BUT: if prev had this stock with weight_na (data quality upgrade), skip — not a real action.
+            if prev_was_na:
+                continue  # data quality changed, not a real flow event
             if prev_cap is None:
                 delta = today_cap
             else:
@@ -690,6 +694,8 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
         for sc, prev_h in prev_etf['holdings'].items():
             if sc in today_stocks:
                 continue  # still held; already processed
+            if prev_h.get('weight_na'):
+                continue  # prev was partial-data, can't reliably say it exited
             prev_cap = _capital_of(prev_etf_for_cap, prev_h)
             if prev_cap is None:
                 continue
@@ -771,6 +777,9 @@ def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, ba
             if today_cap is None:
                 continue
             prev_h = prev_holdings.get(sc)
+            prev_was_na = prev_h is not None and prev_h.get('weight_na', False)
+            if prev_was_na:
+                continue  # data quality changed (partial → ok), not a real action
             if not prev_h:
                 # Not held yesterday → buy
                 buys.append({
@@ -807,6 +816,8 @@ def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, ba
         for sc, prev_h in prev_holdings.items():
             if sc in today_holdings:
                 continue
+            if prev_h.get('weight_na'):
+                continue  # prev was partial-data, can't reliably say it exited
             prev_etf_for_cap = {'aum_billion': prev_aum}
             prev_cap = _capital_of(prev_etf_for_cap, prev_h)
             if prev_cap is None:
@@ -1217,15 +1228,19 @@ def _gen_health(health):
     return html
 
 
-def _gen_flow_stats(flows, big_etfs, collective):
-    """Top-level stats: big ETF count, material inflows/outflows, collective signals, total flow."""
+def _gen_flow_stats(flows, big_etfs, collective, today_data):
+    """Top-level stats: total AUM tracked, big ETF count, material flows, collective signals."""
     big_count = len(big_etfs)
     material_in = sum(1 for f in flows.values() if f['net_flow'] > 0 and any(r['is_material'] for r in f['inflows']))
     material_out = sum(1 for f in flows.values() if f['net_flow'] < 0 and any(r['is_material'] for r in f['outflows']))
     collective_buys = len(collective.get('buys', []))
     collective_sells = len(collective.get('sells', []))
     total_flow = round(sum(abs(f['net_flow']) for f in flows.values()), 1)
+    total_aum = round(sum(e.get('aum_billion', 0) or 0 for e in today_data.values()), 0)
+    total_etf = len(today_data)
     return f"""<div class="stats">
+  <div class="sc"><div class="n">{int(total_aum):,}億</div><div class="l">追蹤主動式 ETF 總規模</div></div>
+  <div class="sc"><div class="n">{total_etf}</div><div class="l">追蹤 ETF 檔數</div></div>
   <div class="sc"><div class="n">{big_count}</div><div class="l">大資金 ETF（≥100億）</div></div>
   <div class="sc gr"><div class="n">{material_in}</div><div class="l">重大資金流入個股</div></div>
   <div class="sc rd"><div class="n">{material_out}</div><div class="l">重大資金流出個股</div></div>
@@ -1411,7 +1426,7 @@ def _gen_collective_moves(collective):
 
 def generate_etf_html(today_data, flows, big_actions, collective, consensus, big_etf_list, first_seen):
     big_etf_codes = [code for code, _, _ in big_etf_list]
-    stats = _gen_flow_stats(flows, big_etf_list, collective)
+    stats = _gen_flow_stats(flows, big_etf_list, collective, today_data)
     tab_flow = _gen_flow_overview(flows, big_etf_codes)
     tab_big = _gen_big_etf_actions(big_actions, big_etf_list)
     tab_collective = _gen_collective_moves(collective)
@@ -1429,7 +1444,7 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
 </div>
 <div class="construction">
   <span class="icon">🚧</span>
-  <span class="text">本頁面開發測試中，資金流向計算需累積數日歷史資料後才會準確。「✦首次」標記也將從明日起才開始顯示真正新買入。</span>
+  <span class="text"><b>開發測試中</b>｜資金流向需累積數日資料才準確，「✦首次」標記從明日起才會顯示真正新買入</span>
   <span class="icon">🚧</span>
 </div>
 {stats}
