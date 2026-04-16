@@ -581,52 +581,58 @@ def generate_html(all_cbs, recent_map, short_map, short_date):
 </tr>"""
 
     CSS = """
-:root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b}
+:root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b;--card:#fff;--hover:#eef2ff}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:13px}
-.hdr{background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;padding:18px 24px 14px}
-.hdr h1{font-size:18px;font-weight:700;margin-bottom:3px}
-.hdr .sub{font-size:11px;opacity:.8}
-.stats{display:flex;gap:10px;padding:14px 24px;background:#fff;border-bottom:1px solid var(--brd);flex-wrap:wrap}
-.sc{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:10px 16px;min-width:110px}
-.sc .n{font-size:24px;font-weight:700;color:var(--bl)}.sc .l{font-size:11px;color:var(--mu);margin-top:2px}
-.sc.gr .n{color:var(--gr)}.sc.am .n{color:var(--am)}
-.tabs{display:flex;padding:0 24px;border-bottom:2px solid var(--brd);background:#fff}
-.tab{padding:11px 20px;cursor:pointer;border-bottom:3px solid transparent;font-size:12px;font-weight:600;color:var(--mu);margin-bottom:-2px}
-.tab.active{border-bottom-color:var(--bl);color:var(--bl)}
-.pane{display:none;padding:18px 24px}.pane.active{display:block}
-.ttl{font-size:14px;font-weight:700;margin-bottom:4px}
-.desc{font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.6}
-.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:3px}
-.box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:7px;padding:9px 13px;font-size:11.5px;color:#1e40af;margin-bottom:12px;line-height:1.7}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5}
+.hdr{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#2563eb 100%);color:#fff;padding:22px 28px 16px}
+.hdr h1{font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px}
+.hdr .sub{font-size:11.5px;opacity:.85}
+.nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px;transition:opacity .15s}
+.nav-link:hover{opacity:.7}
+.stats{display:flex;gap:12px;padding:16px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
+.sc{background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:14px 20px;min-width:120px;transition:transform .15s,box-shadow .15s;border-left:3px solid var(--bl)}
+.sc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.sc .n{font-size:28px;font-weight:800;color:var(--bl);letter-spacing:-0.5px}.sc .l{font-size:11px;color:var(--mu);margin-top:3px;font-weight:500}
+.sc.gr{border-left-color:var(--gr)}.sc.gr .n{color:var(--gr)}
+.sc.am{border-left-color:var(--am)}.sc.am .n{color:var(--am)}
+.sc.rd{border-left-color:var(--rd)}.sc.rd .n{color:var(--rd)}
+.tabs{display:flex;padding:0 28px;border-bottom:2px solid var(--brd);background:var(--card);gap:4px}
+.tab{padding:12px 22px;cursor:pointer;border-bottom:3px solid transparent;font-size:12.5px;font-weight:600;color:var(--mu);margin-bottom:-2px;transition:all .15s;border-radius:6px 6px 0 0}
+.tab:hover{background:#f1f5f9;color:var(--txt)}
+.tab.active{border-bottom-color:var(--bl);color:var(--bl);background:transparent}
+.pane{display:none;padding:20px 28px}.pane.active{display:block}
+.ttl{font-size:15px;font-weight:700;margin-bottom:6px}
+.desc{font-size:12.5px;color:var(--mu);margin-bottom:14px;line-height:1.7}
+.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;border-radius:5px;padding:2px 8px;font-size:11px;font-weight:600;margin-right:4px}
+.box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;font-size:12px;color:#1e40af;margin-bottom:14px;line-height:1.7}
 .box.warn{background:#fffbeb;border-color:#fde68a;color:#92400e}
-table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-th{background:#f1f5f9;font-weight:700;color:var(--mu);font-size:10.5px;text-transform:uppercase;padding:9px 10px;text-align:left;border-bottom:2px solid var(--brd);white-space:nowrap}
-td{padding:7px 10px;border-bottom:1px solid var(--brd);vertical-align:middle}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
+th{background:#edf2f7;font-weight:700;color:var(--mu);font-size:11px;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:2px solid var(--brd);white-space:nowrap;letter-spacing:0.3px}
+td{padding:9px 12px;border-bottom:1px solid var(--brd);vertical-align:middle;transition:background .1s}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:#f8fafc}
+tr:hover td{background:var(--hover)}
 .num{text-align:right;font-variant-numeric:tabular-nums}
 .center{text-align:center}
-tr.row-buy td{background:#f0fdf4}
+tr.row-buy td{background:#f0fdf4;border-left:3px solid var(--gr)}
 tr.row-buy:hover td{background:#dcfce7}
-tr.row-watch td{background:#fefce8}
-tr.row-sell td{background:#fff7ed}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
-.badge.buy{background:#dcfce7;color:#15803d}
-.badge.watch{background:#fef9c3;color:#854d0e}
-.badge.sell{background:#ffedd5;color:#c2410c}
-.badge.info{background:#dbeafe;color:#1d4ed8}
-.badge.neutral{background:#f1f5f9;color:#94a3b8}
+tr.row-watch td{background:#fefce8;border-left:3px solid var(--am)}
+tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;letter-spacing:0.2px}
+.badge.buy{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+.badge.watch{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
+.badge.sell{background:#ffedd5;color:#c2410c;border:1px solid #fed7aa}
+.badge.info{background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe}
+.badge.neutral{background:#f1f5f9;color:#94a3b8;border:1px solid var(--brd)}
 .cond{font-size:11px;line-height:2;white-space:nowrap}
-.chk{display:inline-block;width:15px;height:15px;border-radius:50%;font-size:9px;text-align:center;line-height:15px;font-weight:700;margin-right:2px}
+.chk{display:inline-block;width:16px;height:16px;border-radius:50%;font-size:9px;text-align:center;line-height:16px;font-weight:700;margin-right:3px}
 .chk-y{background:#dcfce7;color:#15803d}
 .chk-n{background:#fee2e2;color:#dc2626}
 .chk-na{background:#fef9c3;color:#854d0e}
 .short-up{color:#16a34a;font-weight:700}
 .short-dn{color:#dc2626;font-weight:700}
 .prem-neg{color:#16a34a;font-weight:700}
-.ft{text-align:center;color:var(--mu);font-size:11px;padding:16px;border-top:1px solid var(--brd)}
-@media(max-width:768px){.hdr,.stats,.pane{padding-left:14px;padding-right:14px}.tabs{padding:0 14px;overflow-x:auto}th,td{padding:7px 7px}}
+.ft{text-align:center;color:var(--mu);font-size:11.5px;padding:20px 28px;border-top:1px solid var(--brd);line-height:1.8;background:var(--card)}
+@media(max-width:768px){.hdr,.stats,.pane{padding-left:16px;padding-right:16px}.tabs{padding:0 16px;overflow-x:auto}th,td{padding:8px 8px}.sc{min-width:100px;padding:10px 14px}.sc .n{font-size:22px}}
 """
 
     html = f"""<!DOCTYPE html>
@@ -635,8 +641,8 @@ tr.row-sell td{background:#fff7ed}
 <title>可轉債策略儀表板 v4</title>
 <style>{CSS}</style></head><body>
 <div class="hdr">
-  <h1>📊 可轉債策略儀表板 v4</h1>
-  <div class="sub">更新：{TODAY}（每日晚上六點自動更新一次）</div>
+  <h1>可轉債策略儀表板</h1>
+  <div class="sub">更新：{TODAY}（每日晚上六點自動更新一次）<a class="nav-link" href="etf_index.html">→ 主動式 ETF 儀表板</a></div>
 </div>
 <div class="stats">
   <div class="sc"><div class="n">{len(all_cbs)}</div><div class="l">全部CB數</div></div>
