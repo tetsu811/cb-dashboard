@@ -32,9 +32,11 @@ FETCH_DELAY = 1.5
 
 # ── Flow monitoring thresholds ──
 BIG_ETF_AUM_THRESHOLD = 100         # 億 TWD — 大資金 ETF 的門檻
-CAPITAL_FLOW_THRESHOLD = 1.0        # 億 TWD — 重大資金流入/出的絕對門檻
-WEIGHT_RATIO_THRESHOLD = 0.20       # 20% — 權重相對變化門檻（兩者任一達標）
+CAPITAL_FLOW_THRESHOLD = 1.0        # 億 TWD — 重大資金流入/出的絕對門檻（舊邏輯）
+WEIGHT_RATIO_THRESHOLD = 0.20       # 20% — 權重相對變化門檻
 NEW_BUY_WINDOW_DAYS = 7             # 首見後多少天仍顯示「✦新」
+MATERIAL_RATIO_OF_AUM = 0.03        # 3% — 動作量體 ≥ 該基金 AUM × 3% 視為重大
+TRADING_DAYS_LOOKBACK = 5           # 「最近一週」= 5 個交易日
 
 
 # ── Section 2: Data fetching ─────────────────────────────────────────────────
@@ -300,6 +302,56 @@ def cleanup_old_snapshots(keep_days=MAX_HISTORY_DAYS):
                 print(f"Cleaned up old snapshot: {fname}")
         except ValueError:
             pass
+
+
+def trading_days_back(d, n):
+    """Return date that is N trading days (Mon–Fri) before d."""
+    out = d
+    count = 0
+    while count < n:
+        out = out - timedelta(days=1)
+        if out.weekday() < 5:
+            count += 1
+    return out
+
+
+def find_snapshot_n_trading_days_back(n):
+    """Find the closest snapshot at or before T-n trading days. Returns (data, date_str) or (None, None).
+    First tries exact T-n; if missing, walks backwards up to 5 extra calendar days."""
+    target = trading_days_back(TODAY, n)
+    # Try exact target then walk back a few days for resilience
+    for offset in range(0, 8):
+        d = target - timedelta(days=offset)
+        snap = load_snapshot(d.isoformat())
+        if snap:
+            return snap, d.isoformat()
+    return None, None
+
+
+def is_tw_only_ok(etf_entry):
+    """ETF qualifies for the universe if status=ok and ALL holdings are TW stocks (numeric codes)."""
+    if etf_entry.get('status') != 'ok':
+        return False
+    holdings = etf_entry.get('holdings', [])
+    if not holdings:
+        return False
+    return all(h.get('stock_code', '').isdigit() for h in holdings)
+
+
+def filter_universe(today_data):
+    """Return subset of today_data containing only TW-only ok ETFs."""
+    return {code: e for code, e in today_data.items() if is_tw_only_ok(e)}
+
+
+def filter_universe_snapshot(snapshot, universe_codes):
+    """Subset a historical snapshot to a given set of ETF codes (preserves shape)."""
+    if not snapshot:
+        return None
+    etfs = snapshot.get('etfs', {})
+    return {
+        'fetched_at': snapshot.get('fetched_at'),
+        'etfs': {c: etfs[c] for c in universe_codes if c in etfs}
+    }
 
 
 def load_first_seen():
@@ -651,7 +703,12 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
                 weight_ratio = (today_w - prev_w) / prev_w
 
             is_new = is_recent_first_buy(first_seen, sc, etf_code, baseline_date)
-            is_material = (abs(delta) >= CAPITAL_FLOW_THRESHOLD) or (abs(weight_ratio) >= WEIGHT_RATIO_THRESHOLD)
+            etf_aum = etf.get('aum_billion') or 0
+            material_capital_threshold = etf_aum * MATERIAL_RATIO_OF_AUM
+            is_material = (
+                (etf_aum > 0 and abs(delta) >= material_capital_threshold)
+                or (abs(weight_ratio) >= WEIGHT_RATIO_THRESHOLD)
+            )
 
             record = {
                 "etf": etf_code,
@@ -702,11 +759,12 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
             delta = round(-prev_cap, 2)
             if abs(delta) < 0.005:
                 continue
-            is_material = abs(delta) >= CAPITAL_FLOW_THRESHOLD
+            today_aum = today_etf.get('aum_billion') or 0
+            is_material = today_aum > 0 and abs(delta) >= today_aum * MATERIAL_RATIO_OF_AUM
             record = {
                 "etf": etf_code,
                 "etf_name": today_etf.get('name'),
-                "etf_aum": today_etf.get('aum_billion'),
+                "etf_aum": today_aum,
                 "today_capital": 0,
                 "prev_capital": prev_cap,
                 "delta": delta,
@@ -913,6 +971,254 @@ def compute_collective_moves(big_etf_actions, min_count=2):
     collective_sells.sort(key=lambda x: x['total_capital'])
 
     return {"buys": collective_buys, "sells": collective_sells}
+
+
+# ── Section 4c: Stock & Fund views ───────────────────────────────────────────
+
+def build_stock_view(today_data, flows_1d, flows_5d):
+    """Per-stock aggregated view combining 1-day and 5-day flow data.
+
+    Returns a list of stock entries sorted by combined absolute flow:
+    [{
+      stock_code, stock_name,
+      holders: [{etf, etf_aum, capital, weight, flow_1d, flow_5d, is_first_buy}],
+      holder_count, total_capital,
+      net_flow_1d, net_flow_5d,
+      has_first_buy_5d,
+      material_count_1d, material_count_5d
+    }]
+    """
+    stock_map = {}
+
+    # Build today's holdings index
+    for etf_code, etf in today_data.items():
+        if etf.get('status') != 'ok':
+            continue
+        aum = etf.get('aum_billion')
+        for h in etf.get('holdings', []):
+            sc = h['stock_code']
+            cap = _capital_of(etf, h)
+            if cap is None:
+                continue
+            stock_map.setdefault(sc, {
+                'stock_code': sc,
+                'stock_name': h['stock_name'],
+                'holders': [],
+                'flows_1d_by_etf': {},
+                'flows_5d_by_etf': {},
+            })
+            stock_map[sc]['holders'].append({
+                'etf': etf_code,
+                'etf_aum': aum,
+                'capital': cap,
+                'weight': h.get('weight_pct') or 0,
+            })
+
+    # Layer in 1-day flows
+    for sc, flow in (flows_1d or {}).items():
+        entry = stock_map.setdefault(sc, {
+            'stock_code': sc,
+            'stock_name': flow['stock_name'],
+            'holders': [],
+            'flows_1d_by_etf': {},
+            'flows_5d_by_etf': {},
+        })
+        for r in flow['inflows'] + flow['outflows']:
+            entry['flows_1d_by_etf'][r['etf']] = r
+
+    # Layer in 5-day flows
+    for sc, flow in (flows_5d or {}).items():
+        entry = stock_map.setdefault(sc, {
+            'stock_code': sc,
+            'stock_name': flow['stock_name'],
+            'holders': [],
+            'flows_1d_by_etf': {},
+            'flows_5d_by_etf': {},
+        })
+        for r in flow['inflows'] + flow['outflows']:
+            entry['flows_5d_by_etf'][r['etf']] = r
+
+    # Compose output
+    result = []
+    for sc, info in stock_map.items():
+        holders = info['holders']
+        # Annotate each holder with its 1d/5d flow and first-buy flags
+        annotated = []
+        any_first_5d = False
+        material_1d = 0
+        material_5d = 0
+        for h in holders:
+            etf = h['etf']
+            f1 = info['flows_1d_by_etf'].get(etf)
+            f5 = info['flows_5d_by_etf'].get(etf)
+            holder = {
+                'etf': etf,
+                'etf_aum': h['etf_aum'],
+                'capital': h['capital'],
+                'weight': h['weight'],
+                'flow_1d': f1['delta'] if f1 else 0,
+                'flow_5d': f5['delta'] if f5 else 0,
+                'is_material_1d': bool(f1 and f1.get('is_material')),
+                'is_material_5d': bool(f5 and f5.get('is_material')),
+                'is_first_buy': bool(f5 and f5.get('is_new_buy')) or bool(f1 and f1.get('is_new_buy')),
+            }
+            annotated.append(holder)
+            if holder['is_first_buy']:
+                any_first_5d = True
+            if holder['is_material_1d']:
+                material_1d += 1
+            if holder['is_material_5d']:
+                material_5d += 1
+        # Also pick up exit-only ETFs (in flow data but not in current holders)
+        held_etfs = {h['etf'] for h in holders}
+        for etf, r in info['flows_1d_by_etf'].items():
+            if etf in held_etfs:
+                continue
+            if not r.get('is_exit'):
+                continue
+            annotated.append({
+                'etf': etf,
+                'etf_aum': r.get('etf_aum'),
+                'capital': 0,
+                'weight': 0,
+                'flow_1d': r['delta'],
+                'flow_5d': info['flows_5d_by_etf'].get(etf, {}).get('delta', r['delta']),
+                'is_material_1d': r.get('is_material', False),
+                'is_material_5d': info['flows_5d_by_etf'].get(etf, {}).get('is_material', False),
+                'is_first_buy': False,
+                'is_exit': True,
+            })
+            if r.get('is_material'):
+                material_1d += 1
+        annotated.sort(key=lambda x: -x['capital'])
+
+        net_1d = round(sum(h['flow_1d'] for h in annotated), 2)
+        net_5d = round(sum(h['flow_5d'] for h in annotated), 2)
+        total_cap = round(sum(h['capital'] for h in annotated if h['capital']), 2)
+
+        result.append({
+            'stock_code': sc,
+            'stock_name': info['stock_name'],
+            'holders': annotated,
+            'holder_count': sum(1 for h in annotated if h['capital'] > 0),
+            'total_capital': total_cap,
+            'net_flow_1d': net_1d,
+            'net_flow_5d': net_5d,
+            'has_first_buy_5d': any_first_5d,
+            'material_count_1d': material_1d,
+            'material_count_5d': material_5d,
+        })
+
+    # Sort by combined absolute flow + total capital tiebreaker
+    result.sort(key=lambda r: (-(abs(r['net_flow_1d']) + abs(r['net_flow_5d'])), -r['total_capital']))
+    return result
+
+
+def build_fund_view(today_data, snap_1d, snap_5d, first_seen, baseline_date):
+    """Per-fund summary: AUM, day/week deltas, recent material moves and first-time buys.
+
+    Returns: {etf_code: {
+      name, aum,
+      aum_delta_1d, aum_delta_5d,
+      material_buys_5d: [{stock_code, stock_name, delta, weight}],
+      material_sells_5d: [...],
+      first_buys_5d: [...],
+      action_count_5d,
+    }}
+    """
+    snap_1d_idx = _index_prev_etf(snap_1d) if snap_1d else {}
+    snap_5d_idx = _index_prev_etf(snap_5d) if snap_5d else {}
+
+    result = {}
+    for etf_code, etf in today_data.items():
+        if etf.get('status') != 'ok':
+            continue
+        aum = etf.get('aum_billion')
+        threshold = (aum or 0) * MATERIAL_RATIO_OF_AUM
+
+        prev_1d = snap_1d_idx.get(etf_code)
+        prev_5d = snap_5d_idx.get(etf_code)
+
+        aum_d1 = round(aum - prev_1d['aum_billion'], 2) if (aum and prev_1d and prev_1d.get('aum_billion')) else None
+        aum_d5 = round(aum - prev_5d['aum_billion'], 2) if (aum and prev_5d and prev_5d.get('aum_billion')) else None
+
+        material_buys, material_sells, first_buys = [], [], []
+
+        if prev_5d:
+            prev5_holdings = prev_5d.get('holdings', {})
+            today_holdings = {h['stock_code']: h for h in etf.get('holdings', [])}
+
+            for sc, h in today_holdings.items():
+                today_cap = _capital_of(etf, h)
+                if today_cap is None:
+                    continue
+                ph = prev5_holdings.get(sc)
+                prev_was_na = ph is not None and ph.get('weight_na', False)
+                if prev_was_na:
+                    continue
+                prev_cap = None
+                if ph:
+                    prev_cap = _capital_of({'aum_billion': prev_5d.get('aum_billion')}, ph)
+                if prev_cap is None:
+                    delta = today_cap
+                    is_new = is_recent_first_buy(first_seen, sc, etf_code, baseline_date)
+                else:
+                    delta = round(today_cap - prev_cap, 2)
+                    is_new = False
+                if abs(delta) < 0.005:
+                    continue
+                row = {
+                    'stock_code': sc,
+                    'stock_name': h['stock_name'],
+                    'delta': delta,
+                    'weight': h.get('weight_pct') or 0,
+                    'prev_weight': ph.get('weight_pct') if ph else None,
+                    'is_new_buy': is_new,
+                }
+                if is_new:
+                    first_buys.append(row)
+                if abs(delta) >= threshold and threshold > 0:
+                    if delta > 0:
+                        material_buys.append(row)
+                    else:
+                        material_sells.append(row)
+
+            # Exits
+            for sc, ph in prev5_holdings.items():
+                if sc in today_holdings:
+                    continue
+                if ph.get('weight_na'):
+                    continue
+                prev_cap = _capital_of({'aum_billion': prev_5d.get('aum_billion')}, ph)
+                if prev_cap is None:
+                    continue
+                delta = round(-prev_cap, 2)
+                if abs(delta) >= threshold and threshold > 0:
+                    material_sells.append({
+                        'stock_code': sc,
+                        'stock_name': ph.get('stock_name', sc),
+                        'delta': delta,
+                        'weight': 0,
+                        'prev_weight': ph.get('weight_pct'),
+                        'is_exit': True,
+                    })
+
+        material_buys.sort(key=lambda r: -r['delta'])
+        material_sells.sort(key=lambda r: r['delta'])
+        first_buys.sort(key=lambda r: -r['delta'])
+
+        result[etf_code] = {
+            'name': etf.get('name'),
+            'aum': aum,
+            'aum_delta_1d': aum_d1,
+            'aum_delta_5d': aum_d5,
+            'threshold_billion': round(threshold, 2),
+            'material_buys_5d': material_buys,
+            'material_sells_5d': material_sells,
+            'first_buys_5d': first_buys,
+            'action_count_5d': len(material_buys) + len(material_sells) + len(first_buys),
+        }
+    return result
 
 
 # ── Section 5: Health check ──────────────────────────────────────────────────
@@ -1228,8 +1534,203 @@ def _gen_health(health):
     return html
 
 
+def _gen_v3_stats(today_data, stock_view, collective, snap_1d_date, snap_5d_date):
+    """Stats for the v3 layout: universe size, AUM, 1d/5d total flows, signals."""
+    total_etf = len(today_data)
+    total_aum = round(sum(e.get('aum_billion', 0) or 0 for e in today_data.values()), 0)
+    flow_1d = round(sum(abs(s['net_flow_1d']) for s in stock_view), 1)
+    flow_5d = round(sum(abs(s['net_flow_5d']) for s in stock_view), 1)
+    collective_n = len(collective.get('buys', [])) + len(collective.get('sells', []))
+    flow_5d_label = f'{flow_5d:.0f}億' if snap_5d_date else '累積中'
+    return f"""<div class="stats">
+  <div class="sc"><div class="n">{int(total_aum):,}億</div><div class="l">追蹤主動式 ETF 總規模</div></div>
+  <div class="sc"><div class="n">{total_etf}</div><div class="l">追蹤 ETF 檔數（純台股）</div></div>
+  <div class="sc gr"><div class="n">{flow_1d:.0f}億</div><div class="l">1 日總資金流動</div></div>
+  <div class="sc am"><div class="n">{flow_5d_label}</div><div class="l">5 日總資金流動</div></div>
+  <div class="sc rd"><div class="n">{collective_n}</div><div class="l">集體訊號數</div></div>
+</div>"""
+
+
+def _gen_stock_view(stock_view, today_data, snap_5d_date):
+    """Render stock-perspective table."""
+    if not stock_view:
+        return '<div class="empty-msg">無資料</div>'
+
+    # Filter: only show stocks that actually have movement OR are widely held
+    filtered = [s for s in stock_view if abs(s['net_flow_1d']) >= 0.005 or abs(s['net_flow_5d']) >= 0.005 or s['holder_count'] >= 3]
+    if not filtered:
+        return '<div class="empty-msg">尚無資金流向資料（首次執行或無歷史快照可比較）</div>'
+
+    accumulating_5d = '' if snap_5d_date else '<div class="warn-box" style="margin:0 0 14px;">5 日資料累積中，目前僅顯示 1 日變化</div>'
+
+    html = accumulating_5d
+    html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="center">持有<br/>ETF 數</th><th class="num">總投入<br/>(億)</th><th class="num">1 日<br/>淨流入</th>'
+    if snap_5d_date:
+        html += '<th class="num">5 日<br/>淨流入</th>'
+    html += '<th>持有 ETF（依資金量排序，hover 顯示 1 日/5 日變化）</th></tr>'
+
+    for s in filtered:
+        sc = s['stock_code']
+        name = s['stock_name']
+        net_1d = s['net_flow_1d']
+        net_5d = s['net_flow_5d']
+
+        row_cls = ''
+        # Highlight if material 1d action OR significant 1d net flow
+        if s['material_count_1d'] > 0 and net_1d > 0:
+            row_cls = ' class="row-buy"'
+        elif s['material_count_1d'] > 0 and net_1d < 0:
+            row_cls = ' class="row-sell"'
+
+        first_mark = ' <span class="badge buy" style="font-size:9.5px;padding:1px 6px">✦</span>' if s['has_first_buy_5d'] else ''
+
+        net_1d_str = _fmt_cap_delta(net_1d) if abs(net_1d) >= 0.005 else '─'
+        net_5d_str = _fmt_cap_delta(net_5d) if abs(net_5d) >= 0.005 else '─'
+
+        # Build holder badges, sorted by capital desc, color-coded by 1-day flow direction
+        badges = ''
+        for h in s['holders']:
+            etf = h['etf']
+            cap = h['capital']
+            f1 = h['flow_1d']
+            f5 = h['flow_5d']
+            is_first = h['is_first_buy']
+            is_exit = h.get('is_exit', False)
+
+            # Decide color from 1d flow
+            if is_exit:
+                style = 'background:#dc2626;color:#fff;border-color:#b91c1c'
+                label = f'{etf} ✕撤出 {_fmt_capital(f1)}'
+            elif h['is_material_1d'] and f1 > 0:
+                style = 'background:#16a34a;color:#fff;border-color:#15803d'
+                label = f'{etf} <b>{_fmt_capital(cap)}</b> <span style="font-size:9.5px">▲{_fmt_capital(abs(f1))}</span>'
+            elif h['is_material_1d'] and f1 < 0:
+                style = 'background:#dc2626;color:#fff;border-color:#b91c1c'
+                label = f'{etf} <b>{_fmt_capital(cap)}</b> <span style="font-size:9.5px">▼{_fmt_capital(abs(f1))}</span>'
+            elif f1 > 0:
+                style = 'background:#dcfce7;color:#15803d;border-color:#bbf7d0'
+                label = f'{etf} <b>{_fmt_capital(cap)}</b> <span style="font-size:9.5px">▲{_fmt_capital(abs(f1))}</span>'
+            elif f1 < 0:
+                style = 'background:#fee2e2;color:#dc2626;border-color:#fecaca'
+                label = f'{etf} <b>{_fmt_capital(cap)}</b> <span style="font-size:9.5px">▼{_fmt_capital(abs(f1))}</span>'
+            else:
+                style = 'background:#ede9fe;color:#6d28d9;border-color:#ddd6fe'
+                label = f'{etf} <b>{_fmt_capital(cap)}</b>'
+
+            if is_first and not is_exit:
+                label += ' <span style="font-size:9.5px">✦</span>'
+
+            title = f'{etf}: 持倉 {_fmt_capital(cap)} (權重 {h["weight"]:.2f}%)'
+            if abs(f1) >= 0.005:
+                title += f' | 1 日 {("+" if f1>0 else "")}{_fmt_capital(f1)}'
+            if snap_5d_date and abs(f5) >= 0.005:
+                title += f' | 5 日 {("+" if f5>0 else "")}{_fmt_capital(f5)}'
+            if is_first:
+                title += ' | 首次買入'
+
+            badges += f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
+
+        cap_total = f'<b>{s["total_capital"]:.1f}</b>' if s['total_capital'] >= 1 else f'{s["total_capital"]*100:.0f}百萬'
+
+        html += f'<tr{row_cls}><td><b>{sc}</b>{first_mark}</td><td>{name}</td><td class="center"><b>{s["holder_count"]}</b></td><td class="num">{cap_total}</td><td class="num">{net_1d_str}</td>'
+        if snap_5d_date:
+            html += f'<td class="num">{net_5d_str}</td>'
+        html += f'<td>{badges}</td></tr>'
+
+    html += '</table>'
+    return html
+
+
+def _gen_fund_view(fund_view, today_data, snap_5d_date):
+    """Render fund-perspective view: dropdown selector + per-fund cards."""
+    if not fund_view:
+        return '<div class="empty-msg">無基金資料</div>'
+
+    # Sort by AUM desc
+    sorted_funds = sorted(fund_view.items(), key=lambda x: -(x[1]['aum'] or 0))
+
+    accumulating_5d = '' if snap_5d_date else '<div class="warn-box" style="margin:0 0 14px;">5 日資料累積中，目前僅顯示 1 日 AUM 變化</div>'
+
+    html = accumulating_5d
+    html += '<select class="etf-select" onchange="filterETF(this)"><option value="all">全部 ETF</option>'
+    for code, info in sorted_funds:
+        html += f'<option value="{code}">{code} {info["name"]} (AUM {info["aum"]:.1f} 億)</option>'
+    html += '</select>'
+
+    for code, info in sorted_funds:
+        aum = info['aum']
+        threshold = info['threshold_billion']
+
+        # AUM delta strings
+        def fmt_aum_delta(d, label):
+            if d is None:
+                return f'<span style="color:#94a3b8">{label} 無資料</span>'
+            if abs(d) < 0.05:
+                return f'<span style="color:#64748b">{label} ─</span>'
+            cls = 'delta-up' if d > 0 else 'delta-down'
+            arrow = '▲' if d > 0 else '▼'
+            return f'<span class="{cls}">{label} {arrow}{_fmt_capital(abs(d))}</span>'
+
+        aum_d1_str = fmt_aum_delta(info['aum_delta_1d'], '1 日')
+        aum_d5_str = fmt_aum_delta(info['aum_delta_5d'], '5 日') if snap_5d_date else ''
+
+        html += f'<div class="etf-detail" data-code="{code}"><div class="etf-section">'
+        html += f'<h3>{code} {info["name"]}</h3>'
+        html += f'<div style="margin-bottom:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-size:13px">'
+        html += f'<span><b>AUM</b>: {aum:.1f} 億</span>'
+        html += f'<span style="color:#cbd5e1">|</span>'
+        html += f'<span>{aum_d1_str}</span>'
+        if snap_5d_date:
+            html += f'<span style="color:#cbd5e1">|</span><span>{aum_d5_str}</span>'
+        html += f'<span style="color:#cbd5e1">|</span>'
+        html += f'<span style="color:#64748b">重大門檻：{_fmt_capital(threshold)}（AUM × 3%）</span>'
+        html += '</div>'
+
+        # First buys
+        if info['first_buys_5d']:
+            html += '<div style="margin-bottom:12px"><div style="font-weight:700;font-size:12.5px;color:#15803d;margin-bottom:6px">✦ 首次買入（baseline 後新出現）</div>'
+            html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="num">投入金額</th><th class="num">當前權重</th></tr>'
+            for r in info['first_buys_5d']:
+                html += f'<tr class="row-buy"><td><b>{r["stock_code"]}</b></td><td>{r["stock_name"]}</td><td class="num"><span class="delta-up">+{_fmt_capital(r["delta"])}</span></td><td class="num">{r["weight"]:.2f}%</td></tr>'
+            html += '</table></div>'
+
+        # Material buys
+        if info['material_buys_5d']:
+            html += f'<div style="margin-bottom:12px"><div style="font-weight:700;font-size:12.5px;color:#15803d;margin-bottom:6px">▲ 5 日重大加碼（≥ {_fmt_capital(threshold)}）</div>'
+            html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="num">資金變化</th><th class="num">權重變化</th></tr>'
+            for r in info['material_buys_5d']:
+                pw = r.get('prev_weight')
+                w_str = f'{pw:.2f}% → {r["weight"]:.2f}%' if pw is not None else f'{r["weight"]:.2f}%'
+                html += f'<tr class="row-buy"><td><b>{r["stock_code"]}</b></td><td>{r["stock_name"]}</td><td class="num"><span class="delta-up">+{_fmt_capital(r["delta"])}</span></td><td class="num">{w_str}</td></tr>'
+            html += '</table></div>'
+
+        # Material sells
+        if info['material_sells_5d']:
+            html += f'<div style="margin-bottom:12px"><div style="font-weight:700;font-size:12.5px;color:#b91c1c;margin-bottom:6px">▼ 5 日重大減碼（≥ {_fmt_capital(threshold)}）</div>'
+            html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="num">資金變化</th><th class="num">權重變化</th></tr>'
+            for r in info['material_sells_5d']:
+                pw = r.get('prev_weight')
+                if r.get('is_exit'):
+                    w_str = f'{pw:.2f}% → ─' if pw is not None else '─'
+                else:
+                    w_str = f'{pw:.2f}% → {r["weight"]:.2f}%' if pw is not None else f'{r["weight"]:.2f}%'
+                exit_mark = ' ✕撤出' if r.get('is_exit') else ''
+                html += f'<tr class="row-sell"><td><b>{r["stock_code"]}</b>{exit_mark}</td><td>{r["stock_name"]}</td><td class="num"><span class="delta-down">{_fmt_capital(r["delta"])}</span></td><td class="num">{w_str}</td></tr>'
+            html += '</table></div>'
+
+        if info['action_count_5d'] == 0:
+            if snap_5d_date:
+                html += '<div class="empty-msg" style="text-align:left;padding:8px 0;color:#64748b">5 日內無重大動作（門檻：AUM × 3%）</div>'
+            else:
+                html += '<div class="empty-msg" style="text-align:left;padding:8px 0;color:#64748b">5 日資料累積中</div>'
+
+        html += '</div></div>'
+
+    return html
+
+
 def _gen_flow_stats(flows, big_etfs, collective, today_data):
-    """Top-level stats: total AUM tracked, big ETF count, material flows, collective signals."""
+    """[Legacy] Top-level stats: total AUM tracked, big ETF count, material flows, collective signals."""
     big_count = len(big_etfs)
     material_in = sum(1 for f in flows.values() if f['net_flow'] > 0 and any(r['is_material'] for r in f['inflows']))
     material_out = sum(1 for f in flows.values() if f['net_flow'] < 0 and any(r['is_material'] for r in f['outflows']))
@@ -1430,13 +1931,15 @@ def _gen_collective_moves(collective):
     return html
 
 
-def generate_etf_html(today_data, flows, big_actions, collective, consensus, big_etf_list, first_seen):
-    big_etf_codes = [code for code, _, _ in big_etf_list]
-    stats = _gen_flow_stats(flows, big_etf_list, collective, today_data)
-    tab_flow = _gen_flow_overview(flows, big_etf_codes)
+def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date):
+    stats = _gen_v3_stats(today_data_tw, stock_view, collective, snap_1d_date, snap_5d_date)
+    tab_stock = _gen_stock_view(stock_view, today_data_tw, snap_5d_date)
+    tab_fund = _gen_fund_view(fund_view, today_data_tw, snap_5d_date)
     tab_collective = _gen_collective_moves(collective)
-    tab_consensus = _gen_consensus(consensus)
-    tab_holdings = _gen_individual_holdings(today_data)
+    tab_holdings = _gen_individual_holdings(today_data_tw)
+
+    snap_1d_str = snap_1d_date or '尚無'
+    snap_5d_str = snap_5d_date or '累積中'
 
     return f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
@@ -1445,36 +1948,36 @@ def generate_etf_html(today_data, flows, big_actions, collective, consensus, big
 <style>{CSS}</style></head><body>
 <div class="hdr">
   <h1>主動式 ETF 資金流向監測</h1>
-  <div class="sub">更新：{TODAY.isoformat()}（每個交易日收盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
+  <div class="sub">更新：{TODAY.isoformat()}｜1 日比較基準：{snap_1d_str}｜5 日比較基準：{snap_5d_str}<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
 </div>
 <div class="construction">
   <span class="icon">🚧</span>
-  <span class="text"><b>開發測試中</b>｜資金流向需累積數日資料才準確，「✦首次」標記從明日起才會顯示真正新買入</span>
+  <span class="text"><b>開發測試中</b>｜純台股 ok 主動式 ETF；5 日視角需累積 5 個交易日資料；「✦」= baseline 後首次買入</span>
   <span class="icon">🚧</span>
 </div>
 {stats}
 <div class="tabs">
-  <div class="tab active" onclick="showTab('t1',this)">資金流向</div>
+  <div class="tab active" onclick="showTab('t1',this)">股票視角</div>
+  <div class="tab" onclick="showTab('t2',this)">基金視角</div>
   <div class="tab" onclick="showTab('t3',this)">集體行為</div>
-  <div class="tab" onclick="showTab('t4',this)">持倉總覽</div>
-  <div class="tab" onclick="showTab('t5',this)">各 ETF 持股</div>
+  <div class="tab" onclick="showTab('t4',this)">各 ETF 持股</div>
 </div>
 <div id="t1" class="pane active">
-  <div class="ttl">今日資金流向</div>
-  <div class="desc">按股票聚合當日所有 ETF 的資金動作。門檻：單筆流入/流出 ≥ {CAPITAL_FLOW_THRESHOLD:.0f} 億 或 權重變化 ≥ {int(WEIGHT_RATIO_THRESHOLD*100)}%。<b>深色徽章 = 大資金 ETF（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）+ 重大異動</b>。「✦首次」= 該 ETF 首次持有此股票（近 {NEW_BUY_WINDOW_DAYS} 天內），「✕撤出」= 昨日持有今日完全賣出</div>
-  {tab_flow}
+  <div class="ttl">股票視角：哪些股票被買入或賣出</div>
+  <div class="desc">每檔股票顯示有哪些 ETF 持有、近 1 日和 5 日的淨流入/流出。<b>深色徽章 = 該 ETF 此筆動作 ≥ 自身 AUM × {int(MATERIAL_RATIO_OF_AUM*100)}%（重大動作）</b>。「✦」= baseline 後首次買入。Hover 徽章查看明細。</div>
+  {tab_stock}
+</div>
+<div id="t2" class="pane">
+  <div class="ttl">基金視角：每檔基金最近在做什麼</div>
+  <div class="desc">每檔基金的 AUM 變化、近 5 日內超過自身 AUM × {int(MATERIAL_RATIO_OF_AUM*100)}% 的加碼/減碼/首次買入。下拉選單可篩選單一基金。</div>
+  {tab_fund}
 </div>
 <div id="t3" class="pane">
   <div class="ttl">機構集體行為</div>
-  <div class="desc">≥ 2 檔大資金 ETF 今日同時做出相同動作的股票。多家機構同步動作是最強烈的共識訊號</div>
+  <div class="desc">≥ 2 檔大資金 ETF（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）今日同時做出相同動作的股票。多家機構同步動作是最強烈的共識訊號</div>
   {tab_collective}
 </div>
 <div id="t4" class="pane">
-  <div class="ttl">跨 ETF 持倉總覽</div>
-  <div class="desc">當下靜態快照：哪些個股被多檔 ETF 持有、市場影響力多少。徽章依資金量排序</div>
-  {tab_consensus}
-</div>
-<div id="t5" class="pane">
   <div class="ttl">各 ETF 完整持股明細</div>
   <div class="desc">選擇 ETF 查看完整持股清單</div>
   {tab_holdings}
@@ -1490,68 +1993,77 @@ def main():
     config = load_config()
     etf_list = config['etfs']
     print(f"=== 主動式 ETF 資金流向監測 ({TODAY.isoformat()}) ===")
-    print(f"追蹤 {len(etf_list)} 檔 ETF\n")
+    print(f"追蹤所有 {len(etf_list)} 檔 ETF（資料抓取）\n")
 
-    # Load previous state
-    prev_data = load_latest_cache()
+    # Load previous state (full snapshot, all 20 ETFs)
     first_seen, baseline_date = load_first_seen()
-    print(f"first_seen baseline date: {baseline_date}（早於此日期的記錄視為既有持股）")
+    print(f"first_seen baseline: {baseline_date}（早於此日期的記錄視為既有持股）")
 
-    # Fetch today
+    # Fetch today's data for ALL ETFs
     today_data = fetch_all_etf_holdings(etf_list)
 
-    # Persist
+    # Persist all 20 ETFs (data collection unaffected by analysis universe)
     save_daily_snapshot(today_data)
     save_latest_cache(today_data)
     cleanup_old_snapshots()
 
-    # Update historical first-seen registry
+    # Update historical first-seen registry (also from full data)
     first_seen = update_first_seen(today_data, first_seen)
     save_first_seen(first_seen, baseline_date)
 
-    # Health
-    health = build_health_report(today_data, prev_data)
+    # Health (from full data)
+    health = build_health_report(today_data, None)
 
-    # Core flow engine
-    flows = compute_capital_flows(today_data, prev_data, first_seen, baseline_date)
+    # ── Filter to analysis universe: TW-only, ok status (12 ETFs)
+    today_data_tw = filter_universe(today_data)
+    universe_codes = list(today_data_tw.keys())
+    universe_aum = sum(e.get('aum_billion', 0) or 0 for e in today_data_tw.values())
+    print(f"\n分析 universe（純台股 ok ETF）: {len(today_data_tw)} 檔，總 AUM {universe_aum:.0f} 億")
+    for c in sorted(today_data_tw.keys(), key=lambda x: -(today_data_tw[x].get('aum_billion') or 0)):
+        e = today_data_tw[c]
+        print(f"  {c} {e['name']}: AUM {e.get('aum_billion'):.1f} 億, {e.get('holdings_count')} 檔持股")
 
-    # Big ETFs and their actions
-    big_etf_list = filter_big_etfs(today_data, BIG_ETF_AUM_THRESHOLD)
-    big_etf_codes = [code for code, _, _ in big_etf_list]
-    print(f"大資金 ETF（AUM ≥ {BIG_ETF_AUM_THRESHOLD} 億）: {len(big_etf_list)} 檔")
-    for code, aum, name in big_etf_list:
-        print(f"  {code} {name}: {aum:.1f} 億")
+    # ── Load comparison snapshots for 1d / 5d periods (filtered to universe)
+    snap_1d_full, snap_1d_date = find_snapshot_n_trading_days_back(1)
+    snap_5d_full, snap_5d_date = find_snapshot_n_trading_days_back(TRADING_DAYS_LOOKBACK)
+    snap_1d = filter_universe_snapshot(snap_1d_full, universe_codes)
+    snap_5d = filter_universe_snapshot(snap_5d_full, universe_codes)
+    print(f"\n比較基準: 1日 = {snap_1d_date or '無'} | 5日 = {snap_5d_date or '累積中'}")
 
-    big_actions = compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, baseline_date)
+    # ── Compute flows for both periods
+    flows_1d = compute_capital_flows(today_data_tw, snap_1d, first_seen, baseline_date) if snap_1d else {}
+    flows_5d = compute_capital_flows(today_data_tw, snap_5d, first_seen, baseline_date) if snap_5d else {}
+
+    # ── Build views
+    stock_view = build_stock_view(today_data_tw, flows_1d, flows_5d)
+    fund_view = build_fund_view(today_data_tw, snap_1d, snap_5d, first_seen, baseline_date)
+
+    # ── Collective moves (from big ETFs within the universe)
+    big_etf_list = [(c, e.get('aum_billion'), e.get('name')) for c, e in today_data_tw.items() if (e.get('aum_billion') or 0) >= BIG_ETF_AUM_THRESHOLD]
+    big_etf_list.sort(key=lambda x: -(x[1] or 0))
+    big_etf_codes = [c for c, _, _ in big_etf_list]
+    big_actions = compute_big_etf_actions(today_data_tw, snap_1d, big_etf_codes, first_seen, baseline_date) if snap_1d else {}
     collective = compute_collective_moves(big_actions)
 
-    # Static consensus view (tab 4)
-    consensus = compute_cross_etf_consensus(today_data, prev_data, first_seen, baseline_date)
-
-    # Render
-    html = generate_etf_html(today_data, flows, big_actions, collective, consensus, big_etf_list, first_seen)
+    # ── Render
+    html = generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date)
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"\nDashboard written to {OUTPUT_HTML}")
 
     # Summary
-    material_flows = sum(1 for f in flows.values() if f['material_count'] > 0)
-    print(f"\n資金流向統計:")
-    print(f"  有動作的股票: {len(flows)}")
-    print(f"  重大異動股票: {material_flows}")
+    print(f"\n統計：")
+    print(f"  股票視角列數: {len(stock_view)}")
+    print(f"  基金視角項目: {len(fund_view)}")
     print(f"  集體買入訊號: {len(collective['buys'])}")
     print(f"  集體賣出訊號: {len(collective['sells'])}")
 
-    ok_count = sum(1 for h in health.values() if h['status'] in ('ok', 'partial'))
     err_count = sum(1 for h in health.values() if h['status'] == 'error')
-    stale_count = sum(1 for h in health.values() if h['status'] == 'stale')
-    print(f"\nStatus: {ok_count} ok, {stale_count} stale, {err_count} error")
-
     if err_count == len(etf_list):
         print("::error::All ETF fetches failed!", file=sys.stderr)
         sys.exit(1)
-    elif err_count + stale_count > len(etf_list) // 2:
-        print(f"::warning::ETF fetch issues: {err_count} errors, {stale_count} stale", file=sys.stderr)
+    elif err_count > len(etf_list) // 2:
+        print(f"::warning::ETF fetch issues: {err_count} errors", file=sys.stderr)
 
 
 if __name__ == '__main__':
