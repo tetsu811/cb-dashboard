@@ -37,6 +37,7 @@ WEIGHT_RATIO_THRESHOLD = 0.20       # 20% — 權重相對變化門檻
 NEW_BUY_WINDOW_DAYS = 7             # 首見後多少天仍顯示「✦新」
 MATERIAL_RATIO_OF_AUM = 0.03        # 3% — 動作量體 ≥ 該基金 AUM × 3% 視為重大
 TRADING_DAYS_LOOKBACK = 5           # 「最近一週」= 5 個交易日
+MINOR_WEIGHT_THRESHOLD = 0.8        # 權重 < 0.8% 視為小持倉（預設收起）
 
 
 # ── Section 2: Data fetching ─────────────────────────────────────────────────
@@ -1265,6 +1266,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .legend{background:#f8fafc;border:1px solid var(--brd);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:12px;color:var(--mu);line-height:1.8}
 .legend .lg-title{font-weight:700;color:var(--txt);margin-right:4px}
 .legend .lg-text{font-size:11.5px;color:var(--mu);margin-right:8px}
+.toggle-minor{cursor:pointer;font-size:10.5px;font-weight:600;padding:3px 8px;background:#f1f5f9;color:#64748b;border:1px solid var(--brd);border-radius:6px;margin:1px 2px;transition:all .15s}
+.toggle-minor:hover{background:#e2e8f0;color:var(--txt)}
+.minor-holders.expanded{display:inline !important}
 .stats{display:flex;gap:12px;padding:16px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
 .sc{background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:14px 20px;min-width:120px;transition:transform .15s,box-shadow .15s;border-left:3px solid var(--bl)}
 .sc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
@@ -1326,6 +1330,18 @@ function filterETF(sel){
   document.querySelectorAll('.etf-detail').forEach(function(d){
     d.style.display=(v==='all'||d.dataset.code===v)?'block':'none';
   });
+}
+function toggleMinor(btn){
+  var row = btn.closest('tr');
+  var minor = row.querySelector('.minor-holders');
+  var count = btn.dataset.count;
+  if(minor.classList.contains('expanded')){
+    minor.classList.remove('expanded');
+    btn.innerHTML = '+' + count + ' 檔小持倉（權重&lt;0.8%）';
+  } else {
+    minor.classList.add('expanded');
+    btn.innerHTML = '收合小持倉';
+  }
 }
 """
 
@@ -1591,8 +1607,8 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
         net_5d_str = _fmt_cap_delta(net_5d) if abs(net_5d) >= 0.005 else '─'
 
         # Build holder badges, sorted by capital desc, color-coded by 1-day flow direction
-        badges = ''
-        for h in s['holders']:
+        # Split into main vs minor (weight < threshold AND no material/first-buy/exit action)
+        def render_badge(h):
             etf = h['etf']
             cap = h['capital']
             f1 = h['flow_1d']
@@ -1600,7 +1616,6 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
             is_first = h['is_first_buy']
             is_exit = h.get('is_exit', False)
 
-            # Decide color from 1d flow
             if is_exit:
                 style = 'background:#dc2626;color:#fff;border-color:#b91c1c'
                 label = f'{etf} ✕撤出 {_fmt_capital(f1)}'
@@ -1631,7 +1646,34 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
             if is_first:
                 title += ' | 首次買入'
 
-            badges += f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
+            return f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
+
+        def is_minor(h):
+            # Always show: material actions, first buys, exits
+            if h.get('is_material_1d') or h.get('is_material_5d'):
+                return False
+            if h.get('is_first_buy'):
+                return False
+            if h.get('is_exit'):
+                return False
+            return h['weight'] < MINOR_WEIGHT_THRESHOLD
+
+        main_badges = ''
+        minor_badges = ''
+        minor_count = 0
+        for h in s['holders']:
+            if is_minor(h):
+                minor_badges += render_badge(h)
+                minor_count += 1
+            else:
+                main_badges += render_badge(h)
+
+        if minor_count > 0:
+            toggle_btn = f'<button class="toggle-minor" onclick="toggleMinor(this)" data-count="{minor_count}">+{minor_count} 檔小持倉（權重&lt;{MINOR_WEIGHT_THRESHOLD}%）</button>'
+            minor_wrapper = f'<span class="minor-holders" style="display:none">{minor_badges}</span>'
+            badges = main_badges + toggle_btn + minor_wrapper
+        else:
+            badges = main_badges
 
         cap_total = f'<b>{s["total_capital"]:.1f}</b>' if s['total_capital'] >= 1 else f'{s["total_capital"]*100:.0f}百萬'
 
