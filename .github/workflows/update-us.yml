@@ -1,0 +1,40 @@
+name: Update US Dashboard
+
+on:
+  schedule:
+    # 美股收盤後執行。22:30 UTC 涵蓋 EDT（16:00 ET = 20:00 UTC）與 EST（16:00 ET = 21:00 UTC）
+    # 兩種時區，並讓 yfinance 資料有時間更新。
+    - cron: '30 22 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas lxml requests beautifulsoup4
+
+      - name: Generate US sector dashboard
+        run: python generate_us.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add us_index.html us_latest.json us_data/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto update US dashboard $(date -u +%Y-%m-%d)"
+            git push
+          fi
