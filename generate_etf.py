@@ -1262,6 +1262,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .construction .icon{font-size:18px}
 .construction .text{line-height:1.5}
 @media(max-width:640px){.construction{padding:10px 16px;font-size:12px;flex-wrap:wrap}}
+.legend{background:#f8fafc;border:1px solid var(--brd);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:12px;color:var(--mu);line-height:1.8}
+.legend .lg-title{font-weight:700;color:var(--txt);margin-right:4px}
+.legend .lg-text{font-size:11.5px;color:var(--mu);margin-right:8px}
 .stats{display:flex;gap:12px;padding:16px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
 .sc{background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:14px 20px;min-width:120px;transition:transform .15s,box-shadow .15s;border-left:3px solid var(--bl)}
 .sc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
@@ -1964,7 +1967,17 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
 </div>
 <div id="t1" class="pane active">
   <div class="ttl">股票視角：哪些股票被買入或賣出</div>
-  <div class="desc">每檔股票顯示有哪些 ETF 持有、近 1 日和 5 日的淨流入/流出。<b>深色徽章 = 該 ETF 此筆動作 ≥ 自身 AUM × {int(MATERIAL_RATIO_OF_AUM*100)}%（重大動作）</b>。「✦」= baseline 後首次買入。Hover 徽章查看明細。</div>
+  <div class="desc">每檔股票顯示有哪些 ETF 持有、近 1 日和 5 日的淨流入/流出。徽章內的金額為「該 ETF 對此股票的當前持倉金額」，▲/▼ 為今日資金變化。</div>
+  <div class="legend">
+    <span class="lg-title">徽章圖例：</span>
+    <span class="badge etf-tag" style="background:#ede9fe;color:#6d28d9;border-color:#ddd6fe">00XXXA <b>13.0億</b></span><span class="lg-text">持有，今日無變化</span>
+    <span class="badge etf-tag" style="background:#dcfce7;color:#15803d;border-color:#bbf7d0">00XXXA <b>13.0億</b> <span style="font-size:9.5px">▲2.5億</span></span><span class="lg-text">今日資金流入</span>
+    <span class="badge etf-tag" style="background:#16a34a;color:#fff;border-color:#15803d">00XXXA <b>13.0億</b> <span style="font-size:9.5px">▲5億</span></span><span class="lg-text">重大流入（≥ AUM × {int(MATERIAL_RATIO_OF_AUM*100)}%）</span>
+    <span class="badge etf-tag" style="background:#fee2e2;color:#dc2626;border-color:#fecaca">00XXXA <b>13.0億</b> <span style="font-size:9.5px">▼1.8億</span></span><span class="lg-text">今日資金流出</span>
+    <span class="badge etf-tag" style="background:#dc2626;color:#fff;border-color:#b91c1c">00XXXA <b>13.0億</b> <span style="font-size:9.5px">▼5億</span></span><span class="lg-text">重大流出</span>
+    <span class="badge etf-tag" style="background:#dc2626;color:#fff;border-color:#b91c1c">00XXXA ✕撤出 -13.0億</span><span class="lg-text">完全賣出</span>
+    <span class="badge etf-tag" style="background:#dcfce7;color:#15803d;border-color:#bbf7d0">00XXXA <b>2.0億</b> <span style="font-size:9.5px">✦</span></span><span class="lg-text">baseline 後首次買入</span>
+  </div>
   {tab_stock}
 </div>
 <div id="t2" class="pane">
