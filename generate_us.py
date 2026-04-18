@@ -990,7 +990,7 @@ def _gen_stock_row(c, mode="contrib"):
         vr_txt = f"×{vr_yday:.2f}" if vr_yday else "─"
         right = f'<span class="val am">{vr_txt}</span><span class="val {cls}" style="min-width:52px">{_fmt_pct(c["day_pct"])}</span>'
     else:
-        right = f'<span class="val {cls}">{_fmt_pct(c["day_pct"])}</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:42px" title="權重 {weight_pct:.2f}%">{weight_pct:.1f}%</span>'
+        right = f'<span class="val {cls}">{_fmt_pct(c["day_pct"])}</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 {weight_pct:.2f}%">權 {weight_pct:.1f}%</span>'
 
     summary = f'''<summary class="row-item">
   <span class="sym">{c["symbol"]}</span>
