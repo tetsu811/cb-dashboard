@@ -1310,10 +1310,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px;transition:opacity .15s}
 .nav-link:hover{opacity:.7}
 .warn-box{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:8px;padding:10px 14px;font-size:12px;margin:14px 28px 0;line-height:1.7}
-.construction{background:linear-gradient(90deg,#fef3c7,#fde68a);border-bottom:2px solid #f59e0b;color:#78350f;padding:10px 28px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;text-align:center;justify-content:center}
-.construction .icon{font-size:18px}
-.construction .text{line-height:1.5}
-@media(max-width:640px){.construction{padding:10px 16px;font-size:12px;flex-wrap:wrap}}
 .legend{background:#f8fafc;border:1px solid var(--brd);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:12px;color:var(--mu);line-height:1.8}
 .legend .lg-title{font-weight:700;color:var(--txt);margin-right:4px}
 .legend .lg-text{font-size:11.5px;color:var(--mu);margin-right:8px}
@@ -1651,7 +1647,7 @@ def _gen_v3_stats(today_data, stock_view, collective, snap_1d_date, snap_5d_date
 </div>"""
 
 
-def _gen_stock_view(stock_view, today_data, snap_5d_date):
+def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date):
     """Render stock-perspective table."""
     if not stock_view:
         return '<div class="empty-msg">無資料</div>'
@@ -1661,10 +1657,7 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
     if not filtered:
         return '<div class="empty-msg">尚無資金流向資料（首次執行或無歷史快照可比較）</div>'
 
-    accumulating_5d = '' if snap_5d_date else '<div class="warn-box" style="margin:0 0 14px;">5 日資料累積中，目前僅顯示 1 日變化</div>'
-
-    html = accumulating_5d
-    html += '<table class="sortable"><tr>'
+    html = '<table class="sortable"><tr>'
     html += '<th>股票代號</th>'
     html += '<th>股票名稱</th>'
     html += '<th class="center sortable-th" onclick="sortTable(this,2,\'num\')">持有<br/>ETF 數 <span class="sort-hint">⇅</span></th>'
@@ -1672,6 +1665,8 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
     html += '<th class="num sortable-th" onclick="sortTable(this,4,\'num\')">1 日<br/>淨流入 <span class="sort-hint">⇅</span></th>'
     if snap_5d_date:
         html += '<th class="num sortable-th" onclick="sortTable(this,5,\'num\')">5 日<br/>淨流入 <span class="sort-hint">⇅</span></th>'
+    else:
+        html += '<th class="num" style="color:#94a3b8">5 日<br/>淨流入</th>'
     html += '<th>持有 ETF（徽章顯示：ETF 代號｜持倉金額｜佔該 ETF 權重｜今日進出）</th></tr>'
 
     for s in filtered:
@@ -1687,7 +1682,7 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
         elif s['material_count_1d'] > 0 and net_1d < 0:
             row_cls = ' class="row-sell"'
 
-        first_mark = ' <span class="badge" style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-size:9.5px;padding:1px 6px">✦ 新</span>' if s['has_first_buy_5d'] else ''
+        first_mark = ' <span class="badge" style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-size:9.5px;padding:1px 6px" title="近期新增持股（系統起算日 ' + (baseline_date or 'n/a') + ' 之後才出現在該 ETF 的持股中）">✦ 近期新增</span>' if s['has_first_buy_5d'] else ''
 
         net_1d_str = _fmt_cap_delta(net_1d) if abs(net_1d) >= 0.005 else '─'
         net_5d_str = _fmt_cap_delta(net_5d) if abs(net_5d) >= 0.005 else '─'
@@ -1713,7 +1708,7 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
                     style = 'background:#f59e0b;color:#fff;border-color:#d97706'
                 else:
                     style = 'background:#fef3c7;color:#b45309;border-color:#fde68a'
-                label = f'{etf} <b>{_fmt_capital(cap)}</b> {weight_str} <span style="font-size:9.5px">✦首次</span>'
+                label = f'{etf} <b>{_fmt_capital(cap)}</b> {weight_str} <span style="font-size:9.5px">✦新增</span>'
             elif h['is_material_1d'] and f1 > 0:
                 style = 'background:#16a34a;color:#fff;border-color:#15803d'
                 label = f'{etf} <b>{_fmt_capital(cap)}</b> {weight_str} <span style="font-size:9.5px">▲{_fmt_capital(abs(f1))}</span>'
@@ -1736,7 +1731,7 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
             if snap_5d_date and abs(f5) >= 0.005:
                 title += f' | 5 日 {("+" if f5>0 else "")}{_fmt_capital(f5)}'
             if is_first:
-                title += ' | 首次買入'
+                title += f' | 近期新增（系統起算日 {baseline_date or "n/a"} 後首見）'
 
             return f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
 
@@ -1775,13 +1770,15 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date):
         html += f'<td class="num" data-sort="{net_1d}">{net_1d_str}</td>'
         if snap_5d_date:
             html += f'<td class="num" data-sort="{net_5d}">{net_5d_str}</td>'
+        else:
+            html += '<td class="num" style="color:#94a3b8;font-size:11px">累積資料中</td>'
         html += f'<td>{badges}</td></tr>'
 
     html += '</table>'
     return html
 
 
-def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date):
+def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_date):
     """Render fund-perspective view: dropdown selector + per-fund cards.
     Falls back to 1-day window (holdings + AUM) when 5-day data is still accumulating."""
     if not fund_view:
@@ -1838,7 +1835,8 @@ def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date):
         action_count = info[f'action_count{suffix}']
 
         if first_buys:
-            html += '<div style="margin-bottom:12px"><div style="font-weight:700;font-size:12.5px;color:#15803d;margin-bottom:6px">✦ 首次買入（baseline 後新出現）</div>'
+            bd = baseline_date or 'n/a'
+            html += f'<div style="margin-bottom:12px"><div style="font-weight:700;font-size:12.5px;color:#b45309;margin-bottom:6px">✦ 近期新增持股（系統起算日 {bd} 後才出現）</div>'
             html += '<table><tr><th>股票代號</th><th>股票名稱</th><th class="num">投入金額</th><th class="num">當前權重</th></tr>'
             for r in first_buys:
                 html += f'<tr class="row-buy"><td><b>{r["stock_code"]}</b></td><td>{r["stock_name"]}</td><td class="num"><span class="delta-up">+{_fmt_capital(r["delta"])}</span></td><td class="num">{r["weight"]:.2f}%</td></tr>'
@@ -2053,7 +2051,7 @@ def _gen_collective_moves(collective):
             actions_html = ''
             for a in item['actions']:
                 act_color = '#16a34a' if a['action_type'] == '新買入' else '#059669'
-                new_mark = ' ✦' if a.get('is_new_buy') else ''
+                new_mark = ' ✦新增' if a.get('is_new_buy') else ''
                 actions_html += f'<span class="badge etf-tag" style="background:{act_color};color:#fff;border-color:{act_color}" title="{a["etf_name"]}">{a["etf"]} {a["action_type"]}{new_mark} +{_fmt_capital(a["delta"])}</span>'
             html += f'<tr class="row-buy"><td><b>{item["stock_code"]}</b></td><td>{item["stock_name"]}</td><td class="center"><b>{item["etf_count"]}</b></td><td class="num"><span class="delta-up">+{_fmt_capital(item["total_capital"])}</span></td><td>{actions_html}</td></tr>'
         html += '</table>'
@@ -2076,10 +2074,10 @@ def _gen_collective_moves(collective):
     return html
 
 
-def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date):
+def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date, baseline_date):
     stats = _gen_v3_stats(today_data_tw, stock_view, collective, snap_1d_date, snap_5d_date)
-    tab_stock = _gen_stock_view(stock_view, today_data_tw, snap_5d_date)
-    tab_fund = _gen_fund_view(fund_view, today_data_tw, snap_1d_date, snap_5d_date)
+    tab_stock = _gen_stock_view(stock_view, today_data_tw, snap_5d_date, baseline_date)
+    tab_fund = _gen_fund_view(fund_view, today_data_tw, snap_1d_date, snap_5d_date, baseline_date)
     tab_collective = _gen_collective_moves(collective)
     tab_holdings = _gen_individual_holdings(today_data_tw)
 
@@ -2094,11 +2092,6 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
 <div class="hdr">
   <h1>主動式 ETF 資金流向監測</h1>
   <div class="sub">更新：{TODAY.isoformat()}｜1 日比較基準：{snap_1d_str}｜5 日比較基準：{snap_5d_str}<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
-</div>
-<div class="construction">
-  <span class="icon">🚧</span>
-  <span class="text"><b>開發測試中</b>｜純台股 ok 主動式 ETF；5 日視角需累積 5 個交易日資料；「✦」= baseline 後首次買入</span>
-  <span class="icon">🚧</span>
 </div>
 {stats}
 <div class="tabs">
@@ -2122,7 +2115,7 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
     <span class="badge etf-tag" style="background:#dc2626;color:#fff;border-color:#b91c1c">00XXXA <b>13.0億</b> <span style="font-size:9.5px;opacity:0.75">7.5%</span> <span style="font-size:9.5px">▼5億</span></span><span class="lg-text">大賣</span>
     <br/>
     <span class="lg-title" style="margin-top:4px">特殊標記：</span>
-    <span class="badge etf-tag" style="background:#fef3c7;color:#b45309;border-color:#fde68a">00XXXA <b>2.0億</b> <span style="font-size:9.5px;opacity:0.75">1.2%</span> <span style="font-size:9.5px">✦首次</span></span><span class="lg-text">✦ = 這檔 ETF 第一次買這支股票（琥珀色凸顯）</span>
+    <span class="badge etf-tag" style="background:#fef3c7;color:#b45309;border-color:#fde68a">00XXXA <b>2.0億</b> <span style="font-size:9.5px;opacity:0.75">1.2%</span> <span style="font-size:9.5px">✦新增</span></span><span class="lg-text">✦ = 該 ETF 近期新增這支股（系統起算日 {baseline_date} 之後才出現；不代表歷史首次）</span>
     <span class="badge etf-tag" style="background:#dc2626;color:#fff;border-color:#b91c1c">00XXXA ✕撤出 -13.0億</span><span class="lg-text">✕撤出 = 今日完全賣光</span>
   </div>
   {tab_stock}
@@ -2219,7 +2212,7 @@ def main():
     collective = compute_collective_moves(big_actions)
 
     # ── Render
-    html = generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date)
+    html = generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date, baseline_date)
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"\nDashboard written to {OUTPUT_HTML}")
