@@ -1362,6 +1362,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px}
 .nav-link:hover{opacity:.7}
 .construction{background:linear-gradient(90deg,#fef3c7,#fde68a);border-bottom:2px solid #f59e0b;color:#78350f;padding:10px 28px;font-size:12.5px;font-weight:600;text-align:center}
+.health-badge{display:flex;gap:8px;flex-wrap:wrap;padding:10px 28px;background:#f8fafc;border-bottom:1px solid var(--brd);font-size:11.5px;align-items:center}
+.hb-item{display:inline-flex;align-items:center;padding:3px 10px;border-radius:14px;font-weight:600;border:1px solid}
+.hb-item.hb-ok{background:#f0fdf4;color:#15803d;border-color:#bbf7d0}
+.hb-item.hb-warn{background:#fef3c7;color:#92400e;border-color:#fde68a}
+.hb-item.hb-bad{background:#fee2e2;color:#b91c1c;border-color:#fecaca}
+.hb-item.hb-off{background:#e2e8f0;color:#64748b;border-color:#cbd5e1}
+.hb-item.hb-ts{margin-left:auto;background:transparent;border-color:transparent;color:var(--mu);font-weight:500}
+@media(max-width:768px){.health-badge{padding-left:16px;padding-right:16px;font-size:10.5px}.hb-item.hb-ts{margin-left:0;width:100%;text-align:center}}
 .pane{padding:22px 28px}
 .ttl{font-size:15px;font-weight:700;margin-bottom:4px}
 .desc{font-size:12.5px;color:var(--mu);margin-bottom:16px;line-height:1.7}
@@ -1527,6 +1535,16 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 .sankey-info-active .si-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:4px 14px;margin-top:6px}
 .sankey-info-active .si-grid .k{color:var(--mu);font-size:11.5px}
 .sankey-info-active .si-grid .v{font-weight:700;font-variant-numeric:tabular-nums}
+.sankey-info-active .si-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.sankey-info-active .si-chip{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid #bfdbfe;border-radius:20px;padding:4px 10px;font-size:11.5px;font-weight:600;color:#1e3a8a;cursor:pointer;transition:all .15s}
+.sankey-info-active .si-chip:hover{background:#dbeafe;border-color:#60a5fa;transform:translateY(-1px);box-shadow:0 2px 6px rgba(59,130,246,0.15)}
+.sankey-info-active .si-chip .si-stars{color:#b45309;font-size:10.5px;letter-spacing:-1px}
+.sankey-info-active .si-chip .si-chip-pct{font-variant-numeric:tabular-nums;font-weight:700}
+.sankey-svg .sankey-node.clickable-target rect{stroke:#60a5fa;stroke-width:2;stroke-dasharray:4 3;animation:pulse-stroke 1.6s ease-in-out infinite}
+@keyframes pulse-stroke {
+  0%, 100% { stroke-opacity: 0.5; }
+  50% { stroke-opacity: 1; }
+}
 /* Backtest table */
 .bt-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .bt-table th{background:#f1f5f9;font-size:11px;color:var(--mu);font-weight:700;padding:8px 12px;text-transform:uppercase;text-align:left}
@@ -1648,6 +1666,55 @@ def _news_age(ts_iso):
 
 
 # ── HTML 區塊 ───────────────────────────────────────────────────────────
+
+def _gen_health_badge(health):
+    """頁面頂部的資料品質狀態條。"""
+    if not health:
+        return ""
+    parts = []
+
+    # FMP 基本面
+    fmp_pct = health["fmp_ok_pct"]
+    fmp_cls = "hb-ok" if fmp_pct >= 80 else "hb-warn" if fmp_pct >= 40 else "hb-bad"
+    parts.append(f'<span class="hb-item {fmp_cls}" title="紅黃綠燈基本面資料取得率（FMP 主源 / yfinance 備援）">基本面 {health["fmp_ok_count"]}/{health["stock_count"]}</span>')
+
+    # 新聞
+    news_age = health.get("avg_news_age_hours", 0)
+    news_cls = "hb-ok" if news_age < 24 else "hb-warn" if news_age < 36 else "hb-bad"
+    parts.append(f'<span class="hb-item {news_cls}" title="{health["news_total"]} 則新聞，平均 {news_age:.1f} 小時前">新聞 {health["news_total"]} 則（均齡 {news_age:.0f}h）</span>')
+
+    # LLM
+    if health.get("llm_enabled"):
+        llm_count = health.get("llm_enriched_count", 0)
+        llm_cls = "hb-ok" if llm_count > 0 else "hb-warn"
+        parts.append(f'<span class="hb-item {llm_cls}" title="Claude Haiku 深度分析">LLM 分析 {llm_count}</span>')
+    else:
+        parts.append(f'<span class="hb-item hb-off" title="ANTHROPIC_API_KEY 未設定，使用 keyword classifier">LLM 關閉</span>')
+
+    # Capex
+    capex_cls = "hb-ok" if health["capex_groups_ok"] >= 2 else "hb-warn"
+    parts.append(f'<span class="hb-item {capex_cls}" title="Capex 週期追蹤組數">Capex 週期 {health["capex_groups_ok"]}/{len(CAPEX_GROUPS)}</span>')
+
+    # 歷史
+    hist_cls = "hb-ok" if health["history_days"] >= 3 else "hb-warn"
+    parts.append(f'<span class="hb-item {hist_cls}" title="歷史快照累積天數 — 連續訊號需至少 3 天">歷史 {health["history_days"]} 天</span>')
+
+    # 最後更新時間
+    try:
+        fetched = datetime.fromisoformat(health["fetched_at"].replace("Z", "+00:00"))
+        age_m = (datetime.now(timezone.utc) - fetched).total_seconds() / 60
+        if age_m < 60:
+            time_str = f"{int(age_m)} 分鐘前"
+        elif age_m < 1440:
+            time_str = f"{int(age_m/60)} 小時前"
+        else:
+            time_str = f"{int(age_m/1440)} 天前"
+    except Exception:
+        time_str = "─"
+    parts.append(f'<span class="hb-item hb-ts" title="資料抓取時間 {health.get("fetched_at", "─")}">🕐 更新於 {time_str}</span>')
+
+    return f'<div class="health-badge">{ "".join(parts) }</div>'
+
 
 def _gen_alpha_panel(alpha_scores, stocks):
     """Top alpha 排行 — 前 12 強。"""
@@ -1787,7 +1854,7 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         score = stk.get("score", 0)
         score_max = stk.get("score_max", 24)
         dot_color = _color_for_pct(day_pct)
-        svg_parts.append(f'<g class="sankey-node giant-node" data-giant="{code}">')
+        svg_parts.append(f'<g class="sankey-node giant-node" data-giant="{code}" onclick="selectGiant(\'{code}\', event)" style="cursor:pointer">')
         svg_parts.append(f'<rect x="{left_x - 115}" y="{y - 18}" width="115" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
         svg_parts.append(f'<circle cx="{left_x - 105}" cy="{y}" r="5" fill="{dot_color}"/>')
         svg_parts.append(f'<text x="{left_x - 95}" y="{y - 3}" font-size="13" font-weight="700" fill="#1e293b">{code}</text>')
@@ -1799,7 +1866,7 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         y = bucket_y[key]
         avg_pct = bucket_avg_pct.get(key)
         dot_color = _color_for_pct(avg_pct)
-        svg_parts.append(f'<g class="sankey-node bucket-node" data-bucket="{key}">')
+        svg_parts.append(f'<g class="sankey-node bucket-node" data-bucket="{key}" data-bucket-label="{label}" onclick="selectBucket(\'{key}\', event)" style="cursor:pointer">')
         svg_parts.append(f'<rect x="{right_x}" y="{y - 18}" width="130" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
         svg_parts.append(f'<circle cx="{right_x + 10}" cy="{y}" r="5" fill="{dot_color}"/>')
         svg_parts.append(f'<text x="{right_x + 20}" y="{y - 3}" font-size="12" font-weight="700" fill="#1e293b">{label}</text>')
@@ -1807,8 +1874,8 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         svg_parts.append(f'</g>')
 
     svg_parts.append('</svg>')
-    info_box = '''<div id="sankey-info" class="sankey-info-empty">點擊任一連線查看詳細資訊</div>'''
-    return '<div class="sankey-wrap" onclick="if(event.target.tagName!==\'path\')resetSankey()">' + "".join(svg_parts) + info_box + '</div>'
+    info_box = '''<div id="sankey-info" class="sankey-info-empty">👆 點擊左側巨頭或右側 Bucket 節點，查看其所有供應鏈關係；或點一條線看單一關係</div>'''
+    return '<div class="sankey-wrap" onclick="if(!event.target.closest(\'g.sankey-node\') && event.target.tagName!==\'path\') resetSankey()">' + "".join(svg_parts) + info_box + '</div>'
 
 
 def _gen_capex_panel(capex_groups, bucket_lookup):
@@ -2276,7 +2343,7 @@ def _gen_cross_check_block(s):
     return f'<div class="warn-box">⚠️ 兩源差異偵測：{" ; ".join(parts)}</div>'
 
 
-def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings):
+def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings, health=None):
     bucket_lookup = {k: label for k, label, _, _ in BUCKETS}
     giants_grid = _gen_giants_grid(stocks)
     supply_chain = _gen_supply_chain(stocks, alpha_scores, bucket_rankings)
@@ -2286,6 +2353,7 @@ def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucke
     signals_html = _gen_signals_panel(signals, stocks)
     sankey_html = _gen_sankey_svg(stocks, bucket_lookup)
     alpha_html = _gen_alpha_panel(alpha_scores, stocks)
+    health_badge = _gen_health_badge(health)
 
     n_green = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "green")
     n_red = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "red")
@@ -2303,6 +2371,7 @@ def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucke
   <h1>AI 供應鏈策略儀表板</h1>
   <div class="sub">9 檔巨頭 + 供應鏈上下游 × 基本面紅黃綠燈 · 更新 {TODAY.isoformat()} · {fmp_status} <a class="nav-link" href="us_index.html">→ 美股板塊復盤</a> <a class="nav-link" href="etf_index.html">→ ETF 資金流</a></div>
 </div>
+{health_badge}
 <div class="pane">
   <div class="ttl">🏭 AI 資本支出週期（Capex 領先指標）</div>
   <div class="desc">雲端 Hyperscaler（MSFT+GOOGL+META+AMZN）合計 Capex 年增決定上游供應鏈（AI 晶片／HBM／網通／電源）需求強度。TSM Capex 則是設備商（ASML／AMAT／LRCX／KLAC）的訂單訊號</div>
@@ -2311,10 +2380,6 @@ def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucke
   <div class="ttl">🏛 AI 九巨頭</div>
   <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分 · 最高 24 分）</div>
   {giants_grid}
-
-  <div class="ttl">⚡ Alpha 評分排行（綜合買賣訊號）</div>
-  <div class="desc">6 個子分數加權合成 0-100 分。權重：基本面 25% · 動能 20% · 技術 15% · Capex 對齊 15% · 分析師 15% · 訊號 10%。≥70 強勢買進 · 55-69 買進 · 40-54 觀望 · <40 弱勢</div>
-  {alpha_html}
 
   <div class="ttl">🔄 連續訊號（歷史累積）</div>
   <div class="desc">從每日快照累積，找出連續漲/跌、連續進 Top-3 的標的（需至少 3 個交易日歷史）</div>
@@ -2332,55 +2397,161 @@ def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucke
   {supply_chain}
 </div>
 <script>
+var __sankeyState = {{giant: null, bucket: null}};
+
+function __fmtPct(p){{
+  if(p==null || isNaN(p)) return '—';
+  var s = (p>=0?'+':'') + p.toFixed(2) + '%';
+  var cls = p>0.05 ? 'up' : p<-0.05 ? 'dn' : 'mu';
+  return '<span class="'+cls+'">'+s+'</span>';
+}}
+function __stars(n){{ return '★'.repeat(n) + '☆'.repeat(3-n); }}
+function __strengthLabel(n){{ return n===3 ? '關鍵依賴' : n===2 ? '重要' : '次要'; }}
+
 function resetSankey(){{
+  __sankeyState = {{giant: null, bucket: null}};
   document.querySelectorAll('.sankey-svg path.sankey-link').forEach(p=>{{
     p.classList.remove('active','dimmed');
     p.setAttribute('stroke-width', p.dataset.defaultWidth);
     p.style.opacity = '';
   }});
   document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
-    n.classList.remove('active','dimmed');
+    n.classList.remove('active','dimmed','clickable-target');
   }});
   var info = document.getElementById('sankey-info');
   if(info){{
     info.className='sankey-info-empty';
-    info.innerHTML='點擊任一連線查看詳細資訊';
+    info.innerHTML='👆 點擊左側巨頭或右側 Bucket 節點，查看其所有供應鏈關係；或點一條線看單一關係';
   }}
 }}
-function highlightSankey(el, ev){{
-  var giant = el.dataset.giant, bucket = el.dataset.bucket;
+
+function __applyPathFilter(matchFn){{
   document.querySelectorAll('.sankey-svg path.sankey-link').forEach(p=>{{
-    if(p===el){{p.classList.add('active');p.classList.remove('dimmed');p.setAttribute('stroke-width', (parseFloat(p.dataset.defaultWidth)+1.5).toFixed(1));}}
-    else {{p.classList.add('dimmed');p.classList.remove('active');}}
+    if(matchFn(p)){{
+      p.classList.add('active'); p.classList.remove('dimmed');
+      p.setAttribute('stroke-width', (parseFloat(p.dataset.defaultWidth)+1.0).toFixed(1));
+    }} else {{
+      p.classList.add('dimmed'); p.classList.remove('active');
+      p.setAttribute('stroke-width', p.dataset.defaultWidth);
+    }}
   }});
+}}
+
+function __collectRelations(giantCode){{
+  // 從 DOM 收集 NVDA 的所有 bucket 關聯
+  var out = [];
+  document.querySelectorAll('.sankey-svg path.sankey-link[data-giant="'+giantCode+'"]').forEach(p=>{{
+    out.push({{
+      bucket: p.dataset.bucket,
+      label: p.dataset.bucketLabel,
+      strength: parseInt(p.dataset.strength),
+      bucketPct: parseFloat(p.dataset.bucketPct),
+    }});
+  }});
+  out.sort(function(a,b){{ return b.strength - a.strength; }});
+  return out;
+}}
+
+function __collectGiantsForBucket(bucketKey){{
+  var out = [];
+  document.querySelectorAll('.sankey-svg path.sankey-link[data-bucket="'+bucketKey+'"]').forEach(p=>{{
+    out.push({{
+      giant: p.dataset.giant,
+      strength: parseInt(p.dataset.strength),
+      giantPct: parseFloat(p.dataset.giantPct),
+    }});
+  }});
+  out.sort(function(a,b){{ return b.strength - a.strength; }});
+  return out;
+}}
+
+function selectGiant(code, ev){{
+  if(ev && ev.stopPropagation) ev.stopPropagation();
+  __sankeyState = {{giant: code, bucket: null}};
+  var rels = __collectRelations(code);
+  var relBuckets = new Set(rels.map(function(r){{return r.bucket;}}));
+  __applyPathFilter(function(p){{ return p.dataset.giant===code; }});
+  document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
+    var isGiant = n.dataset.giant===code;
+    var isRelBucket = !!(n.dataset.bucket && relBuckets.has(n.dataset.bucket));
+    n.classList.toggle('active', isGiant);
+    n.classList.toggle('clickable-target', isRelBucket);
+    n.classList.toggle('dimmed', !isGiant && !isRelBucket);
+  }});
+  var info = document.getElementById('sankey-info');
+  if(info){{
+    var chips = rels.map(function(r){{
+      return '<span class="si-chip" onclick="selectBucket(\\''+r.bucket+'\\', event)" title="'+__strengthLabel(r.strength)+' · Bucket 平均 '+(r.bucketPct>=0?'+':'')+r.bucketPct.toFixed(2)+'%"><span class="si-stars">'+__stars(r.strength)+'</span> '+r.label+' <span class="si-chip-pct">'+__fmtPct(r.bucketPct)+'</span></span>';
+    }}).join('');
+    info.className='sankey-info-active';
+    info.innerHTML =
+      '<div class="si-head">🎯 '+code+' 的上下游依賴（'+rels.length+' 個 bucket）</div>'+
+      '<div style="font-size:11.5px;color:#64748b;margin-bottom:6px">點下方任一 Bucket 查看單一關係細節</div>'+
+      '<div class="si-chips">'+chips+'</div>';
+  }}
+}}
+
+function selectBucket(key, ev){{
+  if(ev && ev.stopPropagation) ev.stopPropagation();
+  // 若已選擇 giant，顯示 giant→bucket 單一關係
+  if(__sankeyState.giant){{
+    var giant = __sankeyState.giant;
+    var path = document.querySelector('.sankey-svg path.sankey-link[data-giant="'+giant+'"][data-bucket="'+key+'"]');
+    if(path){{ highlightSankey(path, ev); return; }}
+  }}
+  // 否則顯示該 bucket 所有依賴它的巨頭
+  __sankeyState = {{giant: null, bucket: key}};
+  var deps = __collectGiantsForBucket(key);
+  var depGiants = new Set(deps.map(function(d){{return d.giant;}}));
+  __applyPathFilter(function(p){{ return p.dataset.bucket===key; }});
+  var bucketLabel = '';
+  document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
+    var isBucket = n.dataset.bucket===key;
+    if(isBucket) bucketLabel = n.dataset.bucketLabel || '';
+    var isDepGiant = !!(n.dataset.giant && depGiants.has(n.dataset.giant));
+    n.classList.toggle('active', isBucket);
+    n.classList.toggle('clickable-target', isDepGiant);
+    n.classList.toggle('dimmed', !isBucket && !isDepGiant);
+  }});
+  var info = document.getElementById('sankey-info');
+  if(info){{
+    var chips = deps.map(function(d){{
+      return '<span class="si-chip" onclick="selectGiant(\\''+d.giant+'\\', event)" title="'+__strengthLabel(d.strength)+' · 巨頭當日 '+(d.giantPct>=0?'+':'')+d.giantPct.toFixed(2)+'%"><span class="si-stars">'+__stars(d.strength)+'</span> '+d.giant+' <span class="si-chip-pct">'+__fmtPct(d.giantPct)+'</span></span>';
+    }}).join('');
+    info.className='sankey-info-active';
+    info.innerHTML =
+      '<div class="si-head">🎯 '+bucketLabel+' 被 '+deps.length+' 個巨頭依賴</div>'+
+      '<div style="font-size:11.5px;color:#64748b;margin-bottom:6px">點下方任一巨頭查看它對此 bucket 的依賴細節</div>'+
+      '<div class="si-chips">'+chips+'</div>';
+  }}
+}}
+
+function highlightSankey(el, ev){{
+  if(ev && ev.stopPropagation) ev.stopPropagation();
+  var giant = el.dataset.giant, bucket = el.dataset.bucket;
+  __sankeyState = {{giant: giant, bucket: bucket}};
+  __applyPathFilter(function(p){{ return p===el; }});
   document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
     var isMatch = n.dataset.giant===giant || n.dataset.bucket===bucket;
-    n.classList.toggle('active', isMatch);
+    n.classList.toggle('active', !!isMatch);
+    n.classList.toggle('clickable-target', false);
     n.classList.toggle('dimmed', !isMatch);
   }});
   var info = document.getElementById('sankey-info');
   if(!info) return;
   var strength = parseInt(el.dataset.strength);
-  var stars = '★'.repeat(strength) + '☆'.repeat(3-strength);
   var gpct = parseFloat(el.dataset.giantPct);
   var bpct = parseFloat(el.dataset.bucketPct);
   var label = el.dataset.bucketLabel;
-  var strengthText = strength===3 ? '關鍵依賴' : strength===2 ? '重要' : '次要';
-  var fmtPct = function(p){{
-    var s = (p>=0?'+':'') + p.toFixed(2) + '%';
-    var cls = p>0.05 ? 'up' : p<-0.05 ? 'dn' : 'mu';
-    return '<span class="'+cls+'">'+s+'</span>';
-  }};
   info.className='sankey-info-active';
   info.innerHTML =
     '<div class="si-head">'+giant+'  →  '+label+'</div>'+
-    '<div style="font-size:12px;color:#475569">'+stars+' '+strengthText+'</div>'+
+    '<div style="font-size:12px;color:#475569;margin-bottom:6px">'+__stars(strength)+' '+__strengthLabel(strength)+'（'+strength+'/3）</div>'+
     '<div class="si-grid">'+
-      '<div><span class="k">巨頭當日</span><span class="v">'+fmtPct(gpct)+'</span></div>'+
-      '<div><span class="k">Bucket 平均當日</span><span class="v">'+fmtPct(bpct)+'</span></div>'+
-      '<div><span class="k">依賴強度</span><span class="v">'+stars+' ('+strength+'/3)</span></div>'+
-    '</div>';
-  if(ev && ev.stopPropagation) ev.stopPropagation();
+      '<div><span class="k">巨頭當日</span><span class="v">'+__fmtPct(gpct)+'</span></div>'+
+      '<div><span class="k">Bucket 平均當日</span><span class="v">'+__fmtPct(bpct)+'</span></div>'+
+    '</div>'+
+    '<div style="margin-top:8px;font-size:11.5px"><a href="#" onclick="selectGiant(\\''+giant+'\\', event); return false;" style="color:var(--bl)">← 回到 '+giant+' 全部依賴</a></div>';
 }}
 </script>
 </body></html>"""
@@ -2454,17 +2625,78 @@ def main():
     for sym, sc in sorted(alpha_scores.items(), key=lambda x: -x[1]["alpha"])[:5]:
         print(f"  {sym:6s} {sc['alpha']:5.1f}  {sc['tier_label']}")
 
-    # 10. HTML
-    html = generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings)
+    # 10. Monitoring summary — 供 debug / 健康監控用
+    health = compute_health_summary(stocks, fmp_map, news_map, capex_groups, signals, alpha_scores, benchmarks)
+    with open("ai_strategy_health.json", "w", encoding="utf-8") as f:
+        json.dump(health, f, ensure_ascii=False, indent=2, default=str)
+    print(f"\n=== 資料品質 ===")
+    print(f"  FMP 基本面成功: {health['fmp_ok_count']}/{health['stock_count']}")
+    print(f"  yfinance 新聞: {health['news_total']} 則")
+    print(f"  LLM 深度分析: {health['llm_enriched_count']}")
+    print(f"  Capex 週期組: {health['capex_groups_ok']}/{len(CAPEX_GROUPS)}")
+    print(f"  歷史快照: {health['history_days']} 天")
+
+    # 11. HTML
+    html = generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings, health)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n儀表板輸出至 {OUTPUT_HTML}")
 
-    # 7. latest cache（debug 用）
+    # 12. latest cache（debug 用）
     def to_slim(s):
         return {k: v for k, v in s.items() if k not in ("tech", "fundamentals", "insider_recent", "news", "analyst_estimates_next")}
     with open(CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump({"trade_date": TODAY.isoformat(), "stocks": {k: to_slim(v) for k, v in stocks.items()}}, f, ensure_ascii=False, indent=2, default=str)
+
+
+def compute_health_summary(stocks, fmp_map, news_map, capex_groups, signals, alpha_scores, benchmarks):
+    """計算本次執行的資料品質摘要，寫入 ai_strategy_health.json。"""
+    stock_count = len(stocks)
+    fmp_ok_count = sum(1 for sym in stocks if (fmp_map.get(sym) or {}).get("ratios_latest"))
+    news_total = sum(len(v) for v in (news_map or {}).values())
+    llm_enriched_count = sum(
+        1 for s in stocks.values()
+        for n in (s.get("news") or [])
+        if n.get("llm")
+    )
+    capex_groups_ok = len(capex_groups or [])
+    alpha_tiers = {"strong_buy": 0, "buy": 0, "neutral": 0, "weak": 0}
+    for v in (alpha_scores or {}).values():
+        alpha_tiers[v["tier"]] = alpha_tiers.get(v["tier"], 0) + 1
+    bench_ok = sum(1 for b in (benchmarks or []) if b.get("pct_252d") is not None)
+
+    # 歷史快照天數
+    history_days = 0
+    if os.path.isdir(HISTORY_DIR):
+        history_days = len([p for p in glob.glob(os.path.join(HISTORY_DIR, "*.json"))])
+
+    # 資料新鮮度：新聞平均年齡
+    news_ages = []
+    for v in (news_map or {}).values():
+        for n in v:
+            ts_epoch = n.get("ts_epoch")
+            if ts_epoch:
+                age_h = (NOW_UTC.timestamp() - ts_epoch) / 3600
+                if age_h > 0:
+                    news_ages.append(age_h)
+    avg_news_age = sum(news_ages) / len(news_ages) if news_ages else 0
+
+    return {
+        "trade_date": TODAY.isoformat(),
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "stock_count": stock_count,
+        "fmp_ok_count": fmp_ok_count,
+        "fmp_ok_pct": round(fmp_ok_count / stock_count * 100, 1) if stock_count else 0,
+        "news_total": news_total,
+        "avg_news_age_hours": round(avg_news_age, 1),
+        "llm_enriched_count": llm_enriched_count,
+        "llm_enabled": bool(ANTHROPIC_API_KEY),
+        "capex_groups_ok": capex_groups_ok,
+        "bench_ok_count": bench_ok,
+        "signals_count": len(signals or {}),
+        "alpha_tiers": alpha_tiers,
+        "history_days": history_days,
+    }
 
 
 if __name__ == "__main__":

@@ -257,11 +257,11 @@ def _action_shows_progress(action_text):
 
 
 def is_material_bill(bill_ref):
-    """多層 filter：
-    1. 先排除命名/紀念類
-    2. 高價值 policy area（Approp/Defense/Health/Energy/…） 直接進
-    3. 低價值 policy area 需要有（階段進展 OR $金額關鍵字 OR 標題 $ 金額）才進
-    4. 無 policy area 的需要三者至少一個
+    """Filter 層次：
+    1. 排除命名/紀念類
+    2. Policy area 在感興趣清單 → pass
+    3. 無 policy area 但標題有 $ 金額 / money keyword / 已有進展 → pass
+    MAX_BILLS_PER_RUN 再做最終 cost cap。
     """
     title = (bill_ref.get("title") or "").lower()
     for pat in SKIP_TITLE_PATTERNS:
@@ -269,29 +269,20 @@ def is_material_bill(bill_ref):
             return False
 
     policy = ((bill_ref.get("policyArea") or {}).get("name"))
-    action_text = (bill_ref.get("latestAction") or {}).get("text") or ""
-
-    # 高價值政策領域：幾乎必打
-    if policy in HIGH_VALUE_POLICY_AREAS:
+    if policy in POLICY_AREAS_OF_INTEREST:
         return True
 
-    # 其他訊號
-    has_progress = _action_shows_progress(action_text)
-    has_dollar_in_title = bool(re.search(r"\$[\d,]+|\b\d+\s*(?:billion|million)\s+dollars?\b", title, re.IGNORECASE))
-    has_money_keyword = bool(re.search(
+    # 無 policy area / 非感興趣：要訊號
+    action_text = (bill_ref.get("latestAction") or {}).get("text") or ""
+    if re.search(r"\$[\d,]+|\b\d+\s*(?:billion|million)\s+dollars?\b", title, re.IGNORECASE):
+        return True
+    if re.search(
         r"\b(appropriation\w*|authoriz\w+ act|funding|budget|fiscal year \d{4}|"
         r"chips|infrastructure|reauthoriz\w+|supplemental)\b",
         title
-    ))
-
-    # 次高價值 policy area：要其中一個訊號
-    if policy in POLICY_AREAS_OF_INTEREST:
-        return has_progress or has_dollar_in_title or has_money_keyword
-
-    # 無（或非感興趣）policy area：要求訊號更強
-    if has_dollar_in_title:
+    ):
         return True
-    if has_progress and has_money_keyword:
+    if _action_shows_progress(action_text):
         return True
 
     return False
