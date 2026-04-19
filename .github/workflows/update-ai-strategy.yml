@@ -31,9 +31,18 @@ jobs:
           restore-keys: |
             fmp-cache-
 
+      - name: Restore LLM news cache
+        uses: actions/cache@v4
+        with:
+          path: ai_llm_cache
+          key: llm-cache-${{ github.run_id }}
+          restore-keys: |
+            llm-cache-
+
       - name: Generate AI strategy dashboard
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python generate_ai_strategy.py
 
       - name: Commit and push

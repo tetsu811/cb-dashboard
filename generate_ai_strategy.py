@@ -321,6 +321,172 @@ SENTIMENT_NEG = {
 }
 
 
+# ── Claude LLM 新聞深度分析（可選） ─────────────────────────────────────
+
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+ANTHROPIC_MODEL = "claude-haiku-4-5"  # 成本低、速度快
+LLM_CACHE_DIR = "ai_llm_cache"
+LLM_CACHE_TTL_HOURS = 48
+LLM_NEWS_SYSTEM_PROMPT = """你是美股財經新聞分析師。收到新聞標題後，回傳 JSON 評估該新聞對標的股價的即時影響。
+
+輸出嚴格 JSON（不要有任何 markdown 或解釋文字），schema：
+{
+  "impact": "bullish" | "bearish" | "neutral",
+  "magnitude": "high" | "medium" | "low",
+  "category": "earnings" | "guidance" | "product" | "partnership" | "regulation" | "macro" | "competition" | "management" | "other",
+  "zh": "<繁體中文摘要，12-20 字>"
+}
+
+判斷原則：
+- bullish/bearish 判斷要考慮對「該標的」的影響，不是對整體市場
+- magnitude: high = 會顯著推升/壓低股價（>2% 日幅），medium = 小幅（0.5-2%），low = 關聯度弱
+- category: 精確歸類；若含多類別，選最主導的
+- zh: 簡短白話，說明發生什麼事與方向，不要加解讀性評論"""
+
+
+def _llm_cache_key(sym, title):
+    import hashlib
+    h = hashlib.sha256((sym + "|" + title).encode()).hexdigest()[:24]
+    os.makedirs(LLM_CACHE_DIR, exist_ok=True)
+    return os.path.join(LLM_CACHE_DIR, f"{h}.json")
+
+
+def _llm_cache_fresh(path):
+    if not os.path.isfile(path):
+        return False
+    age_s = time.time() - os.path.getmtime(path)
+    return age_s < LLM_CACHE_TTL_HOURS * 3600
+
+
+def call_claude_news_analysis(sym, title):
+    """回傳 {impact, magnitude, category, zh} 或 None。"""
+    cache_path = _llm_cache_key(sym, title)
+    if _llm_cache_fresh(cache_path):
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    if not ANTHROPIC_API_KEY:
+        return None
+    try:
+        r = requests.post(
+            "https://api.anthropic.com/v1/messages",
+            headers={
+                "x-api-key": ANTHROPIC_API_KEY,
+                "anthropic-version": "2023-06-01",
+                "content-type": "application/json",
+            },
+            json={
+                "model": ANTHROPIC_MODEL,
+                "max_tokens": 200,
+                "system": [{
+                    "type": "text",
+                    "text": LLM_NEWS_SYSTEM_PROMPT,
+                    "cache_control": {"type": "ephemeral"},
+                }],
+                "messages": [{
+                    "role": "user",
+                    "content": f"Ticker: {sym}\nHeadline: {title}"
+                }],
+            },
+            timeout=20,
+        )
+        if r.status_code != 200:
+            return None
+        data = r.json()
+        text = data["content"][0]["text"].strip()
+        # 清掉可能的 markdown code fence
+        if text.startswith("```"):
+            text = text.split("```")[1]
+            if text.startswith("json"):
+                text = text[4:].strip()
+        parsed = json.loads(text)
+        # 存快取
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(parsed, f, ensure_ascii=False)
+        return parsed
+    except Exception as e:
+        print(f"  [LLM {sym}] {e}")
+        return None
+
+
+def enrich_news_with_llm(stocks):
+    """對九巨頭的 top N 新聞做 LLM 分析（成本可控）。"""
+    if not ANTHROPIC_API_KEY:
+        print("ℹ️  ANTHROPIC_API_KEY 未設定，跳過 LLM 新聞深度分析（keyword classifier 仍作用）")
+        return 0
+
+    giant_set = {code for code, _, _ in GIANTS}
+    tasks = []
+    for sym, s in stocks.items():
+        if sym not in giant_set:
+            continue
+        for news_item in (s.get("news") or [])[:3]:
+            tasks.append((sym, news_item))
+
+    print(f"LLM：並行分析 {len(tasks)} 則九巨頭新聞...")
+    t0 = time.time()
+    done = 0
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        futures = {ex.submit(call_claude_news_analysis, sym, n["title"]): (sym, n) for sym, n in tasks}
+        for fut in as_completed(futures):
+            sym, news_item = futures[fut]
+            result = fut.result()
+            if result:
+                news_item["llm"] = result
+                done += 1
+    print(f"  完成 {done}/{len(tasks)} · {time.time()-t0:.1f}s")
+    return done
+
+
+BENCHMARKS = [
+    ("SPY",  "S&P 500"),
+    ("QQQ",  "Nasdaq 100"),
+    ("SOXX", "半導體 ETF"),
+    ("VGT",  "科技 ETF"),
+]
+
+
+def fetch_benchmarks():
+    """抓 benchmark ETF 的 2 年日線、算各期報酬。"""
+    syms = [s for s, _ in BENCHMARKS]
+    df = yf.download(syms, period="2y", interval="1d", auto_adjust=False, progress=False, group_by="ticker", threads=True)
+    out = []
+    for sym, label in BENCHMARKS:
+        try:
+            bars = df[sym].dropna(subset=["Close"]) if sym in df.columns.get_level_values(0) else None
+            if bars is None or len(bars) < 2:
+                out.append({"symbol": sym, "label": label, "price": None, "day_pct": None, "pct_252d": None})
+                continue
+            closes = bars["Close"]
+            last = float(closes.iloc[-1])
+            prev = float(closes.iloc[-2])
+            day_pct = (last / prev - 1) * 100
+            pct_252 = None
+            if len(closes) > 252:
+                pct_252 = float((last / closes.iloc[-253] - 1) * 100)
+            out.append({"symbol": sym, "label": label, "price": last, "day_pct": day_pct, "pct_252d": pct_252})
+        except Exception:
+            out.append({"symbol": sym, "label": label, "price": None, "day_pct": None, "pct_252d": None})
+    return out
+
+
+def compute_portfolio_return(stocks, symbols, field="pct_252d"):
+    """等權組合的報酬。"""
+    rets = []
+    for s in symbols:
+        stk = stocks.get(s)
+        if not stk:
+            continue
+        val = (stk.get("tech") or {}).get(field)
+        if val is not None:
+            rets.append(val)
+    if not rets:
+        return None
+    return sum(rets) / len(rets)
+
+
 def _classify_news(title, summary=""):
     """回傳 (category, category_label, sentiment, matched_words)。
     - category: 'order' | 'guidance' | 'insider' | 'earnings' | 'general'
@@ -914,6 +1080,87 @@ def save_history_snapshot(stocks):
         json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
+def load_history(days=30):
+    """讀近 N 天 snapshot，排序由舊到新。"""
+    if not os.path.isdir(HISTORY_DIR):
+        return []
+    snaps = []
+    for p in sorted(glob.glob(os.path.join(HISTORY_DIR, "*.json"))):
+        try:
+            with open(p, "r", encoding="utf-8") as f:
+                snaps.append(json.load(f))
+        except Exception:
+            continue
+    snaps.sort(key=lambda s: s.get("trade_date", ""))
+    return snaps[-days:]
+
+
+def compute_consecutive_signals(history, stocks):
+    """依歷史快照計算每檔個股的連續訊號。"""
+    if not history:
+        return {}
+    # 組成 [(date, {sym: {day_pct, score}})]
+    series = [(h["trade_date"], h.get("stocks", {})) for h in history]
+    if history[-1].get("trade_date") != TODAY.isoformat():
+        # 把今天補上
+        today_slim = {k: {"day_pct": v.get("day_pct"), "score": v.get("score")} for k, v in stocks.items()}
+        series.append((TODAY.isoformat(), today_slim))
+
+    signals = {}
+    for sym in stocks:
+        up_streak, down_streak = 0, 0
+        top3_streak, bottom3_streak = 0, 0
+        score_up_streak = 0
+        prev_score = None
+        for _, daily in reversed(series):
+            snap = daily.get(sym)
+            if not snap:
+                break
+            pct = snap.get("day_pct")
+            score = snap.get("score")
+
+            # 連續漲/跌
+            if pct is None:
+                break
+            if pct > 0 and down_streak == 0:
+                up_streak += 1
+            elif pct < 0 and up_streak == 0:
+                down_streak += 1
+            else:
+                break
+
+        # Top-3 / bottom-3 streak（獨立一輪）
+        for _, daily in reversed(series):
+            snap = daily.get(sym)
+            if not snap or snap.get("day_pct") is None:
+                break
+            ranked = sorted(
+                [(c, v.get("day_pct")) for c, v in daily.items() if v.get("day_pct") is not None],
+                key=lambda x: x[1], reverse=True,
+            )
+            codes = [c for c, _ in ranked]
+            if sym in codes[:3]:
+                if bottom3_streak == 0:
+                    top3_streak += 1
+                else:
+                    break
+            elif sym in codes[-3:]:
+                if top3_streak == 0:
+                    bottom3_streak += 1
+                else:
+                    break
+            else:
+                break
+
+        signals[sym] = {
+            "up_streak": up_streak,
+            "down_streak": down_streak,
+            "top3_streak": top3_streak,
+            "bottom3_streak": bottom3_streak,
+        }
+    return signals
+
+
 def cleanup_history():
     if not os.path.isdir(HISTORY_DIR):
         return
@@ -1040,6 +1287,8 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 .sent-positive-label{color:#15803d}
 .sent-negative-label{color:#b91c1c}
 .sent-neutral-label{color:#64748b}
+.llm-tag{display:inline-flex;align-items:center;margin-left:auto;padding:1.5px 6px;background:#f0f9ff;border:1px dashed #7dd3fc;border-radius:4px}
+.llm-summary{background:linear-gradient(90deg,#f0f9ff,#fff);border-left:2px solid #0ea5e9;padding:4px 8px;margin:3px 0;font-size:11px;color:#0c4a6e;border-radius:0 4px 4px 0;line-height:1.5}
 .analyst-bar{display:flex;gap:2px;height:18px;border-radius:4px;overflow:hidden;margin-top:3px}
 .analyst-bar > div{transition:opacity .15s}
 .analyst-bar .sb{background:#15803d}
@@ -1075,6 +1324,25 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 .b-stats .stat-pill.up{background:#dcfce7;color:#15803d}
 .b-stats .stat-pill.dn{background:#fee2e2;color:#b91c1c}
 .b-stats .stat-pill.mu{background:#e2e8f0;color:#475569}
+/* 連續訊號 */
+.signals{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:16px}
+.sig-card{background:var(--card);border:1px solid var(--brd);border-radius:10px;padding:10px 14px;border-left:3px solid var(--bl)}
+.sig-card.pos{border-left-color:var(--gr)}
+.sig-card.neg{border-left-color:var(--rd)}
+.sig-card.warn{border-left-color:var(--am)}
+.sig-card.bot{border-left-color:#7c3aed}
+.sig-card h5{font-size:11.5px;font-weight:700;color:var(--txt);margin-bottom:6px}
+.sig-card .sig-body{display:flex;flex-wrap:wrap;gap:3px}
+.streak-tag{display:inline-block;padding:2px 7px;font-size:10.5px;font-weight:700;border-radius:10px}
+.streak-tag.pos{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+.streak-tag.neg{background:#fee2e2;color:#b91c1c;border:1px solid #fecaca}
+.streak-tag.warn{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.streak-tag.bot{background:#ede9fe;color:#6b21a8;border:1px solid #ddd6fe}
+/* Sankey SVG */
+.sankey-wrap{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:10px;margin-bottom:16px;overflow-x:auto}
+.sankey-svg{width:100%;height:auto;min-width:920px}
+.sankey-svg path:hover{opacity:1 !important}
+.sankey-svg .sankey-node:hover rect{stroke:var(--bl);stroke-width:2}
 /* Backtest table */
 .bt-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .bt-table th{background:#f1f5f9;font-size:11px;color:var(--mu);font-weight:700;padding:8px 12px;text-transform:uppercase;text-align:left}
@@ -1165,6 +1433,122 @@ def _news_age(ts_iso):
 
 # ── HTML 區塊 ───────────────────────────────────────────────────────────
 
+def _gen_signals_panel(signals, stocks):
+    """連續訊號：找出連續漲/跌/在 top3 的股票。"""
+    if not signals:
+        return ""
+    up_items = sorted([(s, v["up_streak"]) for s, v in signals.items() if v["up_streak"] >= 2],
+                      key=lambda x: -x[1])
+    down_items = sorted([(s, v["down_streak"]) for s, v in signals.items() if v["down_streak"] >= 2],
+                        key=lambda x: -x[1])
+    top3_items = sorted([(s, v["top3_streak"]) for s, v in signals.items() if v["top3_streak"] >= 2],
+                       key=lambda x: -x[1])
+    bottom3_items = sorted([(s, v["bottom3_streak"]) for s, v in signals.items() if v["bottom3_streak"] >= 2],
+                          key=lambda x: -x[1])
+
+    def _tags(items, cls):
+        if not items:
+            return '<span style="color:var(--mu);font-size:11.5px">—</span>'
+        parts = []
+        for sym, n in items[:8]:
+            name = stocks.get(sym, {}).get("name", sym) if stocks.get(sym) else sym
+            parts.append(f'<span class="streak-tag {cls}" title="{name}">{sym} {n}天</span>')
+        return "".join(parts)
+
+    boxes = []
+    if up_items:
+        boxes.append(f'<div class="sig-card pos"><h5>🔥 連續收紅</h5><div class="sig-body">{_tags(up_items, "pos")}</div></div>')
+    if down_items:
+        boxes.append(f'<div class="sig-card neg"><h5>❄️ 連續收黑</h5><div class="sig-body">{_tags(down_items, "neg")}</div></div>')
+    if top3_items:
+        boxes.append(f'<div class="sig-card warn"><h5>🏆 連續進 Top-3</h5><div class="sig-body">{_tags(top3_items, "warn")}</div></div>')
+    if bottom3_items:
+        boxes.append(f'<div class="sig-card bot"><h5>📉 連續墊底 Top-3</h5><div class="sig-body">{_tags(bottom3_items, "bot")}</div></div>')
+
+    if not boxes:
+        return '<div class="empty-msg" style="margin:10px 0">連續訊號累積中（需至少 3 個交易日的歷史資料）</div>'
+
+    return f'<div class="signals">{ "".join(boxes) }</div>'
+
+
+def _gen_sankey_svg(stocks, bucket_lookup):
+    """供應鏈依賴關係視覺化（SVG）。
+    左側 9 巨頭，右側 9 bucket，連線粗細 = 依賴強度，顏色 = bucket 平均表現。
+    """
+    giants_list = list(GIANTS)  # (code, name, role)
+    buckets_list = list(BUCKETS)
+
+    W, H = 880, 520
+    left_x = 130
+    right_x = 780
+    top_pad = 30
+    row_h = 52
+
+    # 計算每個 bucket 的平均日漲跌 → 決定連線顏色
+    bucket_avg_pct = {}
+    for key, _, _, syms in buckets_list:
+        ds = [stocks[s]["day_pct"] for s in syms if s in stocks and stocks[s].get("day_pct") is not None]
+        bucket_avg_pct[key] = sum(ds) / len(ds) if ds else 0
+
+    def _color_for_pct(pct):
+        if pct is None or abs(pct) < 0.1:
+            return "#94a3b8"
+        return "#16a34a" if pct > 0 else "#dc2626"
+
+    # 巨頭當日漲跌也著色
+    giant_y = {g[0]: top_pad + i * row_h + row_h / 2 for i, g in enumerate(giants_list)}
+    bucket_y = {b[0]: top_pad + i * row_h + row_h / 2 for i, b in enumerate(buckets_list)}
+
+    svg_parts = [f'<svg class="sankey-svg" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">']
+
+    # 畫連線（先畫，讓 node 在上面）
+    for giant_code, deps in DEPENDENCY.items():
+        for bucket_key, strength in deps.items():
+            y1 = giant_y.get(giant_code)
+            y2 = bucket_y.get(bucket_key)
+            if y1 is None or y2 is None:
+                continue
+            width = strength * 1.4  # 1=1.4, 2=2.8, 3=4.2
+            opacity = 0.25 + strength * 0.15  # 弱連線淡一點
+            color = _color_for_pct(bucket_avg_pct.get(bucket_key, 0))
+            midx = (left_x + right_x) / 2
+            path = f"M{left_x + 10},{y1} C{midx},{y1} {midx},{y2} {right_x - 10},{y2}"
+            svg_parts.append(
+                f'<path d="{path}" stroke="{color}" stroke-width="{width:.1f}" fill="none" opacity="{opacity:.2f}"><title>{giant_code} → {bucket_lookup.get(bucket_key, bucket_key)} · 依賴 {"★" * strength}</title></path>'
+            )
+
+    # 巨頭節點（左）
+    for i, (code, _, role) in enumerate(giants_list):
+        y = giant_y[code]
+        stk = stocks.get(code) or {}
+        day_pct = stk.get("day_pct")
+        score = stk.get("score", 0)
+        score_max = stk.get("score_max", 24)
+        dot_color = _color_for_pct(day_pct)
+        # 節點
+        svg_parts.append(f'<g class="sankey-node giant">')
+        svg_parts.append(f'<rect x="{left_x - 115}" y="{y - 18}" width="115" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
+        svg_parts.append(f'<circle cx="{left_x - 105}" cy="{y}" r="5" fill="{dot_color}"/>')
+        svg_parts.append(f'<text x="{left_x - 95}" y="{y - 3}" font-size="13" font-weight="700" fill="#1e293b">{code}</text>')
+        svg_parts.append(f'<text x="{left_x - 95}" y="{y + 11}" font-size="10" fill="#64748b">{_fmt_pct(day_pct)} · {score}/{score_max}</text>')
+        svg_parts.append(f'</g>')
+
+    # Bucket 節點（右）
+    for i, (key, label, role, syms) in enumerate(buckets_list):
+        y = bucket_y[key]
+        avg_pct = bucket_avg_pct.get(key)
+        dot_color = _color_for_pct(avg_pct)
+        svg_parts.append(f'<g class="sankey-node bucket-node">')
+        svg_parts.append(f'<rect x="{right_x}" y="{y - 18}" width="130" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
+        svg_parts.append(f'<circle cx="{right_x + 10}" cy="{y}" r="5" fill="{dot_color}"/>')
+        svg_parts.append(f'<text x="{right_x + 20}" y="{y - 3}" font-size="12" font-weight="700" fill="#1e293b">{label}</text>')
+        svg_parts.append(f'<text x="{right_x + 20}" y="{y + 11}" font-size="10" fill="#64748b">{_fmt_pct(avg_pct)} · {len(syms)} 檔</text>')
+        svg_parts.append(f'</g>')
+
+    svg_parts.append('</svg>')
+    return '<div class="sankey-wrap">' + "".join(svg_parts) + '</div>'
+
+
 def _gen_capex_panel(capex_groups, bucket_lookup):
     if not capex_groups:
         return '<div class="empty-msg" style="padding:8px 0">Capex 資料需 FMP 完整 quota，明日自動補上</div>'
@@ -1234,8 +1618,8 @@ def _gen_legend():
 </details>'''
 
 
-def _gen_backtest(stocks):
-    """Score 與 1 年報酬的相關性驗證。"""
+def _gen_backtest(stocks, benchmarks):
+    """Score 與 1 年報酬的相關性 + 組合 vs 大盤比較。"""
     items = [
         (s["symbol"], s["name"], s["score"], (s.get("tech") or {}).get("pct_252d"))
         for s in stocks.values()
@@ -1264,18 +1648,39 @@ def _gen_backtest(stocks):
         cls = _pct_cls(avg)
         tier_rows += f'<tr><td>{label}</td><td class="num">{len(arr)}</td><td class="num {cls}">{_fmt_pct(avg)}</td></tr>'
 
+    # 組合 vs 大盤
+    giant_syms = [code for code, _, _ in GIANTS]
+    high_score_syms = [s["symbol"] for s in stocks.values() if s["score"] >= 14]
+    portfolio_rows = [
+        ("AI 九巨頭（等權）", compute_portfolio_return(stocks, giant_syms)),
+        (f"高分組合（≥14 分，{len(high_score_syms)} 檔等權）", compute_portfolio_return(stocks, high_score_syms)),
+    ]
+    bench_rows = [(b["label"] + f" ({b['symbol']})", b.get("pct_252d")) for b in (benchmarks or [])]
+
+    cmp_rows = ""
+    for label, val in portfolio_rows + bench_rows:
+        if val is None:
+            cmp_rows += f'<tr><td>{label}</td><td class="num mu">─</td></tr>'
+        else:
+            cls = _pct_cls(val)
+            cmp_rows += f'<tr><td>{label}</td><td class="num {cls}">{_fmt_pct(val)}</td></tr>'
+
     valid = "✓ 評分系統有效" if diff > 10 else "⚠️ 評分與 1 年報酬相關性弱（可能因上市時間短或市場剛反轉）" if diff < 0 else "→ 相關性尚可"
 
-    return f'''<div class="ttl">📊 評分有效性驗證（Top10 vs Bottom10 · 1 年報酬）</div>
-<div class="desc">依當前紅黃綠燈分數分三級，看過去 1 年平均報酬率。若高分平均報酬明顯高於低分，代表評分有一定預測力。<b>免責</b>：這是快照型驗證（用當前評分套過去價格），不是嚴格回測</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-  <table class="bt-table"><tr><th>分數等級</th><th class="num">檔數</th><th class="num">1 年平均報酬</th></tr>{tier_rows}</table>
-  <div style="background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:14px;font-size:12.5px;line-height:1.8">
-    <div style="color:var(--mu);font-size:11px;font-weight:700;margin-bottom:6px">⛳ 摘要</div>
-    Top10 均報酬：<b class="{_pct_cls(top_avg)}">{_fmt_pct(top_avg)}</b><br/>
-    Bottom10 均報酬：<b class="{_pct_cls(bot_avg)}">{_fmt_pct(bot_avg)}</b><br/>
-    <b>差距：{_fmt_pct(diff)}</b><br/>
-    <span style="color:var(--mu)">{valid}</span>
+    return f'''<div class="ttl">📊 組合比較 + 評分有效性</div>
+<div class="desc">左：依當前紅黃綠燈分數分三級的 1 年平均報酬。右：AI 策略組合（九巨頭等權 + 高分等權）vs 大盤 ETF 的 1 年報酬。<b>免責</b>：快照型驗證（用當前評分套過去價格），不是嚴格回測</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
+  <div>
+    <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px">🚦 依分數等級</div>
+    <table class="bt-table"><tr><th>等級</th><th class="num">檔數</th><th class="num">1 年平均</th></tr>{tier_rows}</table>
+    <div style="margin-top:8px;background:var(--card);border:1px solid var(--brd);border-radius:6px;padding:8px 12px;font-size:11.5px;line-height:1.6">
+      Top10 均：<b class="{_pct_cls(top_avg)}">{_fmt_pct(top_avg)}</b> · Bottom10 均：<b class="{_pct_cls(bot_avg)}">{_fmt_pct(bot_avg)}</b>
+      · 差距 <b>{_fmt_pct(diff)}</b> · <span style="color:var(--mu)">{valid}</span>
+    </div>
+  </div>
+  <div>
+    <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px">📈 組合 vs 大盤（1 年）</div>
+    <table class="bt-table"><tr><th>組合 / 基準</th><th class="num">1 年報酬</th></tr>{cmp_rows}</table>
   </div>
 </div>'''
 
@@ -1519,12 +1924,28 @@ def _gen_news_block(s):
         matched = n.get("matched_keywords", [])
         matched_title = (" · 關鍵字: " + ", ".join(matched[:3])) if matched else ""
 
-        tags = f'<div class="news-tags"><span class="cat-pill cat-{cat}" title="{cat_label}{matched_title}">{cat_label}</span><span class="sent-dot sent-{sentiment}"></span><span class="sent-label sent-{sentiment}-label">{sent_label}</span></div>'
+        tags = f'<div class="news-tags"><span class="cat-pill cat-{cat}" title="{cat_label}{matched_title}">{cat_label}</span><span class="sent-dot sent-{sentiment}"></span><span class="sent-label sent-{sentiment}-label">{sent_label}</span>'
+
+        # LLM 分析輸出（若有）
+        llm = n.get("llm") or {}
+        if llm:
+            impact = llm.get("impact", "neutral")
+            mag = llm.get("magnitude", "low")
+            llm_cat = llm.get("category", "other")
+            mag_emoji = "🔥" if mag == "high" else "⚡" if mag == "medium" else "·"
+            impact_cls = "sent-positive" if impact == "bullish" else "sent-negative" if impact == "bearish" else "sent-neutral"
+            tags += f'<span class="llm-tag" title="AI 深度分析 · {llm_cat}"><span class="{impact_cls}" style="font-size:10px">🤖 {mag_emoji} {impact}</span></span>'
+
+        tags += '</div>'
+
+        zh_summary = ""
+        if llm and llm.get("zh"):
+            zh_summary = f'<div class="llm-summary">💡 {llm["zh"]}</div>'
 
         meta_parts = [x for x in (provider, age) if x]
         meta = f'<div class="news-meta"><span>{" · ".join(meta_parts)}</span></div>'
 
-        items += f'<div class="news-item">{tags}{open_}{n["title"]}{close_}{meta}</div>'
+        items += f'<div class="news-item">{tags}{open_}{n["title"]}{close_}{zh_summary}{meta}</div>'
 
     return f'<div class="sd-block"><h5>📰 新聞 (yfinance · 48h)</h5>{summary}{items}</div>'
 
@@ -1539,13 +1960,15 @@ def _gen_cross_check_block(s):
     return f'<div class="warn-box">⚠️ 兩源差異偵測：{" ; ".join(parts)}</div>'
 
 
-def generate_html(stocks, capex_groups):
+def generate_html(stocks, capex_groups, signals, benchmarks):
     bucket_lookup = {k: label for k, label, _, _ in BUCKETS}
     giants_grid = _gen_giants_grid(stocks)
     supply_chain = _gen_supply_chain(stocks)
     capex_html = _gen_capex_panel(capex_groups, bucket_lookup)
     legend_html = _gen_legend()
-    backtest_html = _gen_backtest(stocks)
+    backtest_html = _gen_backtest(stocks, benchmarks)
+    signals_html = _gen_signals_panel(signals, stocks)
+    sankey_html = _gen_sankey_svg(stocks, bucket_lookup)
 
     n_green = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "green")
     n_red = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "red")
@@ -1572,7 +1995,15 @@ def generate_html(stocks, capex_groups):
   <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分 · 最高 24 分）</div>
   {giants_grid}
 
+  <div class="ttl">🔄 連續訊號（歷史累積）</div>
+  <div class="desc">從每日快照累積，找出連續漲/跌、連續進 Top-3 的標的（需至少 3 個交易日歷史）</div>
+  {signals_html}
+
   {backtest_html}
+
+  <div class="ttl">🕸 供應鏈依賴關係圖（巨頭 ↔ Bucket）</div>
+  <div class="desc">連線粗細 = 依賴強度（★/★★/★★★）。連線顏色 = 該 bucket 當日平均漲跌（綠漲紅跌）。節點顯示當日 % 與紅黃綠燈分數</div>
+  {sankey_html}
 
   <div class="ttl">🔗 供應鏈（由上游至下游）</div>
   <div class="desc">每個 bucket 標示哪些巨頭依賴它（★=弱、★★=中、★★★=關鍵）。點 bucket 展開個股清單，個股依紅黃綠燈分數排序。再點個股看完整技術/基本面/分析師/新聞分析</div>
@@ -1591,7 +2022,7 @@ def main():
     print(f"追蹤 {len(symbols)} 檔個股（9 巨頭 + {len(symbols)-9} 檔供應鏈）\n")
 
     # 1. yfinance 批次 K 線（技術面資料）
-    print("yfinance：批次抓 1 年 K 線...")
+    print("yfinance：批次抓 2 年 K 線...")
     bars_df = yf_batch_bars(symbols)
     print("  完成\n")
 
@@ -1616,7 +2047,10 @@ def main():
     for s in rank:
         print(f"  {s['symbol']:6s} {s['score']:2d}/{s['score_max']:2d} · {s['name']}")
 
-    # 5. Capex 週期（僅九巨頭有 capex_quarterly）
+    # 5. LLM 新聞深度分析（九巨頭 only，gated by ANTHROPIC_API_KEY）
+    enrich_news_with_llm(stocks)
+
+    # 6. Capex 週期
     capex_groups = compute_capex_groups(fmp_map)
     if capex_groups:
         print("\n=== Capex 週期 ===")
@@ -1625,12 +2059,19 @@ def main():
             yoy_s = f"{yoy:+.1f}%" if yoy is not None else "─"
             print(f"  {g['label']}: TTM ${g['total_ttm']/1e9:.1f}B · YoY {yoy_s}")
 
-    # 6. 歷史快照
+    # 7. Benchmark ETFs
+    print("\n抓 benchmark ETFs...")
+    benchmarks = fetch_benchmarks()
+
+    # 8. 歷史快照 + 連續訊號
     save_history_snapshot(stocks)
     cleanup_history()
+    history = load_history()
+    signals = compute_consecutive_signals(history, stocks) if history else {}
+    print(f"\n連續訊號計算：歷史 {len(history)} 天")
 
-    # 7. HTML
-    html = generate_html(stocks, capex_groups)
+    # 9. HTML
+    html = generate_html(stocks, capex_groups, signals, benchmarks)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n儀表板輸出至 {OUTPUT_HTML}")
