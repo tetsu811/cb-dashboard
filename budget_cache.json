@@ -6687,5 +6687,142 @@
         "expected_alpha_bp": 0.44379958220902305
       }
     ]
+  },
+  "119-hr-2483": {
+    "bill_id": "119-hr-2483",
+    "pipeline_version": "v0.2",
+    "title": "SUPPORT for Patients and Communities Reauthorization Act of 2025",
+    "congress": 119,
+    "type": "hr",
+    "number": "2483",
+    "url": "https://www.congress.gov/bill/119th-congress/house-bill/2483",
+    "policy_area": "Health",
+    "stage": "signed",
+    "stage_label": "已簽署",
+    "passage_baseline": 1.0,
+    "passage_nuance_adj": 0.0,
+    "passage_nuance_reason": "",
+    "passage_prob": 0.98,
+    "cosponsors_total": 1,
+    "cosponsors_R": 0,
+    "cosponsors_D": 1,
+    "budget": {
+      "total_amount_usd": 1119312500.0,
+      "period_years": 5,
+      "programs": [
+        {
+          "name": "Prenatal and Postnatal Health (Section 317L)",
+          "amount_usd": 21250000.0,
+          "industry_hint": "孕產婦健康"
+        },
+        {
+          "name": "Preventing Overdoses of Controlled Substances (Section 392A)",
+          "amount_usd": 62500000.0,
+          "industry_hint": "藥物過量預防"
+        },
+        {
+          "name": "Monitoring and Reporting of Child, Youth, and Adult Trauma",
+          "amount_usd": 45000000.0,
+          "industry_hint": "兒童青少年創傷治療"
+        },
+        {
+          "name": "Residential Treatment Program for Pregnant and Postpartum Women (Section 508)",
+          "amount_usd": 194655000.0,
+          "industry_hint": "孕產婦住宅治療"
+        },
+        {
+          "name": "Loan Repayment Program for Substance Use Disorder Treatment Workforce (Section 781)",
+          "amount_usd": 200000000.0,
+          "industry_hint": "物質使用障礙治療勞動力貸款減免"
+        },
+        {
+          "name": "Building Communities of Recovery (Section 547)",
+          "amount_usd": 85000000.0,
+          "industry_hint": "恢復社區建設"
+        },
+        {
+          "name": "Youth Prevention and Recovery (Section 7102)",
+          "amount_usd": 310906500.0,
+          "industry_hint": "青年預防與復原"
+        }
+      ],
+      "is_appropriation": false,
+      "confidence": 0.85,
+      "notes": "本法案為授權法案（Authorization）而非撥款法案，授權額度為財年2026-2030共5年。多項計畫金額來自內文段落的年度授權額度乘以5年累計。實際撥款需待國會後續通過撥款法案。"
+    },
+    "companies_raw": null,
+    "latest_action": {
+      "actionDate": "2025-12-01",
+      "text": "Became Public Law No: 119-44."
+    },
+    "last_action_date": "2025-12-01",
+    "fetched_at": "2026-04-19T08:27:07.902632+00:00",
+    "beneficiaries": []
+  },
+  "119-s-3923": {
+    "bill_id": "119-s-3923",
+    "pipeline_version": "v0.2",
+    "title": "Weather Research and Forecasting Innovation Reauthorization Act of 2026",
+    "congress": 119,
+    "type": "s",
+    "number": "3923",
+    "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3923",
+    "policy_area": "Transportation and Public Works",
+    "stage": "reported",
+    "stage_label": "委員會通過",
+    "passage_baseline": 0.35,
+    "passage_nuance_adj": 0.0,
+    "passage_nuance_reason": "",
+    "passage_prob": 0.6449999999999999,
+    "cosponsors_total": 9,
+    "cosponsors_R": 4,
+    "cosponsors_D": 5,
+    "budget": {
+      "total_amount_usd": 545239000.0,
+      "period_years": 5,
+      "programs": [
+        {
+          "name": "Weather Laboratories and Cooperative Institutes",
+          "amount_usd": 188940000.0,
+          "industry_hint": "氣象研究"
+        },
+        {
+          "name": "United States Weather Research Program",
+          "amount_usd": 79377000.0,
+          "industry_hint": "氣象研究"
+        },
+        {
+          "name": "Tornado, Severe Storm, and Next Generation Radar Research",
+          "amount_usd": 42445000.0,
+          "industry_hint": "颶風/嚴重天氣預警"
+        },
+        {
+          "name": "Joint Technology Transfer Initiative",
+          "amount_usd": 24470000.0,
+          "industry_hint": "技術轉移"
+        },
+        {
+          "name": "Tsunami Hazard Mitigation Program",
+          "amount_usd": 150000000.0,
+          "industry_hint": "海嘯預警與防災"
+        },
+        {
+          "name": "General Act Implementation",
+          "amount_usd": 75000000.0,
+          "industry_hint": "法案總體執行"
+        }
+      ],
+      "is_appropriation": false,
+      "confidence": 0.85,
+      "notes": "此為授權法案（Authorization），非實際撥款。涵蓋2026-2030年五年期，多個計畫項目的授權金額合計約5.45億美元，主要聚焦氣象預報創新和災害預警系統。"
+    },
+    "companies_raw": null,
+    "latest_action": {
+      "actionDate": "2026-03-04",
+      "text": "Committee on Commerce, Science, and Transportation. Ordered to be reported with amendments favorably."
+    },
+    "last_action_date": "2026-03-04",
+    "fetched_at": "2026-04-19T08:28:26.017534+00:00",
+    "beneficiaries": []
   }
 }
