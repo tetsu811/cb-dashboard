@@ -31,6 +31,10 @@ CACHE_FILE = "budget_cache.json"
 LOOKBACK_DAYS = 30
 MAX_BILLS_PER_RUN = 60  # cost 控制：每次最多新處理這麼多件（快取命中的不算）
 
+# 當前國會屆次。119 = 2025-01 ~ 2027-01。每兩年要更新這個值。
+# 不限定屆次的話，Congress.gov API 會把舊法案的 metadata 更新也回傳（1995 年的都會出現）。
+CURRENT_CONGRESS = 119
+
 # Policy areas that map to investable industries (Congress.gov 官方分類)
 POLICY_AREAS_OF_INTEREST = {
     "Appropriations", "Armed Forces and National Security", "Energy",
@@ -135,13 +139,14 @@ def cg_get(path, params=None, max_retries=3):
 
 
 def fetch_recent_bills():
-    """抓取最近 LOOKBACK_DAYS 天有動作的法案。"""
+    """抓取當前屆國會、最近 LOOKBACK_DAYS 天有動作的法案。"""
     from_dt = (datetime.now(timezone.utc) - timedelta(days=LOOKBACK_DAYS)).strftime("%Y-%m-%dT00:00:00Z")
     bills = []
     offset = 0
     page_size = 250
     while True:
-        data = cg_get("/bill", params={
+        # /bill/{congress} 只回傳該屆法案，避免 1995 年舊法案的 metadata 更新也跑出來
+        data = cg_get(f"/bill/{CURRENT_CONGRESS}", params={
             "fromDateTime": from_dt, "limit": page_size, "offset": offset,
             "sort": "updateDate+desc",
         })
@@ -149,9 +154,11 @@ def fetch_recent_bills():
             break
         page = data["bills"]
         bills.extend(page)
-        if len(page) < page_size or len(bills) >= 1000:
+        if len(page) < page_size or len(bills) >= 2000:
             break
         offset += page_size
+    # Defense in depth：即使 API 端已限制，還是過濾一次
+    bills = [b for b in bills if b.get("congress") == CURRENT_CONGRESS]
     return bills
 
 
