@@ -1,0 +1,1262 @@
+#!/usr/bin/env python3
+"""
+AI 供應鏈策略儀表板
+- 九巨頭（Mag7 + TSM + AVGO）為頂層追蹤
+- 由上到下展開至供應鏈 bucket 與個股
+- 資料源：FMP（基本面/分析師面）+ yfinance（價格/新聞/技術面）
+- 兩源交叉驗證；任一失效自動 fallback
+每個交易日收盤後執行，產出 ai_strategy.html。
+"""
+import glob
+import json
+import os
+import sys
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta, timezone
+
+import pandas as pd
+import requests
+import yfinance as yf
+
+TODAY = datetime.now().date()
+NOW_UTC = datetime.now(timezone.utc)
+OUTPUT_HTML = "ai_strategy.html"
+CACHE_FILE = "ai_latest.json"
+HISTORY_DIR = "ai_data"
+MAX_HISTORY_DAYS = 60
+
+# FMP config
+FMP_BASE = "https://financialmodelingprep.com/stable"
+FMP_KEY = os.environ.get("FMP_API_KEY", "").strip()
+FMP_TIMEOUT = 15
+FMP_CACHE_DIR = "ai_fmp_cache"
+# 各端點的快取 TTL（小時）
+FMP_TTL_HOURS = {
+    "ratios": 72,               # 基本面比率 — 財報才動，3 天快取
+    "key-metrics-ttm": 72,      # 同上
+    "financial-scores": 168,    # 一週
+    "price-target-consensus": 24,
+    "grades-historical": 24,
+    "analyst-estimates": 72,
+    "profile": 168,
+    "batch-quote": 0,           # 每次重抓
+}
+
+# ── 九巨頭 ─────────────────────────────────────────────────────────────────
+GIANTS = [
+    ("NVDA",  "NVIDIA",     "AI 晶片"),
+    ("MSFT",  "Microsoft",  "雲端 / Copilot"),
+    ("GOOGL", "Alphabet",   "雲端 / Gemini"),
+    ("META",  "Meta",       "Llama / 廣告"),
+    ("AMZN",  "Amazon",     "AWS / Bedrock"),
+    ("AAPL",  "Apple",      "終端 AI"),
+    ("TSLA",  "Tesla",      "FSD / Dojo"),
+    ("TSM",   "TSMC",       "全球晶圓代工"),
+    ("AVGO",  "Broadcom",   "客製 AI ASIC"),
+]
+
+# ── 供應鏈 buckets（由上游至下游）────────────────────────────────────────
+BUCKETS = [
+    # (key, label, role, [symbols])
+    ("equipment", "半導體設備", "最上游", ["ASML", "AMAT", "LRCX", "KLAC"]),
+    ("eda",       "EDA 工具",   "晶片設計", ["SNPS", "CDNS"]),
+    ("foundry",   "晶圓代工",   "製造核心", ["TSM"]),
+    ("ai_chip",   "AI 晶片",    "運算核心", ["NVDA", "AVGO", "AMD", "MRVL", "QCOM"]),
+    ("hbm",       "HBM / 記憶體", "運算配套", ["MU", "WDC", "STX"]),
+    ("network",   "網通 / 光通訊", "資料中心連結", ["ANET", "LITE", "COHR", "CIEN", "CSCO"]),
+    ("power",     "電源 / 散熱 / 伺服器", "資料中心基建", ["VRT", "ETN", "SMCI", "DELL", "HPE"]),
+    ("cloud_saas", "雲端 / 企業 SaaS", "下游平台", ["ORCL", "CRM", "NOW", "SNOW", "PLTR"]),
+    ("ai_app",    "AI 應用層", "終端應用", ["ADBE", "IBM", "AI", "PATH", "CRWD", "PANW"]),
+]
+
+# 每個巨頭在哪些 bucket 有重要依賴（強度 1-3）
+DEPENDENCY = {
+    "NVDA":  {"foundry": 3, "eda": 3, "equipment": 2, "hbm": 3, "network": 2, "power": 2},
+    "MSFT":  {"ai_chip": 3, "foundry": 2, "hbm": 2, "network": 3, "power": 3, "cloud_saas": 1},
+    "GOOGL": {"ai_chip": 2, "foundry": 3, "hbm": 2, "network": 3, "power": 3, "cloud_saas": 1},
+    "META":  {"ai_chip": 3, "foundry": 2, "hbm": 2, "network": 3, "power": 3, "ai_app": 1},
+    "AMZN":  {"ai_chip": 2, "foundry": 2, "hbm": 2, "network": 3, "power": 3, "cloud_saas": 1},
+    "AAPL":  {"foundry": 3, "eda": 2, "equipment": 1, "ai_app": 1},
+    "TSLA":  {"foundry": 2, "ai_chip": 1},
+    "TSM":   {"equipment": 3, "eda": 2},
+    "AVGO":  {"foundry": 3, "eda": 3, "network": 3},
+}
+
+# ── 抓取參數 ────────────────────────────────────────────────────────────
+WORKERS = 8
+NEWS_PER_STOCK = 3
+NEWS_MAX_AGE_HOURS = 48
+CROSS_CHECK_DIFF_PCT = 2.0  # 兩源差超過這個 % 就提示
+
+# ── 紅黃綠燈門檻 ────────────────────────────────────────────────────────
+TRAFFIC_LIGHT_RULES = {
+    # 損益表 4 盞
+    "revenue_growth_yoy": {"green": 0.15, "yellow": 0.05, "higher_better": True, "label": "營收年增"},
+    "operating_margin":   {"green": 0.20, "yellow": 0.10, "higher_better": True, "label": "營業利益率"},
+    "net_margin":         {"green": 0.15, "yellow": 0.07, "higher_better": True, "label": "淨利率"},
+    "gross_margin":       {"green": 0.40, "yellow": 0.25, "higher_better": True, "label": "毛利率"},
+
+    # 資產負債 4 盞
+    "debt_to_equity":     {"green": 0.5,  "yellow": 1.5,  "higher_better": False, "label": "負債/股東權益"},
+    "current_ratio":      {"green": 2.0,  "yellow": 1.0,  "higher_better": True,  "label": "流動比率"},
+    "roe":                {"green": 0.15, "yellow": 0.08, "higher_better": True,  "label": "ROE"},
+    "roic":               {"green": 0.15, "yellow": 0.08, "higher_better": True,  "label": "ROIC"},
+
+    # 現金流 3 盞
+    "fcf_margin":         {"green": 0.15, "yellow": 0.05, "higher_better": True, "label": "FCF / 營收"},
+    "income_quality":     {"green": 0.90, "yellow": 0.70, "higher_better": True, "label": "盈餘品質(FCF/NI)"},
+    "fcf_yield":          {"green": 0.04, "yellow": 0.02, "higher_better": True, "label": "FCF 殖利率"},
+
+    # 估值 1 盞
+    "forward_peg":        {"green": 1.2,  "yellow": 2.0,  "higher_better": False, "label": "Forward PEG"},
+}
+
+
+# ── FMP 客戶端（含檔案快取）─────────────────────────────────────────────
+
+class FMPError(Exception): pass
+
+
+def _cache_path(path, params):
+    """根據 endpoint + params 產生快取檔名。"""
+    os.makedirs(FMP_CACHE_DIR, exist_ok=True)
+    safe_path = path.replace("/", "_")
+    # 從 params 取主要識別（symbol / symbols / limit / period）
+    parts = [safe_path]
+    for k in ("symbol", "symbols", "period"):
+        if k in params:
+            parts.append(f"{k}={params[k]}")
+    if "limit" in params:
+        parts.append(f"limit={params['limit']}")
+    fname = "_".join(parts)[:200] + ".json"
+    return os.path.join(FMP_CACHE_DIR, fname)
+
+
+def _cache_fresh(cache_file, ttl_hours):
+    if ttl_hours <= 0 or not os.path.isfile(cache_file):
+        return False
+    age_s = time.time() - os.path.getmtime(cache_file)
+    return age_s < ttl_hours * 3600
+
+
+def fmp_get(path, **params):
+    """GET /{path}?... 加上 apikey。成功回傳 JSON，失敗 raise。
+    會優先檢查 file cache（依端點 TTL）。"""
+    ttl = FMP_TTL_HOURS.get(path.split("/")[0], 24)
+    cache_file = _cache_path(path, params)
+    if _cache_fresh(cache_file, ttl):
+        try:
+            with open(cache_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+
+    if not FMP_KEY:
+        raise FMPError("FMP_API_KEY env 未設定")
+    params["apikey"] = FMP_KEY
+    url = f"{FMP_BASE}/{path}"
+    try:
+        r = requests.get(url, params=params, timeout=FMP_TIMEOUT)
+    except requests.RequestException as e:
+        raise FMPError(f"network: {e}")
+    if r.status_code != 200:
+        raise FMPError(f"HTTP {r.status_code}: {r.text[:120]}")
+    try:
+        data = r.json()
+    except ValueError:
+        raise FMPError(f"invalid JSON: {r.text[:120]}")
+    if isinstance(data, dict) and "Error Message" in data:
+        raise FMPError(data["Error Message"])
+    if isinstance(data, str) and "Restricted" in data:
+        raise FMPError("endpoint restricted on current plan")
+
+    # 成功 → 存快取
+    try:
+        with open(cache_file, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False)
+    except Exception:
+        pass
+    return data
+
+
+def fmp_safe(path, default=None, **params):
+    """Graceful — 失敗回 default、不噴。"""
+    try:
+        return fmp_get(path, **params)
+    except FMPError as e:
+        print(f"  [FMP {path}] {e}")
+        return default
+
+
+def fmp_batch_quote(symbols):
+    """用 batch-quote 一次抓多檔的 quote，省 API calls。"""
+    if not symbols or not FMP_KEY:
+        return {}
+    syms = ",".join(sorted(set(symbols)))
+    data = fmp_safe("batch-quote", [], symbols=syms)
+    out = {}
+    if isinstance(data, list):
+        for row in data:
+            if "symbol" in row:
+                out[row["symbol"]] = row
+    return out
+
+
+# ── yfinance 工具 ──────────────────────────────────────────────────────
+
+def yf_batch_bars(symbols):
+    """批次抓近 1 年日線，用來算技術指標。"""
+    df = yf.download(
+        list(symbols), period="1y", interval="1d",
+        auto_adjust=False, progress=False, group_by="ticker", threads=True,
+    )
+    return df
+
+
+def yf_metrics_for_symbol(bars_df, sym):
+    """從批次 K 線抽個股指標：day%、MAs、RSI、量能比。"""
+    if sym not in bars_df.columns.get_level_values(0):
+        return None
+    bars = bars_df[sym].dropna(subset=["Close"])
+    if len(bars) < 2:
+        return None
+    closes, vols = bars["Close"], bars["Volume"]
+    last, prev = closes.iloc[-1], closes.iloc[-2]
+    day_pct = (last / prev - 1) * 100
+
+    def pct_over(n):
+        return float((last / closes.iloc[-(n + 1)] - 1) * 100) if len(closes) > n else None
+
+    def ma(n):
+        return float(closes.iloc[-n:].mean()) if len(closes) >= n else None
+
+    vol_today = float(vols.iloc[-1]) if len(vols) else None
+    vol_yday = float(vols.iloc[-2]) if len(vols) >= 2 else None
+    vol_vs_yday = (vol_today / vol_yday) if (vol_yday and vol_today) else None
+
+    return {
+        "price": float(last),
+        "day_pct": float(day_pct),
+        "pct_5d": pct_over(5),
+        "pct_20d": pct_over(20),
+        "pct_60d": pct_over(60),
+        "pct_252d": pct_over(252),  # 1 年
+        "ma20": ma(20),
+        "ma50": ma(50),
+        "ma200": ma(200),
+        "above_ma50": ma(50) and last > ma(50),
+        "above_ma200": ma(200) and last > ma(200),
+        "vol_vs_yday": float(vol_vs_yday) if vol_vs_yday else None,
+        "rsi": _rsi(closes),
+    }
+
+
+def _rsi(closes, period=14):
+    if len(closes) < period + 1:
+        return None
+    diffs = closes.diff().dropna()
+    gains = diffs.clip(lower=0)
+    losses = (-diffs).clip(lower=0)
+    avg_g = gains.iloc[:period].mean()
+    avg_l = losses.iloc[:period].mean()
+    for g, l in zip(gains.iloc[period:], losses.iloc[period:]):
+        avg_g = (avg_g * (period - 1) + g) / period
+        avg_l = (avg_l * (period - 1) + l) / period
+    if avg_l == 0:
+        return 100.0
+    return float(100 - 100 / (1 + avg_g / avg_l))
+
+
+def _parse_news_item(raw, related_sym):
+    c = raw.get("content") or {}
+    if c.get("contentType") not in (None, "STORY", "VIDEO"):
+        return None
+    title = c.get("title") or ""
+    if not title:
+        return None
+    pub = c.get("pubDate") or c.get("displayTime")
+    try:
+        ts = datetime.fromisoformat(pub.replace("Z", "+00:00")) if pub else None
+    except (ValueError, AttributeError):
+        ts = None
+    if ts and (NOW_UTC - ts).total_seconds() > NEWS_MAX_AGE_HOURS * 3600:
+        return None
+    return {
+        "symbol": related_sym,
+        "title": title,
+        "url": (c.get("clickThroughUrl") or {}).get("url") or (c.get("canonicalUrl") or {}).get("url") or "",
+        "provider": (c.get("provider") or {}).get("displayName", ""),
+        "timestamp": ts.isoformat() if ts else None,
+        "ts_epoch": ts.timestamp() if ts else 0,
+    }
+
+
+def yf_fundamentals(sym):
+    """從 yfinance .info 抽基本面欄位（當 FMP 失效的備援）。"""
+    try:
+        info = yf.Ticker(sym).info or {}
+    except Exception:
+        return {}
+    return {
+        # 利潤率
+        "gross_margin": info.get("grossMargins"),
+        "operating_margin": info.get("operatingMargins"),
+        "net_margin": info.get("profitMargins"),
+        # 成長性
+        "revenue_growth_yoy": info.get("revenueGrowth"),
+        # 資產負債
+        "current_ratio": info.get("currentRatio"),
+        "roe": info.get("returnOnEquity"),
+        # yfinance 的 debtToEquity 是 0-400+ 的百分比刻度，要換算
+        "debt_to_equity": (info["debtToEquity"] / 100.0) if info.get("debtToEquity") else None,
+        # 現金流
+        "fcf_ttm": info.get("freeCashflow"),
+        "ocf_ttm": info.get("operatingCashflow"),
+        "total_revenue": info.get("totalRevenue"),
+        "market_cap": info.get("marketCap"),
+        # 估值
+        "forward_pe": info.get("forwardPE"),
+        "trailing_pe": info.get("trailingPE"),
+        "peg_ratio": info.get("pegRatio"),
+        # 分析師
+        "target_mean_price": info.get("targetMeanPrice"),
+        "target_high_price": info.get("targetHighPrice"),
+        "target_low_price": info.get("targetLowPrice"),
+        "num_analysts": info.get("numberOfAnalystOpinions"),
+        "recommendation_mean": info.get("recommendationMean"),  # 1=strong buy ... 5=strong sell
+        "recommendation_key": info.get("recommendationKey"),
+        # 其他
+        "industry": info.get("industry"),
+        "long_name": info.get("longName") or info.get("shortName"),
+    }
+
+
+def fetch_yf_fundamentals_bulk(symbols):
+    """並行抓 yfinance .info 當 FMP 備援。"""
+    out = {}
+    syms = sorted(set(symbols))
+    print(f"yfinance：並行抓 {len(syms)} 檔 .info 作為基本面備援...")
+    t0 = time.time()
+    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+        futures = {ex.submit(yf_fundamentals, s): s for s in syms}
+        for fut in as_completed(futures):
+            sym = futures[fut]
+            try:
+                out[sym] = fut.result()
+            except Exception:
+                out[sym] = {}
+    print(f"  完成，耗時 {time.time()-t0:.1f}s")
+    return out
+
+
+def yf_news_for_symbol(sym):
+    try:
+        news = yf.Ticker(sym).news or []
+    except Exception:
+        return []
+    items = []
+    for raw in news:
+        it = _parse_news_item(raw, sym)
+        if it:
+            items.append(it)
+    items.sort(key=lambda x: x["ts_epoch"], reverse=True)
+    return items[:NEWS_PER_STOCK]
+
+
+# ── FMP 綜合抓取（每檔個股一組 API 呼叫）────────────────────────────────
+
+def fmp_enrichment(sym, include_estimates):
+    """抓單一個股的 FMP 資料（核心端點）。"""
+    out = {
+        "quote": None,          # 由 batch-quote 另外注入
+        "ratios_latest": None,
+        "ratios_history": [],
+        "key_metrics_ttm": None,
+        "financial_scores": None,
+        "analyst_estimates_next": None,
+        "price_target": None,
+        "grades": None,
+    }
+
+    # 核心 5 端點（所有個股都抓）
+    rh = fmp_safe("ratios", [], symbol=sym, period="annual", limit=5)
+    if isinstance(rh, list) and rh:
+        out["ratios_history"] = rh
+        out["ratios_latest"] = rh[0]
+
+    km = fmp_safe("key-metrics-ttm", [], symbol=sym)
+    if isinstance(km, list) and km:
+        out["key_metrics_ttm"] = km[0]
+
+    fs = fmp_safe("financial-scores", [], symbol=sym)
+    if isinstance(fs, list) and fs:
+        out["financial_scores"] = fs[0]
+
+    pt = fmp_safe("price-target-consensus", [], symbol=sym)
+    if isinstance(pt, list) and pt:
+        out["price_target"] = pt[0]
+
+    gh = fmp_safe("grades-historical", [], symbol=sym, limit=1)
+    if isinstance(gh, list) and gh:
+        out["grades"] = gh[0]
+
+    # analyst-estimates 只對九巨頭抓（省 quota）
+    if include_estimates:
+        ae = fmp_safe("analyst-estimates", [], symbol=sym, period="annual", limit=2)
+        if isinstance(ae, list):
+            for r in ae:
+                try:
+                    yr = int(r["date"][:4])
+                    if yr >= TODAY.year:
+                        out["analyst_estimates_next"] = r
+                        break
+                except (KeyError, ValueError):
+                    pass
+
+    return sym, out
+
+
+def fetch_fmp_bulk(symbols):
+    """並行抓所有個股的 FMP 資料。"""
+    data = {}
+    if not FMP_KEY:
+        print("⚠️  FMP_API_KEY 未設定，將僅使用 yfinance")
+        return data
+
+    giant_set = {code for code, _, _ in GIANTS}
+    syms = sorted(set(symbols))
+
+    # 1. Batch quote 一次搞定（1 call）
+    print(f"FMP：batch-quote {len(syms)} 檔...")
+    quotes = fmp_batch_quote(syms)
+    print(f"  收到 {len(quotes)} 檔 quote")
+
+    # 2. 每檔 5 個核心端點（九巨頭多 1 個 analyst-estimates）
+    print(f"FMP：平行抓每檔的基本面/分析師資料...")
+    t0 = time.time()
+    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+        futures = {ex.submit(fmp_enrichment, s, s in giant_set): s for s in syms}
+        for fut in as_completed(futures):
+            sym, result = fut.result()
+            result["quote"] = quotes.get(sym)
+            data[sym] = result
+    print(f"  完成，耗時 {time.time()-t0:.1f}s")
+    return data
+
+
+def fetch_yf_bulk(symbols):
+    """並行抓 yfinance 的新聞（價格走批次）。"""
+    news_map = {}
+    syms = sorted(set(symbols))
+    print(f"yfinance：並行抓 {len(syms)} 檔個股新聞...")
+    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
+        futures = {ex.submit(yf_news_for_symbol, s): s for s in syms}
+        for fut in as_completed(futures):
+            sym = futures[fut]
+            news_map[sym] = fut.result()
+    return news_map
+
+
+# ── 交叉驗證 ────────────────────────────────────────────────────────────
+
+def _cross_check_fundamentals(fmp, yf_fund):
+    """比對 FMP ratios 和 yfinance .info 的重疊欄位（當兩源都有）。"""
+    warnings = []
+    if not fmp or not yf_fund:
+        return warnings
+    r = fmp.get("ratios_latest") or {}
+    pairs = [
+        ("gross_margin", r.get("grossProfitMargin"), yf_fund.get("gross_margin")),
+        ("operating_margin", r.get("operatingProfitMargin"), yf_fund.get("operating_margin")),
+        ("net_margin", r.get("netProfitMargin"), yf_fund.get("net_margin")),
+        ("current_ratio", r.get("currentRatio"), yf_fund.get("current_ratio")),
+    ]
+    for label, fmp_v, yf_v in pairs:
+        if fmp_v is None or yf_v is None:
+            continue
+        avg = (abs(fmp_v) + abs(yf_v)) / 2
+        if avg == 0:
+            continue
+        diff_pct = abs(fmp_v - yf_v) / avg * 100
+        if diff_pct > 10:  # 基本面欄位差 10% 才 flag（因 fiscal year 不同很常見）
+            warnings.append({"field": label, "yf": yf_v, "fmp": fmp_v, "diff_pct": round(diff_pct, 1)})
+    return warnings
+
+
+def cross_check(yf_tech, fmp):
+    """兩源重疊欄位比對；回傳 warnings list。"""
+    warnings = []
+    if not fmp:
+        return warnings
+    q = fmp.get("quote") or {}
+    prof = fmp.get("profile") or {}
+
+    checks = []
+    # 價格
+    if yf_tech and q.get("price"):
+        checks.append(("price", yf_tech["price"], q["price"]))
+    # 市值
+    yf_mc = None  # 可從 prof/quote 取，yfinance 也有，但我們這邊只存了 tech
+    fmp_mc = q.get("marketCap") or prof.get("marketCap")
+    # 日漲跌
+    if yf_tech and q.get("changePercentage") is not None:
+        checks.append(("day_change_%", yf_tech["day_pct"], q["changePercentage"]))
+    # 50 日均
+    if yf_tech and yf_tech.get("ma50") and q.get("priceAvg50"):
+        checks.append(("MA50", yf_tech["ma50"], q["priceAvg50"]))
+    # 200 日均
+    if yf_tech and yf_tech.get("ma200") and q.get("priceAvg200"):
+        checks.append(("MA200", yf_tech["ma200"], q["priceAvg200"]))
+
+    for label, a, b in checks:
+        if a is None or b is None:
+            continue
+        avg = (abs(a) + abs(b)) / 2
+        if avg == 0:
+            continue
+        diff_pct = abs(a - b) / avg * 100
+        if diff_pct > CROSS_CHECK_DIFF_PCT:
+            warnings.append({
+                "field": label,
+                "yf": a,
+                "fmp": b,
+                "diff_pct": round(diff_pct, 2),
+            })
+    return warnings
+
+
+# ── 紅黃綠燈計算 ────────────────────────────────────────────────────────
+
+def _extract_fundamentals(fmp, yf_fund):
+    """從 FMP 擷取紅黃綠燈欄位，缺的地方由 yfinance .info 補上。
+    同時記錄每個欄位來自哪一源，供交叉驗證/透明度顯示。"""
+    out = {}
+    sources = {}
+    fmp = fmp or {}
+    yf_fund = yf_fund or {}
+    r = fmp.get("ratios_latest") or {}
+    km = fmp.get("key_metrics_ttm") or {}
+    scores = fmp.get("financial_scores") or {}
+
+    def _take(key, fmp_val, yf_val):
+        """優先 FMP、缺了用 yf、都沒就 None。"""
+        if fmp_val is not None:
+            out[key] = fmp_val
+            sources[key] = "fmp"
+        elif yf_val is not None:
+            out[key] = yf_val
+            sources[key] = "yf"
+        else:
+            out[key] = None
+            sources[key] = None
+
+    # 損益
+    _take("gross_margin", r.get("grossProfitMargin"), yf_fund.get("gross_margin"))
+    _take("operating_margin", r.get("operatingProfitMargin"), yf_fund.get("operating_margin"))
+    _take("net_margin", r.get("netProfitMargin"), yf_fund.get("net_margin"))
+
+    # 營收年增率：FMP 5 年 ratios 裡有 revenuePerShare，yf 有 revenueGrowth
+    fmp_rev_yoy = None
+    rh = fmp.get("ratios_history") or []
+    if len(rh) >= 2 and rh[0].get("revenuePerShare") and rh[1].get("revenuePerShare"):
+        y1, y2 = rh[0]["revenuePerShare"], rh[1]["revenuePerShare"]
+        if y2:
+            fmp_rev_yoy = (y1 - y2) / y2
+    _take("revenue_growth_yoy", fmp_rev_yoy, yf_fund.get("revenue_growth_yoy"))
+
+    # 資產負債
+    _take("debt_to_equity", r.get("debtToEquityRatio"), yf_fund.get("debt_to_equity"))
+    _take("current_ratio", r.get("currentRatio"), yf_fund.get("current_ratio"))
+    _take("roe", km.get("returnOnEquityTTM"), yf_fund.get("roe"))
+    _take("roic", km.get("returnOnInvestedCapitalTTM"), None)  # yf 沒 ROIC
+
+    # 現金流
+    fmp_fcf_margin = None
+    ocf_sales = r.get("operatingCashFlowSalesRatio")
+    fcf_ocf = r.get("freeCashFlowOperatingCashFlowRatio")
+    if ocf_sales and fcf_ocf:
+        fmp_fcf_margin = ocf_sales * fcf_ocf
+    yf_fcf_margin = None
+    if yf_fund.get("fcf_ttm") and yf_fund.get("total_revenue"):
+        yf_fcf_margin = yf_fund["fcf_ttm"] / yf_fund["total_revenue"]
+    _take("fcf_margin", fmp_fcf_margin, yf_fcf_margin)
+
+    _take("income_quality", km.get("incomeQualityTTM") or fcf_ocf, None)
+    _take("fcf_yield", km.get("freeCashFlowYieldTTM"), None)
+
+    # 估值
+    fmp_fpeg = r.get("forwardPriceToEarningsGrowthRatio") or r.get("priceToEarningsGrowthRatio")
+    _take("forward_peg", fmp_fpeg, yf_fund.get("peg_ratio"))
+
+    # 附帶指標
+    out["piotroski"] = scores.get("piotroskiScore")
+    out["altman_z"] = scores.get("altmanZScore")
+    out["forward_pe"] = yf_fund.get("forward_pe")  # yf 比較可靠
+    out["trailing_pe"] = yf_fund.get("trailing_pe")
+
+    return out, sources
+
+
+def _light_color(metric, value, rules):
+    """依 rules 回傳 'green'/'yellow'/'red'/'gray'"""
+    if value is None:
+        return "gray"
+    rule = rules.get(metric)
+    if not rule:
+        return "gray"
+    g, y = rule["green"], rule["yellow"]
+    higher = rule["higher_better"]
+    if higher:
+        if value >= g:
+            return "green"
+        if value >= y:
+            return "yellow"
+        return "red"
+    else:  # 越小越好
+        if value <= g:
+            return "green"
+        if value <= y:
+            return "yellow"
+        return "red"
+
+
+def compute_traffic_lights(fundamentals):
+    """回傳 {metric_key: {value, color, label}}。"""
+    out = {}
+    for metric, rule in TRAFFIC_LIGHT_RULES.items():
+        val = fundamentals.get(metric)
+        color = _light_color(metric, val, TRAFFIC_LIGHT_RULES)
+        out[metric] = {
+            "value": val,
+            "color": color,
+            "label": rule["label"],
+        }
+    return out
+
+
+def traffic_light_score(lights):
+    """把 12 盞燈加權總分（綠=2 / 黃=1 / 紅/灰=0）。"""
+    score = 0
+    total_possible = 0
+    for _, v in lights.items():
+        c = v["color"]
+        if c == "green":
+            score += 2
+        elif c == "yellow":
+            score += 1
+        total_possible += 2
+    return score, total_possible
+
+
+# ── 聚合 ────────────────────────────────────────────────────────────────
+
+def build_stock_report(sym, name, bars_df, fmp_map, news_map, yf_fund_map):
+    """建立單一個股的完整報告。"""
+    fmp = fmp_map.get(sym) or {}
+    yf_fund = yf_fund_map.get(sym) or {}
+    yf_tech = yf_metrics_for_symbol(bars_df, sym)
+    news = news_map.get(sym, [])
+
+    # 基本價格欄位：yfinance 為主、FMP fallback
+    q = fmp.get("quote") or {}
+    price = (yf_tech or {}).get("price") or q.get("price")
+    day_pct = (yf_tech or {}).get("day_pct") or q.get("changePercentage")
+    market_cap = q.get("marketCap") or yf_fund.get("market_cap")
+    industry = q.get("industry") or yf_fund.get("industry") or q.get("exchange")
+    display_name = name or yf_fund.get("long_name") or q.get("name") or sym
+
+    # 基本面欄位（FMP 為主、yf 為備援；sources 記錄每個欄位來自哪一源）
+    fundamentals, f_sources = _extract_fundamentals(fmp, yf_fund)
+    lights = compute_traffic_lights(fundamentals)
+    # sources 也掛到 lights 上，前台可顯示
+    for k in lights:
+        lights[k]["source"] = f_sources.get(k)
+    score, total = traffic_light_score(lights)
+
+    # 交叉驗證
+    warnings = cross_check(yf_tech, fmp)
+    # yf vs fmp 基本面欄位交叉比對（當兩源都有值時）
+    fund_warnings = _cross_check_fundamentals(fmp, yf_fund)
+    warnings.extend(fund_warnings)
+
+    # 分析師
+    pt = fmp.get("price_target") or {}
+    grades = fmp.get("grades") or {}
+    upside = None
+    if pt.get("targetConsensus") and price:
+        upside = (pt["targetConsensus"] - price) / price * 100
+
+    return {
+        "symbol": sym,
+        "name": display_name,
+        "industry": industry,
+        "price": price,
+        "day_pct": day_pct,
+        "market_cap": market_cap,
+        "tech": yf_tech,
+        "fundamentals": fundamentals,
+        "lights": lights,
+        "score": score,
+        "score_max": total,
+        "cross_check": warnings,
+        "price_target": {
+            "consensus": pt.get("targetConsensus"),
+            "high": pt.get("targetHigh"),
+            "low": pt.get("targetLow"),
+            "upside_pct": upside,
+        },
+        "grades": {
+            "strong_buy": grades.get("analystRatingsStrongBuy"),
+            "buy": grades.get("analystRatingsBuy"),
+            "hold": grades.get("analystRatingsHold"),
+            "sell": grades.get("analystRatingsSell"),
+            "strong_sell": grades.get("analystRatingsStrongSell"),
+        } if grades else None,
+        "analyst_estimates_next": fmp.get("analyst_estimates_next"),
+        "piotroski": (fmp.get("financial_scores") or {}).get("piotroskiScore"),
+        "altman_z": (fmp.get("financial_scores") or {}).get("altmanZScore"),
+        "news": news,
+    }
+
+
+def collect_all_symbols():
+    syms = set()
+    for code, _, _ in GIANTS:
+        syms.add(code)
+    for _, _, _, stocks in BUCKETS:
+        syms.update(stocks)
+    return sorted(syms)
+
+
+# ── 歷史快照 ────────────────────────────────────────────────────────────
+
+def save_history_snapshot(stocks):
+    os.makedirs(HISTORY_DIR, exist_ok=True)
+    slim = {
+        s["symbol"]: {
+            "day_pct": s.get("day_pct"),
+            "price": s.get("price"),
+            "score": s.get("score"),
+        } for s in stocks.values()
+    }
+    payload = {
+        "trade_date": TODAY.isoformat(),
+        "fetched_at": datetime.now().isoformat(),
+        "stocks": slim,
+    }
+    with open(os.path.join(HISTORY_DIR, f"{TODAY.isoformat()}.json"), "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+
+
+def cleanup_history():
+    if not os.path.isdir(HISTORY_DIR):
+        return
+    cutoff = TODAY - timedelta(days=MAX_HISTORY_DAYS)
+    for p in glob.glob(os.path.join(HISTORY_DIR, "*.json")):
+        name = os.path.splitext(os.path.basename(p))[0]
+        try:
+            d = datetime.strptime(name, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        if d < cutoff:
+            try:
+                os.remove(p)
+            except OSError:
+                pass
+
+
+# ── HTML 渲染（下一 section）─────────────────────────────────────────
+
+CSS = """
+:root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b;--card:#fff;--hover:#eef2ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5}
+.hdr{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#2563eb 100%);color:#fff;padding:22px 28px 16px}
+.hdr h1{font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px}
+.hdr .sub{font-size:11.5px;opacity:.85}
+.nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px}
+.nav-link:hover{opacity:.7}
+.construction{background:linear-gradient(90deg,#fef3c7,#fde68a);border-bottom:2px solid #f59e0b;color:#78350f;padding:10px 28px;font-size:12.5px;font-weight:600;text-align:center}
+.pane{padding:22px 28px}
+.ttl{font-size:15px;font-weight:700;margin-bottom:4px}
+.desc{font-size:12.5px;color:var(--mu);margin-bottom:16px;line-height:1.7}
+
+/* 巨頭熱力圖 */
+.giants{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:24px}
+.giant-card{background:var(--card);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;cursor:pointer;transition:transform .12s,box-shadow .12s;position:relative;overflow:hidden}
+.giant-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.giant-card .sym{font-size:11px;font-weight:700;color:var(--mu);letter-spacing:0.4px}
+.giant-card .name{font-size:14px;font-weight:800;margin-top:1px}
+.giant-card .role{font-size:10.5px;color:var(--mu);margin-top:2px}
+.giant-card .px{font-size:18px;font-weight:800;margin-top:8px;letter-spacing:-0.3px}
+.giant-card .chg{font-size:12px;font-weight:700;margin-top:1px}
+.giant-card .chg.up{color:var(--gr)}.giant-card .chg.dn{color:var(--rd)}
+.giant-card .score{position:absolute;top:10px;right:12px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px}
+.score.high{background:#dcfce7;color:#15803d}
+.score.mid{background:#fef3c7;color:#b45309}
+.score.low{background:#fee2e2;color:#b91c1c}
+
+/* 供應鏈區 */
+.chain{margin-top:10px}
+.bucket{background:var(--card);border:1px solid var(--brd);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.bucket > summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#f8fafc 0%,#fff 100%);border-bottom:1px solid var(--brd)}
+.bucket > summary::-webkit-details-marker{display:none}
+.bucket > summary:hover{background:var(--hover)}
+.bucket .b-left{display:flex;align-items:center;gap:12px}
+.bucket .b-title{font-size:14px;font-weight:800}
+.bucket .b-role{font-size:10.5px;color:var(--mu);background:#e2e8f0;padding:2px 8px;border-radius:10px;font-weight:600}
+.bucket .b-stocks-count{font-size:11px;color:var(--mu)}
+.bucket .b-giants{display:flex;gap:4px;flex-wrap:wrap;max-width:40%}
+.bucket .b-giant-chip{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;background:#dbeafe;color:#1e40af}
+.bucket .b-giant-chip.s3{background:#1e40af;color:#fff}
+.bucket .b-giant-chip.s2{background:#60a5fa;color:#fff}
+.bucket .b-giant-chip.s1{background:#bfdbfe;color:#1e3a8a}
+.bucket .chev{color:var(--mu);font-size:11px;transition:transform .15s;margin-left:8px}
+.bucket[open] > summary .chev{transform:rotate(180deg)}
+
+/* 個股列 */
+.b-body{padding:10px 14px}
+details.stock{border-bottom:1px dashed #eef2f7;margin:0}
+details.stock:last-child{border-bottom:none}
+details.stock > summary{list-style:none;cursor:pointer;padding:10px 4px;display:flex;align-items:center;gap:10px;font-size:13px;transition:background .1s}
+details.stock > summary::-webkit-details-marker{display:none}
+details.stock > summary:hover{background:#f8fafc}
+details.stock .sym{font-weight:700;min-width:56px}
+details.stock .nm{color:var(--mu);font-size:12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+details.stock .lights-mini{display:flex;gap:2px;align-items:center}
+.light{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,0.08)}
+.light.green{background:#16a34a}
+.light.yellow{background:#eab308}
+.light.red{background:#dc2626}
+.light.gray{background:#cbd5e1}
+.score-chip{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;min-width:38px;text-align:center}
+.up{color:var(--gr)}.dn{color:var(--rd)}.mu{color:var(--mu)}
+.pct{font-variant-numeric:tabular-nums;font-weight:700;min-width:60px;text-align:right}
+
+/* 個股詳情面板 */
+.stock-detail{background:#f8fafc;border-left:3px solid var(--bl);border-radius:0 8px 8px 0;margin:4px 0 12px 12px;padding:14px 16px}
+.sd-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.sd-grid2{grid-template-columns:1fr}}
+.sd-block{background:#fff;border:1px solid var(--brd);border-radius:8px;padding:12px 14px}
+.sd-block h5{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.lights-full{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:5px}
+.light-row{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:3px 0}
+.light-row .k{color:var(--mu);flex:1}
+.light-row .v{font-weight:700;font-variant-numeric:tabular-nums}
+
+.kv-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:1px dashed #eef2f7}
+.kv-row:last-child{border-bottom:none}
+.kv-row .k{color:var(--mu)}
+.kv-row .v{font-weight:700;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700}
+.pill.up{background:#dcfce7;color:#15803d}
+.pill.dn{background:#fee2e2;color:#dc2626}
+.pill.am{background:#fef3c7;color:#b45309}
+.pill.mu{background:#e2e8f0;color:#475569}
+.warn-box{background:#fef3c7;border:1px solid #fde68a;color:#92400e;border-radius:6px;padding:6px 10px;font-size:11.5px;margin-top:8px;line-height:1.5}
+.news-item{padding:5px 0;border-bottom:1px dashed #eef2f7;font-size:12px;line-height:1.45}
+.news-item:last-child{border-bottom:none}
+.news-item a{color:var(--txt);text-decoration:none}
+.news-item a:hover{color:var(--bl);text-decoration:underline}
+.news-meta{font-size:10.5px;color:var(--mu);margin-top:1px}
+.analyst-bar{display:flex;gap:2px;height:18px;border-radius:4px;overflow:hidden;margin-top:3px}
+.analyst-bar > div{transition:opacity .15s}
+.analyst-bar .sb{background:#15803d}
+.analyst-bar .b{background:#4ade80}
+.analyst-bar .h{background:#cbd5e1}
+.analyst-bar .s{background:#fca5a5}
+.analyst-bar .ss{background:#b91c1c}
+.ft{text-align:center;color:var(--mu);font-size:11.5px;padding:20px 28px;border-top:1px solid var(--brd);line-height:1.8;background:var(--card)}
+.empty-msg{color:var(--mu);font-size:12.5px;padding:10px 0;text-align:center}
+@media(max-width:768px){.hdr,.pane{padding-left:16px;padding-right:16px}.giants{grid-template-columns:repeat(2,1fr)}}
+"""
+
+
+# ── HTML 工具 ───────────────────────────────────────────────────────────
+
+def _fmt_pct(v, show_plus=True, digits=2):
+    if v is None:
+        return "─"
+    sign = "+" if v > 0 and show_plus else ""
+    return f"{sign}{v:.{digits}f}%"
+
+
+def _fmt_price(v):
+    if v is None:
+        return "─"
+    return f"${v:,.2f}"
+
+
+def _fmt_mc(v):
+    if v is None:
+        return "─"
+    if v >= 1e12:
+        return f"${v/1e12:.2f}T"
+    if v >= 1e9:
+        return f"${v/1e9:.1f}B"
+    if v >= 1e6:
+        return f"${v/1e6:.1f}M"
+    return f"${v:,.0f}"
+
+
+def _pct_cls(v):
+    if v is None:
+        return "mu"
+    return "up" if v > 0 else ("dn" if v < 0 else "mu")
+
+
+def _light_cls(c):
+    return f"light {c}"
+
+
+def _score_cls(score, total):
+    if total == 0:
+        return "low"
+    pct = score / total
+    if pct >= 0.65:
+        return "high"
+    if pct >= 0.4:
+        return "mid"
+    return "low"
+
+
+def _fmt_light_value(metric, value):
+    """依 metric 決定顯示格式（% / 倍數 / 原值）。"""
+    if value is None:
+        return "─"
+    pct_metrics = {"revenue_growth_yoy", "operating_margin", "net_margin", "gross_margin",
+                   "roe", "roic", "fcf_margin", "fcf_yield"}
+    if metric in pct_metrics:
+        return f"{value*100:.1f}%"
+    if metric in ("income_quality",):
+        return f"{value:.2f}"
+    if metric in ("current_ratio", "debt_to_equity", "forward_peg"):
+        return f"{value:.2f}"
+    return f"{value:.2f}"
+
+
+def _news_age(ts_iso):
+    if not ts_iso:
+        return ""
+    try:
+        ts = datetime.fromisoformat(ts_iso)
+    except ValueError:
+        return ""
+    age = (NOW_UTC - ts).total_seconds()
+    if age < 3600:
+        return f"{int(age // 60)} 分鐘前"
+    if age < 86400:
+        return f"{int(age // 3600)} 小時前"
+    return f"{int(age // 86400)} 天前"
+
+
+# ── HTML 區塊 ───────────────────────────────────────────────────────────
+
+def _gen_giants_grid(stocks):
+    html = '<div class="giants">'
+    for code, name, role in GIANTS:
+        s = stocks.get(code)
+        if not s:
+            html += f'<div class="giant-card"><div class="sym">{code}</div><div class="name">{name}</div><div class="role">{role}</div><div class="empty-msg">資料不足</div></div>'
+            continue
+        chg_cls = _pct_cls(s["day_pct"])
+        score_cls = _score_cls(s["score"], s["score_max"])
+        html += f'''<a href="#stock-{code}" class="giant-card" style="text-decoration:none;color:inherit">
+  <span class="score score-chip {score_cls}">{s["score"]}/{s["score_max"]}</span>
+  <div class="sym">{code}</div>
+  <div class="name">{name}</div>
+  <div class="role">{role}</div>
+  <div class="px">{_fmt_price(s["price"])}</div>
+  <div class="chg {chg_cls}">{_fmt_pct(s["day_pct"])}</div>
+</a>'''
+    html += '</div>'
+    return html
+
+
+def _gen_supply_chain(stocks):
+    html = '<div class="chain">'
+    # 建反向索引：bucket → 哪些巨頭依賴它（含強度）
+    bucket_deps = {}
+    for giant, deps in DEPENDENCY.items():
+        for b, strength in deps.items():
+            bucket_deps.setdefault(b, []).append((giant, strength))
+
+    for key, label, role, syms in BUCKETS:
+        deps = sorted(bucket_deps.get(key, []), key=lambda x: -x[1])
+        giant_chips = "".join(
+            f'<span class="b-giant-chip s{strength}" title="依賴強度 {"★" * strength}">{g}</span>'
+            for g, strength in deps
+        )
+        # 依 score 排序個股
+        sorted_stocks = sorted(
+            [stocks[s] for s in syms if s in stocks],
+            key=lambda x: -x["score"] if x else 0,
+        )
+        html += f'''<details class="bucket">
+  <summary>
+    <div class="b-left">
+      <span class="b-role">{role}</span>
+      <span class="b-title">{label}</span>
+      <span class="b-stocks-count">· {len(sorted_stocks)} 檔</span>
+    </div>
+    <div class="b-giants">{giant_chips}</div>
+    <span class="chev">▾</span>
+  </summary>
+  <div class="b-body">
+    {_gen_bucket_body(sorted_stocks)}
+  </div>
+</details>'''
+    html += '</div>'
+    return html
+
+
+def _gen_bucket_body(stocks):
+    if not stocks:
+        return '<div class="empty-msg">此 bucket 暫無資料</div>'
+    return "".join(_gen_stock_row(s) for s in stocks)
+
+
+def _gen_stock_row(s):
+    code = s["symbol"]
+    light_parts = []
+    for k, v in s["lights"].items():
+        val_str = _fmt_light_value(k, v["value"])
+        label = v["label"]
+        light_parts.append(f'<span class="{_light_cls(v["color"])}" title="{label}: {val_str}"></span>')
+    lights_mini = "".join(light_parts)
+    score_cls = _score_cls(s["score"], s["score_max"])
+    day_cls = _pct_cls(s["day_pct"])
+    return f'''<details class="stock" id="stock-{code}">
+  <summary>
+    <span class="sym">{code}</span>
+    <span class="nm">{s["name"]}</span>
+    <span class="lights-mini" title="紅黃綠燈摘要">{lights_mini}</span>
+    <span class="score-chip {score_cls}" title="12 盞燈綜合分">{s["score"]}/{s["score_max"]}</span>
+    <span class="pct {day_cls}">{_fmt_pct(s["day_pct"])}</span>
+  </summary>
+  {_gen_stock_detail(s)}
+</details>'''
+
+
+def _gen_stock_detail(s):
+    return f'''<div class="stock-detail">
+  <div class="sd-grid2">
+    {_gen_tech_block(s)}
+    {_gen_lights_block(s)}
+    {_gen_valuation_block(s)}
+    {_gen_news_block(s)}
+  </div>
+  {_gen_cross_check_block(s)}
+</div>'''
+
+
+def _gen_tech_block(s):
+    t = s.get("tech") or {}
+    rows = []
+
+    def ma_pill(lbl, above, val):
+        if val is None or above is None:
+            return f'<span class="pill mu">{lbl} ─</span>'
+        cls = "up" if above else "dn"
+        arrow = "↑" if above else "↓"
+        return f'<span class="pill {cls}">{lbl} {arrow} {_fmt_price(val)}</span>'
+
+    rows.append(f'<div class="kv-row"><span class="k">收盤</span><span class="v">{_fmt_price(t.get("price") or s.get("price"))}</span></div>')
+    rows.append(f'<div class="kv-row"><span class="k">市值</span><span class="v">{_fmt_mc(s.get("market_cap"))}</span></div>')
+    rows.append(f'<div class="kv-row"><span class="k">近 5 日 / 20 日 / 60 日</span><span class="v"><span class="{_pct_cls(t.get("pct_5d"))}">{_fmt_pct(t.get("pct_5d"))}</span> / <span class="{_pct_cls(t.get("pct_20d"))}">{_fmt_pct(t.get("pct_20d"))}</span> / <span class="{_pct_cls(t.get("pct_60d"))}">{_fmt_pct(t.get("pct_60d"))}</span></span></div>')
+    rows.append(f'<div class="kv-row"><span class="k">近 1 年</span><span class="v {_pct_cls(t.get("pct_252d"))}">{_fmt_pct(t.get("pct_252d"))}</span></div>')
+    rsi = t.get("rsi")
+    rsi_str = "─" if rsi is None else f"{rsi:.0f} {'超買' if rsi>=70 else '超賣' if rsi<=30 else '中性'}"
+    rows.append(f'<div class="kv-row"><span class="k">RSI(14)</span><span class="v">{rsi_str}</span></div>')
+    rows.append(f'<div class="kv-row"><span class="k">均線位置</span><span class="v">{ma_pill("MA50", t.get("above_ma50"), t.get("ma50"))} {ma_pill("MA200", t.get("above_ma200"), t.get("ma200"))}</span></div>')
+
+    return f'<div class="sd-block"><h5>📐 技術面 (yfinance)</h5>{"".join(rows)}</div>'
+
+
+def _gen_lights_block(s):
+    lights = s["lights"]
+    # 分組顯示
+    groups = [
+        ("損益", ["revenue_growth_yoy", "operating_margin", "net_margin", "gross_margin"]),
+        ("資產負債", ["debt_to_equity", "current_ratio", "roe", "roic"]),
+        ("現金流", ["fcf_margin", "income_quality", "fcf_yield"]),
+        ("估值", ["forward_peg"]),
+    ]
+    html = ""
+    for group_name, keys in groups:
+        html += f'<div style="font-size:11px;color:var(--mu);font-weight:700;margin:6px 0 3px 0;text-transform:uppercase;letter-spacing:0.3px">{group_name}</div>'
+        for k in keys:
+            v = lights.get(k, {})
+            color = v.get("color", "gray")
+            label = v.get("label", k)
+            value = _fmt_light_value(k, v.get("value"))
+            html += f'<div class="light-row"><span class="{_light_cls(color)}"></span><span class="k">{label}</span><span class="v">{value}</span></div>'
+    # 附 Piotroski + Altman Z
+    pio = s.get("piotroski")
+    az = s.get("altman_z")
+    html += '<div style="font-size:11px;color:var(--mu);font-weight:700;margin:10px 0 3px 0;text-transform:uppercase">綜合指標</div>'
+    if pio is not None:
+        pio_cls = "up" if pio >= 7 else "am" if pio >= 5 else "dn"
+        html += f'<div class="kv-row"><span class="k">Piotroski F-Score (0-9)</span><span class="v"><span class="pill {pio_cls}">{pio}</span></span></div>'
+    if az is not None:
+        az_cls = "up" if az >= 3 else "am" if az >= 1.8 else "dn"
+        html += f'<div class="kv-row"><span class="k">Altman Z-Score</span><span class="v"><span class="pill {az_cls}">{az:.2f}</span></span></div>'
+
+    return f'<div class="sd-block"><h5>🚦 紅黃綠燈 (FMP)</h5>{html}</div>'
+
+
+def _gen_valuation_block(s):
+    pt = s.get("price_target") or {}
+    grades = s.get("grades") or {}
+    est = s.get("analyst_estimates_next") or {}
+    rows = []
+
+    if pt.get("consensus") is not None:
+        upside = pt.get("upside_pct")
+        upside_str = _fmt_pct(upside) if upside is not None else "─"
+        upside_cls = _pct_cls(upside)
+        rows.append(f'<div class="kv-row"><span class="k">目標價共識</span><span class="v">{_fmt_price(pt["consensus"])} <span class="{upside_cls}">({upside_str})</span></span></div>')
+        rows.append(f'<div class="kv-row"><span class="k">目標範圍</span><span class="v mu">{_fmt_price(pt.get("low"))} – {_fmt_price(pt.get("high"))}</span></div>')
+
+    if grades:
+        total = sum(v or 0 for v in grades.values())
+        if total:
+            sb = (grades.get("strong_buy") or 0)
+            b = (grades.get("buy") or 0)
+            h = (grades.get("hold") or 0)
+            sell = (grades.get("sell") or 0)
+            ss = (grades.get("strong_sell") or 0)
+            bar = ""
+            for cls, n in [("sb", sb), ("b", b), ("h", h), ("s", sell), ("ss", ss)]:
+                if n:
+                    pct = n / total * 100
+                    bar += f'<div class="{cls}" style="width:{pct:.1f}%" title="{cls} {n} 人"></div>'
+            rows.append(f'<div class="kv-row"><span class="k">分析師 {total} 人</span><span class="v mu" style="font-size:11px">{sb}S/{b}B/{h}H/{sell}S/{ss}SS</span></div>')
+            rows.append(f'<div class="analyst-bar">{bar}</div>')
+
+    if est:
+        rev_avg = est.get("revenueAvg")
+        eps_avg = est.get("epsAvg")
+        num_a = est.get("numAnalystsRevenue")
+        if rev_avg:
+            rows.append(f'<div class="kv-row"><span class="k">明年營收預估（{num_a} 位分析師）</span><span class="v">{_fmt_mc(rev_avg)}</span></div>')
+        if eps_avg is not None:
+            rows.append(f'<div class="kv-row"><span class="k">明年 EPS 預估</span><span class="v">${eps_avg:.2f}</span></div>')
+
+    body = "".join(rows) if rows else '<div class="empty-msg">分析師資料暫無</div>'
+    return f'<div class="sd-block"><h5>🎯 分析師面 (FMP)</h5>{body}</div>'
+
+
+def _gen_news_block(s):
+    news = s.get("news") or []
+    if not news:
+        return '<div class="sd-block"><h5>📰 新聞 (yfinance · 48h)</h5><div class="empty-msg">暫無相關新聞</div></div>'
+    items = ""
+    for n in news:
+        age = _news_age(n.get("timestamp"))
+        provider = n.get("provider") or ""
+        meta = " · ".join([x for x in (provider, age) if x])
+        url = n.get("url") or "#"
+        open_ = f'<a href="{url}" target="_blank" rel="noopener">' if url != "#" else "<span>"
+        close_ = "</a>" if url != "#" else "</span>"
+        items += f'<div class="news-item">{open_}{n["title"]}{close_}<div class="news-meta">{meta}</div></div>'
+    return f'<div class="sd-block"><h5>📰 新聞 (yfinance · 48h)</h5>{items}</div>'
+
+
+def _gen_cross_check_block(s):
+    w = s.get("cross_check") or []
+    if not w:
+        return '<div style="font-size:11px;color:var(--mu);margin-top:8px;padding:4px 8px;background:#f0fdf4;border-radius:4px">✓ 兩源資料一致（差異 &lt; 2%）</div>'
+    parts = []
+    for warning in w:
+        parts.append(f'<b>{warning["field"]}</b> 差 {warning["diff_pct"]}% (yf: {warning["yf"]:.2f} / fmp: {warning["fmp"]:.2f})')
+    return f'<div class="warn-box">⚠️ 兩源差異偵測：{" ; ".join(parts)}</div>'
+
+
+def generate_html(stocks):
+    giants_grid = _gen_giants_grid(stocks)
+    supply_chain = _gen_supply_chain(stocks)
+
+    n_green = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "green")
+    n_red = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "red")
+    n_total_lights = sum(len(s["lights"]) for s in stocks.values())
+
+    fmp_status = "FMP + yfinance 雙源交叉驗證" if FMP_KEY else "僅 yfinance（FMP 未設定）"
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-TW"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>AI 供應鏈策略儀表板 — {TODAY.isoformat()}</title>
+<style>{CSS}</style></head><body>
+<div class="hdr">
+  <h1>AI 供應鏈策略儀表板</h1>
+  <div class="sub">9 檔巨頭 + 供應鏈上下游 × 基本面紅黃綠燈 · 更新 {TODAY.isoformat()} · {fmp_status} <a class="nav-link" href="us_index.html">→ 美股板塊復盤</a> <a class="nav-link" href="etf_index.html">→ ETF 資金流</a></div>
+</div>
+<div class="construction">🚧 Phase 1 MVP｜供應鏈連線視覺化 / Capex 週期訊號 / 回測將於後續版本加入 🚧</div>
+<div class="pane">
+  <div class="ttl">🏛 AI 九巨頭</div>
+  <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分）</div>
+  {giants_grid}
+
+  <div class="ttl">🔗 供應鏈（由上游至下游）</div>
+  <div class="desc">每個 bucket 標示哪些巨頭依賴它（★=弱、★★=中、★★★=關鍵）。點 bucket 展開個股清單，個股依紅黃綠燈分數排序。再點個股看完整技術/基本面/分析師/新聞分析</div>
+  {supply_chain}
+</div>
+<div class="ft">資料源：Financial Modeling Prep（基本面/分析師）+ Yahoo Finance（價格/新聞）｜ 統計本次：{n_green} 🟢 / {n_red} 🔴（全部 {n_total_lights} 盞燈）｜ 僅供研究參考，不構成投資建議</div>
+</body></html>"""
+
+
+# ── Main ────────────────────────────────────────────────────────────────
+
+def main():
+    symbols = collect_all_symbols()
+    print(f"=== AI 供應鏈策略 ({TODAY.isoformat()}) ===")
+    print(f"追蹤 {len(symbols)} 檔個股（9 巨頭 + {len(symbols)-9} 檔供應鏈）\n")
+
+    # 1. yfinance 批次 K 線（技術面資料）
+    print("yfinance：批次抓 1 年 K 線...")
+    bars_df = yf_batch_bars(symbols)
+    print("  完成\n")
+
+    # 2. FMP 平行抓（基本面 + 分析師面）
+    fmp_map = fetch_fmp_bulk(symbols)
+
+    # 3. yfinance 基本面備援 + 新聞
+    yf_fund_map = fetch_yf_fundamentals_bulk(symbols)
+    news_map = fetch_yf_bulk(symbols)
+
+    # 4. 組合每檔個股的報告
+    stocks = {}
+    name_map = {code: name for code, name, _ in GIANTS}
+    for sym in symbols:
+        name = name_map.get(sym) or sym
+        rep = build_stock_report(sym, name, bars_df, fmp_map, news_map, yf_fund_map)
+        stocks[sym] = rep
+
+    # 摘要
+    print("\n=== 紅黃綠燈分數排行 ===")
+    rank = sorted(stocks.values(), key=lambda s: -s["score"])[:10]
+    for s in rank:
+        print(f"  {s['symbol']:6s} {s['score']:2d}/{s['score_max']:2d} · {s['name']}")
+
+    # 5. 歷史快照
+    save_history_snapshot(stocks)
+    cleanup_history()
+
+    # 6. HTML
+    html = generate_html(stocks)
+    with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"\n儀表板輸出至 {OUTPUT_HTML}")
+
+    # 7. latest cache（debug 用）
+    def to_slim(s):
+        return {k: v for k, v in s.items() if k not in ("tech", "fundamentals", "insider_recent", "news", "analyst_estimates_next")}
+    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump({"trade_date": TODAY.isoformat(), "stocks": {k: to_slim(v) for k, v in stocks.items()}}, f, ensure_ascii=False, indent=2, default=str)
+
+
+if __name__ == "__main__":
+    main()
