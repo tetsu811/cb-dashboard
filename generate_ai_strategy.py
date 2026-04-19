@@ -70,15 +70,24 @@ GIANTS = [
 # ── 供應鏈 buckets（由上游至下游）────────────────────────────────────────
 BUCKETS = [
     # (key, label, role, [symbols])
-    ("equipment", "半導體設備", "最上游", ["ASML", "AMAT", "LRCX", "KLAC"]),
-    ("eda",       "EDA 工具",   "晶片設計", ["SNPS", "CDNS"]),
-    ("foundry",   "晶圓代工",   "製造核心", ["TSM"]),
-    ("ai_chip",   "AI 晶片",    "運算核心", ["NVDA", "AVGO", "AMD", "MRVL", "QCOM"]),
-    ("hbm",       "HBM / 記憶體", "運算配套", ["MU", "WDC", "STX"]),
-    ("network",   "網通 / 光通訊", "資料中心連結", ["ANET", "LITE", "COHR", "CIEN", "CSCO"]),
-    ("power",     "電源 / 散熱 / 伺服器", "資料中心基建", ["VRT", "ETN", "SMCI", "DELL", "HPE"]),
-    ("cloud_saas", "雲端 / 企業 SaaS", "下游平台", ["ORCL", "CRM", "NOW", "SNOW", "PLTR"]),
-    ("ai_app",    "AI 應用層", "終端應用", ["ADBE", "IBM", "AI", "PATH", "CRWD", "PANW"]),
+    ("equipment", "半導體設備", "最上游",
+        ["ASML", "AMAT", "LRCX", "KLAC", "TOELY", "ONTO", "ENTG"]),
+    ("eda",       "EDA 工具",   "晶片設計",
+        ["SNPS", "CDNS", "ANSS"]),
+    ("foundry",   "晶圓代工",   "製造核心",
+        ["TSM", "GFS", "UMC"]),
+    ("ai_chip",   "AI 晶片",    "運算核心",
+        ["NVDA", "AVGO", "AMD", "MRVL", "QCOM", "INTC"]),
+    ("hbm",       "HBM / 記憶體", "運算配套",
+        ["MU", "WDC", "STX", "SIMO"]),
+    ("network",   "網通 / 光通訊", "資料中心連結",
+        ["ANET", "LITE", "COHR", "CIEN", "CSCO", "VIAV", "AXTI", "FN", "EXTR"]),
+    ("power",     "電源 / 散熱 / 伺服器", "資料中心基建",
+        ["VRT", "ETN", "SMCI", "DELL", "HPE", "APH"]),
+    ("cloud_saas", "雲端 / 企業 SaaS", "下游平台",
+        ["ORCL", "CRM", "NOW", "SNOW", "PLTR", "DDOG", "MDB"]),
+    ("ai_app",    "AI 應用層", "終端應用",
+        ["ADBE", "IBM", "AI", "PATH", "CRWD", "PANW"]),
 ]
 
 # 每個巨頭在哪些 bucket 有重要依賴（強度 1-3）
@@ -1504,13 +1513,26 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 /* Sankey SVG */
 .sankey-wrap{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:10px;margin-bottom:16px;overflow-x:auto}
 .sankey-svg{width:100%;height:auto;min-width:920px}
-.sankey-svg path:hover{opacity:1 !important}
+.sankey-svg path.sankey-link{transition:opacity .15s, stroke-width .15s}
+.sankey-svg path.sankey-link:hover{opacity:1 !important}
+.sankey-svg path.sankey-link.active{opacity:1 !important}
+.sankey-svg path.sankey-link.dimmed{opacity:0.06 !important}
+.sankey-svg .sankey-node{transition:opacity .15s}
 .sankey-svg .sankey-node:hover rect{stroke:var(--bl);stroke-width:2}
+.sankey-svg .sankey-node.active rect{stroke:var(--bl);stroke-width:2.5}
+.sankey-svg .sankey-node.dimmed{opacity:0.3}
+.sankey-info-empty{text-align:center;font-size:11.5px;color:var(--mu);padding:8px 0;border-top:1px solid var(--brd);margin-top:6px}
+.sankey-info-active{padding:10px 14px;background:#f0f9ff;border:1px solid #bfdbfe;border-radius:8px;margin:8px 4px 0;font-size:12.5px;line-height:1.7}
+.sankey-info-active .si-head{font-weight:800;font-size:13.5px;color:#1e3a8a;margin-bottom:4px}
+.sankey-info-active .si-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:4px 14px;margin-top:6px}
+.sankey-info-active .si-grid .k{color:var(--mu);font-size:11.5px}
+.sankey-info-active .si-grid .v{font-weight:700;font-variant-numeric:tabular-nums}
 /* Backtest table */
 .bt-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .bt-table th{background:#f1f5f9;font-size:11px;color:var(--mu);font-weight:700;padding:8px 12px;text-transform:uppercase;text-align:left}
 .bt-table td{padding:8px 12px;font-size:12.5px;border-top:1px solid var(--brd)}
 .bt-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.tier-examples{font-size:10.5px;color:var(--mu);font-weight:500;margin-top:2px}
 /* Alpha panel */
 .alpha-wrap{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;margin-bottom:18px}
 .alpha-wrap h3{font-size:14px;font-weight:800;margin-bottom:10px}
@@ -1731,20 +1753,30 @@ def _gen_sankey_svg(stocks, bucket_lookup):
 
     svg_parts = [f'<svg class="sankey-svg" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">']
 
-    # 畫連線（先畫，讓 node 在上面）
+    # 畫連線（先畫，讓 node 在上面）。每條 path 帶 data-giant / data-bucket，供 JS 高亮
     for giant_code, deps in DEPENDENCY.items():
         for bucket_key, strength in deps.items():
             y1 = giant_y.get(giant_code)
             y2 = bucket_y.get(bucket_key)
             if y1 is None or y2 is None:
                 continue
-            width = strength * 1.4  # 1=1.4, 2=2.8, 3=4.2
-            opacity = 0.25 + strength * 0.15  # 弱連線淡一點
-            color = _color_for_pct(bucket_avg_pct.get(bucket_key, 0))
+            width = strength * 1.4
+            opacity = 0.25 + strength * 0.15
+            bucket_pct = bucket_avg_pct.get(bucket_key, 0)
+            color = _color_for_pct(bucket_pct)
             midx = (left_x + right_x) / 2
             path = f"M{left_x + 10},{y1} C{midx},{y1} {midx},{y2} {right_x - 10},{y2}"
+            bucket_label = bucket_lookup.get(bucket_key, bucket_key)
+            giant_pct = (stocks.get(giant_code) or {}).get("day_pct")
             svg_parts.append(
-                f'<path d="{path}" stroke="{color}" stroke-width="{width:.1f}" fill="none" opacity="{opacity:.2f}"><title>{giant_code} → {bucket_lookup.get(bucket_key, bucket_key)} · 依賴 {"★" * strength}</title></path>'
+                f'<path class="sankey-link" data-giant="{giant_code}" data-bucket="{bucket_key}" '
+                f'data-giant-pct="{giant_pct if giant_pct is not None else 0:.2f}" '
+                f'data-bucket-pct="{bucket_pct:.2f}" data-bucket-label="{bucket_label}" '
+                f'data-strength="{strength}" data-default-opacity="{opacity:.2f}" data-default-width="{width:.1f}" '
+                f'd="{path}" stroke="{color}" stroke-width="{width:.1f}" fill="none" opacity="{opacity:.2f}" '
+                f'onclick="highlightSankey(this, event)" style="cursor:pointer">'
+                f'<title>{giant_code} → {bucket_label} · 依賴 {"★" * strength}</title>'
+                f'</path>'
             )
 
     # 巨頭節點（左）
@@ -1755,8 +1787,7 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         score = stk.get("score", 0)
         score_max = stk.get("score_max", 24)
         dot_color = _color_for_pct(day_pct)
-        # 節點
-        svg_parts.append(f'<g class="sankey-node giant">')
+        svg_parts.append(f'<g class="sankey-node giant-node" data-giant="{code}">')
         svg_parts.append(f'<rect x="{left_x - 115}" y="{y - 18}" width="115" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
         svg_parts.append(f'<circle cx="{left_x - 105}" cy="{y}" r="5" fill="{dot_color}"/>')
         svg_parts.append(f'<text x="{left_x - 95}" y="{y - 3}" font-size="13" font-weight="700" fill="#1e293b">{code}</text>')
@@ -1768,7 +1799,7 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         y = bucket_y[key]
         avg_pct = bucket_avg_pct.get(key)
         dot_color = _color_for_pct(avg_pct)
-        svg_parts.append(f'<g class="sankey-node bucket-node">')
+        svg_parts.append(f'<g class="sankey-node bucket-node" data-bucket="{key}">')
         svg_parts.append(f'<rect x="{right_x}" y="{y - 18}" width="130" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
         svg_parts.append(f'<circle cx="{right_x + 10}" cy="{y}" r="5" fill="{dot_color}"/>')
         svg_parts.append(f'<text x="{right_x + 20}" y="{y - 3}" font-size="12" font-weight="700" fill="#1e293b">{label}</text>')
@@ -1776,12 +1807,13 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         svg_parts.append(f'</g>')
 
     svg_parts.append('</svg>')
-    return '<div class="sankey-wrap">' + "".join(svg_parts) + '</div>'
+    info_box = '''<div id="sankey-info" class="sankey-info-empty">點擊任一連線查看詳細資訊</div>'''
+    return '<div class="sankey-wrap" onclick="if(event.target.tagName!==\'path\')resetSankey()">' + "".join(svg_parts) + info_box + '</div>'
 
 
 def _gen_capex_panel(capex_groups, bucket_lookup):
     if not capex_groups:
-        return '<div class="empty-msg" style="padding:8px 0">Capex 資料需 FMP 完整 quota，明日自動補上</div>'
+        return ''
     html = '<div class="capex-panel">'
     for grp in capex_groups:
         yoy = grp["yoy_pct"]
@@ -1876,7 +1908,8 @@ def _gen_backtest(stocks, benchmarks):
             continue
         avg = sum(x[3] for x in arr) / len(arr)
         cls = _pct_cls(avg)
-        tier_rows += f'<tr><td>{label}</td><td class="num">{len(arr)}</td><td class="num {cls}">{_fmt_pct(avg)}</td></tr>'
+        examples = " · ".join(x[0] for x in arr[:3])
+        tier_rows += f'<tr><td>{label}<div class="tier-examples">例：{examples}</div></td><td class="num">{len(arr)}</td><td class="num {cls}">{_fmt_pct(avg)}</td></tr>'
 
     # 組合 vs 大盤
     giant_syms = [code for code, _, _ in GIANTS]
@@ -1898,11 +1931,11 @@ def _gen_backtest(stocks, benchmarks):
     valid = "✓ 評分系統有效" if diff > 10 else "⚠️ 評分與 1 年報酬相關性弱（可能因上市時間短或市場剛反轉）" if diff < 0 else "→ 相關性尚可"
 
     return f'''<div class="ttl">📊 組合比較 + 評分有效性</div>
-<div class="desc">左：依當前紅黃綠燈分數分三級的 1 年平均報酬。右：AI 策略組合（九巨頭等權 + 高分等權）vs 大盤 ETF 的 1 年報酬。<b>免責</b>：快照型驗證（用當前評分套過去價格），不是嚴格回測</div>
+<div class="desc">左：把宇宙內的股票依目前紅黃綠燈分數分三級，看該分級所有股票過去 1 年的「等權平均報酬」。右：策略組合（九巨頭等權 + 高分等權）vs 大盤 ETF 過去 1 年報酬</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
   <div>
-    <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px">🚦 依分數等級</div>
-    <table class="bt-table"><tr><th>等級</th><th class="num">檔數</th><th class="num">1 年平均</th></tr>{tier_rows}</table>
+    <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px">🚦 依分數等級 · 該等級股票過去 1 年等權平均報酬</div>
+    <table class="bt-table"><tr><th>等級</th><th class="num">檔數</th><th class="num">過去 1 年報酬（等權組合）</th></tr>{tier_rows}</table>
     <div style="margin-top:8px;background:var(--card);border:1px solid var(--brd);border-radius:6px;padding:8px 12px;font-size:11.5px;line-height:1.6">
       Top10 均：<b class="{_pct_cls(top_avg)}">{_fmt_pct(top_avg)}</b> · Bottom10 均：<b class="{_pct_cls(bot_avg)}">{_fmt_pct(bot_avg)}</b>
       · 差距 <b>{_fmt_pct(diff)}</b> · <span style="color:var(--mu)">{valid}</span>
@@ -2298,7 +2331,58 @@ def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucke
   {legend_html}
   {supply_chain}
 </div>
-<div class="ft">資料源：Financial Modeling Prep（基本面/分析師）+ Yahoo Finance（價格/新聞）｜ 統計本次：{n_green} 🟢 / {n_red} 🔴（全部 {n_total_lights} 盞燈）｜ 僅供研究參考，不構成投資建議</div>
+<script>
+function resetSankey(){{
+  document.querySelectorAll('.sankey-svg path.sankey-link').forEach(p=>{{
+    p.classList.remove('active','dimmed');
+    p.setAttribute('stroke-width', p.dataset.defaultWidth);
+    p.style.opacity = '';
+  }});
+  document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
+    n.classList.remove('active','dimmed');
+  }});
+  var info = document.getElementById('sankey-info');
+  if(info){{
+    info.className='sankey-info-empty';
+    info.innerHTML='點擊任一連線查看詳細資訊';
+  }}
+}}
+function highlightSankey(el, ev){{
+  var giant = el.dataset.giant, bucket = el.dataset.bucket;
+  document.querySelectorAll('.sankey-svg path.sankey-link').forEach(p=>{{
+    if(p===el){{p.classList.add('active');p.classList.remove('dimmed');p.setAttribute('stroke-width', (parseFloat(p.dataset.defaultWidth)+1.5).toFixed(1));}}
+    else {{p.classList.add('dimmed');p.classList.remove('active');}}
+  }});
+  document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
+    var isMatch = n.dataset.giant===giant || n.dataset.bucket===bucket;
+    n.classList.toggle('active', isMatch);
+    n.classList.toggle('dimmed', !isMatch);
+  }});
+  var info = document.getElementById('sankey-info');
+  if(!info) return;
+  var strength = parseInt(el.dataset.strength);
+  var stars = '★'.repeat(strength) + '☆'.repeat(3-strength);
+  var gpct = parseFloat(el.dataset.giantPct);
+  var bpct = parseFloat(el.dataset.bucketPct);
+  var label = el.dataset.bucketLabel;
+  var strengthText = strength===3 ? '關鍵依賴' : strength===2 ? '重要' : '次要';
+  var fmtPct = function(p){{
+    var s = (p>=0?'+':'') + p.toFixed(2) + '%';
+    var cls = p>0.05 ? 'up' : p<-0.05 ? 'dn' : 'mu';
+    return '<span class="'+cls+'">'+s+'</span>';
+  }};
+  info.className='sankey-info-active';
+  info.innerHTML =
+    '<div class="si-head">'+giant+'  →  '+label+'</div>'+
+    '<div style="font-size:12px;color:#475569">'+stars+' '+strengthText+'</div>'+
+    '<div class="si-grid">'+
+      '<div><span class="k">巨頭當日</span><span class="v">'+fmtPct(gpct)+'</span></div>'+
+      '<div><span class="k">Bucket 平均當日</span><span class="v">'+fmtPct(bpct)+'</span></div>'+
+      '<div><span class="k">依賴強度</span><span class="v">'+stars+' ('+strength+'/3)</span></div>'+
+    '</div>';
+  if(ev && ev.stopPropagation) ev.stopPropagation();
+}}
+</script>
 </body></html>"""
 
 
