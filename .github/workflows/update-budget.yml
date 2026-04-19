@@ -38,5 +38,13 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Auto update budget dashboard $(date -u +%Y-%m-%d)"
-            git push
+            # Retry with rebase if another workflow pushed during our run
+            for i in 1 2 3; do
+              if git push; then
+                break
+              fi
+              echo "Push rejected, rebasing and retrying (attempt $i/3)"
+              git pull --rebase origin main
+              sleep 5
+            done
           fi
