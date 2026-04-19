@@ -1060,6 +1060,169 @@ def compute_capex_groups(fmp_map):
     return out
 
 
+# ── Alpha Scoring Model ─────────────────────────────────────────────────
+
+# 6 個子分數，各 0-10，加權平均 × 10 = 0-100 分
+ALPHA_WEIGHTS = {
+    "fundamental": 0.25,   # 紅黃綠燈分數
+    "momentum":    0.20,   # 60 日報酬 universe 排名
+    "technical":   0.15,   # MA + RSI
+    "capex_align": 0.15,   # 若屬於 Capex 受惠 bucket
+    "analyst":     0.15,   # 目標價上行 + 買進評級
+    "signals":     0.10,   # 連續訊號
+}
+
+
+def _rank_pct(value, all_values):
+    """計算 value 在 all_values 中的 percentile（0-1）。"""
+    if value is None:
+        return 0.5
+    sorted_vals = sorted([v for v in all_values if v is not None])
+    if not sorted_vals:
+        return 0.5
+    below = sum(1 for v in sorted_vals if v < value)
+    return below / len(sorted_vals)
+
+
+def compute_alpha_scores(stocks, capex_groups, signals, stock_to_bucket):
+    """給每檔個股算 alpha = 0-100 分。回傳 {sym: {alpha, components, tier}}。"""
+    # 收集 universe 60 日報酬用於排序
+    universe_60d = [(s.get("tech") or {}).get("pct_60d") for s in stocks.values()]
+
+    # 哪些 bucket 受惠於 Capex 上升（YoY > 10）
+    capex_benefit_buckets = set()
+    for g in (capex_groups or []):
+        yoy = g.get("yoy_pct")
+        if yoy is not None and yoy > 5:
+            capex_benefit_buckets.update(g["benefit_buckets"])
+
+    out = {}
+    for sym, s in stocks.items():
+        tech = s.get("tech") or {}
+        lights = s.get("lights") or {}
+        grades = s.get("grades") or {}
+        pt = s.get("price_target") or {}
+
+        # 1. 基本面（紅黃綠燈 0-24 → 0-10）
+        fund = (s.get("score", 0) / max(s.get("score_max", 24), 1)) * 10
+
+        # 2. 動能（60d 報酬 percentile × 10）
+        pct_60d = tech.get("pct_60d")
+        momentum = _rank_pct(pct_60d, universe_60d) * 10
+
+        # 3. 技術面（MA50 + MA200 + RSI 合理）
+        tech_score = 0
+        if tech.get("above_ma50"):
+            tech_score += 3
+        if tech.get("above_ma200"):
+            tech_score += 3
+        rsi = tech.get("rsi")
+        if rsi is not None and 30 <= rsi <= 65:
+            tech_score += 4
+        elif rsi is not None and 65 < rsi <= 75:
+            tech_score += 2
+        # RSI >75 or <30 → 0 分
+
+        # 4. Capex 對齊
+        bucket_key = stock_to_bucket.get(sym)
+        capex_align = 10.0 if bucket_key in capex_benefit_buckets else 5.0 if capex_benefit_buckets else 0.0
+
+        # 5. 分析師面
+        analyst = 0
+        if pt.get("upside_pct") is not None:
+            u = pt["upside_pct"]
+            if u > 20:
+                analyst += 6
+            elif u > 10:
+                analyst += 4
+            elif u > 0:
+                analyst += 2
+        if grades:
+            total = sum((grades.get(k) or 0) for k in ("strong_buy", "buy", "hold", "sell", "strong_sell"))
+            buy_pct = (((grades.get("strong_buy") or 0) + (grades.get("buy") or 0)) / total * 100) if total else 0
+            if buy_pct > 70:
+                analyst += 4
+            elif buy_pct > 50:
+                analyst += 2
+        analyst = min(analyst, 10)
+
+        # 6. 連續訊號
+        sig = (signals or {}).get(sym) or {}
+        sig_score = 0
+        if sig.get("up_streak", 0) >= 3:
+            sig_score += 5
+        elif sig.get("up_streak", 0) == 2:
+            sig_score += 2
+        if sig.get("top3_streak", 0) >= 2:
+            sig_score += 5
+        if sig.get("down_streak", 0) >= 3:
+            sig_score -= 3
+        if sig.get("bottom3_streak", 0) >= 2:
+            sig_score -= 3
+        sig_score = max(0, min(10, sig_score + 5))  # 中性基準線 +5，範圍 0-10
+
+        # 加權合成
+        components = {
+            "fundamental": fund,
+            "momentum": momentum,
+            "technical": tech_score,
+            "capex_align": capex_align,
+            "analyst": analyst,
+            "signals": sig_score,
+        }
+        alpha = sum(components[k] * ALPHA_WEIGHTS[k] for k in ALPHA_WEIGHTS) * 10  # 0-100
+        # 分級
+        if alpha >= 70:
+            tier = "strong_buy"
+            tier_label = "強勢買進"
+        elif alpha >= 55:
+            tier = "buy"
+            tier_label = "買進"
+        elif alpha >= 40:
+            tier = "neutral"
+            tier_label = "觀望"
+        else:
+            tier = "weak"
+            tier_label = "弱勢"
+
+        out[sym] = {
+            "alpha": round(alpha, 1),
+            "components": {k: round(v, 1) for k, v in components.items()},
+            "tier": tier,
+            "tier_label": tier_label,
+            "capex_benefit": bucket_key in capex_benefit_buckets,
+        }
+    return out
+
+
+def compute_bucket_rankings(stocks, alpha_scores):
+    """對每個 bucket 內個股依 alpha 排序、標出 1/2/3 名。"""
+    rankings = {}
+    for key, label, role, syms in BUCKETS:
+        stocks_in_bucket = [
+            (sym, alpha_scores.get(sym, {}).get("alpha", 0))
+            for sym in syms if sym in stocks
+        ]
+        stocks_in_bucket.sort(key=lambda x: -x[1])
+        ranks = {}
+        for i, (sym, _) in enumerate(stocks_in_bucket):
+            if i == 0 and len(stocks_in_bucket) >= 2:
+                ranks[sym] = {"rank": 1, "medal": "🥇", "label": "領頭"}
+            elif i == 1 and len(stocks_in_bucket) >= 3:
+                ranks[sym] = {"rank": 2, "medal": "🥈", "label": "跟隨"}
+            elif i == 2 and len(stocks_in_bucket) >= 4:
+                ranks[sym] = {"rank": 3, "medal": "🥉", "label": "第三"}
+            elif i == len(stocks_in_bucket) - 1 and len(stocks_in_bucket) >= 4:
+                ranks[sym] = {"rank": -1, "medal": "🐌", "label": "落後"}
+            else:
+                ranks[sym] = {"rank": 0, "medal": "", "label": ""}
+        rankings[key] = {
+            "ordered": stocks_in_bucket,
+            "ranks": ranks,
+        }
+    return rankings
+
+
 # ── 歷史快照 ────────────────────────────────────────────────────────────
 
 def save_history_snapshot(stocks):
@@ -1348,6 +1511,37 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 .bt-table th{background:#f1f5f9;font-size:11px;color:var(--mu);font-weight:700;padding:8px 12px;text-transform:uppercase;text-align:left}
 .bt-table td{padding:8px 12px;font-size:12.5px;border-top:1px solid var(--brd)}
 .bt-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+/* Alpha panel */
+.alpha-wrap{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;margin-bottom:18px}
+.alpha-wrap h3{font-size:14px;font-weight:800;margin-bottom:10px}
+.alpha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.alpha-card{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:10px 12px;position:relative;border-left:3px solid var(--bl)}
+.alpha-card.strong_buy{border-left-color:#15803d;background:linear-gradient(90deg,#dcfce7,#fff)}
+.alpha-card.buy{border-left-color:#16a34a;background:linear-gradient(90deg,#f0fdf4,#fff)}
+.alpha-card.neutral{border-left-color:#d97706}
+.alpha-card.weak{border-left-color:#dc2626;background:linear-gradient(90deg,#fef2f2,#fff)}
+.alpha-card .sym{font-size:12px;font-weight:700}
+.alpha-card .name{font-size:10px;color:var(--mu);margin-bottom:4px}
+.alpha-card .alpha-num{font-size:22px;font-weight:800;letter-spacing:-0.5px}
+.alpha-card .tier-label{font-size:10px;font-weight:700;padding:1.5px 7px;border-radius:10px;position:absolute;top:8px;right:10px}
+.alpha-card.strong_buy .tier-label{background:#15803d;color:#fff}
+.alpha-card.buy .tier-label{background:#86efac;color:#14532d}
+.alpha-card.neutral .tier-label{background:#fef3c7;color:#92400e}
+.alpha-card.weak .tier-label{background:#fee2e2;color:#b91c1c}
+.alpha-card .breakdown{font-size:9.5px;color:var(--mu);margin-top:4px;line-height:1.4}
+/* Bucket ranking medal */
+.rank-medal{font-size:11.5px;margin-right:4px}
+.rank-pill{font-size:10px;font-weight:700;padding:1.5px 5px;border-radius:4px;margin-right:4px}
+.rank-pill.r1{background:#fef3c7;color:#92400e}
+.rank-pill.r2{background:#e5e7eb;color:#374151}
+.rank-pill.r3{background:#fef3c7;color:#a16207;opacity:0.85}
+.rank-pill.r-laggard{background:#fee2e2;color:#991b1b}
+.alpha-pill{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;min-width:46px;text-align:center}
+.alpha-pill.strong_buy{background:#15803d;color:#fff}
+.alpha-pill.buy{background:#dcfce7;color:#15803d}
+.alpha-pill.neutral{background:#fef3c7;color:#92400e}
+.alpha-pill.weak{background:#fee2e2;color:#b91c1c}
+.b-leader{font-size:10.5px;color:#92400e;background:#fef3c7;padding:2px 7px;border-radius:10px;font-weight:700;margin-left:6px}
 .empty-msg{color:var(--mu);font-size:12.5px;padding:10px 0;text-align:center}
 @media(max-width:768px){.hdr,.pane{padding-left:16px;padding-right:16px}.giants{grid-template-columns:repeat(2,1fr)}}
 """
@@ -1432,6 +1626,42 @@ def _news_age(ts_iso):
 
 
 # ── HTML 區塊 ───────────────────────────────────────────────────────────
+
+def _gen_alpha_panel(alpha_scores, stocks):
+    """Top alpha 排行 — 前 12 強。"""
+    if not alpha_scores:
+        return ""
+    items = [(sym, sc["alpha"], sc["tier"], sc["tier_label"], sc["components"]) for sym, sc in alpha_scores.items()]
+    items.sort(key=lambda x: -x[1])
+    top = items[:12]
+
+    # 分級統計
+    tier_counts = {"strong_buy": 0, "buy": 0, "neutral": 0, "weak": 0}
+    for _, _, t, _, _ in items:
+        tier_counts[t] += 1
+    stats = f'<div style="font-size:11.5px;color:var(--mu);margin-bottom:10px">共 {len(items)} 檔：<b style="color:#15803d">{tier_counts["strong_buy"]} 強勢買進</b> / <b style="color:#16a34a">{tier_counts["buy"]} 買進</b> / <b style="color:#d97706">{tier_counts["neutral"]} 觀望</b> / <b style="color:#dc2626">{tier_counts["weak"]} 弱勢</b></div>'
+
+    cards = ""
+    for sym, alpha, tier, tlabel, comps in top:
+        name = stocks.get(sym, {}).get("name", sym)
+        breakdown = " · ".join(
+            f"{k[:3]}{v:.0f}" for k, v in comps.items()
+            if v is not None
+        )
+        cards += f'''<div class="alpha-card {tier}">
+  <div class="tier-label">{tlabel}</div>
+  <div class="sym">{sym}</div>
+  <div class="name">{name[:14]}</div>
+  <div class="alpha-num">{alpha}</div>
+  <div class="breakdown" title="基本/動能/技術/Capex/分析師/訊號 各 0-10 分">{breakdown}</div>
+</div>'''
+
+    return f'''<div class="alpha-wrap">
+  <h3>⚡ Alpha 評分排行 Top 12</h3>
+  {stats}
+  <div class="alpha-grid">{cards}</div>
+</div>'''
+
 
 def _gen_signals_panel(signals, stocks):
     """連續訊號：找出連續漲/跌/在 top3 的股票。"""
@@ -1706,7 +1936,7 @@ def _gen_giants_grid(stocks):
     return html
 
 
-def _gen_supply_chain(stocks):
+def _gen_supply_chain(stocks, alpha_scores=None, bucket_rankings=None):
     html = '<div class="chain">'
     # 建反向索引：bucket → 哪些巨頭依賴它（含強度）
     bucket_deps = {}
@@ -1720,11 +1950,17 @@ def _gen_supply_chain(stocks):
             f'<span class="b-giant-chip s{strength}" title="依賴強度 {"★" * strength}">{g}</span>'
             for g, strength in deps
         )
-        # 依 score 排序個股
-        sorted_stocks = sorted(
-            [stocks[s] for s in syms if s in stocks],
-            key=lambda x: -x["score"] if x else 0,
-        )
+        # 依 alpha（若有）排序個股，否則用紅黃綠燈分數
+        if alpha_scores:
+            sorted_stocks = sorted(
+                [stocks[s] for s in syms if s in stocks],
+                key=lambda x: -alpha_scores.get(x["symbol"], {}).get("alpha", 0),
+            )
+        else:
+            sorted_stocks = sorted(
+                [stocks[s] for s in syms if s in stocks],
+                key=lambda x: -x["score"] if x else 0,
+            )
         # 計算 bucket 統計
         b_stats = ""
         if sorted_stocks:
@@ -1737,32 +1973,42 @@ def _gen_supply_chain(stocks):
             day_cls = _pct_cls(avg_day)
             b_stats = f'<div class="b-stats"><span class="stat-pill {score_cls}" title="平均分數">🚦 {avg_score:.1f}/{avg_score_max}</span><span class="stat-pill {day_cls}" title="平均日漲跌">{_fmt_pct(avg_day)}</span></div>'
 
+        # 取得 bucket 內 top alpha 的領頭股
+        leader_info = ""
+        if bucket_rankings and key in bucket_rankings and bucket_rankings[key]["ordered"]:
+            top_sym, top_alpha = bucket_rankings[key]["ordered"][0]
+            if top_alpha > 0:
+                leader_info = f'<span class="b-leader" title="Bucket 內 alpha 最高">🥇 {top_sym} ({top_alpha:.0f})</span>'
+
+        ranks_for_bucket = (bucket_rankings or {}).get(key, {}).get("ranks", {})
+
         html += f'''<details class="bucket">
   <summary>
     <div class="b-left">
       <span class="b-role">{role}</span>
       <span class="b-title">{label}</span>
       <span class="b-stocks-count">· {len(sorted_stocks)} 檔</span>
+      {leader_info}
     </div>
     {b_stats}
     <div class="b-giants">{giant_chips}</div>
     <span class="chev">▾</span>
   </summary>
   <div class="b-body">
-    {_gen_bucket_body(sorted_stocks)}
+    {_gen_bucket_body(sorted_stocks, alpha_scores, ranks_for_bucket)}
   </div>
 </details>'''
     html += '</div>'
     return html
 
 
-def _gen_bucket_body(stocks):
+def _gen_bucket_body(stocks, alpha_scores=None, ranks_for_bucket=None):
     if not stocks:
         return '<div class="empty-msg">此 bucket 暫無資料</div>'
-    return "".join(_gen_stock_row(s) for s in stocks)
+    return "".join(_gen_stock_row(s, alpha_scores, ranks_for_bucket) for s in stocks)
 
 
-def _gen_stock_row(s):
+def _gen_stock_row(s, alpha_scores=None, ranks_for_bucket=None):
     code = s["symbol"]
     light_parts = []
     for k, v in s["lights"].items():
@@ -1772,25 +2018,62 @@ def _gen_stock_row(s):
     lights_mini = "".join(light_parts)
     score_cls = _score_cls(s["score"], s["score_max"])
     day_cls = _pct_cls(s["day_pct"])
+
+    # 排名獎牌
+    rank_info = (ranks_for_bucket or {}).get(code, {})
+    medal = rank_info.get("medal", "")
+    medal_html = f'<span class="rank-medal" title="Bucket 內 {rank_info.get("label", "")}">{medal}</span>' if medal else ""
+
+    # Alpha 分數 pill
+    alpha_pill = ""
+    if alpha_scores and code in alpha_scores:
+        a = alpha_scores[code]
+        tier = a["tier"]
+        alpha_pill = f'<span class="alpha-pill {tier}" title="Alpha {a["tier_label"]}">α {a["alpha"]:.0f}</span>'
+
     return f'''<details class="stock" id="stock-{code}">
   <summary>
+    {medal_html}
     <span class="sym">{code}</span>
     <span class="nm">{s["name"]}</span>
     <span class="lights-mini" title="紅黃綠燈摘要">{lights_mini}</span>
     <span class="score-chip {score_cls}" title="12 盞燈綜合分">{s["score"]}/{s["score_max"]}</span>
+    {alpha_pill}
     <span class="pct {day_cls}">{_fmt_pct(s["day_pct"])}</span>
   </summary>
-  {_gen_stock_detail(s)}
+  {_gen_stock_detail(s, alpha_scores)}
 </details>'''
 
 
-def _gen_stock_detail(s):
+def _gen_stock_detail(s, alpha_scores=None):
+    alpha_block = ""
+    if alpha_scores and s["symbol"] in alpha_scores:
+        a = alpha_scores[s["symbol"]]
+        comps = a["components"]
+        labels = {
+            "fundamental": "基本面",
+            "momentum": "動能",
+            "technical": "技術",
+            "capex_align": "Capex 對齊",
+            "analyst": "分析師",
+            "signals": "訊號",
+        }
+        rows = "".join(
+            f'<div class="light-row"><span class="k">{labels[k]} ({ALPHA_WEIGHTS[k]*100:.0f}%)</span><span class="v">{v:.1f}/10</span></div>'
+            for k, v in comps.items()
+        )
+        alpha_block = f'''<div class="sd-block" style="grid-column:1/-1">
+  <h5>⚡ Alpha 評分拆解 — {a["alpha"]:.0f}/100 · <span class="alpha-pill {a["tier"]}">{a["tier_label"]}</span></h5>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:4px 14px">{rows}</div>
+</div>'''
+
     return f'''<div class="stock-detail">
   <div class="sd-grid2">
     {_gen_tech_block(s)}
     {_gen_lights_block(s)}
     {_gen_valuation_block(s)}
     {_gen_news_block(s)}
+    {alpha_block}
   </div>
   {_gen_cross_check_block(s)}
 </div>'''
@@ -1960,15 +2243,16 @@ def _gen_cross_check_block(s):
     return f'<div class="warn-box">⚠️ 兩源差異偵測：{" ; ".join(parts)}</div>'
 
 
-def generate_html(stocks, capex_groups, signals, benchmarks):
+def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings):
     bucket_lookup = {k: label for k, label, _, _ in BUCKETS}
     giants_grid = _gen_giants_grid(stocks)
-    supply_chain = _gen_supply_chain(stocks)
+    supply_chain = _gen_supply_chain(stocks, alpha_scores, bucket_rankings)
     capex_html = _gen_capex_panel(capex_groups, bucket_lookup)
     legend_html = _gen_legend()
     backtest_html = _gen_backtest(stocks, benchmarks)
     signals_html = _gen_signals_panel(signals, stocks)
     sankey_html = _gen_sankey_svg(stocks, bucket_lookup)
+    alpha_html = _gen_alpha_panel(alpha_scores, stocks)
 
     n_green = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "green")
     n_red = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "red")
@@ -1994,6 +2278,10 @@ def generate_html(stocks, capex_groups, signals, benchmarks):
   <div class="ttl">🏛 AI 九巨頭</div>
   <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分 · 最高 24 分）</div>
   {giants_grid}
+
+  <div class="ttl">⚡ Alpha 評分排行（綜合買賣訊號）</div>
+  <div class="desc">6 個子分數加權合成 0-100 分。權重：基本面 25% · 動能 20% · 技術 15% · Capex 對齊 15% · 分析師 15% · 訊號 10%。≥70 強勢買進 · 55-69 買進 · 40-54 觀望 · <40 弱勢</div>
+  {alpha_html}
 
   <div class="ttl">🔄 連續訊號（歷史累積）</div>
   <div class="desc">從每日快照累積，找出連續漲/跌、連續進 Top-3 的標的（需至少 3 個交易日歷史）</div>
@@ -2070,8 +2358,20 @@ def main():
     signals = compute_consecutive_signals(history, stocks) if history else {}
     print(f"\n連續訊號計算：歷史 {len(history)} 天")
 
-    # 9. HTML
-    html = generate_html(stocks, capex_groups, signals, benchmarks)
+    # 9. Alpha scoring model + bucket rankings
+    stock_to_bucket = {}
+    for key, _, _, syms in BUCKETS:
+        for sym in syms:
+            stock_to_bucket[sym] = key
+    alpha_scores = compute_alpha_scores(stocks, capex_groups, signals, stock_to_bucket)
+    bucket_rankings = compute_bucket_rankings(stocks, alpha_scores)
+    # 打印 alpha top 5
+    print("\n=== Alpha Top 5 ===")
+    for sym, sc in sorted(alpha_scores.items(), key=lambda x: -x[1]["alpha"])[:5]:
+        print(f"  {sym:6s} {sc['alpha']:5.1f}  {sc['tier_label']}")
+
+    # 10. HTML
+    html = generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n儀表板輸出至 {OUTPUT_HTML}")

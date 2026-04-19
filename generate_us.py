@@ -299,6 +299,66 @@ def build_market_report(bars_df):
 
 # ── 新聞 / 財報 抓取 ────────────────────────────────────────────────────────
 
+# 新聞語意分析 — 四大類（訂單/指引/高管/財報）+ 一般情緒詞典 fallback
+NEWS_CATEGORY_RULES = [
+    ("order", "訂單 / 合約",
+        ["wins", "awarded", "secures", "landed", "clinches", "deal", "contract", "order", "partnership", "supply agreement", "multi-year", "signs"],
+        ["loses", "cancels", "cancelled", "terminated", "dropped", "ends partnership"],
+        ["contract", "deal", "order", "agreement", "partnership", "supply"]),
+    ("guidance", "指引修訂",
+        ["raises guidance", "raised guidance", "upgrades", "upgraded", "raises target", "boost", "beats estimates", "lifts outlook", "raised price target", "outperform"],
+        ["cuts guidance", "lowers guidance", "downgrades", "downgraded", "cuts target", "slashes", "warns", "below estimates", "lowered outlook", "underperform"],
+        ["guidance", "outlook", "forecast", "target", "rating", "estimate", "analyst", "upgrade", "downgrade", "price target"]),
+    ("insider", "高管動作",
+        ["insider buying", "bought shares", "increased stake", "ceo buys", "purchases shares", "insider purchase", "accumulates"],
+        ["insider selling", "sold shares", "dumped", "unloads", "cashes out", "ceo sells", "insider sale", "reduces stake"],
+        ["insider", "ceo", "executive", "director", "stake", "holding"]),
+    ("earnings", "財報",
+        ["beats", "beat estimates", "tops estimates", "record revenue", "strong quarter", "exceeds", "blowout"],
+        ["misses", "missed estimates", "falls short", "disappointing", "weak quarter", "shortfall"],
+        ["earnings", "q1", "q2", "q3", "q4", "quarterly", "eps", "revenue of $", "reports earnings"]),
+]
+
+SENTIMENT_POS = {
+    "surge", "soar", "jump", "rally", "rise", "gain", "climb", "advance", "boost",
+    "strong", "record", "best", "wins", "bullish", "positive", "growth",
+    "expand", "expansion", "optimistic", "breakthrough", "approved", "launch",
+    "premium", "success", "milestone", "all-time high", "tops",
+    "powering", "dominates", "leading", "outperform", "exceeds",
+}
+SENTIMENT_NEG = {
+    "fall", "drop", "plunge", "decline", "slump", "crash", "tumble", "slide",
+    "cut", "weak", "loss", "worst", "loses", "hurt", "bearish", "negative",
+    "shrink", "warn", "warning", "layoff", "lawsuit", "probe", "investigation",
+    "recall", "delay", "halt", "below", "sinks", "plummets", "underperform",
+    "selloff", "disappointing", "concerns", "risk", "tumbled",
+}
+
+
+def _classify_news(title, summary=""):
+    """(category, category_label, sentiment, matched_words)"""
+    text = (title + " " + (summary or "")).lower()
+    for category, label, pos_kws, neg_kws, detectors in NEWS_CATEGORY_RULES:
+        if not any(d in text for d in detectors):
+            continue
+        pos_hit = [w for w in pos_kws if w in text]
+        neg_hit = [w for w in neg_kws if w in text]
+        if pos_hit or neg_hit:
+            matched = pos_hit + neg_hit
+            if pos_hit and not neg_hit:
+                return (category, label, "positive", matched)
+            if neg_hit and not pos_hit:
+                return (category, label, "negative", matched)
+            return (category, label, "neutral", matched)
+    pos_count = sum(1 for w in SENTIMENT_POS if w in text)
+    neg_count = sum(1 for w in SENTIMENT_NEG if w in text)
+    if pos_count > neg_count:
+        return ("general", "一般新聞", "positive", [])
+    if neg_count > pos_count:
+        return ("general", "一般新聞", "negative", [])
+    return ("general", "一般新聞", "neutral", [])
+
+
 def _parse_news_item(raw, related_sym):
     """yfinance 新版 news 結構是 {id, content:{...}}，抽出展示欄位。"""
     c = raw.get("content") or {}
@@ -307,6 +367,7 @@ def _parse_news_item(raw, related_sym):
     title = c.get("title") or ""
     if not title:
         return None
+    summary = c.get("summary") or ""
     pub = c.get("pubDate") or c.get("displayTime")
     try:
         ts = datetime.fromisoformat(pub.replace("Z", "+00:00")) if pub else None
@@ -316,6 +377,7 @@ def _parse_news_item(raw, related_sym):
         return None
     url = (c.get("clickThroughUrl") or {}).get("url") or (c.get("canonicalUrl") or {}).get("url") or ""
     provider = (c.get("provider") or {}).get("displayName", "")
+    category, cat_label, sentiment, matched = _classify_news(title, summary)
     return {
         "symbol": related_sym,
         "title": title,
@@ -323,6 +385,10 @@ def _parse_news_item(raw, related_sym):
         "provider": provider,
         "timestamp": ts.isoformat() if ts else None,
         "ts_epoch": ts.timestamp() if ts else 0,
+        "category": category,
+        "category_label": cat_label,
+        "sentiment": sentiment,
+        "matched_keywords": matched,
     }
 
 
@@ -722,6 +788,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .news-item:last-child{border-bottom:none}
 .news-item .sym-pill{flex-shrink:0;font-weight:700;font-size:11px;color:var(--bl);background:#dbeafe;padding:2px 7px;border-radius:4px;min-width:46px;text-align:center}
 .news-item .meta{font-size:11px;color:var(--mu);margin-top:2px}
+.news-tags{display:flex;gap:4px;align-items:center;margin-bottom:3px}
+.cat-pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:0.2px}
+.cat-order{background:#fce7f3;color:#9f1239}
+.cat-guidance{background:#dbeafe;color:#1e40af}
+.cat-insider{background:#e9d5ff;color:#6b21a8}
+.cat-earnings{background:#fef3c7;color:#92400e}
+.cat-general{background:#e2e8f0;color:#475569}
+.sent-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px}
+.sent-positive{background:#16a34a}
+.sent-negative{background:#dc2626}
+.sent-neutral{background:#94a3b8}
+.sent-label{font-size:10px;font-weight:600}
+.sent-positive-label{color:#15803d}
+.sent-negative-label{color:#b91c1c}
+.sent-neutral-label{color:#64748b}
 .news-item a{color:var(--txt);text-decoration:none;line-height:1.5}
 .news-item a:hover{color:var(--bl);text-decoration:underline}
 .earn-section{margin-top:14px;padding-top:12px;border-top:1px dashed var(--brd)}
@@ -1048,10 +1129,18 @@ def _fmt_news_age(ts_iso):
     return f"{int(age // 86400)} 天前"
 
 
+SENT_LABEL_US = {"positive": "正向", "negative": "負向", "neutral": "中性"}
+
+
 def _gen_news_panel(news):
     if not news:
         return ""
-    html = '<div class="news-section"><h4>📰 相關新聞（Top 貢獻股，48 小時內）</h4>'
+    # 整體情緒摘要
+    sent_counts = {"positive": 0, "negative": 0, "neutral": 0}
+    for n in news:
+        sent_counts[n.get("sentiment", "neutral")] += 1
+    summary = f'<div style="font-size:11px;color:var(--mu);margin-bottom:6px">綜合情緒：<span style="color:var(--gr);font-weight:700">↑{sent_counts["positive"]}</span> / <span style="color:var(--mu);font-weight:700">={sent_counts["neutral"]}</span> / <span style="color:var(--rd);font-weight:700">↓{sent_counts["negative"]}</span></div>'
+    html = f'<div class="news-section"><h4>📰 相關新聞（Top 貢獻股，48 小時內）</h4>{summary}'
     for n in news:
         age = _fmt_news_age(n.get("timestamp"))
         provider = n.get("provider") or ""
@@ -1060,9 +1149,17 @@ def _gen_news_panel(news):
         url = n.get("url") or "#"
         link_open = f'<a href="{url}" target="_blank" rel="noopener">' if url != "#" else "<span>"
         link_close = "</a>" if url != "#" else "</span>"
+        cat = n.get("category", "general")
+        cat_label = n.get("category_label", "一般新聞")
+        sentiment = n.get("sentiment", "neutral")
+        sent_lbl = SENT_LABEL_US.get(sentiment, "中性")
+        matched = n.get("matched_keywords", [])
+        matched_title = (" · 命中關鍵字: " + ", ".join(matched[:3])) if matched else ""
+        tags = f'<div class="news-tags"><span class="cat-pill cat-{cat}" title="{cat_label}{matched_title}">{cat_label}</span><span class="sent-dot sent-{sentiment}"></span><span class="sent-label sent-{sentiment}-label">{sent_lbl}</span></div>'
         html += f'''<div class="news-item">
   <span class="sym-pill">{n["symbol"]}</span>
   <div style="flex:1;min-width:0">
+    {tags}
     {link_open}{n["title"]}{link_close}
     <div class="meta">{meta}</div>
   </div>
