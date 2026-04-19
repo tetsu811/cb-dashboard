@@ -88,6 +88,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .sent-positive-label{color:#15803d}
 .sent-negative-label{color:#b91c1c}
 .sent-neutral-label{color:#64748b}
+/* 放量歸因 */
+.attribution-block{background:linear-gradient(135deg,#fef3c7 0%,#fef9c3 40%,#fff 100%);border:1px solid #fde68a;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.attr-title{font-size:12.5px;font-weight:800;color:#78350f;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.attr-row{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;padding:6px 0;border-bottom:1px dashed rgba(146,64,14,0.15);align-items:start}
+.attr-row:last-of-type{border-bottom:none}
+.attr-head{display:flex;align-items:center;gap:6px;min-width:170px}
+.attr-icon{font-size:14px}
+.attr-label{font-size:11.5px;font-weight:700;color:#1e293b}
+.attr-status{font-size:10.5px;font-weight:700;padding:1.5px 7px;border-radius:10px}
+.attr-status.attr-found{background:#dcfce7;color:#15803d}
+.attr-status.attr-none{background:#e2e8f0;color:#64748b}
+.attr-body{font-size:11.5px;line-height:1.55;color:#1e293b;word-break:break-word}
+.attr-empty{color:#94a3b8;font-style:italic}
+.attr-link{color:#1e293b;text-decoration:none;display:inline-block;margin:2px 0}
+.attr-link:hover{color:var(--bl);text-decoration:underline}
+.attr-chip-info{display:inline-block}
+.attr-sent{font-size:10px;color:var(--mu);font-weight:600}
+.attr-conclusion{margin-top:8px;padding-top:8px;border-top:2px dashed #fde68a;font-size:12px;line-height:1.6;color:#78350f}
+.attr-conclusion-label{font-weight:800}
+.attr-conclusion-found{font-weight:600}
+.attr-conclusion-none{color:#64748b;font-style:italic}
 .news-item a{color:var(--txt);text-decoration:none;line-height:1.5}
 .news-item a:hover{color:var(--bl);text-decoration:underline}
 .earn-section{margin-top:14px;padding-top:12px;border-top:1px dashed var(--brd)}
@@ -226,7 +247,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Apple Inc">Apple Inc <span class="pill am" title="量 ÷ 昨日 = 1.42">放量</span></span>
   <span class="val up">+2.59%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 13.61%">權 13.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">13 買</b> / <b class="dn">3 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.74% · 20 日 +8.54% · 站上 MA50 · RSI 64</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.74%</span></div>
@@ -247,7 +293,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/too-consider-apple-aapl-strong-190338967.html" target="_blank" rel="noopener">Is It Too Late To Consider Apple (AAPL) After Its Strong 1 Year Share Price Run?</a><div class="sd-news-meta">Simply Wall St. · 12 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/asked-chatgpt-stock-market-look-173906448.html" target="_blank" rel="noopener">I Asked ChatGPT How the Stock Market Would Look If We Ignored the 7 Biggest Stocks</a><div class="sd-news-meta">GOBankingRates · 13 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/too-consider-apple-aapl-strong-190338967.html" target="_blank" rel="noopener">Is It Too Late To Consider Apple (AAPL) After Its Strong 1 Year Share Price Run?</a><div class="sd-news-meta">Simply Wall St. · 12 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/asked-chatgpt-stock-market-look-173906448.html" target="_blank" rel="noopener">I Asked ChatGPT How the Stock Market Would Look If We Ignored the 7 Biggest Stocks</a><div class="sd-news-meta">GOBankingRates · 14 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">NVDA</span>
   <span class="nm" title="NVIDIA Corp">NVIDIA Corp</span>
@@ -274,7 +320,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/prediction-ai-supply-chain-shortage-065000390.html" target="_blank" rel="noopener">Prediction: The AI Supply Chain Shortage Will Create 2 New Trillion-Dollar Companies by 2030</a><div class="sd-news-meta">Motley Fool · 38 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/crypto/articles/ripple-thriving-xrp-holders-arent-052000222.html" target="_blank" rel="noopener">Ripple Is Thriving. XRP Holders Aren't. Here's Why.</a><div class="sd-news-meta">Motley Fool · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/marvell-mrvl-stock-winner-jim-041953279.html" target="_blank" rel="noopener">Is Marvell (MRVL) Stock a Winner? Find Out What Jim Cramer Said!</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/options/articles/worried-retirement-tax-bill-heres-072200307.html" target="_blank" rel="noopener">Worried About Your Retirement Tax Bill? Here's an Investment Worth Looking At</a><div class="sd-news-meta">Motley Fool · 17 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/prediction-ai-supply-chain-shortage-065000390.html" target="_blank" rel="noopener">Prediction: The AI Supply Chain Shortage Will Create 2 New Trillion-Dollar Companies by 2030</a><div class="sd-news-meta">Motley Fool · 49 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/crypto/articles/ripple-thriving-xrp-holders-arent-052000222.html" target="_blank" rel="noopener">Ripple Is Thriving. XRP Holders Aren't. Here's Why.</a><div class="sd-news-meta">Motley Fool · 2 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">AVGO</span>
   <span class="nm" title="Broadcom Inc">Broadcom Inc</span>
@@ -332,7 +378,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/the-software-rebound-is-real-but-not-every-big-name-is-back-chart-of-the-day-121425237.html" target="_blank" rel="noopener">The software rebound is real, but not every big name is back: Chart of the Day</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/record-stock-market-valuations-mask-062850006.html" target="_blank" rel="noopener">Record stock market valuations mask reliance on temporary profit catalysts</a><div class="sd-news-meta">Investing.com · 59 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/u-export-controls-complicate-micron-011032128.html" target="_blank" rel="noopener">U.S. Export Controls Complicate Micron AI Memory Outlook And Supply Chain</a><div class="sd-news-meta">Simply Wall St. · 6 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/the-software-rebound-is-real-but-not-every-big-name-is-back-chart-of-the-day-121425237.html" target="_blank" rel="noopener">The software rebound is real, but not every big name is back: Chart of the Day</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/record-stock-market-valuations-mask-062850006.html" target="_blank" rel="noopener">Record stock market valuations mask reliance on temporary profit catalysts</a><div class="sd-news-meta">Investing.com · 1 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/u-export-controls-complicate-micron-011032128.html" target="_blank" rel="noopener">U.S. Export Controls Complicate Micron AI Memory Outlook And Supply Chain</a><div class="sd-news-meta">Simply Wall St. · 6 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col vol">
@@ -342,7 +388,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Apple Inc">Apple Inc <span class="pill am" title="量 ÷ 昨日 = 1.42">放量</span></span>
   <span class="val am">×1.42</span><span class="val up" style="min-width:52px">+2.59%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">13 買</b> / <b class="dn">3 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.74% · 20 日 +8.54% · 站上 MA50 · RSI 64</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.74%</span></div>
@@ -363,13 +434,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/too-consider-apple-aapl-strong-190338967.html" target="_blank" rel="noopener">Is It Too Late To Consider Apple (AAPL) After Its Strong 1 Year Share Price Run?</a><div class="sd-news-meta">Simply Wall St. · 12 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/asked-chatgpt-stock-market-look-173906448.html" target="_blank" rel="noopener">I Asked ChatGPT How the Stock Market Would Look If We Ignored the 7 Biggest Stocks</a><div class="sd-news-meta">GOBankingRates · 13 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/too-consider-apple-aapl-strong-190338967.html" target="_blank" rel="noopener">Is It Too Late To Consider Apple (AAPL) After Its Strong 1 Year Share Price Run?</a><div class="sd-news-meta">Simply Wall St. · 12 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/asked-chatgpt-stock-market-look-173906448.html" target="_blank" rel="noopener">I Asked ChatGPT How the Stock Market Would Look If We Ignored the 7 Biggest Stocks</a><div class="sd-news-meta">GOBankingRates · 14 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">CSCO</span>
   <span class="nm" title="Cisco Systems Inc">Cisco Systems Inc <span class="pill am" title="量 ÷ 昨日 = 1.39">放量</span></span>
   <span class="val am">×1.39</span><span class="val up" style="min-width:52px">+2.07%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/did-cisco-csco-astrix-deal-030812528.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Did Cisco’s (CSCO) Astrix Deal and Project Glasswing Push Deeper into AI Security Just Shift Its Investment Narrative?<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">22 買</b> / <b class="dn">22 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +4.90% · 20 日 +9.86% · 站上 MA50 · RSI 68</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+4.90%</span></div>
@@ -404,19 +500,26 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="val up" style="min-width:60px;text-align:right">+2.54%</span>
   <span style="flex:0 0 auto"><span class="pill pill-up" style="padding:3px 9px;border-radius:6px;font-size:11px;font-weight:700;margin-left:6px">即將公布 2026-04-22（預期 EPS $1.36）</span></span>
 </div></div>
-  <div class="news-section"><h4>📰 相關新聞（Top 貢獻股，48 小時內）</h4><div style="font-size:11px;color:var(--mu);margin-bottom:6px">綜合情緒：<span style="color:var(--gr);font-weight:700">↑3</span> / <span style="color:var(--mu);font-weight:700">=1</span> / <span style="color:var(--rd);font-weight:700">↓2</span></div><div class="news-item">
+  <div class="news-section"><h4>📰 相關新聞（Top 貢獻股，48 小時內）</h4><div style="font-size:11px;color:var(--mu);margin-bottom:6px">綜合情緒：<span style="color:var(--gr);font-weight:700">↑2</span> / <span style="color:var(--mu);font-weight:700">=2</span> / <span style="color:var(--rd);font-weight:700">↓2</span></div><div class="news-item">
+  <span class="sym-pill">NVDA</span>
+  <div style="flex:1;min-width:0">
+    <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
+    <a href="https://finance.yahoo.com/markets/options/articles/worried-retirement-tax-bill-heres-072200307.html" target="_blank" rel="noopener">Worried About Your Retirement Tax Bill? Here's an Investment Worth Looking At</a>
+    <div class="meta">Motley Fool · 17 分鐘前</div>
+  </div>
+</div><div class="news-item">
   <span class="sym-pill">NVDA</span>
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-positive"></span><span class="sent-label sent-positive-label">正向</span></div>
     <a href="https://finance.yahoo.com/sectors/technology/articles/prediction-ai-supply-chain-shortage-065000390.html" target="_blank" rel="noopener">Prediction: The AI Supply Chain Shortage Will Create 2 New Trillion-Dollar Companies by 2030</a>
-    <div class="meta">Motley Fool · 38 分鐘前</div>
+    <div class="meta">Motley Fool · 49 分鐘前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">MU</span>
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/markets/stocks/articles/record-stock-market-valuations-mask-062850006.html" target="_blank" rel="noopener">Record stock market valuations mask reliance on temporary profit catalysts</a>
-    <div class="meta">Investing.com · 59 分鐘前</div>
+    <div class="meta">Investing.com · 1 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">NVDA</span>
@@ -439,13 +542,6 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
     <a href="https://finance.yahoo.com/markets/stocks/articles/nvidia-ai-foundation-portfolio-links-041650598.html" target="_blank" rel="noopener">Nvidia’s AI Foundation Portfolio Links Equity Bets And Policy Risks</a>
     <div class="meta">Simply Wall St. · 3 小時前</div>
   </div>
-</div><div class="news-item">
-  <span class="sym-pill">NVDA</span>
-  <div style="flex:1;min-width:0">
-    <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-positive"></span><span class="sent-label sent-positive-label">正向</span></div>
-    <a href="https://finance.yahoo.com/markets/stocks/articles/1-growth-stock-think-outperform-024100157.html" target="_blank" rel="noopener">1 Growth Stock I Think Will Outperform Nvidia Stock Over the Next Decade</a>
-    <div class="meta">Motley Fool · 4 小時前</div>
-  </div>
 </div></div>
 </div><div class="drill" data-code="XLF">
   <h2>XLF 金融 <span class="val up" style="font-size:18px;margin-left:8px">+0.77%</span></h2>
@@ -458,7 +554,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="The Goldman Sachs Group Inc">The Goldman Sachs Group Inc <span class="pill am" title="量 ÷ 昨日 = 1.61">放量</span></span>
   <span class="val up">+2.88%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 3.59%">權 3.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Traders Ready to Put War Behind Them Dial Up Risk<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/news/anthropic-trump-officials-meet-discuss-222934906.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Anthropic, Trump Officials Meet to Discuss Mythos Access<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">7 買</b> / <b class="dn">10 賣</b> · <b class="dn">淨賣出 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +2.00% · 20 日 +14.39% · 站上 MA50 · RSI 66</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+2.00%</span></div>
@@ -479,13 +600,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/personal-finance/banking/article/best-cd-rates-today-saturday-april-18-2026-100000449.html" target="_blank" rel="noopener">Best CD rates today, April 18, 2026 (best account provides 4.05% APY)</a><div class="sd-news-meta">Yahoo Personal Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/don-t-goldman-sachs-gs-042943839.html" target="_blank" rel="noopener">Don’t Give Up on Goldman Sachs (GS), Says Jim Cramer</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener">Traders Ready to Put War Behind Them Dial Up Risk</a><div class="sd-news-meta">Bloomberg · 12 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/personal-finance/banking/article/best-cd-rates-today-saturday-april-18-2026-100000449.html" target="_blank" rel="noopener">Best CD rates today, April 18, 2026 (best account provides 4.05% APY)</a><div class="sd-news-meta">Yahoo Personal Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/don-t-goldman-sachs-gs-042943839.html" target="_blank" rel="noopener">Don’t Give Up on Goldman Sachs (GS), Says Jim Cramer</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener">Traders Ready to Put War Behind Them Dial Up Risk</a><div class="sd-news-meta">Bloomberg · 12 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">C</span>
   <span class="nm" title="Citigroup Inc">Citigroup Inc <span class="pill am" title="量 ÷ 昨日 = 1.71">放量</span></span>
   <span class="val up">+2.20%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 2.81%">權 2.8%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Traders Ready to Put War Behind Them Dial Up Risk<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/news/anthropic-trump-officials-meet-discuss-222934906.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Anthropic, Trump Officials Meet to Discuss Mythos Access<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">42 買</b> / <b class="dn">6 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +6.26% · 20 日 +20.33% · 站上 MA50 · RSI 73（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+6.26%</span></div>
@@ -574,7 +720,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="American Express Co">American Express Co <span class="pill am" title="量 ÷ 昨日 = 2.36">放量</span></span>
   <span class="val am">×2.36</span><span class="val up" style="min-width:52px">+1.82%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">23 買</b> / <b class="dn">12 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-23</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +5.80% · 20 日 +12.46% · 站上 MA50 · RSI 65</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+5.80%</span></div>
@@ -601,7 +772,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Citigroup Inc">Citigroup Inc <span class="pill am" title="量 ÷ 昨日 = 1.71">放量</span></span>
   <span class="val am">×1.71</span><span class="val up" style="min-width:52px">+2.20%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Traders Ready to Put War Behind Them Dial Up Risk<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/news/anthropic-trump-officials-meet-discuss-222934906.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Anthropic, Trump Officials Meet to Discuss Mythos Access<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">42 買</b> / <b class="dn">6 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +6.26% · 20 日 +20.33% · 站上 MA50 · RSI 73（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+6.26%</span></div>
@@ -628,7 +824,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="The Goldman Sachs Group Inc">The Goldman Sachs Group Inc <span class="pill am" title="量 ÷ 昨日 = 1.61">放量</span></span>
   <span class="val am">×1.61</span><span class="val up" style="min-width:52px">+2.88%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Traders Ready to Put War Behind Them Dial Up Risk<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/news/anthropic-trump-officials-meet-discuss-222934906.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Anthropic, Trump Officials Meet to Discuss Mythos Access<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">7 買</b> / <b class="dn">10 賣</b> · <b class="dn">淨賣出 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +2.00% · 20 日 +14.39% · 站上 MA50 · RSI 66</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+2.00%</span></div>
@@ -649,7 +870,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/personal-finance/banking/article/best-cd-rates-today-saturday-april-18-2026-100000449.html" target="_blank" rel="noopener">Best CD rates today, April 18, 2026 (best account provides 4.05% APY)</a><div class="sd-news-meta">Yahoo Personal Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/don-t-goldman-sachs-gs-042943839.html" target="_blank" rel="noopener">Don’t Give Up on Goldman Sachs (GS), Says Jim Cramer</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener">Traders Ready to Put War Behind Them Dial Up Risk</a><div class="sd-news-meta">Bloomberg · 12 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/personal-finance/banking/article/best-cd-rates-today-saturday-april-18-2026-100000449.html" target="_blank" rel="noopener">Best CD rates today, April 18, 2026 (best account provides 4.05% APY)</a><div class="sd-news-meta">Yahoo Personal Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/don-t-goldman-sachs-gs-042943839.html" target="_blank" rel="noopener">Don’t Give Up on Goldman Sachs (GS), Says Jim Cramer</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/traders-ready-put-war-behind-190000645.html" target="_blank" rel="noopener">Traders Ready to Put War Behind Them Dial Up Risk</a><div class="sd-news-meta">Bloomberg · 12 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col tech">
@@ -685,7 +906,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/markets/stocks/articles/don-t-goldman-sachs-gs-042943839.html" target="_blank" rel="noopener">Don’t Give Up on Goldman Sachs (GS), Says Jim Cramer</a>
-    <div class="meta">Insider Monkey · 2 小時前</div>
+    <div class="meta">Insider Monkey · 3 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">V</span>
@@ -748,7 +969,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/eli-lilly-lly-says-fda-050339117.html" target="_blank" rel="noopener">Eli Lilly (LLY) Says FDA Requests Additional Data on Obesity Pill</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/drug-stock-crushed-p-500-213500240.html" target="_blank" rel="noopener">This Drug Stock Has Crushed the S&P 500 Over the Last Decade</a><div class="sd-news-meta">Motley Fool · 9 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/foundayo-trial-results-recast-eli-130246654.html" target="_blank" rel="noopener">Foundayo Trial Results Recast Eli Lilly Story On GLP1 Safety And Growth</a><div class="sd-news-meta">Simply Wall St. · 18 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/eli-lilly-lly-says-fda-050339117.html" target="_blank" rel="noopener">Eli Lilly (LLY) Says FDA Requests Additional Data on Obesity Pill</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/drug-stock-crushed-p-500-213500240.html" target="_blank" rel="noopener">This Drug Stock Has Crushed the S&P 500 Over the Last Decade</a><div class="sd-news-meta">Motley Fool · 10 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/foundayo-trial-results-recast-eli-130246654.html" target="_blank" rel="noopener">Foundayo Trial Results Recast Eli Lilly Story On GLP1 Safety And Growth</a><div class="sd-news-meta">Simply Wall St. · 18 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">MRK</span>
   <span class="nm" title="Merck & Co Inc">Merck & Co Inc <span class="pill am" title="量 ÷ 昨日 = 1.42">放量</span></span>
@@ -781,7 +1002,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="UnitedHealth Group Inc">UnitedHealth Group Inc <span class="pill am" title="量 ÷ 昨日 = 1.81">放量</span></span>
   <span class="val up">+2.60%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 4.61%">權 4.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-21</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +6.67% · 20 日 +15.76% · 站上 MA50 · RSI 73（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+6.67%</span></div>
@@ -802,7 +1048,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/why-unitedhealth-group-unh-6-030942159.html" target="_blank" rel="noopener">Why UnitedHealth Group (UNH) Is Up 6.7% After Medicare Advantage Rate Clarity And Analyst Optimism</a><div class="sd-news-meta">Simply Wall St. · 4 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/unh-stock-earnings-preview-expect-093546748.html" target="_blank" rel="noopener">UNH Stock Earnings Preview: What to Expect from UnitedHealth’s Q1 Results</a><div class="sd-news-meta">TipRanks · 21 小時前</div></div><div class="sd-news-item"><a href="https://www.barrons.com/articles/stocks-today-oil-nasdaq-streak-2eebd54d?siteid=yhoof2&yptr=yahoo" target="_blank" rel="noopener">Review & Preview: The Nasdaq’s Historic Week</a><div class="sd-news-meta">Barrons.com · 1 天前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/why-unitedhealth-group-unh-6-030942159.html" target="_blank" rel="noopener">Why UnitedHealth Group (UNH) Is Up 6.7% After Medicare Advantage Rate Clarity And Analyst Optimism</a><div class="sd-news-meta">Simply Wall St. · 4 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/unh-stock-earnings-preview-expect-093546748.html" target="_blank" rel="noopener">UNH Stock Earnings Preview: What to Expect from UnitedHealth’s Q1 Results</a><div class="sd-news-meta">TipRanks · 22 小時前</div></div><div class="sd-news-item"><a href="https://www.barrons.com/articles/stocks-today-oil-nasdaq-streak-2eebd54d?siteid=yhoof2&yptr=yahoo" target="_blank" rel="noopener">Review & Preview: The Nasdaq’s Historic Week</a><div class="sd-news-meta">Barrons.com · 1 天前</div></div>
 </div></div></details>
     </div>
     <div class="col neg">
@@ -812,7 +1058,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Gilead Sciences Inc">Gilead Sciences Inc <span class="pill am" title="量 ÷ 昨日 = 2.14">放量</span></span>
   <span class="val dn">-0.66%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 3.25%">權 3.3%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">26 買</b> / <b class="dn">24 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-23</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -0.97% · 20 日 -2.46% · 跌破 MA50 · RSI 43</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-0.97%</span></div>
@@ -897,7 +1168,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Gilead Sciences Inc">Gilead Sciences Inc <span class="pill am" title="量 ÷ 昨日 = 2.14">放量</span></span>
   <span class="val am">×2.14</span><span class="val dn" style="min-width:52px">-0.66%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">26 買</b> / <b class="dn">24 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-23</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -0.97% · 20 日 -2.46% · 跌破 MA50 · RSI 43</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-0.97%</span></div>
@@ -924,7 +1220,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Amgen Inc">Amgen Inc <span class="pill am" title="量 ÷ 昨日 = 1.86">放量</span></span>
   <span class="val am">×1.86</span><span class="val up" style="min-width:52px">+1.69%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/healthcare/articles/evercore-isi-adjusts-viridian-therapeutics-133712823.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Evercore ISI Adjusts Viridian Therapeutics, Inc. (VRDN) Outlook in Pre-Earnings Preview<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">17 買</b> / <b class="dn">5 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.22% · 20 日 +1.54% · 跌破 MA50 · RSI 52</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：分析師指引
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.22%</span></div>
@@ -951,7 +1272,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="UnitedHealth Group Inc">UnitedHealth Group Inc <span class="pill am" title="量 ÷ 昨日 = 1.81">放量</span></span>
   <span class="val am">×1.81</span><span class="val up" style="min-width:52px">+2.60%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-21</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +6.67% · 20 日 +15.76% · 站上 MA50 · RSI 73（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+6.67%</span></div>
@@ -972,7 +1318,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/why-unitedhealth-group-unh-6-030942159.html" target="_blank" rel="noopener">Why UnitedHealth Group (UNH) Is Up 6.7% After Medicare Advantage Rate Clarity And Analyst Optimism</a><div class="sd-news-meta">Simply Wall St. · 4 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/unh-stock-earnings-preview-expect-093546748.html" target="_blank" rel="noopener">UNH Stock Earnings Preview: What to Expect from UnitedHealth’s Q1 Results</a><div class="sd-news-meta">TipRanks · 21 小時前</div></div><div class="sd-news-item"><a href="https://www.barrons.com/articles/stocks-today-oil-nasdaq-streak-2eebd54d?siteid=yhoof2&yptr=yahoo" target="_blank" rel="noopener">Review & Preview: The Nasdaq’s Historic Week</a><div class="sd-news-meta">Barrons.com · 1 天前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/healthcare/articles/why-unitedhealth-group-unh-6-030942159.html" target="_blank" rel="noopener">Why UnitedHealth Group (UNH) Is Up 6.7% After Medicare Advantage Rate Clarity And Analyst Optimism</a><div class="sd-news-meta">Simply Wall St. · 4 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/unh-stock-earnings-preview-expect-093546748.html" target="_blank" rel="noopener">UNH Stock Earnings Preview: What to Expect from UnitedHealth’s Q1 Results</a><div class="sd-news-meta">TipRanks · 22 小時前</div></div><div class="sd-news-item"><a href="https://www.barrons.com/articles/stocks-today-oil-nasdaq-streak-2eebd54d?siteid=yhoof2&yptr=yahoo" target="_blank" rel="noopener">Review & Preview: The Nasdaq’s Historic Week</a><div class="sd-news-meta">Barrons.com · 1 天前</div></div>
 </div></div></details>
     </div>
     <div class="col tech">
@@ -1032,7 +1378,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-positive"></span><span class="sent-label sent-positive-label">正向</span></div>
     <a href="https://finance.yahoo.com/markets/stocks/articles/drug-stock-crushed-p-500-213500240.html" target="_blank" rel="noopener">This Drug Stock Has Crushed the S&P 500 Over the Last Decade</a>
-    <div class="meta">Motley Fool · 9 小時前</div>
+    <div class="meta">Motley Fool · 10 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">LLY</span>
@@ -1081,13 +1427,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/article/tesla-stock-snaps-8-week-losing-streak-with-earnings-ahead-130116963.html" target="_blank" rel="noopener">Tesla stock snaps 8-week losing streak with earnings ahead</a><div class="sd-news-meta">Yahoo Finance · 1 天前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-m-blessing-061250796.html" target="_blank" rel="noopener">Jim Cramer Says “I’m Blessing Rocket Lab (RKLB) Because It’s Got a $1.85 Billion Backlog”</a><div class="sd-news-meta">Insider Monkey · 1 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/article/tesla-stock-snaps-8-week-losing-streak-with-earnings-ahead-130116963.html" target="_blank" rel="noopener">Tesla stock snaps 8-week losing streak with earnings ahead</a><div class="sd-news-meta">Yahoo Finance · 1 天前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-m-blessing-061250796.html" target="_blank" rel="noopener">Jim Cramer Says “I’m Blessing Rocket Lab (RKLB) Because It’s Got a $1.85 Billion Backlog”</a><div class="sd-news-meta">Insider Monkey · 1 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">HD</span>
   <span class="nm" title="The Home Depot Inc">The Home Depot Inc <span class="pill am" title="量 ÷ 昨日 = 1.72">放量</span></span>
   <span class="val up">+3.63%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 5.94%">權 5.9%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/home-depot-weighs-simpl-automation-200258373.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Home Depot Weighs SIMPL Automation Deal Against Valuation And Debt Concerns<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">23 買</b> / <b class="dn">5 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.58% · 20 日 +6.46% · 跌破 MA50 · RSI 57</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.58%</span></div>
@@ -1149,7 +1520,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="The Home Depot Inc">The Home Depot Inc <span class="pill am" title="量 ÷ 昨日 = 1.72">放量</span></span>
   <span class="val am">×1.72</span><span class="val up" style="min-width:52px">+3.63%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/home-depot-weighs-simpl-automation-200258373.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Home Depot Weighs SIMPL Automation Deal Against Valuation And Debt Concerns<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">23 買</b> / <b class="dn">5 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.58% · 20 日 +6.46% · 跌破 MA50 · RSI 57</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.58%</span></div>
@@ -1176,7 +1572,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Lowe's Companies Inc">Lowe's Companies Inc <span class="pill am" title="量 ÷ 昨日 = 1.59">放量</span></span>
   <span class="val am">×1.59</span><span class="val up" style="min-width:52px">+3.84%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">13 買</b> / <b class="dn">2 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.07% · 20 日 +9.58% · 跌破 MA50 · RSI 57</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.07%</span></div>
@@ -1203,7 +1624,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Starbucks Corp">Starbucks Corp <span class="pill am" title="量 ÷ 昨日 = 1.44">放量</span></span>
   <span class="val am">×1.44</span><span class="val up" style="min-width:52px">+1.67%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/starbucks-sbux-dividend-hike-mush-050616460.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>What Starbucks (SBUX)'s Dividend Hike And MUSH Foods Deal Mean For Shareholders<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">18 買</b> / <b class="dn">4 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.52% · 20 日 +4.35% · 站上 MA50 · RSI 63</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.52%</span></div>
@@ -1264,7 +1710,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/sectors/technology/articles/robots-beat-human-runners-beijing-023519296.html" target="_blank" rel="noopener">Robots beat human runners in Beijing race, signaling manufacturing push</a>
-    <div class="meta">Investing.com · 4 小時前</div>
+    <div class="meta">Investing.com · 5 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">TSLA</span>
@@ -1292,7 +1738,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Meta Platforms Inc Class A">Meta Platforms Inc Class A <span class="pill am" title="量 ÷ 昨日 = 1.70">放量</span></span>
   <span class="val up">+1.73%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 18.17%">權 18.2%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/broadcom-avgo-ranks-among-unrivaled-184858144.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Broadcom (AVGO) Ranks Among Unrivaled Stocks of the Next 5 Years<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/sectors/technology/articles/meta-platforms-meta-expands-ai-184721791.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Meta Platforms (META) Expands AI Chip Deal with Broadcom<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +9.32% · 20 日 +13.49% · 站上 MA50 · RSI 70</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+9.32%</span></div>
@@ -1313,7 +1784,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/meta-layoffs-ai-push-reframe-020707677.html" target="_blank" rel="noopener">Meta Layoffs And AI Push Reframe Costs Margins And Valuation Story</a><div class="sd-news-meta">Simply Wall St. · 5 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/crypto/articles/fix-money-michael-saylor-shares-010124912.html" target="_blank" rel="noopener">'Fix The Money': Michael Saylor Shares Endgame For Strategy's Bitcoin-Backed Credit Instruments</a><div class="sd-news-meta">Benzinga · 6 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/meta-layoffs-ai-push-reframe-020707677.html" target="_blank" rel="noopener">Meta Layoffs And AI Push Reframe Costs Margins And Valuation Story</a><div class="sd-news-meta">Simply Wall St. · 5 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/crypto/articles/fix-money-michael-saylor-shares-010124912.html" target="_blank" rel="noopener">'Fix The Money': Michael Saylor Shares Endgame For Strategy's Bitcoin-Backed Credit Instruments</a><div class="sd-news-meta">Benzinga · 6 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">GOOGL</span>
   <span class="nm" title="Alphabet Inc Class A">Alphabet Inc Class A <span class="pill am" title="量 ÷ 昨日 = 1.24">放量</span></span>
@@ -1340,13 +1811,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a><div class="sd-news-meta">Investing.com · 20 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-reveals-why-intel-041846090.html" target="_blank" rel="noopener">Jim Cramer Reveals Why Intel’s (INTC) CEO’s a Winner</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a><div class="sd-news-meta">Investing.com · 31 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-reveals-why-intel-041846090.html" target="_blank" rel="noopener">Jim Cramer Reveals Why Intel’s (INTC) CEO’s a Winner</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">GOOG</span>
   <span class="nm" title="Alphabet Inc Class C">Alphabet Inc Class C <span class="pill am" title="量 ÷ 昨日 = 1.41">放量</span></span>
   <span class="val up">+1.99%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 8.52%">權 8.5%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">31 買</b> / <b class="dn">29 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +7.50% · 20 日 +11.01% · 站上 MA50 · RSI 73（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+7.50%</span></div>
@@ -1367,7 +1863,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a><div class="sd-news-meta">Investing.com · 20 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-reveals-why-intel-041846090.html" target="_blank" rel="noopener">Jim Cramer Reveals Why Intel’s (INTC) CEO’s a Winner</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a><div class="sd-news-meta">Investing.com · 31 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-reveals-why-intel-041846090.html" target="_blank" rel="noopener">Jim Cramer Reveals Why Intel’s (INTC) CEO’s a Winner</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col neg">
@@ -1377,7 +1873,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Netflix Inc">Netflix Inc <span class="pill am" title="量 ÷ 昨日 = 1.94">放量</span></span>
   <span class="val dn">-9.72%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 5.89%">權 5.9%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/netflix-cancellations-boycotts-buzz-online-110123208.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-neutral"></span>Netflix Cancellations, Boycotts Buzz Online As Streaming Giant Enjoys Nearly $3 Billion Warner Bros. Windfall: 'About Time To Say No Thank You'<span class="attr-sent sent-neutral-label"> · 中性</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">27 買</b> / <b class="dn">22 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><b class="dn">已公布 2026-04-16: EPS -8.6% surprise</b></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -5.53% · 20 日 +6.07% · 站上 MA50 · RSI 49</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約 + 財報 miss
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-5.53%</span></div>
@@ -1398,7 +1919,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/the-future-of-netflix-is-now-100022235.html" target="_blank" rel="noopener">The future of Netflix is now</a><div class="sd-news-meta">Yahoo Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/buy-3-growth-stocks-now-070500890.html" target="_blank" rel="noopener">Buy These 3 Growth Stocks Now, Ignore the Noise, and Thank Yourself Later</a><div class="sd-news-meta">Motley Fool · 23 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/inflation-surging-3-stocks-buy-222000196.html" target="_blank" rel="noopener">Inflation Is Surging: 3 Stocks to Buy to Hedge Your Portfolio Against It</a><div class="sd-news-meta">Motley Fool · 9 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/the-future-of-netflix-is-now-100022235.html" target="_blank" rel="noopener">The future of Netflix is now</a><div class="sd-news-meta">Yahoo Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/buy-3-growth-stocks-now-070500890.html" target="_blank" rel="noopener">Buy These 3 Growth Stocks Now, Ignore the Noise, and Thank Yourself Later</a><div class="sd-news-meta">Motley Fool · 34 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/inflation-surging-3-stocks-buy-222000196.html" target="_blank" rel="noopener">Inflation Is Surging: 3 Stocks to Buy to Hedge Your Portfolio Against It</a><div class="sd-news-meta">Motley Fool · 9 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">VZ</span>
   <span class="nm" title="Verizon Communications Inc">Verizon Communications Inc</span>
@@ -1435,7 +1956,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Netflix Inc">Netflix Inc <span class="pill am" title="量 ÷ 昨日 = 1.94">放量</span></span>
   <span class="val am">×1.94</span><span class="val dn" style="min-width:52px">-9.72%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/netflix-cancellations-boycotts-buzz-online-110123208.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-neutral"></span>Netflix Cancellations, Boycotts Buzz Online As Streaming Giant Enjoys Nearly $3 Billion Warner Bros. Windfall: 'About Time To Say No Thank You'<span class="attr-sent sent-neutral-label"> · 中性</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">27 買</b> / <b class="dn">22 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><b class="dn">已公布 2026-04-16: EPS -8.6% surprise</b></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -5.53% · 20 日 +6.07% · 站上 MA50 · RSI 49</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約 + 財報 miss
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-5.53%</span></div>
@@ -1456,13 +2002,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/the-future-of-netflix-is-now-100022235.html" target="_blank" rel="noopener">The future of Netflix is now</a><div class="sd-news-meta">Yahoo Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/buy-3-growth-stocks-now-070500890.html" target="_blank" rel="noopener">Buy These 3 Growth Stocks Now, Ignore the Noise, and Thank Yourself Later</a><div class="sd-news-meta">Motley Fool · 23 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/inflation-surging-3-stocks-buy-222000196.html" target="_blank" rel="noopener">Inflation Is Surging: 3 Stocks to Buy to Hedge Your Portfolio Against It</a><div class="sd-news-meta">Motley Fool · 9 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/the-future-of-netflix-is-now-100022235.html" target="_blank" rel="noopener">The future of Netflix is now</a><div class="sd-news-meta">Yahoo Finance · 21 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/buy-3-growth-stocks-now-070500890.html" target="_blank" rel="noopener">Buy These 3 Growth Stocks Now, Ignore the Noise, and Thank Yourself Later</a><div class="sd-news-meta">Motley Fool · 34 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/inflation-surging-3-stocks-buy-222000196.html" target="_blank" rel="noopener">Inflation Is Surging: 3 Stocks to Buy to Hedge Your Portfolio Against It</a><div class="sd-news-meta">Motley Fool · 9 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">META</span>
   <span class="nm" title="Meta Platforms Inc Class A">Meta Platforms Inc Class A <span class="pill am" title="量 ÷ 昨日 = 1.70">放量</span></span>
   <span class="val am">×1.70</span><span class="val up" style="min-width:52px">+1.73%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/broadcom-avgo-ranks-among-unrivaled-184858144.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Broadcom (AVGO) Ranks Among Unrivaled Stocks of the Next 5 Years<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/sectors/technology/articles/meta-platforms-meta-expands-ai-184721791.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Meta Platforms (META) Expands AI Chip Deal with Broadcom<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +9.32% · 20 日 +13.49% · 站上 MA50 · RSI 70</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+9.32%</span></div>
@@ -1483,13 +2054,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/meta-layoffs-ai-push-reframe-020707677.html" target="_blank" rel="noopener">Meta Layoffs And AI Push Reframe Costs Margins And Valuation Story</a><div class="sd-news-meta">Simply Wall St. · 5 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/crypto/articles/fix-money-michael-saylor-shares-010124912.html" target="_blank" rel="noopener">'Fix The Money': Michael Saylor Shares Endgame For Strategy's Bitcoin-Backed Credit Instruments</a><div class="sd-news-meta">Benzinga · 6 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/meta-layoffs-ai-push-reframe-020707677.html" target="_blank" rel="noopener">Meta Layoffs And AI Push Reframe Costs Margins And Valuation Story</a><div class="sd-news-meta">Simply Wall St. · 5 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/crypto/articles/fix-money-michael-saylor-shares-010124912.html" target="_blank" rel="noopener">'Fix The Money': Michael Saylor Shares Endgame For Strategy's Bitcoin-Backed Credit Instruments</a><div class="sd-news-meta">Benzinga · 6 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">GOOG</span>
   <span class="nm" title="Alphabet Inc Class C">Alphabet Inc Class C <span class="pill am" title="量 ÷ 昨日 = 1.41">放量</span></span>
   <span class="val am">×1.41</span><span class="val up" style="min-width:52px">+1.99%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">31 買</b> / <b class="dn">29 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +7.50% · 20 日 +11.01% · 站上 MA50 · RSI 73（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+7.50%</span></div>
@@ -1510,7 +2106,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a><div class="sd-news-meta">Investing.com · 20 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-reveals-why-intel-041846090.html" target="_blank" rel="noopener">Jim Cramer Reveals Why Intel’s (INTC) CEO’s a Winner</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/news/what-the-allbirds-hail-mary-says-about-the-ai-trade-right-now-113847747.html" target="_blank" rel="noopener">What the Allbirds 'Hail Mary' says about the AI trade right now</a><div class="sd-news-meta">Yahoo Finance · 20 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a><div class="sd-news-meta">Investing.com · 31 分鐘前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-reveals-why-intel-041846090.html" target="_blank" rel="noopener">Jim Cramer Reveals Why Intel’s (INTC) CEO’s a Winner</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col tech">
@@ -1534,14 +2130,14 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/sectors/technology/articles/bernstein-shares-5-view-ai-070801923.html" target="_blank" rel="noopener">Bernstein shares a 5+ year view on how AI might impact the software industry</a>
-    <div class="meta">Investing.com · 20 分鐘前</div>
+    <div class="meta">Investing.com · 31 分鐘前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">NFLX</span>
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-positive"></span><span class="sent-label sent-positive-label">正向</span></div>
     <a href="https://finance.yahoo.com/markets/stocks/articles/buy-3-growth-stocks-now-070500890.html" target="_blank" rel="noopener">Buy These 3 Growth Stocks Now, Ignore the Noise, and Thank Yourself Later</a>
-    <div class="meta">Motley Fool · 23 分鐘前</div>
+    <div class="meta">Motley Fool · 34 分鐘前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">GOOGL</span>
@@ -1604,13 +2200,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/caterpillar-turns-self-driving-tractors-003117141.html" target="_blank" rel="noopener">Caterpillar Turns To Self-Driving Tractors: What Buying The 'Tesla Of Agriculture' Could Mean</a><div class="sd-news-meta">Benzinga · 6 小時前</div></div><div class="sd-news-item"><a href="https://www.investors.com/news/caterpillar-taiwan-semiconductor-nvidia-chipmaker-ai-stocks-near-buy-points/?src=A00220&yptr=yahoo" target="_blank" rel="noopener">Caterpillar, Nvidia Chipmaker Lead Five Stocks Near Buy Points</a><div class="sd-news-meta">Investor's Business Daily · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/caterpillar-buys-monarch-tractor-deepen-100746309.html" target="_blank" rel="noopener">Caterpillar Buys Monarch Tractor To Deepen Automation And Electrification Story</a><div class="sd-news-meta">Simply Wall St. · 21 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/technology/articles/caterpillar-turns-self-driving-tractors-003117141.html" target="_blank" rel="noopener">Caterpillar Turns To Self-Driving Tractors: What Buying The 'Tesla Of Agriculture' Could Mean</a><div class="sd-news-meta">Benzinga · 7 小時前</div></div><div class="sd-news-item"><a href="https://www.investors.com/news/caterpillar-taiwan-semiconductor-nvidia-chipmaker-ai-stocks-near-buy-points/?src=A00220&yptr=yahoo" target="_blank" rel="noopener">Caterpillar, Nvidia Chipmaker Lead Five Stocks Near Buy Points</a><div class="sd-news-meta">Investor's Business Daily · 19 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/caterpillar-buys-monarch-tractor-deepen-100746309.html" target="_blank" rel="noopener">Caterpillar Buys Monarch Tractor To Deepen Automation And Electrification Story</a><div class="sd-news-meta">Simply Wall St. · 21 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">GEV</span>
   <span class="nm" title="GE Vernova Inc">GE Vernova Inc <span class="pill am" title="量 ÷ 昨日 = 1.65">放量</span></span>
   <span class="val up">+2.50%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 4.65%">權 4.7%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/energy/articles/judge-orders-turbine-manufacturer-stick-185052239.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Judge orders turbine manufacturer to stick with Massachusetts offshore wind farm project<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">10 買</b> / <b class="dn">1 賣</b> · <b class="up">淨買進 2 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-22</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.15% · 20 日 +14.29% · 站上 MA50 · RSI 69</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.15%</span></div>
@@ -1672,7 +2293,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Union Pacific Corp">Union Pacific Corp <span class="pill am" title="量 ÷ 昨日 = 1.70">放量</span></span>
   <span class="val am">×1.70</span><span class="val up" style="min-width:52px">+0.03%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/union-pacific-bid-puts-norfolk-220356993.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Union Pacific Bid Puts Norfolk Southern At Center Of Coast To Coast Rail<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">41 買</b> / <b class="dn">1 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-23</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +0.25% · 20 日 +7.24% · 跌破 MA50 · RSI 58</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+0.25%</span></div>
@@ -1699,7 +2345,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="GE Vernova Inc">GE Vernova Inc <span class="pill am" title="量 ÷ 昨日 = 1.65">放量</span></span>
   <span class="val am">×1.65</span><span class="val up" style="min-width:52px">+2.50%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/energy/articles/judge-orders-turbine-manufacturer-stick-185052239.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Judge orders turbine manufacturer to stick with Massachusetts offshore wind farm project<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">10 買</b> / <b class="dn">1 賣</b> · <b class="up">淨買進 2 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-22</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.15% · 20 日 +14.29% · 站上 MA50 · RSI 69</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.15%</span></div>
@@ -1726,7 +2397,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Eaton Corp PLC">Eaton Corp PLC <span class="pill am" title="量 ÷ 昨日 = 1.45">放量</span></span>
   <span class="val am">×1.45</span><span class="val up" style="min-width:52px">+3.43%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">30 買</b> / <b class="dn">2 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +0.80% · 20 日 +12.76% · 站上 MA50 · RSI 66</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+0.80%</span></div>
@@ -1798,7 +2494,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-positive"></span><span class="sent-label sent-positive-label">正向</span></div>
     <a href="https://finance.yahoo.com/sectors/technology/articles/caterpillar-turns-self-driving-tractors-003117141.html" target="_blank" rel="noopener">Caterpillar Turns To Self-Driving Tractors: What Buying The 'Tesla Of Agriculture' Could Mean</a>
-    <div class="meta">Benzinga · 6 小時前</div>
+    <div class="meta">Benzinga · 7 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">GEV</span>
@@ -1894,7 +2590,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Costco Wholesale Corp">Costco Wholesale Corp <span class="pill am" title="量 ÷ 昨日 = 1.58">放量</span></span>
   <span class="val up">+1.28%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 9.62%">權 9.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/p-g-targets-textured-hair-140516510.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>P&G Targets Textured Hair And Sports Fans To Support Brand Reach<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">19 買</b> / <b class="dn">10 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +0.14% · 20 日 +2.58% · 站上 MA50 · RSI 52</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+0.14%</span></div>
@@ -1915,7 +2636,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-key-edge-sets-apart-235252868.html" target="_blank" rel="noopener">Costco’s key edge sets it apart from Walmart, Target, Kroger</a><div class="sd-news-meta">TheStreet · 7 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/target-adds-iconic-assortment-product-164700236.html" target="_blank" rel="noopener">Target adds iconic assortment to product line</a><div class="sd-news-meta">TheStreet · 14 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-just-made-household-staple-153300722.html" target="_blank" rel="noopener">Costco just made a household staple even better</a><div class="sd-news-meta">TheStreet · 15 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-key-edge-sets-apart-235252868.html" target="_blank" rel="noopener">Costco’s key edge sets it apart from Walmart, Target, Kroger</a><div class="sd-news-meta">TheStreet · 7 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/target-adds-iconic-assortment-product-164700236.html" target="_blank" rel="noopener">Target adds iconic assortment to product line</a><div class="sd-news-meta">TheStreet · 14 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-just-made-household-staple-153300722.html" target="_blank" rel="noopener">Costco just made a household staple even better</a><div class="sd-news-meta">TheStreet · 16 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col neg">
@@ -1925,7 +2646,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Altria Group Inc">Altria Group Inc <span class="pill am" title="量 ÷ 昨日 = 1.62">放量</span></span>
   <span class="val dn">-1.19%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 4.58%">權 4.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">17 買</b> / <b class="dn">1 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -4.76% · 20 日 -1.38% · 跌破 MA50 · RSI 40</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-4.76%</span></div>
@@ -1973,7 +2719,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/pepsico-q1-preview-food-changes-013116747.html" target="_blank" rel="noopener">PepsiCo Q1 Preview: Food Changes May Please Robert Kennedy Jr. — Will Shareholders Rejoice Too?</a><div class="sd-news-meta">Benzinga · 5 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/coca-cola-ko-valuation-check-220530557.html" target="_blank" rel="noopener">Coca-Cola (KO) Valuation Check As Marriott Win And Portfolio Shifts Support Steady Growth Narrative</a><div class="sd-news-meta">Simply Wall St. · 9 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-pepsico-pep-190939084.html" target="_blank" rel="noopener">Jim Cramer Explains How PepsiCo (PEP)’s CEO Ramon Laguarta Is “Winning With Innovation”</a><div class="sd-news-meta">Insider Monkey · 12 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/pepsico-q1-preview-food-changes-013116747.html" target="_blank" rel="noopener">PepsiCo Q1 Preview: Food Changes May Please Robert Kennedy Jr. — Will Shareholders Rejoice Too?</a><div class="sd-news-meta">Benzinga · 6 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/coca-cola-ko-valuation-check-220530557.html" target="_blank" rel="noopener">Coca-Cola (KO) Valuation Check As Marriott Win And Portfolio Shifts Support Steady Growth Narrative</a><div class="sd-news-meta">Simply Wall St. · 9 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-pepsico-pep-190939084.html" target="_blank" rel="noopener">Jim Cramer Explains How PepsiCo (PEP)’s CEO Ramon Laguarta Is “Winning With Innovation”</a><div class="sd-news-meta">Insider Monkey · 12 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col vol">
@@ -1983,7 +2729,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Altria Group Inc">Altria Group Inc <span class="pill am" title="量 ÷ 昨日 = 1.62">放量</span></span>
   <span class="val am">×1.62</span><span class="val dn" style="min-width:52px">-1.19%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">17 買</b> / <b class="dn">1 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -4.76% · 20 日 -1.38% · 跌破 MA50 · RSI 40</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-4.76%</span></div>
@@ -2010,7 +2781,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Philip Morris International Inc">Philip Morris International Inc <span class="pill am" title="量 ÷ 昨日 = 1.61">放量</span></span>
   <span class="val am">×1.61</span><span class="val up" style="min-width:52px">+0.99%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/look-philip-morris-international-valuation-030642194.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>A Look At Philip Morris International’s Valuation As Smoke Free Shift And Partnerships Gain Traction<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://finance.yahoo.com/markets/stocks/articles/philip-morris-pm-establishes-strategic-175836097.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Philip Morris (PM) Establishes Strategic Commercial Partnership With Ferrari Hypersail<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">7 買</b> / <b class="dn">6 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-22</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -1.66% · 20 日 -3.42% · 跌破 MA50 · RSI 40</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-1.66%</span></div>
@@ -2037,7 +2833,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Costco Wholesale Corp">Costco Wholesale Corp <span class="pill am" title="量 ÷ 昨日 = 1.58">放量</span></span>
   <span class="val am">×1.58</span><span class="val up" style="min-width:52px">+1.28%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/p-g-targets-textured-hair-140516510.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>P&G Targets Textured Hair And Sports Fans To Support Brand Reach<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">19 買</b> / <b class="dn">10 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +0.14% · 20 日 +2.58% · 站上 MA50 · RSI 52</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量漲幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+0.14%</span></div>
@@ -2058,7 +2879,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-key-edge-sets-apart-235252868.html" target="_blank" rel="noopener">Costco’s key edge sets it apart from Walmart, Target, Kroger</a><div class="sd-news-meta">TheStreet · 7 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/target-adds-iconic-assortment-product-164700236.html" target="_blank" rel="noopener">Target adds iconic assortment to product line</a><div class="sd-news-meta">TheStreet · 14 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-just-made-household-staple-153300722.html" target="_blank" rel="noopener">Costco just made a household staple even better</a><div class="sd-news-meta">TheStreet · 15 小時前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-key-edge-sets-apart-235252868.html" target="_blank" rel="noopener">Costco’s key edge sets it apart from Walmart, Target, Kroger</a><div class="sd-news-meta">TheStreet · 7 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/target-adds-iconic-assortment-product-164700236.html" target="_blank" rel="noopener">Target adds iconic assortment to product line</a><div class="sd-news-meta">TheStreet · 14 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/costco-just-made-household-staple-153300722.html" target="_blank" rel="noopener">Costco just made a household staple even better</a><div class="sd-news-meta">TheStreet · 16 小時前</div></div>
 </div></div></details>
     </div>
     <div class="col tech">
@@ -2087,7 +2908,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/markets/stocks/articles/pepsico-q1-preview-food-changes-013116747.html" target="_blank" rel="noopener">PepsiCo Q1 Preview: Food Changes May Please Robert Kennedy Jr. — Will Shareholders Rejoice Too?</a>
-    <div class="meta">Benzinga · 5 小時前</div>
+    <div class="meta">Benzinga · 6 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">WMT</span>
@@ -2221,7 +3042,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Exxon Mobil Corp">Exxon Mobil Corp <span class="pill am" title="量 ÷ 昨日 = 1.90">放量</span></span>
   <span class="val dn">-3.65%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 23.74%">權 23.7%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/energy/articles/exxon-mobil-faces-kazakhstan-fine-050445155.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Exxon Mobil Faces Kazakhstan Fine And Golden Pass LNG Setbacks<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://www.yahoo.com/news/articles/trump-threatens-bomb-iran-again-054216208.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Trump threatens to bomb Iran again if no deal is reached by Wednesday<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">27 買</b> / <b class="dn">7 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -3.98% · 20 日 -7.41% · 跌破 MA50 · RSI 36</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-3.98%</span></div>
@@ -2248,7 +3094,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Chevron Corp">Chevron Corp <span class="pill am" title="量 ÷ 昨日 = 1.96">放量</span></span>
   <span class="val dn">-2.21%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 17.30%">權 17.3%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">47 買</b> / <b class="dn">26 賣</b> · <b class="dn">淨賣出 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -2.42% · 20 日 -8.66% · 跌破 MA50 · RSI 38</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-2.42%</span></div>
@@ -2269,7 +3140,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://www.yahoo.com/news/articles/iran-hard-liners-undermine-diplomatic-051644181.html" target="_blank" rel="noopener">Iran hard-liners undermine diplomatic efforts, re-closing Strait of Hormuz</a><div class="sd-news-meta">Investing.com · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043057034.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Chevron (CVX)</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/hormuz-shipping-chaos-returns-iran-235205274.html" target="_blank" rel="noopener">Hormuz shipping chaos returns as Iran reverses transit reopening</a><div class="sd-news-meta">Investing.com · 7 小時前</div></div>
+  <div class="sd-news-item"><a href="https://www.yahoo.com/news/articles/iran-hard-liners-undermine-diplomatic-051644181.html" target="_blank" rel="noopener">Iran hard-liners undermine diplomatic efforts, re-closing Strait of Hormuz</a><div class="sd-news-meta">Investing.com · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043057034.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Chevron (CVX)</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/hormuz-shipping-chaos-returns-iran-235205274.html" target="_blank" rel="noopener">Hormuz shipping chaos returns as Iran reverses transit reopening</a><div class="sd-news-meta">Investing.com · 7 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">COP</span>
   <span class="nm" title="ConocoPhillips">ConocoPhillips <span class="pill am" title="量 ÷ 昨日 = 1.69">放量</span></span>
@@ -2306,7 +3177,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Valero Energy Corp">Valero Energy Corp <span class="pill am" title="量 ÷ 昨日 = 3.63">放量</span></span>
   <span class="val am">×3.63</span><span class="val dn" style="min-width:52px">-7.48%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">15 買</b> / <b class="dn">2 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -6.35% · 20 日 -7.61% · 跌破 MA50 · RSI 42</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-6.35%</span></div>
@@ -2327,13 +3223,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043021008.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Valero (VLO)</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://www.investors.com/news/chevron-stock-leads-dow-decliners-oil-price-sinks/?src=A00220&yptr=yahoo" target="_blank" rel="noopener">Here Are The Biggest Losers From Oil Stock Rout</a><div class="sd-news-meta">Investor's Business Daily · 1 天前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/u-energy-stocks-plunge-hormuz-142335563.html" target="_blank" rel="noopener">U.S. energy stocks plunge as Hormuz re-opening leads Brent to go below $90/barrel</a><div class="sd-news-meta">Investing.com · 1 天前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043021008.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Valero (VLO)</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div><div class="sd-news-item"><a href="https://www.investors.com/news/chevron-stock-leads-dow-decliners-oil-price-sinks/?src=A00220&yptr=yahoo" target="_blank" rel="noopener">Here Are The Biggest Losers From Oil Stock Rout</a><div class="sd-news-meta">Investor's Business Daily · 1 天前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/u-energy-stocks-plunge-hormuz-142335563.html" target="_blank" rel="noopener">U.S. energy stocks plunge as Hormuz re-opening leads Brent to go below $90/barrel</a><div class="sd-news-meta">Investing.com · 1 天前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">CVX</span>
   <span class="nm" title="Chevron Corp">Chevron Corp <span class="pill am" title="量 ÷ 昨日 = 1.96">放量</span></span>
   <span class="val am">×1.96</span><span class="val dn" style="min-width:52px">-2.21%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">47 買</b> / <b class="dn">26 賣</b> · <b class="dn">淨賣出 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -2.42% · 20 日 -8.66% · 跌破 MA50 · RSI 38</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-2.42%</span></div>
@@ -2354,13 +3275,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://www.yahoo.com/news/articles/iran-hard-liners-undermine-diplomatic-051644181.html" target="_blank" rel="noopener">Iran hard-liners undermine diplomatic efforts, re-closing Strait of Hormuz</a><div class="sd-news-meta">Investing.com · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043057034.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Chevron (CVX)</a><div class="sd-news-meta">Insider Monkey · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/hormuz-shipping-chaos-returns-iran-235205274.html" target="_blank" rel="noopener">Hormuz shipping chaos returns as Iran reverses transit reopening</a><div class="sd-news-meta">Investing.com · 7 小時前</div></div>
+  <div class="sd-news-item"><a href="https://www.yahoo.com/news/articles/iran-hard-liners-undermine-diplomatic-051644181.html" target="_blank" rel="noopener">Iran hard-liners undermine diplomatic efforts, re-closing Strait of Hormuz</a><div class="sd-news-meta">Investing.com · 2 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043057034.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Chevron (CVX)</a><div class="sd-news-meta">Insider Monkey · 3 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/hormuz-shipping-chaos-returns-iran-235205274.html" target="_blank" rel="noopener">Hormuz shipping chaos returns as Iran reverses transit reopening</a><div class="sd-news-meta">Investing.com · 7 小時前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">XOM</span>
   <span class="nm" title="Exxon Mobil Corp">Exxon Mobil Corp <span class="pill am" title="量 ÷ 昨日 = 1.90">放量</span></span>
   <span class="val am">×1.90</span><span class="val dn" style="min-width:52px">-3.65%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/energy/articles/exxon-mobil-faces-kazakhstan-fine-050445155.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Exxon Mobil Faces Kazakhstan Fine And Golden Pass LNG Setbacks<span class="attr-sent sent-positive-label"> · 正向</span></a><br/><a href="https://www.yahoo.com/news/articles/trump-threatens-bomb-iran-again-054216208.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Trump threatens to bomb Iran again if no deal is reached by Wednesday<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">27 買</b> / <b class="dn">7 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -3.98% · 20 日 -7.41% · 跌破 MA50 · RSI 36</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-3.98%</span></div>
@@ -2419,7 +3365,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/sectors/energy/articles/jim-cramer-shares-why-d-043057034.html" target="_blank" rel="noopener">Jim Cramer Shares Why He’d Buy Chevron (CVX)</a>
-    <div class="meta">Insider Monkey · 2 小時前</div>
+    <div class="meta">Insider Monkey · 3 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">XOM</span>
@@ -2475,13 +3421,38 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 <div class="sd-note">近 6 個月內部人申報（SEC Form 4）</div>
 </div><div class="sd-block">
   <h5>📰 新聞</h5>
-  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/4-dividend-stocks-double-now-203500359.html" target="_blank" rel="noopener">4 Dividend Stocks to Double Up On Right Now</a><div class="sd-news-meta">Motley Fool · 10 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/dividend-stock-showdown-nextera-energy-003500683.html" target="_blank" rel="noopener">Dividend Stock Showdown: NextEra Energy or Dominion Energy -- Which Should You Own?</a><div class="sd-news-meta">Motley Fool · 1 天前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/utility-stock-showdown-southern-company-173500910.html" target="_blank" rel="noopener">Utility Stock Showdown: Southern Company vs. NextEra Energy -- Which Is the Better Buy?</a><div class="sd-news-meta">Motley Fool · 1 天前</div></div>
+  <div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/4-dividend-stocks-double-now-203500359.html" target="_blank" rel="noopener">4 Dividend Stocks to Double Up On Right Now</a><div class="sd-news-meta">Motley Fool · 11 小時前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/markets/stocks/articles/dividend-stock-showdown-nextera-energy-003500683.html" target="_blank" rel="noopener">Dividend Stock Showdown: NextEra Energy or Dominion Energy -- Which Should You Own?</a><div class="sd-news-meta">Motley Fool · 1 天前</div></div><div class="sd-news-item"><a href="https://finance.yahoo.com/sectors/energy/articles/utility-stock-showdown-southern-company-173500910.html" target="_blank" rel="noopener">Utility Stock Showdown: Southern Company vs. NextEra Energy -- Which Is the Better Buy?</a><div class="sd-news-meta">Motley Fool · 1 天前</div></div>
 </div></div></details><details class="stock-row"><summary class="row-item">
   <span class="sym">ETR</span>
   <span class="nm" title="Entergy Corp">Entergy Corp <span class="pill am" title="量 ÷ 昨日 = 1.33">放量</span></span>
   <span class="val up">+0.01%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 3.57%">權 3.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">56 買</b> / <b class="dn">12 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -0.82% · 20 日 +11.14% · 站上 MA50 · RSI 67</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-0.82%</span></div>
@@ -2566,7 +3537,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Exelon Corp">Exelon Corp <span class="pill am" title="量 ÷ 昨日 = 1.60">放量</span></span>
   <span class="val dn">-1.20%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 3.52%">權 3.5%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/energy/articles/eversource-gains-grid-modernization-infrastructure-162300263.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Eversource Gains From Grid Modernization & Infrastructure Development<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -3.19% · 20 日 -2.06% · 跌破 MA50 · RSI 39</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：分析師指引
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-3.19%</span></div>
@@ -2597,7 +3593,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Exelon Corp">Exelon Corp <span class="pill am" title="量 ÷ 昨日 = 1.60">放量</span></span>
   <span class="val am">×1.60</span><span class="val dn" style="min-width:52px">-1.20%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/sectors/energy/articles/eversource-gains-grid-modernization-infrastructure-162300263.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Eversource Gains From Grid Modernization & Infrastructure Development<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -3.19% · 20 日 -2.06% · 跌破 MA50 · RSI 39</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：分析師指引
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-3.19%</span></div>
@@ -2624,7 +3645,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Southern Co">Southern Co <span class="pill am" title="量 ÷ 昨日 = 1.57">放量</span></span>
   <span class="val am">×1.57</span><span class="val dn" style="min-width:52px">-0.41%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">46 買</b> / <b class="dn">4 賣</b> · <b class="up">淨買進 1 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -2.72% · 20 日 -1.79% · 跌破 MA50 · RSI 42</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-2.72%</span></div>
@@ -2651,7 +3697,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Entergy Corp">Entergy Corp <span class="pill am" title="量 ÷ 昨日 = 1.33">放量</span></span>
   <span class="val am">×1.33</span><span class="val up" style="min-width:52px">+0.01%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">56 買</b> / <b class="dn">12 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -0.82% · 20 日 +11.14% · 站上 MA50 · RSI 67</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-0.82%</span></div>
@@ -2705,7 +3776,7 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <div style="flex:1;min-width:0">
     <div class="news-tags"><span class="cat-pill cat-general" title="一般新聞">一般新聞</span><span class="sent-dot sent-neutral"></span><span class="sent-label sent-neutral-label">中性</span></div>
     <a href="https://finance.yahoo.com/markets/stocks/articles/4-dividend-stocks-double-now-203500359.html" target="_blank" rel="noopener">4 Dividend Stocks to Double Up On Right Now</a>
-    <div class="meta">Motley Fool · 10 小時前</div>
+    <div class="meta">Motley Fool · 11 小時前</div>
   </div>
 </div><div class="news-item">
   <span class="sym-pill">CEG</span>
@@ -2767,7 +3838,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="American Tower Corp">American Tower Corp <span class="pill am" title="量 ÷ 昨日 = 2.46">放量</span></span>
   <span class="val up">+2.11%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 5.95%">權 6.0%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">27 買</b> / <b class="dn">6 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.71% · 20 日 -0.22% · 站上 MA50 · RSI 57</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.71%</span></div>
@@ -2825,7 +3921,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Welltower Inc">Welltower Inc <span class="pill am" title="量 ÷ 昨日 = 1.72">放量</span></span>
   <span class="val dn">-1.86%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 10.16%">權 10.2%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/welltower-uk-senior-care-deals-170247087.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Welltower’s UK Senior Care Deals Reshape Growth And Risk Profile<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.41% · 20 日 +2.15% · 站上 MA50 · RSI 60</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.41%</span></div>
@@ -2852,7 +3973,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Ventas Inc">Ventas Inc <span class="pill am" title="量 ÷ 昨日 = 2.38">放量</span></span>
   <span class="val dn">-0.48%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 4.39%">權 4.4%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/april-leasing-deals-driving-terreno-172600942.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Are April Leasing Deals Driving Terreno Realty's Growth Outlook?<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">31 買</b> / <b class="dn">14 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +0.16% · 20 日 -0.53% · 站上 MA50 · RSI 56</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+0.16%</span></div>
@@ -2883,7 +4029,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="American Tower Corp">American Tower Corp <span class="pill am" title="量 ÷ 昨日 = 2.46">放量</span></span>
   <span class="val am">×2.46</span><span class="val up" style="min-width:52px">+2.11%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">27 買</b> / <b class="dn">6 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.71% · 20 日 -0.22% · 站上 MA50 · RSI 57</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.71%</span></div>
@@ -2910,7 +4081,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Ventas Inc">Ventas Inc <span class="pill am" title="量 ÷ 昨日 = 2.38">放量</span></span>
   <span class="val am">×2.38</span><span class="val dn" style="min-width:52px">-0.48%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/april-leasing-deals-driving-terreno-172600942.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Are April Leasing Deals Driving Terreno Realty's Growth Outlook?<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">31 買</b> / <b class="dn">14 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +0.16% · 20 日 -0.53% · 站上 MA50 · RSI 56</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+0.16%</span></div>
@@ -2937,7 +4133,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Welltower Inc">Welltower Inc <span class="pill am" title="量 ÷ 昨日 = 1.72">放量</span></span>
   <span class="val am">×1.72</span><span class="val dn" style="min-width:52px">-1.86%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><a href="https://finance.yahoo.com/markets/stocks/articles/welltower-uk-senior-care-deals-170247087.html" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-positive"></span>Welltower’s UK Senior Care Deals Reshape Growth And Risk Profile<span class="attr-sent sent-positive-label"> · 正向</span></a></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">0 買</b> / <b class="dn">0 賣</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +1.41% · 20 日 +2.15% · 站上 MA50 · RSI 60</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-found">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>放量跌幅主因疑為：訂單/合約
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+1.41%</span></div>
@@ -3063,7 +4284,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Sherwin-Williams Co">Sherwin-Williams Co <span class="pill am" title="量 ÷ 昨日 = 1.92">放量</span></span>
   <span class="val up">+3.66%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 4.60%">權 4.6%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">29 買</b> / <b class="dn">2 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +2.81% · 20 日 +11.33% · 站上 MA50 · RSI 62</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+2.81%</span></div>
@@ -3090,7 +4336,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Freeport-McMoRan Inc">Freeport-McMoRan Inc <span class="pill am" title="量 ÷ 昨日 = 1.95">放量</span></span>
   <span class="val up">+2.83%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 5.26%">權 5.3%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">13 買</b> / <b class="dn">7 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-23</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.55% · 20 日 +30.94% · 站上 MA50 · RSI 70（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.55%</span></div>
@@ -3121,7 +4392,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Linde PLC">Linde PLC <span class="pill am" title="量 ÷ 昨日 = 1.84">放量</span></span>
   <span class="val dn">-1.40%</span><span class="val mu" style="color:var(--mu);font-weight:500;min-width:56px;font-size:11px" title="此股在該板塊 ETF 的權重 14.40%">權 14.4%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">20 買</b> / <b class="dn">4 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -2.17% · 20 日 +0.50% · 站上 MA50 · RSI 48</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-2.17%</span></div>
@@ -3206,7 +4502,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Freeport-McMoRan Inc">Freeport-McMoRan Inc <span class="pill am" title="量 ÷ 昨日 = 1.95">放量</span></span>
   <span class="val am">×1.95</span><span class="val up" style="min-width:52px">+2.83%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">13 買</b> / <b class="dn">7 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span style="color:#3730a3">📅 即將公布 2026-04-23</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +3.55% · 20 日 +30.94% · 站上 MA50 · RSI 70（超買）</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+3.55%</span></div>
@@ -3233,7 +4554,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Sherwin-Williams Co">Sherwin-Williams Co <span class="pill am" title="量 ÷ 昨日 = 1.92">放量</span></span>
   <span class="val am">×1.92</span><span class="val up" style="min-width:52px">+3.66%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">29 買</b> / <b class="dn">2 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 +2.81% · 20 日 +11.33% · 站上 MA50 · RSI 62</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v up">+2.81%</span></div>
@@ -3260,7 +4606,32 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
   <span class="nm" title="Linde PLC">Linde PLC <span class="pill am" title="量 ÷ 昨日 = 1.84">放量</span></span>
   <span class="val am">×1.84</span><span class="val dn" style="min-width:52px">-1.40%</span>
   <span class="chev">▾</span>
-</summary><div class="stock-detail"><div class="sd-block">
+</summary><div class="stock-detail"><div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📦</span><span class="attr-label">訂單 / 合約</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">🎯</span><span class="attr-label">分析師指引 / 評級修訂</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">—</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">👔</span><span class="attr-label">高管 / 內部人動作</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body"><span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">20 買</b> / <b class="dn">4 賣</b> · <b class="up">淨買進 0 股</b></span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">💰</span><span class="attr-label">財報 / 盈餘</span><span class="attr-status attr-none">✗ 未發現</span></div>
+  <div class="attr-body"><span class="attr-empty">本週內無財報</span></div>
+</div>
+  <div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">📊</span><span class="attr-label">技術面 / 近期動能</span><span class="attr-status attr-found">✓ 找到</span></div>
+  <div class="attr-body">5 日 -2.17% · 20 日 +0.50% · 站上 MA50 · RSI 48</div>
+</div>
+  <div class="attr-conclusion attr-conclusion-none">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）
+  </div>
+</div><div class="sd-block">
   <h5>📐 技術面</h5>
   <div class="sd-grid">
     <div><span class="k">近 5 日</span><span class="v dn">-2.17%</span></div>

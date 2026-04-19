@@ -508,11 +508,84 @@ def fetch_news_and_earnings(symbols):
     return n, e
 
 
+def build_surge_attribution(stock):
+    """為放量個股強制掃過 5 個歸因角度。一定都回傳（即使結果為 '未發現'）。"""
+    all_news = stock.get("all_news") or []
+    chip = stock.get("chip") or {}
+    earn = stock.get("earnings") or {}
+
+    # 1. 訂單 / 合約
+    order_news = [n for n in all_news if n.get("category") == "order"]
+    # 2. 指引修訂
+    guidance_news = [n for n in all_news if n.get("category") == "guidance"]
+    # 3. 高管動作（先看新聞裡有沒有，再看 SEC Form 4 籌碼資料）
+    insider_news = [n for n in all_news if n.get("category") == "insider"]
+    insider_buys = chip.get("insider_buys")
+    insider_sells = chip.get("insider_sells")
+    insider_net = chip.get("insider_net_shares")
+    # 4. 財報
+    earn_past = earn.get("past")
+    earn_up = earn.get("upcoming")
+    earnings_news = [n for n in all_news if n.get("category") == "earnings"]
+
+    # 5. 基本面 — 看技術面 + 貢獻度 + 權重
+    day_pct = stock.get("day_pct")
+    vol_vs_yday = (stock.get("tech") or {}).get("vol_vs_yday") or stock.get("vol_ratio")
+    # 注意: surges 欄位目前把 tech 放在 c['tech']，但舊 code 裡的 vol_ratio 是在 c 下
+
+    # 綜合結論：判斷主要驅動因素
+    reasons = []
+    if order_news:
+        reasons.append("訂單/合約")
+    if guidance_news:
+        reasons.append("分析師指引")
+    if earn_past:
+        sur = earn_past.get("surprise_pct")
+        if sur is not None:
+            reasons.append(f"財報 {'beat' if sur >= 0 else 'miss'}")
+        else:
+            reasons.append("財報公布")
+    if insider_news:
+        reasons.append("高管異動")
+    if insider_net and abs(insider_net) > 10000:
+        reasons.append(f"內部人{'淨買' if insider_net > 0 else '淨賣'}")
+
+    if reasons:
+        direction = "漲" if (day_pct or 0) > 0 else "跌"
+        conclusion = f"放量{direction}幅主因疑為：" + " + ".join(reasons)
+    else:
+        conclusion = "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+
+    return {
+        "orders": [{"title": n["title"], "url": n.get("url", "#"), "sentiment": n.get("sentiment", "neutral")} for n in order_news[:2]],
+        "guidance": [{"title": n["title"], "url": n.get("url", "#"), "sentiment": n.get("sentiment", "neutral")} for n in guidance_news[:2]],
+        "insider_news": [{"title": n["title"], "url": n.get("url", "#"), "sentiment": n.get("sentiment", "neutral")} for n in insider_news[:2]],
+        "insider_chip": {
+            "buys": insider_buys,
+            "sells": insider_sells,
+            "net_shares": insider_net,
+        },
+        "earnings": {
+            "past": earn_past,
+            "upcoming": earn_up,
+            "news": [{"title": n["title"], "url": n.get("url", "#"), "sentiment": n.get("sentiment", "neutral")} for n in earnings_news[:2]],
+        },
+        "fundamentals": {
+            "day_pct": day_pct,
+            "vol_vs_yday": vol_vs_yday,
+        },
+        "reasons": reasons,
+        "conclusion": conclusion,
+    }
+
+
 def attach_enrichment(sectors, news_map, earn_map, chip_map):
     """把 新聞 / 財報 / 籌碼 掛到板塊、以及個別個股（gainers/losers/surges）上。"""
     def _attach_to_stock(c):
         sym = c["symbol"]
-        c["news"] = news_map.get(sym, [])[:NEWS_PER_STOCK]
+        full_news = news_map.get(sym, [])
+        c["news"] = full_news[:NEWS_PER_STOCK]
+        c["all_news"] = full_news  # 供放量歸因掃描用
         c["chip"] = chip_map.get(sym, {}) or {}
         earn = earn_map.get(sym) or {}
         c["earnings"] = {"past": earn.get("past"), "upcoming": earn.get("upcoming")}
@@ -525,6 +598,9 @@ def attach_enrichment(sectors, news_map, earn_map, chip_map):
             for c in s.get(group, []) or []:
                 if "news" not in c:
                     _attach_to_stock(c)
+        # 為放量個股額外建構歸因分析
+        for c in s.get("surges", []) or []:
+            c["attribution"] = build_surge_attribution(c)
 
         # 板塊層級彙整新聞（gainers + losers 的去重標題）
         top_syms = [c["symbol"] for c in (s.get("gainers", []) + s.get("losers", []))]
@@ -803,6 +879,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .sent-positive-label{color:#15803d}
 .sent-negative-label{color:#b91c1c}
 .sent-neutral-label{color:#64748b}
+/* 放量歸因 */
+.attribution-block{background:linear-gradient(135deg,#fef3c7 0%,#fef9c3 40%,#fff 100%);border:1px solid #fde68a;border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.attr-title{font-size:12.5px;font-weight:800;color:#78350f;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.attr-row{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;padding:6px 0;border-bottom:1px dashed rgba(146,64,14,0.15);align-items:start}
+.attr-row:last-of-type{border-bottom:none}
+.attr-head{display:flex;align-items:center;gap:6px;min-width:170px}
+.attr-icon{font-size:14px}
+.attr-label{font-size:11.5px;font-weight:700;color:#1e293b}
+.attr-status{font-size:10.5px;font-weight:700;padding:1.5px 7px;border-radius:10px}
+.attr-status.attr-found{background:#dcfce7;color:#15803d}
+.attr-status.attr-none{background:#e2e8f0;color:#64748b}
+.attr-body{font-size:11.5px;line-height:1.55;color:#1e293b;word-break:break-word}
+.attr-empty{color:#94a3b8;font-style:italic}
+.attr-link{color:#1e293b;text-decoration:none;display:inline-block;margin:2px 0}
+.attr-link:hover{color:var(--bl);text-decoration:underline}
+.attr-chip-info{display:inline-block}
+.attr-sent{font-size:10px;color:var(--mu);font-weight:600}
+.attr-conclusion{margin-top:8px;padding-top:8px;border-top:2px dashed #fde68a;font-size:12px;line-height:1.6;color:#78350f}
+.attr-conclusion-label{font-weight:800}
+.attr-conclusion-found{font-weight:600}
+.attr-conclusion-none{color:#64748b;font-style:italic}
 .news-item a{color:var(--txt);text-decoration:none;line-height:1.5}
 .news-item a:hover{color:var(--bl);text-decoration:underline}
 .earn-section{margin-top:14px;padding-top:12px;border-top:1px dashed var(--brd)}
@@ -1055,7 +1152,130 @@ def _gen_stock_detail(c):
   {news_body}
 </div>'''
 
-    return f'<div class="stock-detail">{tech_html}{chip_block}{news_block}</div>'
+    attr_html = _gen_attribution_block(c.get("attribution"), c) if c.get("attribution") else ""
+
+    return f'<div class="stock-detail">{attr_html}{tech_html}{chip_block}{news_block}</div>'
+
+
+def _gen_attr_row(icon, label, found, content_html):
+    """歸因單一行：標籤 + 狀態 + 詳細內容（找到則顯示新聞/資料，沒找到顯示 '未發現'）"""
+    status_cls = "attr-found" if found else "attr-none"
+    status = "✓ 找到" if found else "✗ 未發現"
+    return f'''<div class="attr-row">
+  <div class="attr-head"><span class="attr-icon">{icon}</span><span class="attr-label">{label}</span><span class="attr-status {status_cls}">{status}</span></div>
+  <div class="attr-body">{content_html}</div>
+</div>'''
+
+
+def _gen_attr_news_links(news_list):
+    if not news_list:
+        return '<span class="attr-empty">—</span>'
+    items = []
+    for n in news_list:
+        url = n.get("url") or "#"
+        sent = n.get("sentiment", "neutral")
+        sent_lbl = SENT_LABEL_US.get(sent, "中性")
+        items.append(f'<a href="{url}" target="_blank" rel="noopener" class="attr-link"><span class="sent-dot sent-{sent}"></span>{n["title"]}<span class="attr-sent sent-{sent}-label"> · {sent_lbl}</span></a>')
+    return "<br/>".join(items)
+
+
+def _gen_attribution_block(attr, stock):
+    """放量個股的「5 角度歸因」面板。每一角度無論是否找到都要出現。"""
+    orders = attr.get("orders", [])
+    guidance = attr.get("guidance", [])
+    insider_news = attr.get("insider_news", [])
+    insider_chip = attr.get("insider_chip", {})
+    earn = attr.get("earnings", {})
+    reasons = attr.get("reasons", [])
+    conclusion = attr.get("conclusion", "")
+
+    # 1. 訂單
+    orders_body = _gen_attr_news_links(orders)
+    orders_found = bool(orders)
+
+    # 2. 指引
+    gu_body = _gen_attr_news_links(guidance)
+    gu_found = bool(guidance)
+
+    # 3. 高管（新聞 + 籌碼二選一有即算找到）
+    insider_buys = insider_chip.get("buys")
+    insider_sells = insider_chip.get("sells")
+    insider_net = insider_chip.get("net_shares")
+    chip_str = ""
+    if insider_buys is not None or insider_sells is not None:
+        b = insider_buys if insider_buys is not None else "─"
+        s = insider_sells if insider_sells is not None else "─"
+        net_str = ""
+        if insider_net is not None and insider_net != 0:
+            direction = "淨買進" if insider_net > 0 else "淨賣出"
+            net_cls = "up" if insider_net > 0 else "dn"
+            net_str = f' · <b class="{net_cls}">{direction} {abs(int(insider_net)):,} 股</b>'
+        chip_str = f'<span class="attr-chip-info">近 6 月 SEC Form 4: <b class="up">{b} 買</b> / <b class="dn">{s} 賣</b>{net_str}</span>'
+
+    insider_news_html = _gen_attr_news_links(insider_news) if insider_news else ""
+    insider_body = chip_str
+    if insider_news:
+        insider_body += f'<div style="margin-top:4px">相關新聞：{insider_news_html}</div>'
+    if not insider_body:
+        insider_body = '<span class="attr-empty">—</span>'
+    insider_found = bool(insider_news) or (insider_buys is not None and (insider_buys or insider_sells))
+
+    # 4. 財報
+    past = earn.get("past")
+    up = earn.get("upcoming")
+    earn_news = earn.get("news") or []
+    earn_body = ""
+    earn_found = False
+    if past:
+        sur = past.get("surprise_pct")
+        if sur is not None:
+            cls = "up" if sur >= 0 else "dn"
+            earn_body += f'<b class="{cls}">已公布 {past["date"]}: EPS {"+" if sur >= 0 else ""}{sur:.1f}% surprise</b>'
+        else:
+            earn_body += f'<b>已公布 {past["date"]}</b>'
+        earn_found = True
+    if up:
+        if earn_body:
+            earn_body += " · "
+        earn_body += f'<span style="color:#3730a3">📅 即將公布 {up["date"]}</span>'
+        earn_found = True
+    if earn_news:
+        if earn_body:
+            earn_body += "<br/>"
+        earn_body += f'<div style="margin-top:4px">相關新聞：{_gen_attr_news_links(earn_news)}</div>'
+        earn_found = True
+    if not earn_body:
+        earn_body = '<span class="attr-empty">本週內無財報</span>'
+
+    # 5. 基本面 / 技術短評
+    t = stock.get("tech") or {}
+    fund_parts = []
+    if t.get("pct_5d") is not None:
+        fund_parts.append(f'5 日 {_fmt_pct(t["pct_5d"])}')
+    if t.get("pct_20d") is not None:
+        fund_parts.append(f'20 日 {_fmt_pct(t["pct_20d"])}')
+    if t.get("above_ma50") is not None:
+        fund_parts.append("站上 MA50" if t["above_ma50"] else "跌破 MA50")
+    if t.get("rsi") is not None:
+        rsi = t["rsi"]
+        fund_parts.append(f'RSI {rsi:.0f}' + ('（超買）' if rsi >= 70 else '（超賣）' if rsi <= 30 else ''))
+    fund_body = " · ".join(fund_parts) if fund_parts else '<span class="attr-empty">—</span>'
+    fund_found = bool(fund_parts)
+
+    # 結論 pill
+    concl_cls = "attr-conclusion-found" if reasons else "attr-conclusion-none"
+
+    return f'''<div class="attribution-block">
+  <div class="attr-title">🔍 放量歸因分析（五個角度強制掃描）</div>
+  {_gen_attr_row("📦", "訂單 / 合約", orders_found, orders_body)}
+  {_gen_attr_row("🎯", "分析師指引 / 評級修訂", gu_found, gu_body)}
+  {_gen_attr_row("👔", "高管 / 內部人動作", insider_found, insider_body)}
+  {_gen_attr_row("💰", "財報 / 盈餘", earn_found, earn_body)}
+  {_gen_attr_row("📊", "技術面 / 近期動能", fund_found, fund_body)}
+  <div class="attr-conclusion {concl_cls}">
+    <span class="attr-conclusion-label">🎯 綜合研判：</span>{conclusion}
+  </div>
+</div>'''
 
 
 def _gen_stock_row(c, mode="contrib"):
