@@ -40,8 +40,19 @@ FMP_TTL_HOURS = {
     "grades-historical": 24,
     "analyst-estimates": 72,
     "profile": 168,
+    "cash-flow-statement": 720, # 30 天（季報才動）
     "batch-quote": 0,           # 每次重抓
 }
+
+# Capex 週期分組：哪些巨頭 vs 哪些受惠 bucket
+CAPEX_GROUPS = [
+    ("hyperscaler", "雲端 Hyperscaler",
+     ["MSFT", "GOOGL", "META", "AMZN"],
+     ["ai_chip", "hbm", "network", "power"]),
+    ("foundry", "晶圓代工（TSM）",
+     ["TSM"],
+     ["equipment", "eda"]),
+]
 
 # ── 九巨頭 ─────────────────────────────────────────────────────────────────
 GIANTS = [
@@ -206,9 +217,9 @@ def fmp_batch_quote(symbols):
 # ── yfinance 工具 ──────────────────────────────────────────────────────
 
 def yf_batch_bars(symbols):
-    """批次抓近 1 年日線，用來算技術指標。"""
+    """批次抓近 2 年日線（足夠算 1y 報酬 + 200 日均線）。"""
     df = yf.download(
-        list(symbols), period="1y", interval="1d",
+        list(symbols), period="2y", interval="1d",
         auto_adjust=False, progress=False, group_by="ticker", threads=True,
     )
     return df
@@ -268,6 +279,83 @@ def _rsi(closes, period=14):
     return float(100 - 100 / (1 + avg_g / avg_l))
 
 
+#
+# ── 新聞分類器（語意）────────────────────────────────────────────────────
+# 四大類高價值類別（訂單 / 指引 / 高管 / 財報）優先命中；都沒中才做情緒詞典 fallback。
+#
+
+NEWS_CATEGORY_RULES = [
+    # (category, 正向關鍵字, 負向關鍵字, 類別偵測字 — 任一命中就進此類)
+    ("order", "訂單 / 合約",
+        ["wins", "awarded", "secures", "landed", "clinches", "deal", "contract", "order", "partnership", "supply agreement", "multi-year", "signs"],
+        ["loses", "cancels", "cancelled", "terminated", "dropped", "ends partnership"],
+        ["contract", "deal", "order", "agreement", "partnership", "supply"]),
+    ("guidance", "指引修訂",
+        ["raises guidance", "raised guidance", "upgrades", "upgraded", "raises target", "boost", "beats estimates", "lifts outlook", "raised price target", "outperform"],
+        ["cuts guidance", "lowers guidance", "downgrades", "downgraded", "cuts target", "slashes", "warns", "below estimates", "lowered outlook", "underperform"],
+        ["guidance", "outlook", "forecast", "target", "rating", "estimate", "analyst", "upgrade", "downgrade", "price target"]),
+    ("insider", "高管動作",
+        ["insider buying", "bought shares", "increased stake", "ceo buys", "purchases shares", "insider purchase", "accumulates"],
+        ["insider selling", "sold shares", "dumped", "unloads", "cashes out", "ceo sells", "insider sale", "reduces stake"],
+        ["insider", "ceo", "executive", "director", "stake", "holding"]),
+    ("earnings", "財報",
+        ["beats", "beat estimates", "tops estimates", "record revenue", "strong quarter", "exceeds", "blowout"],
+        ["misses", "missed estimates", "falls short", "disappointing", "weak quarter", "shortfall"],
+        ["earnings", "q1", "q2", "q3", "q4", "quarterly", "eps", "revenue of $", "reports earnings"]),
+]
+
+# 一般情緒詞典（非特定類別時用）
+SENTIMENT_POS = {
+    "surge", "soar", "jump", "rally", "rise", "gain", "climb", "advance", "boost",
+    "strong", "record", "best", "wins", "bullish", "positive", "growth",
+    "expand", "expansion", "optimistic", "breakthrough", "approved", "launch",
+    "premium", "success", "bullish", "milestone", "all-time high", "tops",
+    "powering", "dominates", "leading", "outperform", "exceeds",
+}
+SENTIMENT_NEG = {
+    "fall", "drop", "plunge", "decline", "slump", "crash", "tumble", "slide",
+    "cut", "weak", "loss", "worst", "loses", "hurt", "bearish", "negative",
+    "shrink", "warn", "warning", "layoff", "lawsuit", "probe", "investigation",
+    "recall", "delay", "halt", "below", "sinks", "plummets", "underperform",
+    "selloff", "disappointing", "concerns", "risk", "tumbled",
+}
+
+
+def _classify_news(title, summary=""):
+    """回傳 (category, category_label, sentiment, matched_words)。
+    - category: 'order' | 'guidance' | 'insider' | 'earnings' | 'general'
+    - sentiment: 'positive' | 'negative' | 'neutral'
+    """
+    text = (title + " " + (summary or "")).lower()
+    matched = []
+
+    # 1. 類別偵測（掃描 4 大類規則）
+    for category, label, pos_kws, neg_kws, detectors in NEWS_CATEGORY_RULES:
+        # 類別命中條件：detector 關鍵字 + 明確正/負向詞
+        detected = any(d in text for d in detectors)
+        if not detected:
+            continue
+        pos_hit = [w for w in pos_kws if w in text]
+        neg_hit = [w for w in neg_kws if w in text]
+        if pos_hit or neg_hit:
+            matched = pos_hit + neg_hit
+            if pos_hit and not neg_hit:
+                return (category, label, "positive", matched)
+            if neg_hit and not pos_hit:
+                return (category, label, "negative", matched)
+            # 正負都有 → 中性（混合訊號）
+            return (category, label, "neutral", matched)
+
+    # 2. 都沒中 → 跑一般情緒詞典
+    pos_count = sum(1 for w in SENTIMENT_POS if w in text)
+    neg_count = sum(1 for w in SENTIMENT_NEG if w in text)
+    if pos_count > neg_count:
+        return ("general", "一般新聞", "positive", [])
+    if neg_count > pos_count:
+        return ("general", "一般新聞", "negative", [])
+    return ("general", "一般新聞", "neutral", [])
+
+
 def _parse_news_item(raw, related_sym):
     c = raw.get("content") or {}
     if c.get("contentType") not in (None, "STORY", "VIDEO"):
@@ -275,6 +363,7 @@ def _parse_news_item(raw, related_sym):
     title = c.get("title") or ""
     if not title:
         return None
+    summary = c.get("summary") or ""
     pub = c.get("pubDate") or c.get("displayTime")
     try:
         ts = datetime.fromisoformat(pub.replace("Z", "+00:00")) if pub else None
@@ -282,13 +371,21 @@ def _parse_news_item(raw, related_sym):
         ts = None
     if ts and (NOW_UTC - ts).total_seconds() > NEWS_MAX_AGE_HOURS * 3600:
         return None
+
+    category, cat_label, sentiment, matched = _classify_news(title, summary)
+
     return {
         "symbol": related_sym,
         "title": title,
+        "summary": summary[:200] if summary else "",
         "url": (c.get("clickThroughUrl") or {}).get("url") or (c.get("canonicalUrl") or {}).get("url") or "",
         "provider": (c.get("provider") or {}).get("displayName", ""),
         "timestamp": ts.isoformat() if ts else None,
         "ts_epoch": ts.timestamp() if ts else 0,
+        "category": category,
+        "category_label": cat_label,
+        "sentiment": sentiment,
+        "matched_keywords": matched,
     }
 
 
@@ -413,6 +510,19 @@ def fmp_enrichment(sym, include_estimates):
                         break
                 except (KeyError, ValueError):
                     pass
+
+        # 九巨頭的季 Capex（8 季足夠算 TTM + YoY）
+        cf = fmp_safe("cash-flow-statement", [], symbol=sym, period="quarter", limit=8)
+        if isinstance(cf, list):
+            out["capex_quarterly"] = [
+                {
+                    "date": r.get("date"),
+                    "period": r.get("period"),
+                    "fiscalYear": r.get("fiscalYear"),
+                    "capex": abs(r.get("capitalExpenditure") or 0),
+                }
+                for r in cf
+            ]
 
     return sym, out
 
@@ -729,6 +839,61 @@ def collect_all_symbols():
     return sorted(syms)
 
 
+# ── Capex 週期計算 ──────────────────────────────────────────────────────
+
+def compute_capex_trend(quarters):
+    """從 8 季 capex 算 TTM + YoY + 最近一季 QoQ。"""
+    if not quarters or len(quarters) < 4:
+        return None
+    quarters = quarters[:8]
+    latest4 = [q["capex"] for q in quarters[:4] if q["capex"]]
+    if len(latest4) < 4:
+        return None
+    ttm = sum(latest4)
+    yoy = None
+    if len(quarters) >= 8:
+        prev4 = [q["capex"] for q in quarters[4:8] if q["capex"]]
+        if len(prev4) == 4 and sum(prev4) > 0:
+            yoy = (ttm - sum(prev4)) / sum(prev4) * 100
+    qoq = None
+    if len(latest4) >= 2 and latest4[1] > 0:
+        qoq = (latest4[0] - latest4[1]) / latest4[1] * 100
+    return {"ttm": ttm, "yoy_pct": yoy, "qoq_pct": qoq, "latest_quarter": quarters[0] if quarters else None}
+
+
+def compute_capex_groups(fmp_map):
+    """針對 CAPEX_GROUPS 定義，計算每組合計 TTM + YoY。"""
+    out = []
+    for key, label, giants, benefit_buckets in CAPEX_GROUPS:
+        entries = []
+        for g in giants:
+            fmp = fmp_map.get(g) or {}
+            q = fmp.get("capex_quarterly") or []
+            trend = compute_capex_trend(q)
+            if trend:
+                entries.append({"symbol": g, **trend})
+        if not entries:
+            continue
+        total_ttm = sum(e["ttm"] for e in entries)
+        # 用各家的 YoY 組合：先算上年 TTM 合計
+        prev_total = 0
+        for e in entries:
+            if e.get("yoy_pct") is not None:
+                prev_total += e["ttm"] / (1 + e["yoy_pct"] / 100)
+            else:
+                prev_total += e["ttm"]  # 無歷史資料時視同持平
+        agg_yoy = ((total_ttm - prev_total) / prev_total * 100) if prev_total else None
+        out.append({
+            "key": key,
+            "label": label,
+            "giants": entries,
+            "total_ttm": total_ttm,
+            "yoy_pct": agg_yoy,
+            "benefit_buckets": benefit_buckets,
+        })
+    return out
+
+
 # ── 歷史快照 ────────────────────────────────────────────────────────────
 
 def save_history_snapshot(stocks):
@@ -855,11 +1020,26 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 .pill.am{background:#fef3c7;color:#b45309}
 .pill.mu{background:#e2e8f0;color:#475569}
 .warn-box{background:#fef3c7;border:1px solid #fde68a;color:#92400e;border-radius:6px;padding:6px 10px;font-size:11.5px;margin-top:8px;line-height:1.5}
-.news-item{padding:5px 0;border-bottom:1px dashed #eef2f7;font-size:12px;line-height:1.45}
+.news-item{padding:7px 0;border-bottom:1px dashed #eef2f7;font-size:12px;line-height:1.45}
 .news-item:last-child{border-bottom:none}
 .news-item a{color:var(--txt);text-decoration:none}
 .news-item a:hover{color:var(--bl);text-decoration:underline}
-.news-meta{font-size:10.5px;color:var(--mu);margin-top:1px}
+.news-meta{font-size:10.5px;color:var(--mu);margin-top:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.news-tags{display:flex;gap:4px;align-items:center;margin-bottom:3px}
+.cat-pill{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:0.2px}
+.cat-order{background:#fce7f3;color:#9f1239}
+.cat-guidance{background:#dbeafe;color:#1e40af}
+.cat-insider{background:#e9d5ff;color:#6b21a8}
+.cat-earnings{background:#fef3c7;color:#92400e}
+.cat-general{background:#e2e8f0;color:#475569}
+.sent-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px}
+.sent-positive{background:#16a34a}
+.sent-negative{background:#dc2626}
+.sent-neutral{background:#94a3b8}
+.sent-label{font-size:10px;font-weight:600}
+.sent-positive-label{color:#15803d}
+.sent-negative-label{color:#b91c1c}
+.sent-neutral-label{color:#64748b}
 .analyst-bar{display:flex;gap:2px;height:18px;border-radius:4px;overflow:hidden;margin-top:3px}
 .analyst-bar > div{transition:opacity .15s}
 .analyst-bar .sb{background:#15803d}
@@ -868,6 +1048,38 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 .analyst-bar .s{background:#fca5a5}
 .analyst-bar .ss{background:#b91c1c}
 .ft{text-align:center;color:var(--mu);font-size:11.5px;padding:20px 28px;border-top:1px solid var(--brd);line-height:1.8;background:var(--card)}
+/* Capex 週期 */
+.capex-panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:18px}
+.capex-card{background:var(--card);border:1px solid var(--brd);border-radius:10px;padding:14px 16px;border-left:4px solid var(--bl)}
+.capex-card.rising{border-left-color:var(--gr)}
+.capex-card.falling{border-left-color:var(--rd)}
+.capex-card h4{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:4px}
+.capex-card .big{font-size:24px;font-weight:800;letter-spacing:-0.3px;margin:4px 0}
+.capex-card .yoy{font-size:13px;font-weight:700}
+.capex-card .members{font-size:10.5px;color:var(--mu);margin-top:8px;line-height:1.6}
+.capex-card .signal{font-size:11.5px;color:var(--txt);background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-top:10px;line-height:1.5}
+.capex-card.falling .signal{background:#fef2f2}
+/* 圖例 */
+.legend-box{background:var(--card);border:1px solid var(--brd);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:12px}
+.legend-box summary{list-style:none;cursor:pointer;font-weight:700;color:var(--txt);font-size:13px}
+.legend-box summary::-webkit-details-marker{display:none}
+.legend-body{margin-top:10px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}
+.legend-group{background:#f8fafc;border-radius:6px;padding:8px 10px}
+.legend-group h6{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;margin-bottom:5px}
+.legend-row{font-size:11px;display:flex;gap:6px;padding:1.5px 0}
+.legend-row .k{flex:1}
+.legend-row .v{color:var(--mu)}
+/* Bucket summary */
+.b-stats{display:flex;gap:12px;align-items:center;font-size:11px;margin-right:10px}
+.b-stats .stat-pill{padding:2px 7px;border-radius:10px;font-weight:700}
+.b-stats .stat-pill.up{background:#dcfce7;color:#15803d}
+.b-stats .stat-pill.dn{background:#fee2e2;color:#b91c1c}
+.b-stats .stat-pill.mu{background:#e2e8f0;color:#475569}
+/* Backtest table */
+.bt-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.bt-table th{background:#f1f5f9;font-size:11px;color:var(--mu);font-weight:700;padding:8px 12px;text-transform:uppercase;text-align:left}
+.bt-table td{padding:8px 12px;font-size:12.5px;border-top:1px solid var(--brd)}
+.bt-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
 .empty-msg{color:var(--mu);font-size:12.5px;padding:10px 0;text-align:center}
 @media(max-width:768px){.hdr,.pane{padding-left:16px;padding-right:16px}.giants{grid-template-columns:repeat(2,1fr)}}
 """
@@ -953,6 +1165,121 @@ def _news_age(ts_iso):
 
 # ── HTML 區塊 ───────────────────────────────────────────────────────────
 
+def _gen_capex_panel(capex_groups, bucket_lookup):
+    if not capex_groups:
+        return '<div class="empty-msg" style="padding:8px 0">Capex 資料需 FMP 完整 quota，明日自動補上</div>'
+    html = '<div class="capex-panel">'
+    for grp in capex_groups:
+        yoy = grp["yoy_pct"]
+        trend_cls = "rising" if (yoy is not None and yoy > 5) else "falling" if (yoy is not None and yoy < -5) else ""
+        arrow = "📈" if (yoy and yoy > 5) else "📉" if (yoy and yoy < -5) else "→"
+        yoy_str = _fmt_pct(yoy) if yoy is not None else "─"
+        yoy_cls = _pct_cls(yoy)
+        members = " · ".join(f'{e["symbol"]}({_fmt_mc(e["ttm"])})' for e in grp["giants"])
+
+        # 受惠 bucket 的名稱
+        benefit_names = [bucket_lookup[b] for b in grp["benefit_buckets"] if b in bucket_lookup]
+        signal = ""
+        if yoy is not None:
+            if yoy > 20:
+                signal = f'🚀 <b>加速期</b> — 上游受惠：{" · ".join(benefit_names)}'
+            elif yoy > 5:
+                signal = f'📈 <b>擴張期</b> — 上游穩定受惠：{" · ".join(benefit_names)}'
+            elif yoy > -5:
+                signal = f'→ <b>持平</b> — 上游需求穩定，無大動作'
+            else:
+                signal = f'⚠️ <b>放緩期</b> — 上游承壓：{" · ".join(benefit_names)}'
+
+        html += f'''<div class="capex-card {trend_cls}">
+  <h4>🏭 {grp["label"]}（{len(grp["giants"])} 家）</h4>
+  <div class="big">{_fmt_mc(grp["total_ttm"])}</div>
+  <div class="yoy {yoy_cls}">TTM YoY {yoy_str} {arrow}</div>
+  <div class="members">{members}</div>
+  <div class="signal">{signal}</div>
+</div>'''
+    html += '</div>'
+    return html
+
+
+def _gen_legend():
+    groups = [
+        ("📊 損益表 (4)", [
+            ("營收年增率", "≥15% 綠 · 5-15% 黃 · <5% 紅"),
+            ("營業利益率", "≥20% 綠 · 10-20% 黃 · <10% 紅"),
+            ("淨利率", "≥15% 綠 · 7-15% 黃 · <7% 紅"),
+            ("毛利率", "≥40% 綠 · 25-40% 黃 · <25% 紅"),
+        ]),
+        ("🏦 資產負債 (4)", [
+            ("負債/股東權益", "≤0.5 綠 · 0.5-1.5 黃 · >1.5 紅"),
+            ("流動比率", "≥2 綠 · 1-2 黃 · <1 紅"),
+            ("ROE", "≥15% 綠 · 8-15% 黃 · <8% 紅"),
+            ("ROIC", "≥15% 綠 · 8-15% 黃 · <8% 紅"),
+        ]),
+        ("💰 現金流 (3)", [
+            ("FCF / 營收", "≥15% 綠 · 5-15% 黃 · <5% 紅"),
+            ("盈餘品質 FCF/NI", "≥0.9 綠 · 0.7-0.9 黃 · <0.7 紅"),
+            ("FCF 殖利率", "≥4% 綠 · 2-4% 黃 · <2% 紅"),
+        ]),
+        ("💲 估值 (1)", [
+            ("Forward PEG", "≤1.2 綠 · 1.2-2 黃 · >2 紅"),
+        ]),
+    ]
+    body = ""
+    for title, rows in groups:
+        rows_html = "".join(f'<div class="legend-row"><span class="k">{k}</span><span class="v">{v}</span></div>' for k, v in rows)
+        body += f'<div class="legend-group"><h6>{title}</h6>{rows_html}</div>'
+    return f'''<details class="legend-box">
+  <summary>🚦 12 盞燈解說（依照下方個股列上的 12 點排序，左→右）— 點開查看各指標門檻</summary>
+  <div class="legend-body">{body}</div>
+</details>'''
+
+
+def _gen_backtest(stocks):
+    """Score 與 1 年報酬的相關性驗證。"""
+    items = [
+        (s["symbol"], s["name"], s["score"], (s.get("tech") or {}).get("pct_252d"))
+        for s in stocks.values()
+        if (s.get("tech") or {}).get("pct_252d") is not None
+    ]
+    if len(items) < 10:
+        return ""
+    items.sort(key=lambda x: -x[2])
+    top10 = items[:10]
+    bot10 = items[-10:]
+    top_avg = sum(x[3] for x in top10) / len(top10)
+    bot_avg = sum(x[3] for x in bot10) / len(bot10)
+    diff = top_avg - bot_avg
+
+    # Bucket by score tier
+    tiers = [
+        ("🟢 高分（≥ 14）", [x for x in items if x[2] >= 14]),
+        ("🟡 中分（10-13）", [x for x in items if 10 <= x[2] <= 13]),
+        ("🔴 低分（< 10）", [x for x in items if x[2] < 10]),
+    ]
+    tier_rows = ""
+    for label, arr in tiers:
+        if not arr:
+            continue
+        avg = sum(x[3] for x in arr) / len(arr)
+        cls = _pct_cls(avg)
+        tier_rows += f'<tr><td>{label}</td><td class="num">{len(arr)}</td><td class="num {cls}">{_fmt_pct(avg)}</td></tr>'
+
+    valid = "✓ 評分系統有效" if diff > 10 else "⚠️ 評分與 1 年報酬相關性弱（可能因上市時間短或市場剛反轉）" if diff < 0 else "→ 相關性尚可"
+
+    return f'''<div class="ttl">📊 評分有效性驗證（Top10 vs Bottom10 · 1 年報酬）</div>
+<div class="desc">依當前紅黃綠燈分數分三級，看過去 1 年平均報酬率。若高分平均報酬明顯高於低分，代表評分有一定預測力。<b>免責</b>：這是快照型驗證（用當前評分套過去價格），不是嚴格回測</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+  <table class="bt-table"><tr><th>分數等級</th><th class="num">檔數</th><th class="num">1 年平均報酬</th></tr>{tier_rows}</table>
+  <div style="background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:14px;font-size:12.5px;line-height:1.8">
+    <div style="color:var(--mu);font-size:11px;font-weight:700;margin-bottom:6px">⛳ 摘要</div>
+    Top10 均報酬：<b class="{_pct_cls(top_avg)}">{_fmt_pct(top_avg)}</b><br/>
+    Bottom10 均報酬：<b class="{_pct_cls(bot_avg)}">{_fmt_pct(bot_avg)}</b><br/>
+    <b>差距：{_fmt_pct(diff)}</b><br/>
+    <span style="color:var(--mu)">{valid}</span>
+  </div>
+</div>'''
+
+
 def _gen_giants_grid(stocks):
     html = '<div class="giants">'
     for code, name, role in GIANTS:
@@ -993,6 +1320,18 @@ def _gen_supply_chain(stocks):
             [stocks[s] for s in syms if s in stocks],
             key=lambda x: -x["score"] if x else 0,
         )
+        # 計算 bucket 統計
+        b_stats = ""
+        if sorted_stocks:
+            scores = [s["score"] for s in sorted_stocks]
+            day_pcts = [s["day_pct"] for s in sorted_stocks if s.get("day_pct") is not None]
+            avg_score = sum(scores) / len(scores) if scores else 0
+            avg_score_max = sorted_stocks[0]["score_max"] if sorted_stocks else 24
+            avg_day = (sum(day_pcts) / len(day_pcts)) if day_pcts else None
+            score_cls = "up" if avg_score / avg_score_max >= 0.6 else "mu" if avg_score / avg_score_max >= 0.4 else "dn"
+            day_cls = _pct_cls(avg_day)
+            b_stats = f'<div class="b-stats"><span class="stat-pill {score_cls}" title="平均分數">🚦 {avg_score:.1f}/{avg_score_max}</span><span class="stat-pill {day_cls}" title="平均日漲跌">{_fmt_pct(avg_day)}</span></div>'
+
         html += f'''<details class="bucket">
   <summary>
     <div class="b-left">
@@ -1000,6 +1339,7 @@ def _gen_supply_chain(stocks):
       <span class="b-title">{label}</span>
       <span class="b-stocks-count">· {len(sorted_stocks)} 檔</span>
     </div>
+    {b_stats}
     <div class="b-giants">{giant_chips}</div>
     <span class="chev">▾</span>
   </summary>
@@ -1148,20 +1488,45 @@ def _gen_valuation_block(s):
     return f'<div class="sd-block"><h5>🎯 分析師面 (FMP)</h5>{body}</div>'
 
 
+SENT_LABEL = {"positive": "正向", "negative": "負向", "neutral": "中性"}
+
+
 def _gen_news_block(s):
     news = s.get("news") or []
     if not news:
         return '<div class="sd-block"><h5>📰 新聞 (yfinance · 48h)</h5><div class="empty-msg">暫無相關新聞</div></div>'
+
+    # 摘要：各類別/情緒的分布
+    sent_counts = {"positive": 0, "negative": 0, "neutral": 0}
+    cat_counts = {}
+    for n in news:
+        sent_counts[n.get("sentiment", "neutral")] += 1
+        cat_counts[n.get("category_label", "一般新聞")] = cat_counts.get(n.get("category_label", "一般新聞"), 0) + 1
+    summary = f'<div style="font-size:10.5px;color:var(--mu);margin-bottom:6px">綜合情緒：<span class="sent-positive-label">↑{sent_counts["positive"]}</span> / <span class="sent-neutral-label">={sent_counts["neutral"]}</span> / <span class="sent-negative-label">↓{sent_counts["negative"]}</span></div>'
+
     items = ""
     for n in news:
         age = _news_age(n.get("timestamp"))
         provider = n.get("provider") or ""
-        meta = " · ".join([x for x in (provider, age) if x])
         url = n.get("url") or "#"
         open_ = f'<a href="{url}" target="_blank" rel="noopener">' if url != "#" else "<span>"
         close_ = "</a>" if url != "#" else "</span>"
-        items += f'<div class="news-item">{open_}{n["title"]}{close_}<div class="news-meta">{meta}</div></div>'
-    return f'<div class="sd-block"><h5>📰 新聞 (yfinance · 48h)</h5>{items}</div>'
+
+        cat = n.get("category", "general")
+        cat_label = n.get("category_label", "一般新聞")
+        sentiment = n.get("sentiment", "neutral")
+        sent_label = SENT_LABEL.get(sentiment, "中性")
+        matched = n.get("matched_keywords", [])
+        matched_title = (" · 關鍵字: " + ", ".join(matched[:3])) if matched else ""
+
+        tags = f'<div class="news-tags"><span class="cat-pill cat-{cat}" title="{cat_label}{matched_title}">{cat_label}</span><span class="sent-dot sent-{sentiment}"></span><span class="sent-label sent-{sentiment}-label">{sent_label}</span></div>'
+
+        meta_parts = [x for x in (provider, age) if x]
+        meta = f'<div class="news-meta"><span>{" · ".join(meta_parts)}</span></div>'
+
+        items += f'<div class="news-item">{tags}{open_}{n["title"]}{close_}{meta}</div>'
+
+    return f'<div class="sd-block"><h5>📰 新聞 (yfinance · 48h)</h5>{summary}{items}</div>'
 
 
 def _gen_cross_check_block(s):
@@ -1174,9 +1539,13 @@ def _gen_cross_check_block(s):
     return f'<div class="warn-box">⚠️ 兩源差異偵測：{" ; ".join(parts)}</div>'
 
 
-def generate_html(stocks):
+def generate_html(stocks, capex_groups):
+    bucket_lookup = {k: label for k, label, _, _ in BUCKETS}
     giants_grid = _gen_giants_grid(stocks)
     supply_chain = _gen_supply_chain(stocks)
+    capex_html = _gen_capex_panel(capex_groups, bucket_lookup)
+    legend_html = _gen_legend()
+    backtest_html = _gen_backtest(stocks)
 
     n_green = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "green")
     n_red = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "red")
@@ -1194,14 +1563,20 @@ def generate_html(stocks):
   <h1>AI 供應鏈策略儀表板</h1>
   <div class="sub">9 檔巨頭 + 供應鏈上下游 × 基本面紅黃綠燈 · 更新 {TODAY.isoformat()} · {fmp_status} <a class="nav-link" href="us_index.html">→ 美股板塊復盤</a> <a class="nav-link" href="etf_index.html">→ ETF 資金流</a></div>
 </div>
-<div class="construction">🚧 Phase 1 MVP｜供應鏈連線視覺化 / Capex 週期訊號 / 回測將於後續版本加入 🚧</div>
 <div class="pane">
+  <div class="ttl">🏭 AI 資本支出週期（Capex 領先指標）</div>
+  <div class="desc">雲端 Hyperscaler（MSFT+GOOGL+META+AMZN）合計 Capex 年增決定上游供應鏈（AI 晶片／HBM／網通／電源）需求強度。TSM Capex 則是設備商（ASML／AMAT／LRCX／KLAC）的訂單訊號</div>
+  {capex_html}
+
   <div class="ttl">🏛 AI 九巨頭</div>
-  <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分）</div>
+  <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分 · 最高 24 分）</div>
   {giants_grid}
+
+  {backtest_html}
 
   <div class="ttl">🔗 供應鏈（由上游至下游）</div>
   <div class="desc">每個 bucket 標示哪些巨頭依賴它（★=弱、★★=中、★★★=關鍵）。點 bucket 展開個股清單，個股依紅黃綠燈分數排序。再點個股看完整技術/基本面/分析師/新聞分析</div>
+  {legend_html}
   {supply_chain}
 </div>
 <div class="ft">資料源：Financial Modeling Prep（基本面/分析師）+ Yahoo Finance（價格/新聞）｜ 統計本次：{n_green} 🟢 / {n_red} 🔴（全部 {n_total_lights} 盞燈）｜ 僅供研究參考，不構成投資建議</div>
@@ -1241,12 +1616,21 @@ def main():
     for s in rank:
         print(f"  {s['symbol']:6s} {s['score']:2d}/{s['score_max']:2d} · {s['name']}")
 
-    # 5. 歷史快照
+    # 5. Capex 週期（僅九巨頭有 capex_quarterly）
+    capex_groups = compute_capex_groups(fmp_map)
+    if capex_groups:
+        print("\n=== Capex 週期 ===")
+        for g in capex_groups:
+            yoy = g["yoy_pct"]
+            yoy_s = f"{yoy:+.1f}%" if yoy is not None else "─"
+            print(f"  {g['label']}: TTM ${g['total_ttm']/1e9:.1f}B · YoY {yoy_s}")
+
+    # 6. 歷史快照
     save_history_snapshot(stocks)
     cleanup_history()
 
-    # 6. HTML
-    html = generate_html(stocks)
+    # 7. HTML
+    html = generate_html(stocks, capex_groups)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n儀表板輸出至 {OUTPUT_HTML}")
