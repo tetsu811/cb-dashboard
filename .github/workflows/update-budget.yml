@@ -1,0 +1,42 @@
+name: Update Budget Dashboard
+
+on:
+  schedule:
+    # 每日 UTC 11:00（約台灣 19:00）— 美國華府當日 6-7AM，抓到前一個立法日的動作
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests pydantic yfinance pandas
+
+      - name: Generate budget dashboard
+        env:
+          CONGRESS_API_KEY: ${{ secrets.CONGRESS_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python generate_budget.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add budget_dashboard.html budget_latest.json budget_cache.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto update budget dashboard $(date -u +%Y-%m-%d)"
+            git push
+          fi
