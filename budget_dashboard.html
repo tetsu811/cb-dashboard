@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>美國預算法案監控 — 2026-04-19</title>
+<meta name="robots" content="noindex, nofollow"/>
+<meta name="referrer" content="no-referrer"/>
+<style>
+:root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b;--card:#fff;--gold:#b45309}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5}
+.hdr{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#2563eb 100%);color:#fff;padding:22px 28px 16px}
+.hdr h1{font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px}
+.hdr .sub{font-size:11.5px;opacity:.85}
+.nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px}
+.nav-link:hover{opacity:.7}
+.summary{display:flex;gap:10px;padding:14px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
+.summary .mk{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:10px 16px;min-width:160px}
+.summary .lbl{font-size:10.5px;color:var(--mu);font-weight:600;letter-spacing:0.3px}
+.summary .px{font-size:18px;font-weight:700;margin-top:2px}
+.construction{background:linear-gradient(90deg,#fef3c7,#fde68a);border-bottom:2px solid #f59e0b;color:#78350f;padding:10px 28px;font-size:12.5px;font-weight:600;text-align:center}
+.pane{padding:20px 28px}
+.ttl{font-size:15px;font-weight:700;margin-bottom:4px}
+.desc{font-size:12.5px;color:var(--mu);margin-bottom:16px;line-height:1.7}
+.bills{display:flex;flex-direction:column;gap:10px}
+.bill{background:var(--card);border:1px solid var(--brd);border-radius:10px;overflow:hidden}
+.bill > summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;grid-template-columns:90px 1fr 140px 120px 100px;gap:14px;align-items:center;font-size:13px}
+.bill > summary::-webkit-details-marker{display:none}
+.bill > summary:hover{background:#f8fafc}
+.bill[open] > summary{background:#eef2ff;border-bottom:1px solid var(--brd)}
+.bid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:700;font-size:11.5px;color:var(--mu)}
+.btitle{font-weight:600;line-height:1.4;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.bstage{display:flex;flex-direction:column;gap:4px}
+.bstage .pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10.5px;font-weight:700;text-align:center;width:fit-content}
+.pill.stage{background:#e2e8f0;color:#475569}
+.pill.stage.passed_one,.pill.stage.passed_both,.pill.stage.enrolled,.pill.stage.signed{background:#dcfce7;color:#15803d}
+.pill.stage.committee,.pill.stage.reported{background:#fef3c7;color:#b45309}
+.probbar{width:100%;height:6px;background:var(--brd);border-radius:3px;overflow:hidden;margin-top:2px}
+.probbar > span{display:block;height:100%;background:var(--bl)}
+.probbar.hi > span{background:var(--gr)}
+.probbar.mi > span{background:var(--am)}
+.probbar.lo > span{background:var(--rd)}
+.probtxt{font-size:11px;color:var(--mu);margin-top:2px;font-variant-numeric:tabular-nums}
+.bamt{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.balpha{text-align:right}
+.balpha .num{font-weight:800;font-variant-numeric:tabular-nums;font-size:15px}
+.balpha .num.hi{color:var(--gold)}
+.balpha .num.mi{color:var(--am)}
+.balpha .num.lo{color:var(--mu)}
+.balpha .lbl{font-size:10px;color:var(--mu);font-weight:600}
+.detail{padding:16px 20px;background:#fafbff;display:grid;grid-template-columns:1.2fr 2fr;gap:18px}
+@media(max-width:860px){.detail{grid-template-columns:1fr}.bill > summary{grid-template-columns:1fr 100px;grid-template-areas:"id alpha" "title title" "stage amt";gap:8px}.bid{grid-area:id}.btitle{grid-area:title}.bstage{grid-area:stage}.bamt{grid-area:amt;text-align:left}.balpha{grid-area:alpha}}
+.detail .block h4{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;padding-bottom:4px;border-bottom:1px solid var(--brd)}
+.detail .kv{font-size:12.5px;line-height:1.9}
+.detail .kv .k{color:var(--mu);display:inline-block;min-width:84px}
+.detail .kv .v{font-weight:600}
+.detail .notes{font-size:12.5px;color:#475569;margin-top:8px;line-height:1.7;padding:8px 10px;background:#fff;border-left:3px solid var(--bl);border-radius:0 6px 6px 0}
+.progs{margin-top:10px;font-size:12px}
+.progs .row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #e2e8f0}
+.progs .row:last-child{border-bottom:none}
+.progs .nm{color:var(--txt)}
+.progs .hint{color:var(--mu);font-size:11px;margin-left:6px}
+.progs .amt{font-weight:700;font-variant-numeric:tabular-nums}
+.cotable{width:100%;border-collapse:collapse;font-size:12px}
+.cotable th,.cotable td{padding:6px 8px;text-align:left;border-bottom:1px dashed #e2e8f0}
+.cotable th{font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:0.3px;border-bottom:1px solid var(--brd)}
+.cotable td.num{text-align:right;font-variant-numeric:tabular-nums}
+.cotable .tk{font-weight:800;color:var(--bl)}
+.cotable .tk a{color:inherit;text-decoration:none}
+.cotable .tk a:hover{text-decoration:underline}
+.cotable .ratio.hi{color:var(--gold);font-weight:700}
+.cotable .ratio.mi{color:var(--am);font-weight:700}
+.cotable .rationale{color:var(--mu);font-size:11px;margin-top:2px;line-height:1.4}
+.cotable .conf{display:inline-block;padding:1px 5px;border-radius:6px;font-size:10px;font-weight:700;background:#e2e8f0;color:#475569}
+.cotable .conf.hi{background:#dcfce7;color:#15803d}
+.cotable .conf.lo{background:#fee2e2;color:#b91c1c}
+.empty{text-align:center;color:var(--mu);padding:28px;font-size:13px;background:var(--card);border:1px dashed var(--brd);border-radius:10px}
+.ft{text-align:center;color:var(--mu);font-size:11.5px;padding:20px 28px;border-top:1px solid var(--brd);line-height:1.8;background:var(--card)}
+.biglink{color:var(--bl);text-decoration:none;font-size:11.5px;margin-left:4px}
+.biglink:hover{text-decoration:underline}
+@media(max-width:768px){.hdr,.summary,.pane{padding-left:16px;padding-right:16px}}
+</style></head><body>
+<div class="hdr">
+  <h1>美國聯邦預算法案監控</h1>
+  <div class="sub">更新：2026-04-19（每日自動抓 Congress.gov → Claude 判讀 → 量體校正）<a class="nav-link" href="us_index.html">→ 美股板塊</a><a class="nav-link" href="etf_index.html">→ ETF 資金流向</a><a class="nav-link" href="index.html">→ 可轉債</a></div>
+</div>
+<div class="construction">🚧 開發測試中｜Claude 產出的預算金額與公司映射有機率誤判，請務必交叉驗證 🚧</div>
+<div class="summary">
+  <div class="mk"><div class="lbl">追蹤法案</div><div class="px">50 件</div></div>
+  <div class="mk"><div class="lbl">預算總額（名目）</div><div class="px">$11.5B</div></div>
+  <div class="mk"><div class="lbl">期望加權預算（×通過機率）</div><div class="px">$2.1B</div></div>
+</div>
+<div class="pane">
+  <div class="ttl">法案清單（按 Top α 排序）</div>
+  <div class="desc">每筆法案顯示當前階段、通過機率、總預算。展開後看 Claude 判讀的受惠公司與量體校正結果。期望 Alpha 越高代表該公司相對自身市值的預期影響越大——這是真正的 alpha 所在。</div>
+  <div class="bills"><details class="bill">
+<summary>
+<span class="bid">107-HR-1389</span>
+<div class="btitle">To amend the Head Start Act to authorize the appropriation of $11,500,000,000 for fiscal year 2002.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:18%"></span></div>
+  <div class="probtxt">通過機率 18.5%</div>
+</div>
+<div class="bamt">$11.5B<div style="font-size:10.5px;color:var(--mu);font-weight:500">1 年</div></div>
+<div class="balpha"><div class="num hi">315</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-1389</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/1389" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">18.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">3 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=3</span></div>
+  <div><span class="k">總預算</span><span class="v">$11.5B (1 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-06-20</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，核准2002財政年度Head Start計畫撥款上限115億美元，實際撥款仍須後續撥款法案。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此為單純授權撥款修正案，全由民主黨提出（共和黨控制眾院），缺乏兩黨支持，雖已轉交小組委員會但無後續markup動作，通過機率略低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">Head Start Programs<span class="hint">（幼兒教育）</span></span><span class="amt">$11.5B</span></div></div>
+</div>
+<div class="block">
+<h4>🏢 受惠公司（預估）</h4>
+<div style="font-size:12px;color:var(--mu);margin-bottom:8px">受惠產業：幼兒教育、教育出版與教材、兒童營養餐食、校車與交通服務、教育科技</div>
+<table class="cotable">
+<thead><tr><th>公司</th><th style="text-align:right">市值</th><th style="text-align:right">佔比估算</th><th style="text-align:right">預算/市值</th><th style="text-align:right">期望 Alpha</th><th>信心</th></tr></thead>
+<tbody><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/SCHL" target="_blank" rel="noopener">SCHL</a></div><div style="font-size:10px;color:var(--mu)">Scholastic Corporation</div></td>
+<td class="num">$1.0B</td>
+<td class="num">1.5%<div style="font-size:10px;color:var(--mu)">$172.5M</div></td>
+<td class="num ratio hi">17.0%</td>
+<td class="num"><span style="font-weight:800">315</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf ">60%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">美國幼兒閱讀教材與童書龍頭，Head Start課程常採用其讀本。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/BFAM" target="_blank" rel="noopener">BFAM</a></div><div style="font-size:10px;color:var(--mu)">Bright Horizons Family Solutions</div></td>
+<td class="num">$4.8B</td>
+<td class="num">2.0%<div style="font-size:10px;color:var(--mu)">$230.0M</div></td>
+<td class="num ratio hi">4.8%</td>
+<td class="num"><span style="font-weight:800">89</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf ">45%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">全美最大企業托育與幼教營運商，可承接部分Head Start委外服務。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/CMP" target="_blank" rel="noopener">CMP</a></div><div style="font-size:10px;color:var(--mu)">Compass Minerals International, </div></td>
+<td class="num">$1.1B</td>
+<td class="num">0.3%<div style="font-size:10px;color:var(--mu)">$34.5M</div></td>
+<td class="num ratio hi">3.3%</td>
+<td class="num"><span style="font-weight:800">60</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">15%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">與幼教午餐供應鏈有關聯性較弱，僅列為潛在邊緣受惠。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/BLBD" target="_blank" rel="noopener">BLBD</a></div><div style="font-size:10px;color:var(--mu)">Blue Bird Corporation</div></td>
+<td class="num">$2.1B</td>
+<td class="num">0.5%<div style="font-size:10px;color:var(--mu)">$57.5M</div></td>
+<td class="num ratio hi">2.7%</td>
+<td class="num"><span style="font-weight:800">50</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">35%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">校車製造龍頭，Head Start交通車採購潛在受惠者（小市值alpha）。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/LRN" target="_blank" rel="noopener">LRN</a></div><div style="font-size:10px;color:var(--mu)">Stride, Inc.</div></td>
+<td class="num">$4.3B</td>
+<td class="num">0.5%<div style="font-size:10px;color:var(--mu)">$57.5M</div></td>
+<td class="num ratio mi">1.3%</td>
+<td class="num"><span style="font-weight:800">25</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">30%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">K-12線上教育平台，可能提供Head Start配套課程與教材。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/PSO" target="_blank" rel="noopener">PSO</a></div><div style="font-size:10px;color:var(--mu)">Pearson plc</div></td>
+<td class="num">$9.0B</td>
+<td class="num">0.8%<div style="font-size:10px;color:var(--mu)">$92.0M</div></td>
+<td class="num ratio mi">1.0%</td>
+<td class="num"><span style="font-weight:800">19</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf ">45%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">全球教育出版龍頭，旗下早期學習評估工具廣泛被幼教機構採用。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/MAT" target="_blank" rel="noopener">MAT</a></div><div style="font-size:10px;color:var(--mu)">Mattel, Inc.</div></td>
+<td class="num">$4.6B</td>
+<td class="num">0.4%<div style="font-size:10px;color:var(--mu)">$46.0M</div></td>
+<td class="num ratio mi">1.0%</td>
+<td class="num"><span style="font-weight:800">19</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">35%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">Fisher-Price品牌教具與玩具廣泛用於幼教教室。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/ARMK" target="_blank" rel="noopener">ARMK</a></div><div style="font-size:10px;color:var(--mu)">Aramark</div></td>
+<td class="num">$11.9B</td>
+<td class="num">1.0%<div style="font-size:10px;color:var(--mu)">$115.0M</div></td>
+<td class="num ratio mi">1.0%</td>
+<td class="num"><span style="font-weight:800">18</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf ">50%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">學校與機構餐飲外包龍頭，Head Start營養餐供應重要承包商。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/KFY" target="_blank" rel="noopener">KFY</a></div><div style="font-size:10px;color:var(--mu)">Korn Ferry</div></td>
+<td class="num">$3.4B</td>
+<td class="num">0.2%<div style="font-size:10px;color:var(--mu)">$23.0M</div></td>
+<td class="num ratio mi">0.7%</td>
+<td class="num"><span style="font-weight:800">12</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">20%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">幼教師資培訓與人力諮詢服務潛在承包商。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/SYY" target="_blank" rel="noopener">SYY</a></div><div style="font-size:10px;color:var(--mu)">Sysco Corporation</div></td>
+<td class="num">$36.5B</td>
+<td class="num">1.5%<div style="font-size:10px;color:var(--mu)">$172.5M</div></td>
+<td class="num ratio ">0.5%</td>
+<td class="num"><span style="font-weight:800">9</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf ">55%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">全美最大食品配送商，供應大量幼教中心餐食原料。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/HAS" target="_blank" rel="noopener">HAS</a></div><div style="font-size:10px;color:var(--mu)">Hasbro, Inc.</div></td>
+<td class="num">$13.7B</td>
+<td class="num">0.3%<div style="font-size:10px;color:var(--mu)">$34.5M</div></td>
+<td class="num ratio ">0.3%</td>
+<td class="num"><span style="font-weight:800">5</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">30%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">幼兒遊戲與教具供應商，可間接受惠於幼教採購擴大。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/JCI" target="_blank" rel="noopener">JCI</a></div><div style="font-size:10px;color:var(--mu)">Johnson Controls International p</div></td>
+<td class="num">$86.2B</td>
+<td class="num">0.3%<div style="font-size:10px;color:var(--mu)">$34.5M</div></td>
+<td class="num ratio ">0.0%</td>
+<td class="num"><span style="font-weight:800">1</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">20%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">Head Start中心設施HVAC與建築設備的潛在供應商。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/HMHC" target="_blank" rel="noopener">HMHC</a></div><div style="font-size:10px;color:var(--mu)">Houghton Mifflin Harcourt</div></td>
+<td class="num">—</td>
+<td class="num">1.0%<div style="font-size:10px;color:var(--mu)">$115.0M</div></td>
+<td class="num ratio ">0.0%</td>
+<td class="num"><span style="font-weight:800">0</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf ">55%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">幼教與早期閱讀教材主要出版商，直接受惠於幼教預算擴大。</span></td></tr><tr>
+<td><div class="tk"><a href="https://finance.yahoo.com/quote/LEA" target="_blank" rel="noopener">LEA</a></div><div style="font-size:10px;color:var(--mu)">Lear Corporation</div></td>
+<td class="num">$6.4B</td>
+<td class="num">0.0%<div style="font-size:10px;color:var(--mu)">—</div></td>
+<td class="num ratio ">0.0%</td>
+<td class="num"><span style="font-weight:800">0</span><div style="font-size:10px;color:var(--mu)">bp</div></td>
+<td><span class="conf lo">5%</span></td>
+</tr>
+<tr><td colspan="6" style="padding-top:0;padding-bottom:8px;border-bottom:1px solid var(--brd)"><span class="rationale">曾為幼教玩具教具供應商但已下市，不計入。</span></td></tr></tbody>
+</table>
+<div style="font-size:10.5px;color:var(--mu);margin-top:8px;line-height:1.6">
+• <b>期望 Alpha</b> = (年化預算/市值) × 通過機率，以 bp 顯示，越高代表這家公司相對其量體的預期影響越大<br>
+• <b>佔比估算</b> = Claude 估計該公司可拿到法案預算的百分比（非官方合約），請自行交叉驗證
+</div>
+</div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">119-S-177</span>
+<div class="btitle">Protect Funding for Women's Health Care Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:11%"></span></div>
+  <div class="probtxt">通過機率 11.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">119-S-177</span><a class="biglink" href="https://www.congress.gov/bill/119th-congress/senate-bill/177" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Health</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">11.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">18 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=18 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2025-01-22</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案為政策性禁止條款，禁止聯邦資金流向美國計畫生育聯盟及其附屬機構，未涉及具體預算金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此法案為純黨派提案（18位共同提案人全為共和黨），議題涉及高度爭議的女性健康與墮胎相關資金，且委員會主席傳統上對此類提案不友善；雖參議院目前由共和黨掌控略微提升可能性，但60票門檻難以跨越，整體通過率應略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">119-S-3973</span>
+<div class="btitle">National Domestic Preparedness Consortium Reauthorization Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:18%"></span></div>
+  <div class="probtxt">通過機率 18.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">119-S-3973</span><a class="biglink" href="https://www.congress.gov/bill/119th-congress/senate-bill/3973" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Emergency Management</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">18.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2026-03-03</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，重新授權國家國內準備聯盟，摘要未公布具體金額與年限，無法抽取預算細節。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：法案剛引入參議院且無任何共同提案人，兩黨支持訊號薄弱；但此為例行性再授權法案，通常具一定通過機會，故僅小幅下調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">106-HR-88</span>
+<div class="btitle">To amend the Treasury and General Government Appropriations Act, 1999, to repeal the requirement regarding data produced under Federal grants and agreements awarded to institutions of higher education, hospitals, and other nonprofit organizations.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:38%"></span></div>
+  <div class="probtxt">通過機率 38.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">106-HR-88</span><a class="biglink" href="https://www.congress.gov/bill/106th-congress/house-bill/88" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">38.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">55 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=11 · D=44</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1999-07-15</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅為廢除1999年財政與一般政府撥款法案中關於聯邦補助資料公開的規定，屬程序性修法，未涉及任何預算撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有55位共同提案人且已舉行小組委員會聽證，顯示一定關注度，但共和黨多數下由民主黨主導（D=44 vs R=11）的廢除性法案不利推進，且此為爭議性的資料公開條款廢除議題，整體略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-564</span>
+<div class="btitle">Infrastructure Protection Act of 1995</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:17%"></span></div>
+  <div class="probtxt">通過機率 16.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-564</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/564" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Transportation and Public Works</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">16.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">7 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=5 · D=2</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-12-06</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案屬於預算程序改革，將公路、航空、內陸水道及港口維護等信託基金之收支排除於聯邦預算外，並非撥款或授權支出，故無具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有兩黨共同提案人（5R/2D）且部分委員會已discharge，顯示些微推進，但被re-referred至多個委員會（Budget與Transportation）通常意味立法路徑變得更複雜，且1995年此類基礎設施保護法案最終未獲通過，故略微下調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-103</span>
+<div class="btitle">To amend title 5, United States Code, to provide that the Civil Service Retirement and Disability Fund be excluded from the budget of the United States Government.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:30%"></span></div>
+  <div class="probtxt">通過機率 30.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-103</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/103" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">30.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 +5%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">151 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=61 · D=89</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-12-07</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅為預算處理規則修改，將公務員退休與殘障基金排除於聯邦預算之外，並未涉及具體撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有151位共同提案人且兩黨均衡（R=61, D=89）為強正向訊號，但此類預算處理技術性法案歷史上極少通過，且已被多次重新轉委員會顯示程序停滯，僅給予小幅上調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">106-HR-4401</span>
+<div class="btitle">Health Care Infrastructure Investment Act of 2000</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:2%"></span></div>
+  <div class="probtxt">通過機率 2.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">106-HR-4401</span><a class="biglink" href="https://www.congress.gov/bill/106th-congress/house-bill/4401" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Health</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">2.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">1 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2000-07-11</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：法案提及對 Health Care Infrastructure Commission 進行撥款，但摘要未揭露具體金額與實施年限。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：法案僅一位共同提案人且無兩黨支持，雖已舉行小組委員會聽證顯示微弱進展，但被多重委員會聯合審議增加通過難度，整體前景略低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">Health Care Infrastructure Commission<span class="hint">（醫療資訊基礎建設）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">106-HR-4110</span>
+<div class="btitle">To amend title 44, United States Code, to authorize appropriations for the National Historical Publications and Records Commission for fiscal years 2002 through 2005.</div>
+<div class="bstage">
+  <span class="pill stage signed">已簽署</span>
+  <div class="probbar hi"><span style="width:98%"></span></div>
+  <div class="probtxt">通過機率 98.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">4 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">106-HR-4110</span><a class="biglink" href="https://www.congress.gov/bill/106th-congress/house-bill/4110" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">已簽署</span></div>
+  <div><span class="k">通過機率</span><span class="v">98.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 100% + 調整 +0%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">11 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=5 · D=6</span></div>
+  <div><span class="k">總預算</span><span class="v">— (4 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2000-11-01</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，僅核准 2002-2005 財政年度撥款授權，摘要未提供具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：法案已於2000年11月1日由總統簽署成為公法106-410，已達最終通過階段，維持基準100%通過率無需調整。</div>
+<div class="progs"><div class="row"><span class="nm">National Historical Publications and Records Commission<span class="hint">（歷史檔案與出版）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-2599</span>
+<div class="btitle">Budget Enforcement Simplification Trust Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:23%"></span></div>
+  <div class="probtxt">通過機率 23.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-2599</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/2599" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">23.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">27 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=15 · D=12</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-11-16</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為預算程序改革法案，將國會預算流程改為兩年期並賦予總統逐項否決權，屬程序性立法，無具體撥款金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有27位共同提案人且呈兩黨性質（R15/D12），但法案被多重委員會管轄（Budget、Government Reform、Rules）增加通過難度，且僅停留在小組委員會層級無後續動作，歷史上此類預算執行改革法案多無疾而終，僅給予小幅負向調整。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">105-HR-887</span>
+<div class="btitle">To require the Director of the Office of Management and Budget to develop and implement a system for determining and reporting the number of individuals employed by non-Federal Government entities providing services under contracts awarded by executive branch agencies.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:15%"></span></div>
+  <div class="probtxt">通過機率 14.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">105-HR-887</span><a class="biglink" href="https://www.congress.gov/bill/105th-congress/house-bill/887" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">14.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">5 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=4</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1997-03-04</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案僅要求OMB建立並實施承包商人力統計與年度報告制度，屬行政管理規範，未涉及具體預算金額或撥款授權。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此為行政管理類技術性法案，雖已轉至小組委員會顯示些微進展，但共同提案人僅5位且偏民主黨（當時為共和黨多數國會），缺乏真正兩黨支持與領導層推動，難以突破委員會階段。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">105-HR-888</span>
+<div class="btitle">To amend the Omnibus Consolidated Appropriations Act, for fiscal year 1997, to prohibit the contracting out of certain duties.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:30%"></span></div>
+  <div class="probtxt">通過機率 30.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">105-HR-888</span><a class="biglink" href="https://www.congress.gov/bill/105th-congress/house-bill/888" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">30.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">4 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=3</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1997-03-04</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為政策性修法，規範聯邦服務契約外包限制，未涉及具體撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此法案僅4位共同提案人且偏向民主黨（少數黨），僅被轉至小組委員會後無進一步動作，屬於禁止性修法且非必過類別，通過機率略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">105-HR-107</span>
+<div class="btitle">To amend title 5, United States Code, to provide that the Civil Service Retirement and Disability Fund be excluded from the budget of the United States Government.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:23%"></span></div>
+  <div class="probtxt">通過機率 23.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">105-HR-107</span><a class="biglink" href="https://www.congress.gov/bill/105th-congress/house-bill/107" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">23.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">127 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=54 · D=72</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1997-01-15</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案為修法性質，將聯邦公務員退休與殘障基金排除於聯邦預算之外，不涉及具體撥款金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有127位兩黨共同提案人（72D/54R）顯示高度跨黨派支持，屬強烈正向訊號，但法案涉及預算記帳改變，屬於結構性改革類，歷史上此類CSRDF移出預算的提案多年屢次提出皆未通過，且僅被轉介至小組委員會無進一步markup動作，整體略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">105-HR-3576</span>
+<div class="btitle">To amend title 31, United States Code, to prohibit the inclusion of legislative provisions and nonemergency spending in emergency appropriation laws.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:16%"></span></div>
+  <div class="probtxt">通過機率 16.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">105-HR-3576</span><a class="biglink" href="https://www.congress.gov/bill/105th-congress/house-bill/3576" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">16.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1998-03-31</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為程序性修法，禁止在緊急撥款法案中夾帶立法條款或非緊急支出，本身不涉及任何金額或授權。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：無任何共同提案人、僅轉入次級委員會且無後續動作，屬冷門程序改革法案，成功機率低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">105-HR-2956</span>
+<div class="btitle">Biennial Budgeting and Appropriations Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:18%"></span></div>
+  <div class="probtxt">通過機率 18.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">2 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">105-HR-2956</span><a class="biglink" href="https://www.congress.gov/bill/105th-congress/house-bill/2956" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">18.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">2 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=2</span></div>
+  <div><span class="k">總預算</span><span class="v">— (2 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1997-11-18</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為預算程序改革法案，將聯邦預算與撥款改為兩年一期的雙年度循環，屬程序性規範，無具體撥款金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：預算程序改革類法案歷來難以通過，多次嘗試皆失敗；僅2位同黨(民主黨)共同提案人、缺乏兩黨支持，且被多個委員會分審增加通過障礙，略為下調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-3282</span>
+<div class="btitle">Panama Canal Commission Authorization Act, Fiscal Year 1997</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:4%"></span></div>
+  <div class="probtxt">通過機率 3.5%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">1 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-3282</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/3282" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Transportation and Public Works</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">3.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">1 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=1</span></div>
+  <div><span class="k">總預算</span><span class="v">— (1 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1996-04-26</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為1997財年巴拿馬運河委員會授權法案，授權必要支出但摘要未列具體金額，屬授權性質非撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖屬年度授權類法案（正向），但僅1位民主黨共同提案人、缺乏兩黨支持，且被多個委員會及小組委員會分流處理，顯示推進動能不足，略為下調。</div>
+<div class="progs"><div class="row"><span class="nm">Panama Canal Commission operations, maintenance, improvement, and administration<span class="hint">（運河營運與基礎設施）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-3379</span>
+<div class="btitle">To amend chapter 11 of title 31, United States Code, to require that each President's budget submission to Congress include a detailed plan to achieve a balanced Federal budget, and for other purposes.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:20%"></span></div>
+  <div class="probtxt">通過機率 19.5%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">6 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-3379</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/3379" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">19.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -1%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">11 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=6 · D=5</span></div>
+  <div><span class="k">總預算</span><span class="v">— (6 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1996-05-03</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為程序性法案，要求總統每年提交可達成平衡預算之六年計畫，並修改眾議院規則禁止審議不平衡之預算決議。本身不涉及任何撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有11位兩黨共同提案人（R6/D5）為正向訊號，但平衡預算計畫類修法長期難以通過，且僅停留在小組委員會分派階段、無markup或黨領袖推動，整體僅略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-3392</span>
+<div class="btitle">Intelligence Budget Accountability Act of 1996</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:12%"></span></div>
+  <div class="probtxt">通過機率 12.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-3392</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/3392" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">12.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">46 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=45</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1996-05-08</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅要求總統在年度預算中公開情報活動撥款金額，屬程序性透明度規範，未涉及實際撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有46位共同提案人，但全為民主黨且無任何共和黨支持，在共和黨主導的第104屆國會中缺乏跨黨派動能；情報預算透明化屬高度爭議議題，僅停留在小組委員會層級，通過機率偏低。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-3235</span>
+<div class="btitle">Office of Government Ethics Authorization Act of 1996</div>
+<div class="bstage">
+  <span class="pill stage signed">已簽署</span>
+  <div class="probbar hi"><span style="width:98%"></span></div>
+  <div class="probtxt">通過機率 98.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-3235</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/3235" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">已簽署</span></div>
+  <div><span class="k">通過機率</span><span class="v">98.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 100% + 調整 +0%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">1 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1996-08-06</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為授權法案，延長對政府倫理辦公室(OGE)的撥款授權，但摘要中未提及具體金額或年限。實際撥款需依後續撥款法案決定。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：法案已於1996年8月6日由總統簽署成為公法第104-179號，已完成立法程序，基準通過率100%無需調整。</div>
+<div class="progs"><div class="row"><span class="nm">Office of Government Ethics (OGE) 授權撥款延長<span class="hint">（政府行政/倫理監督）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-3619</span>
+<div class="btitle">To provide off-budget treatment for the land and water conservation fund.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:15%"></span></div>
+  <div class="probtxt">通過機率 14.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-3619</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/3619" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Environmental Protection</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">14.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">5 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=4</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1996-06-17</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案為預算程序調整，將土地與水資源保育基金改為預算外處理，不涉及具體撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：多重委員會轉介（Resources、Budget、Government Reform）增加程序複雜度，且僅5位共同提案人規模偏小，兩黨組成失衡（以民主黨為主但在共和黨控制的第104屆國會中），預算處理類法案在委員會層級常被擱置。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-1516</span>
+<div class="btitle">Balanced Budget Enforcement Act of 1995</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:5%"></span></div>
+  <div class="probtxt">通過機率 4.5%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">7 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-1516</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/1516" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">4.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">7 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=7</span></div>
+  <div><span class="k">總預算</span><span class="v">— (7 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-10-25</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為預算執行程序法案，設定1996-2002年赤字削減目標與可裁量支出上限，並非實際撥款法案，無具體總金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：七位共同提案人全為民主黨，在共和黨控制的1995年國會中屬少數黨單方推動，缺乏兩黨支持；雖已分派至多個小組委員會但無實質markup或報告動作，通過機會低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-1302</span>
+<div class="btitle">Capital Budget Commission Act of 1995</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:23%"></span></div>
+  <div class="probtxt">通過機率 23.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-1302</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/1302" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">23.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">20 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=19</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-03-24</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為設立資本預算委員會的研究性法案，僅授權撥款而未指定具體金額，屬授權性質而非實際撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有20位共同提案人，但幾乎全為民主黨（19D vs 1R），而當時眾議院由共和黨掌控，缺乏跨黨派支持；且僅被轉交至小組委員會，無實質進展跡象，略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-567</span>
+<div class="btitle">To require that the President transmit to Congress, that the congressional Budget Committees report, and that the Congress consider a balanced budget for each fiscal year.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:4%"></span></div>
+  <div class="probtxt">通過機率 3.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-567</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/567" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">3.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">3 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=3</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-04-27</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案為程序性規定，要求總統及國會預算委員會提交平衡預算，並不涉及任何具體撥款或授權金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此為程序性平衡預算要求法案，雖在共和黨多數的104屆國會下預算議題受重視，但僅3位民主黨共同提案人、無跨黨派支持，且長期停滯於多個小組委員會無進一步動作，通過前景黯淡。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-1131</span>
+<div class="btitle">Balanced Budget/Spending Limitation Act of 1995</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:6%"></span></div>
+  <div class="probtxt">通過機率 6.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">7 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-1131</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/1131" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">6.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">8 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=8 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">— (7 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-04-27</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為預算程序改革法案，設定聯邦支出佔GDP比例上限（FY1996的21.5%降至FY2002的19%）並要求FY2002前赤字歸零，非實際撥款或授權特定金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖為共和黨多數院中由共和黨議員推動的預算平衡法案，但8位共同提案人全為共和黨、缺乏兩黨支持，且被分派至三個委員會（Budget、Rules、Government Reform），協調難度高，歷史上此類憲法修正/支出限制法案鮮少通過，略為下調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-767</span>
+<div class="btitle">Federal Budget Structure Act of 1995</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:2%"></span></div>
+  <div class="probtxt">通過機率 2.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-767</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/767" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Economics and Public Finance</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">2.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">1 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=1</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-02-13</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為預算結構改革法案，要求總統提交的預算區分為營運預算與資本預算，屬程序性規範，未編列具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：僅有1位民主黨共同提案人，在共和黨主導的104屆國會缺乏兩黨支持；且法案被分派至多個委員會與小組委員會，增加通過難度，無任何markup或favorable report跡象。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">104-HR-1412</span>
+<div class="btitle">To require the Director of the Office of Management and Budget to develop and implement a system for determining and reporting the number of individuals employed by non-Federal Government entities providing services under contracts awarded by executive branch agencies.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:15%"></span></div>
+  <div class="probtxt">通過機率 14.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">104-HR-1412</span><a class="biglink" href="https://www.congress.gov/bill/104th-congress/house-bill/1412" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">14.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">3 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=2</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">1995-04-07</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅要求OMB建立並實施一套系統以追蹤聯邦服務契約下非聯邦雇員人數並年度報告國會，屬行政管理性質，未涉及具體預算金額或撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖已轉交小組委員會顯示輕微進展，但此類政府管理報告法案鮮少通過，且提案人僅3位、黨派規模有限，缺乏領袖推動，故略為下調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">119-HRES-1096</span>
+<div class="btitle">Providing for consideration of the bill (H.R. 4213) making appropriations for the Department of Homeland Security for the fiscal year ending September 30, 2026, and for other purposes.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:16%"></span></div>
+  <div class="probtxt">通過機率 16.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">1 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">119-HRES-1096</span><a class="biglink" href="https://www.congress.gov/bill/119th-congress/house-resolution/1096" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Congress</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">16.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">— (1 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2026-03-18</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為程序性決議 (H.Res.)，授權眾議院審議 H.R. 4213 國土安全部 2026 財年撥款法案本身。決議文未列出具體金額，實際預算須參考 H.R. 4213 本文與 CBO 估算。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此為規則委員會的程序性決議（rule resolution），通常由多數黨主導且走快速通道，但目前尚在Rules Committee且由少數黨（DeLauro）發起discharge petition，顯示多數黨領導層無意推進，反而成為少數黨施壓工具，成功機率偏低。</div>
+<div class="progs"><div class="row"><span class="nm">Department of Homeland Security Appropriations FY2026<span class="hint">（國土安全、邊境管理、海關、移民執法、網路安全）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">112-HR-345</span>
+<div class="btitle">District of Columbia Budget Autonomy Act of 2011</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:3%"></span></div>
+  <div class="probtxt">通過機率 3.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">112-HR-345</span><a class="biglink" href="https://www.congress.gov/bill/112th-congress/house-bill/345" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">3.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">2 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=2</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2011-02-08</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案為制度性改革，賦予華府特區預算自主權，取消聯邦對其地方預算流程與短期借款的管控，並無具體金額或撥款內容。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：DC預算自治類法案長期遭共和黨主導的眾院阻擋，無兩黨共同提案人（僅2位民主黨人）且僅被轉入小組委員會，無實質進展跡象，應在已偏低的基準上略微下調。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">112-HR-3002</span>
+<div class="btitle">District of Columbia Fiscal Year 2012 Local Funds Continuation Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:2%"></span></div>
+  <div class="probtxt">通過機率 2.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">1 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">112-HR-3002</span><a class="biglink" href="https://www.congress.gov/bill/112th-congress/house-bill/3002" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Government Operations and Politics</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">2.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">— (1 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2011-10-03</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為哥倫比亞特區2012財年地方資金延續撥款法案，授權在正式撥款法案通過前依FY2012預算請求法案的運作水準動支地方資金，未指明具體總額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：該法案無任何共同提案人，且僅停留在小組委員會層級，缺乏跨黨派支持訊號；雖屬DC財政延續性質具一定需要性，但2011年類似獨立DC法案多被納入更大撥款案而未單獨通過。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">112-HR-3614</span>
+<div class="btitle">Achievement Through Technology and Innovation Reauthorization Act of 2011</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:18%"></span></div>
+  <div class="probtxt">通過機率 18.5%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">6 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">112-HR-3614</span><a class="biglink" href="https://www.congress.gov/bill/112th-congress/house-bill/3614" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">18.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">5 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=5</span></div>
+  <div><span class="k">總預算</span><span class="v">— (6 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2012-03-29</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，重新授權 ESEA Title II Part D 至 2017 財年，未明列具體金額，實際撥款須待後續撥款法案。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖已被轉至小組委員會顯示略有進展，但5位共同提案人全為民主黨、在共和黨控制的眾議院中缺乏兩黨支持，且再授權教育科技法案在第112屆國會並非優先事項，通過機率低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">Subpart 1 - State and Local Grants (Formula subgrants for teaching and learning through technology)<span class="hint">（教育科技）</span></span><span class="amt">—</span></div><div class="row"><span class="nm">Subpart 1 - Competitive subgrants for systemic school redesign through technology integration<span class="hint">（教育科技）</span></span><span class="amt">—</span></div><div class="row"><span class="nm">Subpart 2 - State Competitive Grants (online/blended learning, curricula redesign)<span class="hint">（教育科技）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">113-HR-209</span>
+<div class="btitle">To authorize the appropriation of funds to be used to recruit, hire, and train 100,000 new classroom paraprofessionals in order to improve educational achievement for children.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:16%"></span></div>
+  <div class="probtxt">通過機率 16.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">113-HR-209</span><a class="biglink" href="https://www.congress.gov/bill/113th-congress/house-bill/209" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">16.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2013-04-23</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案僅授權撥款以招募、聘用與培訓10萬名教室輔助人員，未明列具體金額，屬授權性質而非實際撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此法案無任何共同提案人，且為民主黨式大額支出提案在共和黨控制的眾議院中提出，僅被下轉至小組委員會後無進一步動作，通過機率應低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">Recruit, hire, and train 100,000 new classroom paraprofessionals<span class="hint">（教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-1107</span>
+<div class="btitle">Full Funding for IDEA Now Act of 2005</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:22%"></span></div>
+  <div class="probtxt">通過機率 22.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-1107</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/1107" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">22.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">42 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=40</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2005-04-18</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案修訂IDEA法，將B部分對各州身心障礙兒童教育補助改為強制性最低撥款，金額依現行公式之最高授權水準決定，但摘要未列出具體金額。屬授權性質而非實際撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有42位共同提案人顯示一定關注度，但幾乎全為民主黨（40D vs 1R），在共和黨掌控的眾議院屬於少數黨法案，且僅被轉交至小組委員會無進一步動作，IDEA全額撥款類法案長年未能通過，通過機率應略低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA Part B State Grants (Mandatory Minimum Funding)<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-353</span>
+<div class="btitle">To authorize the Secretary of the Interior to provide supplemental funding and other services that are necessary to assist certain local school districts in the State of California in providing educational services for students attending schools located within Yosemite National Park, to authorize the Secretary of the Interior to adjust the boundaries of the Golden Gate National Recreation Area, and for other purposes.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:2%"></span></div>
+  <div class="probtxt">通過機率 2.0%</div>
+</div>
+<div class="bamt">$1.6M<div style="font-size:10.5px;color:var(--mu);font-weight:500">4 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-353</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/353" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Public Lands and Natural Resources</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">2.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">$1.6M (4 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2005-04-29</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，授權內政部於2006-2009年每年最多撥款40萬美元（四年合計上限160萬）支援優勝美地附近學區教育服務，並調整金門國家遊憩區邊界，後者無明確金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此法案無共同提案人，缺乏兩黨支持訊號，且被分派至多個委員會增加通過難度；雖屬地方性國家公園事務較無爭議，但僅停留於小組委員會層級，無積極推進跡象。</div>
+<div class="progs"><div class="row"><span class="nm">Yosemite local school districts educational services (Bass Lake Joint Union & Mariposa Unified)<span class="hint">（教育服務）</span></span><span class="amt">$1.6M</span></div><div class="row"><span class="nm">Golden Gate National Recreation Area boundary adjustment (Rancho Corral de Tierra)<span class="hint">（國家公園/土地管理）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-1853</span>
+<div class="btitle">To ensure that the total amount of funds awarded to a State under part A of title I of the Elementary and Secondary Education Act of 1965 for each of fiscal years 2005 and 2006 is not less than the total amount of funds awarded to the State under such part for fiscal year 2003.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:14%"></span></div>
+  <div class="probtxt">通過機率 14.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">2 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-1853</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/1853" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">14.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">2 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=1 · D=1</span></div>
+  <div><span class="k">總預算</span><span class="v">— (2 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2005-05-17</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案為授權性質，要求各州於 2005、2006 財年 Title I Part A 獲得不低於 2003 年的金額，並補發差額，但法案本身未載明具體總金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有極少數兩黨共同提案人，但僅 2 位規模太小無明顯助力；且此為 ESEA 單州保底撥款的狹窄修法，非年度必過法案，已被再次轉至小組委員會後無後續動作，通過機會略低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">ESEA Title I Part A - Improving Basic Programs Operated by Local Educational Agencies (hold-harmless supplementary payments)<span class="hint">（教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-3145</span>
+<div class="btitle">Mandatory IDEA Full Funding Compromise Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:28%"></span></div>
+  <div class="probtxt">通過機率 28.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">7 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-3145</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/3145" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">28.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 +3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">79 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=24 · D=54</span></div>
+  <div><span class="k">總預算</span><span class="v">— (7 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2005-08-10</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案同時授權與撥款 IDEA Part B 經費，分階段提升至聯邦承諾的 40% 補助比例，但摘要未列出具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有79位兩黨共同提案人（含24位共和黨人）屬強烈跨黨派訊號，但IDEA全額撥款強制化長期遭共和黨領導層及預算委員會抵制，已被轉入小組委員會後無後續markup動作，通過機率僅略高於基準。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA Part B - Education of Children with Disabilities (FY2006-FY2012)<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-5106</span>
+<div class="btitle">To amend the National Science Foundation Authorization Act of 2002 to authorize grants for Partnerships for Access to Laboratory Science (PALS).</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:22%"></span></div>
+  <div class="probtxt">通過機率 22.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-5106</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/5106" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Science, Technology, Communications</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">22.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">48 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=2 · D=46</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2006-05-24</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，授權 NSF 設立 PALS 補助計畫以改善中學實驗室與科學儀器，但摘要未提供具體金額或實施年限。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：共同提案人雖多但幾乎全為民主黨（46D vs 2R），在共和黨控制的第109屆國會屬少數黨法案，且被分派至多重委員會與子委員會顯示推進困難，小幅下調。</div>
+<div class="progs"><div class="row"><span class="nm">Partnerships for Access to Laboratory Science (PALS) Grants<span class="hint">（教育/實驗室設備/科學儀器）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-4793</span>
+<div class="btitle">To make available funds included in the Deficit Reduction Act of 2005 for the Low-Income Home Energy Assistance Act of 1981 program for fiscal year 2006, and for other purposes.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:30%"></span></div>
+  <div class="probtxt">通過機率 30.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">1 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-4793</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/4793" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Social Welfare</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">30.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 +5%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">41 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=15 · D=25</span></div>
+  <div><span class="k">總預算</span><span class="v">— (1 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2006-05-01</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案修改2005年赤字削減法，將LIHEAP撥款年度從2007財年提前至2006財年，屬撥款性質但摘要未明載具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：41位共同提案人且具兩黨性質（15R/25D）為正向訊號，但法案被分配至多個委員會並下放至小組委員會後無進一步markup動作，顯示推進動能有限，僅能小幅上調。</div>
+<div class="progs"><div class="row"><span class="nm">Low-Income Home Energy Assistance Program (LIHEAP)<span class="hint">（低收入家庭能源補助）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">109-HR-4785</span>
+<div class="btitle">To make available funds included in the Deficit Reduction Act of 2005 for the Low-Income Home Energy Assistance Act of 1981 program for fiscal year 2006, and for other purposes.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:2%"></span></div>
+  <div class="probtxt">通過機率 2.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">1 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">109-HR-4785</span><a class="biglink" href="https://www.congress.gov/bill/109th-congress/house-bill/4785" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Social Welfare</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">2.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">— (1 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2006-05-01</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案修訂2005年赤字削減法，將LIHEAP撥款年度由FY2007提前至FY2006，並取消一次性支出限制；摘要未明列具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：無任何共同提案人，缺乏兩黨支持訊號；雖涉及LIHEAP資金使用屬常見議題，但被多重委員會及小組委員會分派後無進一步行動，顯示推進動能不足。</div>
+<div class="progs"><div class="row"><span class="nm">Low-Income Home Energy Assistance Program (LIHEAP)<span class="hint">（低收入家庭能源補助）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-737</span>
+<div class="btitle">Mandatory IDEA Full Funding Act of 2001</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:22%"></span></div>
+  <div class="probtxt">通過機率 22.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-737</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/737" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">22.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">76 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=29 · D=45</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-04-20</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為授權性質，修訂IDEA以要求聯邦對各州特殊教育補助達最低法定水準，但摘要未列明具體金額或年限。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有76位兩黨共同提案人（含29位共和黨）顯示跨黨派支持，但法案僅停留於小組委員會層級無後續markup動作，且強制性全額撥款IDEA類法案歷史上極難通過，整體仍偏低。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA State Grants for Education of Children with Disabilities<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-835</span>
+<div class="btitle">IDEA Full Funding Act of 2001</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:23%"></span></div>
+  <div class="probtxt">通過機率 23.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-835</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/835" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">23.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">42 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=27 · D=15</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-04-20</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，旨在達成聯邦政府補助各州特殊教育每生平均支出40%的目標，摘要未提供具體金額與年限。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有42位兩黨共同提案人（含27位共和黨、15位民主黨）顯示一定的跨黨派支持，但IDEA全額撥款類法案歷年屢次提出均未通過，且僅推進至小組委員會層級，無markup或報告出委會之跡象，正負因子大致相抵略偏負面。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA Part B - Assistance for Education of All Children with Disabilities<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-637</span>
+<div class="btitle">English Language Acquisition Funding Fairness Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:6%"></span></div>
+  <div class="probtxt">通過機率 5.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-637</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/637" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">5.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">7 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=7 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-03-29</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅修改 ESEA 條文，取消雙語教育補助中特定教學計畫的資金上限，不涉及具體撥款金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有7位共同提案人但全為共和黨（無跨黨派支持），且法案已被轉至小組委員會後無後續動作，顯示停滯；此類教育撥款公平法案歷史通過率偏低，略下調。</div>
+<div class="progs"><div class="row"><span class="nm">Special Alternative Instructional Programs for Limited English Proficient Students<span class="hint">（教育服務）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-659</span>
+<div class="btitle">To authorize appropriations for part B of the Individuals with Disabilities Education Act to achieve full funding for part B of that Act by 2006.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:38%"></span></div>
+  <div class="probtxt">通過機率 38.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">4 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-659</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/659" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">38.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">47 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=11 · D=36</span></div>
+  <div><span class="k">總預算</span><span class="v">— (4 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-04-05</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權法案，目標於2006年前達成IDEA Part B全額撥款（聯邦負擔全國平均每生支出之40%），摘要僅提及FY2002-2005授權撥款但未列具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有47位共同提案人且具跨黨派支持（11R/36D），但以民主黨為主、共和黨控制眾議院下推動授權全額IDEA撥款屬於常見但難以通過的政策主張，僅轉至小組委員會且無markup安排，維持接近基準。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA Part B - Assistance for Education of All Children with Disabilities<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-714</span>
+<div class="btitle">To amend the Individuals with Disabilities Education Act to provide that certain funds treated as local funds under that Act shall be used to provide additional funding for programs under the Elementary and Secondary Education Act of 1965.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:23%"></span></div>
+  <div class="probtxt">通過機率 23.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-714</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/714" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">23.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">42 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=3 · D=39</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-04-05</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅為修改 IDEA 條文中地方教育機構對特定資金之使用規範，要求轉列為地方資金者須用於 ESEA 計畫，未涉及具體金額或撥款授權。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有42位共同提案人顯示一定關注度，但高度偏向少數黨（D=39 vs R=3），在共和黨控制的眾議院中難獲推進；且僅被轉至小組委員會，無markup或favorable report等進展訊號，略低於基準。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-1527</span>
+<div class="btitle">Flexibility to Increase IDEA Funding Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:6%"></span></div>
+  <div class="probtxt">通過機率 6.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-1527</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/1527" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">6.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">8 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=8 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-06-27</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此法案僅授權州與地方教育機構將ESEA及Perkins法案下的經費轉撥至IDEA特殊教育計畫，未編列新預算金額，屬於彈性授權性質。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有8位共同提案人，但全為共和黨無民主黨支持，缺乏兩黨合作訊號；法案僅被轉交至小組委員會，無 markup 或 reported 動作，且IDEA資金調整類法案歷史上極少單獨通過，通常併入更大教育法案。</div>
+<div class="progs"><div class="row"><span class="nm">Transfer authority to IDEA special education programs<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-1250</span>
+<div class="btitle">Native Hawaiian Education Reauthorization Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:18%"></span></div>
+  <div class="probtxt">通過機率 17.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-1250</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/1250" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">17.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">1 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=1</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-06-20</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權再授權法案(reauthorization)，僅延長原住民夏威夷人教育計畫之撥款授權，未指明具體金額或年限，實際撥款需另行立法。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：僅1位民主黨共同提案人、缺乏兩黨支持，且停留在小組委員會無後續動作；雖屬再授權類法案略有利，但整體動能不足，略低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">Native Hawaiian Education Program<span class="hint">（教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-1330</span>
+<div class="btitle">Helping Children Succeed by Fully Funding the Individuals with Disabilities Education Act (IDEA)</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:29%"></span></div>
+  <div class="probtxt">通過機率 29.0%</div>
+</div>
+<div class="bamt">—<div style="font-size:10.5px;color:var(--mu);font-weight:500">6 年</div></div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#dbeafe;color:#1e3a8a;margin-left:6px">撥款</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-1330</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/1330" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">29.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 +4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">73 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=36 · D=37</span></div>
+  <div><span class="k">總預算</span><span class="v">— (6 年)</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-06-20</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：法案同時授權並撥款 IDEA Part B 計畫，實施期間為 FY2002 至 FY2007 共六年，但摘要未提供具體金額。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有73位共同提案人且兩黨人數幾乎均衡（R36/D37），為強正向訊號，但該法案已被推入次級委員會且無後續動作，107屆國會最終未有進展，全額撥款IDEA的類似提案歷史上皆未通過，因此僅小幅上調。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA Part B - Assistance for Education of All Children with Disabilities<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-1625</span>
+<div class="btitle">Samuel Kelner Commission on Youth Authorization Act</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:1%"></span></div>
+  <div class="probtxt">通過機率 1.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-1625</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/1625" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Families</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">1.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">0 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=0</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-06-20</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案僅設立青年委員會以研議政策建議，屬政策宣示與授權性質，摘要中未提及具體預算金額或撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：法案無任何共同提案人，缺乏跨黨派支持，且已被轉入次級小組委員會後超過數月無進一步行動，顯示推進動能低落，應下調通過機率。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">107-HR-1829</span>
+<div class="btitle">Full Funding for IDEA Now Act of 2001</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:6%"></span></div>
+  <div class="probtxt">通過機率 6.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">107-HR-1829</span><a class="biglink" href="https://www.congress.gov/bill/107th-congress/house-bill/1829" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">6.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">9 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=9</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2001-07-16</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權性修法，要求聯邦對各州 IDEA 補助達到特定最低水準，未列具體金額，實際撥款仍須後續撥款法案。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有9位共同提案人，但全為民主黨且眾議院由共和黨掌控，缺乏跨黨派支持；IDEA全額撥款議題長年被提出但鮮少通過，加上僅停留在小組委員會層級，通過機率略低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">IDEA State Grants for Education of Children with Disabilities<span class="hint">（特殊教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">111-HR-178</span>
+<div class="btitle">To authorize the appropriation of funds to be used to recruit, hire, and train 100,000 new classroom paraprofessionals in order to improve educational achievement for children.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:16%"></span></div>
+  <div class="probtxt">通過機率 16.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">111-HR-178</span><a class="biglink" href="https://www.congress.gov/bill/111th-congress/house-bill/178" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">16.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -4%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">1 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=0 · D=1</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2009-03-16</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為授權性法案，授權撥款以招募、聘用及培訓10萬名課堂助理人員，但未列出具體金額，實際撥款須待後續撥款法案。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：法案僅有1位同黨共同提案人、無兩黨支持，且被分派至兩個小組委員會後無後續行動，屬授權新支出的單一議員法案，通過機率低於基準。</div>
+<div class="progs"><div class="row"><span class="nm">Recruit, hire, and train 100,000 new classroom paraprofessionals<span class="hint">（教育）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">111-HCONRES-96</span>
+<div class="btitle">Recognizing the importance of autism awareness, supporting efforts to increase funding for research into the causes and treatment of autism and to improve training and support for individuals with autism and those who care for individuals with autism.</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar lo"><span style="width:16%"></span></div>
+  <div class="probtxt">通過機率 16.0%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">111-HCONRES-96</span><a class="biglink" href="https://www.congress.gov/bill/111th-congress/house-concurrent-resolution/96" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Health</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">16.0%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -3%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">8 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=3 · D=5</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2009-05-14</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：此為政策宣示性決議案，僅表達對自閉症研究、教育與服務經費的支持立場，未編列任何具體金額或授權撥款。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：此為無約束力的表彰性決議案，雖具兩黨共同提案人支持（5D/3R），但被分派至三個委員會且已下轉至小組委員會，推進動能薄弱，典型此類決議多停滯於委員會。</div>
+
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details><details class="bill">
+<summary>
+<span class="bid">111-HR-2280</span>
+<div class="btitle">Fair Funding for Schools Act of 2009</div>
+<div class="bstage">
+  <span class="pill stage referred">交付委員會</span>
+  <div class="probbar mi"><span style="width:23%"></span></div>
+  <div class="probtxt">通過機率 22.5%</div>
+</div>
+<div class="bamt">—</div>
+<div class="balpha"><div class="num lo">—</div><div class="lbl">TOP α (bp)</div></div>
+</summary>
+<div class="detail">
+<div class="block">
+<h4>📋 法案詳情 <span class="pill" style="background:#fef3c7;color:#b45309;margin-left:6px">授權</span></h4>
+<div class="kv">
+  <div><span class="k">Bill ID</span><span class="v">111-HR-2280</span><a class="biglink" href="https://www.congress.gov/bill/111th-congress/house-bill/2280" target="_blank" rel="noopener">Congress.gov ↗</a></div>
+  <div><span class="k">政策領域</span><span class="v">Education</span></div>
+  <div><span class="k">當前階段</span><span class="v">交付委員會</span></div>
+  <div><span class="k">通過機率</span><span class="v">22.5%</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">= 基準 5% + 調整 -2%</span></div>
+  <div><span class="k">共同提案人</span><span class="v">19 位</span>
+    <span style="font-size:11px;color:var(--mu);margin-left:6px">R=5 · D=14</span></div>
+  <div><span class="k">總預算</span><span class="v">—</span></div>
+  <div><span class="k">最近行動</span><span class="v" style="font-size:11.5px">2009-06-04</span></div>
+</div>
+<div class="notes"><b>Claude 判讀</b>：本法案為授權法案，修改 Impact Aid 計畫公式並再授權撥款，但未於摘要中提供具體金額或年限。</div>
+<div class="notes" style="border-left-color:var(--am)"><b>通過機率依據</b>：雖有19位共同提案人且具兩黨色彩（5R/14D），但法案僅停留在小組委員會層級，無markup或其他推進動作，教育類一般法案在此階段通過機率極低，稍作下調。</div>
+<div class="progs"><div class="row"><span class="nm">Impact Aid - Federal Property Payments<span class="hint">（教育）</span></span><span class="amt">—</span></div><div class="row"><span class="nm">Impact Aid - Federally-Connected Children Payments<span class="hint">（教育）</span></span><span class="amt">—</span></div><div class="row"><span class="nm">Impact Aid - Construction Payments (軍眷與印地安保留地學區)<span class="hint">（教育/基礎建設）</span></span><span class="amt">—</span></div><div class="row"><span class="nm">Emergency Repair and Modernization Grants<span class="hint">（教育/基礎建設）</span></span><span class="amt">—</span></div></div>
+</div>
+<div class="block"><h4>🏢 受惠公司</h4><div class="empty" style="padding:20px">Claude 未對此法案產出公司映射（可能因無具體金額或政策方向過於廣泛）</div></div>
+</div>
+</details></div>
+</div>
+<div class="ft">資料來源：Congress.gov API · Claude Opus 4.7 判讀 · Yahoo Finance（yfinance） ｜ 僅供研究參考，不構成投資建議</div>
+</body></html>
