@@ -70,15 +70,24 @@ GIANTS = [
 # ── 供應鏈 buckets（由上游至下游）────────────────────────────────────────
 BUCKETS = [
     # (key, label, role, [symbols])
-    ("equipment", "半導體設備", "最上游", ["ASML", "AMAT", "LRCX", "KLAC"]),
-    ("eda",       "EDA 工具",   "晶片設計", ["SNPS", "CDNS"]),
-    ("foundry",   "晶圓代工",   "製造核心", ["TSM"]),
-    ("ai_chip",   "AI 晶片",    "運算核心", ["NVDA", "AVGO", "AMD", "MRVL", "QCOM"]),
-    ("hbm",       "HBM / 記憶體", "運算配套", ["MU", "WDC", "STX"]),
-    ("network",   "網通 / 光通訊", "資料中心連結", ["ANET", "LITE", "COHR", "CIEN", "CSCO"]),
-    ("power",     "電源 / 散熱 / 伺服器", "資料中心基建", ["VRT", "ETN", "SMCI", "DELL", "HPE"]),
-    ("cloud_saas", "雲端 / 企業 SaaS", "下游平台", ["ORCL", "CRM", "NOW", "SNOW", "PLTR"]),
-    ("ai_app",    "AI 應用層", "終端應用", ["ADBE", "IBM", "AI", "PATH", "CRWD", "PANW"]),
+    ("equipment", "半導體設備", "最上游",
+        ["ASML", "AMAT", "LRCX", "KLAC", "TOELY", "ONTO", "ENTG"]),
+    ("eda",       "EDA 工具",   "晶片設計",
+        ["SNPS", "CDNS", "ANSS"]),
+    ("foundry",   "晶圓代工",   "製造核心",
+        ["TSM", "GFS", "UMC"]),
+    ("ai_chip",   "AI 晶片",    "運算核心",
+        ["NVDA", "AVGO", "AMD", "MRVL", "QCOM", "INTC"]),
+    ("hbm",       "HBM / 記憶體", "運算配套",
+        ["MU", "WDC", "STX", "SIMO"]),
+    ("network",   "網通 / 光通訊", "資料中心連結",
+        ["ANET", "LITE", "COHR", "CIEN", "CSCO", "VIAV", "AXTI", "FN", "EXTR"]),
+    ("power",     "電源 / 散熱 / 伺服器", "資料中心基建",
+        ["VRT", "ETN", "SMCI", "DELL", "HPE", "APH"]),
+    ("cloud_saas", "雲端 / 企業 SaaS", "下游平台",
+        ["ORCL", "CRM", "NOW", "SNOW", "PLTR", "DDOG", "MDB"]),
+    ("ai_app",    "AI 應用層", "終端應用",
+        ["ADBE", "IBM", "AI", "PATH", "CRWD", "PANW"]),
 ]
 
 # 每個巨頭在哪些 bucket 有重要依賴（強度 1-3）
@@ -1060,6 +1069,169 @@ def compute_capex_groups(fmp_map):
     return out
 
 
+# ── Alpha Scoring Model ─────────────────────────────────────────────────
+
+# 6 個子分數，各 0-10，加權平均 × 10 = 0-100 分
+ALPHA_WEIGHTS = {
+    "fundamental": 0.25,   # 紅黃綠燈分數
+    "momentum":    0.20,   # 60 日報酬 universe 排名
+    "technical":   0.15,   # MA + RSI
+    "capex_align": 0.15,   # 若屬於 Capex 受惠 bucket
+    "analyst":     0.15,   # 目標價上行 + 買進評級
+    "signals":     0.10,   # 連續訊號
+}
+
+
+def _rank_pct(value, all_values):
+    """計算 value 在 all_values 中的 percentile（0-1）。"""
+    if value is None:
+        return 0.5
+    sorted_vals = sorted([v for v in all_values if v is not None])
+    if not sorted_vals:
+        return 0.5
+    below = sum(1 for v in sorted_vals if v < value)
+    return below / len(sorted_vals)
+
+
+def compute_alpha_scores(stocks, capex_groups, signals, stock_to_bucket):
+    """給每檔個股算 alpha = 0-100 分。回傳 {sym: {alpha, components, tier}}。"""
+    # 收集 universe 60 日報酬用於排序
+    universe_60d = [(s.get("tech") or {}).get("pct_60d") for s in stocks.values()]
+
+    # 哪些 bucket 受惠於 Capex 上升（YoY > 10）
+    capex_benefit_buckets = set()
+    for g in (capex_groups or []):
+        yoy = g.get("yoy_pct")
+        if yoy is not None and yoy > 5:
+            capex_benefit_buckets.update(g["benefit_buckets"])
+
+    out = {}
+    for sym, s in stocks.items():
+        tech = s.get("tech") or {}
+        lights = s.get("lights") or {}
+        grades = s.get("grades") or {}
+        pt = s.get("price_target") or {}
+
+        # 1. 基本面（紅黃綠燈 0-24 → 0-10）
+        fund = (s.get("score", 0) / max(s.get("score_max", 24), 1)) * 10
+
+        # 2. 動能（60d 報酬 percentile × 10）
+        pct_60d = tech.get("pct_60d")
+        momentum = _rank_pct(pct_60d, universe_60d) * 10
+
+        # 3. 技術面（MA50 + MA200 + RSI 合理）
+        tech_score = 0
+        if tech.get("above_ma50"):
+            tech_score += 3
+        if tech.get("above_ma200"):
+            tech_score += 3
+        rsi = tech.get("rsi")
+        if rsi is not None and 30 <= rsi <= 65:
+            tech_score += 4
+        elif rsi is not None and 65 < rsi <= 75:
+            tech_score += 2
+        # RSI >75 or <30 → 0 分
+
+        # 4. Capex 對齊
+        bucket_key = stock_to_bucket.get(sym)
+        capex_align = 10.0 if bucket_key in capex_benefit_buckets else 5.0 if capex_benefit_buckets else 0.0
+
+        # 5. 分析師面
+        analyst = 0
+        if pt.get("upside_pct") is not None:
+            u = pt["upside_pct"]
+            if u > 20:
+                analyst += 6
+            elif u > 10:
+                analyst += 4
+            elif u > 0:
+                analyst += 2
+        if grades:
+            total = sum((grades.get(k) or 0) for k in ("strong_buy", "buy", "hold", "sell", "strong_sell"))
+            buy_pct = (((grades.get("strong_buy") or 0) + (grades.get("buy") or 0)) / total * 100) if total else 0
+            if buy_pct > 70:
+                analyst += 4
+            elif buy_pct > 50:
+                analyst += 2
+        analyst = min(analyst, 10)
+
+        # 6. 連續訊號
+        sig = (signals or {}).get(sym) or {}
+        sig_score = 0
+        if sig.get("up_streak", 0) >= 3:
+            sig_score += 5
+        elif sig.get("up_streak", 0) == 2:
+            sig_score += 2
+        if sig.get("top3_streak", 0) >= 2:
+            sig_score += 5
+        if sig.get("down_streak", 0) >= 3:
+            sig_score -= 3
+        if sig.get("bottom3_streak", 0) >= 2:
+            sig_score -= 3
+        sig_score = max(0, min(10, sig_score + 5))  # 中性基準線 +5，範圍 0-10
+
+        # 加權合成
+        components = {
+            "fundamental": fund,
+            "momentum": momentum,
+            "technical": tech_score,
+            "capex_align": capex_align,
+            "analyst": analyst,
+            "signals": sig_score,
+        }
+        alpha = sum(components[k] * ALPHA_WEIGHTS[k] for k in ALPHA_WEIGHTS) * 10  # 0-100
+        # 分級
+        if alpha >= 70:
+            tier = "strong_buy"
+            tier_label = "強勢買進"
+        elif alpha >= 55:
+            tier = "buy"
+            tier_label = "買進"
+        elif alpha >= 40:
+            tier = "neutral"
+            tier_label = "觀望"
+        else:
+            tier = "weak"
+            tier_label = "弱勢"
+
+        out[sym] = {
+            "alpha": round(alpha, 1),
+            "components": {k: round(v, 1) for k, v in components.items()},
+            "tier": tier,
+            "tier_label": tier_label,
+            "capex_benefit": bucket_key in capex_benefit_buckets,
+        }
+    return out
+
+
+def compute_bucket_rankings(stocks, alpha_scores):
+    """對每個 bucket 內個股依 alpha 排序、標出 1/2/3 名。"""
+    rankings = {}
+    for key, label, role, syms in BUCKETS:
+        stocks_in_bucket = [
+            (sym, alpha_scores.get(sym, {}).get("alpha", 0))
+            for sym in syms if sym in stocks
+        ]
+        stocks_in_bucket.sort(key=lambda x: -x[1])
+        ranks = {}
+        for i, (sym, _) in enumerate(stocks_in_bucket):
+            if i == 0 and len(stocks_in_bucket) >= 2:
+                ranks[sym] = {"rank": 1, "medal": "🥇", "label": "領頭"}
+            elif i == 1 and len(stocks_in_bucket) >= 3:
+                ranks[sym] = {"rank": 2, "medal": "🥈", "label": "跟隨"}
+            elif i == 2 and len(stocks_in_bucket) >= 4:
+                ranks[sym] = {"rank": 3, "medal": "🥉", "label": "第三"}
+            elif i == len(stocks_in_bucket) - 1 and len(stocks_in_bucket) >= 4:
+                ranks[sym] = {"rank": -1, "medal": "🐌", "label": "落後"}
+            else:
+                ranks[sym] = {"rank": 0, "medal": "", "label": ""}
+        rankings[key] = {
+            "ordered": stocks_in_bucket,
+            "ranks": ranks,
+        }
+    return rankings
+
+
 # ── 歷史快照 ────────────────────────────────────────────────────────────
 
 def save_history_snapshot(stocks):
@@ -1341,13 +1513,57 @@ details.stock .lights-mini{display:flex;gap:2px;align-items:center}
 /* Sankey SVG */
 .sankey-wrap{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:10px;margin-bottom:16px;overflow-x:auto}
 .sankey-svg{width:100%;height:auto;min-width:920px}
-.sankey-svg path:hover{opacity:1 !important}
+.sankey-svg path.sankey-link{transition:opacity .15s, stroke-width .15s}
+.sankey-svg path.sankey-link:hover{opacity:1 !important}
+.sankey-svg path.sankey-link.active{opacity:1 !important}
+.sankey-svg path.sankey-link.dimmed{opacity:0.06 !important}
+.sankey-svg .sankey-node{transition:opacity .15s}
 .sankey-svg .sankey-node:hover rect{stroke:var(--bl);stroke-width:2}
+.sankey-svg .sankey-node.active rect{stroke:var(--bl);stroke-width:2.5}
+.sankey-svg .sankey-node.dimmed{opacity:0.3}
+.sankey-info-empty{text-align:center;font-size:11.5px;color:var(--mu);padding:8px 0;border-top:1px solid var(--brd);margin-top:6px}
+.sankey-info-active{padding:10px 14px;background:#f0f9ff;border:1px solid #bfdbfe;border-radius:8px;margin:8px 4px 0;font-size:12.5px;line-height:1.7}
+.sankey-info-active .si-head{font-weight:800;font-size:13.5px;color:#1e3a8a;margin-bottom:4px}
+.sankey-info-active .si-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:4px 14px;margin-top:6px}
+.sankey-info-active .si-grid .k{color:var(--mu);font-size:11.5px}
+.sankey-info-active .si-grid .v{font-weight:700;font-variant-numeric:tabular-nums}
 /* Backtest table */
 .bt-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .bt-table th{background:#f1f5f9;font-size:11px;color:var(--mu);font-weight:700;padding:8px 12px;text-transform:uppercase;text-align:left}
 .bt-table td{padding:8px 12px;font-size:12.5px;border-top:1px solid var(--brd)}
 .bt-table td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.tier-examples{font-size:10.5px;color:var(--mu);font-weight:500;margin-top:2px}
+/* Alpha panel */
+.alpha-wrap{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;margin-bottom:18px}
+.alpha-wrap h3{font-size:14px;font-weight:800;margin-bottom:10px}
+.alpha-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.alpha-card{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:10px 12px;position:relative;border-left:3px solid var(--bl)}
+.alpha-card.strong_buy{border-left-color:#15803d;background:linear-gradient(90deg,#dcfce7,#fff)}
+.alpha-card.buy{border-left-color:#16a34a;background:linear-gradient(90deg,#f0fdf4,#fff)}
+.alpha-card.neutral{border-left-color:#d97706}
+.alpha-card.weak{border-left-color:#dc2626;background:linear-gradient(90deg,#fef2f2,#fff)}
+.alpha-card .sym{font-size:12px;font-weight:700}
+.alpha-card .name{font-size:10px;color:var(--mu);margin-bottom:4px}
+.alpha-card .alpha-num{font-size:22px;font-weight:800;letter-spacing:-0.5px}
+.alpha-card .tier-label{font-size:10px;font-weight:700;padding:1.5px 7px;border-radius:10px;position:absolute;top:8px;right:10px}
+.alpha-card.strong_buy .tier-label{background:#15803d;color:#fff}
+.alpha-card.buy .tier-label{background:#86efac;color:#14532d}
+.alpha-card.neutral .tier-label{background:#fef3c7;color:#92400e}
+.alpha-card.weak .tier-label{background:#fee2e2;color:#b91c1c}
+.alpha-card .breakdown{font-size:9.5px;color:var(--mu);margin-top:4px;line-height:1.4}
+/* Bucket ranking medal */
+.rank-medal{font-size:11.5px;margin-right:4px}
+.rank-pill{font-size:10px;font-weight:700;padding:1.5px 5px;border-radius:4px;margin-right:4px}
+.rank-pill.r1{background:#fef3c7;color:#92400e}
+.rank-pill.r2{background:#e5e7eb;color:#374151}
+.rank-pill.r3{background:#fef3c7;color:#a16207;opacity:0.85}
+.rank-pill.r-laggard{background:#fee2e2;color:#991b1b}
+.alpha-pill{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:10px;min-width:46px;text-align:center}
+.alpha-pill.strong_buy{background:#15803d;color:#fff}
+.alpha-pill.buy{background:#dcfce7;color:#15803d}
+.alpha-pill.neutral{background:#fef3c7;color:#92400e}
+.alpha-pill.weak{background:#fee2e2;color:#b91c1c}
+.b-leader{font-size:10.5px;color:#92400e;background:#fef3c7;padding:2px 7px;border-radius:10px;font-weight:700;margin-left:6px}
 .empty-msg{color:var(--mu);font-size:12.5px;padding:10px 0;text-align:center}
 @media(max-width:768px){.hdr,.pane{padding-left:16px;padding-right:16px}.giants{grid-template-columns:repeat(2,1fr)}}
 """
@@ -1433,6 +1649,42 @@ def _news_age(ts_iso):
 
 # ── HTML 區塊 ───────────────────────────────────────────────────────────
 
+def _gen_alpha_panel(alpha_scores, stocks):
+    """Top alpha 排行 — 前 12 強。"""
+    if not alpha_scores:
+        return ""
+    items = [(sym, sc["alpha"], sc["tier"], sc["tier_label"], sc["components"]) for sym, sc in alpha_scores.items()]
+    items.sort(key=lambda x: -x[1])
+    top = items[:12]
+
+    # 分級統計
+    tier_counts = {"strong_buy": 0, "buy": 0, "neutral": 0, "weak": 0}
+    for _, _, t, _, _ in items:
+        tier_counts[t] += 1
+    stats = f'<div style="font-size:11.5px;color:var(--mu);margin-bottom:10px">共 {len(items)} 檔：<b style="color:#15803d">{tier_counts["strong_buy"]} 強勢買進</b> / <b style="color:#16a34a">{tier_counts["buy"]} 買進</b> / <b style="color:#d97706">{tier_counts["neutral"]} 觀望</b> / <b style="color:#dc2626">{tier_counts["weak"]} 弱勢</b></div>'
+
+    cards = ""
+    for sym, alpha, tier, tlabel, comps in top:
+        name = stocks.get(sym, {}).get("name", sym)
+        breakdown = " · ".join(
+            f"{k[:3]}{v:.0f}" for k, v in comps.items()
+            if v is not None
+        )
+        cards += f'''<div class="alpha-card {tier}">
+  <div class="tier-label">{tlabel}</div>
+  <div class="sym">{sym}</div>
+  <div class="name">{name[:14]}</div>
+  <div class="alpha-num">{alpha}</div>
+  <div class="breakdown" title="基本/動能/技術/Capex/分析師/訊號 各 0-10 分">{breakdown}</div>
+</div>'''
+
+    return f'''<div class="alpha-wrap">
+  <h3>⚡ Alpha 評分排行 Top 12</h3>
+  {stats}
+  <div class="alpha-grid">{cards}</div>
+</div>'''
+
+
 def _gen_signals_panel(signals, stocks):
     """連續訊號：找出連續漲/跌/在 top3 的股票。"""
     if not signals:
@@ -1501,20 +1753,30 @@ def _gen_sankey_svg(stocks, bucket_lookup):
 
     svg_parts = [f'<svg class="sankey-svg" viewBox="0 0 {W} {H}" xmlns="http://www.w3.org/2000/svg">']
 
-    # 畫連線（先畫，讓 node 在上面）
+    # 畫連線（先畫，讓 node 在上面）。每條 path 帶 data-giant / data-bucket，供 JS 高亮
     for giant_code, deps in DEPENDENCY.items():
         for bucket_key, strength in deps.items():
             y1 = giant_y.get(giant_code)
             y2 = bucket_y.get(bucket_key)
             if y1 is None or y2 is None:
                 continue
-            width = strength * 1.4  # 1=1.4, 2=2.8, 3=4.2
-            opacity = 0.25 + strength * 0.15  # 弱連線淡一點
-            color = _color_for_pct(bucket_avg_pct.get(bucket_key, 0))
+            width = strength * 1.4
+            opacity = 0.25 + strength * 0.15
+            bucket_pct = bucket_avg_pct.get(bucket_key, 0)
+            color = _color_for_pct(bucket_pct)
             midx = (left_x + right_x) / 2
             path = f"M{left_x + 10},{y1} C{midx},{y1} {midx},{y2} {right_x - 10},{y2}"
+            bucket_label = bucket_lookup.get(bucket_key, bucket_key)
+            giant_pct = (stocks.get(giant_code) or {}).get("day_pct")
             svg_parts.append(
-                f'<path d="{path}" stroke="{color}" stroke-width="{width:.1f}" fill="none" opacity="{opacity:.2f}"><title>{giant_code} → {bucket_lookup.get(bucket_key, bucket_key)} · 依賴 {"★" * strength}</title></path>'
+                f'<path class="sankey-link" data-giant="{giant_code}" data-bucket="{bucket_key}" '
+                f'data-giant-pct="{giant_pct if giant_pct is not None else 0:.2f}" '
+                f'data-bucket-pct="{bucket_pct:.2f}" data-bucket-label="{bucket_label}" '
+                f'data-strength="{strength}" data-default-opacity="{opacity:.2f}" data-default-width="{width:.1f}" '
+                f'd="{path}" stroke="{color}" stroke-width="{width:.1f}" fill="none" opacity="{opacity:.2f}" '
+                f'onclick="highlightSankey(this, event)" style="cursor:pointer">'
+                f'<title>{giant_code} → {bucket_label} · 依賴 {"★" * strength}</title>'
+                f'</path>'
             )
 
     # 巨頭節點（左）
@@ -1525,8 +1787,7 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         score = stk.get("score", 0)
         score_max = stk.get("score_max", 24)
         dot_color = _color_for_pct(day_pct)
-        # 節點
-        svg_parts.append(f'<g class="sankey-node giant">')
+        svg_parts.append(f'<g class="sankey-node giant-node" data-giant="{code}">')
         svg_parts.append(f'<rect x="{left_x - 115}" y="{y - 18}" width="115" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
         svg_parts.append(f'<circle cx="{left_x - 105}" cy="{y}" r="5" fill="{dot_color}"/>')
         svg_parts.append(f'<text x="{left_x - 95}" y="{y - 3}" font-size="13" font-weight="700" fill="#1e293b">{code}</text>')
@@ -1538,7 +1799,7 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         y = bucket_y[key]
         avg_pct = bucket_avg_pct.get(key)
         dot_color = _color_for_pct(avg_pct)
-        svg_parts.append(f'<g class="sankey-node bucket-node">')
+        svg_parts.append(f'<g class="sankey-node bucket-node" data-bucket="{key}">')
         svg_parts.append(f'<rect x="{right_x}" y="{y - 18}" width="130" height="36" rx="6" fill="#fff" stroke="#cbd5e1" stroke-width="1"/>')
         svg_parts.append(f'<circle cx="{right_x + 10}" cy="{y}" r="5" fill="{dot_color}"/>')
         svg_parts.append(f'<text x="{right_x + 20}" y="{y - 3}" font-size="12" font-weight="700" fill="#1e293b">{label}</text>')
@@ -1546,12 +1807,13 @@ def _gen_sankey_svg(stocks, bucket_lookup):
         svg_parts.append(f'</g>')
 
     svg_parts.append('</svg>')
-    return '<div class="sankey-wrap">' + "".join(svg_parts) + '</div>'
+    info_box = '''<div id="sankey-info" class="sankey-info-empty">點擊任一連線查看詳細資訊</div>'''
+    return '<div class="sankey-wrap" onclick="if(event.target.tagName!==\'path\')resetSankey()">' + "".join(svg_parts) + info_box + '</div>'
 
 
 def _gen_capex_panel(capex_groups, bucket_lookup):
     if not capex_groups:
-        return '<div class="empty-msg" style="padding:8px 0">Capex 資料需 FMP 完整 quota，明日自動補上</div>'
+        return ''
     html = '<div class="capex-panel">'
     for grp in capex_groups:
         yoy = grp["yoy_pct"]
@@ -1646,7 +1908,8 @@ def _gen_backtest(stocks, benchmarks):
             continue
         avg = sum(x[3] for x in arr) / len(arr)
         cls = _pct_cls(avg)
-        tier_rows += f'<tr><td>{label}</td><td class="num">{len(arr)}</td><td class="num {cls}">{_fmt_pct(avg)}</td></tr>'
+        examples = " · ".join(x[0] for x in arr[:3])
+        tier_rows += f'<tr><td>{label}<div class="tier-examples">例：{examples}</div></td><td class="num">{len(arr)}</td><td class="num {cls}">{_fmt_pct(avg)}</td></tr>'
 
     # 組合 vs 大盤
     giant_syms = [code for code, _, _ in GIANTS]
@@ -1668,11 +1931,11 @@ def _gen_backtest(stocks, benchmarks):
     valid = "✓ 評分系統有效" if diff > 10 else "⚠️ 評分與 1 年報酬相關性弱（可能因上市時間短或市場剛反轉）" if diff < 0 else "→ 相關性尚可"
 
     return f'''<div class="ttl">📊 組合比較 + 評分有效性</div>
-<div class="desc">左：依當前紅黃綠燈分數分三級的 1 年平均報酬。右：AI 策略組合（九巨頭等權 + 高分等權）vs 大盤 ETF 的 1 年報酬。<b>免責</b>：快照型驗證（用當前評分套過去價格），不是嚴格回測</div>
+<div class="desc">左：把宇宙內的股票依目前紅黃綠燈分數分三級，看該分級所有股票過去 1 年的「等權平均報酬」。右：策略組合（九巨頭等權 + 高分等權）vs 大盤 ETF 過去 1 年報酬</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px">
   <div>
-    <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px">🚦 依分數等級</div>
-    <table class="bt-table"><tr><th>等級</th><th class="num">檔數</th><th class="num">1 年平均</th></tr>{tier_rows}</table>
+    <div style="font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px">🚦 依分數等級 · 該等級股票過去 1 年等權平均報酬</div>
+    <table class="bt-table"><tr><th>等級</th><th class="num">檔數</th><th class="num">過去 1 年報酬（等權組合）</th></tr>{tier_rows}</table>
     <div style="margin-top:8px;background:var(--card);border:1px solid var(--brd);border-radius:6px;padding:8px 12px;font-size:11.5px;line-height:1.6">
       Top10 均：<b class="{_pct_cls(top_avg)}">{_fmt_pct(top_avg)}</b> · Bottom10 均：<b class="{_pct_cls(bot_avg)}">{_fmt_pct(bot_avg)}</b>
       · 差距 <b>{_fmt_pct(diff)}</b> · <span style="color:var(--mu)">{valid}</span>
@@ -1706,7 +1969,7 @@ def _gen_giants_grid(stocks):
     return html
 
 
-def _gen_supply_chain(stocks):
+def _gen_supply_chain(stocks, alpha_scores=None, bucket_rankings=None):
     html = '<div class="chain">'
     # 建反向索引：bucket → 哪些巨頭依賴它（含強度）
     bucket_deps = {}
@@ -1720,11 +1983,17 @@ def _gen_supply_chain(stocks):
             f'<span class="b-giant-chip s{strength}" title="依賴強度 {"★" * strength}">{g}</span>'
             for g, strength in deps
         )
-        # 依 score 排序個股
-        sorted_stocks = sorted(
-            [stocks[s] for s in syms if s in stocks],
-            key=lambda x: -x["score"] if x else 0,
-        )
+        # 依 alpha（若有）排序個股，否則用紅黃綠燈分數
+        if alpha_scores:
+            sorted_stocks = sorted(
+                [stocks[s] for s in syms if s in stocks],
+                key=lambda x: -alpha_scores.get(x["symbol"], {}).get("alpha", 0),
+            )
+        else:
+            sorted_stocks = sorted(
+                [stocks[s] for s in syms if s in stocks],
+                key=lambda x: -x["score"] if x else 0,
+            )
         # 計算 bucket 統計
         b_stats = ""
         if sorted_stocks:
@@ -1737,32 +2006,42 @@ def _gen_supply_chain(stocks):
             day_cls = _pct_cls(avg_day)
             b_stats = f'<div class="b-stats"><span class="stat-pill {score_cls}" title="平均分數">🚦 {avg_score:.1f}/{avg_score_max}</span><span class="stat-pill {day_cls}" title="平均日漲跌">{_fmt_pct(avg_day)}</span></div>'
 
+        # 取得 bucket 內 top alpha 的領頭股
+        leader_info = ""
+        if bucket_rankings and key in bucket_rankings and bucket_rankings[key]["ordered"]:
+            top_sym, top_alpha = bucket_rankings[key]["ordered"][0]
+            if top_alpha > 0:
+                leader_info = f'<span class="b-leader" title="Bucket 內 alpha 最高">🥇 {top_sym} ({top_alpha:.0f})</span>'
+
+        ranks_for_bucket = (bucket_rankings or {}).get(key, {}).get("ranks", {})
+
         html += f'''<details class="bucket">
   <summary>
     <div class="b-left">
       <span class="b-role">{role}</span>
       <span class="b-title">{label}</span>
       <span class="b-stocks-count">· {len(sorted_stocks)} 檔</span>
+      {leader_info}
     </div>
     {b_stats}
     <div class="b-giants">{giant_chips}</div>
     <span class="chev">▾</span>
   </summary>
   <div class="b-body">
-    {_gen_bucket_body(sorted_stocks)}
+    {_gen_bucket_body(sorted_stocks, alpha_scores, ranks_for_bucket)}
   </div>
 </details>'''
     html += '</div>'
     return html
 
 
-def _gen_bucket_body(stocks):
+def _gen_bucket_body(stocks, alpha_scores=None, ranks_for_bucket=None):
     if not stocks:
         return '<div class="empty-msg">此 bucket 暫無資料</div>'
-    return "".join(_gen_stock_row(s) for s in stocks)
+    return "".join(_gen_stock_row(s, alpha_scores, ranks_for_bucket) for s in stocks)
 
 
-def _gen_stock_row(s):
+def _gen_stock_row(s, alpha_scores=None, ranks_for_bucket=None):
     code = s["symbol"]
     light_parts = []
     for k, v in s["lights"].items():
@@ -1772,25 +2051,62 @@ def _gen_stock_row(s):
     lights_mini = "".join(light_parts)
     score_cls = _score_cls(s["score"], s["score_max"])
     day_cls = _pct_cls(s["day_pct"])
+
+    # 排名獎牌
+    rank_info = (ranks_for_bucket or {}).get(code, {})
+    medal = rank_info.get("medal", "")
+    medal_html = f'<span class="rank-medal" title="Bucket 內 {rank_info.get("label", "")}">{medal}</span>' if medal else ""
+
+    # Alpha 分數 pill
+    alpha_pill = ""
+    if alpha_scores and code in alpha_scores:
+        a = alpha_scores[code]
+        tier = a["tier"]
+        alpha_pill = f'<span class="alpha-pill {tier}" title="Alpha {a["tier_label"]}">α {a["alpha"]:.0f}</span>'
+
     return f'''<details class="stock" id="stock-{code}">
   <summary>
+    {medal_html}
     <span class="sym">{code}</span>
     <span class="nm">{s["name"]}</span>
     <span class="lights-mini" title="紅黃綠燈摘要">{lights_mini}</span>
     <span class="score-chip {score_cls}" title="12 盞燈綜合分">{s["score"]}/{s["score_max"]}</span>
+    {alpha_pill}
     <span class="pct {day_cls}">{_fmt_pct(s["day_pct"])}</span>
   </summary>
-  {_gen_stock_detail(s)}
+  {_gen_stock_detail(s, alpha_scores)}
 </details>'''
 
 
-def _gen_stock_detail(s):
+def _gen_stock_detail(s, alpha_scores=None):
+    alpha_block = ""
+    if alpha_scores and s["symbol"] in alpha_scores:
+        a = alpha_scores[s["symbol"]]
+        comps = a["components"]
+        labels = {
+            "fundamental": "基本面",
+            "momentum": "動能",
+            "technical": "技術",
+            "capex_align": "Capex 對齊",
+            "analyst": "分析師",
+            "signals": "訊號",
+        }
+        rows = "".join(
+            f'<div class="light-row"><span class="k">{labels[k]} ({ALPHA_WEIGHTS[k]*100:.0f}%)</span><span class="v">{v:.1f}/10</span></div>'
+            for k, v in comps.items()
+        )
+        alpha_block = f'''<div class="sd-block" style="grid-column:1/-1">
+  <h5>⚡ Alpha 評分拆解 — {a["alpha"]:.0f}/100 · <span class="alpha-pill {a["tier"]}">{a["tier_label"]}</span></h5>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:4px 14px">{rows}</div>
+</div>'''
+
     return f'''<div class="stock-detail">
   <div class="sd-grid2">
     {_gen_tech_block(s)}
     {_gen_lights_block(s)}
     {_gen_valuation_block(s)}
     {_gen_news_block(s)}
+    {alpha_block}
   </div>
   {_gen_cross_check_block(s)}
 </div>'''
@@ -1960,15 +2276,16 @@ def _gen_cross_check_block(s):
     return f'<div class="warn-box">⚠️ 兩源差異偵測：{" ; ".join(parts)}</div>'
 
 
-def generate_html(stocks, capex_groups, signals, benchmarks):
+def generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings):
     bucket_lookup = {k: label for k, label, _, _ in BUCKETS}
     giants_grid = _gen_giants_grid(stocks)
-    supply_chain = _gen_supply_chain(stocks)
+    supply_chain = _gen_supply_chain(stocks, alpha_scores, bucket_rankings)
     capex_html = _gen_capex_panel(capex_groups, bucket_lookup)
     legend_html = _gen_legend()
     backtest_html = _gen_backtest(stocks, benchmarks)
     signals_html = _gen_signals_panel(signals, stocks)
     sankey_html = _gen_sankey_svg(stocks, bucket_lookup)
+    alpha_html = _gen_alpha_panel(alpha_scores, stocks)
 
     n_green = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "green")
     n_red = sum(1 for s in stocks.values() for l in s["lights"].values() if l["color"] == "red")
@@ -1995,6 +2312,10 @@ def generate_html(stocks, capex_groups, signals, benchmarks):
   <div class="desc">Mag7 + TSM（全球晶圓代工）+ AVGO（客製 AI ASIC）。角標分數為 12 盞燈綜合分（綠 2 分 / 黃 1 分 · 最高 24 分）</div>
   {giants_grid}
 
+  <div class="ttl">⚡ Alpha 評分排行（綜合買賣訊號）</div>
+  <div class="desc">6 個子分數加權合成 0-100 分。權重：基本面 25% · 動能 20% · 技術 15% · Capex 對齊 15% · 分析師 15% · 訊號 10%。≥70 強勢買進 · 55-69 買進 · 40-54 觀望 · <40 弱勢</div>
+  {alpha_html}
+
   <div class="ttl">🔄 連續訊號（歷史累積）</div>
   <div class="desc">從每日快照累積，找出連續漲/跌、連續進 Top-3 的標的（需至少 3 個交易日歷史）</div>
   {signals_html}
@@ -2010,7 +2331,58 @@ def generate_html(stocks, capex_groups, signals, benchmarks):
   {legend_html}
   {supply_chain}
 </div>
-<div class="ft">資料源：Financial Modeling Prep（基本面/分析師）+ Yahoo Finance（價格/新聞）｜ 統計本次：{n_green} 🟢 / {n_red} 🔴（全部 {n_total_lights} 盞燈）｜ 僅供研究參考，不構成投資建議</div>
+<script>
+function resetSankey(){{
+  document.querySelectorAll('.sankey-svg path.sankey-link').forEach(p=>{{
+    p.classList.remove('active','dimmed');
+    p.setAttribute('stroke-width', p.dataset.defaultWidth);
+    p.style.opacity = '';
+  }});
+  document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
+    n.classList.remove('active','dimmed');
+  }});
+  var info = document.getElementById('sankey-info');
+  if(info){{
+    info.className='sankey-info-empty';
+    info.innerHTML='點擊任一連線查看詳細資訊';
+  }}
+}}
+function highlightSankey(el, ev){{
+  var giant = el.dataset.giant, bucket = el.dataset.bucket;
+  document.querySelectorAll('.sankey-svg path.sankey-link').forEach(p=>{{
+    if(p===el){{p.classList.add('active');p.classList.remove('dimmed');p.setAttribute('stroke-width', (parseFloat(p.dataset.defaultWidth)+1.5).toFixed(1));}}
+    else {{p.classList.add('dimmed');p.classList.remove('active');}}
+  }});
+  document.querySelectorAll('.sankey-svg .sankey-node').forEach(n=>{{
+    var isMatch = n.dataset.giant===giant || n.dataset.bucket===bucket;
+    n.classList.toggle('active', isMatch);
+    n.classList.toggle('dimmed', !isMatch);
+  }});
+  var info = document.getElementById('sankey-info');
+  if(!info) return;
+  var strength = parseInt(el.dataset.strength);
+  var stars = '★'.repeat(strength) + '☆'.repeat(3-strength);
+  var gpct = parseFloat(el.dataset.giantPct);
+  var bpct = parseFloat(el.dataset.bucketPct);
+  var label = el.dataset.bucketLabel;
+  var strengthText = strength===3 ? '關鍵依賴' : strength===2 ? '重要' : '次要';
+  var fmtPct = function(p){{
+    var s = (p>=0?'+':'') + p.toFixed(2) + '%';
+    var cls = p>0.05 ? 'up' : p<-0.05 ? 'dn' : 'mu';
+    return '<span class="'+cls+'">'+s+'</span>';
+  }};
+  info.className='sankey-info-active';
+  info.innerHTML =
+    '<div class="si-head">'+giant+'  →  '+label+'</div>'+
+    '<div style="font-size:12px;color:#475569">'+stars+' '+strengthText+'</div>'+
+    '<div class="si-grid">'+
+      '<div><span class="k">巨頭當日</span><span class="v">'+fmtPct(gpct)+'</span></div>'+
+      '<div><span class="k">Bucket 平均當日</span><span class="v">'+fmtPct(bpct)+'</span></div>'+
+      '<div><span class="k">依賴強度</span><span class="v">'+stars+' ('+strength+'/3)</span></div>'+
+    '</div>';
+  if(ev && ev.stopPropagation) ev.stopPropagation();
+}}
+</script>
 </body></html>"""
 
 
@@ -2070,8 +2442,20 @@ def main():
     signals = compute_consecutive_signals(history, stocks) if history else {}
     print(f"\n連續訊號計算：歷史 {len(history)} 天")
 
-    # 9. HTML
-    html = generate_html(stocks, capex_groups, signals, benchmarks)
+    # 9. Alpha scoring model + bucket rankings
+    stock_to_bucket = {}
+    for key, _, _, syms in BUCKETS:
+        for sym in syms:
+            stock_to_bucket[sym] = key
+    alpha_scores = compute_alpha_scores(stocks, capex_groups, signals, stock_to_bucket)
+    bucket_rankings = compute_bucket_rankings(stocks, alpha_scores)
+    # 打印 alpha top 5
+    print("\n=== Alpha Top 5 ===")
+    for sym, sc in sorted(alpha_scores.items(), key=lambda x: -x[1]["alpha"])[:5]:
+        print(f"  {sym:6s} {sc['alpha']:5.1f}  {sc['tier_label']}")
+
+    # 10. HTML
+    html = generate_html(stocks, capex_groups, signals, benchmarks, alpha_scores, bucket_rankings)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n儀表板輸出至 {OUTPUT_HTML}")
