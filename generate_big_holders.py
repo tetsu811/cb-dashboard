@@ -334,6 +334,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .section{margin-bottom:28px}
 .section h3{font-size:13.5px;font-weight:700;color:var(--bl);margin-bottom:10px;padding:8px 0;border-bottom:2px solid #dbeafe}
 .section h3.sell{color:var(--rd);border-bottom-color:#fecaca}
+.dir-toggle{display:inline-flex;background:#eef2ff;border-radius:10px;padding:4px;margin-bottom:14px;gap:2px}
+.dir-btn{padding:8px 18px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:600;color:var(--mu);border-radius:7px;transition:all .15s;font-family:inherit}
+.dir-btn:hover{color:var(--txt)}
+.dir-btn.active{background:var(--card);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.dir-btn[data-dir="up"].active{color:var(--gr)}
+.dir-btn[data-dir="dn"].active{color:var(--rd)}
+.dir-pane{display:none}
+.dir-pane.active{display:block}
 table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
 th{background:#edf2f7;font-weight:700;color:var(--mu);font-size:11px;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:2px solid var(--brd);white-space:nowrap;letter-spacing:0.3px}
 td{padding:9px 12px;border-bottom:1px solid var(--brd);vertical-align:middle}
@@ -369,17 +377,17 @@ def _fmt_delta(v):
     return f'<span class="{cls}">{sign}{v:.2f}</span>'
 
 
-def _render_table(rows, delta_key, pct_key, prev_pct_key, label, row_cls):
+def _render_table(rows, delta_key, pct_key, prev_pct_key, label, row_cls, threshold_label):
     if not rows:
         return f'<div class="empty-msg">目前沒有{label}超過 {MIN_CHANGE_PP}pp 的股票。</div>'
     parts = [
         '<table><thead><tr>',
         '<th class="rank">#</th>',
         '<th>代號</th><th>名稱</th>',
-        '<th class="num">本週 %</th>',
-        '<th class="num">上週 %</th>',
-        '<th class="num">變化 (pp)</th>',
-        '<th class="num">大戶人數</th>',
+        f'<th class="num" title="本週大戶持股佔全部股份的比例">本週 {threshold_label}佔比</th>',
+        f'<th class="num" title="上週大戶持股佔全部股份的比例">上週 {threshold_label}佔比</th>',
+        '<th class="num" title="本週 − 上週，單位為百分點">週變化 (pp)</th>',
+        f'<th class="num" title="本週{threshold_label}的股東人數">{threshold_label}人數</th>',
         '</tr></thead><tbody>',
     ]
     for i, r in enumerate(rows, 1):
@@ -416,7 +424,7 @@ def render_html(curr_date, prev_date, rows, stats):
 <body>
 <div class="hdr">
   <h1>台股大戶持股變化監測</h1>
-  <div class="sub">本週資料日 {curr_fmt}｜比較基準 {prev_fmt}｜資料來源 TDCC 集保戶股權分散表（每週五更新，透過 FinMind API）
+  <div class="sub">本週資料日 {curr_fmt}｜比較基準 {prev_fmt}｜資料來源 TDCC 集保戶股權分散表（每週五更新）
     <a class="nav-link" href="etf_index.html">→ 主動式 ETF</a>
     <a class="nav-link" href="index.html">→ 可轉債</a>
   </div>
@@ -435,28 +443,46 @@ def render_html(curr_date, prev_date, rows, stats):
 
 <div class="pane active" id="t400">
   <div class="ttl">400 張以上大戶持股比例變化</div>
-  <div class="desc">大戶定義：持有 400,001 股以上的股東（四個級距加總：400,001–600,000 / 600,001–800,000 / 800,001–1,000,000 / 1,000,001 以上）。顯示本週相較上週持股比例變化，取變化幅度前 {TOP_N} 名。變化門檻 ±{MIN_CHANGE_PP}pp。</div>
-  <div class="section"><h3>🟢 增加榜 Top {TOP_N}</h3>
-    {_render_table(up_400, 'delta_400', 'pct_400', 'prev_pct_400', '增加', 'row-up')}
+  <div class="desc">
+    <b>大戶定義</b>：單一股東持有該股 <b>400,001 股以上</b>（約 400 張以上，含四個級距：400,001–600,000 / 600,001–800,000 / 800,001–1,000,000 / 1,000,001 以上）。<br>
+    <b>本週 400張大戶佔比</b>：這些大戶持有的股數 ÷ 該股集保總股數。例如「台積電 88.42%」表示台積電有 88.42% 的股份由 400 張以上大戶持有。<br>
+    <b>週變化 (pp)</b>：本週佔比 − 上週佔比，單位百分點（percentage points）。正值＝大戶加碼；負值＝大戶減碼。<br>
+    榜單取變化幅度前 {TOP_N} 名，變化門檻 ±{MIN_CHANGE_PP}pp 以下視為雜訊不列入。
   </div>
-  <div class="section"><h3 class="sell">🔴 減少榜 Top {TOP_N}</h3>
-    {_render_table(dn_400, 'delta_400', 'pct_400', 'prev_pct_400', '減少', 'row-down')}
+  <div class="dir-toggle" data-scope="t400">
+    <button class="dir-btn active" data-dir="up">🟢 增加 Top {TOP_N}</button>
+    <button class="dir-btn" data-dir="dn">🔴 減少 Top {TOP_N}</button>
+  </div>
+  <div class="dir-pane active" data-scope="t400" data-dir="up">
+    {_render_table(up_400, 'delta_400', 'pct_400', 'prev_pct_400', '增加', 'row-up', '400張大戶')}
+  </div>
+  <div class="dir-pane" data-scope="t400" data-dir="dn">
+    {_render_table(dn_400, 'delta_400', 'pct_400', 'prev_pct_400', '減少', 'row-down', '400張大戶')}
   </div>
 </div>
 
 <div class="pane" id="t1000">
   <div class="ttl">1000 張以上大戶持股比例變化</div>
-  <div class="desc">大戶定義：持有 1,000,001 股以上的股東（即 1,000 張以上）。多為政府基金、法人、信託、董監與主要股東。</div>
-  <div class="section"><h3>🟢 增加榜 Top {TOP_N}</h3>
-    {_render_table(up_1000, 'delta_1000', 'pct_1000', 'prev_pct_1000', '增加', 'row-up')}
+  <div class="desc">
+    <b>大戶定義</b>：單一股東持有該股 <b>1,000,001 股以上</b>（約 1,000 張以上）。這個級距多為政府基金、法人、信託、董監與主要股東。<br>
+    <b>本週 1000張大戶佔比</b>：這些大戶持有的股數 ÷ 該股集保總股數。例如「台積電 85.69%」表示台積電有 85.69% 的股份由 1,000 張以上大戶持有。<br>
+    <b>週變化 (pp)</b>：本週佔比 − 上週佔比，單位百分點。正值＝大戶加碼；負值＝大戶減碼。<br>
+    榜單取變化幅度前 {TOP_N} 名，變化門檻 ±{MIN_CHANGE_PP}pp 以下視為雜訊不列入。
   </div>
-  <div class="section"><h3 class="sell">🔴 減少榜 Top {TOP_N}</h3>
-    {_render_table(dn_1000, 'delta_1000', 'pct_1000', 'prev_pct_1000', '減少', 'row-down')}
+  <div class="dir-toggle" data-scope="t1000">
+    <button class="dir-btn active" data-dir="up">🟢 增加 Top {TOP_N}</button>
+    <button class="dir-btn" data-dir="dn">🔴 減少 Top {TOP_N}</button>
+  </div>
+  <div class="dir-pane active" data-scope="t1000" data-dir="up">
+    {_render_table(up_1000, 'delta_1000', 'pct_1000', 'prev_pct_1000', '增加', 'row-up', '1000張大戶')}
+  </div>
+  <div class="dir-pane" data-scope="t1000" data-dir="dn">
+    {_render_table(dn_1000, 'delta_1000', 'pct_1000', 'prev_pct_1000', '減少', 'row-down', '1000張大戶')}
   </div>
 </div>
 
 <div class="ft">
-  資料來源：<a href="https://finmind.github.io/" target="_blank">FinMind</a> TaiwanStockHoldingSharesPer（原始為 TDCC 集保戶股權分散表）｜股名對照：TWSE ISIN<br>
+  資料來源：TDCC 集保戶股權分散表｜股名對照：TWSE ISIN<br>
   每日排程跑一次，資料為週頻（每週五更新上週五資料）。產生於 {datetime.now().strftime('%Y-%m-%d %H:%M')}
 </div>
 
@@ -466,6 +492,16 @@ document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () =>
   document.querySelectorAll('.pane').forEach(x => x.classList.remove('active'));
   t.classList.add('active');
   document.getElementById(t.dataset.tab).classList.add('active');
+}}));
+
+document.querySelectorAll('.dir-btn').forEach(btn => btn.addEventListener('click', () => {{
+  const scope = btn.parentElement.dataset.scope;
+  const dir = btn.dataset.dir;
+  btn.parentElement.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll(`.dir-pane[data-scope="${{scope}}"]`).forEach(p => {{
+    p.classList.toggle('active', p.dataset.dir === dir);
+  }});
 }}));
 </script>
 </body></html>
