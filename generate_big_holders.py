@@ -342,6 +342,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .dir-btn[data-dir="dn"].active{color:var(--rd)}
 .dir-pane{display:none}
 .dir-pane.active{display:block}
+th.sortable-th{cursor:pointer;user-select:none;transition:background .12s}
+th.sortable-th:hover{background:#dbeafe;color:var(--bl)}
+th.sortable-th .sort-hint{display:inline-block;margin-left:4px;font-size:10px;opacity:0.4}
+th.sortable-th.sort-asc,th.sortable-th.sort-desc{background:#dbeafe;color:var(--bl)}
+th.sortable-th.sort-asc .sort-hint,th.sortable-th.sort-desc .sort-hint{opacity:1;color:var(--bl)}
 table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
 th{background:#edf2f7;font-weight:700;color:var(--mu);font-size:11px;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:2px solid var(--brd);white-space:nowrap;letter-spacing:0.3px}
 td{padding:9px 12px;border-bottom:1px solid var(--brd);vertical-align:middle}
@@ -380,27 +385,34 @@ def _fmt_delta(v):
 def _render_table(rows, delta_key, pct_key, prev_pct_key, label, row_cls, threshold_label):
     if not rows:
         return f'<div class="empty-msg">目前沒有{label}超過 {MIN_CHANGE_PP}pp 的股票。</div>'
+    # 預設依 delta 欄排序（由後端已排好），所以預設標示在第 5 欄
+    default_dir = 'desc' if label == '增加' else 'asc'
     parts = [
-        '<table><thead><tr>',
+        '<table class="sortable"><thead><tr>',
         '<th class="rank">#</th>',
-        '<th>代號</th><th>名稱</th>',
-        f'<th class="num" title="本週大戶持股佔全部股份的比例">本週 {threshold_label}佔比</th>',
-        f'<th class="num" title="上週大戶持股佔全部股份的比例">上週 {threshold_label}佔比</th>',
-        '<th class="num" title="本週 − 上週，單位為百分點">週變化 (pp)</th>',
-        f'<th class="num" title="本週{threshold_label}的股東人數">{threshold_label}人數</th>',
+        '<th class="sortable-th" data-sort-type="str" data-col="1">代號 <span class="sort-hint">⇅</span></th>',
+        '<th class="sortable-th" data-sort-type="str" data-col="2">名稱 <span class="sort-hint">⇅</span></th>',
+        f'<th class="num sortable-th" data-sort-type="num" data-col="3" title="本週大戶持股佔全部股份的比例">本週 {threshold_label}佔比 <span class="sort-hint">⇅</span></th>',
+        f'<th class="num sortable-th" data-sort-type="num" data-col="4" title="上週大戶持股佔全部股份的比例">上週 {threshold_label}佔比 <span class="sort-hint">⇅</span></th>',
+        f'<th class="num sortable-th sort-{default_dir}" data-sort-type="num" data-col="5" title="本週 − 上週，單位為百分點">週變化 (pp) <span class="sort-hint">{"▼" if default_dir == "desc" else "▲"}</span></th>',
+        f'<th class="num sortable-th" data-sort-type="num" data-col="6" title="本週{threshold_label}的股東人數">{threshold_label}人數 <span class="sort-hint">⇅</span></th>',
         '</tr></thead><tbody>',
     ]
     for i, r in enumerate(rows, 1):
         holders = r['holders_1000'] if '1000' in pct_key else r['holders_400']
+        pct_now = r[pct_key]
+        pct_prev = r[prev_pct_key]
+        delta = r[delta_key]
+        # data-sort attrs 提供排序時的原始數值
         parts.append(
             f'<tr class="{row_cls}">'
             f'<td class="rank">{i}</td>'
-            f'<td><span class="code">{r["code"]}</span></td>'
-            f'<td>{r["name"] or "—"}</td>'
-            f'<td class="num">{_fmt_pct(r[pct_key])}</td>'
-            f'<td class="num">{_fmt_pct(r[prev_pct_key])}</td>'
-            f'<td class="num">{_fmt_delta(r[delta_key])}</td>'
-            f'<td class="num">{holders:,}</td>'
+            f'<td data-sort="{r["code"]}"><span class="code">{r["code"]}</span></td>'
+            f'<td data-sort="{r["name"] or ""}">{r["name"] or "—"}</td>'
+            f'<td class="num" data-sort="{pct_now if pct_now is not None else -999}">{_fmt_pct(pct_now)}</td>'
+            f'<td class="num" data-sort="{pct_prev if pct_prev is not None else -999}">{_fmt_pct(pct_prev)}</td>'
+            f'<td class="num" data-sort="{delta if delta is not None else -999}">{_fmt_delta(delta)}</td>'
+            f'<td class="num" data-sort="{holders}">{holders:,}</td>'
             f'</tr>'
         )
     parts.append('</tbody></table>')
@@ -503,6 +515,46 @@ document.querySelectorAll('.dir-btn').forEach(btn => btn.addEventListener('click
     p.classList.toggle('active', p.dataset.dir === dir);
   }});
 }}));
+
+document.querySelectorAll('table.sortable').forEach(table => {{
+  table.querySelectorAll('th.sortable-th').forEach(th => {{
+    th.addEventListener('click', () => {{
+      const col = parseInt(th.dataset.col, 10);
+      const type = th.dataset.sortType;
+      const currentlyAsc = th.classList.contains('sort-asc');
+      // Clear all siblings
+      th.parentElement.querySelectorAll('th').forEach(x => {{
+        x.classList.remove('sort-asc', 'sort-desc');
+        const hint = x.querySelector('.sort-hint');
+        if (hint && x.classList.contains('sortable-th')) hint.textContent = '⇅';
+      }});
+      const newDir = currentlyAsc ? 'desc' : 'asc';
+      th.classList.add('sort-' + newDir);
+      const hint = th.querySelector('.sort-hint');
+      if (hint) hint.textContent = newDir === 'asc' ? '▲' : '▼';
+
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {{
+        const av = a.children[col]?.dataset.sort ?? a.children[col]?.textContent.trim() ?? '';
+        const bv = b.children[col]?.dataset.sort ?? b.children[col]?.textContent.trim() ?? '';
+        let cmp;
+        if (type === 'num') {{
+          cmp = parseFloat(av) - parseFloat(bv);
+        }} else {{
+          cmp = av.localeCompare(bv, 'zh-Hant');
+        }}
+        return newDir === 'asc' ? cmp : -cmp;
+      }});
+      // Update rank column and re-append
+      rows.forEach((row, i) => {{
+        const rankCell = row.querySelector('td.rank');
+        if (rankCell) rankCell.textContent = i + 1;
+        tbody.appendChild(row);
+      }});
+    }});
+  }});
+}});
 </script>
 </body></html>
 """
