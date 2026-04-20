@@ -3,9 +3,11 @@ name: Update Big Holders Dashboard
 on:
   schedule:
     # TDCC 每週五 17:30 左右更新，多跑幾次以確保抓到最新資料；
-    # 若當週快照已存在且未改變，腳本會跳過寫入。
-    # Taipei 每日 18:00 (UTC 10:00)
-    - cron: '0 10 * * *'
+    # 若當週快照已存在且未改變，腳本會跳過寫入（不產生多餘 commit）。
+    # 主觸發 Taipei 18:00 (UTC 10:00)；備援 19:00/20:00 防 GitHub Actions 延遲。
+    - cron: '0 10 * * *'   # Taipei 18:00 (主)
+    - cron: '0 11 * * *'   # Taipei 19:00 (備援)
+    - cron: '0 12 * * *'   # Taipei 20:00 (備援)
   workflow_dispatch:
 
 permissions:

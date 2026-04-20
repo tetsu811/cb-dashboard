@@ -629,6 +629,17 @@ def main():
     }
     print(f'  stats: {stats}', flush=True)
 
+    # 若 curr_date 與 stats 跟上次完全相同，跳過寫檔（避免 cron 備援觸發時產生無意義 commit）
+    if LATEST_JSON.exists():
+        try:
+            existing = json.loads(LATEST_JSON.read_text('utf-8'))
+            if existing.get('curr_date') == curr_date and existing.get('stats') == stats:
+                print('  no data change — skipping write (already current)', flush=True)
+                print('✓ done', flush=True)
+                return
+        except Exception:
+            pass
+
     # Persist latest JSON (for external consumers)
     latest = {
         'curr_date': curr_date,
