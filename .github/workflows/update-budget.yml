@@ -44,7 +44,7 @@ jobs:
                 break
               fi
               echo "Push rejected, rebasing and retrying (attempt $i/3)"
-              git pull --rebase origin main
+              git pull --rebase --autostash origin main
               sleep 5
             done
           fi
