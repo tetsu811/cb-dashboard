@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>台股每日大盤復盤 — 2026-04-21</title>
+<meta name="robots" content="noindex, nofollow"/>
+<style>
+:root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b;--card:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5}
+.hdr{background:linear-gradient(135deg,#0f172a 0%,#065f46 60%,#059669 100%);color:#fff;padding:22px 28px 16px}
+.hdr h1{font-size:20px;font-weight:800;margin-bottom:4px}
+.hdr .sub{font-size:11.5px;opacity:.85}
+/* 大盤橫條 */
+.market{display:flex;gap:10px;padding:14px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
+.mk{background:var(--bg);border:1px solid var(--brd);border-radius:8px;padding:10px 16px;min-width:160px}
+.mk .lbl{font-size:10.5px;color:var(--mu);font-weight:600;letter-spacing:.3px}
+.lbl-en{font-size:9.5px;opacity:.7;font-weight:400}
+.mk .px{font-size:20px;font-weight:800;margin-top:2px}
+.mk .chg{font-size:12.5px;font-weight:600;margin-top:1px}
+.chg.up{color:var(--gr)}.chg.dn{color:var(--rd)}.chg.nu{color:var(--mu)}
+.vol-lbl{font-size:10.5px;color:var(--mu);margin-top:3px}
+/* 漲跌家數 */
+.breadth-card{min-width:170px}
+.breadth-row{display:flex;gap:12px;font-size:14px;font-weight:700;margin-top:6px}
+.b-up{color:var(--gr)}.b-flat{color:var(--mu)}.b-dn{color:var(--rd)}
+.breadth-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-top:6px}
+.bb-up{background:var(--gr)}.bb-flat{background:#94a3b8}.bb-dn{background:var(--rd)}
+/* 面板通用 */
+.panels{padding:18px 28px;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:18px 20px}
+.panel-ttl{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.src-note{font-size:10.5px;font-weight:400;color:var(--mu);background:var(--bg);padding:2px 8px;border-radius:10px;border:1px solid var(--brd)}
+.na{color:var(--mu);font-style:italic;font-size:13px}
+/* Fear & Greed */
+.fg-panel{border-left-width:4px}
+.fg-body{display:flex;gap:24px;flex-wrap:wrap}
+.fg-left{display:flex;flex-direction:column;align-items:center;min-width:190px;flex:0 0 auto}
+.fg-right{flex:1;min-width:200px}
+.fg-rating{font-size:18px;font-weight:800;margin-top:4px;text-align:center}
+.fg-sub{font-size:10.5px;color:var(--mu);text-align:center;margin-top:2px}
+.fg-gauge-na{color:var(--mu);font-style:italic;font-size:13px;padding:40px 0;text-align:center}
+.cmp-title{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--brd)}
+.cmp-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed #f1f5f9;font-size:13px}
+.cmp-row:last-child{border-bottom:none}
+.cmp-lbl{color:var(--mu);flex:1}
+.cmp-val{font-weight:700;min-width:36px;text-align:right}
+.cmp-diff{font-weight:600;font-size:12px;min-width:46px;text-align:right}
+.cmp-diff.up{color:var(--gr)}.cmp-diff.dn{color:var(--rd)}.cmp-diff.nu{color:var(--mu)}
+.fg-note{margin-top:14px;font-size:11.5px;color:var(--mu);background:var(--bg);border-radius:8px;padding:10px 12px;line-height:1.7}
+/* RRP */
+.rrp-panel{}
+.rrp-top{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+.rrp-main{min-width:160px}
+.rrp-val{font-size:28px;font-weight:800;color:var(--bl);line-height:1.1}
+.rrp-unit{font-size:14px;font-weight:400;color:var(--mu);margin-left:4px}
+.rrp-date{font-size:10.5px;color:var(--mu);margin-top:2px}
+.rrp-changes{font-size:12px;margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rc-row{white-space:nowrap}
+.rc-sep{color:var(--mu)}
+.rrp-desc{flex:1;min-width:180px}
+.rrp-desc-title{font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.rrp-desc ul{padding-left:14px}
+.rrp-desc li{font-size:12px;color:var(--mu);line-height:1.7}
+.rrp-chart{margin-top:4px}
+.rrp-na{color:var(--mu);font-style:italic}
+/* ETF 板塊 */
+.etf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.etf-card{border-radius:10px;padding:12px 14px;border:1px solid rgba(0,0,0,.06);transition:transform .12s}
+.etf-card:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.1)}
+.etf-code{font-size:11px;font-weight:700;opacity:.85}
+.etf-name{font-size:14px;font-weight:700;margin-top:2px}
+.etf-pct{font-size:20px;font-weight:800;margin-top:6px}
+.etf-sub{font-size:10.5px;opacity:.85;margin-top:3px;display:flex;align-items:center;gap:6px}
+.vol-pill{font-size:9.5px;font-weight:700;background:rgba(0,0,0,.12);padding:1px 6px;border-radius:8px}
+/* 工具 */
+.up{color:var(--gr)}.dn{color:var(--rd)}.mu{color:var(--mu)}
+@media(max-width:600px){
+  .fg-body,.rrp-top{flex-direction:column}
+  .market{padding:10px 14px}
+  .panels{padding:12px 14px}
+}
+</style></head><body>
+<div class="hdr">
+  <h1>台股每日大盤復盤</h1>
+  <div class="sub">更新：2026-04-21（台股收盤後自動更新）</div>
+</div>
+<div class="market"><div class="mk">
+  <div class="lbl">加權指數 <span class="lbl-en">TAIEX</span></div>
+  <div class="px">37,605</div>
+  <div class="chg up">+646.3 &nbsp; +1.75%</div>
+  <div class="vol-lbl">成交量 ─</div>
+</div></div>
+<div class="panels">
+  <div class="panel fg-panel" style="background:#ecfccb;border-color:#84cc1640">
+  <div class="panel-ttl">😱 貪婪與恐懼指數 <span class="src-note">CNN Business</span></div>
+  <div class="fg-body">
+    <div class="fg-left">
+      <svg viewBox="0 0 260 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;display:block;margin:0 auto">
+  <path d="M 40.0 100.0 A 90 90 0 0 0 66.4 36.4 L 90.4 60.4 A 56 56 0 0 1 74.0 100.0 Z" fill="#ef4444" /><path d="M 66.4 36.4 A 90 90 0 0 0 115.9 11.1 L 121.2 44.7 A 56 56 0 0 1 90.4 60.4 Z" fill="#f97316" /><path d="M 115.9 11.1 A 90 90 0 0 0 144.1 11.1 L 138.8 44.7 A 56 56 0 0 1 121.2 44.7 Z" fill="#eab308" /><path d="M 144.1 11.1 A 90 90 0 0 0 193.6 36.4 L 169.6 60.4 A 56 56 0 0 1 138.8 44.7 Z" fill="#84cc16" /><path d="M 193.6 36.4 A 90 90 0 0 0 220.0 100.0 L 186.0 100.0 A 56 56 0 0 1 169.6 60.4 Z" fill="#16a34a" />
+  <line x1="130" y1="100" x2="158.3" y2="61.3" stroke="#1e293b" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="130" cy="100" r="5" fill="#1e293b"/>
+  <text x="32.0" y="100.0" font-size="9" fill="#64748b" text-anchor="middle" dominant-baseline="middle">0</text><text x="60.7" y="30.7" font-size="9" fill="#64748b" text-anchor="middle" dominant-baseline="middle">25</text><text x="130.0" y="2.0" font-size="9" fill="#64748b" text-anchor="middle" dominant-baseline="middle">50</text><text x="199.3" y="30.7" font-size="9" fill="#64748b" text-anchor="middle" dominant-baseline="middle">75</text><text x="228.0" y="100.0" font-size="9" fill="#64748b" text-anchor="middle" dominant-baseline="middle">100</text>
+  <text x="130" y="78" font-size="26" font-weight="800" fill="#84cc16" text-anchor="middle">70</text>
+</svg>
+      <div class="fg-rating" style="color:#84cc16">貪婪</div>
+      <div class="fg-sub">CNN Fear &amp; Greed</div>
+      <svg viewBox="0 0 240 50" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:240px;display:block;margin-top:8px"><polygon points="0,50 0.0,39.5 8.3,39.3 16.6,39.8 24.8,39.6 33.1,42.8 41.4,41.8 49.7,42.2 57.9,43.0 66.2,40.9 74.5,40.9 82.8,42.5 91.0,42.8 99.3,43.1 107.6,42.4 115.9,43.1 124.1,40.5 132.4,38.1 140.7,38.8 149.0,36.2 157.2,32.8 165.5,31.1 173.8,31.7 182.1,28.6 190.3,25.4 198.6,21.2 206.9,18.4 215.2,16.0 223.4,14.5 231.7,15.0 240.0,15.0 240,50" fill="#84cc1633"/><polyline points="0.0,39.5 8.3,39.3 16.6,39.8 24.8,39.6 33.1,42.8 41.4,41.8 49.7,42.2 57.9,43.0 66.2,40.9 74.5,40.9 82.8,42.5 91.0,42.8 99.3,43.1 107.6,42.4 115.9,43.1 124.1,40.5 132.4,38.1 140.7,38.8 149.0,36.2 157.2,32.8 165.5,31.1 173.8,31.7 182.1,28.6 190.3,25.4 198.6,21.2 206.9,18.4 215.2,16.0 223.4,14.5 231.7,15.0 240.0,15.0" fill="none" stroke="#84cc16" stroke-width="1.5"/><circle cx="240.0" cy="15.0" r="3" fill="#84cc16"/></svg>
+    </div>
+    <div class="fg-right">
+      <div class="cmp-title">與歷史相比</div>
+      <div class="cmp-row"><span class="cmp-lbl">昨日收盤</span><span class="cmp-val">70</span><span class="cmp-diff up">+0.2</span></div><div class="cmp-row"><span class="cmp-lbl">一週前</span><span class="cmp-val">49</span><span class="cmp-diff up">+21.0</span></div><div class="cmp-row"><span class="cmp-lbl">一個月前</span><span class="cmp-val">16</span><span class="cmp-diff up">+54.5</span></div><div class="cmp-row"><span class="cmp-lbl">一年前</span><span class="cmp-val">12</span><span class="cmp-diff up">+57.7</span></div>
+      <div class="fg-note">
+        ℹ️ 指數由市場動能、強弱、期權比率、垃圾債券需求等 7 項子指標合成，
+        0 = 極度恐懼，100 = 極度貪婪。
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="panel rrp-panel">
+  <div class="panel-ttl">🏦 隔夜逆回購 (RRP) <span class="src-note">FRED · RRPONTSYD</span></div>
+  <div class="rrp-top">
+    <div class="rrp-main">
+      <div class="rrp-val">0.5<span class="rrp-unit">B USD</span></div>
+      <div class="rrp-date">2026-04-20</div>
+      <div class="rrp-changes">
+        <span class="rc-row">日變動：<span class="up">+0.4B</span></span>
+        <span class="rc-sep">·</span>
+        <span class="rc-row">週前：<span class="mu">0.2B</span><span class="up"> +0.3B</span></span>
+      </div>
+    </div>
+    <div class="rrp-desc">
+      <div class="rrp-desc-title">指標意義</div>
+      <ul>
+        <li>聯準會 ON RRP：銀行把隔夜閒置資金停放聯準會</li>
+        <li>數字上升 → 市場資金過剩，流動性充裕</li>
+        <li>數字下降 → 資金轉向風險資產 / 國庫券</li>
+      </ul>
+    </div>
+  </div>
+  <div class="rrp-chart"><svg viewBox="0 0 480 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+  <line x1="50" y1="102.0" x2="464" y2="102.0" stroke="#e2e8f0" stroke-width="1"/><text x="46" y="102.0" font-size="9" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">0B</text><line x1="50" y1="57.0" x2="464" y2="57.0" stroke="#e2e8f0" stroke-width="1"/><text x="46" y="57.0" font-size="9" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">53B</text><line x1="50" y1="12.0" x2="464" y2="12.0" stroke="#e2e8f0" stroke-width="1"/><text x="46" y="12.0" font-size="9" fill="#94a3b8" text-anchor="end" dominant-baseline="middle">106B</text>
+  <polygon points="50.0,102 50.0,99.4 54.7,97.8 59.3,99.7 64.0,101.4 68.6,99.9 73.3,100.8 77.9,93.3 82.6,92.2 87.2,99.5 91.9,100.8 96.5,97.1 101.2,98.0 105.8,84.8 110.5,93.1 115.1,91.4 119.8,12.0 124.4,97.3 129.1,96.6 133.7,99.9 138.4,98.2 143.0,99.5 147.7,99.3 152.3,99.2 157.0,99.3 161.6,99.4 166.3,100.4 170.9,101.1 175.6,99.1 180.2,99.3 184.9,100.4 189.6,101.3 194.2,100.9 198.9,101.1 203.5,101.2 208.2,99.7 212.8,93.9 217.5,93.3 222.1,100.6 226.8,100.1 231.4,100.6 236.1,99.5 240.7,101.0 245.4,100.9 250.0,101.2 254.7,99.7 259.3,101.8 264.0,101.7 268.6,101.4 273.3,101.6 277.9,101.7 282.6,101.4 287.2,101.3 291.9,101.1 296.5,98.9 301.2,88.2 305.8,101.6 310.5,101.1 315.1,101.4 319.8,99.7 324.4,100.8 329.1,101.8 333.8,101.9 338.4,101.6 343.1,102.0 347.7,101.8 352.4,101.6 357.0,101.4 361.7,101.5 366.3,101.6 371.0,101.4 375.6,101.4 380.3,101.2 384.9,101.5 389.6,101.4 394.2,101.3 398.9,101.5 403.5,88.7 408.2,100.3 412.8,101.8 417.5,101.9 422.1,89.1 426.8,102.0 431.4,101.8 436.1,101.7 440.7,101.9 445.4,101.9 450.0,101.9 454.7,102.0 459.3,102.0 464.0,101.7 464.0,102" fill="#dbeafe" opacity="0.5"/>
+  <polyline points="50.0,99.4 54.7,97.8 59.3,99.7 64.0,101.4 68.6,99.9 73.3,100.8 77.9,93.3 82.6,92.2 87.2,99.5 91.9,100.8 96.5,97.1 101.2,98.0 105.8,84.8 110.5,93.1 115.1,91.4 119.8,12.0 124.4,97.3 129.1,96.6 133.7,99.9 138.4,98.2 143.0,99.5 147.7,99.3 152.3,99.2 157.0,99.3 161.6,99.4 166.3,100.4 170.9,101.1 175.6,99.1 180.2,99.3 184.9,100.4 189.6,101.3 194.2,100.9 198.9,101.1 203.5,101.2 208.2,99.7 212.8,93.9 217.5,93.3 222.1,100.6 226.8,100.1 231.4,100.6 236.1,99.5 240.7,101.0 245.4,100.9 250.0,101.2 254.7,99.7 259.3,101.8 264.0,101.7 268.6,101.4 273.3,101.6 277.9,101.7 282.6,101.4 287.2,101.3 291.9,101.1 296.5,98.9 301.2,88.2 305.8,101.6 310.5,101.1 315.1,101.4 319.8,99.7 324.4,100.8 329.1,101.8 333.8,101.9 338.4,101.6 343.1,102.0 347.7,101.8 352.4,101.6 357.0,101.4 361.7,101.5 366.3,101.6 371.0,101.4 375.6,101.4 380.3,101.2 384.9,101.5 389.6,101.4 394.2,101.3 398.9,101.5 403.5,88.7 408.2,100.3 412.8,101.8 417.5,101.9 422.1,89.1 426.8,102.0 431.4,101.8 436.1,101.7 440.7,101.9 445.4,101.9 450.0,101.9 454.7,102.0 459.3,102.0 464.0,101.7" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/>
+  <circle cx="464.0" cy="101.7" r="4" fill="#3b82f6"/>
+  <text x="50.0" y="116" font-size="9" fill="#94a3b8" text-anchor="middle">12-09</text><text x="259.3" y="116" font-size="9" fill="#94a3b8" text-anchor="middle">02-13</text><text x="464.0" y="116" font-size="9" fill="#94a3b8" text-anchor="middle">04-20</text>
+</svg></div>
+</div>
+  <div class="panel etf-panel">
+  <div class="panel-ttl">📊 台股 ETF 板塊概覽</div>
+  <div class="etf-grid"><div class="etf-card" style="background:rgb(148,251,21);color:#fff">
+  <div class="etf-code">00891</div>
+  <div class="etf-name">中信關鍵半導體</div>
+  <div class="etf-pct">+2.70%</div>
+  <div class="etf-sub">半導體 </div>
+</div><div class="etf-card" style="background:rgb(160,246,53);color:#fff">
+  <div class="etf-code">00881</div>
+  <div class="etf-name">國泰台灣5G+</div>
+  <div class="etf-pct">+2.23%</div>
+  <div class="etf-sub">通訊 </div>
+</div><div class="etf-card" style="background:rgb(171,241,83);color:#fff">
+  <div class="etf-code">006208</div>
+  <div class="etf-name">富邦台50</div>
+  <div class="etf-pct">+1.81%</div>
+  <div class="etf-sub">大盤 </div>
+</div><div class="etf-card" style="background:rgb(174,240,89);color:#fff">
+  <div class="etf-code">0050</div>
+  <div class="etf-name">元大台灣50</div>
+  <div class="etf-pct">+1.71%</div>
+  <div class="etf-sub">大盤 </div>
+</div><div class="etf-card" style="background:rgb(178,238,100);color:#fff">
+  <div class="etf-code">00892</div>
+  <div class="etf-name">富邦台灣半導體</div>
+  <div class="etf-pct">+1.56%</div>
+  <div class="etf-sub">半導體 </div>
+</div><div class="etf-card" style="background:rgb(199,228,156);color:#0f172a">
+  <div class="etf-code">00893</div>
+  <div class="etf-name">國泰智能電動車</div>
+  <div class="etf-pct">+0.76%</div>
+  <div class="etf-sub">電動車 </div>
+</div><div class="etf-card" style="background:rgb(204,226,168);color:#0f172a">
+  <div class="etf-code">00900</div>
+  <div class="etf-name">富邦特選高股息</div>
+  <div class="etf-pct">+0.60%</div>
+  <div class="etf-sub">高息 </div>
+</div><div class="etf-card" style="background:rgb(209,224,182);color:#0f172a">
+  <div class="etf-code">00895</div>
+  <div class="etf-name">富邦未來車</div>
+  <div class="etf-pct">+0.39%</div>
+  <div class="etf-sub">電動車 </div>
+</div><div class="etf-card" style="background:rgb(211,202,202);color:#0f172a">
+  <div class="etf-code">00919</div>
+  <div class="etf-name">群益台灣精選高息</div>
+  <div class="etf-pct">-0.13%</div>
+  <div class="etf-sub">高息 </div>
+</div></div>
+</div>
+</div>
+<script>
+// 無互動邏輯需求 — 保留空白
+</script>
+</body></html>

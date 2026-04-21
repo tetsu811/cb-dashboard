@@ -1,0 +1,39 @@
+name: Update TW Market Dashboard
+
+on:
+  schedule:
+    # 台股收盤後執行：台灣時間 14:30 = UTC 06:30（EDT 夏令無影響）
+    - cron: '30 6 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install yfinance pandas requests
+
+      - name: Generate TW market dashboard
+        run: python generate_tw_market.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tw_market.html tw_market_latest.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto update TW market dashboard $(date -u +%Y-%m-%d)"
+            git push
+          fi
