@@ -14,6 +14,8 @@ from datetime import datetime, timedelta, timezone
 import pandas as pd
 import yfinance as yf
 
+from key_stocks_universe import get_universe as get_key_stocks_universe
+
 TODAY = datetime.now().date()
 NOW_UTC = datetime.now(timezone.utc)
 OUTPUT_HTML = 'us_index.html'
@@ -59,6 +61,17 @@ EARNINGS_PAST_DAYS = 3         # 過去 N 個交易日內公布的財報
 EARNINGS_UPCOMING_DAYS = 7     # 未來 N 個交易日內將公布的財報
 STREAK_LOOKBACK = 10           # 連續性訊號回看天數
 NEWS_WORKERS = 8               # 抓新聞並發數
+
+# 重點個股（Universe 掃描）參數
+KEY_SCAN_CHUNK_SIZE = 200      # 批次下載每批 tickers 數量（避免 yfinance 單次太多失敗）
+KEY_VOL_VS_YDAY = 1.5          # 今日量 ≥ 昨日量 × 此倍數（擇一）
+KEY_VOL_VS_AVG20 = 2.0         # 今日量 ≥ 20 日均量 × 此倍數（擇一）
+KEY_NEW_HIGH_LOOKBACK = 60     # 創 N 日新高
+KEY_RSI_BOT_BEFORE = 40        # RSI 底部：5 日前 RSI < 此值
+KEY_RSI_BOT_AFTER = 50         # RSI 反彈：今日 RSI > 此值
+KEY_MA_ALIGN_TOL = 0.05        # MA20 / MA60 距離 ≤ 此比例（糾結判定）
+KEY_MIN_PRICE = 2.0            # 最低股價（避免 penny stocks）
+KEY_MIN_DOLLAR_VOL = 3e6       # 最低日成交額（3M 美元，過濾流動性太差）
 
 
 # ── 資料抓取 ────────────────────────────────────────────────────────────────
@@ -210,6 +223,201 @@ def fetch_stocks_bars(symbols):
         except Exception:
             continue
     return out
+
+
+# ── 重點個股掃描（Universe-level volume + pattern filter） ──────────────────
+
+def _compute_rsi_series(closes, period=RSI_PERIOD):
+    """回傳 RSI 時序（pandas Series），對齊 closes.index。不足 period+1 則回傳空 Series。"""
+    if len(closes) < period + 1:
+        return pd.Series(dtype=float)
+    diffs = closes.diff()
+    gains = diffs.clip(lower=0)
+    losses = (-diffs).clip(lower=0)
+    # Wilder smoothing via EMA with alpha = 1/period
+    avg_gain = gains.ewm(alpha=1 / period, adjust=False, min_periods=period).mean()
+    avg_loss = losses.ewm(alpha=1 / period, adjust=False, min_periods=period).mean()
+    rs = avg_gain / avg_loss.replace(0, pd.NA)
+    rsi = 100 - 100 / (1 + rs)
+    return rsi
+
+
+def _analyze_stock_for_key_scan(sym, bars):
+    """
+    為單檔個股計算「放量 + 型態」訊號。
+    回傳 dict（含通過訊號），若不符基本資料要求則回傳 None。
+    """
+    try:
+        bars = bars.dropna(subset=["Close"])
+    except Exception:
+        return None
+    if bars is None or len(bars) < 60:
+        return None
+    closes = bars["Close"]
+    highs = bars["High"] if "High" in bars else closes
+    volumes = bars["Volume"]
+
+    last = float(closes.iloc[-1])
+    prev = float(closes.iloc[-2])
+    if last < KEY_MIN_PRICE:
+        return None
+
+    vol_today = float(volumes.iloc[-1])
+    vol_yday = float(volumes.iloc[-2])
+    vol_avg5 = float(volumes.iloc[-6:-1].mean()) if len(volumes) >= 6 else None
+    vol_avg20 = float(volumes.iloc[-21:-1].mean()) if len(volumes) >= 21 else float(volumes.mean())
+    dollar_vol = last * vol_today
+    if dollar_vol < KEY_MIN_DOLLAR_VOL:
+        return None
+
+    # 放量觸發（擇一）
+    vol_vs_yday = (vol_today / vol_yday) if vol_yday else None
+    vol_vs_avg20 = (vol_today / vol_avg20) if vol_avg20 else None
+    vol_vs_avg5 = (vol_today / vol_avg5) if vol_avg5 else None
+
+    vol_trigger = False
+    vol_reasons = []
+    if vol_vs_yday and vol_vs_yday >= KEY_VOL_VS_YDAY:
+        vol_trigger = True
+        vol_reasons.append(f"量 / 昨 ×{vol_vs_yday:.2f}")
+    if vol_vs_avg20 and vol_vs_avg20 >= KEY_VOL_VS_AVG20:
+        vol_trigger = True
+        vol_reasons.append(f"量 / 20 日均 ×{vol_vs_avg20:.2f}")
+    if not vol_trigger:
+        return None
+
+    # 型態檢測
+    patterns = []
+
+    # A. 創 60 日新高（用收盤對比前 59 日收盤最高，含當日不要）
+    lookback = min(KEY_NEW_HIGH_LOOKBACK, len(closes) - 1)
+    prior_max_close = float(closes.iloc[-(lookback + 1):-1].max())
+    prior_max_high = float(highs.iloc[-(lookback + 1):-1].max())
+    new_high_close = last >= prior_max_close
+    new_high_intraday = float(highs.iloc[-1]) >= prior_max_high
+    if new_high_close or new_high_intraday:
+        patterns.append(f"{lookback} 日新高")
+
+    # B. RSI 反彈（5 日前 RSI < 40，今日 RSI > 50，代理底部圓弧）
+    rsi_series = _compute_rsi_series(closes)
+    rsi_today = None
+    rsi_5d = None
+    if len(rsi_series) >= 6:
+        rsi_today = float(rsi_series.iloc[-1]) if pd.notna(rsi_series.iloc[-1]) else None
+        rsi_5d = float(rsi_series.iloc[-6]) if pd.notna(rsi_series.iloc[-6]) else None
+    if rsi_today is not None and rsi_5d is not None:
+        if rsi_5d < KEY_RSI_BOT_BEFORE and rsi_today > KEY_RSI_BOT_AFTER:
+            patterns.append(f"RSI 反彈（{rsi_5d:.0f}→{rsi_today:.0f}）")
+
+    # C. 均線糾結後站上（MA20 與 MA60 距離 <= 5%，收盤站上兩者）
+    ma20 = float(closes.iloc[-20:].mean()) if len(closes) >= 20 else None
+    ma60 = float(closes.iloc[-60:].mean()) if len(closes) >= 60 else None
+    ma_align = False
+    if ma20 and ma60:
+        ma_gap = abs(ma20 - ma60) / ((ma20 + ma60) / 2)
+        if ma_gap <= KEY_MA_ALIGN_TOL and last > ma20 and last > ma60:
+            ma_align = True
+            patterns.append(f"MA20/60 糾結突破（價差 {ma_gap*100:.1f}%）")
+
+    if not patterns:
+        return None
+
+    day_pct = (last / prev - 1) * 100
+
+    # 一併算一些共用的技術指標（給 UI 顯示）
+    def pct_over(n):
+        if len(closes) <= n:
+            return None
+        return float((last / closes.iloc[-(n + 1)] - 1) * 100)
+
+    ma50 = float(closes.iloc[-50:].mean()) if len(closes) >= 50 else None
+    ma200 = float(closes.iloc[-200:].mean()) if len(closes) >= 200 else None
+
+    return {
+        "symbol": sym,
+        "name": sym,            # 之後會用 yf.Ticker.info 補 longName，沒有就用 symbol
+        "close": last,
+        "day_pct": day_pct,
+        "pct_5d": pct_over(5),
+        "pct_20d": pct_over(20),
+        "pct_60d": pct_over(60),
+        "volume": int(vol_today),
+        "vol_yesterday": int(vol_yday) if vol_yday else None,
+        "vol_vs_yday": vol_vs_yday,
+        "vol_vs_avg5": vol_vs_avg5,
+        "vol_ratio": vol_vs_avg20,              # 對齊既有欄位名
+        "dollar_vol": dollar_vol,
+        "rsi": rsi_today,
+        "rsi_5d_ago": rsi_5d,
+        "ma20": ma20,
+        "ma50": ma50,
+        "ma60": ma60,
+        "ma200": ma200,
+        "above_ma20": bool(ma20 and last > ma20),
+        "above_ma50": bool(ma50 and last > ma50),
+        "above_ma200": bool(ma200 and last > ma200),
+        "new_60d_high": new_high_close or new_high_intraday,
+        "ma_align": ma_align,
+        "vol_reasons": vol_reasons,
+        "patterns": patterns,
+    }
+
+
+def scan_key_stocks(universe):
+    """
+    批次掃描 universe 裡所有個股，回傳符合「放量 + 型態」條件的 list。
+    """
+    if not universe:
+        return []
+    print(f"掃描重點個股 universe（共 {len(universe)} 檔，分批 {KEY_SCAN_CHUNK_SIZE}）...")
+    matches = []
+    for i in range(0, len(universe), KEY_SCAN_CHUNK_SIZE):
+        chunk = universe[i:i + KEY_SCAN_CHUNK_SIZE]
+        try:
+            df = yf.download(
+                chunk, period="1y", interval="1d",
+                auto_adjust=False, progress=False,
+                group_by="ticker", threads=True,
+            )
+        except Exception as e:
+            print(f"  chunk {i // KEY_SCAN_CHUNK_SIZE} 下載失敗: {e}")
+            continue
+        avail = set(df.columns.get_level_values(0)) if hasattr(df.columns, "get_level_values") else set()
+        for sym in chunk:
+            if sym not in avail:
+                continue
+            try:
+                bars = df[sym]
+            except Exception:
+                continue
+            result = _analyze_stock_for_key_scan(sym, bars)
+            if result:
+                matches.append(result)
+        print(f"  已掃 {min(i + KEY_SCAN_CHUNK_SIZE, len(universe))} / {len(universe)}，累計命中 {len(matches)}")
+
+    # 依 vol_vs_yday 排序，由大到小
+    matches.sort(key=lambda x: (x.get("vol_vs_yday") or 0), reverse=True)
+    print(f"重點個股掃描完成：{len(matches)} 檔命中")
+    return matches
+
+
+def enrich_key_stocks_with_names(stocks):
+    """用 yf.Ticker.info 補個股中文 / 長名稱（best-effort，失敗就用 symbol）。"""
+    if not stocks:
+        return
+    def _fetch_name(sym):
+        try:
+            info = yf.Ticker(sym).info or {}
+            return sym, info.get("longName") or info.get("shortName") or sym
+        except Exception:
+            return sym, sym
+    symbols = [s["symbol"] for s in stocks]
+    name_map = {}
+    with ThreadPoolExecutor(max_workers=NEWS_WORKERS) as ex:
+        for sym, name in ex.map(_fetch_name, symbols):
+            name_map[sym] = name
+    for s in stocks:
+        s["name"] = name_map.get(s["symbol"], s["symbol"])
 
 
 # ── 歸因計算 ────────────────────────────────────────────────────────────────
@@ -638,6 +846,43 @@ def attach_news_and_earnings(sectors, news_map, earn_map):
     attach_enrichment(sectors, news_map, earn_map, {})
 
 
+def attach_key_stocks_enrichment(key_stocks, news_map, earn_map, chip_map):
+    """把新聞 / 財報 / 籌碼 掛到重點個股上，並建構 5 角度歸因。
+
+    重點個股原本沒有 sector 的 tech dict 包裹，為了重用 build_surge_attribution 與
+    _gen_stock_detail（後者讀 c['tech']），這裡把技術欄位封裝進 c['tech']。
+    """
+    for ks in key_stocks:
+        sym = ks["symbol"]
+        full_news = news_map.get(sym, [])
+        ks["news"] = full_news[:NEWS_PER_STOCK]
+        ks["all_news"] = full_news
+        ks["chip"] = chip_map.get(sym, {}) or {}
+        earn = earn_map.get(sym) or {}
+        ks["earnings"] = {"past": earn.get("past"), "upcoming": earn.get("upcoming")}
+
+        # 包裝 tech（給 _gen_stock_detail 用）
+        ks["tech"] = {
+            "close": ks.get("close"),
+            "pct_5d": ks.get("pct_5d"),
+            "pct_20d": ks.get("pct_20d"),
+            "vol_vs_yday": ks.get("vol_vs_yday"),
+            "vol_ratio": ks.get("vol_ratio"),
+            "ma20": ks.get("ma20"),
+            "ma50": ks.get("ma50"),
+            "ma200": ks.get("ma200"),
+            "above_ma20": ks.get("above_ma20"),
+            "above_ma50": ks.get("above_ma50"),
+            "above_ma200": ks.get("above_ma200"),
+            "rsi": ks.get("rsi"),
+        }
+
+        # 重點個股沒有板塊權重，給 _gen_stock_row contrib 模式一個預設值
+        ks.setdefault("weight", 0.0)
+
+        ks["attribution"] = build_surge_attribution(ks)
+
+
 # ── 歷史快照與趨勢 ──────────────────────────────────────────────────────────
 
 def save_history_snapshot(sectors, market):
@@ -939,7 +1184,27 @@ details.stock-row[open] > summary .chev{transform:rotate(180deg)}
 .stock-detail .sd-news-item a:hover{color:var(--bl);text-decoration:underline}
 .stock-detail .sd-news-meta{font-size:10.5px;color:var(--mu);margin-top:1px}
 .empty-msg{color:var(--mu);font-size:13px;padding:16px 0;text-align:center}
-@media(max-width:768px){.hdr,.market,.pane{padding-left:16px;padding-right:16px}.heat{grid-template-columns:repeat(2,1fr)}}
+/* 重點個股區塊 */
+.key-stocks-panel{background:linear-gradient(135deg,#fff7ed 0%,#fef3c7 40%,#fff 100%);border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:12px;padding:14px 18px;margin-bottom:20px}
+.key-stocks-panel.empty{background:var(--card);border:1px solid var(--brd);border-left:4px solid var(--mu)}
+.ks-hdr{margin-bottom:12px}
+.ks-title{font-size:16px;font-weight:800;color:#78350f;margin-bottom:4px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ks-count{font-size:12px;background:#f59e0b;color:#fff;padding:2px 10px;border-radius:12px;font-weight:700}
+.ks-sub{font-size:12px;color:#92400e;line-height:1.7}
+.key-stocks-panel.empty .ks-title{color:var(--txt)}
+.key-stocks-panel.empty .ks-sub{color:var(--mu)}
+.ks-groups{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ks-group-h{font-size:13px;font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid}
+.ks-group-up{color:var(--gr);border-bottom-color:#bbf7d0}
+.ks-group-dn{color:var(--rd);border-bottom-color:#fecaca}
+.ks-row{gap:8px}
+.ks-row .nm{max-width:180px;min-width:100px}
+.ks-pats{display:flex;flex-wrap:wrap;gap:3px;flex:0 0 auto;margin-right:6px}
+.ks-pat{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;background:#e2e8f0;color:#475569;white-space:nowrap}
+.ks-pat-high{background:#dcfce7;color:#15803d}
+.ks-pat-rsi{background:#dbeafe;color:#1e40af}
+.ks-pat-ma{background:#e9d5ff;color:#6b21a8}
+@media(max-width:768px){.hdr,.market,.pane{padding-left:16px;padding-right:16px}.heat{grid-template-columns:repeat(2,1fr)}.ks-groups{grid-template-columns:1fr}}
 """
 
 JS = """
@@ -1522,11 +1787,86 @@ def _gen_trends_panel(trends, sectors):
     return f'<div class="trends">{"".join(boxes)}</div>'
 
 
-def generate_html(sectors, market, trends):
+def _gen_key_stocks_panel(key_stocks):
+    """重點個股掃描區塊：跨 universe 的放量 + 型態命中清單。"""
+    if not key_stocks:
+        return f'''<div class="key-stocks-panel empty">
+  <div class="ks-hdr">
+    <div class="ks-title">🎯 重點個股放量監測</div>
+    <div class="ks-sub">跨 {len(get_key_stocks_universe())} 檔 universe 掃描「放量 + 型態」命中清單</div>
+  </div>
+  <div class="empty-msg">今日無符合條件的重點個股（量 ≥ 昨 ×{KEY_VOL_VS_YDAY} 或 ≥ 20 日均 ×{KEY_VOL_VS_AVG20}，且出現 60 日新高／RSI 底部反彈／MA20-60 糾結突破）</div>
+</div>'''
+
+    # 命中統計
+    n_high = sum(1 for s in key_stocks if s.get("new_60d_high"))
+    n_rsi  = sum(1 for s in key_stocks if "RSI 反彈" in " ".join(s.get("patterns", [])))
+    n_ma   = sum(1 for s in key_stocks if s.get("ma_align"))
+
+    # 漲 / 跌分組
+    gainers = [s for s in key_stocks if (s.get("day_pct") or 0) > 0]
+    losers  = [s for s in key_stocks if (s.get("day_pct") or 0) <= 0]
+
+    def _render_one(s):
+        cls = "up" if (s.get("day_pct") or 0) >= 0 else "dn"
+        vr_yday = s.get("vol_vs_yday")
+        vr_avg20 = s.get("vol_ratio")
+        vr_yday_txt = f"×{vr_yday:.2f}" if vr_yday else "─"
+        vr_avg20_txt = f"×{vr_avg20:.2f}" if vr_avg20 else "─"
+
+        # 型態 pills
+        pattern_pills = ""
+        for p in s.get("patterns", []):
+            if "新高" in p:
+                pattern_pills += f'<span class="ks-pat ks-pat-high">🚀 {p}</span>'
+            elif "RSI" in p:
+                pattern_pills += f'<span class="ks-pat ks-pat-rsi">📈 {p}</span>'
+            elif "MA" in p:
+                pattern_pills += f'<span class="ks-pat ks-pat-ma">〰️ {p}</span>'
+            else:
+                pattern_pills += f'<span class="ks-pat">{p}</span>'
+
+        # 基本資訊行
+        summary = f'''<summary class="row-item ks-row">
+  <span class="sym">{s["symbol"]}</span>
+  <span class="nm" title="{s.get("name", s["symbol"])}">{s.get("name", s["symbol"])}</span>
+  <span class="ks-pats">{pattern_pills}</span>
+  <span class="val am" title="量 / 昨日">{vr_yday_txt}</span>
+  <span class="val mu" title="量 / 20 日均" style="min-width:60px">{vr_avg20_txt}</span>
+  <span class="val {cls}" style="min-width:60px">{_fmt_pct(s.get("day_pct"))}</span>
+  <span class="chev">▾</span>
+</summary>'''
+        return f'<details class="stock-row">{summary}{_gen_stock_detail(s)}</details>'
+
+    gainers_html = "".join(_render_one(s) for s in gainers) if gainers else '<div class="empty-msg" style="font-size:12px">無上漲命中</div>'
+    losers_html  = "".join(_render_one(s) for s in losers)  if losers  else '<div class="empty-msg" style="font-size:12px">無下跌命中</div>'
+
+    return f'''<div class="key-stocks-panel">
+  <div class="ks-hdr">
+    <div class="ks-title">🎯 重點個股放量監測 <span class="ks-count">{len(key_stocks)} 檔命中</span></div>
+    <div class="ks-sub">跨 {len(get_key_stocks_universe())} 檔 universe（S&P 500 + 半導體/AI/成長股）掃描<br/>
+      篩選條件：今日量 ≥ 昨日量 ×{KEY_VOL_VS_YDAY} <b>或</b> ≥ 20 日均量 ×{KEY_VOL_VS_AVG20}，<b>且</b>命中下列型態之一 ——
+      🚀 {KEY_NEW_HIGH_LOOKBACK} 日新高（{n_high} 檔）・📈 RSI 底部反彈 <{KEY_RSI_BOT_BEFORE}→>{KEY_RSI_BOT_AFTER}（{n_rsi} 檔）・〰️ MA20/60 糾結突破（{n_ma} 檔）</div>
+  </div>
+  <div class="ks-groups">
+    <div class="ks-group">
+      <h4 class="ks-group-h ks-group-up">▲ 放量上漲（{len(gainers)} 檔）</h4>
+      {gainers_html}
+    </div>
+    <div class="ks-group">
+      <h4 class="ks-group-h ks-group-dn">▼ 放量下跌（{len(losers)} 檔）</h4>
+      {losers_html}
+    </div>
+  </div>
+</div>'''
+
+
+def generate_html(sectors, market, trends, key_stocks=None):
     market_row = _gen_market_row(market)
     heatmap = _gen_sector_cards(sectors)
     drill = _gen_drill_panels(sectors)
     trend_panel = _gen_trends_panel(trends, sectors)
+    key_stocks_panel = _gen_key_stocks_panel(key_stocks or [])
 
     return f"""<!DOCTYPE html>
 <html lang="zh-TW"><head><meta charset="UTF-8"/>
@@ -1543,6 +1883,7 @@ def generate_html(sectors, market, trends):
 <div class="market">{market_row}</div>
 <div class="pane">
   {trend_panel}
+  {key_stocks_panel}
   <div class="ttl">板塊熱力圖</div>
   <div class="desc">11 檔 SPDR 行業 ETF 當日漲跌排序。顏色越深表示漲/跌幅越大。點擊任一板塊查看「為什麼」——包含推升股、拖累股、放量個股、技術面、本週財報、相關新聞</div>
   {heatmap}
@@ -1555,11 +1896,11 @@ def generate_html(sectors, market, trends):
 
 # ── 持久化（快取今日資料以便 debug） ────────────────────────────────────────
 
-def save_cache(sectors, market):
-    # 清理成 json-safe
+def save_cache(sectors, market, key_stocks=None):
+    # 清理成 json-safe；也避免把 all_news（原始陣列）灌滿快取
     def clean(o):
         if isinstance(o, dict):
-            return {k: clean(v) for k, v in o.items() if k != "all_holdings"}
+            return {k: clean(v) for k, v in o.items() if k not in ("all_holdings", "all_news")}
         if isinstance(o, list):
             return [clean(x) for x in o]
         return o
@@ -1568,6 +1909,7 @@ def save_cache(sectors, market):
         "trade_date": TODAY.isoformat(),
         "sectors": clean(sectors),
         "market": clean(market),
+        "key_stocks": clean(key_stocks or []),
     }
     with open(CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
@@ -1593,7 +1935,22 @@ def main():
 
     market = build_market_report(bars_df)
 
-    # 蒐集所有需要新聞/財報的個股（top gainers + losers + full top-10 for earnings）
+    # 重點個股 universe 掃描（放量 + 型態）
+    universe = get_key_stocks_universe()
+    # 去除已經在 sector top-10 裡的個股，避免重複（它們已經有自己的歸因區塊）
+    sector_syms = set()
+    for s in sectors:
+        if s.get("status") != "ok":
+            continue
+        for c in s.get("all_holdings", []):
+            sector_syms.add(c["symbol"])
+    universe_filtered = [sym for sym in universe if sym not in sector_syms]
+    print(f"（已排除 {len(universe) - len(universe_filtered)} 檔已在板塊 top-10 的個股）")
+    key_stocks = scan_key_stocks(universe_filtered)
+    if key_stocks:
+        enrich_key_stocks_with_names(key_stocks)
+
+    # 蒐集所有需要新聞/財報的個股（top gainers + losers + full top-10 + 重點個股）
     enrich_syms = set()
     for s in sectors:
         if s.get("status") != "ok":
@@ -1602,8 +1959,11 @@ def main():
             enrich_syms.add(c["symbol"])
         for c in s.get("all_holdings", []):
             enrich_syms.add(c["symbol"])
+    for ks in key_stocks:
+        enrich_syms.add(ks["symbol"])
     news_map, earn_map, chip_map = fetch_stock_enrichment(enrich_syms)
     attach_enrichment(sectors, news_map, earn_map, chip_map)
+    attach_key_stocks_enrichment(key_stocks, news_map, earn_map, chip_map)
 
     # 持久化今日 snapshot，計算趨勢
     save_history_snapshot(sectors, market)
@@ -1612,12 +1972,12 @@ def main():
     trends = compute_sector_trends(history, sectors)
     print(f"歷史快照 {len(history)} 天，趨勢計算完成")
 
-    html = generate_html(sectors, market, trends)
+    html = generate_html(sectors, market, trends, key_stocks)
     with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"\n儀表板輸出至 {OUTPUT_HTML}")
 
-    save_cache(sectors, market)
+    save_cache(sectors, market, key_stocks)
     print(f"快取輸出至 {CACHE_FILE}")
 
     ok_count = sum(1 for s in sectors if s["status"] == "ok")
