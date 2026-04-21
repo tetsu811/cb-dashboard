@@ -373,6 +373,33 @@ def find_snapshot_n_trading_days_back(n):
     return None, None
 
 
+def find_oldest_available_snapshot():
+    """Return the oldest daily snapshot in etf_data/. Returns (data, date_str) or (None, None)."""
+    try:
+        files = sorted(f for f in os.listdir(DATA_DIR) if re.match(r'^\d{4}-\d{2}-\d{2}\.json$', f))
+    except FileNotFoundError:
+        return None, None
+    for fname in files:
+        date_str = fname[:-5]  # strip .json
+        snap = load_snapshot(date_str)
+        if snap:
+            return snap, date_str
+    return None, None
+
+
+def count_trading_days_between(d1_str, d2):
+    """Count trading weekdays strictly after d1_str up to and including d2.
+    d1_str: ISO date string, d2: date object."""
+    d1 = datetime.strptime(d1_str, '%Y-%m-%d').date()
+    count = 0
+    cur = d1 + timedelta(days=1)
+    while cur <= d2:
+        if cur.weekday() < 5:
+            count += 1
+        cur += timedelta(days=1)
+    return count
+
+
 def is_tw_only_ok(etf_entry):
     """ETF qualifies for the universe if status=ok and ALL holdings are TW stocks (numeric codes)."""
     if etf_entry.get('status') != 'ok':
@@ -1630,24 +1657,24 @@ def _gen_health(health):
     return html
 
 
-def _gen_v3_stats(today_data, stock_view, collective, snap_1d_date, snap_5d_date):
+def _gen_v3_stats(today_data, stock_view, collective, snap_1d_date, snap_5d_date, snap_5d_label='5 日'):
     """Stats for the v3 layout: universe size, AUM, 1d/5d total flows, signals."""
     total_etf = len(today_data)
     total_aum = round(sum(e.get('aum_billion', 0) or 0 for e in today_data.values()), 0)
     flow_1d = round(sum(abs(s['net_flow_1d']) for s in stock_view), 1)
     flow_5d = round(sum(abs(s['net_flow_5d']) for s in stock_view), 1)
     collective_n = len(collective.get('buys', [])) + len(collective.get('sells', []))
-    flow_5d_label = f'{flow_5d:.0f}億' if snap_5d_date else '累積中'
+    flow_5d_val = f'{flow_5d:.0f}億' if snap_5d_date else '累積中'
     return f"""<div class="stats">
   <div class="sc"><div class="n">{int(total_aum):,}億</div><div class="l">追蹤主動式 ETF 總規模</div></div>
   <div class="sc"><div class="n">{total_etf}</div><div class="l">追蹤 ETF 檔數（純台股）</div></div>
   <div class="sc gr"><div class="n">{flow_1d:.0f}億</div><div class="l">1 日總資金流動</div></div>
-  <div class="sc am"><div class="n">{flow_5d_label}</div><div class="l">5 日總資金流動</div></div>
+  <div class="sc am"><div class="n">{flow_5d_val}</div><div class="l">{snap_5d_label}總資金流動</div></div>
   <div class="sc rd"><div class="n">{collective_n}</div><div class="l">集體訊號數</div></div>
 </div>"""
 
 
-def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date):
+def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date, snap_5d_label='5 日'):
     """Render stock-perspective table."""
     if not stock_view:
         return '<div class="empty-msg">無資料</div>'
@@ -1664,9 +1691,9 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date):
     html += '<th class="num sortable-th" onclick="sortTable(this,3,\'num\')">總投入<br/>(億) <span class="sort-hint">⇅</span></th>'
     html += '<th class="num sortable-th" onclick="sortTable(this,4,\'num\')">1 日<br/>淨流入 <span class="sort-hint">⇅</span></th>'
     if snap_5d_date:
-        html += '<th class="num sortable-th" onclick="sortTable(this,5,\'num\')">5 日<br/>淨流入 <span class="sort-hint">⇅</span></th>'
+        html += f'<th class="num sortable-th" onclick="sortTable(this,5,\'num\')">{snap_5d_label}<br/>淨流入 <span class="sort-hint">⇅</span></th>'
     else:
-        html += '<th class="num" style="color:#94a3b8">5 日<br/>淨流入</th>'
+        html += f'<th class="num" style="color:#94a3b8">{snap_5d_label}<br/>淨流入</th>'
     html += '<th>持有 ETF（徽章顯示：ETF 代號｜持倉金額｜佔該 ETF 權重｜今日進出）</th></tr>'
 
     for s in filtered:
@@ -1729,7 +1756,7 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date):
             if abs(f1) >= 0.005:
                 title += f' | 1 日 {("+" if f1>0 else "")}{_fmt_capital(f1)}'
             if snap_5d_date and abs(f5) >= 0.005:
-                title += f' | 5 日 {("+" if f5>0 else "")}{_fmt_capital(f5)}'
+                title += f' | {snap_5d_label} {("+" if f5>0 else "")}{_fmt_capital(f5)}'
             if is_first:
                 title += f' | 近期新增（系統起算日 {baseline_date or "n/a"} 後首見）'
 
@@ -1778,14 +1805,14 @@ def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date):
     return html
 
 
-def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_date):
+def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_date, snap_5d_label='5 日'):
     """Render fund-perspective view: dropdown selector + per-fund cards.
     Falls back to 1-day window (holdings + AUM) when 5-day data is still accumulating."""
     if not fund_view:
         return '<div class="empty-msg">無基金資料</div>'
 
     use_5d = bool(snap_5d_date)
-    window_label = '5 日' if use_5d else '1 日'
+    window_label = snap_5d_label if use_5d else '1 日'
     suffix = '_5d' if use_5d else '_1d'
 
     sorted_funds = sorted(fund_view.items(), key=lambda x: -(x[1]['aum'] or 0))
@@ -1793,7 +1820,7 @@ def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_d
     if use_5d:
         banner = ''
     else:
-        banner = f'<div class="warn-box" style="margin:0 0 14px;">5 日比較資料尚在累積（基準：{snap_1d_date or "無"}），目前以 <b>1 日</b> 變化顯示。累積滿 5 個交易日後自動切換。</div>'
+        banner = f'<div class="warn-box" style="margin:0 0 14px;">{snap_5d_label}比較資料尚在累積（基準：{snap_1d_date or "無"}），目前以 <b>1 日</b> 變化顯示。累積滿 5 個交易日後自動切換。</div>'
 
     html = banner
     html += '<select class="etf-select" onchange="filterETF(this)"><option value="all">全部 ETF</option>'
@@ -1815,7 +1842,7 @@ def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_d
             return f'<span class="{cls}">{label} {arrow}{_fmt_capital(abs(d))}</span>'
 
         aum_d1_str = fmt_aum_delta(info['aum_delta_1d'], '1 日')
-        aum_d5_str = fmt_aum_delta(info['aum_delta_5d'], '5 日') if use_5d else ''
+        aum_d5_str = fmt_aum_delta(info['aum_delta_5d'], snap_5d_label) if use_5d else ''
 
         html += f'<div class="etf-detail" data-code="{code}"><div class="etf-section">'
         html += f'<h3>{code} {info["name"]}</h3>'
@@ -2074,10 +2101,10 @@ def _gen_collective_moves(collective):
     return html
 
 
-def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date, baseline_date):
-    stats = _gen_v3_stats(today_data_tw, stock_view, collective, snap_1d_date, snap_5d_date)
-    tab_stock = _gen_stock_view(stock_view, today_data_tw, snap_5d_date, baseline_date)
-    tab_fund = _gen_fund_view(fund_view, today_data_tw, snap_1d_date, snap_5d_date, baseline_date)
+def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date, baseline_date, snap_5d_label='5 日'):
+    stats = _gen_v3_stats(today_data_tw, stock_view, collective, snap_1d_date, snap_5d_date, snap_5d_label)
+    tab_stock = _gen_stock_view(stock_view, today_data_tw, snap_5d_date, baseline_date, snap_5d_label)
+    tab_fund = _gen_fund_view(fund_view, today_data_tw, snap_1d_date, snap_5d_date, baseline_date, snap_5d_label)
     tab_collective = _gen_collective_moves(collective)
     tab_holdings = _gen_individual_holdings(today_data_tw)
 
@@ -2091,7 +2118,7 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
 <style>{CSS}</style></head><body>
 <div class="hdr">
   <h1>主動式 ETF 資金流向監測</h1>
-  <div class="sub">更新：{TODAY.isoformat()}｜1 日比較基準：{snap_1d_str}｜5 日比較基準：{snap_5d_str}<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
+  <div class="sub">更新：{TODAY.isoformat()}｜1 日比較基準：{snap_1d_str}｜{snap_5d_label}比較基準：{snap_5d_str}<a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
 </div>
 {stats}
 <div class="tabs">
@@ -2192,9 +2219,19 @@ def main():
     # ── Load comparison snapshots for 1d / 5d periods (filtered to universe)
     snap_1d_full, snap_1d_date = find_snapshot_n_trading_days_back(1)
     snap_5d_full, snap_5d_date = find_snapshot_n_trading_days_back(TRADING_DAYS_LOOKBACK)
+
+    # Fallback: if T-5 snapshot not yet accumulated, use the oldest available snapshot
+    snap_5d_label = '5 日'
+    if snap_5d_full is None:
+        snap_5d_full, snap_5d_date = find_oldest_available_snapshot()
+        if snap_5d_date:
+            actual_days = count_trading_days_between(snap_5d_date, TODAY)
+            snap_5d_label = f'{actual_days} 日'
+            print(f"  ↳ 未找到 T-5 快照，改用最舊快照 {snap_5d_date}（實際 {actual_days} 個交易日）")
+
     snap_1d = filter_universe_snapshot(snap_1d_full, universe_codes)
     snap_5d = filter_universe_snapshot(snap_5d_full, universe_codes)
-    print(f"\n比較基準: 1日 = {snap_1d_date or '無'} | 5日 = {snap_5d_date or '累積中'}")
+    print(f"\n比較基準: 1日 = {snap_1d_date or '無'} | {snap_5d_label} = {snap_5d_date or '累積中'}")
 
     # ── Compute flows for both periods
     flows_1d = compute_capital_flows(today_data_tw, snap_1d, first_seen, baseline_date) if snap_1d else {}
@@ -2212,7 +2249,7 @@ def main():
     collective = compute_collective_moves(big_actions)
 
     # ── Render
-    html = generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date, baseline_date)
+    html = generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_date, snap_5d_date, baseline_date, snap_5d_label)
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"\nDashboard written to {OUTPUT_HTML}")
