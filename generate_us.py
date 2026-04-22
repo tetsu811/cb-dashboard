@@ -73,17 +73,61 @@ KEY_MA_ALIGN_TOL = 0.05        # MA20 / MA60 距離 ≤ 此比例（糾結判定
 KEY_MIN_PRICE = 2.0            # 最低股價（避免 penny stocks）
 KEY_MIN_DOLLAR_VOL = 3e6       # 最低日成交額（3M 美元，過濾流動性太差）
 
+# yfinance 重試（避開 SQLite 快取 'database is locked' 偶發失敗）
+FETCH_RETRIES = 2              # 重試次數（總計 = 1 次原始 + 此次）
+FETCH_RETRY_SLEEP = 5          # 每次重試之間 sleep 秒數
+
 
 # ── 資料抓取 ────────────────────────────────────────────────────────────────
+
+def _yf_download_with_retry(tickers, required=None, period="1y", interval="1d",
+                            retries=FETCH_RETRIES, sleep_s=FETCH_RETRY_SLEEP, label=""):
+    """
+    封裝 yfinance 批次下載，若關鍵 ticker 缺漏則重試。
+    - required: 必須出現在結果裡的 tickers（通常是 ETF / 指數 / 使用者點名）；若 None 則
+      只要有任一 ticker 成功就算過關。
+    - 每次失敗 sleep_s 秒後重試，最多 retries 次。
+    """
+    tickers = list(tickers)
+    required = list(required) if required else None
+    last_df = None
+    last_missing = tickers
+    for attempt in range(retries + 1):
+        try:
+            df = yf.download(
+                tickers, period=period, interval=interval,
+                auto_adjust=False, progress=False,
+                group_by="ticker", threads=True,
+            )
+        except Exception as e:
+            print(f"  [{label}] 第 {attempt + 1} 次下載 exception: {e}")
+            df = None
+        if df is not None and hasattr(df, "columns") and len(df.columns) > 0:
+            try:
+                avail = set(df.columns.get_level_values(0))
+            except Exception:
+                avail = set()
+            check_list = required if required is not None else tickers
+            missing = [t for t in check_list if t not in avail]
+            last_df, last_missing = df, missing
+            if not missing:
+                if attempt > 0:
+                    print(f"  [{label}] 重試第 {attempt} 次後成功補齊所有 tickers")
+                return df
+            print(f"  [{label}] 第 {attempt + 1} 次下載缺漏 {len(missing)} 檔: {missing[:10]}"
+                  + (" ..." if len(missing) > 10 else ""))
+        if attempt < retries:
+            time.sleep(sleep_s)
+    if last_missing:
+        print(f"  [{label}] 重試 {retries} 次後仍缺漏：{last_missing}")
+    return last_df
+
 
 def fetch_sector_and_market_bars():
     """一次抓取所有 ETF 與大盤指標的 60 日 K 線，用於算 1d/5d/20d/50d 指標。"""
     tickers = [s[0] for s in SECTORS] + [m[0] for m in MARKET_TICKERS]
-    df = yf.download(
-        tickers, period="1y", interval="1d",
-        auto_adjust=False, progress=False, group_by="ticker", threads=True,
-    )
-    return df
+    # 這些都是必須的 — 一檔都不能掉
+    return _yf_download_with_retry(tickers, required=tickers, label="sectors+market")
 
 
 def _ticker_bars(df, ticker):
@@ -170,10 +214,10 @@ def fetch_stocks_bars(symbols):
     """批次抓取多檔個股的近 1 年 K 線，算完整技術面指標。"""
     if not symbols:
         return {}
-    df = yf.download(
-        list(symbols), period="1y", interval="1d",
-        auto_adjust=False, progress=False, group_by="ticker", threads=True,
-    )
+    # 板塊 top-10 的個股 — 全部都希望拿到，但有零星缺漏不 fatal
+    df = _yf_download_with_retry(list(symbols), required=list(symbols), label="sector holdings")
+    if df is None:
+        return {}
     out = {}
     for sym in symbols:
         try:
@@ -373,14 +417,11 @@ def scan_key_stocks(universe):
     matches = []
     for i in range(0, len(universe), KEY_SCAN_CHUNK_SIZE):
         chunk = universe[i:i + KEY_SCAN_CHUNK_SIZE]
-        try:
-            df = yf.download(
-                chunk, period="1y", interval="1d",
-                auto_adjust=False, progress=False,
-                group_by="ticker", threads=True,
-            )
-        except Exception as e:
-            print(f"  chunk {i // KEY_SCAN_CHUNK_SIZE} 下載失敗: {e}")
+        # Universe 內有部分退市 ticker 本來就會缺，這裡不強制每檔都要成功，只要整批有結果即可。
+        # 重試目的是擋掉整批 SQLite lock 導致空 df 的情況。
+        df = _yf_download_with_retry(chunk, required=None, label=f"universe chunk {i // KEY_SCAN_CHUNK_SIZE}")
+        if df is None:
+            print(f"  chunk {i // KEY_SCAN_CHUNK_SIZE} 重試後仍失敗，略過")
             continue
         avail = set(df.columns.get_level_values(0)) if hasattr(df.columns, "get_level_values") else set()
         for sym in chunk:
