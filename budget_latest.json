@@ -1,197 +1,6 @@
 {
-  "generated_at": "2026-04-24T11:54:16.709321+00:00",
+  "generated_at": "2026-04-25T11:30:44.982123+00:00",
   "records": [
-    {
-      "bill_id": "119-hr-1197",
-      "pipeline_version": "v0.2",
-      "title": "PREEMIE Reauthorization Act of 2025",
-      "congress": 119,
-      "type": "hr",
-      "number": "1197",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/1197",
-      "policy_area": "Health",
-      "stage": "referred",
-      "stage_label": "交付委員會",
-      "passage_baseline": 0.05,
-      "passage_nuance_adj": 0.12,
-      "passage_nuance_reason": "雖仍處於初始referred階段，但37位共同提案人且明顯跨黨派（9R/28D）為強力正向訊號，且PREEMIE法案屬於歷史上多次成功再授權的健康類法案，提升通過機率。",
-      "passage_prob": 0.52,
-      "cosponsors_total": 37,
-      "cosponsors_R": 9,
-      "cosponsors_D": 28,
-      "budget": {
-        "total_amount_usd": null,
-        "period_years": 5,
-        "programs": [
-          {
-            "name": "CDC Preterm Birth Research, Epidemiological Studies, Data Tracking, and Prevention (Section 3(e) reauthorization FY2025-2029)",
-            "amount_usd": null,
-            "industry_hint": "公共衛生／母嬰健康研究"
-          },
-          {
-            "name": "Interagency Working Group on Preterm Birth Prevention",
-            "amount_usd": null,
-            "industry_hint": "公共衛生行政協調"
-          },
-          {
-            "name": "National Academies Study on Preterm Births",
-            "amount_usd": null,
-            "industry_hint": "醫學研究／政策評估"
-          }
-        ],
-        "is_appropriation": false,
-        "confidence": 0.2,
-        "notes": "此法案僅延長 PREEMIE Act 授權至 2025-2029 財年，內文未列出具體金額，屬授權再延展而非實際撥款。"
-      },
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2025-02-11",
-        "text": "Referred to the House Committee on Energy and Commerce."
-      },
-      "last_action_date": "2025-02-11",
-      "fetched_at": "2026-04-19T07:56:23.411621+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-8060",
-      "pipeline_version": "v0.2",
-      "title": "To reauthorize funding for programs to prevent, investigate, and prosecute elder abuse, neglect, and exploitation, and for other purposes.",
-      "congress": 119,
-      "type": "hr",
-      "number": "8060",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/8060",
-      "policy_area": null,
-      "stage": "referred",
-      "stage_label": "交付委員會",
-      "passage_baseline": 0.05,
-      "passage_nuance_adj": -0.02,
-      "passage_nuance_reason": "雖為再授權類法案且議題具兩黨共識潛力，但目前僅1位民主黨共同提案人、缺乏跨黨派支持，且被轉介至多個委員會（Ways and Means、Energy and Commerce、Education and Workforce），多重委員會審查會增加推進難度，故略為下調。",
-      "passage_prob": 0.035,
-      "cosponsors_total": 1,
-      "cosponsors_R": 0,
-      "cosponsors_D": 1,
-      "budget": {
-        "total_amount_usd": null,
-        "period_years": null,
-        "programs": [],
-        "is_appropriation": false,
-        "confidence": 0.1,
-        "notes": "法案僅提供標題，無摘要與內文金額段落，無法抽取具體預算數字。此為再授權法案，即使有金額亦屬授權上限而非實際撥款。"
-      },
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-03-24",
-        "text": "Referred to the Committee on Ways and Means, and in addition to the Committees on Energy and Commerce, Education and Workforce, and the Judiciary, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
-      },
-      "last_action_date": "2026-03-24",
-      "fetched_at": "2026-04-19T07:56:33.079286+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-4449",
-      "pipeline_version": "v0.2",
-      "title": "Advocating for Small Business Act",
-      "congress": 119,
-      "type": "hr",
-      "number": "4449",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/4449",
-      "policy_area": "Finance and Financial Sector",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.36,
-      "cosponsors_total": 2,
-      "cosponsors_R": 2,
-      "cosponsors_D": 0,
-      "budget": {
-        "total_amount_usd": null,
-        "period_years": null,
-        "programs": [],
-        "is_appropriation": false,
-        "confidence": 0.15,
-        "notes": "此法案為組織性修正案，主要規定在證券交易委員會內建立小企業辦公室，內文無具體預算撥款或授權金額。"
-      },
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2025-09-08",
-        "text": "Placed on the Union Calendar, Calendar No. 207."
-      },
-      "last_action_date": "2025-09-08",
-      "fetched_at": "2026-04-19T08:39:25.830434+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-3673",
-      "pipeline_version": "v0.2",
-      "title": "Small Business Investor Capital Access Act",
-      "congress": 119,
-      "type": "hr",
-      "number": "3673",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/3673",
-      "policy_area": "Finance and Financial Sector",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.355,
-      "cosponsors_total": 1,
-      "cosponsors_R": 0,
-      "cosponsors_D": 1,
-      "budget": {
-        "total_amount_usd": null,
-        "period_years": null,
-        "programs": [],
-        "is_appropriation": false,
-        "confidence": 0.1,
-        "notes": "法案主要調整投資顧問豁免門檻從1.5億美元至1.75億美元，以及設立5年通膨調整機制，並非撥款或授權特定預算支出的法案。"
-      },
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2025-09-08",
-        "text": "Placed on the Union Calendar, Calendar No. 211."
-      },
-      "last_action_date": "2025-09-08",
-      "fetched_at": "2026-04-19T08:39:21.531548+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-2148",
-      "pipeline_version": "v0.2",
-      "title": "Veteran Caregiver Reeducation, Reemployment, and Retirement Act",
-      "congress": 119,
-      "type": "hr",
-      "number": "2148",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2148",
-      "policy_area": "Armed Forces and National Security",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.32,
-      "cosponsors_total": 8,
-      "cosponsors_R": 2,
-      "cosponsors_D": 6,
-      "budget": {
-        "total_amount_usd": null,
-        "period_years": null,
-        "programs": [],
-        "is_appropriation": false,
-        "confidence": 0.2,
-        "notes": "法案為授權法案(Authorization)，內文未含具體撥款金額。主要規定VA提供家庭照護者就業協助、喪慮諮詢等服務，但未指定預算額度。"
-      },
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-02-12",
-        "text": "Ordered to be Reported in the Nature of a Substitute (Amended) by Voice Vote."
-      },
-      "last_action_date": "2026-02-12",
-      "fetched_at": "2026-04-19T08:39:30.352784+00:00",
-      "beneficiaries": []
-    },
     {
       "bill_id": "119-sjres-99",
       "pipeline_version": "v0.2",
@@ -390,15 +199,15 @@
           "confidence": 0.75,
           "share_usd": 96000000.0,
           "yf_name": "Granite Construction Incorporated",
-          "market_cap": 5332680192,
+          "market_cap": 5396996608,
           "revenue_ttm": 4424378880,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 16000000.0,
-          "budget_to_mcap_pct": 0.30003674369978045,
+          "budget_to_mcap_pct": 0.29646118317515907,
           "budget_to_revenue_pct": 0.3616326818737549,
-          "expected_alpha_bp": 10.651304401342205
+          "expected_alpha_bp": 10.524372002718145
         },
         {
           "ticker": "ACM",
@@ -408,15 +217,15 @@
           "confidence": 0.75,
           "share_usd": 84000000.00000001,
           "yf_name": "AECOM",
-          "market_cap": 10402563072,
+          "market_cap": 10390927360,
           "revenue_ttm": 15956303872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 14000000.000000002,
-          "budget_to_mcap_pct": 0.13458221693154665,
+          "budget_to_mcap_pct": 0.1347329214704471,
           "budget_to_revenue_pct": 0.08773961759757594,
-          "expected_alpha_bp": 4.7776687010699055
+          "expected_alpha_bp": 4.783018712200872
         },
         {
           "ticker": "TTEK",
@@ -426,15 +235,15 @@
           "confidence": 0.7,
           "share_usd": 60000000.0,
           "yf_name": "Tetra Tech, Inc.",
-          "market_cap": 8171101184,
+          "market_cap": 8147628544,
           "revenue_ttm": 4457205760,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 10000000.0,
-          "budget_to_mcap_pct": 0.12238252562067405,
+          "budget_to_mcap_pct": 0.12273509949547352,
           "budget_to_revenue_pct": 0.22435580806572414,
-          "expected_alpha_bp": 4.344579659533928
+          "expected_alpha_bp": 4.35709603208931
         },
         {
           "ticker": "ROAD",
@@ -444,15 +253,15 @@
           "confidence": 0.55,
           "share_usd": 36000000.0,
           "yf_name": "Construction Partners, Inc.",
-          "market_cap": 6879617024,
+          "market_cap": 6791452672,
           "revenue_ttm": 3060244992,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.08721415711177821,
+          "budget_to_mcap_pct": 0.08834634193560645,
           "budget_to_revenue_pct": 0.1960627340518494,
-          "expected_alpha_bp": 3.0961025774681263
+          "expected_alpha_bp": 3.1362951387140283
         },
         {
           "ticker": "J",
@@ -462,15 +271,15 @@
           "confidence": 0.65,
           "share_usd": 60000000.0,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 14983852032,
+          "market_cap": 14868753408,
           "revenue_ttm": 12390108160,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 10000000.0,
-          "budget_to_mcap_pct": 0.06673851275789214,
+          "budget_to_mcap_pct": 0.0672551338071125,
           "budget_to_revenue_pct": 0.0807095456380584,
-          "expected_alpha_bp": 2.3692172029051703
+          "expected_alpha_bp": 2.3875572501524935
         },
         {
           "ticker": "STRL",
@@ -480,15 +289,15 @@
           "confidence": 0.6,
           "share_usd": 60000000.0,
           "yf_name": "Sterling Infrastructure, Inc.",
-          "market_cap": 15207520256,
+          "market_cap": 15253847040,
           "revenue_ttm": 2490049024,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 10000000.0,
-          "budget_to_mcap_pct": 0.06575694019578625,
+          "budget_to_mcap_pct": 0.06555723270186928,
           "budget_to_revenue_pct": 0.4015985188892409,
-          "expected_alpha_bp": 2.3343713769504117
+          "expected_alpha_bp": 2.3272817609163594
         },
         {
           "ticker": "PRIM",
@@ -498,15 +307,15 @@
           "confidence": 0.5,
           "share_usd": 36000000.0,
           "yf_name": "Primoris Services Corporation",
-          "market_cap": 9356565504,
+          "market_cap": 9306130432,
           "revenue_ttm": 7574900224,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.06412609410402734,
+          "budget_to_mcap_pct": 0.06447362890346388,
           "budget_to_revenue_pct": 0.07920896411268691,
-          "expected_alpha_bp": 2.2764763406929704
+          "expected_alpha_bp": 2.2888138260729676
         },
         {
           "ticker": "EXP",
@@ -516,15 +325,15 @@
           "confidence": 0.4,
           "share_usd": 24000000.0,
           "yf_name": "Eagle Materials Inc.",
-          "market_cap": 6550457344,
+          "market_cap": 6561773056,
           "revenue_ttm": 2299727104,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 4000000.0,
-          "budget_to_mcap_pct": 0.061064438556551574,
+          "budget_to_mcap_pct": 0.06095913354306656,
           "budget_to_revenue_pct": 0.17393368078510937,
-          "expected_alpha_bp": 2.1677875687575807
+          "expected_alpha_bp": 2.1640492407788625
         },
         {
           "ticker": "USLM",
@@ -534,15 +343,15 @@
           "confidence": 0.3,
           "share_usd": 12000000.0,
           "yf_name": "United States Lime & Minerals, Inc.",
-          "market_cap": 3795055104,
+          "market_cap": 3769825792,
           "revenue_ttm": 372727008,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 2000000.0,
-          "budget_to_mcap_pct": 0.05270015705152723,
+          "budget_to_mcap_pct": 0.05305284939808698,
           "budget_to_revenue_pct": 0.5365857469604134,
-          "expected_alpha_bp": 1.8708555753292166
+          "expected_alpha_bp": 1.8833761536320877
         },
         {
           "ticker": "MTZ",
@@ -552,15 +361,15 @@
           "confidence": 0.5,
           "share_usd": 36000000.0,
           "yf_name": "MasTec, Inc.",
-          "market_cap": 30181588992,
+          "market_cap": 29648711680,
           "revenue_ttm": 14299170816,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.01987966903131036,
+          "budget_to_mcap_pct": 0.020236967004699208,
           "budget_to_revenue_pct": 0.04196047503178523,
-          "expected_alpha_bp": 0.7057282506115177
+          "expected_alpha_bp": 0.7184123286668219
         },
         {
           "ticker": "MLM",
@@ -570,15 +379,15 @@
           "confidence": 0.55,
           "share_usd": 36000000.0,
           "yf_name": "Martin Marietta Materials, Inc.",
-          "market_cap": 37326524416,
+          "market_cap": 37110001664,
           "revenue_ttm": 6150000128,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.016074360240805333,
+          "budget_to_mcap_pct": 0.01616814802199412,
           "budget_to_revenue_pct": 0.09756097357921877,
-          "expected_alpha_bp": 0.5706397885485893
+          "expected_alpha_bp": 0.5739692547807911
         },
         {
           "ticker": "VMC",
@@ -588,15 +397,15 @@
           "confidence": 0.55,
           "share_usd": 36000000.0,
           "yf_name": "Vulcan Materials Company",
-          "market_cap": 38222184448,
+          "market_cap": 38138613760,
           "revenue_ttm": 7941100032,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.015697689932303055,
+          "budget_to_mcap_pct": 0.015732087269235872,
           "budget_to_revenue_pct": 0.07555628283011157,
-          "expected_alpha_bp": 0.5572679925967584
+          "expected_alpha_bp": 0.5584890980578734
         },
         {
           "ticker": "WSP",
@@ -1107,34 +916,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-s-1657",
-      "pipeline_version": "v0.2",
-      "title": "Review Every Veteran’s Claim Act of 2025",
-      "congress": 119,
-      "type": "s",
-      "number": "1657",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1657",
-      "policy_area": "Armed Forces and National Security",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.355,
-      "cosponsors_total": 1,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-03-18",
-        "text": "Committee on Veterans' Affairs. Ordered to be reported without amendment favorably."
-      },
-      "last_action_date": "2026-03-18",
-      "fetched_at": "2026-04-19T11:26:20.389330+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-1116",
       "pipeline_version": "v0.2",
       "title": "Ensuring Veterans’ Final Resting Place Act of 2025",
@@ -1160,6 +941,34 @@
       },
       "last_action_date": "2026-03-18",
       "fetched_at": "2026-04-19T11:26:21.580379+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-1657",
+      "pipeline_version": "v0.2",
+      "title": "Review Every Veteran’s Claim Act of 2025",
+      "congress": 119,
+      "type": "s",
+      "number": "1657",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1657",
+      "policy_area": "Armed Forces and National Security",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.355,
+      "cosponsors_total": 1,
+      "cosponsors_R": 0,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-18",
+        "text": "Committee on Veterans' Affairs. Ordered to be reported without amendment favorably."
+      },
+      "last_action_date": "2026-03-18",
+      "fetched_at": "2026-04-19T11:26:20.389330+00:00",
       "beneficiaries": []
     },
     {
@@ -1330,15 +1139,15 @@
           "confidence": 0.8,
           "share_usd": 33200000.0,
           "yf_name": "Tetra Tech, Inc.",
-          "market_cap": 8171101184,
+          "market_cap": 8147628544,
           "revenue_ttm": 4457205760,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6640000.0,
-          "budget_to_mcap_pct": 0.08126199701212757,
+          "budget_to_mcap_pct": 0.08149610606499441,
           "budget_to_revenue_pct": 0.1489722565556408,
-          "expected_alpha_bp": 1.9096569297849981
+          "expected_alpha_bp": 1.915158492527369
         },
         {
           "ticker": "MWA",
@@ -1348,15 +1157,15 @@
           "confidence": 0.6,
           "share_usd": 16600000.0,
           "yf_name": "Mueller Water Products, Inc.",
-          "market_cap": 4392863232,
+          "market_cap": 4405374464,
           "revenue_ttm": 1443600000,
           "sector": "Industrials",
           "industry": "Specialty Industrial Machinery",
           "country": "United States",
           "annual_share_usd": 3320000.0,
-          "budget_to_mcap_pct": 0.07557713101139407,
+          "budget_to_mcap_pct": 0.07536249249934364,
           "budget_to_revenue_pct": 0.22998060404544196,
-          "expected_alpha_bp": 1.776062578767761
+          "expected_alpha_bp": 1.7710185737345758
         },
         {
           "ticker": "ACM",
@@ -1366,15 +1175,15 @@
           "confidence": 0.75,
           "share_usd": 29050000.000000004,
           "yf_name": "AECOM",
-          "market_cap": 10402563072,
+          "market_cap": 10390927360,
           "revenue_ttm": 15956303872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 5810000.000000001,
-          "budget_to_mcap_pct": 0.05585162002659185,
+          "budget_to_mcap_pct": 0.05591416241023555,
           "budget_to_revenue_pct": 0.036411941302994015,
-          "expected_alpha_bp": 1.3125130706249089
+          "expected_alpha_bp": 1.3139828166405356
         },
         {
           "ticker": "MYRG",
@@ -1384,15 +1193,15 @@
           "confidence": 0.45,
           "share_usd": 12450000.0,
           "yf_name": "MYR Group Inc.",
-          "market_cap": 5253321728,
+          "market_cap": 5272435712,
           "revenue_ttm": 3657889024,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 2490000.0,
-          "budget_to_mcap_pct": 0.047398581867324006,
+          "budget_to_mcap_pct": 0.047226749381368276,
           "budget_to_revenue_pct": 0.06807204875989152,
-          "expected_alpha_bp": 1.1138666738821144
+          "expected_alpha_bp": 1.1098286104621549
         },
         {
           "ticker": "J",
@@ -1402,15 +1211,15 @@
           "confidence": 0.75,
           "share_usd": 29050000.000000004,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 14983852032,
+          "market_cap": 14868753408,
           "revenue_ttm": 12390108160,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 5810000.000000001,
-          "budget_to_mcap_pct": 0.03877507591233534,
+          "budget_to_mcap_pct": 0.03907523274193237,
           "budget_to_revenue_pct": 0.046892246015711944,
-          "expected_alpha_bp": 0.9112142839398806
+          "expected_alpha_bp": 0.9182679694354109
         },
         {
           "ticker": "PRIM",
@@ -1420,15 +1229,15 @@
           "confidence": 0.5,
           "share_usd": 16600000.0,
           "yf_name": "Primoris Services Corporation",
-          "market_cap": 9356565504,
+          "market_cap": 9306130432,
           "revenue_ttm": 7574900224,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 3320000.0,
-          "budget_to_mcap_pct": 0.03548310540422846,
+          "budget_to_mcap_pct": 0.035675407993250016,
           "budget_to_revenue_pct": 0.04382896014235342,
-          "expected_alpha_bp": 0.8338529769993689
+          "expected_alpha_bp": 0.8383720878413755
         },
         {
           "ticker": "WMS",
@@ -1438,15 +1247,15 @@
           "confidence": 0.6,
           "share_usd": 20750000.0,
           "yf_name": "Advanced Drainage Systems, Inc.",
-          "market_cap": 11919582208,
+          "market_cap": 11837792256,
           "revenue_ttm": 2989376000,
           "sector": "Industrials",
           "industry": "Building Products & Equipment",
           "country": "United States",
           "annual_share_usd": 4150000.0,
-          "budget_to_mcap_pct": 0.0348166565537395,
+          "budget_to_mcap_pct": 0.0350572126140883,
           "budget_to_revenue_pct": 0.13882495878738574,
-          "expected_alpha_bp": 0.8181914290128784
+          "expected_alpha_bp": 0.8238444964310753
         },
         {
           "ticker": "STN",
@@ -1456,15 +1265,15 @@
           "confidence": 0.6,
           "share_usd": 16600000.0,
           "yf_name": "Stantec Inc.",
-          "market_cap": 10185041920,
+          "market_cap": 10189604864,
           "revenue_ttm": 6494799872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "Canada",
           "annual_share_usd": 3320000.0,
-          "budget_to_mcap_pct": 0.032596822144449256,
+          "budget_to_mcap_pct": 0.03258222516291678,
           "budget_to_revenue_pct": 0.05111781833822146,
-          "expected_alpha_bp": 0.7660253203945577
+          "expected_alpha_bp": 0.7656822913285445
         },
         {
           "ticker": "ROAD",
@@ -1474,15 +1283,15 @@
           "confidence": 0.35,
           "share_usd": 8300000.0,
           "yf_name": "Construction Partners, Inc.",
-          "market_cap": 6879617024,
+          "market_cap": 6791452672,
           "revenue_ttm": 3060244992,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 1660000.0,
-          "budget_to_mcap_pct": 0.024129250134258637,
+          "budget_to_mcap_pct": 0.02444248793551778,
           "budget_to_revenue_pct": 0.05424402308767833,
-          "expected_alpha_bp": 0.567037378155078
+          "expected_alpha_bp": 0.574398466484668
         },
         {
           "ticker": "XYL",
@@ -1492,15 +1301,15 @@
           "confidence": 0.8,
           "share_usd": 24900000.0,
           "yf_name": "Xylem Inc.",
-          "market_cap": 29587877888,
+          "market_cap": 29531955200,
           "revenue_ttm": 9034999808,
           "sector": "Industrials",
           "industry": "Specialty Industrial Machinery",
           "country": "United States",
           "annual_share_usd": 4980000.0,
-          "budget_to_mcap_pct": 0.016831217226361966,
+          "budget_to_mcap_pct": 0.01686308937648666,
           "budget_to_revenue_pct": 0.055118982909003286,
-          "expected_alpha_bp": 0.39553360481950633
+          "expected_alpha_bp": 0.39628260034743656
         },
         {
           "ticker": "FLS",
@@ -1510,15 +1319,15 @@
           "confidence": 0.4,
           "share_usd": 8300000.0,
           "yf_name": "Flowserve Corporation",
-          "market_cap": 10467723264,
+          "market_cap": 10635134976,
           "revenue_ttm": 4729260032,
           "sector": "Industrials",
           "industry": "Specialty Industrial Machinery",
           "country": "United States",
           "annual_share_usd": 1660000.0,
-          "budget_to_mcap_pct": 0.015858271738124544,
+          "budget_to_mcap_pct": 0.01560864064016182,
           "budget_to_revenue_pct": 0.03510062861352091,
-          "expected_alpha_bp": 0.3726693858459268
+          "expected_alpha_bp": 0.3668030550438028
         },
         {
           "ticker": "AOS",
@@ -1528,15 +1337,15 @@
           "confidence": 0.3,
           "share_usd": 4150000.0,
           "yf_name": "A. O. Smith Corporation",
-          "market_cap": 8998028288,
+          "market_cap": 8899878912,
           "revenue_ttm": 3830200064,
           "sector": "Industrials",
           "industry": "Specialty Industrial Machinery",
           "country": "United States",
           "annual_share_usd": 830000.0,
-          "budget_to_mcap_pct": 0.009224243061192742,
+          "budget_to_mcap_pct": 0.009325969580112866,
           "budget_to_revenue_pct": 0.021669886327901223,
-          "expected_alpha_bp": 0.21676971193802944
+          "expected_alpha_bp": 0.2191602851326524
         },
         {
           "ticker": "PWR",
@@ -1546,15 +1355,15 @@
           "confidence": 0.6,
           "share_usd": 33200000.0,
           "yf_name": "Quanta Services, Inc.",
-          "market_cap": 95051931648,
+          "market_cap": 93761445888,
           "revenue_ttm": 28479696896,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6640000.0,
-          "budget_to_mcap_pct": 0.00698565498341423,
+          "budget_to_mcap_pct": 0.007081802053193184,
           "budget_to_revenue_pct": 0.023314854874500416,
-          "expected_alpha_bp": 0.16416289211023444
+          "expected_alpha_bp": 0.16642234825003988
         },
         {
           "ticker": "ROP",
@@ -1564,15 +1373,15 @@
           "confidence": 0.4,
           "share_usd": 8300000.0,
           "yf_name": "Roper Technologies, Inc.",
-          "market_cap": 37440913408,
+          "market_cap": 36374581248,
           "revenue_ttm": 8114999808,
           "sector": "Technology",
           "industry": "Software - Application",
           "country": "United States",
           "annual_share_usd": 1660000.0,
-          "budget_to_mcap_pct": 0.004433652517797036,
+          "budget_to_mcap_pct": 0.004563626420005241,
           "budget_to_revenue_pct": 0.020455946263406244,
-          "expected_alpha_bp": 0.10419083416823037
+          "expected_alpha_bp": 0.10724522087012317
         },
         {
           "ticker": "ECL",
@@ -1582,15 +1391,15 @@
           "confidence": 0.4,
           "share_usd": 8300000.0,
           "yf_name": "Ecolab Inc.",
-          "market_cap": 76663939072,
+          "market_cap": 76110381056,
           "revenue_ttm": 16081200128,
           "sector": "Basic Materials",
           "industry": "Specialty Chemicals",
           "country": "United States",
           "annual_share_usd": 1660000.0,
-          "budget_to_mcap_pct": 0.0021652944266808256,
+          "budget_to_mcap_pct": 0.0021810428182965163,
           "budget_to_revenue_pct": 0.010322612658178841,
-          "expected_alpha_bp": 0.05088441902699942
+          "expected_alpha_bp": 0.05125450622996814
         }
       ]
     },
@@ -2512,34 +2321,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-s-2683",
-      "pipeline_version": "v0.2",
-      "title": "VSAFE Act of 2025",
-      "congress": 119,
-      "type": "s",
-      "number": "2683",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2683",
-      "policy_area": "Armed Forces and National Security",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.475,
-      "cosponsors_total": 5,
-      "cosponsors_R": 2,
-      "cosponsors_D": 2,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-03-18",
-        "text": "Committee on Veterans' Affairs. Ordered to be reported with an amendment in the nature of a substitute favorably."
-      },
-      "last_action_date": "2026-03-18",
-      "fetched_at": "2026-04-19T11:27:11.444334+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-2807",
       "pipeline_version": "v0.2",
       "title": "RESPECT Act of 2025",
@@ -2565,6 +2346,34 @@
       },
       "last_action_date": "2026-03-18",
       "fetched_at": "2026-04-19T11:27:12.845593+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-2683",
+      "pipeline_version": "v0.2",
+      "title": "VSAFE Act of 2025",
+      "congress": 119,
+      "type": "s",
+      "number": "2683",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2683",
+      "policy_area": "Armed Forces and National Security",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.475,
+      "cosponsors_total": 5,
+      "cosponsors_R": 2,
+      "cosponsors_D": 2,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-18",
+        "text": "Committee on Veterans' Affairs. Ordered to be reported with an amendment in the nature of a substitute favorably."
+      },
+      "last_action_date": "2026-03-18",
+      "fetched_at": "2026-04-19T11:27:11.444334+00:00",
       "beneficiaries": []
     },
     {
@@ -2904,6 +2713,41 @@
       "beneficiaries": []
     },
     {
+      "bill_id": "119-hr-2860",
+      "pipeline_version": "v0.2",
+      "title": "Northwest Straits Marine Conservation Initiative Reauthorization Act of 2025",
+      "congress": 119,
+      "type": "hr",
+      "number": "2860",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2860",
+      "policy_area": "Environmental Protection",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.05,
+      "passage_nuance_reason": "委員會一致同意報告並已列入聯合日程，屬再授權類法案通常具延續性優勢；但6位共同提案人全為民主黨、缺乏兩黨支持，在共和黨控制的眾議院推進動力有限，僅給予小幅正向調整。",
+      "passage_prob": 0.5800000000000001,
+      "cosponsors_total": 6,
+      "cosponsors_R": 0,
+      "cosponsors_D": 6,
+      "budget": {
+        "total_amount_usd": null,
+        "period_years": 7,
+        "programs": [],
+        "is_appropriation": false,
+        "confidence": 0.2,
+        "notes": "法案為Northwest Straits海洋保育計畫的再授權，設定7年落日條款，但內文未載明具體授權或撥款金額。"
+      },
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-01-12",
+        "text": "Placed on the Union Calendar, Calendar No. 376."
+      },
+      "last_action_date": "2026-01-12",
+      "fetched_at": "2026-04-19T07:59:48.479787+00:00",
+      "beneficiaries": []
+    },
+    {
       "bill_id": "119-s-1433",
       "pipeline_version": "v0.2",
       "title": "Northwest Straits Marine Conservation Initiative Reauthorization Act of 2025",
@@ -3015,15 +2859,15 @@
           "confidence": 0.15,
           "share_usd": 180000.0,
           "yf_name": "KVH Industries, Inc.",
-          "market_cap": 193231024,
+          "market_cap": 190503968,
           "revenue_ttm": 111009000,
           "sector": "Communication Services",
           "industry": "Telecom Services",
           "country": "United States",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 0.015525457237135998,
+          "budget_to_mcap_pct": 0.015747703480905973,
           "budget_to_revenue_pct": 0.027024835824122368,
-          "expected_alpha_bp": 0.861662876661048
+          "expected_alpha_bp": 0.8739975431902816
         },
         {
           "ticker": "CDZI",
@@ -3033,15 +2877,15 @@
           "confidence": 0.1,
           "share_usd": 180000.0,
           "yf_name": "Cadiz Inc.",
-          "market_cap": 391260288,
+          "market_cap": 393763008,
           "revenue_ttm": 16313000,
           "sector": "Utilities",
           "industry": "Utilities - Regulated Water",
           "country": "United States",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 0.0076675300100990575,
+          "budget_to_mcap_pct": 0.007618795923054305,
           "budget_to_revenue_pct": 0.18390240912155947,
-          "expected_alpha_bp": 0.4255479155604977
+          "expected_alpha_bp": 0.42284317372951397
         },
         {
           "ticker": "TTEK",
@@ -3051,15 +2895,15 @@
           "confidence": 0.35,
           "share_usd": 900000.0,
           "yf_name": "Tetra Tech, Inc.",
-          "market_cap": 8171101184,
+          "market_cap": 8147628544,
           "revenue_ttm": 4457205760,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 150000.0,
-          "budget_to_mcap_pct": 0.0018357378843101106,
+          "budget_to_mcap_pct": 0.0018410264924321029,
           "budget_to_revenue_pct": 0.003365337120985862,
-          "expected_alpha_bp": 0.10188345257921114
+          "expected_alpha_bp": 0.10217697032998171
         },
         {
           "ticker": "OSIS",
@@ -3069,15 +2913,15 @@
           "confidence": 0.15,
           "share_usd": 180000.0,
           "yf_name": "OSI Systems, Inc.",
-          "market_cap": 4716914688,
+          "market_cap": 4820032512,
           "revenue_ttm": 1798018944,
           "sector": "Technology",
           "industry": "Electronic Components",
           "country": "United States",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 0.0006360089589137805,
+          "budget_to_mcap_pct": 0.0006224024407576444,
           "budget_to_revenue_pct": 0.0016685029988204618,
-          "expected_alpha_bp": 0.03529849721971482
+          "expected_alpha_bp": 0.03454333546204927
         },
         {
           "ticker": "J",
@@ -3087,15 +2931,15 @@
           "confidence": 0.25,
           "share_usd": 540000.0,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 14983852032,
+          "market_cap": 14868753408,
           "revenue_ttm": 12390108160,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 90000.0,
-          "budget_to_mcap_pct": 0.0006006466148210292,
+          "budget_to_mcap_pct": 0.0006052962042640126,
           "budget_to_revenue_pct": 0.0007263859107425257,
-          "expected_alpha_bp": 0.033335887122567125
+          "expected_alpha_bp": 0.033593939336652695
         },
         {
           "ticker": "ESE",
@@ -3105,15 +2949,15 @@
           "confidence": 0.2,
           "share_usd": 180000.0,
           "yf_name": "ESCO Technologies Inc.",
-          "market_cap": 8259983360,
+          "market_cap": 8287704064,
           "revenue_ttm": 1170454016,
           "sector": "Technology",
           "industry": "Scientific & Technical Instruments",
           "country": "United States",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 0.00036319685757817317,
+          "budget_to_mcap_pct": 0.00036198203710378045,
           "budget_to_revenue_pct": 0.002563107955537144,
-          "expected_alpha_bp": 0.020157425595588613
+          "expected_alpha_bp": 0.020090003059259814
         },
         {
           "ticker": "XYL",
@@ -3123,15 +2967,15 @@
           "confidence": 0.3,
           "share_usd": 540000.0,
           "yf_name": "Xylem Inc.",
-          "market_cap": 29587877888,
+          "market_cap": 29531955200,
           "revenue_ttm": 9034999808,
           "sector": "Industrials",
           "industry": "Specialty Industrial Machinery",
           "country": "United States",
           "annual_share_usd": 90000.0,
-          "budget_to_mcap_pct": 0.00030417862457280667,
+          "budget_to_mcap_pct": 0.0003047546272859035,
           "budget_to_revenue_pct": 0.0009961261971506619,
-          "expected_alpha_bp": 0.01688191366379077
+          "expected_alpha_bp": 0.01691388181436765
         },
         {
           "ticker": "AECOM",
@@ -3152,41 +2996,6 @@
           "expected_alpha_bp": 0.0
         }
       ]
-    },
-    {
-      "bill_id": "119-hr-2860",
-      "pipeline_version": "v0.2",
-      "title": "Northwest Straits Marine Conservation Initiative Reauthorization Act of 2025",
-      "congress": 119,
-      "type": "hr",
-      "number": "2860",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2860",
-      "policy_area": "Environmental Protection",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.05,
-      "passage_nuance_reason": "委員會一致同意報告並已列入聯合日程，屬再授權類法案通常具延續性優勢；但6位共同提案人全為民主黨、缺乏兩黨支持，在共和黨控制的眾議院推進動力有限，僅給予小幅正向調整。",
-      "passage_prob": 0.5800000000000001,
-      "cosponsors_total": 6,
-      "cosponsors_R": 0,
-      "cosponsors_D": 6,
-      "budget": {
-        "total_amount_usd": null,
-        "period_years": 7,
-        "programs": [],
-        "is_appropriation": false,
-        "confidence": 0.2,
-        "notes": "法案為Northwest Straits海洋保育計畫的再授權，設定7年落日條款，但內文未載明具體授權或撥款金額。"
-      },
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-01-12",
-        "text": "Placed on the Union Calendar, Calendar No. 376."
-      },
-      "last_action_date": "2026-01-12",
-      "fetched_at": "2026-04-19T07:59:48.479787+00:00",
-      "beneficiaries": []
     },
     {
       "bill_id": "119-hr-452",
@@ -3782,15 +3591,15 @@
           "confidence": 0.3,
           "share_usd": 2475675.0,
           "yf_name": "Fate Therapeutics, Inc.",
-          "market_cap": 153467776,
+          "market_cap": 154630400,
           "revenue_ttm": 6646000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 495135.0,
-          "budget_to_mcap_pct": 0.3226312473570999,
+          "budget_to_mcap_pct": 0.3202054705931046,
           "budget_to_revenue_pct": 7.450120373156786,
-          "expected_alpha_bp": 17.260771733604845
+          "expected_alpha_bp": 17.130992676731097
         },
         {
           "ticker": "ORGO",
@@ -3800,15 +3609,15 @@
           "confidence": 0.15,
           "share_usd": 825225.0,
           "yf_name": "Organogenesis Holdings Inc.",
-          "market_cap": 299732768,
+          "market_cap": 302305568,
           "revenue_ttm": 564169024,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - Specialty & Generic",
           "country": "United States",
           "annual_share_usd": 165045.0,
-          "budget_to_mcap_pct": 0.05506404958699745,
+          "budget_to_mcap_pct": 0.05459542180843986,
           "budget_to_revenue_pct": 0.029254530642221152,
-          "expected_alpha_bp": 2.9459266529043635
+          "expected_alpha_bp": 2.9208550667515327
         },
         {
           "ticker": "GERN",
@@ -3836,33 +3645,15 @@
           "confidence": 0.55,
           "share_usd": 4951350.0,
           "yf_name": "Mesoblast Limited",
-          "market_cap": 2003879552,
+          "market_cap": 2005172352,
           "revenue_ttm": 65384000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "Australia",
           "annual_share_usd": 990270.0,
-          "budget_to_mcap_pct": 0.0494176408463097,
+          "budget_to_mcap_pct": 0.049385779681845515,
           "budget_to_revenue_pct": 1.5145448427749908,
-          "expected_alpha_bp": 2.643843785277569
-        },
-        {
-          "ticker": "VCEL",
-          "name": "Vericel Corporation",
-          "estimated_share_pct": 2.0,
-          "rationale": "專注細胞治療商業化，長期受惠於細胞移植研究生態系。",
-          "confidence": 0.35,
-          "share_usd": 3300900.0,
-          "yf_name": "Vericel Corporation",
-          "market_cap": 1752047104,
-          "revenue_ttm": 276259008,
-          "sector": "Healthcare",
-          "industry": "Biotechnology",
-          "country": "United States",
-          "annual_share_usd": 660180.0,
-          "budget_to_mcap_pct": 0.037680493777409306,
-          "budget_to_revenue_pct": 0.2389713931065734,
-          "expected_alpha_bp": 2.015906417091398
+          "expected_alpha_bp": 2.6421392129787358
         },
         {
           "ticker": "SANA",
@@ -3872,15 +3663,33 @@
           "confidence": 0.2,
           "share_usd": 1650450.0,
           "yf_name": "Sana Biotechnology, Inc.",
-          "market_cap": 918022144,
+          "market_cap": 888272832,
           "revenue_ttm": null,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.035956648993425586,
+          "budget_to_mcap_pct": 0.037160879868044866,
           "budget_to_revenue_pct": 0,
-          "expected_alpha_bp": 1.9236807211482692
+          "expected_alpha_bp": 1.9881070729404005
+        },
+        {
+          "ticker": "VCEL",
+          "name": "Vericel Corporation",
+          "estimated_share_pct": 2.0,
+          "rationale": "專注細胞治療商業化，長期受惠於細胞移植研究生態系。",
+          "confidence": 0.35,
+          "share_usd": 3300900.0,
+          "yf_name": "Vericel Corporation",
+          "market_cap": 1815202176,
+          "revenue_ttm": 276259008,
+          "sector": "Healthcare",
+          "industry": "Biotechnology",
+          "country": "United States",
+          "annual_share_usd": 660180.0,
+          "budget_to_mcap_pct": 0.036369502457008956,
+          "budget_to_revenue_pct": 0.2389713931065734,
+          "expected_alpha_bp": 1.945768381449979
         },
         {
           "ticker": "CRVS",
@@ -3890,15 +3699,15 @@
           "confidence": 0.2,
           "share_usd": 1650450.0,
           "yf_name": "Corvus Pharmaceuticals, Inc.",
-          "market_cap": 1345558400,
+          "market_cap": 1350597888,
           "revenue_ttm": null,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.02453182262471848,
+          "budget_to_mcap_pct": 0.024440286996805966,
           "budget_to_revenue_pct": 0,
-          "expected_alpha_bp": 1.3124525104224387
+          "expected_alpha_bp": 1.3075553543291194
         },
         {
           "ticker": "NTLA",
@@ -3908,15 +3717,15 @@
           "confidence": 0.25,
           "share_usd": 1650450.0,
           "yf_name": "Intellia Therapeutics, Inc.",
-          "market_cap": 1874779392,
+          "market_cap": 1610160256,
           "revenue_ttm": 67671000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.017606871582253877,
+          "budget_to_mcap_pct": 0.020500443901156632,
           "budget_to_revenue_pct": 0.48778649643126304,
-          "expected_alpha_bp": 0.9419676296505824
+          "expected_alpha_bp": 1.0967737487118798
         },
         {
           "ticker": "CRSP",
@@ -3926,15 +3735,15 @@
           "confidence": 0.45,
           "share_usd": 4126125.0,
           "yf_name": "CRISPR Therapeutics AG",
-          "market_cap": 5321167872,
+          "market_cap": 4704479232,
           "revenue_ttm": 3510000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "Switzerland",
           "annual_share_usd": 825225.0,
-          "budget_to_mcap_pct": 0.015508343654075192,
+          "budget_to_mcap_pct": 0.017541261408633633,
           "budget_to_revenue_pct": 23.510683760683758,
-          "expected_alpha_bp": 0.8296963854930228
+          "expected_alpha_bp": 0.9384574853618994
         },
         {
           "ticker": "BIO",
@@ -3944,15 +3753,15 @@
           "confidence": 0.35,
           "share_usd": 2475675.0,
           "yf_name": "Bio-Rad Laboratories, Inc.",
-          "market_cap": 7599012352,
+          "market_cap": 7772367360,
           "revenue_ttm": 2583200000,
           "sector": "Healthcare",
           "industry": "Medical Devices",
           "country": "United States",
           "annual_share_usd": 495135.0,
-          "budget_to_mcap_pct": 0.006515780960267612,
+          "budget_to_mcap_pct": 0.006370452875763196,
           "budget_to_revenue_pct": 0.01916750541963456,
-          "expected_alpha_bp": 0.34859428137431725
+          "expected_alpha_bp": 0.340819228853331
         },
         {
           "ticker": "QGEN",
@@ -3962,15 +3771,15 @@
           "confidence": 0.3,
           "share_usd": 1650450.0,
           "yf_name": "Qiagen N.V.",
-          "market_cap": 7824658432,
+          "market_cap": 7915331072,
           "revenue_ttm": 2089998976,
           "sector": "Healthcare",
           "industry": "Diagnostics & Research",
           "country": "Netherlands",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.004218586700859072,
+          "budget_to_mcap_pct": 0.0041702614457615455,
           "budget_to_revenue_pct": 0.015793787642506482,
-          "expected_alpha_bp": 0.22569438849596038
+          "expected_alpha_bp": 0.2231089873482427
         },
         {
           "ticker": "DHR",
@@ -3980,15 +3789,15 @@
           "confidence": 0.45,
           "share_usd": 4951350.0,
           "yf_name": "Danaher Corporation",
-          "market_cap": 126386601984,
+          "market_cap": 125452345344,
           "revenue_ttm": 24778000384,
           "sector": "Healthcare",
           "industry": "Diagnostics & Research",
           "country": "United States",
           "annual_share_usd": 990270.0,
-          "budget_to_mcap_pct": 0.0007835245069136078,
+          "budget_to_mcap_pct": 0.0007893594952606133,
           "budget_to_revenue_pct": 0.003996569475555627,
-          "expected_alpha_bp": 0.041918561119878024
+          "expected_alpha_bp": 0.04223073299644281
         },
         {
           "ticker": "TMO",
@@ -3998,15 +3807,15 @@
           "confidence": 0.5,
           "share_usd": 6601800.0,
           "yf_name": "Thermo Fisher Scientific Inc.",
-          "market_cap": 173435699200,
+          "market_cap": 174554267648,
           "revenue_ttm": 45197000704,
           "sector": "Healthcare",
           "industry": "Diagnostics & Research",
           "country": "United States",
           "annual_share_usd": 1320360.0,
-          "budget_to_mcap_pct": 0.0007612965531839019,
+          "budget_to_mcap_pct": 0.0007564180571411703,
           "budget_to_revenue_pct": 0.002921344291509915,
-          "expected_alpha_bp": 0.040729365595338754
+          "expected_alpha_bp": 0.04046836605705261
         },
         {
           "ticker": "VRTX",
@@ -4016,15 +3825,15 @@
           "confidence": 0.4,
           "share_usd": 3300900.0,
           "yf_name": "Vertex Pharmaceuticals Incorporated",
-          "market_cap": 110671921152,
+          "market_cap": 109448445952,
           "revenue_ttm": 12001300480,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 660180.0,
-          "budget_to_mcap_pct": 0.0005965198698351769,
+          "budget_to_mcap_pct": 0.0006031880985222306,
           "budget_to_revenue_pct": 0.005500903848713569,
-          "expected_alpha_bp": 0.031913813036181966
+          "expected_alpha_bp": 0.032270563270939336
         },
         {
           "ticker": "BLUE",
@@ -4388,15 +4197,15 @@
           "confidence": 0.85,
           "share_usd": 3653244420.0,
           "yf_name": "Huntington Ingalls Industries, Inc.",
-          "market_cap": 14575067136,
+          "market_cap": 14147824640,
           "revenue_ttm": 12483999744,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 1826622210.0,
-          "budget_to_mcap_pct": 12.532513181282681,
+          "budget_to_mcap_pct": 12.910975761147123,
           "budget_to_revenue_pct": 14.631706564059346,
-          "expected_alpha_bp": 1146.7249560873654
+          "expected_alpha_bp": 1181.3542821449616
         },
         {
           "ticker": "FLNC",
@@ -4406,15 +4215,15 @@
           "confidence": 0.4,
           "share_usd": 456655552.5,
           "yf_name": "Fluence Energy, Inc.",
-          "market_cap": 2486804992,
+          "market_cap": 2461053952,
           "revenue_ttm": 2551276032,
           "sector": "Utilities",
           "industry": "Utilities - Renewable",
           "country": "United States",
           "annual_share_usd": 228327776.25,
-          "budget_to_mcap_pct": 9.181571413300428,
+          "budget_to_mcap_pct": 9.277642046995645,
           "budget_to_revenue_pct": 8.949552043218505,
-          "expected_alpha_bp": 840.1137843169893
+          "expected_alpha_bp": 848.9042473001016
         },
         {
           "ticker": "SAIC",
@@ -4424,15 +4233,15 @@
           "confidence": 0.55,
           "share_usd": 608874070.0,
           "yf_name": "Science Applications International Corporation",
-          "market_cap": 4106364416,
+          "market_cap": 4121019392,
           "revenue_ttm": 7262000128,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 304437035.0,
-          "budget_to_mcap_pct": 7.4137851432229045,
+          "budget_to_mcap_pct": 7.387420587998049,
           "budget_to_revenue_pct": 4.19219264161379,
-          "expected_alpha_bp": 678.3613406048958
+          "expected_alpha_bp": 675.9489838018216
         },
         {
           "ticker": "KBR",
@@ -4460,15 +4269,15 @@
           "confidence": 0.6,
           "share_usd": 1217748140.0,
           "yf_name": "Textron Inc.",
-          "market_cap": 15733317632,
+          "market_cap": 15313738752,
           "revenue_ttm": 14798999552,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 608874070.0,
-          "budget_to_mcap_pct": 3.869966171417088,
+          "budget_to_mcap_pct": 3.975998806434386,
           "budget_to_revenue_pct": 4.114292103736932,
-          "expected_alpha_bp": 354.10190468466357
+          "expected_alpha_bp": 363.80389078874634
         },
         {
           "ticker": "VSEC",
@@ -4478,15 +4287,15 @@
           "confidence": 0.6,
           "share_usd": 304437035.0,
           "yf_name": "VSE Corporation",
-          "market_cap": 5155739648,
+          "market_cap": 5017145856,
           "revenue_ttm": 1112274944,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 152218517.5,
-          "budget_to_mcap_pct": 2.9524089246641494,
+          "budget_to_mcap_pct": 3.033966359936736,
           "budget_to_revenue_pct": 13.685331879596848,
-          "expected_alpha_bp": 270.1454166067697
+          "expected_alpha_bp": 277.60792193421133
         },
         {
           "ticker": "CACI",
@@ -4496,15 +4305,15 @@
           "confidence": 0.55,
           "share_usd": 608874070.0,
           "yf_name": "CACI International Inc",
-          "market_cap": 11627938816,
+          "market_cap": 11411041280,
           "revenue_ttm": 9162865664,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 304437035.0,
-          "budget_to_mcap_pct": 2.618151332040858,
+          "budget_to_mcap_pct": 2.6679163411106335,
           "budget_to_revenue_pct": 3.322508985328719,
-          "expected_alpha_bp": 239.56084688173854
+          "expected_alpha_bp": 244.11434521162298
         },
         {
           "ticker": "LDOS",
@@ -4514,15 +4323,15 @@
           "confidence": 0.6,
           "share_usd": 913311105.0,
           "yf_name": "Leidos Holdings, Inc.",
-          "market_cap": 18655561728,
+          "market_cap": 18460915712,
           "revenue_ttm": 17173999616,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 456655552.5,
-          "budget_to_mcap_pct": 2.447825260681424,
+          "budget_to_mcap_pct": 2.4736343506685525,
           "budget_to_revenue_pct": 2.6589936107519243,
-          "expected_alpha_bp": 223.9760113523503
+          "expected_alpha_bp": 226.33754308617256
         },
         {
           "ticker": "BAH",
@@ -4532,15 +4341,15 @@
           "confidence": 0.5,
           "share_usd": 456655552.5,
           "yf_name": "Booz Allen Hamilton Holding Corporation",
-          "market_cap": 9528163328,
+          "market_cap": 9495602176,
           "revenue_ttm": 11409000448,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 228327776.25,
-          "budget_to_mcap_pct": 2.39634616231885,
+          "budget_to_mcap_pct": 2.4045634180746878,
           "budget_to_revenue_pct": 2.001295181735451,
-          "expected_alpha_bp": 219.26567385217476
+          "expected_alpha_bp": 220.0175527538339
         },
         {
           "ticker": "MRCY",
@@ -4550,15 +4359,15 @@
           "confidence": 0.4,
           "share_usd": 152218517.5,
           "yf_name": "Mercury Systems, Inc.",
-          "market_cap": 4735754752,
+          "market_cap": 4680541184,
           "revenue_ttm": 942545024,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 76109258.75,
-          "budget_to_mcap_pct": 1.6071199362225759,
+          "budget_to_mcap_pct": 1.6260781768179393,
           "budget_to_revenue_pct": 8.074867174727135,
-          "expected_alpha_bp": 147.0514741643657
+          "expected_alpha_bp": 148.78615317884146
         },
         {
           "ticker": "J",
@@ -4568,15 +4377,15 @@
           "confidence": 0.5,
           "share_usd": 456655552.5,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 14983852032,
+          "market_cap": 14868753408,
           "revenue_ttm": 12390108160,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 228327776.25,
-          "budget_to_mcap_pct": 1.5238256208241767,
+          "budget_to_mcap_pct": 1.5356215143574194,
           "budget_to_revenue_pct": 1.8428231077685768,
-          "expected_alpha_bp": 139.43004430541217
+          "expected_alpha_bp": 140.50936856370387
         },
         {
           "ticker": "LHX",
@@ -4586,15 +4395,15 @@
           "confidence": 0.7,
           "share_usd": 1522185175.0,
           "yf_name": "L3Harris Technologies, Inc.",
-          "market_cap": 61680435200,
+          "market_cap": 59306389504,
           "revenue_ttm": 12856000512,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 761092587.5,
-          "budget_to_mcap_pct": 1.2339286923513795,
+          "budget_to_mcap_pct": 1.283323085194163,
           "budget_to_revenue_pct": 5.920135012359277,
-          "expected_alpha_bp": 112.90447535015123
+          "expected_alpha_bp": 117.42406229526591
         },
         {
           "ticker": "GD",
@@ -4604,15 +4413,15 @@
           "confidence": 0.6,
           "share_usd": 1826622210.0,
           "yf_name": "General Dynamics Corporation",
-          "market_cap": 86321283072,
+          "market_cap": 84831625216,
           "revenue_ttm": 52550000640,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 913311105.0,
-          "budget_to_mcap_pct": 1.0580369898327546,
+          "budget_to_mcap_pct": 1.0766163004357263,
           "budget_to_revenue_pct": 1.737984955046425,
-          "expected_alpha_bp": 96.81038456969706
+          "expected_alpha_bp": 98.51039148986897
         },
         {
           "ticker": "LMT",
@@ -4622,15 +4431,15 @@
           "confidence": 0.7,
           "share_usd": 2131059245.0000002,
           "yf_name": "Lockheed Martin Corporation",
-          "market_cap": 122096517120,
+          "market_cap": 118382895104,
           "revenue_ttm": 75106000896,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 1065529622.5000001,
-          "budget_to_mcap_pct": 0.8726945269476989,
+          "budget_to_mcap_pct": 0.9000705900661803,
           "budget_to_revenue_pct": 1.4187010489021368,
-          "expected_alpha_bp": 79.85154921571446
+          "expected_alpha_bp": 82.3564589910555
         },
         {
           "ticker": "KTOS",
@@ -4640,15 +4449,15 @@
           "confidence": 0.4,
           "share_usd": 152218517.5,
           "yf_name": "Kratos Defense & Security Solutions, Inc.",
-          "market_cap": 12280969216,
+          "market_cap": 11482481664,
           "revenue_ttm": 1346800000,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 76109258.75,
-          "budget_to_mcap_pct": 0.6197333240673111,
+          "budget_to_mcap_pct": 0.6628293515035044,
           "budget_to_revenue_pct": 5.651118113305613,
-          "expected_alpha_bp": 56.70559915215897
+          "expected_alpha_bp": 60.648885662570656
         },
         {
           "ticker": "RTX",
@@ -4658,15 +4467,15 @@
           "confidence": 0.65,
           "share_usd": 1522185175.0,
           "yf_name": "RTX Corporation",
-          "market_cap": 241460330496,
+          "market_cap": 234673045504,
           "revenue_ttm": 90372997120,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 761092587.5,
-          "budget_to_mcap_pct": 0.3152039864836548,
+          "budget_to_mcap_pct": 0.324320411773506,
           "budget_to_revenue_pct": 0.8421681384422808,
-          "expected_alpha_bp": 28.841164763254415
+          "expected_alpha_bp": 29.675317677275807
         }
       ]
     },
@@ -5161,15 +4970,15 @@
           "confidence": 0.35,
           "share_usd": 12959000.0,
           "yf_name": "Matrix Service Company",
-          "market_cap": 353292768,
+          "market_cap": 358355872,
           "revenue_ttm": 838929984,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 2591800.0,
-          "budget_to_mcap_pct": 0.7336125261414919,
+          "budget_to_mcap_pct": 0.7232475319952341,
           "budget_to_revenue_pct": 0.3089411571204493,
-          "expected_alpha_bp": 27.510469730305946
+          "expected_alpha_bp": 27.121782449821275
         },
         {
           "ticker": "GVA",
@@ -5179,15 +4988,15 @@
           "confidence": 0.8,
           "share_usd": 80993750.0,
           "yf_name": "Granite Construction Incorporated",
-          "market_cap": 5332680192,
+          "market_cap": 5396996608,
           "revenue_ttm": 4424378880,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 16198750.0,
-          "budget_to_mcap_pct": 0.30376376262542615,
+          "budget_to_mcap_pct": 0.30014378693491295,
           "budget_to_revenue_pct": 0.3661248378439055,
-          "expected_alpha_bp": 11.391141098453481
+          "expected_alpha_bp": 11.255392010059236
         },
         {
           "ticker": "ROAD",
@@ -5197,15 +5006,15 @@
           "confidence": 0.6,
           "share_usd": 32397500.0,
           "yf_name": "Construction Partners, Inc.",
-          "market_cap": 6879617024,
+          "market_cap": 6791452672,
           "revenue_ttm": 3060244992,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6479500.0,
-          "budget_to_mcap_pct": 0.09418402183429447,
+          "budget_to_mcap_pct": 0.09540668709529365,
           "budget_to_revenue_pct": 0.21173141421482636,
-          "expected_alpha_bp": 3.531900818786043
+          "expected_alpha_bp": 3.577750766073512
         },
         {
           "ticker": "ACM",
@@ -5215,15 +5024,15 @@
           "confidence": 0.65,
           "share_usd": 32397500.0,
           "yf_name": "AECOM",
-          "market_cap": 10402563072,
+          "market_cap": 10390927360,
           "revenue_ttm": 15956303872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6479500.0,
-          "budget_to_mcap_pct": 0.062287533900568307,
+          "budget_to_mcap_pct": 0.06235728319055442,
           "budget_to_revenue_pct": 0.04060777515882094,
-          "expected_alpha_bp": 2.3357825212713115
+          "expected_alpha_bp": 2.338398119645791
         },
         {
           "ticker": "STRL",
@@ -5233,15 +5042,15 @@
           "confidence": 0.55,
           "share_usd": 40496875.0,
           "yf_name": "Sterling Infrastructure, Inc.",
-          "market_cap": 15207520256,
+          "market_cap": 15253847040,
           "revenue_ttm": 2490049024,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 8099375.0,
-          "budget_to_mcap_pct": 0.05325901174982463,
+          "budget_to_mcap_pct": 0.053097261161470254,
           "budget_to_revenue_pct": 0.3252697003928546,
-          "expected_alpha_bp": 1.9972129406184236
+          "expected_alpha_bp": 1.9911472935551344
         },
         {
           "ticker": "EXP",
@@ -5251,15 +5060,15 @@
           "confidence": 0.5,
           "share_usd": 16198750.0,
           "yf_name": "Eagle Materials Inc.",
-          "market_cap": 6550457344,
+          "market_cap": 6561773056,
           "revenue_ttm": 2299727104,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 3239750.0,
-          "budget_to_mcap_pct": 0.049458378703396984,
+          "budget_to_mcap_pct": 0.04937308822403748,
           "budget_to_revenue_pct": 0.1408754105808895,
-          "expected_alpha_bp": 1.8546892013773868
+          "expected_alpha_bp": 1.8514908084014052
         },
         {
           "ticker": "PRIM",
@@ -5269,15 +5078,15 @@
           "confidence": 0.45,
           "share_usd": 19438500.0,
           "yf_name": "Primoris Services Corporation",
-          "market_cap": 9356565504,
+          "market_cap": 9306130432,
           "revenue_ttm": 7574900224,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 3887700.0,
-          "budget_to_mcap_pct": 0.04155050267470452,
+          "budget_to_mcap_pct": 0.04177568784799942,
           "budget_to_revenue_pct": 0.05132344829681548,
-          "expected_alpha_bp": 1.5581438503014193
+          "expected_alpha_bp": 1.5665882942999783
         },
         {
           "ticker": "VMC",
@@ -5287,15 +5096,15 @@
           "confidence": 0.7,
           "share_usd": 64795000.0,
           "yf_name": "Vulcan Materials Company",
-          "market_cap": 38222184448,
+          "market_cap": 38138613760,
           "revenue_ttm": 7941100032,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 12959000.0,
-          "budget_to_mcap_pct": 0.033904393972119216,
+          "budget_to_mcap_pct": 0.03397868648700461,
           "budget_to_revenue_pct": 0.16318897819923597,
-          "expected_alpha_bp": 1.2714147739544706
+          "expected_alpha_bp": 1.2742007432626727
         },
         {
           "ticker": "J",
@@ -5305,15 +5114,15 @@
           "confidence": 0.55,
           "share_usd": 24298125.0,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 14983852032,
+          "market_cap": 14868753408,
           "revenue_ttm": 12390108160,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 4859625.0,
-          "budget_to_mcap_pct": 0.032432414506107156,
+          "budget_to_mcap_pct": 0.03268347296273891,
           "budget_to_revenue_pct": 0.03922181257213496,
-          "expected_alpha_bp": 1.2162155439790183
+          "expected_alpha_bp": 1.225630236102709
         },
         {
           "ticker": "MLM",
@@ -5323,15 +5132,15 @@
           "confidence": 0.7,
           "share_usd": 56695625.00000001,
           "yf_name": "Martin Marietta Materials, Inc.",
-          "market_cap": 37326524416,
+          "market_cap": 37110001664,
           "revenue_ttm": 6150000128,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 11339125.000000002,
-          "budget_to_mcap_pct": 0.030378196677586972,
+          "budget_to_mcap_pct": 0.030555441906649015,
           "budget_to_revenue_pct": 0.18437601242274318,
-          "expected_alpha_bp": 1.1391823754095114
+          "expected_alpha_bp": 1.145829071499338
         },
         {
           "ticker": "CRH",
@@ -5341,15 +5150,15 @@
           "confidence": 0.75,
           "share_usd": 64795000.0,
           "yf_name": "CRH plc",
-          "market_cap": 78286348288,
+          "market_cap": 78847639552,
           "revenue_ttm": 37447000064,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "Ireland",
           "annual_share_usd": 12959000.0,
-          "budget_to_mcap_pct": 0.016553333094968745,
+          "budget_to_mcap_pct": 0.01643549518239356,
           "budget_to_revenue_pct": 0.03460624343165542,
-          "expected_alpha_bp": 0.6207499910613279
+          "expected_alpha_bp": 0.6163310693397585
         },
         {
           "ticker": "URI",
@@ -5359,15 +5168,15 @@
           "confidence": 0.5,
           "share_usd": 24298125.0,
           "yf_name": "United Rentals, Inc.",
-          "market_cap": 61818372096,
+          "market_cap": 61043429376,
           "revenue_ttm": 16364999680,
           "sector": "Industrials",
           "industry": "Rental & Leasing Services",
           "country": "United States",
           "annual_share_usd": 4859625.0,
-          "budget_to_mcap_pct": 0.007861133891480208,
+          "budget_to_mcap_pct": 0.007960930520575607,
           "budget_to_revenue_pct": 0.029695234311180874,
-          "expected_alpha_bp": 0.29479252093050784
+          "expected_alpha_bp": 0.29853489452158527
         },
         {
           "ticker": "PWR",
@@ -5377,15 +5186,15 @@
           "confidence": 0.45,
           "share_usd": 24298125.0,
           "yf_name": "Quanta Services, Inc.",
-          "market_cap": 95051931648,
+          "market_cap": 93761445888,
           "revenue_ttm": 28479696896,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 4859625.0,
-          "budget_to_mcap_pct": 0.0051125999395744545,
+          "budget_to_mcap_pct": 0.005182967214269417,
           "budget_to_revenue_pct": 0.01706347162944188,
-          "expected_alpha_bp": 0.19172249773404204
+          "expected_alpha_bp": 0.19436127053510313
         },
         {
           "ticker": "CAT",
@@ -5395,15 +5204,15 @@
           "confidence": 0.55,
           "share_usd": 32397500.0,
           "yf_name": "Caterpillar Inc.",
-          "market_cap": 388626579456,
+          "market_cap": 386556035072,
           "revenue_ttm": 67589001216,
           "sector": "Industrials",
           "industry": "Farm & Heavy Construction Machinery",
           "country": "United States",
           "annual_share_usd": 6479500.0,
-          "budget_to_mcap_pct": 0.0016672817410147327,
+          "budget_to_mcap_pct": 0.0016762123501171382,
           "budget_to_revenue_pct": 0.00958661895193998,
-          "expected_alpha_bp": 0.06252306528805247
+          "expected_alpha_bp": 0.0628579631293927
         },
         {
           "ticker": "SUM",
@@ -5718,15 +5527,15 @@
           "confidence": 0.05,
           "share_usd": 75000.0,
           "yf_name": "Limoneira Company",
-          "market_cap": 231586944,
+          "market_cap": 230681600,
           "revenue_ttm": 143623008,
           "sector": "Consumer Defensive",
           "industry": "Farm Products",
           "country": "United States",
           "annual_share_usd": 15000.0,
-          "budget_to_mcap_pct": 0.006477049068880153,
+          "budget_to_mcap_pct": 0.006502469204305849,
           "budget_to_revenue_pct": 0.010444009082444507,
-          "expected_alpha_bp": 0.11658688323984276
+          "expected_alpha_bp": 0.1170444456775053
         },
         {
           "ticker": "LND",
@@ -5736,15 +5545,15 @@
           "confidence": 0.05,
           "share_usd": 75000.0,
           "yf_name": "BrasilAgro - Companhia Brasileira de Propriedades Agrícolas",
-          "market_cap": 399458016,
+          "market_cap": 403442624,
           "revenue_ttm": 965212992,
           "sector": "Consumer Defensive",
           "industry": "Farm Products",
           "country": "Brazil",
           "annual_share_usd": 15000.0,
-          "budget_to_mcap_pct": 0.0037550879940283885,
+          "budget_to_mcap_pct": 0.0037180008030088564,
           "budget_to_revenue_pct": 0.0015540611372127074,
-          "expected_alpha_bp": 0.06759158389251099
+          "expected_alpha_bp": 0.06692401445415942
         },
         {
           "ticker": "CALM",
@@ -5754,15 +5563,15 @@
           "confidence": 0.05,
           "share_usd": 75000.0,
           "yf_name": "Cal-Maine Foods, Inc.",
-          "market_cap": 3609148416,
+          "market_cap": 3611991040,
           "revenue_ttm": 3462708992,
           "sector": "Consumer Defensive",
           "industry": "Farm Products",
           "country": "United States",
           "annual_share_usd": 15000.0,
-          "budget_to_mcap_pct": 0.00041561050616545223,
+          "budget_to_mcap_pct": 0.00041528342218700515,
           "budget_to_revenue_pct": 0.00043318684979462465,
-          "expected_alpha_bp": 0.00748098911097814
+          "expected_alpha_bp": 0.007475101599366094
         },
         {
           "ticker": "MOS",
@@ -5772,15 +5581,15 @@
           "confidence": 0.08,
           "share_usd": 150000.0,
           "yf_name": "The Mosaic Company",
-          "market_cap": 7717317120,
+          "market_cap": 7628319744,
           "revenue_ttm": 12052400128,
           "sector": "Basic Materials",
           "industry": "Agricultural Inputs",
           "country": "United States",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 0.0003887361311387966,
+          "budget_to_mcap_pct": 0.00039327140191778513,
           "budget_to_revenue_pct": 0.00024891307690909077,
-          "expected_alpha_bp": 0.0069972503604983395
+          "expected_alpha_bp": 0.007078885234520133
         },
         {
           "ticker": "AGCO",
@@ -5790,15 +5599,15 @@
           "confidence": 0.08,
           "share_usd": 150000.0,
           "yf_name": "AGCO Corporation",
-          "market_cap": 8655152128,
+          "market_cap": 8408254976,
           "revenue_ttm": 10081999872,
           "sector": "Industrials",
           "industry": "Farm & Heavy Construction Machinery",
           "country": "United States",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 0.0003466143582034564,
+          "budget_to_mcap_pct": 0.00035679222485081785,
           "budget_to_revenue_pct": 0.0002975600117127238,
-          "expected_alpha_bp": 0.006239058447662217
+          "expected_alpha_bp": 0.006422260047314722
         },
         {
           "ticker": "BG",
@@ -5808,15 +5617,15 @@
           "confidence": 0.1,
           "share_usd": 225000.0,
           "yf_name": "Bunge Global SA",
-          "market_cap": 24501512192,
+          "market_cap": 24206921728,
           "revenue_ttm": 70328999936,
           "sector": "Consumer Defensive",
           "industry": "Farm Products",
           "country": "United States",
           "annual_share_usd": 45000.0,
-          "budget_to_mcap_pct": 0.00018366213337106993,
+          "budget_to_mcap_pct": 0.0001858972425558297,
           "budget_to_revenue_pct": 6.398498491511381e-05,
-          "expected_alpha_bp": 0.003305918400679259
+          "expected_alpha_bp": 0.0033461503660049347
         },
         {
           "ticker": "CTVA",
@@ -5826,15 +5635,15 @@
           "confidence": 0.15,
           "share_usd": 375000.0,
           "yf_name": "Corteva, Inc.",
-          "market_cap": 53460115456,
+          "market_cap": 53574250496,
           "revenue_ttm": 17400999936,
           "sector": "Basic Materials",
           "industry": "Agricultural Inputs",
           "country": "United States",
           "annual_share_usd": 75000.0,
-          "budget_to_mcap_pct": 0.00014029150397501153,
+          "budget_to_mcap_pct": 0.0001399926257588983,
           "budget_to_revenue_pct": 0.0004310097136707443,
-          "expected_alpha_bp": 0.002525247071550208
+          "expected_alpha_bp": 0.0025198672636601695
         },
         {
           "ticker": "ADM",
@@ -5844,15 +5653,15 @@
           "confidence": 0.1,
           "share_usd": 225000.0,
           "yf_name": "Archer-Daniels-Midland Company",
-          "market_cap": 33747113984,
+          "market_cap": 33361600512,
           "revenue_ttm": 80269000704,
           "sector": "Consumer Defensive",
           "industry": "Farm Products",
           "country": "United States",
           "annual_share_usd": 45000.0,
-          "budget_to_mcap_pct": 0.00013334473585307224,
+          "budget_to_mcap_pct": 0.0001348856149266991,
           "budget_to_revenue_pct": 5.6061492737329594e-05,
-          "expected_alpha_bp": 0.0024002052453553006
+          "expected_alpha_bp": 0.002427941068680584
         },
         {
           "ticker": "NTR",
@@ -5862,15 +5671,15 @@
           "confidence": 0.08,
           "share_usd": 150000.0,
           "yf_name": "Nutrien Ltd.",
-          "market_cap": 34735124480,
+          "market_cap": 34436804608,
           "revenue_ttm": 25948999680,
           "sector": "Basic Materials",
           "industry": "Agricultural Inputs",
           "country": "Canada",
           "annual_share_usd": 30000.0,
-          "budget_to_mcap_pct": 8.63679069792123e-05,
+          "budget_to_mcap_pct": 8.711609669217309e-05,
           "budget_to_revenue_pct": 0.00011561139300148929,
-          "expected_alpha_bp": 0.0015546223256258215
+          "expected_alpha_bp": 0.0015680897404591158
         },
         {
           "ticker": "DE",
@@ -5880,15 +5689,15 @@
           "confidence": 0.1,
           "share_usd": 225000.0,
           "yf_name": "Deere & Company",
-          "market_cap": 159890014208,
+          "market_cap": 151973167104,
           "revenue_ttm": 46731001856,
           "sector": "Industrials",
           "industry": "Farm & Heavy Construction Machinery",
           "country": "United States",
           "annual_share_usd": 45000.0,
-          "budget_to_mcap_pct": 2.814434673916519e-05,
+          "budget_to_mcap_pct": 2.9610490363213325e-05,
           "budget_to_revenue_pct": 9.629581693682918e-05,
-          "expected_alpha_bp": 0.0005065982413049734
+          "expected_alpha_bp": 0.0005329888265378399
         }
       ]
     },
@@ -6374,15 +6183,15 @@
           "confidence": 0.3,
           "share_usd": 8962500.0,
           "yf_name": "DLH Holdings Corp.",
-          "market_cap": 87393008,
+          "market_cap": 87248072,
           "revenue_ttm": 322607008,
           "sector": "Industrials",
           "industry": "Specialty Business Services",
           "country": "United States",
           "annual_share_usd": 1792500.0,
-          "budget_to_mcap_pct": 2.0510794181612333,
+          "budget_to_mcap_pct": 2.0544866596020595,
           "budget_to_revenue_pct": 0.5556295912827783,
-          "expected_alpha_bp": 85.11979585369119
+          "expected_alpha_bp": 85.26119637348548
         },
         {
           "ticker": "ICFI",
@@ -6392,15 +6201,15 @@
           "confidence": 0.55,
           "share_usd": 23900000.0,
           "yf_name": "ICF International, Inc.",
-          "market_cap": 1212623104,
+          "market_cap": 1222041600,
           "revenue_ttm": 1872850944,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 4780000.0,
-          "budget_to_mcap_pct": 0.3941867827054035,
+          "budget_to_mcap_pct": 0.3911487137590079,
           "budget_to_revenue_pct": 0.2552258638261391,
-          "expected_alpha_bp": 16.358751482274247
+          "expected_alpha_bp": 16.23267162099883
         },
         {
           "ticker": "MMS",
@@ -6410,15 +6219,15 @@
           "confidence": 0.55,
           "share_usd": 20912500.000000004,
           "yf_name": "Maximus, Inc.",
-          "market_cap": 3575659264,
+          "market_cap": 3571295232,
           "revenue_ttm": 5373646848,
           "sector": "Industrials",
           "industry": "Specialty Business Services",
           "country": "United States",
           "annual_share_usd": 4182500.000000001,
-          "budget_to_mcap_pct": 0.11697143634768889,
+          "budget_to_mcap_pct": 0.11711437246978075,
           "budget_to_revenue_pct": 0.07783354802254398,
-          "expected_alpha_bp": 4.854314608429089
+          "expected_alpha_bp": 4.860246457495902
         },
         {
           "ticker": "SAIC",
@@ -6428,15 +6237,15 @@
           "confidence": 0.4,
           "share_usd": 14937500.0,
           "yf_name": "Science Applications International Corporation",
-          "market_cap": 4106364416,
+          "market_cap": 4121019392,
           "revenue_ttm": 7262000128,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 2987500.0,
-          "budget_to_mcap_pct": 0.07275291954994381,
+          "budget_to_mcap_pct": 0.07249419902754003,
           "budget_to_revenue_pct": 0.041138804011874565,
-          "expected_alpha_bp": 3.0192461613226684
+          "expected_alpha_bp": 3.0085092596429117
         },
         {
           "ticker": "DV",
@@ -6446,15 +6255,15 @@
           "confidence": 0.2,
           "share_usd": 5975000.0,
           "yf_name": "DoubleVerify Holdings, Inc.",
-          "market_cap": 1689534592,
+          "market_cap": 1764049024,
           "revenue_ttm": 748291008,
           "sector": "Communication Services",
           "industry": "Advertising Agencies",
           "country": "United States",
           "annual_share_usd": 1195000.0,
-          "budget_to_mcap_pct": 0.07072953733284675,
+          "budget_to_mcap_pct": 0.06774188153174591,
           "budget_to_revenue_pct": 0.15969722838096698,
-          "expected_alpha_bp": 2.9352757993131404
+          "expected_alpha_bp": 2.8112880835674554
         },
         {
           "ticker": "BAH",
@@ -6464,33 +6273,15 @@
           "confidence": 0.55,
           "share_usd": 29875000.0,
           "yf_name": "Booz Allen Hamilton Holding Corporation",
-          "market_cap": 9528163328,
+          "market_cap": 9495602176,
           "revenue_ttm": 11409000448,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 5975000.0,
-          "budget_to_mcap_pct": 0.06270883269225169,
+          "budget_to_mcap_pct": 0.06292386611458647,
           "budget_to_revenue_pct": 0.05237093317011324,
-          "expected_alpha_bp": 2.602416556728445
-        },
-        {
-          "ticker": "PSN",
-          "name": "Parsons Corporation",
-          "estimated_share_pct": 1.5,
-          "rationale": "承接國務院國際計畫管理，可能涉入部分邊境與反販運項目。",
-          "confidence": 0.3,
-          "share_usd": 8962500.0,
-          "yf_name": "Parsons Corporation",
-          "market_cap": 5546405888,
-          "revenue_ttm": 6364244992,
-          "sector": "Technology",
-          "industry": "Information Technology Services",
-          "country": "United States",
-          "annual_share_usd": 1792500.0,
-          "budget_to_mcap_pct": 0.03231822618460339,
-          "budget_to_revenue_pct": 0.02816516338156707,
-          "expected_alpha_bp": 1.3412063866610409
+          "expected_alpha_bp": 2.611340443755339
         },
         {
           "ticker": "CACI",
@@ -6500,15 +6291,33 @@
           "confidence": 0.45,
           "share_usd": 17925000.0,
           "yf_name": "CACI International Inc",
-          "market_cap": 11627938816,
+          "market_cap": 11411041280,
           "revenue_ttm": 9162865664,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 3585000.0,
-          "budget_to_mcap_pct": 0.030830915579526903,
+          "budget_to_mcap_pct": 0.031416940067366055,
           "budget_to_revenue_pct": 0.03912531440993523,
-          "expected_alpha_bp": 1.2794829965503667
+          "expected_alpha_bp": 1.3038030127956912
+        },
+        {
+          "ticker": "PSN",
+          "name": "Parsons Corporation",
+          "estimated_share_pct": 1.5,
+          "rationale": "承接國務院國際計畫管理，可能涉入部分邊境與反販運項目。",
+          "confidence": 0.3,
+          "share_usd": 8962500.0,
+          "yf_name": "Parsons Corporation",
+          "market_cap": 5719764480,
+          "revenue_ttm": 6364244992,
+          "sector": "Technology",
+          "industry": "Information Technology Services",
+          "country": "United States",
+          "annual_share_usd": 1792500.0,
+          "budget_to_mcap_pct": 0.03133870295302788,
+          "budget_to_revenue_pct": 0.02816516338156707,
+          "expected_alpha_bp": 1.3005561725506574
         },
         {
           "ticker": "LDOS",
@@ -6518,15 +6327,15 @@
           "confidence": 0.5,
           "share_usd": 23900000.0,
           "yf_name": "Leidos Holdings, Inc.",
-          "market_cap": 18655561728,
+          "market_cap": 18460915712,
           "revenue_ttm": 17173999616,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 4780000.0,
-          "budget_to_mcap_pct": 0.025622385804795852,
+          "budget_to_mcap_pct": 0.025892540080733346,
           "budget_to_revenue_pct": 0.027832771089308494,
-          "expected_alpha_bp": 1.0633290108990279
+          "expected_alpha_bp": 1.074540413350434
         },
         {
           "ticker": "TRU",
@@ -6536,15 +6345,15 @@
           "confidence": 0.25,
           "share_usd": 8962500.0,
           "yf_name": "TransUnion",
-          "market_cap": 14100091904,
+          "market_cap": 14009409536,
           "revenue_ttm": 4576300032,
           "sector": "Financial Services",
           "industry": "Financial Data & Stock Exchanges",
           "country": "United States",
           "annual_share_usd": 1792500.0,
-          "budget_to_mcap_pct": 0.012712683095998068,
+          "budget_to_mcap_pct": 0.01279497180372813,
           "budget_to_revenue_pct": 0.03916919754967674,
-          "expected_alpha_bp": 0.5275763484839199
+          "expected_alpha_bp": 0.5309913298547174
         },
         {
           "ticker": "VRSK",
@@ -6554,15 +6363,15 @@
           "confidence": 0.3,
           "share_usd": 11950000.0,
           "yf_name": "Verisk Analytics, Inc.",
-          "market_cap": 23205435392,
+          "market_cap": 23264385024,
           "revenue_ttm": 3072699904,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 2390000.0,
-          "budget_to_mcap_pct": 0.010299311172691658,
+          "budget_to_mcap_pct": 0.010273213745106216,
           "budget_to_revenue_pct": 0.07778175788949418,
-          "expected_alpha_bp": 0.42742141366670383
+          "expected_alpha_bp": 0.426338370421908
         },
         {
           "ticker": "MAXM",
@@ -6590,7 +6399,7 @@
           "confidence": 0.05,
           "share_usd": 0.0,
           "yf_name": "America's Car-Mart, Inc.",
-          "market_cap": 104776920,
+          "market_cap": 103033400,
           "revenue_ttm": 1343049984,
           "sector": "Consumer Cyclical",
           "industry": "Auto & Truck Dealerships",
@@ -7306,15 +7115,15 @@
           "confidence": 0.3,
           "share_usd": 2475675.0,
           "yf_name": "Fate Therapeutics, Inc.",
-          "market_cap": 153467776,
+          "market_cap": 154630400,
           "revenue_ttm": 6646000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 495135.0,
-          "budget_to_mcap_pct": 0.3226312473570999,
+          "budget_to_mcap_pct": 0.3202054705931046,
           "budget_to_revenue_pct": 7.450120373156786,
-          "expected_alpha_bp": 18.873927970390344
+          "expected_alpha_bp": 18.732020029696617
         },
         {
           "ticker": "SGMO",
@@ -7324,15 +7133,15 @@
           "confidence": 0.2,
           "share_usd": 825225.0,
           "yf_name": "Sangamo Therapeutics, Inc.",
-          "market_cap": 105639872,
+          "market_cap": 78753488,
           "revenue_ttm": 39552000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 165045.0,
-          "budget_to_mcap_pct": 0.1562336236075712,
+          "budget_to_mcap_pct": 0.20957167001923777,
           "budget_to_revenue_pct": 0.41728610436893204,
-          "expected_alpha_bp": 9.139666981042915
+          "expected_alpha_bp": 12.259942696125409
         },
         {
           "ticker": "MESO",
@@ -7342,15 +7151,15 @@
           "confidence": 0.55,
           "share_usd": 4951350.0,
           "yf_name": "Mesoblast Limited",
-          "market_cap": 2003879552,
+          "market_cap": 2005172352,
           "revenue_ttm": 65384000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "Australia",
           "annual_share_usd": 990270.0,
-          "budget_to_mcap_pct": 0.0494176408463097,
+          "budget_to_mcap_pct": 0.049385779681845515,
           "budget_to_revenue_pct": 1.5145448427749908,
-          "expected_alpha_bp": 2.8909319895091175
+          "expected_alpha_bp": 2.889068111387963
         },
         {
           "ticker": "CRVS",
@@ -7360,15 +7169,15 @@
           "confidence": 0.25,
           "share_usd": 1650450.0,
           "yf_name": "Corvus Pharmaceuticals, Inc.",
-          "market_cap": 1345558400,
+          "market_cap": 1350597888,
           "revenue_ttm": null,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.02453182262471848,
+          "budget_to_mcap_pct": 0.024440286996805966,
           "budget_to_revenue_pct": 0,
-          "expected_alpha_bp": 1.435111623546031
+          "expected_alpha_bp": 1.429756789313149
         },
         {
           "ticker": "VCEL",
@@ -7378,15 +7187,15 @@
           "confidence": 0.25,
           "share_usd": 1650450.0,
           "yf_name": "Vericel Corporation",
-          "market_cap": 1752047104,
+          "market_cap": 1815202176,
           "revenue_ttm": 276259008,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.018840246888704653,
+          "budget_to_mcap_pct": 0.018184751228504478,
           "budget_to_revenue_pct": 0.1194856965532867,
-          "expected_alpha_bp": 1.1021544429892223
+          "expected_alpha_bp": 1.063807946867512
         },
         {
           "ticker": "GERN",
@@ -7414,15 +7223,15 @@
           "confidence": 0.35,
           "share_usd": 3300900.0,
           "yf_name": "CRISPR Therapeutics AG",
-          "market_cap": 5321167872,
+          "market_cap": 4704479232,
           "revenue_ttm": 3510000,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "Switzerland",
           "annual_share_usd": 660180.0,
-          "budget_to_mcap_pct": 0.012406674923260154,
+          "budget_to_mcap_pct": 0.014033009126906908,
           "budget_to_revenue_pct": 18.80854700854701,
-          "expected_alpha_bp": 0.7257904830107189
+          "expected_alpha_bp": 0.8209310339240541
         },
         {
           "ticker": "BIO",
@@ -7432,15 +7241,15 @@
           "confidence": 0.2,
           "share_usd": 825225.0,
           "yf_name": "Bio-Rad Laboratories, Inc.",
-          "market_cap": 7599012352,
+          "market_cap": 7772367360,
           "revenue_ttm": 2583200000,
           "sector": "Healthcare",
           "industry": "Medical Devices",
           "country": "United States",
           "annual_share_usd": 165045.0,
-          "budget_to_mcap_pct": 0.002171926986755871,
+          "budget_to_mcap_pct": 0.0021234842919210656,
           "budget_to_revenue_pct": 0.006389168473211521,
-          "expected_alpha_bp": 0.12705772872521842
+          "expected_alpha_bp": 0.12422383107738232
         },
         {
           "ticker": "DHR",
@@ -7450,15 +7259,15 @@
           "confidence": 0.3,
           "share_usd": 2475675.0,
           "yf_name": "Danaher Corporation",
-          "market_cap": 126386601984,
+          "market_cap": 125452345344,
           "revenue_ttm": 24778000384,
           "sector": "Healthcare",
           "industry": "Diagnostics & Research",
           "country": "United States",
           "annual_share_usd": 495135.0,
-          "budget_to_mcap_pct": 0.0003917622534568039,
+          "budget_to_mcap_pct": 0.00039467974763030667,
           "budget_to_revenue_pct": 0.0019982847377778136,
-          "expected_alpha_bp": 0.022918091827223024
+          "expected_alpha_bp": 0.023088765236372936
         },
         {
           "ticker": "TMO",
@@ -7468,15 +7277,15 @@
           "confidence": 0.35,
           "share_usd": 3300900.0,
           "yf_name": "Thermo Fisher Scientific Inc.",
-          "market_cap": 173435699200,
+          "market_cap": 174554267648,
           "revenue_ttm": 45197000704,
           "sector": "Healthcare",
           "industry": "Diagnostics & Research",
           "country": "United States",
           "annual_share_usd": 660180.0,
-          "budget_to_mcap_pct": 0.0003806482765919509,
+          "budget_to_mcap_pct": 0.00037820902857058514,
           "budget_to_revenue_pct": 0.0014606721457549575,
-          "expected_alpha_bp": 0.022267924180629128
+          "expected_alpha_bp": 0.022125228171379227
         },
         {
           "ticker": "GILD",
@@ -7486,15 +7295,15 @@
           "confidence": 0.25,
           "share_usd": 1650450.0,
           "yf_name": "Gilead Sciences, Inc.",
-          "market_cap": 165874466816,
+          "market_cap": 161852948480,
           "revenue_ttm": 29443000320,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - General",
           "country": "United States",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.00019899988608021254,
+          "budget_to_mcap_pct": 0.00020394438476404328,
           "budget_to_revenue_pct": 0.0011211153632864545,
-          "expected_alpha_bp": 0.011641493335692433
+          "expected_alpha_bp": 0.011930746508696532
         },
         {
           "ticker": "NVS",
@@ -7504,15 +7313,15 @@
           "confidence": 0.25,
           "share_usd": 1650450.0,
           "yf_name": "Novartis AG",
-          "market_cap": 284672327680,
+          "market_cap": 280792530944,
           "revenue_ttm": 56674000896,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - General",
           "country": "Switzerland",
           "annual_share_usd": 330090.0,
-          "budget_to_mcap_pct": 0.00011595436855072684,
+          "budget_to_mcap_pct": 0.00011755654571375749,
           "budget_to_revenue_pct": 0.0005824363813765925,
-          "expected_alpha_bp": 0.00678333056021752
+          "expected_alpha_bp": 0.006877057924254812
         },
         {
           "ticker": "BLUE",
@@ -7742,34 +7551,6 @@
       },
       "last_action_date": "2025-12-11",
       "fetched_at": "2026-04-20T12:02:35.218888+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-sres-134",
-      "pipeline_version": "v0.2",
-      "title": "A resolution designating March 15, 2025, as \"National Osceola Turkey Day\".",
-      "congress": 119,
-      "type": "sres",
-      "number": "134",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-resolution/134",
-      "policy_area": "Animals",
-      "stage": "introduced",
-      "stage_label": "提案",
-      "passage_baseline": 0.04,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.045,
-      "cosponsors_total": 1,
-      "cosponsors_R": 1,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2025-03-24",
-        "text": "Submitted in the Senate, considered, and agreed to without amendment and with a preamble by Unanimous Consent. (consideration: CR S1807; text: CR S1806)"
-      },
-      "last_action_date": "2025-03-24",
-      "fetched_at": "2026-04-20T12:02:37.992906+00:00",
       "beneficiaries": []
     },
     {
@@ -8072,15 +7853,15 @@
           "confidence": 0.15,
           "share_usd": 1121310.0,
           "yf_name": "CervoMed Inc.",
-          "market_cap": 35646068,
+          "market_cap": 35923832,
           "revenue_ttm": 4006510,
           "sector": "Healthcare",
           "industry": "Biotechnology",
           "country": "United States",
           "annual_share_usd": 224262.0,
-          "budget_to_mcap_pct": 0.6291353088368681,
+          "budget_to_mcap_pct": 0.6242708183247266,
           "budget_to_revenue_pct": 5.597440166129624,
-          "expected_alpha_bp": 32.71503605951714
+          "expected_alpha_bp": 32.46208255288578
         },
         {
           "ticker": "EBS",
@@ -8090,15 +7871,15 @@
           "confidence": 0.6,
           "share_usd": 11213100.0,
           "yf_name": "Emergent BioSolutions Inc.",
-          "market_cap": 417803968,
+          "market_cap": 414705280,
           "revenue_ttm": 742899968,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - Specialty & Generic",
           "country": "United States",
           "annual_share_usd": 2242620.0,
-          "budget_to_mcap_pct": 0.536763691052355,
+          "budget_to_mcap_pct": 0.540774402486508,
           "budget_to_revenue_pct": 0.301873751056616,
-          "expected_alpha_bp": 27.91171193472246
+          "expected_alpha_bp": 28.12026892929842
         },
         {
           "ticker": "ACHC",
@@ -8108,15 +7889,15 @@
           "confidence": 0.75,
           "share_usd": 44852400.0,
           "yf_name": "Acadia Healthcare Company, Inc.",
-          "market_cap": 2516215552,
+          "market_cap": 2519896832,
           "revenue_ttm": 3312769024,
           "sector": "Healthcare",
           "industry": "Medical Care Facilities",
           "country": "United States",
           "annual_share_usd": 8970480.0,
-          "budget_to_mcap_pct": 0.35650681806134865,
+          "budget_to_mcap_pct": 0.35598600252536056,
           "budget_to_revenue_pct": 0.2707849516525786,
-          "expected_alpha_bp": 18.53835453919013
+          "expected_alpha_bp": 18.511272131318748
         },
         {
           "ticker": "LFMD",
@@ -8126,15 +7907,15 @@
           "confidence": 0.3,
           "share_usd": 2803275.0,
           "yf_name": "LifeMD, Inc.",
-          "market_cap": 214944784,
+          "market_cap": 219679248,
           "revenue_ttm": 194055200,
           "sector": "Healthcare",
           "industry": "Health Information Services",
           "country": "United States",
           "annual_share_usd": 560655.0,
-          "budget_to_mcap_pct": 0.2608367551733658,
+          "budget_to_mcap_pct": 0.255215276410633,
           "budget_to_revenue_pct": 0.28891521587671964,
-          "expected_alpha_bp": 13.563511269015024
+          "expected_alpha_bp": 13.271194373352918
         },
         {
           "ticker": "ORGO",
@@ -8144,15 +7925,15 @@
           "confidence": 0.25,
           "share_usd": 2803275.0,
           "yf_name": "Organogenesis Holdings Inc.",
-          "market_cap": 299732768,
+          "market_cap": 302305568,
           "revenue_ttm": 564169024,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - Specialty & Generic",
           "country": "United States",
           "annual_share_usd": 560655.0,
-          "budget_to_mcap_pct": 0.18705162059558333,
+          "budget_to_mcap_pct": 0.18545970016668697,
           "budget_to_revenue_pct": 0.09937713276509134,
-          "expected_alpha_bp": 9.726684270970335
+          "expected_alpha_bp": 9.643904408667723
         },
         {
           "ticker": "TDOC",
@@ -8162,15 +7943,15 @@
           "confidence": 0.4,
           "share_usd": 8409825.0,
           "yf_name": "Teladoc Health, Inc.",
-          "market_cap": 1028457280,
+          "market_cap": 1037478848,
           "revenue_ttm": 2529977088,
           "sector": "Healthcare",
           "industry": "Health Information Services",
           "country": "United States",
           "annual_share_usd": 1681965.0,
-          "budget_to_mcap_pct": 0.16354252458595073,
+          "budget_to_mcap_pct": 0.16212041365878527,
           "budget_to_revenue_pct": 0.06648143210378354,
-          "expected_alpha_bp": 8.504211278469437
+          "expected_alpha_bp": 8.430261510256834
         },
         {
           "ticker": "INDV",
@@ -8180,15 +7961,15 @@
           "confidence": 0.65,
           "share_usd": 22426200.0,
           "yf_name": "Indivior Pharmaceuticals, Inc.",
-          "market_cap": 4042935296,
+          "market_cap": 4051469824,
           "revenue_ttm": 1239000064,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - Specialty & Generic",
           "country": "United States",
           "annual_share_usd": 4485240.0,
-          "budget_to_mcap_pct": 0.11094018755228677,
+          "budget_to_mcap_pct": 0.11070648912230427,
           "budget_to_revenue_pct": 0.3620048239158122,
-          "expected_alpha_bp": 5.768889752718912
+          "expected_alpha_bp": 5.756737434359822
         },
         {
           "ticker": "PCRX",
@@ -8198,15 +7979,15 @@
           "confidence": 0.3,
           "share_usd": 5606550.0,
           "yf_name": "Pacira BioSciences, Inc.",
-          "market_cap": 1091019648,
+          "market_cap": 1054451456,
           "revenue_ttm": 726411008,
           "sector": "Healthcare",
           "industry": "Drug Manufacturers - Specialty & Generic",
           "country": "United States",
           "annual_share_usd": 1121310.0,
-          "budget_to_mcap_pct": 0.10277633423518327,
+          "budget_to_mcap_pct": 0.10634059952400503,
           "budget_to_revenue_pct": 0.1543630241902942,
-          "expected_alpha_bp": 5.34436938022953
+          "expected_alpha_bp": 5.529711175248261
         },
         {
           "ticker": "PNTG",
@@ -8216,15 +7997,15 @@
           "confidence": 0.25,
           "share_usd": 2803275.0,
           "yf_name": "The Pennant Group, Inc.",
-          "market_cap": 1045016704,
+          "market_cap": 1041546048,
           "revenue_ttm": 947705024,
           "sector": "Healthcare",
           "industry": "Medical Care Facilities",
           "country": "United States",
           "annual_share_usd": 560655.0,
-          "budget_to_mcap_pct": 0.05365033858827198,
+          "budget_to_mcap_pct": 0.05382911308401412,
           "budget_to_revenue_pct": 0.059159230541337725,
-          "expected_alpha_bp": 2.789817606590143
+          "expected_alpha_bp": 2.7991138803687345
         },
         {
           "ticker": "UHS",
@@ -8234,15 +8015,15 @@
           "confidence": 0.7,
           "share_usd": 28032750.0,
           "yf_name": "Universal Health Services, Inc.",
-          "market_cap": 11057366016,
+          "market_cap": 10640533504,
           "revenue_ttm": 17364828160,
           "sector": "Healthcare",
           "industry": "Medical Care Facilities",
           "country": "United States",
           "annual_share_usd": 5606550.0,
-          "budget_to_mcap_pct": 0.05070420922928052,
+          "budget_to_mcap_pct": 0.05269049712490807,
           "budget_to_revenue_pct": 0.03228681532774811,
-          "expected_alpha_bp": 2.636618879922587
+          "expected_alpha_bp": 2.7399058504952203
         },
         {
           "ticker": "MOH",
@@ -8252,15 +8033,15 @@
           "confidence": 0.5,
           "share_usd": 11213100.0,
           "yf_name": "Molina Healthcare, Inc.",
-          "market_cap": 9100310528,
+          "market_cap": 9166474240,
           "revenue_ttm": 43095998464,
           "sector": "Healthcare",
           "industry": "Healthcare Plans",
           "country": "United States",
           "annual_share_usd": 2242620.0,
-          "budget_to_mcap_pct": 0.024643334896099052,
+          "budget_to_mcap_pct": 0.024465459033461485,
           "budget_to_revenue_pct": 0.0052037777982411985,
-          "expected_alpha_bp": 1.2814534145971508
+          "expected_alpha_bp": 1.2722038697399973
         },
         {
           "ticker": "PGNY",
@@ -8270,15 +8051,15 @@
           "confidence": 0.25,
           "share_usd": 1681965.0,
           "yf_name": "Progyny, Inc.",
-          "market_cap": 1447212416,
+          "market_cap": 1488163584,
           "revenue_ttm": 1288660992,
           "sector": "Healthcare",
           "industry": "Healthcare Plans",
           "country": "United States",
           "annual_share_usd": 336393.0,
-          "budget_to_mcap_pct": 0.02324420356548406,
+          "budget_to_mcap_pct": 0.022604571407117566,
           "budget_to_revenue_pct": 0.026104072528642195,
-          "expected_alpha_bp": 1.2086985854051713
+          "expected_alpha_bp": 1.1754377131701135
         },
         {
           "ticker": "CNC",
@@ -8288,33 +8069,15 @@
           "confidence": 0.55,
           "share_usd": 16819650.0,
           "yf_name": "Centene Corporation",
-          "market_cap": 20206931968,
+          "market_cap": 20565925888,
           "revenue_ttm": 176151003136,
           "sector": "Healthcare",
           "industry": "Healthcare Plans",
           "country": "United States",
           "annual_share_usd": 3363930.0,
-          "budget_to_mcap_pct": 0.01664740597596493,
+          "budget_to_mcap_pct": 0.01635681280930229,
           "budget_to_revenue_pct": 0.001909685406334489,
-          "expected_alpha_bp": 0.8656651107501765
-        },
-        {
-          "ticker": "HIMS",
-          "name": "Hims & Hers Health",
-          "estimated_share_pct": 0.5,
-          "rationale": "心理健康虛擬照護平台，可間接受惠於 SUD 與心理健康需求擴張。",
-          "confidence": 0.3,
-          "share_usd": 2803275.0,
-          "yf_name": "Hims & Hers Health, Inc.",
-          "market_cap": 6416476160,
-          "revenue_ttm": 2347636992,
-          "sector": "Healthcare",
-          "industry": "Drug Manufacturers - Specialty & Generic",
-          "country": "United States",
-          "annual_share_usd": 560655.0,
-          "budget_to_mcap_pct": 0.008737739937305401,
-          "budget_to_revenue_pct": 0.02388167344059298,
-          "expected_alpha_bp": 0.45436247673988084
+          "expected_alpha_bp": 0.8505542660837191
         },
         {
           "ticker": "HUM",
@@ -8324,45 +8087,35 @@
           "confidence": 0.45,
           "share_usd": 11213100.0,
           "yf_name": "Humana Inc.",
-          "market_cap": 25805707264,
+          "market_cap": 25839321088,
           "revenue_ttm": 129664000000,
           "sector": "Healthcare",
           "industry": "Healthcare Plans",
           "country": "United States",
           "annual_share_usd": 2242620.0,
-          "budget_to_mcap_pct": 0.008690403161817406,
+          "budget_to_mcap_pct": 0.008679098000920357,
           "budget_to_revenue_pct": 0.001729562561697927,
-          "expected_alpha_bp": 0.45190096441450506
+          "expected_alpha_bp": 0.4513130960478585
+        },
+        {
+          "ticker": "HIMS",
+          "name": "Hims & Hers Health",
+          "estimated_share_pct": 0.5,
+          "rationale": "心理健康虛擬照護平台，可間接受惠於 SUD 與心理健康需求擴張。",
+          "confidence": 0.3,
+          "share_usd": 2803275.0,
+          "yf_name": "Hims & Hers Health, Inc.",
+          "market_cap": 6965808640,
+          "revenue_ttm": 2347636992,
+          "sector": "Healthcare",
+          "industry": "Drug Manufacturers - Specialty & Generic",
+          "country": "United States",
+          "annual_share_usd": 560655.0,
+          "budget_to_mcap_pct": 0.008048670713986194,
+          "budget_to_revenue_pct": 0.02388167344059298,
+          "expected_alpha_bp": 0.4185308771272821
         }
       ]
-    },
-    {
-      "bill_id": "119-s-3006",
-      "pipeline_version": "v0.2",
-      "title": "Youth Prevention and Recovery Reauthorization Act of 2025",
-      "congress": 119,
-      "type": "s",
-      "number": "3006",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3006",
-      "policy_area": "Health",
-      "stage": "referred",
-      "stage_label": "交付委員會",
-      "passage_baseline": 0.05,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.2,
-      "cosponsors_total": 0,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2025-10-14",
-        "text": "Read twice and referred to the Committee on Health, Education, Labor, and Pensions."
-      },
-      "last_action_date": "2025-10-14",
-      "fetched_at": "2026-04-21T11:53:02.104664+00:00",
-      "beneficiaries": []
     },
     {
       "bill_id": "119-hr-2483",
@@ -8433,6 +8186,34 @@
       },
       "last_action_date": "2025-12-01",
       "fetched_at": "2026-04-19T08:27:07.902632+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-3006",
+      "pipeline_version": "v0.2",
+      "title": "Youth Prevention and Recovery Reauthorization Act of 2025",
+      "congress": 119,
+      "type": "s",
+      "number": "3006",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3006",
+      "policy_area": "Health",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.2,
+      "cosponsors_total": 0,
+      "cosponsors_R": 0,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-10-14",
+        "text": "Read twice and referred to the Committee on Health, Education, Labor, and Pensions."
+      },
+      "last_action_date": "2025-10-14",
+      "fetched_at": "2026-04-21T11:53:02.104664+00:00",
       "beneficiaries": []
     },
     {
@@ -8576,34 +8357,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-hr-6300",
-      "pipeline_version": "v0.2",
-      "title": "Grasslands Grazing Act of 2025",
-      "congress": 119,
-      "type": "hr",
-      "number": "6300",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/6300",
-      "policy_area": "Public Lands and Natural Resources",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.18,
-      "cosponsors_total": 0,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-02-11",
-        "text": "Ordered to be Reported in the Nature of a Substitute (Amended) by the Yeas and Nays: 25 - 14."
-      },
-      "last_action_date": "2026-02-11",
-      "fetched_at": "2026-04-21T11:53:35.982253+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-2787",
       "pipeline_version": "v0.2",
       "title": "Grasslands Grazing Act of 2025",
@@ -8629,6 +8382,34 @@
       },
       "last_action_date": "2026-03-04",
       "fetched_at": "2026-04-21T11:53:25.795727+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-6300",
+      "pipeline_version": "v0.2",
+      "title": "Grasslands Grazing Act of 2025",
+      "congress": 119,
+      "type": "hr",
+      "number": "6300",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/6300",
+      "policy_area": "Public Lands and Natural Resources",
+      "stage": "committee",
+      "stage_label": "委員會審議",
+      "passage_baseline": 0.18,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.18,
+      "cosponsors_total": 0,
+      "cosponsors_R": 0,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-02-11",
+        "text": "Ordered to be Reported in the Nature of a Substitute (Amended) by the Yeas and Nays: 25 - 14."
+      },
+      "last_action_date": "2026-02-11",
+      "fetched_at": "2026-04-21T11:53:35.982253+00:00",
       "beneficiaries": []
     },
     {
@@ -8884,34 +8665,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-s-3912",
-      "pipeline_version": "v0.2",
-      "title": "NIDIS Reauthorization Act of 2026",
-      "congress": 119,
-      "type": "s",
-      "number": "3912",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3912",
-      "policy_area": "Science, Technology, Communications",
-      "stage": "referred",
-      "stage_label": "交付委員會",
-      "passage_baseline": 0.05,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.2,
-      "cosponsors_total": 0,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-02-25",
-        "text": "Read twice and referred to the Committee on Commerce, Science, and Transportation."
-      },
-      "last_action_date": "2026-02-25",
-      "fetched_at": "2026-04-21T11:54:05.865536+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-3923",
       "pipeline_version": "v0.2",
       "title": "Weather Research and Forecasting Innovation Reauthorization Act of 2026",
@@ -8975,6 +8728,34 @@
       },
       "last_action_date": "2026-03-04",
       "fetched_at": "2026-04-19T08:28:26.017534+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-3912",
+      "pipeline_version": "v0.2",
+      "title": "NIDIS Reauthorization Act of 2026",
+      "congress": 119,
+      "type": "s",
+      "number": "3912",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3912",
+      "policy_area": "Science, Technology, Communications",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.2,
+      "cosponsors_total": 0,
+      "cosponsors_R": 0,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-02-25",
+        "text": "Read twice and referred to the Committee on Commerce, Science, and Transportation."
+      },
+      "last_action_date": "2026-02-25",
+      "fetched_at": "2026-04-21T11:54:05.865536+00:00",
       "beneficiaries": []
     },
     {
@@ -10322,34 +10103,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-hr-2444",
-      "pipeline_version": "v0.2",
-      "title": "Promoting Resilient Supply Chains Act of 2025",
-      "congress": 119,
-      "type": "hr",
-      "number": "2444",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2444",
-      "policy_area": "Commerce",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.47,
-      "cosponsors_total": 4,
-      "cosponsors_R": 1,
-      "cosponsors_D": 3,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2025-04-29",
-        "text": "Received in the Senate. Read twice. Placed on Senate Legislative Calendar under General Orders. Calendar No. 62."
-      },
-      "last_action_date": "2025-04-29",
-      "fetched_at": "2026-04-22T11:51:10.566175+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-527",
       "pipeline_version": "v0.2",
       "title": "Prescription Pricing for the People Act of 2025",
@@ -10772,34 +10525,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-hr-7633",
-      "pipeline_version": "v0.2",
-      "title": "American Assistance Visibility Act",
-      "congress": 119,
-      "type": "hr",
-      "number": "7633",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/7633",
-      "policy_area": "International Affairs",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.19,
-      "cosponsors_total": 2,
-      "cosponsors_R": 2,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-03-26",
-        "text": "Ordered to be Reported in the Nature of a Substitute by the Yeas and Nays: 44 - 1."
-      },
-      "last_action_date": "2026-03-26",
-      "fetched_at": "2026-04-23T11:51:56.177681+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-3798",
       "pipeline_version": "v0.2",
       "title": "Safe Access to Cash Act of 2026",
@@ -10825,6 +10550,34 @@
       },
       "last_action_date": "2026-03-05",
       "fetched_at": "2026-04-23T11:51:57.755342+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-7633",
+      "pipeline_version": "v0.2",
+      "title": "American Assistance Visibility Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "7633",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/7633",
+      "policy_area": "International Affairs",
+      "stage": "committee",
+      "stage_label": "委員會審議",
+      "passage_baseline": 0.18,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.19,
+      "cosponsors_total": 2,
+      "cosponsors_R": 2,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-26",
+        "text": "Ordered to be Reported in the Nature of a Substitute by the Yeas and Nays: 44 - 1."
+      },
+      "last_action_date": "2026-03-26",
+      "fetched_at": "2026-04-23T11:51:56.177681+00:00",
       "beneficiaries": []
     },
     {
@@ -11080,6 +10833,34 @@
       "beneficiaries": []
     },
     {
+      "bill_id": "119-hr-161",
+      "pipeline_version": "v0.2",
+      "title": "New Source Review Permitting Improvement Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "161",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/161",
+      "policy_area": "Environmental Protection",
+      "stage": "committee",
+      "stage_label": "委員會審議",
+      "passage_baseline": 0.18,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.28,
+      "cosponsors_total": 21,
+      "cosponsors_R": 21,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-01-21",
+        "text": "Ordered to be Reported (Amended) by the Yeas and Nays: 28 - 23."
+      },
+      "last_action_date": "2026-01-21",
+      "fetched_at": "2026-04-24T11:51:08.596923+00:00",
+      "beneficiaries": []
+    },
+    {
       "bill_id": "119-hr-4327",
       "pipeline_version": "v0.2",
       "title": "No Tax on Home Sales Act",
@@ -11106,34 +10887,6 @@
       },
       "last_action_date": "2026-01-21",
       "fetched_at": "2026-04-24T11:51:05.735629+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-161",
-      "pipeline_version": "v0.2",
-      "title": "New Source Review Permitting Improvement Act",
-      "congress": 119,
-      "type": "hr",
-      "number": "161",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/161",
-      "policy_area": "Environmental Protection",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.28,
-      "cosponsors_total": 21,
-      "cosponsors_R": 21,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-01-21",
-        "text": "Ordered to be Reported (Amended) by the Yeas and Nays: 28 - 23."
-      },
-      "last_action_date": "2026-01-21",
-      "fetched_at": "2026-04-24T11:51:08.596923+00:00",
       "beneficiaries": []
     },
     {
@@ -12007,34 +11760,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-hr-7250",
-      "pipeline_version": "v0.2",
-      "title": "To reauthorize the Fort Peck Reservation Rural Water System Act of 2000.",
-      "congress": 119,
-      "type": "hr",
-      "number": "7250",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/7250",
-      "policy_area": "Water Resources Development",
-      "stage": "referred",
-      "stage_label": "交付委員會",
-      "passage_baseline": 0.05,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.05,
-      "cosponsors_total": 0,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-03-26",
-        "text": "Subcommittee Hearings Held"
-      },
-      "last_action_date": "2026-03-26",
-      "fetched_at": "2026-04-24T11:52:47.111491+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-3635",
       "pipeline_version": "v0.2",
       "title": "Fort Peck Water System Reauthorization Act",
@@ -12060,6 +11785,34 @@
       },
       "last_action_date": "2026-03-17",
       "fetched_at": "2026-04-24T11:52:49.641879+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-7250",
+      "pipeline_version": "v0.2",
+      "title": "To reauthorize the Fort Peck Reservation Rural Water System Act of 2000.",
+      "congress": 119,
+      "type": "hr",
+      "number": "7250",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/7250",
+      "policy_area": "Water Resources Development",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.05,
+      "cosponsors_total": 0,
+      "cosponsors_R": 0,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-26",
+        "text": "Subcommittee Hearings Held"
+      },
+      "last_action_date": "2026-03-26",
+      "fetched_at": "2026-04-24T11:52:47.111491+00:00",
       "beneficiaries": []
     },
     {
@@ -12485,34 +12238,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-s-1809",
-      "pipeline_version": "v0.2",
-      "title": "Drone Espionage Act",
-      "congress": 119,
-      "type": "s",
-      "number": "1809",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1809",
-      "policy_area": "Crime and Law Enforcement",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.5149999999999999,
-      "cosponsors_total": 13,
-      "cosponsors_R": 12,
-      "cosponsors_D": 1,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-02-09",
-        "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 316."
-      },
-      "last_action_date": "2026-02-09",
-      "fetched_at": "2026-04-24T11:54:08.429116+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-hr-1276",
       "pipeline_version": "v0.2",
       "title": "To remove restrictions from a parcel of land in Paducah, Kentucky.",
@@ -12541,6 +12266,34 @@
       "beneficiaries": []
     },
     {
+      "bill_id": "119-s-1809",
+      "pipeline_version": "v0.2",
+      "title": "Drone Espionage Act",
+      "congress": 119,
+      "type": "s",
+      "number": "1809",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1809",
+      "policy_area": "Crime and Law Enforcement",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.5149999999999999,
+      "cosponsors_total": 13,
+      "cosponsors_R": 12,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-02-09",
+        "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 316."
+      },
+      "last_action_date": "2026-02-09",
+      "fetched_at": "2026-04-24T11:54:08.429116+00:00",
+      "beneficiaries": []
+    },
+    {
       "bill_id": "119-s-1135",
       "pipeline_version": "v0.2",
       "title": "A bill to amend the National Trails System Act to direct the Secretary of the Interior to conduct a study on the feasibility of designating the Bonneville Shoreline Trail.",
@@ -12566,6 +12319,372 @@
       },
       "last_action_date": "2026-03-04",
       "fetched_at": "2026-04-24T11:54:14.418960+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-6502",
+      "pipeline_version": "v0.2",
+      "title": "College Financial Aid Clarity Act of 2025",
+      "congress": 119,
+      "type": "hr",
+      "number": "6502",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/6502",
+      "policy_area": "Education",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.46499999999999997,
+      "cosponsors_total": 3,
+      "cosponsors_R": 1,
+      "cosponsors_D": 2,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-01-21",
+        "text": "Placed on the Union Calendar, Calendar No. 394."
+      },
+      "last_action_date": "2026-01-21",
+      "fetched_at": "2026-04-25T11:30:08.198672+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-3266",
+      "pipeline_version": "v0.2",
+      "title": "USMMA Athletics Act of 2025",
+      "congress": 119,
+      "type": "s",
+      "number": "3266",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3266",
+      "policy_area": "Transportation and Public Works",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.355,
+      "cosponsors_total": 1,
+      "cosponsors_R": 0,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-02-12",
+        "text": "Committee on Commerce, Science, and Transportation. Ordered to be reported with an amendment in the nature of a substitute favorably."
+      },
+      "last_action_date": "2026-02-12",
+      "fetched_at": "2026-04-25T11:30:11.215410+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-8118",
+      "pipeline_version": "v0.2",
+      "title": "Election Infrastructure Integrity Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "8118",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/8118",
+      "policy_area": "Government Operations and Politics",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.065,
+      "cosponsors_total": 3,
+      "cosponsors_R": 3,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-26",
+        "text": "Referred to the House Committee on House Administration."
+      },
+      "last_action_date": "2026-03-26",
+      "fetched_at": "2026-04-25T11:30:13.739169+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-1872",
+      "pipeline_version": "v0.2",
+      "title": "Critical Infrastructure Manufacturing Feasibility Act",
+      "congress": 119,
+      "type": "s",
+      "number": "1872",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1872",
+      "policy_area": "Commerce",
+      "stage": "passed_one",
+      "stage_label": "單院通過",
+      "passage_baseline": 0.55,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.56,
+      "cosponsors_total": 2,
+      "cosponsors_R": 0,
+      "cosponsors_D": 2,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-11-10",
+        "actionTime": "12:03:07",
+        "text": "Held at the desk."
+      },
+      "last_action_date": "2025-11-10",
+      "fetched_at": "2026-04-25T11:30:16.659906+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-1721",
+      "pipeline_version": "v0.2",
+      "title": "Critical Infrastructure Manufacturing Feasibility Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "1721",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/1721",
+      "policy_area": "Commerce",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.45999999999999996,
+      "cosponsors_total": 2,
+      "cosponsors_R": 1,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-04-29",
+        "text": "Received in the Senate and Read twice and referred to the Committee on Commerce, Science, and Transportation."
+      },
+      "last_action_date": "2025-04-29",
+      "fetched_at": "2026-04-25T11:30:19.597150+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-2222",
+      "pipeline_version": "v0.2",
+      "title": "Critical Undersea Infrastructure Resilience Initiative Act",
+      "congress": 119,
+      "type": "s",
+      "number": "2222",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/2222",
+      "policy_area": "International Affairs",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.355,
+      "cosponsors_total": 1,
+      "cosponsors_R": 0,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-02-10",
+        "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 323."
+      },
+      "last_action_date": "2026-02-10",
+      "fetched_at": "2026-04-25T11:30:22.175499+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-8177",
+      "pipeline_version": "v0.2",
+      "title": "Critical Undersea Infrastructure Resilience Initiative Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "8177",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/8177",
+      "policy_area": "International Affairs",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.060000000000000005,
+      "cosponsors_total": 2,
+      "cosponsors_R": 0,
+      "cosponsors_D": 2,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-04-02",
+        "text": "Referred to the Committee on Foreign Affairs, and in addition to the Committee on the Judiciary, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned."
+      },
+      "last_action_date": "2026-04-02",
+      "fetched_at": "2026-04-25T11:30:25.099068+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-8175",
+      "pipeline_version": "v0.2",
+      "title": "To amend title 10, United States Code, and the National Defense Authorization Act for Fiscal Year 1994, to codify and clarify gender neutral standards for members of certain Armed Forces, and for other purposes.",
+      "congress": 119,
+      "type": "hr",
+      "number": "8175",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/8175",
+      "policy_area": "Armed Forces and National Security",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.30000000000000004,
+      "cosponsors_total": 36,
+      "cosponsors_R": 0,
+      "cosponsors_D": 36,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-04-02",
+        "text": "Referred to the House Committee on Armed Services."
+      },
+      "last_action_date": "2026-04-02",
+      "fetched_at": "2026-04-25T11:30:27.798866+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-4205",
+      "pipeline_version": "v0.2",
+      "title": "No Funding to Honor Crime Scenes Act",
+      "congress": 119,
+      "type": "s",
+      "number": "4205",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/4205",
+      "policy_area": "Public Lands and Natural Resources",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.055,
+      "cosponsors_total": 1,
+      "cosponsors_R": 1,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-25",
+        "text": "Read twice and referred to the Committee on Energy and Natural Resources."
+      },
+      "last_action_date": "2026-03-25",
+      "fetched_at": "2026-04-25T11:30:30.320580+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-4348",
+      "pipeline_version": "v0.2",
+      "title": "To reauthorize the Kay Hagan Tick Act, and for other purposes.",
+      "congress": 119,
+      "type": "hr",
+      "number": "4348",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/4348",
+      "policy_area": "Health",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.25,
+      "cosponsors_total": 32,
+      "cosponsors_R": 6,
+      "cosponsors_D": 26,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-07-10",
+        "text": "Referred to the House Committee on Energy and Commerce."
+      },
+      "last_action_date": "2025-07-10",
+      "fetched_at": "2026-04-25T11:30:33.365558+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-3858",
+      "pipeline_version": "v0.2",
+      "title": "Sport Fish Restoration, Recreational Boating Safety, and Wildlife Restoration Act of 2025",
+      "congress": 119,
+      "type": "hr",
+      "number": "3858",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/3858",
+      "policy_area": "Public Lands and Natural Resources",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.5499999999999999,
+      "cosponsors_total": 24,
+      "cosponsors_R": 11,
+      "cosponsors_D": 13,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-07-15",
+        "text": "Ordered to be Reported by Unanimous Consent."
+      },
+      "last_action_date": "2025-07-15",
+      "fetched_at": "2026-04-25T11:30:36.941825+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-759",
+      "pipeline_version": "v0.2",
+      "title": "Federal Firefighters Families First Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "759",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/759",
+      "policy_area": "Government Operations and Politics",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.25,
+      "cosponsors_total": 72,
+      "cosponsors_R": 11,
+      "cosponsors_D": 61,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-11-20",
+        "actionTime": "17:41:41",
+        "text": "ASSUMING FIRST SPONSORSHIP - Mr. Walkinshaw asked unanimous consent that he may hereafter be considered as the first sponsor of H.R. 759, a bill originally introduced by Representative Connolly, for the purpose of adding cosponsors and requesting reprintings pursuant to clause 7 of rule XII. Agreed to without objection."
+      },
+      "last_action_date": "2025-11-20",
+      "fetched_at": "2026-04-25T11:30:40.379529+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-7482",
+      "pipeline_version": "v0.2",
+      "title": "LymeX Authorization Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "7482",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/7482",
+      "policy_area": "Health",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.065,
+      "cosponsors_total": 3,
+      "cosponsors_R": 0,
+      "cosponsors_D": 3,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-02-11",
+        "text": "Referred to the House Committee on Energy and Commerce."
+      },
+      "last_action_date": "2026-02-11",
+      "fetched_at": "2026-04-25T11:30:42.745795+00:00",
       "beneficiaries": []
     }
   ]
