@@ -747,6 +747,8 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
 
             prev_h = prev_holdings.get(sc)
             prev_was_na = prev_h is not None and prev_h.get('weight_na', False)
+            prev_etf_was_partial = prev_etf.get('status') == 'partial'
+
             if prev_h and not prev_was_na:
                 prev_etf_for_cap = {
                     'aum_billion': prev_etf.get('aum_billion'),
@@ -759,6 +761,10 @@ def compute_capital_flows(today_data, prev_data, first_seen, baseline_date):
             # BUT: if prev had this stock with weight_na (data quality upgrade), skip — not a real action.
             if prev_was_na:
                 continue  # data quality changed, not a real flow event
+            # If the baseline ETF was partial (top-10 only) and the stock wasn't in top-10,
+            # we can't know if it was already held → skip to avoid false "new buy" signals.
+            if prev_cap is None and prev_etf_was_partial:
+                continue
             if prev_cap is None:
                 delta = today_cap
             else:
@@ -908,8 +914,11 @@ def compute_big_etf_actions(today_data, prev_data, big_etf_codes, first_seen, ba
                 continue
             prev_h = prev_holdings.get(sc)
             prev_was_na = prev_h is not None and prev_h.get('weight_na', False)
+            prev_etf_was_partial = prev_etf.get('status') == 'partial'
             if prev_was_na:
                 continue  # data quality changed (partial → ok), not a real action
+            if not prev_h and prev_etf_was_partial:
+                continue  # baseline was partial-top10; can't tell if truly new buy
             if not prev_h:
                 # Not held yesterday → buy
                 buys.append({
