@@ -62,14 +62,14 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
 </div>
 <div class="stats">
   <div class="sc"><div class="n">366</div><div class="l">全部CB數</div></div>
-  <div class="sc gr"><div class="n">1</div><div class="l">S1全條件買入</div></div>
+  <div class="sc gr"><div class="n">0</div><div class="l">S1全條件買入</div></div>
   <div class="sc am"><div class="n">0</div><div class="l">S1不可放空</div></div>
-  <div class="sc gr"><div class="n">16</div><div class="l">S2套利(4/4)</div></div>
-  <div class="sc am"><div class="n">0</div><div class="l">S2不可放空</div></div>
+  <div class="sc gr"><div class="n">15</div><div class="l">S2套利(4/4)</div></div>
+  <div class="sc am"><div class="n">24</div><div class="l">S2不可放空</div></div>
 </div>
 <div class="tabs">
   <div class="tab active" onclick="showTab('s1',this)">策略一：CBAS新上市</div>
-  <div class="tab" onclick="showTab('s2',this)">策略二：AI轉換套利（16筆）</div>
+  <div class="tab" onclick="showTab('s2',this)">策略二：AI轉換套利（15筆）</div>
   <div class="tab" onclick="showTab('all',this)">全部可轉債</div>
 </div>
 <div id="pane-s1" class="pane active">
@@ -93,41 +93,41 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">111.1</td>
   <td class="center">D0</td>
   <td class="center">D6可拆</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-n">✗</span> 融+借↑</td>
-  <td class="num">2330張</td>
-  <td class="num short-dn">-166</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-na">?</span> 融+借↑</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge watch">觀察 D0</span></td>
-</tr><tr class="row-buy">
+</tr><tr class="row-sell">
   <td><b>84762</b></td><td>台境二</td><td>8476</td>
   <td class="num">103.3</td>
   <td class="center">D5</td>
   <td class="center">D6可拆</td>
-  <td class="center cond"><span class="chk chk-y">✓</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">2072張</td>
-  <td class="num short-up">+21</td>
-  <td class="center"><span class="badge buy">★ 買入 D5 (3/3)</span></td>
+  <td class="center cond"><span class="chk chk-y">✓</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-n">✗</span> 融+借↑</td>
+  <td class="num">2004張</td>
+  <td class="num short-dn">-68</td>
+  <td class="center"><span class="badge sell">✗ 融券未增 D5</span></td>
 </tr><tr class="">
   <td><b>64725</b></td><td>保瑞五</td><td>6472</td>
   <td class="num">105.0</td>
   <td class="center">D9</td>
   <td class="center">✓ 可拆</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-n">✗</span> 融+借↑</td>
-  <td class="num">8552張</td>
-  <td class="num short-dn">-22</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">8557張</td>
+  <td class="num short-up">+5</td>
   <td class="center"><span class="badge sell">出場 D9</span></td>
 </tr><tr class="">
   <td><b>64724</b></td><td>保瑞四</td><td>6472</td>
   <td class="num">104.2</td>
   <td class="center">D19</td>
   <td class="center">✓ 可拆</td>
-  <td class="center cond"><span class="chk chk-n">✗</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-n">✗</span> 融+借↑</td>
-  <td class="num">8552張</td>
-  <td class="num short-dn">-22</td>
+  <td class="center cond"><span class="chk chk-n">✗</span> D4-D8<br><span class="chk chk-y">✓</span> CB≥98<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">8557張</td>
+  <td class="num short-up">+5</td>
   <td class="center"><span class="badge sell">出場 D19</span></td>
 </tr></tbody></table>
 </div>
 <div id="pane-s2" class="pane">
-  <div class="ttl">策略二：AI 轉換套利（16 支符合條件）</div>
+  <div class="ttl">策略二：AI 轉換套利（15 支符合條件）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
     <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
     <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加
@@ -141,17 +141,6 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
     <th class="num">距到期</th><th class="num">融+借餘額</th><th class="num">日變化</th>
     <th class="center">訊號</th>
   </tr></thead><tbody><tr class="row-buy">
-  <td><b>68401</b></td><td>東研信超一</td><td>6840</td>
-  <td class="num">107.0</td>
-  <td class="num prem-neg">-2.2%</td>
-  <td class="num">71.9</td>
-  <td class="num">65.7</td>
-  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">394天</td>
-  <td class="num">218張</td>
-  <td class="num short-up">+6</td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
-</tr><tr class="row-buy">
   <td><b>24361</b></td><td>偉詮電一</td><td>2436</td>
   <td class="num">135.4</td>
   <td class="num prem-neg">-2.1%</td>
@@ -159,30 +148,30 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">53.3</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">136天</td>
-  <td class="num">14181張</td>
-  <td class="num short-up">+189</td>
+  <td class="num">14496張</td>
+  <td class="num short-up">+315</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>31311</b></td><td>弘塑一</td><td>3131</td>
-  <td class="num">162.0</td>
-  <td class="num prem-neg">-2.0%</td>
-  <td class="num">2870.0</td>
-  <td class="num">1736.5</td>
+  <td><b>35832</b></td><td>辛耘二</td><td>3583</td>
+  <td class="num">215.0</td>
+  <td class="num prem-neg">-1.7%</td>
+  <td class="num">738.0</td>
+  <td class="num">337.4</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1554天</td>
-  <td class="num">298張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">417天</td>
+  <td class="num">689張</td>
+  <td class="num short-up">+37</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>35872</b></td><td>閎康二</td><td>3587</td>
-  <td class="num">163.0</td>
-  <td class="num prem-neg">-1.5%</td>
-  <td class="num">327.5</td>
-  <td class="num">198.0</td>
+  <td><b>35831</b></td><td>辛耘一</td><td>3583</td>
+  <td class="num">209.0</td>
+  <td class="num prem-neg">-1.1%</td>
+  <td class="num">738.0</td>
+  <td class="num">349.3</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1743天</td>
-  <td class="num">1381張</td>
-  <td class="num short-up">+63</td>
+  <td class="num">405天</td>
+  <td class="num">689張</td>
+  <td class="num short-up">+37</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>49674</b></td><td>十銓四</td><td>4967</td>
@@ -192,74 +181,74 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">147.0</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">993天</td>
-  <td class="num">6850張</td>
+  <td class="num">6893張</td>
+  <td class="num short-up">+43</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>24866</b></td><td>一詮六</td><td>2486</td>
+  <td class="num">183.0</td>
+  <td class="num prem-neg">-0.6%</td>
+  <td class="num">230.5</td>
+  <td class="num">125.2</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">429天</td>
+  <td class="num">3949張</td>
+  <td class="num short-up">+21</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>37023</b></td><td>大聯大三</td><td>3702</td>
+  <td class="num">133.0</td>
+  <td class="num prem-neg">-0.3%</td>
+  <td class="num">99.5</td>
+  <td class="num">74.6</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">572天</td>
+  <td class="num">22353張</td>
+  <td class="num short-up">+647</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>66722</b></td><td>騰輝電子二KY</td><td>6672</td>
+  <td class="num">229.0</td>
+  <td class="num prem-neg">-0.1%</td>
+  <td class="num">207.5</td>
+  <td class="num">90.5</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">1742天</td>
+  <td class="num">2928張</td>
   <td class="num short-up">+51</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>31312</b></td><td>弘塑二</td><td>3131</td>
-  <td class="num">175.0</td>
-  <td class="num prem-neg">-0.8%</td>
-  <td class="num">2870.0</td>
-  <td class="num">1626.6</td>
+  <td><b>37022</b></td><td>大聯大二</td><td>3702</td>
+  <td class="num">129.2</td>
+  <td class="num prem-neg">-0.1%</td>
+  <td class="num">99.5</td>
+  <td class="num">76.9</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1560天</td>
-  <td class="num">298張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">562天</td>
+  <td class="num">22353張</td>
+  <td class="num short-up">+647</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>32608</b></td><td>威剛八</td><td>3260</td>
-  <td class="num">210.0</td>
-  <td class="num prem-neg">-0.7%</td>
-  <td class="num">484.0</td>
-  <td class="num">228.9</td>
+  <td><b>66721</b></td><td>騰輝電子一KY</td><td>6672</td>
+  <td class="num">222.0</td>
+  <td class="num prem-neg">-0.1%</td>
+  <td class="num">207.5</td>
+  <td class="num">93.4</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">986天</td>
-  <td class="num">30124張</td>
-  <td class="num short-up">+344</td>
+  <td class="num">1730天</td>
+  <td class="num">2928張</td>
+  <td class="num short-up">+51</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>33571</b></td><td>臺慶科一</td><td>3357</td>
-  <td class="num">157.0</td>
-  <td class="num prem-neg">-0.5%</td>
-  <td class="num">169.5</td>
-  <td class="num">107.4</td>
-  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">186天</td>
-  <td class="num">1994張</td>
-  <td class="num short-up">+70</td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
-</tr><tr class="row-buy">
-  <td><b>61907</b></td><td>萬泰科七</td><td>6190</td>
-  <td class="num">172.0</td>
-  <td class="num prem-neg">-0.4%</td>
-  <td class="num">72.0</td>
-  <td class="num">41.7</td>
-  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">923天</td>
-  <td class="num">10355張</td>
-  <td class="num short-up">+224</td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
-</tr><tr class="row-buy">
-  <td><b>62745</b></td><td>台燿五</td><td>6274</td>
-  <td class="num">254.0</td>
-  <td class="num ">0.1%</td>
-  <td class="num">966.0</td>
-  <td class="num">380.8</td>
-  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1660天</td>
-  <td class="num">2112張</td>
-  <td class="num short-up">+1</td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
-</tr><tr class="row-buy">
-  <td><b>65101</b></td><td>精測一</td><td>6510</td>
-  <td class="num">184.0</td>
+  <td><b>80282</b></td><td>昇陽半導體二</td><td>8028</td>
+  <td class="num">171.0</td>
   <td class="num ">0.2%</td>
-  <td class="num">3705.0</td>
-  <td class="num">2016.8</td>
+  <td class="num">235.5</td>
+  <td class="num">138.0</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">983天</td>
-  <td class="num">426張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">1365天</td>
+  <td class="num">6581張</td>
+  <td class="num short-up">+88</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>62093</b></td><td>今國光三</td><td>6209</td>
@@ -269,41 +258,41 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">38.6</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">909天</td>
-  <td class="num">5426張</td>
-  <td class="num short-up">+86</td>
+  <td class="num">5637張</td>
+  <td class="num short-up">+211</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>80914</b></td><td>翔名四</td><td>8091</td>
-  <td class="num">141.5</td>
+  <td><b>64145</b></td><td>樺漢五</td><td>6414</td>
+  <td class="num">118.0</td>
   <td class="num ">0.4%</td>
-  <td class="num">179.0</td>
-  <td class="num">127.0</td>
+  <td class="num">321.5</td>
+  <td class="num">273.6</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">110天</td>
+  <td class="num">2680張</td>
+  <td class="num short-up">+18</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>68301</b></td><td>汎銓一</td><td>6830</td>
+  <td class="num">485.0</td>
+  <td class="num ">0.9%</td>
+  <td class="num">716.0</td>
+  <td class="num">149.0</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">474天</td>
-  <td class="num">478張</td>
-  <td class="num short-up">+7</td>
+  <td class="num">959張</td>
+  <td class="num short-up">+128</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
-  <td><b>30371</b></td><td>欣興一</td><td>3037</td>
-  <td class="num">501.0</td>
-  <td class="num ">0.4%</td>
-  <td class="num">825.0</td>
-  <td class="num">165.4</td>
+  <td><b>67152</b></td><td>嘉基二</td><td>6715</td>
+  <td class="num">240.0</td>
+  <td class="num ">0.9%</td>
+  <td class="num">373.5</td>
+  <td class="num">157.1</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1650天</td>
-  <td class="num">4254張</td>
-  <td class="num short-up">+3</td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
-</tr><tr class="row-buy">
-  <td><b>23683</b></td><td>金像電三</td><td>2368</td>
-  <td class="num">311.0</td>
-  <td class="num ">0.7%</td>
-  <td class="num">1390.0</td>
-  <td class="num">450.0</td>
-  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1671天</td>
-  <td class="num">5535張</td>
-  <td class="num short-up">+156</td>
+  <td class="num">265天</td>
+  <td class="num">276張</td>
+  <td class="num short-up">+13</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>24642</b></td><td>盟立二</td><td>2464</td>
@@ -313,14 +302,14 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">78.5</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
   <td class="num">506天</td>
-  <td class="num">4653張</td>
-  <td class="num short-up">+637</td>
+  <td class="num">4827張</td>
+  <td class="num short-up">+174</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr></tbody></table>
 </div>
 <div id="pane-all" class="pane">
   <div class="ttl">全部 366 支可轉債</div>
-  <div class="desc">資料來源：thefew.tw｜融券+借券：TWSE TWT93U 20260427</div>
+  <div class="desc">資料來源：thefew.tw｜融券+借券：TWSE TWT93U 20260428</div>
   <table><thead><tr>
     <th>CB代號</th><th>CB名稱</th><th>股票</th><th class="num">CB價</th>
     <th class="num">溢價率</th><th class="num">股價</th><th class="num">轉換價</th>
@@ -333,8 +322,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">24.4</td>
   <td class="num">35.2</td>
   <td>2029-12-10</td>
-  <td class="num">297384張</td>
-  <td class="num short-up">+5378</td>
+  <td class="num">303619張</td>
+  <td class="num short-up">+6235</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -345,7 +334,7 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">189.1</td>
   <td>2028-10-08</td>
   <td class="num">215張</td>
-  <td class="num short-dn">-1</td>
+  <td class="num ">0</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -355,8 +344,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">11.2</td>
   <td class="num">17.8</td>
   <td>2027-12-27</td>
-  <td class="num">14066張</td>
-  <td class="num short-dn">-128</td>
+  <td class="num">13725張</td>
+  <td class="num short-dn">-341</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -377,8 +366,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.2</td>
   <td class="num">45.4</td>
   <td>2029-08-08</td>
-  <td class="num">190309張</td>
-  <td class="num short-up">+2297</td>
+  <td class="num">192570張</td>
+  <td class="num short-up">+2261</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -388,8 +377,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.2</td>
   <td class="num">33.7</td>
   <td>2029-08-08</td>
-  <td class="num">190309張</td>
-  <td class="num short-up">+2297</td>
+  <td class="num">192570張</td>
+  <td class="num short-up">+2261</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -399,8 +388,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">50.3</td>
   <td class="num">128.7</td>
   <td>2027-08-27</td>
-  <td class="num">2302張</td>
-  <td class="num short-up">+38</td>
+  <td class="num">2314張</td>
+  <td class="num short-up">+12</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -410,8 +399,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">50.3</td>
   <td class="num">99.0</td>
   <td>2028-03-18</td>
-  <td class="num">2302張</td>
-  <td class="num short-up">+38</td>
+  <td class="num">2314張</td>
+  <td class="num short-up">+12</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -421,8 +410,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">23.9</td>
   <td class="num">55.9</td>
   <td>2029-12-19</td>
-  <td class="num">189張</td>
-  <td class="num ">0</td>
+  <td class="num">192張</td>
+  <td class="num short-up">+3</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -432,8 +421,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">16.1</td>
   <td class="num">18.8</td>
   <td>2028-06-20</td>
-  <td class="num">959張</td>
-  <td class="num short-up">+12</td>
+  <td class="num">970張</td>
+  <td class="num short-up">+11</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -443,8 +432,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">91.3</td>
   <td class="num">98.6</td>
   <td>2028-05-29</td>
-  <td class="num">65張</td>
-  <td class="num ">0</td>
+  <td class="num">67張</td>
+  <td class="num short-up">+2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -454,8 +443,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">91.3</td>
   <td class="num">101.5</td>
   <td>2028-06-17</td>
-  <td class="num">65張</td>
-  <td class="num ">0</td>
+  <td class="num">67張</td>
+  <td class="num short-up">+2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -476,8 +465,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">110.5</td>
   <td class="num">109.2</td>
   <td>2030-01-13</td>
-  <td class="num">6758張</td>
-  <td class="num short-dn">-229</td>
+  <td class="num">6426張</td>
+  <td class="num short-dn">-332</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -487,8 +476,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">16.5</td>
   <td class="num">37.3</td>
   <td>2026-09-19</td>
-  <td class="num">574張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">577張</td>
+  <td class="num short-up">+3</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -498,8 +487,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">50.5</td>
   <td class="num">71.5</td>
   <td>2027-08-12</td>
-  <td class="num">24901張</td>
-  <td class="num short-dn">-196</td>
+  <td class="num">24868張</td>
+  <td class="num short-dn">-33</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -509,10 +498,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">530.0</td>
   <td class="num">284.6</td>
   <td>2029-06-24</td>
-  <td class="num">1523張</td>
-  <td class="num short-up">+8</td>
+  <td class="num">1414張</td>
+  <td class="num short-dn">-109</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
   <td><b>15864</b></td><td>和勤四</td><td>1586</td>
   <td class="num">102.4</td>
@@ -520,8 +509,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.9</td>
   <td class="num">30.7</td>
   <td>2026-08-30</td>
-  <td class="num">1214張</td>
-  <td class="num short-up">+32</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -531,8 +520,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.9</td>
   <td class="num">30.1</td>
   <td>2026-08-31</td>
-  <td class="num">1214張</td>
-  <td class="num short-up">+32</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -542,8 +531,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">65.1</td>
   <td class="num">37.7</td>
   <td>2029-09-02</td>
-  <td class="num">779張</td>
-  <td class="num short-up">+170</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -553,8 +542,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">20.9</td>
   <td class="num">33.4</td>
   <td>2028-03-03</td>
-  <td class="num">2427張</td>
-  <td class="num short-up">+31</td>
+  <td class="num">2468張</td>
+  <td class="num short-up">+41</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -564,8 +553,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">32.1</td>
   <td class="num">53.1</td>
   <td>2029-09-30</td>
-  <td class="num">31737張</td>
-  <td class="num short-dn">-220</td>
+  <td class="num">31695張</td>
+  <td class="num short-dn">-42</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -575,8 +564,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">11.1</td>
   <td class="num">18.0</td>
   <td>2027-09-24</td>
-  <td class="num">50張</td>
-  <td class="num short-up">+4</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -586,8 +575,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">60.6</td>
   <td class="num">116.5</td>
   <td>2028-08-01</td>
-  <td class="num">2475張</td>
-  <td class="num ">0</td>
+  <td class="num">2463張</td>
+  <td class="num short-dn">-12</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -597,8 +586,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">9.1</td>
   <td class="num">23.9</td>
   <td>2026-12-20</td>
-  <td class="num">8849張</td>
-  <td class="num short-up">+282</td>
+  <td class="num">9107張</td>
+  <td class="num short-up">+258</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -608,8 +597,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.0</td>
   <td class="num">25.2</td>
   <td>2029-10-02</td>
-  <td class="num">19825張</td>
-  <td class="num short-up">+180</td>
+  <td class="num">19293張</td>
+  <td class="num short-dn">-532</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -619,8 +608,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">46.1</td>
   <td class="num">88.1</td>
   <td>2026-07-31</td>
-  <td class="num">208張</td>
-  <td class="num short-dn">-16</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -630,8 +619,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">10.8</td>
   <td class="num">21.2</td>
   <td>2028-10-13</td>
-  <td class="num">15212張</td>
-  <td class="num short-dn">-6</td>
+  <td class="num">14881張</td>
+  <td class="num short-dn">-331</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -641,8 +630,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">27.1</td>
   <td class="num">75.0</td>
   <td>2028-05-25</td>
-  <td class="num">58766張</td>
-  <td class="num short-dn">-213</td>
+  <td class="num">58904張</td>
+  <td class="num short-up">+138</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -652,8 +641,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">88.4</td>
   <td class="num">85.4</td>
   <td>2027-08-29</td>
-  <td class="num">4176張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">4192張</td>
+  <td class="num short-up">+16</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -663,8 +652,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">250.0</td>
   <td class="num">250.0</td>
   <td>2029-01-23</td>
-  <td class="num">1940張</td>
-  <td class="num short-dn">-20</td>
+  <td class="num">1918張</td>
+  <td class="num short-dn">-22</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -674,8 +663,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">132.0</td>
   <td class="num">118.1</td>
   <td>2031-02-10</td>
-  <td class="num">677張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">737張</td>
+  <td class="num short-up">+60</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
@@ -685,8 +674,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">212.0</td>
   <td class="num">282.8</td>
   <td>2028-06-26</td>
-  <td class="num">1830張</td>
-  <td class="num short-up">+22</td>
+  <td class="num">1839張</td>
+  <td class="num short-up">+9</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -696,8 +685,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">212.0</td>
   <td class="num">273.8</td>
   <td>2028-06-30</td>
-  <td class="num">1830張</td>
-  <td class="num short-up">+22</td>
+  <td class="num">1839張</td>
+  <td class="num short-up">+9</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -707,8 +696,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">59.1</td>
   <td class="num">51.3</td>
   <td>2029-03-18</td>
-  <td class="num">23294張</td>
-  <td class="num short-dn">-92</td>
+  <td class="num">23906張</td>
+  <td class="num short-up">+612</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -718,8 +707,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">159.5</td>
   <td class="num">23.0</td>
   <td>2028-03-24</td>
-  <td class="num">22922張</td>
-  <td class="num short-dn">-1095</td>
+  <td class="num">23045張</td>
+  <td class="num short-up">+123</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -729,8 +718,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.7</td>
   <td class="num">73.5</td>
   <td>2026-08-03</td>
-  <td class="num">9806張</td>
-  <td class="num short-up">+31</td>
+  <td class="num">9905張</td>
+  <td class="num short-up">+99</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -740,8 +729,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">146.5</td>
   <td class="num">72.4</td>
   <td>2028-06-17</td>
-  <td class="num">4732張</td>
-  <td class="num short-dn">-305</td>
+  <td class="num">4630張</td>
+  <td class="num short-dn">-102</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -751,10 +740,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1390.0</td>
   <td class="num">450.0</td>
   <td>2030-11-24</td>
-  <td class="num">5535張</td>
-  <td class="num short-up">+156</td>
+  <td class="num">5475張</td>
+  <td class="num short-dn">-60</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
   <td><b>23742</b></td><td>佳能二</td><td>2374</td>
   <td class="num">122.0</td>
@@ -762,8 +751,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">73.1</td>
   <td class="num">86.3</td>
   <td>2031-02-02</td>
-  <td class="num">22465張</td>
-  <td class="num short-up">+226</td>
+  <td class="num">22704張</td>
+  <td class="num short-up">+239</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -773,8 +762,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">69.5</td>
   <td class="num">55.0</td>
   <td>2028-11-19</td>
-  <td class="num">12547張</td>
-  <td class="num short-up">+315</td>
+  <td class="num">12814張</td>
+  <td class="num short-up">+267</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -784,8 +773,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.2</td>
   <td class="num">26.3</td>
   <td>2028-12-13</td>
-  <td class="num">4671張</td>
-  <td class="num short-up">+54</td>
+  <td class="num">4674張</td>
+  <td class="num short-up">+3</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -795,8 +784,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">73.7</td>
   <td class="num">53.3</td>
   <td>2026-09-11</td>
-  <td class="num">14181張</td>
-  <td class="num short-up">+189</td>
+  <td class="num">14496張</td>
+  <td class="num short-up">+315</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
@@ -806,8 +795,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">87.8</td>
   <td class="num">128.9</td>
   <td>2027-07-10</td>
-  <td class="num">13769張</td>
-  <td class="num short-up">+95</td>
+  <td class="num">13373張</td>
+  <td class="num short-dn">-396</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -817,8 +806,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">87.8</td>
   <td class="num">125.2</td>
   <td>2027-07-22</td>
-  <td class="num">13769張</td>
-  <td class="num short-up">+95</td>
+  <td class="num">13373張</td>
+  <td class="num short-dn">-396</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -828,8 +817,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">18.2</td>
   <td class="num">25.1</td>
   <td>2027-11-29</td>
-  <td class="num">9233張</td>
-  <td class="num short-up">+204</td>
+  <td class="num">9226張</td>
+  <td class="num short-dn">-7</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -839,8 +828,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">18.2</td>
   <td class="num">25.3</td>
   <td>2027-12-25</td>
-  <td class="num">9233張</td>
-  <td class="num short-up">+204</td>
+  <td class="num">9226張</td>
+  <td class="num short-dn">-7</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -850,8 +839,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">318.0</td>
   <td class="num">162.9</td>
   <td>2029-01-23</td>
-  <td class="num">9797張</td>
-  <td class="num short-up">+631</td>
+  <td class="num">9593張</td>
+  <td class="num short-dn">-204</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -861,8 +850,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">318.0</td>
   <td class="num">153.5</td>
   <td>2029-01-27</td>
-  <td class="num">9797張</td>
-  <td class="num short-up">+631</td>
+  <td class="num">9593張</td>
+  <td class="num short-dn">-204</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -872,8 +861,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.6</td>
   <td class="num">30.1</td>
   <td>2026-08-11</td>
-  <td class="num">1680張</td>
-  <td class="num ">0</td>
+  <td class="num">1681張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -883,8 +872,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">106.5</td>
   <td class="num">78.5</td>
   <td>2027-09-16</td>
-  <td class="num">4653張</td>
-  <td class="num short-up">+637</td>
+  <td class="num">4827張</td>
+  <td class="num short-up">+174</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
@@ -894,8 +883,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">545.0</td>
   <td class="num">250.6</td>
   <td>2029-01-09</td>
-  <td class="num">2559張</td>
-  <td class="num short-dn">-7</td>
+  <td class="num">2551張</td>
+  <td class="num short-dn">-8</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -905,8 +894,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">545.0</td>
   <td class="num">246.6</td>
   <td>2029-01-22</td>
-  <td class="num">2559張</td>
-  <td class="num short-dn">-7</td>
+  <td class="num">2551張</td>
+  <td class="num short-dn">-8</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -916,8 +905,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">118.5</td>
   <td class="num">66.5</td>
   <td>2027-01-26</td>
-  <td class="num">4896張</td>
-  <td class="num short-dn">-11</td>
+  <td class="num">4349張</td>
+  <td class="num short-dn">-547</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -927,10 +916,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">230.5</td>
   <td class="num">125.2</td>
   <td>2027-07-01</td>
-  <td class="num">3928張</td>
-  <td class="num ">0</td>
+  <td class="num">3949張</td>
+  <td class="num short-up">+21</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>25283</b></td><td>皇普三</td><td>2528</td>
   <td class="num">105.0</td>
@@ -938,8 +927,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.6</td>
   <td class="num">40.1</td>
   <td>2029-12-31</td>
-  <td class="num">9260張</td>
-  <td class="num short-up">+73</td>
+  <td class="num">9259張</td>
+  <td class="num short-dn">-1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -949,8 +938,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.6</td>
   <td class="num">38.7</td>
   <td>2030-01-17</td>
-  <td class="num">9260張</td>
-  <td class="num short-up">+73</td>
+  <td class="num">9259張</td>
+  <td class="num short-dn">-1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -960,8 +949,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.2</td>
   <td class="num">32.2</td>
   <td>2028-06-23</td>
-  <td class="num">17985張</td>
-  <td class="num short-up">+105</td>
+  <td class="num">18026張</td>
+  <td class="num short-up">+41</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -971,8 +960,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.2</td>
   <td class="num">30.2</td>
   <td>2028-06-30</td>
-  <td class="num">17985張</td>
-  <td class="num short-up">+105</td>
+  <td class="num">18026張</td>
+  <td class="num short-up">+41</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -982,8 +971,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">127.5</td>
   <td class="num">138.0</td>
   <td>2029-10-02</td>
-  <td class="num">3468張</td>
-  <td class="num short-up">+43</td>
+  <td class="num">3580張</td>
+  <td class="num short-up">+112</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -993,8 +982,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">127.5</td>
   <td class="num">136.3</td>
   <td>2029-10-18</td>
-  <td class="num">3468張</td>
-  <td class="num short-up">+43</td>
+  <td class="num">3580張</td>
+  <td class="num short-up">+112</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1004,8 +993,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">18.1</td>
   <td class="num">16.9</td>
   <td>2026-04-28</td>
-  <td class="num">221084張</td>
-  <td class="num short-up">+1376</td>
+  <td class="num">221628張</td>
+  <td class="num short-up">+544</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1015,8 +1004,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">17.1</td>
   <td class="num">22.1</td>
   <td>2027-07-26</td>
-  <td class="num">15904張</td>
-  <td class="num short-up">+359</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1026,8 +1015,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">17.1</td>
   <td class="num">19.3</td>
   <td>2030-08-06</td>
-  <td class="num">15904張</td>
-  <td class="num short-up">+359</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1037,8 +1026,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">228.5</td>
   <td class="num">233.4</td>
   <td>2028-03-29</td>
-  <td class="num">784張</td>
-  <td class="num short-up">+11</td>
+  <td class="num">810張</td>
+  <td class="num short-up">+26</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1048,8 +1037,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">66.0</td>
   <td class="num">121.0</td>
   <td>2027-01-26</td>
-  <td class="num">390張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1059,8 +1048,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">66.0</td>
   <td class="num">72.0</td>
   <td>2028-12-08</td>
-  <td class="num">390張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1070,8 +1059,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">70.0</td>
   <td class="num">135.0</td>
   <td>2028-08-28</td>
-  <td class="num">1036張</td>
-  <td class="num short-up">+9</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1081,8 +1070,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">102.5</td>
   <td class="num">111.3</td>
   <td>2029-01-05</td>
-  <td class="num">541張</td>
-  <td class="num short-up">+21</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1092,8 +1081,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">178.0</td>
   <td class="num">207.6</td>
   <td>2028-10-09</td>
-  <td class="num">423張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">427張</td>
+  <td class="num short-up">+4</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1103,8 +1092,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">178.0</td>
   <td class="num">205.6</td>
   <td>2028-10-20</td>
-  <td class="num">423張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">427張</td>
+  <td class="num short-up">+4</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1114,10 +1103,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">134.0</td>
   <td class="num">86.7</td>
   <td>2028-01-15</td>
-  <td class="num">65張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>27561</b></td><td>聯發國際一</td><td>2756</td>
   <td class="num">100.7</td>
@@ -1125,8 +1114,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">67.1</td>
   <td class="num">87.7</td>
   <td>2027-05-30</td>
-  <td class="num">53張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1147,8 +1136,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">13.9</td>
   <td class="num">12.5</td>
   <td>2029-03-26</td>
-  <td class="num">3608張</td>
-  <td class="num ">0</td>
+  <td class="num">3615張</td>
+  <td class="num short-up">+7</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1158,8 +1147,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">111.5</td>
   <td class="num">143.8</td>
   <td>2027-10-18</td>
-  <td class="num">13332張</td>
-  <td class="num short-up">+134</td>
+  <td class="num">13345張</td>
+  <td class="num short-up">+13</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1169,8 +1158,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">74.2</td>
   <td class="num">71.4</td>
   <td>2027-07-26</td>
-  <td class="num">1999張</td>
-  <td class="num short-up">+11</td>
+  <td class="num">2009張</td>
+  <td class="num short-up">+10</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1180,8 +1169,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.8</td>
   <td class="num">105.9</td>
   <td>2028-11-13</td>
-  <td class="num">3187張</td>
-  <td class="num short-up">+15</td>
+  <td class="num">3230張</td>
+  <td class="num short-up">+43</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1191,8 +1180,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.8</td>
   <td class="num">101.9</td>
   <td>2030-11-25</td>
-  <td class="num">3187張</td>
-  <td class="num short-up">+15</td>
+  <td class="num">3230張</td>
+  <td class="num short-up">+43</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1202,8 +1191,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">36.2</td>
   <td class="num">24.8</td>
   <td>2027-06-01</td>
-  <td class="num">22660張</td>
-  <td class="num short-up">+112</td>
+  <td class="num">22816張</td>
+  <td class="num short-up">+156</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1213,8 +1202,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">36.2</td>
   <td class="num">34.4</td>
   <td>2029-09-11</td>
-  <td class="num">22660張</td>
-  <td class="num short-up">+112</td>
+  <td class="num">22816張</td>
+  <td class="num short-up">+156</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -1224,10 +1213,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">825.0</td>
   <td class="num">165.4</td>
   <td>2030-11-03</td>
-  <td class="num">4254張</td>
-  <td class="num short-up">+3</td>
+  <td class="num">4159張</td>
+  <td class="num short-dn">-95</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
   <td><b>30401</b></td><td>遠見一</td><td>3040</td>
   <td class="num">105.3</td>
@@ -1235,8 +1224,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">44.2</td>
   <td class="num">47.2</td>
   <td>2028-06-30</td>
-  <td class="num">1045張</td>
-  <td class="num short-up">+17</td>
+  <td class="num">1053張</td>
+  <td class="num short-up">+8</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1246,8 +1235,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">111.0</td>
   <td class="num">118.2</td>
   <td>2030-02-24</td>
-  <td class="num">50612張</td>
-  <td class="num short-up">+284</td>
+  <td class="num">51111張</td>
+  <td class="num short-up">+499</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1257,8 +1246,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">111.0</td>
   <td class="num">111.3</td>
   <td>2030-02-25</td>
-  <td class="num">50612張</td>
-  <td class="num short-up">+284</td>
+  <td class="num">51111張</td>
+  <td class="num short-up">+499</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -1268,8 +1257,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">101.0</td>
   <td class="num">93.0</td>
   <td>2026-08-28</td>
-  <td class="num">899張</td>
-  <td class="num short-dn">-39</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1279,8 +1268,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">33.4</td>
   <td class="num">36.0</td>
   <td>2026-07-04</td>
-  <td class="num">1979張</td>
-  <td class="num short-dn">-105</td>
+  <td class="num">1981張</td>
+  <td class="num short-up">+2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1290,8 +1279,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">41.3</td>
   <td class="num">41.1</td>
   <td>2028-02-25</td>
-  <td class="num">8張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1301,8 +1290,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">32.9</td>
   <td class="num">42.3</td>
   <td>2027-05-03</td>
-  <td class="num">171張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1312,8 +1301,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">23.9</td>
   <td class="num">37.8</td>
   <td>2026-07-03</td>
-  <td class="num">986張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1323,10 +1312,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">2870.0</td>
   <td class="num">1736.5</td>
   <td>2030-07-30</td>
-  <td class="num">298張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>31312</b></td><td>弘塑二</td><td>3131</td>
   <td class="num">175.0</td>
@@ -1334,10 +1323,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">2870.0</td>
   <td class="num">1626.6</td>
   <td>2030-08-05</td>
-  <td class="num">298張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>31351</b></td><td>凌航一</td><td>3135</td>
   <td class="num">275.0</td>
@@ -1345,8 +1334,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">140.0</td>
   <td class="num">50.9</td>
   <td>2028-12-04</td>
-  <td class="num">843張</td>
-  <td class="num short-up">+84</td>
+  <td class="num">867張</td>
+  <td class="num short-up">+24</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1356,8 +1345,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">46.2</td>
   <td class="num">93.6</td>
   <td>2027-05-20</td>
-  <td class="num">1912張</td>
-  <td class="num short-up">+53</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1367,8 +1356,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">742.0</td>
   <td class="num">169.1</td>
   <td>2028-08-06</td>
-  <td class="num">1463張</td>
-  <td class="num ">0</td>
+  <td class="num">1456張</td>
+  <td class="num short-dn">-7</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -1378,8 +1367,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">24.9</td>
   <td class="num">28.4</td>
   <td>2028-06-20</td>
-  <td class="num">1383張</td>
-  <td class="num short-up">+47</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1389,8 +1378,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">64.6</td>
   <td class="num">101.0</td>
   <td>2027-03-25</td>
-  <td class="num">1856張</td>
-  <td class="num short-up">+32</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1400,8 +1389,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">54.2</td>
   <td class="num">72.2</td>
   <td>2029-11-01</td>
-  <td class="num">2216張</td>
-  <td class="num short-up">+13</td>
+  <td class="num">2212張</td>
+  <td class="num short-dn">-4</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1411,10 +1400,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">484.0</td>
   <td class="num">228.9</td>
   <td>2029-01-08</td>
-  <td class="num">30124張</td>
-  <td class="num short-up">+344</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>32723</b></td><td>東碩三</td><td>3272</td>
   <td class="num">78.5</td>
@@ -1422,8 +1411,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">17.9</td>
   <td class="num">34.2</td>
   <td>2029-03-07</td>
-  <td class="num">393張</td>
-  <td class="num short-up">+6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1433,8 +1422,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">16.6</td>
   <td class="num">23.9</td>
   <td>2028-09-15</td>
-  <td class="num">416張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1444,8 +1433,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">48.4</td>
   <td class="num">58.6</td>
   <td>2029-11-26</td>
-  <td class="num">860張</td>
-  <td class="num short-dn">-15</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1455,8 +1444,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">105.5</td>
   <td class="num">73.3</td>
   <td>2026-12-25</td>
-  <td class="num">5443張</td>
-  <td class="num short-up">+63</td>
+  <td class="num">5527張</td>
+  <td class="num short-up">+84</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1466,8 +1455,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">41.4</td>
   <td class="num">73.2</td>
   <td>2027-06-25</td>
-  <td class="num">7963張</td>
-  <td class="num short-up">+40</td>
+  <td class="num">7939張</td>
+  <td class="num short-dn">-24</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1477,8 +1466,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">11.9</td>
   <td class="num">15.7</td>
   <td>2027-11-29</td>
-  <td class="num">0張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1488,8 +1477,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">13.8</td>
   <td class="num">23.5</td>
   <td>2027-09-02</td>
-  <td class="num">1285張</td>
-  <td class="num short-up">+8</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1499,8 +1488,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">34.5</td>
   <td class="num">32.6</td>
   <td>2026-06-02</td>
-  <td class="num">7033張</td>
-  <td class="num short-up">+83</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1510,8 +1499,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1145.0</td>
   <td class="num">734.4</td>
   <td>2029-07-31</td>
-  <td class="num">4862張</td>
-  <td class="num short-up">+79</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -1521,8 +1510,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1145.0</td>
   <td class="num">1124.0</td>
   <td>2031-03-02</td>
-  <td class="num">4862張</td>
-  <td class="num short-up">+79</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1532,8 +1521,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1145.0</td>
   <td class="num">1105.0</td>
   <td>2031-03-16</td>
-  <td class="num">4862張</td>
-  <td class="num short-up">+79</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1543,8 +1532,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">17.6</td>
   <td class="num">36.5</td>
   <td>2027-11-27</td>
-  <td class="num">2193張</td>
-  <td class="num short-up">+39</td>
+  <td class="num">2199張</td>
+  <td class="num short-up">+6</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1554,10 +1543,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">169.5</td>
   <td class="num">107.4</td>
   <td>2026-10-31</td>
-  <td class="num">1994張</td>
-  <td class="num short-up">+70</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>33621</b></td><td>先進光一</td><td>3362</td>
   <td class="num">102.0</td>
@@ -1565,8 +1554,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">108.0</td>
   <td class="num">251.0</td>
   <td>2029-07-16</td>
-  <td class="num">4733張</td>
-  <td class="num short-dn">-29</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1576,8 +1565,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">205.0</td>
   <td class="num">195.2</td>
   <td>2029-08-23</td>
-  <td class="num">15264張</td>
-  <td class="num short-up">+246</td>
+  <td class="num">15387張</td>
+  <td class="num short-up">+123</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1587,10 +1576,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">104.5</td>
   <td class="num">62.8</td>
   <td>2027-11-09</td>
-  <td class="num">1486張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>33902</b></td><td>旭軟二</td><td>3390</td>
   <td class="num">126.2</td>
@@ -1598,8 +1587,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">25.7</td>
   <td class="num">24.2</td>
   <td>2028-02-21</td>
-  <td class="num">795張</td>
-  <td class="num short-up">+46</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1609,8 +1598,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">155.0</td>
   <td class="num">127.1</td>
   <td>2027-01-25</td>
-  <td class="num">2370張</td>
-  <td class="num short-up">+20</td>
+  <td class="num">2369張</td>
+  <td class="num short-dn">-1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1620,8 +1609,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">91.9</td>
   <td class="num">121.5</td>
   <td>2027-01-22</td>
-  <td class="num">2343張</td>
-  <td class="num short-dn">-29</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1631,8 +1620,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">94.2</td>
   <td class="num">136.1</td>
   <td>2027-05-22</td>
-  <td class="num">3929張</td>
-  <td class="num short-up">+364</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1642,8 +1631,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">44.2</td>
   <td class="num">42.2</td>
   <td>2028-04-24</td>
-  <td class="num">932張</td>
-  <td class="num short-up">+12</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1653,8 +1642,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">20.5</td>
   <td class="num">25.8</td>
   <td>2027-10-18</td>
-  <td class="num">98張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1675,8 +1664,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">12.6</td>
   <td class="num">18.2</td>
   <td>2026-12-18</td>
-  <td class="num">0張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1686,8 +1675,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">303.0</td>
   <td class="num">161.2</td>
   <td>2027-02-14</td>
-  <td class="num">570張</td>
-  <td class="num short-up">+52</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1697,8 +1686,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">303.0</td>
   <td class="num">200.3</td>
   <td>2029-01-29</td>
-  <td class="num">570張</td>
-  <td class="num short-up">+52</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1708,8 +1697,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">303.0</td>
   <td class="num">269.6</td>
   <td>2030-07-24</td>
-  <td class="num">570張</td>
-  <td class="num short-up">+52</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1719,8 +1708,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">39.5</td>
   <td class="num">45.0</td>
   <td>2028-12-26</td>
-  <td class="num">3334張</td>
-  <td class="num short-up">+99</td>
+  <td class="num">3349張</td>
+  <td class="num short-up">+15</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1730,8 +1719,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">102.5</td>
   <td class="num">186.0</td>
   <td>2027-01-08</td>
-  <td class="num">2527張</td>
-  <td class="num short-up">+65</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1741,8 +1730,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">102.5</td>
   <td class="num">162.8</td>
   <td>2030-02-25</td>
-  <td class="num">2527張</td>
-  <td class="num short-up">+65</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1752,8 +1741,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">196.5</td>
   <td class="num">173.0</td>
   <td>2028-10-28</td>
-  <td class="num">1517張</td>
-  <td class="num short-dn">-41</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1763,8 +1752,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">40.4</td>
   <td class="num">83.9</td>
   <td>2027-09-03</td>
-  <td class="num">866張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1774,10 +1763,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">738.0</td>
   <td class="num">349.3</td>
   <td>2027-06-07</td>
-  <td class="num">652張</td>
-  <td class="num short-dn">-76</td>
+  <td class="num">689張</td>
+  <td class="num short-up">+37</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>35832</b></td><td>辛耘二</td><td>3583</td>
   <td class="num">215.0</td>
@@ -1785,10 +1774,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">738.0</td>
   <td class="num">337.4</td>
   <td>2027-06-19</td>
-  <td class="num">652張</td>
-  <td class="num short-dn">-76</td>
+  <td class="num">689張</td>
+  <td class="num short-up">+37</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>35871</b></td><td>閎康一</td><td>3587</td>
   <td class="num">126.2</td>
@@ -1796,8 +1785,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">327.5</td>
   <td class="num">192.0</td>
   <td>2026-06-20</td>
-  <td class="num">1381張</td>
-  <td class="num short-up">+63</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1807,10 +1796,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">327.5</td>
   <td class="num">198.0</td>
   <td>2031-02-04</td>
-  <td class="num">1381張</td>
-  <td class="num short-up">+63</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>35914</b></td><td>艾笛森四</td><td>3591</td>
   <td class="num">111.5</td>
@@ -1818,8 +1807,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.6</td>
   <td class="num">24.5</td>
   <td>2027-11-22</td>
-  <td class="num">4068張</td>
-  <td class="num short-dn">-232</td>
+  <td class="num">3956張</td>
+  <td class="num short-dn">-112</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1829,8 +1818,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">83.6</td>
   <td class="num">50.5</td>
   <td>2027-08-06</td>
-  <td class="num">5664張</td>
-  <td class="num short-dn">-85</td>
+  <td class="num">5766張</td>
+  <td class="num short-up">+102</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1840,8 +1829,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">188.5</td>
   <td class="num">287.3</td>
   <td>2028-06-16</td>
-  <td class="num">1588張</td>
-  <td class="num short-dn">-50</td>
+  <td class="num">1578張</td>
+  <td class="num short-dn">-10</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1851,8 +1840,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">488.5</td>
   <td class="num">354.0</td>
   <td>2026-10-18</td>
-  <td class="num">4036張</td>
-  <td class="num short-dn">-118</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1862,8 +1851,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">57.1</td>
   <td class="num">50.7</td>
   <td>2028-10-28</td>
-  <td class="num">236張</td>
-  <td class="num short-up">+3</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1873,8 +1862,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">65.6</td>
   <td class="num">75.9</td>
   <td>2028-10-02</td>
-  <td class="num">594張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1884,8 +1873,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">65.6</td>
   <td class="num">80.1</td>
   <td>2028-10-03</td>
-  <td class="num">594張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1895,8 +1884,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">132.0</td>
   <td class="num">61.7</td>
   <td>2027-03-05</td>
-  <td class="num">2426張</td>
-  <td class="num short-up">+75</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1906,8 +1895,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">109.5</td>
   <td class="num">118.0</td>
   <td>2027-08-30</td>
-  <td class="num">895張</td>
-  <td class="num short-up">+16</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1917,8 +1906,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">67.2</td>
   <td class="num">64.0</td>
   <td>2026-05-31</td>
-  <td class="num">3511張</td>
-  <td class="num short-up">+104</td>
+  <td class="num">3507張</td>
+  <td class="num short-dn">-4</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1939,10 +1928,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">99.5</td>
   <td class="num">76.9</td>
   <td>2027-11-11</td>
-  <td class="num">21706張</td>
-  <td class="num short-dn">-94</td>
+  <td class="num">22353張</td>
+  <td class="num short-up">+647</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>37023</b></td><td>大聯大三</td><td>3702</td>
   <td class="num">133.0</td>
@@ -1950,10 +1939,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">99.5</td>
   <td class="num">74.6</td>
   <td>2027-11-21</td>
-  <td class="num">21706張</td>
-  <td class="num short-dn">-94</td>
+  <td class="num">22353張</td>
+  <td class="num short-up">+647</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>37075</b></td><td>漢磊五</td><td>3707</td>
   <td class="num">154.0</td>
@@ -1961,10 +1950,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.0</td>
   <td class="num">40.1</td>
   <td>2030-08-20</td>
-  <td class="num">7493張</td>
-  <td class="num short-dn">-715</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>37083</b></td><td>上緯投控三</td><td>3708</td>
   <td class="num">135.6</td>
@@ -1972,8 +1961,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">118.0</td>
   <td class="num">86.4</td>
   <td>2026-09-27</td>
-  <td class="num">3912張</td>
-  <td class="num short-dn">-66</td>
+  <td class="num">3925張</td>
+  <td class="num short-up">+13</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1983,8 +1972,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">118.0</td>
   <td class="num">83.0</td>
   <td>2026-09-28</td>
-  <td class="num">3912張</td>
-  <td class="num short-dn">-66</td>
+  <td class="num">3925張</td>
+  <td class="num short-up">+13</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -1994,8 +1983,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">179.0</td>
   <td class="num">140.0</td>
   <td>2029-01-21</td>
-  <td class="num">19612張</td>
-  <td class="num short-dn">-541</td>
+  <td class="num">20033張</td>
+  <td class="num short-up">+421</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2005,8 +1994,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">179.0</td>
   <td class="num">159.0</td>
   <td>2029-03-24</td>
-  <td class="num">19612張</td>
-  <td class="num short-dn">-541</td>
+  <td class="num">20033張</td>
+  <td class="num short-up">+421</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2016,8 +2005,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">19.9</td>
   <td class="num">17.5</td>
   <td>2029-01-21</td>
-  <td class="num">3112張</td>
-  <td class="num ">0</td>
+  <td class="num">3027張</td>
+  <td class="num short-dn">-85</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2027,8 +2016,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">14.3</td>
   <td class="num">26.3</td>
   <td>2030-10-27</td>
-  <td class="num">1883張</td>
-  <td class="num short-up">+11</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2038,8 +2027,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">14.3</td>
   <td class="num">20.4</td>
   <td>2031-03-20</td>
-  <td class="num">1883張</td>
-  <td class="num short-up">+11</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2049,8 +2038,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">39.1</td>
   <td class="num">38.6</td>
   <td>2028-04-26</td>
-  <td class="num">29584張</td>
-  <td class="num short-up">+176</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2060,8 +2049,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">39.1</td>
   <td class="num">39.3</td>
   <td>2028-04-27</td>
-  <td class="num">29584張</td>
-  <td class="num short-up">+176</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2071,8 +2060,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">100.5</td>
   <td class="num">105.6</td>
   <td>2030-05-29</td>
-  <td class="num">691張</td>
-  <td class="num short-up">+66</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2082,8 +2071,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">105.5</td>
   <td class="num">141.3</td>
   <td>2027-08-12</td>
-  <td class="num">544張</td>
-  <td class="num short-up">+4</td>
+  <td class="num">547張</td>
+  <td class="num short-up">+3</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2093,8 +2082,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">29.2</td>
   <td class="num">47.0</td>
   <td>2030-06-20</td>
-  <td class="num">3846張</td>
-  <td class="num short-up">+310</td>
+  <td class="num">4051張</td>
+  <td class="num short-up">+205</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2104,8 +2093,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">23.1</td>
   <td class="num">23.9</td>
   <td>2028-09-18</td>
-  <td class="num">0張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2126,8 +2115,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">12.9</td>
   <td class="num">65.7</td>
   <td>2027-09-30</td>
-  <td class="num">141張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2137,8 +2126,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">56.2</td>
   <td class="num">75.0</td>
   <td>2028-09-30</td>
-  <td class="num">820張</td>
-  <td class="num short-up">+12</td>
+  <td class="num">815張</td>
+  <td class="num short-dn">-5</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2159,8 +2148,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">55.0</td>
   <td class="num">48.5</td>
   <td>2028-07-28</td>
-  <td class="num">40張</td>
-  <td class="num short-dn">-16</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2170,8 +2159,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.5</td>
   <td class="num">48.4</td>
   <td>2028-02-26</td>
-  <td class="num">4969張</td>
-  <td class="num short-up">+19</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2181,8 +2170,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">178.5</td>
   <td class="num">85.9</td>
   <td>2027-09-06</td>
-  <td class="num">217張</td>
-  <td class="num short-up">+24</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2192,8 +2181,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">98.5</td>
   <td class="num">154.4</td>
   <td>2027-11-07</td>
-  <td class="num">964張</td>
-  <td class="num short-dn">-27</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2203,8 +2192,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">39.9</td>
   <td class="num">43.4</td>
   <td>2028-06-09</td>
-  <td class="num">461張</td>
-  <td class="num short-up">+3</td>
+  <td class="num">462張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2214,8 +2203,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">19.0</td>
   <td class="num">29.8</td>
   <td>2028-08-28</td>
-  <td class="num">83張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2225,8 +2214,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">18.6</td>
   <td class="num">26.4</td>
   <td>2026-09-26</td>
-  <td class="num">5919張</td>
-  <td class="num ">0</td>
+  <td class="num">5959張</td>
+  <td class="num short-up">+40</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2236,8 +2225,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">65.6</td>
   <td class="num">49.6</td>
   <td>2026-11-27</td>
-  <td class="num">1387張</td>
-  <td class="num short-dn">-28</td>
+  <td class="num">1386張</td>
+  <td class="num short-dn">-1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2258,8 +2247,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">145.5</td>
   <td class="num">160.6</td>
   <td>2027-07-16</td>
-  <td class="num">721張</td>
-  <td class="num ">0</td>
+  <td class="num">719張</td>
+  <td class="num short-dn">-2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2280,8 +2269,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">181.5</td>
   <td class="num">141.3</td>
   <td>2028-10-01</td>
-  <td class="num">3106張</td>
-  <td class="num short-dn">-14</td>
+  <td class="num">3096張</td>
+  <td class="num short-dn">-10</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2291,8 +2280,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">83.0</td>
   <td class="num">97.8</td>
   <td>2026-10-28</td>
-  <td class="num">2348張</td>
-  <td class="num ">0</td>
+  <td class="num">2429張</td>
+  <td class="num short-up">+81</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2302,8 +2291,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">83.0</td>
   <td class="num">70.5</td>
   <td>2030-12-17</td>
-  <td class="num">2348張</td>
-  <td class="num ">0</td>
+  <td class="num">2429張</td>
+  <td class="num short-up">+81</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2313,8 +2302,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">53.9</td>
   <td class="num">59.6</td>
   <td>2026-06-12</td>
-  <td class="num">109張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2324,8 +2313,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">308.5</td>
   <td class="num">323.8</td>
   <td>2028-11-27</td>
-  <td class="num">6714張</td>
-  <td class="num short-up">+22</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2335,8 +2324,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">35.4</td>
   <td class="num">26.6</td>
   <td>2026-06-02</td>
-  <td class="num">38595張</td>
-  <td class="num short-dn">-665</td>
+  <td class="num">38531張</td>
+  <td class="num short-dn">-64</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2346,8 +2335,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.0</td>
   <td class="num">42.9</td>
   <td>2030-05-14</td>
-  <td class="num">3260張</td>
-  <td class="num ">0</td>
+  <td class="num">3267張</td>
+  <td class="num short-up">+7</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2357,10 +2346,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">33.1</td>
   <td class="num">34.7</td>
   <td>2029-01-29</td>
-  <td class="num">128張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>49674</b></td><td>十銓四</td><td>4967</td>
   <td class="num">204.0</td>
@@ -2368,8 +2357,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">303.0</td>
   <td class="num">147.0</td>
   <td>2029-01-15</td>
-  <td class="num">6850張</td>
-  <td class="num short-up">+51</td>
+  <td class="num">6893張</td>
+  <td class="num short-up">+43</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
@@ -2379,8 +2368,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">561.0</td>
   <td class="num">176.5</td>
   <td>2027-12-09</td>
-  <td class="num">7895張</td>
-  <td class="num short-dn">-60</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2390,10 +2379,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">561.0</td>
   <td class="num">204.3</td>
   <td>2027-12-25</td>
-  <td class="num">7895張</td>
-  <td class="num short-dn">-60</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>50097</b></td><td>榮剛七</td><td>5009</td>
   <td class="num">100.3</td>
@@ -2401,8 +2390,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">31.5</td>
   <td class="num">50.3</td>
   <td>2026-07-31</td>
-  <td class="num">37646張</td>
-  <td class="num short-up">+537</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2412,8 +2401,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">30.2</td>
   <td class="num">38.5</td>
   <td>2028-10-15</td>
-  <td class="num">334張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2423,8 +2412,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">164.5</td>
   <td class="num">151.1</td>
   <td>2026-10-06</td>
-  <td class="num">168張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2434,8 +2423,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.7</td>
   <td class="num">57.7</td>
   <td>2029-10-15</td>
-  <td class="num">18張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2445,8 +2434,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">17.4</td>
   <td class="num">22.0</td>
   <td>2026-07-24</td>
-  <td class="num">337張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2456,8 +2445,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">40.2</td>
   <td class="num">44.5</td>
   <td>2029-09-25</td>
-  <td class="num">3530張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">3538張</td>
+  <td class="num short-up">+8</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2467,8 +2456,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">24.8</td>
   <td class="num">35.0</td>
   <td>2027-12-18</td>
-  <td class="num">487張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2478,8 +2467,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">92.3</td>
   <td class="num">110.4</td>
   <td>2027-03-04</td>
-  <td class="num">1670張</td>
-  <td class="num short-up">+6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2489,8 +2478,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">80.9</td>
   <td class="num">120.0</td>
   <td>2026-11-08</td>
-  <td class="num">909張</td>
-  <td class="num short-up">+32</td>
+  <td class="num">914張</td>
+  <td class="num short-up">+5</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2500,8 +2489,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.8</td>
   <td class="num">38.2</td>
   <td>2026-08-08</td>
-  <td class="num">15877張</td>
-  <td class="num short-up">+205</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2511,8 +2500,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.8</td>
   <td class="num">63.5</td>
   <td>2030-12-12</td>
-  <td class="num">15877張</td>
-  <td class="num short-up">+205</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2522,8 +2511,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.8</td>
   <td class="num">55.0</td>
   <td>2028-12-15</td>
-  <td class="num">15877張</td>
-  <td class="num short-up">+205</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2533,8 +2522,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">23.4</td>
   <td class="num">92.0</td>
   <td>2027-03-04</td>
-  <td class="num">451張</td>
-  <td class="num short-up">+4</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2544,8 +2533,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">77.0</td>
   <td class="num">139.6</td>
   <td>2028-12-06</td>
-  <td class="num">21421張</td>
-  <td class="num short-up">+26</td>
+  <td class="num">21458張</td>
+  <td class="num short-up">+37</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2555,8 +2544,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">413.5</td>
   <td class="num">184.1</td>
   <td>2026-06-29</td>
-  <td class="num">2504張</td>
-  <td class="num short-dn">-84</td>
+  <td class="num">2396張</td>
+  <td class="num short-dn">-108</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2566,8 +2555,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">401.0</td>
   <td class="num">300.0</td>
   <td>2030-09-09</td>
-  <td class="num">4498張</td>
-  <td class="num short-dn">-6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2577,8 +2566,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">13.2</td>
   <td class="num">17.4</td>
   <td>2028-03-21</td>
-  <td class="num">72張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2588,8 +2577,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">37.4</td>
   <td class="num">69.5</td>
   <td>2027-03-06</td>
-  <td class="num">1911張</td>
-  <td class="num short-dn">-11</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2599,8 +2588,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">77.7</td>
   <td class="num">80.0</td>
   <td>2031-03-11</td>
-  <td class="num">5373張</td>
-  <td class="num short-up">+109</td>
+  <td class="num">5580張</td>
+  <td class="num short-up">+207</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2610,8 +2599,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">15.4</td>
   <td class="num">22.1</td>
   <td>2026-06-21</td>
-  <td class="num">7662張</td>
-  <td class="num short-up">+47</td>
+  <td class="num">7684張</td>
+  <td class="num short-up">+22</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2621,8 +2610,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">15.4</td>
   <td class="num">19.3</td>
   <td>2027-12-17</td>
-  <td class="num">7662張</td>
-  <td class="num short-up">+47</td>
+  <td class="num">7684張</td>
+  <td class="num short-up">+22</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2632,8 +2621,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">8.1</td>
   <td class="num">12.6</td>
   <td>2026-05-18</td>
-  <td class="num">1069張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2643,8 +2632,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">14.1</td>
   <td class="num">14.5</td>
   <td>2026-06-11</td>
-  <td class="num">1527張</td>
-  <td class="num short-up">+90</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2654,8 +2643,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">14.1</td>
   <td class="num">10.2</td>
   <td>2029-01-05</td>
-  <td class="num">1527張</td>
-  <td class="num short-up">+90</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2665,8 +2654,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">38.8</td>
   <td class="num">36.9</td>
   <td>2029-01-29</td>
-  <td class="num">152張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2676,10 +2665,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">38.8</td>
   <td class="num">38.9</td>
   <td>2029-01-30</td>
-  <td class="num">152張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>61041</b></td><td>創惟一</td><td>6104</td>
   <td class="num">114.0</td>
@@ -2687,8 +2676,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">99.2</td>
   <td class="num">124.8</td>
   <td>2027-08-26</td>
-  <td class="num">7251張</td>
-  <td class="num short-up">+89</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2698,8 +2687,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">45.6</td>
   <td class="num">67.0</td>
   <td>2027-09-10</td>
-  <td class="num">1980張</td>
-  <td class="num short-dn">-20</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2709,8 +2698,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">89.1</td>
   <td class="num">82.0</td>
   <td>2027-05-27</td>
-  <td class="num">2057張</td>
-  <td class="num short-up">+34</td>
+  <td class="num">2092張</td>
+  <td class="num short-up">+35</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2720,8 +2709,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">89.1</td>
   <td class="num">77.4</td>
   <td>2028-05-28</td>
-  <td class="num">2057張</td>
-  <td class="num short-up">+34</td>
+  <td class="num">2092張</td>
+  <td class="num short-up">+35</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2731,8 +2720,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">54.6</td>
   <td class="num">112.0</td>
   <td>2027-06-21</td>
-  <td class="num">13945張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2742,8 +2731,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">30.9</td>
   <td class="num">26.8</td>
   <td>2026-11-30</td>
-  <td class="num">2549張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2753,8 +2742,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">55.4</td>
   <td class="num">90.2</td>
   <td>2027-03-07</td>
-  <td class="num">1984張</td>
-  <td class="num short-up">+6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2764,8 +2753,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">20.0</td>
   <td class="num">29.0</td>
   <td>2028-06-25</td>
-  <td class="num">2936張</td>
-  <td class="num short-up">+39</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2775,8 +2764,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">57.8</td>
   <td class="num">25.0</td>
   <td>2028-10-16</td>
-  <td class="num">6269張</td>
-  <td class="num short-up">+229</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2786,8 +2775,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">45.0</td>
   <td class="num">46.1</td>
   <td>2028-06-25</td>
-  <td class="num">7619張</td>
-  <td class="num short-up">+249</td>
+  <td class="num">7701張</td>
+  <td class="num short-up">+82</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2797,8 +2786,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">24.1</td>
   <td class="num">33.3</td>
   <td>2026-07-25</td>
-  <td class="num">6911張</td>
-  <td class="num short-up">+168</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2808,8 +2797,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">24.1</td>
   <td class="num">28.2</td>
   <td>2027-08-28</td>
-  <td class="num">6911張</td>
-  <td class="num short-up">+168</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2819,8 +2808,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">40.0</td>
   <td class="num">61.2</td>
   <td>2026-07-27</td>
-  <td class="num">24778張</td>
-  <td class="num short-up">+68</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2830,8 +2819,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">40.0</td>
   <td class="num">33.5</td>
   <td>2029-09-27</td>
-  <td class="num">24778張</td>
-  <td class="num short-up">+68</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2852,8 +2841,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1115.0</td>
   <td class="num">276.8</td>
   <td>2027-07-10</td>
-  <td class="num">1411張</td>
-  <td class="num short-dn">-249</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2863,8 +2852,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.8</td>
   <td class="num">43.1</td>
   <td>2028-11-10</td>
-  <td class="num">9062張</td>
-  <td class="num short-dn">-86</td>
+  <td class="num">8983張</td>
+  <td class="num short-dn">-79</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2874,10 +2863,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">72.0</td>
   <td class="num">41.7</td>
   <td>2028-11-06</td>
-  <td class="num">10355張</td>
-  <td class="num short-up">+224</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>61973</b></td><td>佳必琪三</td><td>6197</td>
   <td class="num">138.8</td>
@@ -2885,8 +2874,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">188.0</td>
   <td class="num">160.0</td>
   <td>2027-10-15</td>
-  <td class="num">5569張</td>
-  <td class="num short-up">+139</td>
+  <td class="num">5692張</td>
+  <td class="num short-up">+123</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2896,8 +2885,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">90.2</td>
   <td class="num">104.6</td>
   <td>2029-01-20</td>
-  <td class="num">160張</td>
-  <td class="num short-up">+6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2907,8 +2896,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">90.2</td>
   <td class="num">114.8</td>
   <td>2029-01-21</td>
-  <td class="num">160張</td>
-  <td class="num short-up">+6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2918,8 +2907,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">59.0</td>
   <td class="num">50.7</td>
   <td>2028-08-26</td>
-  <td class="num">3337張</td>
-  <td class="num short-up">+79</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2929,8 +2918,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">59.0</td>
   <td class="num">49.2</td>
   <td>2028-09-05</td>
-  <td class="num">3337張</td>
-  <td class="num short-up">+79</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge watch">接近套利區</span></td>
 </tr><tr>
@@ -2940,8 +2929,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">64.3</td>
   <td class="num">38.6</td>
   <td>2028-10-23</td>
-  <td class="num">5426張</td>
-  <td class="num short-up">+86</td>
+  <td class="num">5637張</td>
+  <td class="num short-up">+211</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
@@ -2951,8 +2940,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">12.8</td>
   <td class="num">21.2</td>
   <td>2028-10-16</td>
-  <td class="num">2084張</td>
-  <td class="num short-up">+18</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2962,8 +2951,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">34.0</td>
   <td class="num">65.8</td>
   <td>2027-06-25</td>
-  <td class="num">881張</td>
-  <td class="num short-up">+24</td>
+  <td class="num">882張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2973,8 +2962,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">64.5</td>
   <td class="num">93.0</td>
   <td>2027-08-02</td>
-  <td class="num">7372張</td>
-  <td class="num short-dn">-205</td>
+  <td class="num">7302張</td>
+  <td class="num short-dn">-70</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2984,8 +2973,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">64.5</td>
   <td class="num">101.0</td>
   <td>2027-08-02</td>
-  <td class="num">7372張</td>
-  <td class="num short-dn">-205</td>
+  <td class="num">7302張</td>
+  <td class="num short-dn">-70</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -2995,10 +2984,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">966.0</td>
   <td class="num">380.8</td>
   <td>2030-11-13</td>
-  <td class="num">2112張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>62756</b></td><td>元山六</td><td>6275</td>
   <td class="num">234.0</td>
@@ -3006,8 +2995,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">52.5</td>
   <td class="num">24.0</td>
   <td>2026-09-30</td>
-  <td class="num">1546張</td>
-  <td class="num short-up">+40</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3017,8 +3006,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.7</td>
   <td class="num">46.1</td>
   <td>2028-06-13</td>
-  <td class="num">31705張</td>
-  <td class="num short-dn">-232</td>
+  <td class="num">31295張</td>
+  <td class="num short-dn">-410</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3028,8 +3017,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">78.8</td>
   <td class="num">86.6</td>
   <td>2026-12-14</td>
-  <td class="num">2303張</td>
-  <td class="num short-up">+125</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3050,10 +3039,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">321.5</td>
   <td class="num">273.6</td>
   <td>2026-08-16</td>
-  <td class="num">2662張</td>
-  <td class="num short-dn">-65</td>
+  <td class="num">2680張</td>
+  <td class="num short-up">+18</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>64251</b></td><td>易發一</td><td>6425</td>
   <td class="num">149.0</td>
@@ -3061,8 +3050,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">83.1</td>
   <td class="num">58.7</td>
   <td>2027-10-15</td>
-  <td class="num">1222張</td>
-  <td class="num short-up">+64</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3072,10 +3061,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">38.2</td>
   <td class="num">30.9</td>
   <td>2027-08-16</td>
-  <td class="num">483張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>64422</b></td><td>光聖二</td><td>6442</td>
   <td class="num">170.0</td>
@@ -3083,8 +3072,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1905.0</td>
   <td class="num">1103.5</td>
   <td>2028-12-01</td>
-  <td class="num">855張</td>
-  <td class="num short-dn">-55</td>
+  <td class="num">846張</td>
+  <td class="num short-dn">-9</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -3094,8 +3083,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1905.0</td>
   <td class="num">1065.9</td>
   <td>2028-12-11</td>
-  <td class="num">855張</td>
-  <td class="num short-dn">-55</td>
+  <td class="num">846張</td>
+  <td class="num short-dn">-9</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -3105,8 +3094,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">405.0</td>
   <td class="num">240.6</td>
   <td>2028-02-27</td>
-  <td class="num">2038張</td>
-  <td class="num ">0</td>
+  <td class="num">1998張</td>
+  <td class="num short-dn">-40</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -3116,8 +3105,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">78.5</td>
   <td class="num">132.5</td>
   <td>2028-07-28</td>
-  <td class="num">4668張</td>
-  <td class="num short-dn">-20</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3127,8 +3116,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">408.0</td>
   <td class="num">500.0</td>
   <td>2031-04-01</td>
-  <td class="num">8552張</td>
-  <td class="num short-dn">-22</td>
+  <td class="num">8557張</td>
+  <td class="num short-up">+5</td>
   <td class="center"><span class="badge sell">出場 D19</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3138,8 +3127,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">408.0</td>
   <td class="num">485.0</td>
   <td>2031-04-15</td>
-  <td class="num">8552張</td>
-  <td class="num short-dn">-22</td>
+  <td class="num">8557張</td>
+  <td class="num short-up">+5</td>
   <td class="center"><span class="badge sell">出場 D9</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3149,8 +3138,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">32.9</td>
   <td class="num">41.9</td>
   <td>2026-08-04</td>
-  <td class="num">2511張</td>
-  <td class="num short-dn">-4</td>
+  <td class="num">2517張</td>
+  <td class="num short-up">+6</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3160,8 +3149,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">32.9</td>
   <td class="num">50.4</td>
   <td>2027-07-21</td>
-  <td class="num">2511張</td>
-  <td class="num short-dn">-4</td>
+  <td class="num">2517張</td>
+  <td class="num short-up">+6</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3171,8 +3160,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">32.9</td>
   <td class="num">44.3</td>
   <td>2028-10-09</td>
-  <td class="num">2511張</td>
-  <td class="num short-dn">-4</td>
+  <td class="num">2517張</td>
+  <td class="num short-up">+6</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3182,8 +3171,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">41.9</td>
   <td class="num">37.6</td>
   <td>2027-07-03</td>
-  <td class="num">6140張</td>
-  <td class="num short-dn">-182</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3193,10 +3182,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">3705.0</td>
   <td class="num">2016.8</td>
   <td>2029-01-05</td>
-  <td class="num">426張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>65331</b></td><td>晶心科一</td><td>6533</td>
   <td class="num">98.0</td>
@@ -3205,7 +3194,7 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">308.0</td>
   <td>2028-09-08</td>
   <td class="num">4377張</td>
-  <td class="num short-dn">-19</td>
+  <td class="num ">0</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3215,8 +3204,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">71.8</td>
   <td class="num">104.4</td>
   <td>2030-06-26</td>
-  <td class="num">485張</td>
-  <td class="num short-up">+20</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3226,8 +3215,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">63.4</td>
   <td class="num">149.0</td>
   <td>2027-06-05</td>
-  <td class="num">1354張</td>
-  <td class="num short-up">+19</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3237,10 +3226,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.6</td>
   <td class="num">37.0</td>
   <td>2029-03-19</td>
-  <td class="num">8744張</td>
-  <td class="num short-dn">-23</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>65521</b></td><td>易華電一</td><td>6552</td>
   <td class="num">101.8</td>
@@ -3248,8 +3237,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">29.9</td>
   <td class="num">63.5</td>
   <td>2026-10-25</td>
-  <td class="num">689張</td>
-  <td class="num short-up">+34</td>
+  <td class="num">690張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3270,8 +3259,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">706.0</td>
   <td class="num">177.5</td>
   <td>2027-10-29</td>
-  <td class="num">132張</td>
-  <td class="num short-dn">-36</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3281,8 +3270,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">706.0</td>
   <td class="num">191.6</td>
   <td>2027-10-30</td>
-  <td class="num">132張</td>
-  <td class="num short-dn">-36</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3314,8 +3303,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">57.9</td>
   <td class="num">78.6</td>
   <td>2028-08-27</td>
-  <td class="num">946張</td>
-  <td class="num short-up">+34</td>
+  <td class="num">952張</td>
+  <td class="num short-up">+6</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3325,8 +3314,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">9.9</td>
   <td class="num">14.5</td>
   <td>2028-09-20</td>
-  <td class="num">108張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3336,8 +3325,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">50.1</td>
   <td class="num">40.6</td>
   <td>2029-07-05</td>
-  <td class="num">20張</td>
-  <td class="num short-up">+1</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3347,8 +3336,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">117.5</td>
   <td class="num">121.7</td>
   <td>2027-09-13</td>
-  <td class="num">78張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3358,8 +3347,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">18.6</td>
   <td class="num">56.5</td>
   <td>2026-05-17</td>
-  <td class="num">247張</td>
-  <td class="num ">0</td>
+  <td class="num">248張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3380,10 +3369,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">424.0</td>
   <td class="num">292.1</td>
   <td>2027-11-19</td>
-  <td class="num">730張</td>
-  <td class="num short-dn">-79</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>66702</b></td><td>復盛應用二</td><td>6670</td>
   <td class="num">114.3</td>
@@ -3391,8 +3380,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">251.5</td>
   <td class="num">270.0</td>
   <td>2028-12-26</td>
-  <td class="num">1141張</td>
-  <td class="num short-up">+24</td>
+  <td class="num">1168張</td>
+  <td class="num short-up">+27</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3402,10 +3391,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">207.5</td>
   <td class="num">93.4</td>
   <td>2031-01-22</td>
-  <td class="num">2877張</td>
-  <td class="num short-dn">-83</td>
+  <td class="num">2928張</td>
+  <td class="num short-up">+51</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>66722</b></td><td>騰輝電子二KY</td><td>6672</td>
   <td class="num">229.0</td>
@@ -3413,10 +3402,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">207.5</td>
   <td class="num">90.5</td>
   <td>2031-02-03</td>
-  <td class="num">2877張</td>
-  <td class="num short-dn">-83</td>
+  <td class="num">2928張</td>
+  <td class="num short-up">+51</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>66801</b></td><td>鑫創電子一</td><td>6680</td>
   <td class="num">102.0</td>
@@ -3424,8 +3413,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">53.0</td>
   <td class="num">76.2</td>
   <td>2029-09-02</td>
-  <td class="num">22張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3435,8 +3424,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">134.0</td>
   <td class="num">176.0</td>
   <td>2027-10-25</td>
-  <td class="num">3658張</td>
-  <td class="num short-dn">-56</td>
+  <td class="num">3731張</td>
+  <td class="num short-up">+73</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3446,10 +3435,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">373.5</td>
   <td class="num">157.1</td>
   <td>2027-01-18</td>
-  <td class="num">263張</td>
-  <td class="num ">0</td>
+  <td class="num">276張</td>
+  <td class="num short-up">+13</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>67531</b></td><td>龍德造船一</td><td>6753</td>
   <td class="num">124.0</td>
@@ -3457,8 +3446,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">136.0</td>
   <td class="num">116.6</td>
   <td>2027-06-25</td>
-  <td class="num">1247張</td>
-  <td class="num ">0</td>
+  <td class="num">1272張</td>
+  <td class="num short-up">+25</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3468,8 +3457,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">77.5</td>
   <td class="num">95.2</td>
   <td>2027-10-31</td>
-  <td class="num">4088張</td>
-  <td class="num short-up">+199</td>
+  <td class="num">4145張</td>
+  <td class="num short-up">+57</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3490,8 +3479,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">70.6</td>
   <td class="num">107.9</td>
   <td>2026-08-25</td>
-  <td class="num">250張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">251張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3501,8 +3490,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">70.6</td>
   <td class="num">101.6</td>
   <td>2028-12-22</td>
-  <td class="num">250張</td>
-  <td class="num short-up">+14</td>
+  <td class="num">251張</td>
+  <td class="num short-up">+1</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3512,8 +3501,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">15.6</td>
   <td class="num">62.2</td>
   <td>2026-06-19</td>
-  <td class="num">29張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3523,8 +3512,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">21.6</td>
   <td class="num">105.0</td>
   <td>2026-11-22</td>
-  <td class="num">6273張</td>
-  <td class="num short-dn">-30</td>
+  <td class="num">6267張</td>
+  <td class="num short-dn">-6</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3534,10 +3523,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">54.0</td>
   <td class="num">42.2</td>
   <td>2028-08-15</td>
-  <td class="num">137張</td>
-  <td class="num short-dn">-8</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>68231</b></td><td>濾能一</td><td>6823</td>
   <td class="num">108.5</td>
@@ -3545,8 +3534,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">85.1</td>
   <td class="num">76.7</td>
   <td>2026-06-01</td>
-  <td class="num">212張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3556,10 +3545,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">716.0</td>
   <td class="num">149.0</td>
   <td>2027-08-15</td>
-  <td class="num">831張</td>
-  <td class="num short-dn">-1</td>
+  <td class="num">959張</td>
+  <td class="num short-up">+128</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>68351</b></td><td>圓裕一</td><td>6835</td>
   <td class="num">96.5</td>
@@ -3567,8 +3556,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">39.4</td>
   <td class="num">48.8</td>
   <td>2027-11-01</td>
-  <td class="num">271張</td>
-  <td class="num short-up">+5</td>
+  <td class="num">293張</td>
+  <td class="num short-up">+22</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3578,10 +3567,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">71.9</td>
   <td class="num">65.7</td>
   <td>2027-05-27</td>
-  <td class="num">218張</td>
-  <td class="num short-up">+6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>68431</b></td><td>進典一</td><td>6843</td>
   <td class="num">102.0</td>
@@ -3589,8 +3578,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">46.5</td>
   <td class="num">61.4</td>
   <td>2028-08-04</td>
-  <td class="num">25張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3600,8 +3589,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">70.3</td>
   <td class="num">80.4</td>
   <td>2030-03-13</td>
-  <td class="num">18張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3611,8 +3600,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">70.3</td>
   <td class="num">78.0</td>
   <td>2030-03-25</td>
-  <td class="num">18張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3622,8 +3611,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">156.5</td>
   <td class="num">248.3</td>
   <td>2028-02-27</td>
-  <td class="num">1978張</td>
-  <td class="num short-dn">-37</td>
+  <td class="num">1928張</td>
+  <td class="num short-dn">-50</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3633,8 +3622,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">174.5</td>
   <td class="num">197.0</td>
   <td>2029-03-13</td>
-  <td class="num">361張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">387張</td>
+  <td class="num short-up">+26</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3645,7 +3634,7 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">294.9</td>
   <td>2027-10-15</td>
   <td class="num">730張</td>
-  <td class="num short-up">+12</td>
+  <td class="num ">0</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3655,8 +3644,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">175.5</td>
   <td class="num">238.2</td>
   <td>2029-12-05</td>
-  <td class="num">229張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3666,8 +3655,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">175.5</td>
   <td class="num">226.9</td>
   <td>2029-12-05</td>
-  <td class="num">229張</td>
-  <td class="num short-up">+2</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3677,8 +3666,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">86.6</td>
   <td class="num">95.4</td>
   <td>2026-09-28</td>
-  <td class="num">5042張</td>
-  <td class="num short-up">+20</td>
+  <td class="num">5082張</td>
+  <td class="num short-up">+40</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3688,8 +3677,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">86.6</td>
   <td class="num">215.4</td>
   <td>2030-05-29</td>
-  <td class="num">5042張</td>
-  <td class="num short-up">+20</td>
+  <td class="num">5082張</td>
+  <td class="num short-up">+40</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3699,8 +3688,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">91.8</td>
   <td class="num">108.0</td>
   <td>2027-11-04</td>
-  <td class="num">57張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3710,8 +3699,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">159.5</td>
   <td class="num">246.4</td>
   <td>2028-11-28</td>
-  <td class="num">3021張</td>
-  <td class="num short-up">+29</td>
+  <td class="num">3053張</td>
+  <td class="num short-up">+32</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3721,8 +3710,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">159.5</td>
   <td class="num">245.2</td>
   <td>2028-12-10</td>
-  <td class="num">3021張</td>
-  <td class="num short-up">+29</td>
+  <td class="num">3053張</td>
+  <td class="num short-up">+32</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3732,8 +3721,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">336.0</td>
   <td class="num">254.9</td>
   <td>2029-03-09</td>
-  <td class="num">200張</td>
-  <td class="num short-dn">-4</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3743,8 +3732,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">121.0</td>
   <td class="num">130.0</td>
   <td>2028-12-26</td>
-  <td class="num">3張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3754,8 +3743,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">141.0</td>
   <td class="num">126.0</td>
   <td>2029-03-19</td>
-  <td class="num">365張</td>
-  <td class="num short-up">+15</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3776,8 +3765,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">52.9</td>
   <td class="num">63.6</td>
   <td>2028-07-23</td>
-  <td class="num">238張</td>
-  <td class="num short-up">+3</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3787,8 +3776,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">52.9</td>
   <td class="num">61.8</td>
   <td>2028-08-04</td>
-  <td class="num">238張</td>
-  <td class="num short-up">+3</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3798,8 +3787,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">118.0</td>
   <td class="num">97.6</td>
   <td>2028-09-02</td>
-  <td class="num">974張</td>
-  <td class="num short-up">+27</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3809,10 +3798,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">292.0</td>
   <td class="num">180.9</td>
   <td>2028-08-12</td>
-  <td class="num">86張</td>
-  <td class="num short-dn">-5</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>75562</b></td><td>意德士二</td><td>7556</td>
   <td class="num">165.0</td>
@@ -3820,10 +3809,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">292.0</td>
   <td class="num">177.4</td>
   <td>2028-08-15</td>
-  <td class="num">86張</td>
-  <td class="num short-dn">-5</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>77131</b></td><td>威力德生醫一</td><td>7713</td>
   <td class="num">102.6</td>
@@ -3831,10 +3820,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">0.0</td>
   <td class="num">69.6</td>
   <td>2028-10-20</td>
-  <td class="num">13張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>80212</b></td><td>尖點二</td><td>8021</td>
   <td class="num">196.0</td>
@@ -3842,8 +3831,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">399.5</td>
   <td class="num">201.8</td>
   <td>2031-01-20</td>
-  <td class="num">3228張</td>
-  <td class="num short-dn">-115</td>
+  <td class="num">3207張</td>
+  <td class="num short-dn">-21</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
 </tr><tr>
@@ -3853,8 +3842,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">163.0</td>
   <td class="num">64.7</td>
   <td>2027-07-13</td>
-  <td class="num">3684張</td>
-  <td class="num short-up">+401</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3864,10 +3853,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">235.5</td>
   <td class="num">138.0</td>
   <td>2030-01-22</td>
-  <td class="num">6493張</td>
-  <td class="num short-dn">-704</td>
+  <td class="num">6581張</td>
+  <td class="num short-up">+88</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr>
   <td><b>80426</b></td><td>金山電六</td><td>8042</td>
   <td class="num">109.2</td>
@@ -3875,8 +3864,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">58.8</td>
   <td class="num">60.0</td>
   <td>2028-12-16</td>
-  <td class="num">1480張</td>
-  <td class="num short-dn">-39</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3886,8 +3875,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">41.7</td>
   <td class="num">63.3</td>
   <td>2027-11-22</td>
-  <td class="num">2120張</td>
-  <td class="num short-up">+12</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3897,8 +3886,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">33.0</td>
   <td class="num">39.4</td>
   <td>2028-05-02</td>
-  <td class="num">50張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3908,10 +3897,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">179.0</td>
   <td class="num">127.0</td>
   <td>2027-08-15</td>
-  <td class="num">478張</td>
-  <td class="num short-up">+7</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>80924</b></td><td>建暐四</td><td>8092</td>
   <td class="num">122.3</td>
@@ -3919,8 +3908,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">16.1</td>
   <td class="num">14.5</td>
   <td>2027-03-11</td>
-  <td class="num">139張</td>
-  <td class="num ">0</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3930,8 +3919,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">33.8</td>
   <td class="num">70.0</td>
   <td>2027-01-11</td>
-  <td class="num">2959張</td>
-  <td class="num ">0</td>
+  <td class="num">3040張</td>
+  <td class="num short-up">+81</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3941,8 +3930,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">71.0</td>
   <td class="num">75.1</td>
   <td>2029-04-28</td>
-  <td class="num">2330張</td>
-  <td class="num short-dn">-166</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge watch">觀察 D0</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3963,8 +3952,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">166.0</td>
   <td class="num">132.1</td>
   <td>2027-10-03</td>
-  <td class="num">440張</td>
-  <td class="num short-up">+48</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3974,10 +3963,10 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">411.0</td>
   <td class="num">121.6</td>
   <td>2030-01-10</td>
-  <td class="num">687張</td>
-  <td class="num short-dn">-16</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
-  <td class="center"><span class="badge sell">✗ 融券未增 (3/4)</span></td>
+  <td class="center"><span class="badge watch">◑ 不可放空 (3+?/4)</span></td>
 </tr><tr>
   <td><b>81714</b></td><td>天宇四</td><td>8171</td>
   <td class="num">105.5</td>
@@ -3985,8 +3974,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.8</td>
   <td class="num">30.5</td>
   <td>2027-11-12</td>
-  <td class="num">1089張</td>
-  <td class="num short-dn">-6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -3996,8 +3985,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">22.8</td>
   <td class="num">32.4</td>
   <td>2027-11-14</td>
-  <td class="num">1089張</td>
-  <td class="num short-dn">-6</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4007,8 +3996,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1170.0</td>
   <td class="num">1007.2</td>
   <td>2029-01-26</td>
-  <td class="num">1189張</td>
-  <td class="num short-up">+38</td>
+  <td class="num">1203張</td>
+  <td class="num short-up">+14</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4018,8 +4007,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1170.0</td>
   <td class="num">985.3</td>
   <td>2029-02-03</td>
-  <td class="num">1189張</td>
-  <td class="num short-up">+38</td>
+  <td class="num">1203張</td>
+  <td class="num short-up">+14</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4029,8 +4018,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">131.0</td>
   <td class="num">196.2</td>
   <td>2026-08-09</td>
-  <td class="num">3083張</td>
-  <td class="num short-dn">-29</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4040,8 +4029,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">1970.0</td>
   <td class="num">2488.0</td>
   <td>2031-02-06</td>
-  <td class="num">3923張</td>
-  <td class="num short-up">+100</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4051,8 +4040,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">82.3</td>
   <td class="num">132.5</td>
   <td>2027-11-15</td>
-  <td class="num">2731張</td>
-  <td class="num short-up">+27</td>
+  <td class="num">2753張</td>
+  <td class="num short-up">+22</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4062,8 +4051,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">16.9</td>
   <td class="num">26.8</td>
   <td>2028-10-03</td>
-  <td class="num">4312張</td>
-  <td class="num short-up">+59</td>
+  <td class="num">4317張</td>
+  <td class="num short-up">+5</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4084,8 +4073,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">28.1</td>
   <td class="num">14.6</td>
   <td>2027-11-22</td>
-  <td class="num">92963張</td>
-  <td class="num short-dn">-800</td>
+  <td class="num">92820張</td>
+  <td class="num short-dn">-143</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4095,8 +4084,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">28.1</td>
   <td class="num">19.0</td>
   <td>2030-04-07</td>
-  <td class="num">92963張</td>
-  <td class="num short-dn">-800</td>
+  <td class="num">92820張</td>
+  <td class="num short-dn">-143</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4106,8 +4095,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">62.8</td>
   <td class="num">68.0</td>
   <td>2029-01-05</td>
-  <td class="num">1309張</td>
-  <td class="num short-up">+38</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4117,8 +4106,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">54.5</td>
   <td class="num">94.0</td>
   <td>2027-05-24</td>
-  <td class="num">137張</td>
-  <td class="num short-up">+7</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4128,8 +4117,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">54.5</td>
   <td class="num">97.8</td>
   <td>2027-05-27</td>
-  <td class="num">137張</td>
-  <td class="num short-up">+7</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4161,8 +4150,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">147.0</td>
   <td class="num">191.4</td>
   <td>2027-05-30</td>
-  <td class="num">341張</td>
-  <td class="num short-dn">-22</td>
+  <td class="num">339張</td>
+  <td class="num short-dn">-2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4172,8 +4161,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">147.0</td>
   <td class="num">233.4</td>
   <td>2027-05-31</td>
-  <td class="num">341張</td>
-  <td class="num short-dn">-22</td>
+  <td class="num">339張</td>
+  <td class="num short-dn">-2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4183,8 +4172,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">36.5</td>
   <td class="num">34.1</td>
   <td>2026-09-28</td>
-  <td class="num">1675張</td>
-  <td class="num short-up">+8</td>
+  <td class="num">1659張</td>
+  <td class="num short-dn">-16</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4194,9 +4183,9 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">17.9</td>
   <td class="num">19.7</td>
   <td>2029-04-21</td>
-  <td class="num">2072張</td>
-  <td class="num short-up">+21</td>
-  <td class="center"><span class="badge buy">★ 買入 D5 (3/3)</span></td>
+  <td class="num">2004張</td>
+  <td class="num short-dn">-68</td>
+  <td class="center"><span class="badge sell">✗ 融券未增 D5</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
   <td><b>84781</b></td><td>東哥遊艇一</td><td>8478</td>
@@ -4205,8 +4194,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">171.0</td>
   <td class="num">377.7</td>
   <td>2027-07-15</td>
-  <td class="num">1646張</td>
-  <td class="num short-dn">-19</td>
+  <td class="num">1644張</td>
+  <td class="num short-dn">-2</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4227,8 +4216,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">27.2</td>
   <td class="num">27.9</td>
   <td>2027-12-09</td>
-  <td class="num">355張</td>
-  <td class="num short-up">+7</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4238,8 +4227,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">23.1</td>
   <td class="num">68.3</td>
   <td>2027-08-16</td>
-  <td class="num">5520張</td>
-  <td class="num short-up">+46</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4249,8 +4238,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">23.1</td>
   <td class="num">63.7</td>
   <td>2027-08-21</td>
-  <td class="num">5520張</td>
-  <td class="num short-up">+46</td>
+  <td class="num">─張</td>
+  <td class="num ">─</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4271,8 +4260,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">75.2</td>
   <td class="num">104.1</td>
   <td>2027-11-15</td>
-  <td class="num">15898張</td>
-  <td class="num short-up">+170</td>
+  <td class="num">15979張</td>
+  <td class="num short-up">+81</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4282,8 +4271,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">38.3</td>
   <td class="num">101.5</td>
   <td>2028-02-27</td>
-  <td class="num">937張</td>
-  <td class="num short-dn">-24</td>
+  <td class="num">932張</td>
+  <td class="num short-dn">-5</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4293,8 +4282,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">37.0</td>
   <td class="num">45.5</td>
   <td>2029-07-23</td>
-  <td class="num">9985張</td>
-  <td class="num short-dn">-38</td>
+  <td class="num">9866張</td>
+  <td class="num short-dn">-119</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4304,8 +4293,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">18.5</td>
   <td class="num">32.2</td>
   <td>2027-10-14</td>
-  <td class="num">1425張</td>
-  <td class="num short-up">+5</td>
+  <td class="num">1433張</td>
+  <td class="num short-up">+8</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4315,8 +4304,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">113.0</td>
   <td class="num">161.2</td>
   <td>2029-10-29</td>
-  <td class="num">13576張</td>
-  <td class="num short-up">+44</td>
+  <td class="num">13618張</td>
+  <td class="num short-up">+42</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4326,8 +4315,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">79.8</td>
   <td class="num">179.3</td>
   <td>2028-11-20</td>
-  <td class="num">7665張</td>
-  <td class="num short-up">+76</td>
+  <td class="num">8089張</td>
+  <td class="num short-up">+424</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4337,8 +4326,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">103.0</td>
   <td class="num">241.7</td>
   <td>2027-10-28</td>
-  <td class="num">9688張</td>
-  <td class="num short-up">+171</td>
+  <td class="num">9013張</td>
+  <td class="num short-dn">-675</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr><tr>
@@ -4348,8 +4337,8 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">103.0</td>
   <td class="num">232.7</td>
   <td>2027-11-08</td>
-  <td class="num">9688張</td>
-  <td class="num short-up">+171</td>
+  <td class="num">9013張</td>
+  <td class="num short-dn">-675</td>
   <td class="center"><span class="badge neutral">─</span></td>
   <td class="center"><span class="badge neutral">─</span></td>
 </tr></tbody></table>
