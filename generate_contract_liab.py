@@ -489,30 +489,108 @@ def build_signals(quarters_data, target_quarter, info=None, big_holders=None):
     return results
 
 
+def next_quarter_months(target_quarter):
+    """回傳 Q+1 季的 3 個月 (year, month) 與其 YoY 對應月。"""
+    nq = shift_quarter(target_quarter, 1)
+    y, qn = int(nq[:4]), int(nq[-1])
+    months = [(y, m) for m in range((qn - 1) * 3 + 1, qn * 3 + 1)]
+    yoy_months = [(y - 1, m) for y, m in months]
+    return nq, months, yoy_months
+
+
+def compute_q1_progress(rev_rows, target_quarter):
+    """從月營收資料計算 Q+1 進度。
+    rev_rows: FinMind monthly revenue rows
+    target_quarter: '2025Q4'
+    回傳 dict 或 None。"""
+    nq, months, yoy_months = next_quarter_months(target_quarter)
+    # build {(y, m): revenue}
+    rev_map = {}
+    for r in rev_rows:
+        y = int(r.get('revenue_year') or 0)
+        m = int(r.get('revenue_month') or 0)
+        if y and m:
+            rev_map[(y, m)] = r.get('revenue', 0) or 0
+
+    monthly = []
+    for (y, m), (yy, ym) in zip(months, yoy_months):
+        curr = rev_map.get((y, m))
+        prev = rev_map.get((yy, ym))
+        if not curr or curr <= 0:
+            monthly.append({'year': y, 'month': m, 'rev': None,
+                            'rev_yoy_base': prev, 'yoy': None})
+        elif not prev or prev <= 0:
+            monthly.append({'year': y, 'month': m, 'rev': curr,
+                            'rev_yoy_base': None, 'yoy': None})
+        else:
+            monthly.append({'year': y, 'month': m, 'rev': curr,
+                            'rev_yoy_base': prev, 'yoy': curr / prev - 1})
+
+    valid_yoys = [x['yoy'] for x in monthly if x['yoy'] is not None]
+    published = sum(1 for x in monthly if x['rev'] is not None)
+    avg_yoy = sum(valid_yoys) / len(valid_yoys) if valid_yoys else None
+
+    # 累計 vs 累計 YoY（更穩定的指標）
+    sum_curr = sum((x['rev'] or 0) for x in monthly if x['rev'])
+    sum_prev = sum((x['rev_yoy_base'] or 0) for x in monthly
+                   if x['rev'] and x['rev_yoy_base'])
+    cum_yoy = (sum_curr / sum_prev - 1) if sum_prev else None
+
+    # 狀態邏輯：以「累計 YoY」為主，但若有單月衰退 ≤ -10% 警訊
+    if not valid_yoys:
+        status = ('wait', '⏳ 等待', '尚未公告，待 5/15 季報')
+    elif min(valid_yoys) <= -0.10:
+        status = ('warn', '🚨 警訊', f'單月最低 YoY {min(valid_yoys) * 100:.0f}% 退款風險')
+    elif (cum_yoy is not None and cum_yoy >= 0.30) or (avg_yoy is not None and avg_yoy >= 0.30):
+        status = ('verified', '✅ 驗證', f'累計 YoY +{(cum_yoy or 0) * 100:.0f}%')
+    elif (cum_yoy is not None and cum_yoy >= 0.05):
+        status = ('mild', '🟢 溫和', f'累計 YoY +{cum_yoy * 100:.0f}%')
+    else:
+        status = ('wait', '⏳ 觀察', '尚未轉化為營收動能')
+
+    return {
+        'next_quarter': nq,
+        'monthly': monthly,
+        'cum_yoy': cum_yoy,
+        'avg_yoy': avg_yoy,
+        'published': published,
+        'total': 3,
+        'status_key': status[0],
+        'status_label': status[1],
+        'status_note': status[2],
+    }
+
+
 def attach_revenue_and_price(token, items, target_quarter):
-    """為前 N 名加掛 TTM 營收、近 3 個月股價漲幅。為節省 API 呼叫，僅對通過 gate 的計算。"""
+    """為前 N 名加掛 TTM 營收、近 3 個月股價漲幅，以及 Q+1 月營收驗證。
+    一次抓 (quarter_end - 1 年) 到今天，TTM / Q+1 都從同一份資料推導。"""
     end_date, _, _ = parse_quarter(target_quarter)
     end_dt = datetime.strptime(end_date, '%Y-%m-%d').date()
     rev_start = (end_dt.replace(year=end_dt.year - 1)).strftime('%Y-%m-%d')
+    today = date.today()
+    rev_end = today.strftime('%Y-%m-%d')
 
-    today_str = date.today().strftime('%Y-%m-%d')
-    px_start = (date.today().replace(month=max(date.today().month - 3, 1))
-                ).strftime('%Y-%m-%d')
+    px_start = (today.replace(month=max(today.month - 3, 1))).strftime('%Y-%m-%d')
 
     for it in items:
         sid = it['code']
-        # TTM revenue（過去 12 個月）
+        # 月營收（從 quarter_end - 1 年 到 今天，含 Q+1 已公告月份）
         try:
-            rev_rows = fetch_revenue_single(token, sid, rev_start, end_date)
-            ttm_rev = sum(r.get('revenue', 0) or 0 for r in rev_rows[-12:])
+            rev_rows = fetch_revenue_single(token, sid, rev_start, rev_end)
+            # TTM = quarter_end 之前 12 個月
+            ttm_rows = [r for r in rev_rows if r.get('date', '') <= end_date]
+            ttm_rev = sum(r.get('revenue', 0) or 0 for r in ttm_rows[-12:])
             it['ttm_revenue'] = ttm_rev
             it['cl_to_ttm_rev'] = (it['cl'] / ttm_rev) if ttm_rev else None
+            # Q+1 月營收驗證
+            it['q1_progress'] = compute_q1_progress(rev_rows, target_quarter)
         except Exception:
             it['ttm_revenue'] = None
             it['cl_to_ttm_rev'] = None
+            it['q1_progress'] = None
         # 股價（近 3 個月）
         try:
-            px_rows = fetch_price_recent(token, sid, px_start, today_str)
+            px_rows = fetch_price_recent(token, sid, px_start, rev_end)
             if px_rows:
                 first_close = px_rows[0]['close']
                 last_close = px_rows[-1]['close']
@@ -627,6 +705,13 @@ tr:hover td{background:var(--hover)}
 .badge.accel{background:#dcfce7;color:#15803d}
 .badge.ind{background:#e0e7ff;color:#4338ca}
 .badge.new{background:#fef3c7;color:#b45309;border:1px solid #fde68a}
+.badge.verified{background:#dcfce7;color:#15803d;border:1px solid #86efac}
+.badge.mild{background:#ecfccb;color:#3f6212;border:1px solid #bef264}
+.badge.warn{background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5}
+.badge.wait{background:#f1f5f9;color:#64748b;border:1px solid #cbd5e1}
+.q1cell{font-size:11.5px;line-height:1.4}
+.q1cell .pub{color:var(--mu);font-size:10.5px}
+.q1cell .yoy{font-weight:700}
 /* Hero */
 .hero{padding:24px 28px;background:linear-gradient(180deg,#fafbff 0%,#fff 100%);border-bottom:1px solid var(--brd)}
 .hero-grid{display:grid;grid-template-columns:1fr 280px;gap:20px}
@@ -643,6 +728,7 @@ tr:hover td{background:var(--hover)}
 .hero-card .sig{display:flex;gap:8px;font-size:11.5px;margin-bottom:6px}
 .hero-card .sig b{color:var(--gr);font-weight:700}
 .hero-card .why{font-size:12px;color:#475569;line-height:1.55;margin-top:6px;border-top:1px dashed var(--brd);padding-top:6px}
+.hero-card .q1-pill{margin:6px 0 4px}
 .hero-right{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px}
 .hero-right h4{font-size:13px;font-weight:700;color:var(--pp);margin-bottom:8px}
 .hero-right .next{font-size:24px;font-weight:800;color:var(--pp);margin:6px 0 2px}
@@ -733,6 +819,35 @@ def goodinfo_url(code):
     return f'https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID={code}'
 
 
+def _render_q1_cell(q1):
+    """Q+1 月營收驗證 cell。"""
+    if not q1:
+        return '<td class="num">—</td>'
+    cyoy = q1.get('cum_yoy')
+    cyoy_str = f'{cyoy * 100:+.0f}%' if cyoy is not None else '—'
+    color_class = 'up' if cyoy and cyoy > 0 else ('dn' if cyoy and cyoy < 0 else '')
+    months = q1.get('monthly') or []
+    pub = q1.get('published', 0)
+    nq = q1.get('next_quarter', '')
+    # 月份明細 tooltip
+    detail_lines = []
+    for m in months:
+        if m['rev'] is None:
+            detail_lines.append(f'{m["month"]}月: 未公告')
+        elif m['yoy'] is None:
+            detail_lines.append(f'{m["month"]}月: {m["rev"] / 1e8:.2f}億 (無去年基期)')
+        else:
+            detail_lines.append(f'{m["month"]}月: {m["yoy"] * 100:+.0f}%')
+    tooltip = ' / '.join(detail_lines)
+    badge = (f'<span class="badge {q1["status_key"]}" title="{tooltip}">'
+             f'{q1["status_label"]}</span>')
+    return (f'<td class="q1cell">'
+            f'{badge}<br>'
+            f'<span class="yoy {color_class}">{cyoy_str}</span> '
+            f'<span class="pub">({pub}/3 月 · {nq})</span>'
+            f'</td>')
+
+
 def _render_row(i, it):
     accel = '<span class="badge accel">加速</span>' if it['cl_2q_accel'] else ''
     new_badge = '<span class="badge new">🆕</span>' if it.get('_new') else ''
@@ -754,6 +869,7 @@ def _render_row(i, it):
 <td class="num">{fmt_pct(it['cl_to_assets'])}</td>
 <td class="num">{fmt_pct(it.get('cl_to_ttm_rev'))}</td>
 <td class="center">{sparkline(it['cl_history'])}</td>
+{_render_q1_cell(it.get('q1_progress'))}
 <td class="num">{bh_html}</td>
 <td class="num">{it.get('price') or '—'}</td>
 <td class="num">{fmt_chg(it.get('price_3m_chg'))}</td>
@@ -772,6 +888,7 @@ def _render_table(items, empty_msg='本分組無符合條件個股'):
   <th class="num">YoY</th><th class="num">QoQ</th>
   <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
   <th class="center">8季趨勢</th>
+  <th title="次季月營收 YoY 驗證 — 看合約負債是否真的轉化為營收">Q+1月營收</th>
   <th class="num">大戶週變</th>
   <th class="num">收盤</th><th class="num">近3月</th>
   <th class="num">分數</th>
@@ -930,6 +1047,15 @@ def _hero_card(rank, item, is_new=False):
     why_text = ' · '.join(why[:3])
 
     gi = goodinfo_url(code)
+    # Q+1 驗證
+    q1 = item.get('q1_progress') or {}
+    q1_html = ''
+    if q1.get('status_label'):
+        cyoy = q1.get('cum_yoy')
+        cyoy_str = f'累計 {cyoy * 100:+.0f}%' if cyoy is not None else '—'
+        q1_html = (f'<div class="q1-pill"><span class="badge {q1["status_key"]}">{q1["status_label"]}</span>'
+                   f' <span style="font-size:11px;color:var(--mu)">Q+1 {cyoy_str} ({q1.get("published", 0)}/3月)</span></div>')
+
     return f'''<a href="{gi}" target="_blank" rel="noopener" class="hero-card-link" title="在 Goodinfo 開啟 {code} {name}">
 <div class="hero-card">
   <div class="rk">第 {rank} 名 · score {item['score']:+.2f}</div>
@@ -939,6 +1065,7 @@ def _hero_card(rank, item, is_new=False):
     <span>YoY <b>+{(yoy_raw or 0) * 100:.0f}%</b></span>
     <span>CL <b>{cl_b:.1f}億</b></span>
   </div>
+  {q1_html}
   <div class="why">{why_text or '訊號齊全，建議觀察'}</div>
 </div>
 </a>'''
