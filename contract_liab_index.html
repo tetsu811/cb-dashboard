@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>合約負債策略 — 2025Q4</title>
+<style>
+:root{--bl:#2563eb;--gr:#16a34a;--rd:#dc2626;--am:#d97706;--pp:#7c3aed;--bg:#f8fafc;--brd:#e2e8f0;--txt:#1e293b;--mu:#64748b;--card:#fff;--hover:#eef2ff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:14px;line-height:1.5}
+.hdr{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#2563eb 100%);color:#fff;padding:22px 28px 16px}
+.hdr h1{font-size:20px;font-weight:800;margin-bottom:4px;letter-spacing:-0.3px}
+.hdr .sub{font-size:11.5px;opacity:.85}
+.nav-link{color:#93c5fd;font-size:11.5px;text-decoration:none;margin-left:14px;border-bottom:1px dashed #93c5fd;padding-bottom:1px}
+.stats{display:flex;gap:12px;padding:16px 28px;background:var(--card);border-bottom:1px solid var(--brd);flex-wrap:wrap}
+.sc{background:var(--bg);border:1px solid var(--brd);border-radius:10px;padding:14px 20px;min-width:130px;border-left:3px solid var(--bl)}
+.sc .n{font-size:24px;font-weight:800;color:var(--bl);letter-spacing:-0.5px}.sc .l{font-size:11px;color:var(--mu);margin-top:3px;font-weight:500}
+.sc.gr{border-left-color:var(--gr)}.sc.gr .n{color:var(--gr)}
+.sc.am{border-left-color:var(--am)}.sc.am .n{color:var(--am)}
+.sc.pp{border-left-color:var(--pp)}.sc.pp .n{color:var(--pp)}
+.tabs{display:flex;padding:0 28px;border-bottom:2px solid var(--brd);background:var(--card);gap:4px;flex-wrap:wrap}
+.tab{padding:11px 16px;cursor:pointer;border-bottom:3px solid transparent;font-size:12.5px;font-weight:600;color:var(--mu);margin-bottom:-2px;transition:all .15s;border-radius:6px 6px 0 0;background:none;border-left:none;border-right:none;border-top:none;font-family:inherit}
+.tab:hover{background:#f1f5f9;color:var(--txt)}
+.tab.active{border-bottom-color:var(--bl);color:var(--bl)}
+.tab .cnt{display:inline-block;background:#e2e8f0;color:var(--mu);font-size:10.5px;padding:1px 7px;border-radius:8px;margin-left:5px;font-weight:600}
+.tab.active .cnt{background:#dbeafe;color:var(--bl)}
+.pane{padding:20px 28px}.pane{display:none}.pane.active{display:block}
+.box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;font-size:12.5px;color:#1e40af;margin-bottom:18px;line-height:1.7}
+.box.warn{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.box.bt{background:#faf5ff;border-color:#ddd6fe;color:#6b21a8}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
+th{background:#edf2f7;font-weight:700;color:var(--mu);font-size:11px;text-transform:uppercase;padding:10px 8px;text-align:left;border-bottom:2px solid var(--brd);white-space:nowrap;letter-spacing:0.3px}
+td{padding:8px 8px;border-bottom:1px solid var(--brd);vertical-align:middle;font-size:13px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--hover)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.center{text-align:center}
+.rank{text-align:center;color:var(--mu);font-size:11px;width:36px}
+.code{font-weight:700;color:var(--bl);font-variant-numeric:tabular-nums}
+.up{color:var(--gr);font-weight:700}.dn{color:var(--rd);font-weight:700}
+.spark{display:inline-block;vertical-align:middle}
+.score{font-weight:700;color:var(--pp)}
+.badge{display:inline-block;padding:2px 7px;border-radius:5px;font-size:10.5px;font-weight:600;letter-spacing:0.2px;white-space:nowrap}
+.badge.accel{background:#dcfce7;color:#15803d}
+.badge.ind{background:#e0e7ff;color:#4338ca}
+.badge.new{background:#fef3c7;color:#b45309;border:1px solid #fde68a}
+/* Hero */
+.hero{padding:24px 28px;background:linear-gradient(180deg,#fafbff 0%,#fff 100%);border-bottom:1px solid var(--brd)}
+.hero-grid{display:grid;grid-template-columns:1fr 280px;gap:20px}
+.hero-left .picks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.hero-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;border-top:3px solid var(--bl);transition:transform .15s,box-shadow .15s}
+.hero-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.hero-card .rk{font-size:11px;color:var(--mu);font-weight:600;letter-spacing:0.4px}
+.hero-card .nm{font-size:16px;font-weight:800;margin:3px 0 2px;color:var(--txt)}
+.hero-card .nm .c{color:var(--bl);font-variant-numeric:tabular-nums;margin-right:6px}
+.hero-card .ind{font-size:10.5px;color:var(--mu);margin-bottom:8px}
+.hero-card .sig{display:flex;gap:8px;font-size:11.5px;margin-bottom:6px}
+.hero-card .sig b{color:var(--gr);font-weight:700}
+.hero-card .why{font-size:12px;color:#475569;line-height:1.55;margin-top:6px;border-top:1px dashed var(--brd);padding-top:6px}
+.hero-right{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px}
+.hero-right h4{font-size:13px;font-weight:700;color:var(--pp);margin-bottom:8px}
+.hero-right .next{font-size:24px;font-weight:800;color:var(--pp);margin:6px 0 2px}
+.hero-right .due{font-size:11.5px;color:var(--mu)}
+.hero-right ul{list-style:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--brd);font-size:11.5px;color:#475569;line-height:1.85}
+.hero-right ul li{padding:1px 0}
+.hero-title{font-size:14px;font-weight:700;color:var(--txt);display:flex;align-items:center;gap:8px}
+.hero-title .pill{background:var(--pp);color:#fff;border-radius:5px;padding:2px 8px;font-size:10.5px;font-weight:600;letter-spacing:0.3px}
+/* 巨漢案例 panel */
+.case{background:linear-gradient(135deg,#fef3c7 0%,#fde68a 100%);border:1px solid #f59e0b;border-radius:12px;padding:16px 20px;margin:18px 0;position:relative;overflow:hidden}
+.case::before{content:'CASE';position:absolute;top:8px;right:14px;background:#92400e;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:0.5px}
+.case h3{font-size:14px;font-weight:800;color:#92400e;margin-bottom:6px}
+.case .sub{font-size:11.5px;color:#78350f;margin-bottom:12px;line-height:1.65}
+.case-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.case-chart{background:rgba(255,255,255,.7);border-radius:8px;padding:10px}
+.case-chart h5{font-size:11px;font-weight:700;color:#78350f;margin-bottom:6px;letter-spacing:0.3px;text-transform:uppercase}
+.case-stats{font-size:11.5px;line-height:2;color:#78350f}
+.case-stats b{color:#15803d;font-weight:700}
+/* 持續追蹤 */
+.tracking{margin-top:18px;background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:16px 20px}
+.tracking h3{font-size:14px;font-weight:700;color:var(--bl);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.tracking .sub{font-size:11.5px;color:var(--mu);margin-bottom:12px}
+/* sticky code col on mobile */
+.sticky-code{position:sticky;left:0;background:var(--card);z-index:1}
+tr:hover .sticky-code{background:var(--hover)}
+.scroll-hint{display:none;text-align:center;font-size:11px;color:var(--mu);padding:6px;background:#f1f5f9;border-radius:6px;margin-bottom:6px}
+.ft{text-align:center;color:var(--mu);font-size:11.5px;padding:20px 28px;border-top:1px solid var(--brd);background:var(--card);line-height:1.8}
+.ft a{color:var(--bl);text-decoration:none}
+@media(max-width:900px){
+  .hdr,.stats,.pane,.hero{padding-left:14px;padding-right:14px}
+  .tabs{padding:0 14px;overflow-x:auto;flex-wrap:nowrap}
+  th,td{padding:7px 5px;font-size:12.5px}
+  .sc{min-width:110px}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-left .picks{grid-template-columns:1fr}
+  .case-grid{grid-template-columns:1fr}
+  .scroll-hint{display:block}
+  table{display:block;overflow-x:auto}
+}
+</style></head><body>
+<div class="hdr">
+  <h1>📊 台股合約負債策略 — 2025Q4</h1>
+  <div class="sub">合約負債 (IFRS 15) = 客戶已付錢、公司還沒認列的營收 → 未來營收的領先指標
+    <a class="nav-link" href="big_holders_index.html">大戶持股</a>
+    <a class="nav-link" href="tw_market.html">台股總覽</a>
+    <a class="nav-link" href="index.html">可轉債</a>
+  </div>
+</div>
+<div class="hero">
+<div class="hero-grid">
+  <div class="hero-left">
+    <div class="hero-title">🏆 本季前 3 強 <span class="pill">2025Q4</span>
+      <span style="font-size:11px;color:var(--mu);font-weight:500;margin-left:auto">合約負債暴增 + 通過全部篩選 · 依綜合分數排序</span>
+    </div>
+    <div class="picks"><div class="hero-card">
+  <div class="rk">第 1 名 · score +1.70</div>
+  <div class="nm"><span class="c">2527</span>宏璟<span class="badge new" style="margin-left:6px">🆕 新進榜</span></div>
+  <div class="ind">建設工程 · 建材營造</div>
+  <div class="sig">
+    <span>YoY <b>+2638%</b></span>
+    <span>CL <b>7.9億</b></span>
+  </div>
+  <div class="why">CL 暴增 2638% · 規模 7.9 億 · 連 2 季加速</div>
+</div><div class="hero-card">
+  <div class="rk">第 2 名 · score +1.31</div>
+  <div class="nm"><span class="c">3073</span>天方能源<span class="badge new" style="margin-left:6px">🆕 新進榜</span></div>
+  <div class="ind">其他 · 綠能環保類</div>
+  <div class="sig">
+    <span>YoY <b>+110021%</b></span>
+    <span>CL <b>0.9億</b></span>
+  </div>
+  <div class="why">CL 暴增 110021%</div>
+</div><div class="hero-card">
+  <div class="rk">第 3 名 · score +1.27</div>
+  <div class="nm"><span class="c">1721</span>三晃<span class="badge new" style="margin-left:6px">🆕 新進榜</span></div>
+  <div class="ind">生技醫療 · 化學生技醫療</div>
+  <div class="sig">
+    <span>YoY <b>+12326%</b></span>
+    <span>CL <b>0.8億</b></span>
+  </div>
+  <div class="why">CL 暴增 12326% · 大戶買超 8.2pp</div>
+</div></div>
+  </div>
+  <div class="hero-right">
+    <h4>📅 下次資料更新</h4>
+    <div class="next">2026-05-15</div>
+    <div class="due">2026Q1 截止 · 約 17 天後</div>
+    <ul>
+      <li>· 公布日當週末本頁面會更新</li>
+      <li>· Q1 報 5/15 · Q2 報 8/14</li>
+      <li>· Q3 報 11/14 · Q4 次年 3/31</li>
+    </ul>
+  </div>
+</div>
+</div>
+<div class="stats">
+  <div class="sc"><div class="n">1,656</div><div class="l">掃描股數</div></div>
+  <div class="sc gr"><div class="n">80</div><div class="l">通過篩選</div></div>
+  <div class="sc am"><div class="n">262%</div><div class="l">榜單平均 YoY</div></div>
+  <div class="sc pp"><div class="n">1000%</div><div class="l">榜首 YoY</div></div>
+</div>
+<div class="tabs">
+  <button class="tab active" data-tab="全部">全部<span class="cnt">80</span></button>
+<button class="tab" data-tab="半導體鏈">半導體鏈<span class="cnt">26</span></button>
+<button class="tab" data-tab="機電設備">機電設備<span class="cnt">7</span></button>
+<button class="tab" data-tab="建設工程">建設工程<span class="cnt">11</span></button>
+<button class="tab" data-tab="生技醫療">生技醫療<span class="cnt">5</span></button>
+<button class="tab" data-tab="傳產內需">傳產內需<span class="cnt">8</span></button>
+<button class="tab" data-tab="其他">其他<span class="cnt">23</span></button>
+<button class="tab" data-tab="回測">回測</button>
+</div>
+<div style="padding:20px 28px">
+  <div class="case">
+<h3>📚 案例：巨漢 (6903) — 為什麼這個策略有用</h3>
+<div class="sub">2025Q1 財報 (5月公布) 合約負債從 9,557 萬暴增到 <b>3.12 億 (+225% QoQ, +1438% YoY)</b>，
+策略當期就標記為買進訊號。當時股價 117.5。隨後巨漢主升段啟動，至今 425 元（半年漲 4 倍）。</div>
+<div class="case-grid">
+  <div class="case-chart">
+    <h5>合約負債 8 季走勢（紅柱 = 首次訊號）</h5>
+    <div style="display:flex;align-items:flex-end;gap:4px;height:80px"><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:5.941178158080114px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">24Q1</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:8.745845910616556px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">24Q2</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:8.727677248053244px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">24Q3</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:13.138837269345641px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">24Q4</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#dc2626;height:33.84135888846035px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">25Q1</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:40.456090805063006px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">25Q2</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:52.86461796402605px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">25Q3</div></div><div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:#92400e;height:64.0px;border-radius:3px 3px 0 0"></div><div style="font-size:9px;color:#78350f">25Q4</div></div></div>
+    <div style="font-size:10.5px;color:#78350f;margin-top:6px">2,030 萬 → <b style="color:#dc2626">6.27 億</b> (約 31 倍)</div>
+  </div>
+  <div class="case-chart">
+    <h5>季底股價（紅點 = 最新 425 元）</h5>
+    <svg width="100%" height="80" viewBox="0 0 100 80" preserveAspectRatio="none"><polyline points="0.0,64.8 12.5,61.7 25.0,70.9 37.5,75.2 50.0,78.3 62.5,80.0 75.0,74.1 87.5,51.8 100.0,10.0" fill="none" stroke="#dc2626" stroke-width="1.5"/><circle cx="100.0" cy="10.0" r="2.5" fill="#dc2626"/></svg>
+    <div style="font-size:10.5px;color:#78350f;margin-top:6px">首次訊號日 117.5 → <b style="color:#dc2626">425 (+262%)</b></div>
+  </div>
+</div>
+<div class="case-stats" style="margin-top:10px">
+  • 進場日 (2025-05-15)：117.5 → 現價 425 = <b>+262%</b><br>
+  • 7月低點 99.5 → 現價 425 = <b>+327%</b>（後段彈性更大）<br>
+  • 從第一次合約負債暴增 → 主升段啟動約 4 個月（典型「領先指標 → 反映」時差）
+</div>
+</div>
+  <div class="tracking">
+<h3>📈 上季 (2025Q3) picks 後續追蹤
+  <span class="pill" style="background:var(--bl);color:#fff;border-radius:5px;padding:2px 8px;font-size:10.5px">已實現</span>
+</h3>
+<div class="sub">進場日 2025-11-14（每季財報截止日等權買進）·
+平均 6 個月報酬 <b style="color:var(--gr)">+60.4%</b> ·
+勝率 <b>60%</b></div>
+<table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱</th>
+  <th class="num">+1個月</th><th class="num">+3個月</th><th class="num">+6個月</th>
+</tr></thead><tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code">7822</td>
+<td>倍利科</td>
+<td class="num"><span class="up">+13.4%</span></td>
+<td class="num"><span class="up">+149.1%</span></td>
+<td class="num"><b><span class="up">+156.6%</span></b></td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code">6903</td>
+<td>巨漢</td>
+<td class="num"><span class="up">+9.6%</span></td>
+<td class="num"><span class="up">+65.8%</span></td>
+<td class="num"><b><span class="up">+143.2%</span></b></td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code">4530</td>
+<td>宏易</td>
+<td class="num"><span class="up">+6.1%</span></td>
+<td class="num"><span class="up">+148.3%</span></td>
+<td class="num"><b><span class="up">+139.1%</span></b></td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code">5291</td>
+<td>邑昇</td>
+<td class="num"><span class="up">+11.7%</span></td>
+<td class="num"><span class="up">+45.4%</span></td>
+<td class="num"><b><span class="up">+136.7%</span></b></td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code">8096</td>
+<td>擎亞</td>
+<td class="num"><span class="dn">-4.1%</span></td>
+<td class="num"><span class="up">+19.2%</span></td>
+<td class="num"><b><span class="up">+70.8%</span></b></td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code">8091</td>
+<td>翔名</td>
+<td class="num"><span class="up">+0.9%</span></td>
+<td class="num"><span class="up">+14.5%</span></td>
+<td class="num"><b><span class="up">+53.0%</span></b></td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code">8076</td>
+<td>伍豐</td>
+<td class="num"><span class="dn">-4.4%</span></td>
+<td class="num"><span class="dn">-4.4%</span></td>
+<td class="num"><b><span class="dn">-6.1%</span></b></td>
+</tr>
+<tr>
+<td class="rank">8</td>
+<td class="code">6994</td>
+<td>富威電力</td>
+<td class="num"><span class="up">+13.8%</span></td>
+<td class="num"><span class="up">+3.9%</span></td>
+<td class="num"><b><span class="dn">-27.1%</span></b></td>
+</tr>
+<tr>
+<td class="rank">9</td>
+<td class="code">2924</td>
+<td>宏太-KY</td>
+<td class="num"><span class="dn">-30.5%</span></td>
+<td class="num"><span class="dn">-32.9%</span></td>
+<td class="num"><b><span class="dn">-27.7%</span></b></td>
+</tr>
+<tr>
+<td class="rank">10</td>
+<td class="code">2258</td>
+<td>鴻華先進-創</td>
+<td class="num"><span class="dn">-10.7%</span></td>
+<td class="num"><span class="dn">-10.1%</span></td>
+<td class="num"><b><span class="dn">-34.6%</span></b></td>
+</tr>
+</tbody></table>
+</div>
+  <div class="box" style="margin-top:18px">
+    <b>策略邏輯</b>：合約負債暴增代表客戶大量預付，未來 1~3 季營收將被推升。
+    篩選條件 → 合約負債 ≥ 0.5億、YoY ≥ 50%、占總資產 ≥ 2%、站上 8 季 75 百分位。
+    YoY/QoQ 上限封頂 1000% / 500%（避免極小基期拉爆 z-score）。
+    評分權重：YoY 30% / QoQ 15% / CL/TTM營收 20% / CL/總資產 10% / 連續加速 10% / 大戶買超 15%。
+    <br><b>資料區間</b>：2024Q1 → 2024Q2 → 2024Q3 → 2024Q4 → 2025Q1 → 2025Q2 → 2025Q3 → 2025Q4（FinMind 為主、MOPS 為備援）
+  </div>
+  <div class="scroll-hint">← 表格可橫向滑動 →</div>
+  <div class="pane active" data-pane="全部"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">2527<span class="badge new">🆕</span></td>
+<td>宏璟<br><span class="badge ind">建設工程</span></td>
+<td class="num">7.95億</td>
+<td class="num">2903萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.4%</td>
+<td class="num">117.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.3 12.0,19.1 24.0,18.2 36.0,21.2 48.0,22.0 60.0,18.9 72.0,22.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.2%</span></td>
+<td class="num">34.4</td>
+<td class="num"><span class="up">+15.4%</span></td>
+<td class="num score">+1.70</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">3073<span class="badge new">🆕</span></td>
+<td>天方能源<br><span class="badge ind">其他</span></td>
+<td class="num">9250萬</td>
+<td class="num">8萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+258.4%</span> </td>
+<td class="num">4.1%</td>
+<td class="num">117.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,22.0 36.0,22.0 48.0,22.0 60.0,22.0 72.0,15.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">22.85</td>
+<td class="num"><span class="dn">-30.1%</span></td>
+<td class="num score">+1.31</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">1721<span class="badge new">🆕</span></td>
+<td>三晃<br><span class="badge ind">生技醫療</span></td>
+<td class="num">7841萬</td>
+<td class="num">63萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+70.5%</span> </td>
+<td class="num">2.5%</td>
+<td class="num">4.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,20.1 24.0,21.4 36.0,22.0 48.0,11.7 60.0,14.9 72.0,9.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+8.2%</span></td>
+<td class="num">26.1</td>
+<td class="num"><span class="up">+37.4%</span></td>
+<td class="num score">+1.27</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">3058<span class="badge new">🆕</span></td>
+<td>立德<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">4.08億</td>
+<td class="num">466萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">7.7%</td>
+<td class="num">12.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.6 12.0,21.6 24.0,21.7 36.0,22.0 48.0,20.2 60.0,20.7 72.0,20.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">8.71</td>
+<td class="num"><span class="dn">-17.8%</span></td>
+<td class="num score">+1.21</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">8054</td>
+<td>安國<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">16.50億</td>
+<td class="num">3987萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+2.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">21.8%</td>
+<td class="num">60.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,21.1 24.0,18.2 36.0,22.0 48.0,13.0 60.0,10.1 72.0,0.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.9%</span></td>
+<td class="num">109.5</td>
+<td class="num"><span class="dn">-14.1%</span></td>
+<td class="num score">+1.10</td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code sticky-code">7740</td>
+<td>熙特爾-創<br><span class="badge ind">其他</span></td>
+<td class="num">28.47億</td>
+<td class="num">6.12億</td>
+<td class="num"><span class="up">+365.0%</span></td>
+<td class="num"><span class="dn">-10.1%</span> </td>
+<td class="num">32.1%</td>
+<td class="num">199.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,19.5 24.0,19.1 36.0,18.4 48.0,16.6 60.0,6.7 72.0,0.0 84.0,2.3" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="2.3" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num">183.5</td>
+<td class="num"><span class="up">+15.0%</span></td>
+<td class="num score">+1.03</td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code sticky-code">6589<span class="badge new">🆕</span></td>
+<td>台康生技<br><span class="badge ind">生技醫療</span></td>
+<td class="num">3.83億</td>
+<td class="num">4618萬</td>
+<td class="num"><span class="up">+730.2%</span></td>
+<td class="num"><span class="up">+205.8%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.5%</td>
+<td class="num">38.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.7 24.0,22.0 36.0,21.4 48.0,15.5 60.0,13.4 72.0,16.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">47.65</td>
+<td class="num"><span class="dn">-25.3%</span></td>
+<td class="num score">+0.67</td>
+</tr>
+<tr>
+<td class="rank">8</td>
+<td class="code sticky-code">2404</td>
+<td>漢唐<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">454.34億</td>
+<td class="num">202.11億</td>
+<td class="num"><span class="up">+124.8%</span></td>
+<td class="num"><span class="up">+13.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">57.6%</td>
+<td class="num">71.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.9 12.0,22.0 24.0,20.1 36.0,21.3 48.0,12.8 60.0,6.9 72.0,4.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+1.4%</span></td>
+<td class="num">969.0</td>
+<td class="num"><span class="up">+1.7%</span></td>
+<td class="num score">+0.66</td>
+</tr>
+<tr>
+<td class="rank">9</td>
+<td class="code sticky-code">3041<span class="badge new">🆕</span></td>
+<td>揚智<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.47億</td>
+<td class="num">1133萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+73.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.7%</td>
+<td class="num">11.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.7 12.0,21.4 24.0,13.3 36.0,20.7 48.0,18.7 60.0,22.0 72.0,9.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.0%</span></td>
+<td class="num">23.7</td>
+<td class="num"><span class="dn">-13.3%</span></td>
+<td class="num score">+0.62</td>
+</tr>
+<tr>
+<td class="rank">10</td>
+<td class="code sticky-code">2258</td>
+<td>鴻華先進-創<br><span class="badge ind">其他</span></td>
+<td class="num">6.42億</td>
+<td class="num">2087萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+2.8%</span> </td>
+<td class="num">3.8%</td>
+<td class="num">15.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.9 12.0,20.5 24.0,21.6 36.0,22.0 48.0,20.5 60.0,20.6 72.0,0.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">28.45</td>
+<td class="num"><span class="dn">-26.2%</span></td>
+<td class="num score">+0.53</td>
+</tr>
+<tr>
+<td class="rank">11</td>
+<td class="code sticky-code">3706<span class="badge new">🆕</span></td>
+<td>神達<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">37.65億</td>
+<td class="num">9.28億</td>
+<td class="num"><span class="up">+305.8%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.9%</td>
+<td class="num">3.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.8 12.0,21.9 24.0,21.6 36.0,17.5 48.0,21.7 60.0,22.0 72.0,21.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.9%</span></td>
+<td class="num">82.0</td>
+<td class="num"><span class="up">+0.6%</span></td>
+<td class="num score">+0.52</td>
+</tr>
+<tr>
+<td class="rank">12</td>
+<td class="code sticky-code">7792</td>
+<td>安葆<br><span class="badge ind">其他</span></td>
+<td class="num">5.83億</td>
+<td class="num">3.57億</td>
+<td class="num"><span class="up">+63.1%</span></td>
+<td class="num"><span class="up">+23.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">10.9%</td>
+<td class="num">175.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.9 12.0,21.9 24.0,22.0 36.0,17.1 48.0,11.4 60.0,18.6 72.0,8.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">347.0</td>
+<td class="num"><span class="dn">-14.5%</span></td>
+<td class="num score">+0.51</td>
+</tr>
+<tr>
+<td class="rank">13</td>
+<td class="code sticky-code">5291</td>
+<td>邑昇<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.04億</td>
+<td class="num">467萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="dn">-3.6%</span> </td>
+<td class="num">5.4%</td>
+<td class="num">9.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.9 12.0,22.0 24.0,21.9 36.0,21.4 48.0,5.9 60.0,4.7 72.0,0.0 84.0,0.8" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.8" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">59.4</td>
+<td class="num"><span class="up">+48.5%</span></td>
+<td class="num score">+0.48</td>
+</tr>
+<tr>
+<td class="rank">14</td>
+<td class="code sticky-code">2101<span class="badge new">🆕</span></td>
+<td>南港<br><span class="badge ind">傳產內需</span></td>
+<td class="num">117.91億</td>
+<td class="num">68.96億</td>
+<td class="num"><span class="up">+71.0%</span></td>
+<td class="num"><span class="up">+36.3%</span> <span class="badge accel">加速</span></td>
+<td class="num">21.7%</td>
+<td class="num">140.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,10.0 12.0,9.1 24.0,22.0 36.0,21.1 48.0,20.5 60.0,20.2 72.0,13.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">33.2</td>
+<td class="num"><span class="dn">-9.4%</span></td>
+<td class="num score">+0.47</td>
+</tr>
+<tr>
+<td class="rank">15</td>
+<td class="code sticky-code">1337</td>
+<td>再生-KY<br><span class="badge ind">傳產內需</span></td>
+<td class="num">11.14億</td>
+<td class="num">4.96億</td>
+<td class="num"><span class="up">+124.5%</span></td>
+<td class="num"><span class="up">+19.0%</span> </td>
+<td class="num">17.6%</td>
+<td class="num">163.1%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,16.1 24.0,16.1 36.0,12.2 48.0,5.5 60.0,6.2 72.0,3.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">5.21</td>
+<td class="num"><span class="dn">-11.2%</span></td>
+<td class="num score">+0.46</td>
+</tr>
+<tr>
+<td class="rank">16</td>
+<td class="code sticky-code">3498</td>
+<td>陽程<br><span class="badge ind">其他</span></td>
+<td class="num">8.50億</td>
+<td class="num">2.46億</td>
+<td class="num"><span class="up">+245.7%</span></td>
+<td class="num"><span class="up">+81.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">21.0%</td>
+<td class="num">67.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,16.9 24.0,20.6 36.0,20.9 48.0,20.1 60.0,20.6 72.0,13.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+1.1%</span></td>
+<td class="num">80.5</td>
+<td class="num"><span class="up">+58.8%</span></td>
+<td class="num score">+0.45</td>
+</tr>
+<tr>
+<td class="rank">17</td>
+<td class="code sticky-code">2924</td>
+<td>宏太-KY<br><span class="badge ind">其他</span></td>
+<td class="num">9811萬</td>
+<td class="num">3735萬</td>
+<td class="num"><span class="up">+162.7%</span></td>
+<td class="num"><span class="up">+12.0%</span> </td>
+<td class="num">10.2%</td>
+<td class="num">166.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,21.7 36.0,13.7 48.0,8.7 60.0,6.2 72.0,2.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">22.45</td>
+<td class="num"><span class="up">+17.2%</span></td>
+<td class="num score">+0.44</td>
+</tr>
+<tr>
+<td class="rank">18</td>
+<td class="code sticky-code">1449<span class="badge new">🆕</span></td>
+<td>佳和<br><span class="badge ind">傳產內需</span></td>
+<td class="num">3.79億</td>
+<td class="num">9533萬</td>
+<td class="num"><span class="up">+297.8%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.7%</td>
+<td class="num">15.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.1 12.0,19.8 24.0,20.5 36.0,18.5 48.0,20.0 60.0,20.8 72.0,22.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.1%</span></td>
+<td class="num">13.45</td>
+<td class="num"><span class="up">+15.0%</span></td>
+<td class="num score">+0.41</td>
+</tr>
+<tr>
+<td class="rank">19</td>
+<td class="code sticky-code">6531</td>
+<td>愛普*<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">9.40億</td>
+<td class="num">1.59億</td>
+<td class="num"><span class="up">+491.1%</span></td>
+<td class="num"><span class="up">+52.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">6.4%</td>
+<td class="num">17.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,13.3 24.0,18.5 36.0,19.9 48.0,16.9 60.0,11.1 72.0,8.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+2.3%</span></td>
+<td class="num">800.0</td>
+<td class="num"><span class="up">+83.5%</span></td>
+<td class="num score">+0.40</td>
+</tr>
+<tr>
+<td class="rank">20</td>
+<td class="code sticky-code">1336<span class="badge new">🆕</span></td>
+<td>台翰<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">7105萬</td>
+<td class="num">852萬</td>
+<td class="num"><span class="up">+733.9%</span></td>
+<td class="num"><span class="up">+76.8%</span> </td>
+<td class="num">2.3%</td>
+<td class="num">2.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.2 12.0,21.0 24.0,21.5 36.0,19.4 48.0,21.6 60.0,22.0 72.0,9.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.2%</span></td>
+<td class="num">13.7</td>
+<td class="num"><span class="dn">-18.0%</span></td>
+<td class="num score">+0.29</td>
+</tr>
+<tr>
+<td class="rank">21</td>
+<td class="code sticky-code">3661<span class="badge new">🆕</span></td>
+<td>世芯-KY<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">120.21億</td>
+<td class="num">61.14億</td>
+<td class="num"><span class="up">+96.6%</span></td>
+<td class="num"><span class="up">+26.7%</span> <span class="badge accel">加速</span></td>
+<td class="num">20.7%</td>
+<td class="num">35.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,3.4 12.0,6.1 24.0,15.3 36.0,22.0 48.0,2.7 60.0,18.1 72.0,9.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.3%</span></td>
+<td class="num">4000.0</td>
+<td class="num"><span class="up">+18.7%</span></td>
+<td class="num score">+0.28</td>
+</tr>
+<tr>
+<td class="rank">22</td>
+<td class="code sticky-code">4128<span class="badge new">🆕</span></td>
+<td>中天<br><span class="badge ind">生技醫療</span></td>
+<td class="num">2.74億</td>
+<td class="num">7001萬</td>
+<td class="num"><span class="up">+290.8%</span></td>
+<td class="num"><span class="up">+376.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.2%</td>
+<td class="num">14.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,18.2 36.0,17.3 48.0,18.1 60.0,18.1 72.0,18.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.6%</span></td>
+<td class="num">15.6</td>
+<td class="num"><span class="dn">-25.7%</span></td>
+<td class="num score">+0.27</td>
+</tr>
+<tr>
+<td class="rank">23</td>
+<td class="code sticky-code">6462</td>
+<td>神盾<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">18.28億</td>
+<td class="num">2.42億</td>
+<td class="num"><span class="up">+654.0%</span></td>
+<td class="num"><span class="up">+1.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">9.5%</td>
+<td class="num">35.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.7 12.0,22.0 24.0,19.6 36.0,20.6 48.0,12.3 60.0,9.9 72.0,0.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.8%</span></td>
+<td class="num">118.5</td>
+<td class="num"><span class="up">+2.6%</span></td>
+<td class="num score">+0.27</td>
+</tr>
+<tr>
+<td class="rank">24</td>
+<td class="code sticky-code">8271<span class="badge new">🆕</span></td>
+<td>宇瞻<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.97億</td>
+<td class="num">4793萬</td>
+<td class="num"><span class="up">+311.5%</span></td>
+<td class="num"><span class="up">+107.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.1%</td>
+<td class="num">1.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.2 12.0,22.0 24.0,10.1 36.0,18.6 48.0,19.8 60.0,18.5 72.0,12.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.2%</span></td>
+<td class="num">225.0</td>
+<td class="num"><span class="up">+86.0%</span></td>
+<td class="num score">+0.25</td>
+</tr>
+<tr>
+<td class="rank">25</td>
+<td class="code sticky-code">3167<span class="badge new">🆕</span></td>
+<td>大量<br><span class="badge ind">機電設備</span></td>
+<td class="num">7.50億</td>
+<td class="num">1.58億</td>
+<td class="num"><span class="up">+374.6%</span></td>
+<td class="num"><span class="up">+189.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">8.9%</td>
+<td class="num">15.4%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.3 24.0,16.3 36.0,19.7 48.0,19.8 60.0,19.1 72.0,16.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.5%</span></td>
+<td class="num">742.0</td>
+<td class="num"><span class="up">+219.1%</span></td>
+<td class="num score">+0.22</td>
+</tr>
+<tr>
+<td class="rank">26</td>
+<td class="code sticky-code">5292<span class="badge new">🆕</span></td>
+<td>華懋<br><span class="badge ind">其他</span></td>
+<td class="num">14.97億</td>
+<td class="num">8.65億</td>
+<td class="num"><span class="up">+73.2%</span></td>
+<td class="num"><span class="up">+25.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">34.7%</td>
+<td class="num">53.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,19.0 24.0,19.9 36.0,18.5 48.0,13.5 60.0,11.3 72.0,8.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num">244.0</td>
+<td class="num"><span class="up">+22.0%</span></td>
+<td class="num score">+0.21</td>
+</tr>
+<tr>
+<td class="rank">27</td>
+<td class="code sticky-code">8091</td>
+<td>翔名<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.22億</td>
+<td class="num">1695萬</td>
+<td class="num"><span class="up">+619.1%</span></td>
+<td class="num"><span class="up">+21.7%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.5%</td>
+<td class="num">5.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,21.4 24.0,21.0 36.0,22.0 48.0,19.1 60.0,21.2 72.0,4.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.3%</span></td>
+<td class="num">179.0</td>
+<td class="num"><span class="up">+28.8%</span></td>
+<td class="num score">+0.18</td>
+</tr>
+<tr>
+<td class="rank">28</td>
+<td class="code sticky-code">5515<span class="badge new">🆕</span></td>
+<td>建國<br><span class="badge ind">建設工程</span></td>
+<td class="num">25.07億</td>
+<td class="num">9.27億</td>
+<td class="num"><span class="up">+170.3%</span></td>
+<td class="num"><span class="up">+93.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">22.7%</td>
+<td class="num">34.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,21.7 24.0,16.6 36.0,21.3 48.0,16.9 60.0,16.7 72.0,16.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">40.8</td>
+<td class="num"><span class="up">+27.1%</span></td>
+<td class="num score">+0.15</td>
+</tr>
+<tr>
+<td class="rank">29</td>
+<td class="code sticky-code">7822</td>
+<td>倍利科<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">9.30億</td>
+<td class="num">2.70億</td>
+<td class="num"><span class="up">+244.2%</span></td>
+<td class="num"><span class="up">+6.0%</span> </td>
+<td class="num">35.2%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,19.7 24.0,22.0 36.0,18.4 60.0,5.7 72.0,1.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.0%</span></td>
+<td class="num">1355.0</td>
+<td class="num"><span class="up">+35.6%</span></td>
+<td class="num score">+0.15</td>
+</tr>
+<tr>
+<td class="rank">30</td>
+<td class="code sticky-code">6903</td>
+<td>巨漢<br><span class="badge ind">其他</span></td>
+<td class="num">6.27億</td>
+<td class="num">9557萬</td>
+<td class="num"><span class="up">+556.5%</span></td>
+<td class="num"><span class="up">+22.8%</span> </td>
+<td class="num">12.3%</td>
+<td class="num">19.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.9 24.0,20.9 36.0,19.3 48.0,11.4 60.0,8.9 72.0,4.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.7%</span></td>
+<td class="num">425.0</td>
+<td class="num"><span class="up">+54.0%</span></td>
+<td class="num score">+0.14</td>
+</tr>
+<tr>
+<td class="rank">31</td>
+<td class="code sticky-code">6196</td>
+<td>帆宣<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">204.72億</td>
+<td class="num">114.68億</td>
+<td class="num"><span class="up">+78.5%</span></td>
+<td class="num"><span class="up">+12.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">35.6%</td>
+<td class="num">39.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.4 24.0,19.9 36.0,17.6 48.0,16.0 60.0,14.7 72.0,4.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">381.5</td>
+<td class="num"><span class="up">+29.1%</span></td>
+<td class="num score">+0.13</td>
+</tr>
+<tr>
+<td class="rank">32</td>
+<td class="code sticky-code">5314<span class="badge new">🆕</span></td>
+<td>世紀*<br><span class="badge ind">建設工程</span></td>
+<td class="num">1.16億</td>
+<td class="num">6263萬</td>
+<td class="num"><span class="up">+86.0%</span></td>
+<td class="num"><span class="up">+500.0%</span> </td>
+<td class="num">2.3%</td>
+<td class="num">4.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,22.0 24.0,21.1 36.0,10.3 48.0,15.7 60.0,20.1 72.0,19.8 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">74.2</td>
+<td class="num"><span class="dn">-28.0%</span></td>
+<td class="num score">+0.11</td>
+</tr>
+<tr>
+<td class="rank">33</td>
+<td class="code sticky-code">8227</td>
+<td>巨有科技<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">4.66億</td>
+<td class="num">1.54億</td>
+<td class="num"><span class="up">+202.9%</span></td>
+<td class="num"><span class="up">+26.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">25.5%</td>
+<td class="num">35.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,22.0 24.0,19.0 36.0,17.6 48.0,8.4 60.0,0.0 72.0,5.5 84.0,0.1" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.1" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.5%</span></td>
+<td class="num">156.0</td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num score">+0.11</td>
+</tr>
+<tr>
+<td class="rank">34</td>
+<td class="code sticky-code">6234<span class="badge new">🆕</span></td>
+<td>高僑<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">8548萬</td>
+<td class="num">3617萬</td>
+<td class="num"><span class="up">+136.3%</span></td>
+<td class="num"><span class="up">+8.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.1%</td>
+<td class="num">18.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,0.0 12.0,20.5 24.0,16.7 36.0,22.0 48.0,15.9 60.0,17.6 72.0,7.4 84.0,5.1" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="5.1" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.6%</span></td>
+<td class="num">43.7</td>
+<td class="num"><span class="up">+57.2%</span></td>
+<td class="num score">+0.06</td>
+</tr>
+<tr>
+<td class="rank">35</td>
+<td class="code sticky-code">7769</td>
+<td>鴻勁<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">65.91億</td>
+<td class="num">23.98億</td>
+<td class="num"><span class="up">+174.8%</span></td>
+<td class="num"><span class="dn">-14.6%</span> </td>
+<td class="num">9.0%</td>
+<td class="num">74.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.1 12.0,22.0 24.0,18.9 36.0,20.3 48.0,6.9 60.0,5.9 72.0,0.0 84.0,4.3" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="4.3" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="up">+0.5%</span></td>
+<td class="num">5100.0</td>
+<td class="num"><span class="up">+34.6%</span></td>
+<td class="num score">+0.03</td>
+</tr>
+<tr>
+<td class="rank">36</td>
+<td class="code sticky-code">8450<span class="badge new">🆕</span></td>
+<td>霹靂<br><span class="badge ind">其他</span></td>
+<td class="num">1.06億</td>
+<td class="num">4350萬</td>
+<td class="num"><span class="up">+143.2%</span></td>
+<td class="num"><span class="up">+68.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">9.8%</td>
+<td class="num">44.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.9 12.0,17.2 24.0,20.1 36.0,22.0 48.0,18.4 60.0,18.7 72.0,15.1 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">16.75</td>
+<td class="num"><span class="dn">-1.5%</span></td>
+<td class="num score">+0.02</td>
+</tr>
+<tr>
+<td class="rank">37</td>
+<td class="code sticky-code">2363<span class="badge new">🆕</span></td>
+<td>矽統<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">8.69億</td>
+<td class="num">2.99億</td>
+<td class="num"><span class="up">+191.0%</span></td>
+<td class="num"><span class="up">+23.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.2%</td>
+<td class="num">32.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,10.7 36.0,14.5 48.0,9.8 60.0,5.0 72.0,4.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+1.2%</span></td>
+<td class="num">53.1</td>
+<td class="num"><span class="dn">-8.8%</span></td>
+<td class="num score">+0.01</td>
+</tr>
+<tr>
+<td class="rank">38</td>
+<td class="code sticky-code">2237<span class="badge new">🆕</span></td>
+<td>華德動能<br><span class="badge ind">機電設備</span></td>
+<td class="num">2.06億</td>
+<td class="num">4988萬</td>
+<td class="num"><span class="up">+313.1%</span></td>
+<td class="num">— </td>
+<td class="num">5.8%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,17.6 60.0,9.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.0%</span></td>
+<td class="num">31.2</td>
+<td class="num"><span class="up">+1.0%</span></td>
+<td class="num score">+0.01</td>
+</tr>
+<tr>
+<td class="rank">39</td>
+<td class="code sticky-code">4523</td>
+<td>永彰<br><span class="badge ind">機電設備</span></td>
+<td class="num">2.44億</td>
+<td class="num">8922萬</td>
+<td class="num"><span class="up">+173.5%</span></td>
+<td class="num"><span class="up">+53.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">8.0%</td>
+<td class="num">39.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.0 12.0,22.0 24.0,17.4 36.0,15.5 48.0,16.4 60.0,18.4 72.0,8.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">30.75</td>
+<td class="num"><span class="up">+0.7%</span></td>
+<td class="num score">-0.01</td>
+</tr>
+<tr>
+<td class="rank">40</td>
+<td class="code sticky-code">7849<span class="badge new">🆕</span></td>
+<td>旭誼<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.36億</td>
+<td class="num">5675萬</td>
+<td class="num"><span class="up">+139.4%</span></td>
+<td class="num">— </td>
+<td class="num">22.3%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,21.1 60.0,19.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">148.5</td>
+<td class="num"><span class="up">+14.2%</span></td>
+<td class="num score">-0.01</td>
+</tr>
+<tr>
+<td class="rank">41</td>
+<td class="code sticky-code">8383<span class="badge new">🆕</span></td>
+<td>千附<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">2.52億</td>
+<td class="num">1.45億</td>
+<td class="num"><span class="up">+73.3%</span></td>
+<td class="num"><span class="up">+24.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.0%</td>
+<td class="num">7.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,16.1 12.0,16.3 24.0,18.0 36.0,21.3 48.0,22.0 60.0,16.8 72.0,10.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.5%</span></td>
+<td class="num">64.0</td>
+<td class="num"><span class="up">+52.2%</span></td>
+<td class="num score">-0.03</td>
+</tr>
+<tr>
+<td class="rank">42</td>
+<td class="code sticky-code">8087<span class="badge new">🆕</span></td>
+<td>麗升能源<br><span class="badge ind">其他</span></td>
+<td class="num">6692萬</td>
+<td class="num">2310萬</td>
+<td class="num"><span class="up">+189.6%</span></td>
+<td class="num"><span class="up">+124.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.5%</td>
+<td class="num">21.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.3 12.0,22.0 24.0,21.4 36.0,17.9 48.0,18.6 60.0,0.0 72.0,16.0 84.0,5.3" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="5.3" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">33.0</td>
+<td class="num"><span class="up">+12.1%</span></td>
+<td class="num score">-0.03</td>
+</tr>
+<tr>
+<td class="rank">43</td>
+<td class="code sticky-code">5533<span class="badge new">🆕</span></td>
+<td>皇鼎<br><span class="badge ind">建設工程</span></td>
+<td class="num">4.02億</td>
+<td class="num">1.40億</td>
+<td class="num"><span class="up">+187.3%</span></td>
+<td class="num"><span class="up">+30.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.4%</td>
+<td class="num">35.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,13.4 24.0,16.7 36.0,17.4 48.0,11.2 60.0,8.1 72.0,6.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">14.35</td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num score">-0.10</td>
+</tr>
+<tr>
+<td class="rank">44</td>
+<td class="code sticky-code">3018<span class="badge new">🆕</span></td>
+<td>隆銘綠能<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">2.01億</td>
+<td class="num">1.26億</td>
+<td class="num"><span class="up">+59.5%</span></td>
+<td class="num"><span class="up">+23.3%</span> <span class="badge accel">加速</span></td>
+<td class="num">16.0%</td>
+<td class="num">35.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,0.0 12.0,9.8 24.0,17.5 36.0,18.9 48.0,22.0 60.0,11.7 72.0,13.7 84.0,8.4" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="8.4" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">—</td>
+<td class="num"><span class="dn">-100.0%</span></td>
+<td class="num score">-0.10</td>
+</tr>
+<tr>
+<td class="rank">45</td>
+<td class="code sticky-code">5548<span class="badge new">🆕</span></td>
+<td>安倉<br><span class="badge ind">建設工程</span></td>
+<td class="num">3.65億</td>
+<td class="num">1.55億</td>
+<td class="num"><span class="up">+135.7%</span></td>
+<td class="num"><span class="up">+33.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">16.2%</td>
+<td class="num">14.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.0 12.0,11.1 24.0,14.2 36.0,17.1 48.0,22.0 60.0,0.2 72.0,7.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">23.5</td>
+<td class="num"><span class="up">+2.6%</span></td>
+<td class="num score">-0.10</td>
+</tr>
+<tr>
+<td class="rank">46</td>
+<td class="code sticky-code">1519<span class="badge new">🆕</span></td>
+<td>華城<br><span class="badge ind">機電設備</span></td>
+<td class="num">59.09億</td>
+<td class="num">36.97億</td>
+<td class="num"><span class="up">+59.8%</span></td>
+<td class="num"><span class="up">+23.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">20.9%</td>
+<td class="num">24.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,18.7 24.0,14.0 36.0,13.4 48.0,5.9 60.0,7.2 72.0,6.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.2%</span></td>
+<td class="num">875.0</td>
+<td class="num"><span class="dn">-15.9%</span></td>
+<td class="num score">-0.12</td>
+</tr>
+<tr>
+<td class="rank">47</td>
+<td class="code sticky-code">8426<span class="badge new">🆕</span></td>
+<td>紅木-KY<br><span class="badge ind">建設工程</span></td>
+<td class="num">3.49億</td>
+<td class="num">1.37億</td>
+<td class="num"><span class="up">+155.1%</span></td>
+<td class="num"><span class="up">+31.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">13.7%</td>
+<td class="num">12.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,18.6 12.0,0.3 24.0,8.3 36.0,22.0 48.0,9.9 60.0,7.3 72.0,8.8 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">23.85</td>
+<td class="num"><span class="dn">-13.6%</span></td>
+<td class="num score">-0.12</td>
+</tr>
+<tr>
+<td class="rank">48</td>
+<td class="code sticky-code">1503</td>
+<td>士電<br><span class="badge ind">機電設備</span></td>
+<td class="num">95.45億</td>
+<td class="num">52.82億</td>
+<td class="num"><span class="up">+80.7%</span></td>
+<td class="num"><span class="up">+18.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">15.8%</td>
+<td class="num">26.1%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.3 12.0,21.4 24.0,22.0 36.0,21.6 48.0,20.5 60.0,14.1 72.0,7.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.3%</span></td>
+<td class="num">188.5</td>
+<td class="num"><span class="dn">-23.4%</span></td>
+<td class="num score">-0.15</td>
+</tr>
+<tr>
+<td class="rank">49</td>
+<td class="code sticky-code">1799<span class="badge new">🆕</span></td>
+<td>易威<br><span class="badge ind">生技醫療</span></td>
+<td class="num">6850萬</td>
+<td class="num">3374萬</td>
+<td class="num"><span class="up">+103.0%</span></td>
+<td class="num"><span class="up">+81.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">5.3%</td>
+<td class="num">11.4%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,18.5 12.0,13.1 24.0,21.2 36.0,21.7 48.0,22.0 60.0,19.9 72.0,19.1 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">38.05</td>
+<td class="num"><span class="up">+10.6%</span></td>
+<td class="num score">-0.20</td>
+</tr>
+<tr>
+<td class="rank">50</td>
+<td class="code sticky-code">1623<span class="badge new">🆕</span></td>
+<td>大東電<br><span class="badge ind">其他</span></td>
+<td class="num">2.44億</td>
+<td class="num">1.53億</td>
+<td class="num"><span class="up">+59.8%</span></td>
+<td class="num"><span class="up">+66.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.4%</td>
+<td class="num">40.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,5.6 24.0,1.9 36.0,20.6 60.0,1.1 72.0,22.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.6%</span></td>
+<td class="num">237.5</td>
+<td class="num"><span class="dn">-14.6%</span></td>
+<td class="num score">-0.20</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="半導體鏈"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">3058<span class="badge new">🆕</span></td>
+<td>立德<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">4.08億</td>
+<td class="num">466萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">7.7%</td>
+<td class="num">12.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.6 12.0,21.6 24.0,21.7 36.0,22.0 48.0,20.2 60.0,20.7 72.0,20.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">8.71</td>
+<td class="num"><span class="dn">-17.8%</span></td>
+<td class="num score">+1.21</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">8054</td>
+<td>安國<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">16.50億</td>
+<td class="num">3987萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+2.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">21.8%</td>
+<td class="num">60.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,21.1 24.0,18.2 36.0,22.0 48.0,13.0 60.0,10.1 72.0,0.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.9%</span></td>
+<td class="num">109.5</td>
+<td class="num"><span class="dn">-14.1%</span></td>
+<td class="num score">+1.10</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">2404</td>
+<td>漢唐<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">454.34億</td>
+<td class="num">202.11億</td>
+<td class="num"><span class="up">+124.8%</span></td>
+<td class="num"><span class="up">+13.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">57.6%</td>
+<td class="num">71.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.9 12.0,22.0 24.0,20.1 36.0,21.3 48.0,12.8 60.0,6.9 72.0,4.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+1.4%</span></td>
+<td class="num">969.0</td>
+<td class="num"><span class="up">+1.7%</span></td>
+<td class="num score">+0.66</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">3041<span class="badge new">🆕</span></td>
+<td>揚智<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.47億</td>
+<td class="num">1133萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+73.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.7%</td>
+<td class="num">11.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.7 12.0,21.4 24.0,13.3 36.0,20.7 48.0,18.7 60.0,22.0 72.0,9.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.0%</span></td>
+<td class="num">23.7</td>
+<td class="num"><span class="dn">-13.3%</span></td>
+<td class="num score">+0.62</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">3706<span class="badge new">🆕</span></td>
+<td>神達<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">37.65億</td>
+<td class="num">9.28億</td>
+<td class="num"><span class="up">+305.8%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.9%</td>
+<td class="num">3.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.8 12.0,21.9 24.0,21.6 36.0,17.5 48.0,21.7 60.0,22.0 72.0,21.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.9%</span></td>
+<td class="num">82.0</td>
+<td class="num"><span class="up">+0.6%</span></td>
+<td class="num score">+0.52</td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code sticky-code">5291</td>
+<td>邑昇<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.04億</td>
+<td class="num">467萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="dn">-3.6%</span> </td>
+<td class="num">5.4%</td>
+<td class="num">9.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.9 12.0,22.0 24.0,21.9 36.0,21.4 48.0,5.9 60.0,4.7 72.0,0.0 84.0,0.8" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.8" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">59.4</td>
+<td class="num"><span class="up">+48.5%</span></td>
+<td class="num score">+0.48</td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code sticky-code">6531</td>
+<td>愛普*<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">9.40億</td>
+<td class="num">1.59億</td>
+<td class="num"><span class="up">+491.1%</span></td>
+<td class="num"><span class="up">+52.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">6.4%</td>
+<td class="num">17.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,13.3 24.0,18.5 36.0,19.9 48.0,16.9 60.0,11.1 72.0,8.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+2.3%</span></td>
+<td class="num">800.0</td>
+<td class="num"><span class="up">+83.5%</span></td>
+<td class="num score">+0.40</td>
+</tr>
+<tr>
+<td class="rank">8</td>
+<td class="code sticky-code">1336<span class="badge new">🆕</span></td>
+<td>台翰<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">7105萬</td>
+<td class="num">852萬</td>
+<td class="num"><span class="up">+733.9%</span></td>
+<td class="num"><span class="up">+76.8%</span> </td>
+<td class="num">2.3%</td>
+<td class="num">2.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.2 12.0,21.0 24.0,21.5 36.0,19.4 48.0,21.6 60.0,22.0 72.0,9.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.2%</span></td>
+<td class="num">13.7</td>
+<td class="num"><span class="dn">-18.0%</span></td>
+<td class="num score">+0.29</td>
+</tr>
+<tr>
+<td class="rank">9</td>
+<td class="code sticky-code">3661<span class="badge new">🆕</span></td>
+<td>世芯-KY<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">120.21億</td>
+<td class="num">61.14億</td>
+<td class="num"><span class="up">+96.6%</span></td>
+<td class="num"><span class="up">+26.7%</span> <span class="badge accel">加速</span></td>
+<td class="num">20.7%</td>
+<td class="num">35.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,3.4 12.0,6.1 24.0,15.3 36.0,22.0 48.0,2.7 60.0,18.1 72.0,9.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.3%</span></td>
+<td class="num">4000.0</td>
+<td class="num"><span class="up">+18.7%</span></td>
+<td class="num score">+0.28</td>
+</tr>
+<tr>
+<td class="rank">10</td>
+<td class="code sticky-code">6462</td>
+<td>神盾<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">18.28億</td>
+<td class="num">2.42億</td>
+<td class="num"><span class="up">+654.0%</span></td>
+<td class="num"><span class="up">+1.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">9.5%</td>
+<td class="num">35.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.7 12.0,22.0 24.0,19.6 36.0,20.6 48.0,12.3 60.0,9.9 72.0,0.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.8%</span></td>
+<td class="num">118.5</td>
+<td class="num"><span class="up">+2.6%</span></td>
+<td class="num score">+0.27</td>
+</tr>
+<tr>
+<td class="rank">11</td>
+<td class="code sticky-code">8271<span class="badge new">🆕</span></td>
+<td>宇瞻<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.97億</td>
+<td class="num">4793萬</td>
+<td class="num"><span class="up">+311.5%</span></td>
+<td class="num"><span class="up">+107.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.1%</td>
+<td class="num">1.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.2 12.0,22.0 24.0,10.1 36.0,18.6 48.0,19.8 60.0,18.5 72.0,12.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.2%</span></td>
+<td class="num">225.0</td>
+<td class="num"><span class="up">+86.0%</span></td>
+<td class="num score">+0.25</td>
+</tr>
+<tr>
+<td class="rank">12</td>
+<td class="code sticky-code">8091</td>
+<td>翔名<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.22億</td>
+<td class="num">1695萬</td>
+<td class="num"><span class="up">+619.1%</span></td>
+<td class="num"><span class="up">+21.7%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.5%</td>
+<td class="num">5.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,21.4 24.0,21.0 36.0,22.0 48.0,19.1 60.0,21.2 72.0,4.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.3%</span></td>
+<td class="num">179.0</td>
+<td class="num"><span class="up">+28.8%</span></td>
+<td class="num score">+0.18</td>
+</tr>
+<tr>
+<td class="rank">13</td>
+<td class="code sticky-code">7822</td>
+<td>倍利科<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">9.30億</td>
+<td class="num">2.70億</td>
+<td class="num"><span class="up">+244.2%</span></td>
+<td class="num"><span class="up">+6.0%</span> </td>
+<td class="num">35.2%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,19.7 24.0,22.0 36.0,18.4 60.0,5.7 72.0,1.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.0%</span></td>
+<td class="num">1355.0</td>
+<td class="num"><span class="up">+35.6%</span></td>
+<td class="num score">+0.15</td>
+</tr>
+<tr>
+<td class="rank">14</td>
+<td class="code sticky-code">6196</td>
+<td>帆宣<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">204.72億</td>
+<td class="num">114.68億</td>
+<td class="num"><span class="up">+78.5%</span></td>
+<td class="num"><span class="up">+12.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">35.6%</td>
+<td class="num">39.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.4 24.0,19.9 36.0,17.6 48.0,16.0 60.0,14.7 72.0,4.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">381.5</td>
+<td class="num"><span class="up">+29.1%</span></td>
+<td class="num score">+0.13</td>
+</tr>
+<tr>
+<td class="rank">15</td>
+<td class="code sticky-code">8227</td>
+<td>巨有科技<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">4.66億</td>
+<td class="num">1.54億</td>
+<td class="num"><span class="up">+202.9%</span></td>
+<td class="num"><span class="up">+26.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">25.5%</td>
+<td class="num">35.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,22.0 24.0,19.0 36.0,17.6 48.0,8.4 60.0,0.0 72.0,5.5 84.0,0.1" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.1" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.5%</span></td>
+<td class="num">156.0</td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num score">+0.11</td>
+</tr>
+<tr>
+<td class="rank">16</td>
+<td class="code sticky-code">6234<span class="badge new">🆕</span></td>
+<td>高僑<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">8548萬</td>
+<td class="num">3617萬</td>
+<td class="num"><span class="up">+136.3%</span></td>
+<td class="num"><span class="up">+8.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.1%</td>
+<td class="num">18.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,0.0 12.0,20.5 24.0,16.7 36.0,22.0 48.0,15.9 60.0,17.6 72.0,7.4 84.0,5.1" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="5.1" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.6%</span></td>
+<td class="num">43.7</td>
+<td class="num"><span class="up">+57.2%</span></td>
+<td class="num score">+0.06</td>
+</tr>
+<tr>
+<td class="rank">17</td>
+<td class="code sticky-code">7769</td>
+<td>鴻勁<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">65.91億</td>
+<td class="num">23.98億</td>
+<td class="num"><span class="up">+174.8%</span></td>
+<td class="num"><span class="dn">-14.6%</span> </td>
+<td class="num">9.0%</td>
+<td class="num">74.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.1 12.0,22.0 24.0,18.9 36.0,20.3 48.0,6.9 60.0,5.9 72.0,0.0 84.0,4.3" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="4.3" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="up">+0.5%</span></td>
+<td class="num">5100.0</td>
+<td class="num"><span class="up">+34.6%</span></td>
+<td class="num score">+0.03</td>
+</tr>
+<tr>
+<td class="rank">18</td>
+<td class="code sticky-code">2363<span class="badge new">🆕</span></td>
+<td>矽統<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">8.69億</td>
+<td class="num">2.99億</td>
+<td class="num"><span class="up">+191.0%</span></td>
+<td class="num"><span class="up">+23.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.2%</td>
+<td class="num">32.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,10.7 36.0,14.5 48.0,9.8 60.0,5.0 72.0,4.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+1.2%</span></td>
+<td class="num">53.1</td>
+<td class="num"><span class="dn">-8.8%</span></td>
+<td class="num score">+0.01</td>
+</tr>
+<tr>
+<td class="rank">19</td>
+<td class="code sticky-code">7849<span class="badge new">🆕</span></td>
+<td>旭誼<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.36億</td>
+<td class="num">5675萬</td>
+<td class="num"><span class="up">+139.4%</span></td>
+<td class="num">— </td>
+<td class="num">22.3%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,21.1 60.0,19.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">148.5</td>
+<td class="num"><span class="up">+14.2%</span></td>
+<td class="num score">-0.01</td>
+</tr>
+<tr>
+<td class="rank">20</td>
+<td class="code sticky-code">8383<span class="badge new">🆕</span></td>
+<td>千附<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">2.52億</td>
+<td class="num">1.45億</td>
+<td class="num"><span class="up">+73.3%</span></td>
+<td class="num"><span class="up">+24.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.0%</td>
+<td class="num">7.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,16.1 12.0,16.3 24.0,18.0 36.0,21.3 48.0,22.0 60.0,16.8 72.0,10.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+3.5%</span></td>
+<td class="num">64.0</td>
+<td class="num"><span class="up">+52.2%</span></td>
+<td class="num score">-0.03</td>
+</tr>
+<tr>
+<td class="rank">21</td>
+<td class="code sticky-code">3018<span class="badge new">🆕</span></td>
+<td>隆銘綠能<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">2.01億</td>
+<td class="num">1.26億</td>
+<td class="num"><span class="up">+59.5%</span></td>
+<td class="num"><span class="up">+23.3%</span> <span class="badge accel">加速</span></td>
+<td class="num">16.0%</td>
+<td class="num">35.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,0.0 12.0,9.8 24.0,17.5 36.0,18.9 48.0,22.0 60.0,11.7 72.0,13.7 84.0,8.4" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="8.4" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">—</td>
+<td class="num"><span class="dn">-100.0%</span></td>
+<td class="num score">-0.10</td>
+</tr>
+<tr>
+<td class="rank">22</td>
+<td class="code sticky-code">6112</td>
+<td>邁達特<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">13.02億</td>
+<td class="num">5.36億</td>
+<td class="num"><span class="up">+142.8%</span></td>
+<td class="num"><span class="up">+26.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">9.1%</td>
+<td class="num">6.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.8 12.0,22.0 24.0,20.1 36.0,18.7 48.0,5.2 60.0,7.4 72.0,6.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.0%</span></td>
+<td class="num">45.8</td>
+<td class="num"><span class="dn">-3.4%</span></td>
+<td class="num score">-0.22</td>
+</tr>
+<tr>
+<td class="rank">23</td>
+<td class="code sticky-code">2467</td>
+<td>志聖<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">13.17億</td>
+<td class="num">5.04億</td>
+<td class="num"><span class="up">+161.2%</span></td>
+<td class="num"><span class="up">+18.6%</span> </td>
+<td class="num">8.6%</td>
+<td class="num">22.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.6 12.0,21.3 24.0,22.0 36.0,19.5 48.0,14.8 60.0,16.1 72.0,5.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.2%</span></td>
+<td class="num">545.0</td>
+<td class="num"><span class="up">+124.3%</span></td>
+<td class="num score">-0.22</td>
+</tr>
+<tr>
+<td class="rank">24</td>
+<td class="code sticky-code">3416</td>
+<td>融程電<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.28億</td>
+<td class="num">6082萬</td>
+<td class="num"><span class="up">+111.1%</span></td>
+<td class="num"><span class="up">+110.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.6%</td>
+<td class="num">3.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,18.0 24.0,17.7 36.0,17.2 48.0,17.7 60.0,16.1 72.0,17.1 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">155.0</td>
+<td class="num"><span class="up">+4.0%</span></td>
+<td class="num score">-0.23</td>
+</tr>
+<tr>
+<td class="rank">25</td>
+<td class="code sticky-code">2493</td>
+<td>揚博<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">8.26億</td>
+<td class="num">4.15億</td>
+<td class="num"><span class="up">+99.1%</span></td>
+<td class="num"><span class="up">+57.7%</span> <span class="badge accel">加速</span></td>
+<td class="num">15.3%</td>
+<td class="num">22.1%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,9.8 12.0,13.9 24.0,22.0 36.0,19.5 48.0,18.8 60.0,18.5 72.0,14.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.9%</span></td>
+<td class="num">126.5</td>
+<td class="num"><span class="up">+12.4%</span></td>
+<td class="num score">-0.25</td>
+</tr>
+<tr>
+<td class="rank">26</td>
+<td class="code sticky-code">8076</td>
+<td>伍豐<br><span class="badge ind">半導體鏈</span></td>
+<td class="num">1.45億</td>
+<td class="num">3654萬</td>
+<td class="num"><span class="up">+296.1%</span></td>
+<td class="num"><span class="up">+1.4%</span> </td>
+<td class="num">2.3%</td>
+<td class="num">7.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.6 12.0,20.8 24.0,20.4 36.0,19.4 48.0,19.4 60.0,22.0 72.0,0.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">22.6</td>
+<td class="num"><span class="dn">-5.8%</span></td>
+<td class="num score">-0.29</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="機電設備"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">3167<span class="badge new">🆕</span></td>
+<td>大量<br><span class="badge ind">機電設備</span></td>
+<td class="num">7.50億</td>
+<td class="num">1.58億</td>
+<td class="num"><span class="up">+374.6%</span></td>
+<td class="num"><span class="up">+189.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">8.9%</td>
+<td class="num">15.4%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.3 24.0,16.3 36.0,19.7 48.0,19.8 60.0,19.1 72.0,16.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.5%</span></td>
+<td class="num">742.0</td>
+<td class="num"><span class="up">+219.1%</span></td>
+<td class="num score">+0.22</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">2237<span class="badge new">🆕</span></td>
+<td>華德動能<br><span class="badge ind">機電設備</span></td>
+<td class="num">2.06億</td>
+<td class="num">4988萬</td>
+<td class="num"><span class="up">+313.1%</span></td>
+<td class="num">— </td>
+<td class="num">5.8%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,17.6 60.0,9.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.0%</span></td>
+<td class="num">31.2</td>
+<td class="num"><span class="up">+1.0%</span></td>
+<td class="num score">+0.01</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">4523</td>
+<td>永彰<br><span class="badge ind">機電設備</span></td>
+<td class="num">2.44億</td>
+<td class="num">8922萬</td>
+<td class="num"><span class="up">+173.5%</span></td>
+<td class="num"><span class="up">+53.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">8.0%</td>
+<td class="num">39.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.0 12.0,22.0 24.0,17.4 36.0,15.5 48.0,16.4 60.0,18.4 72.0,8.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">30.75</td>
+<td class="num"><span class="up">+0.7%</span></td>
+<td class="num score">-0.01</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">1519<span class="badge new">🆕</span></td>
+<td>華城<br><span class="badge ind">機電設備</span></td>
+<td class="num">59.09億</td>
+<td class="num">36.97億</td>
+<td class="num"><span class="up">+59.8%</span></td>
+<td class="num"><span class="up">+23.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">20.9%</td>
+<td class="num">24.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,18.7 24.0,14.0 36.0,13.4 48.0,5.9 60.0,7.2 72.0,6.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.2%</span></td>
+<td class="num">875.0</td>
+<td class="num"><span class="dn">-15.9%</span></td>
+<td class="num score">-0.12</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">1503</td>
+<td>士電<br><span class="badge ind">機電設備</span></td>
+<td class="num">95.45億</td>
+<td class="num">52.82億</td>
+<td class="num"><span class="up">+80.7%</span></td>
+<td class="num"><span class="up">+18.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">15.8%</td>
+<td class="num">26.1%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.3 12.0,21.4 24.0,22.0 36.0,21.6 48.0,20.5 60.0,14.1 72.0,7.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.3%</span></td>
+<td class="num">188.5</td>
+<td class="num"><span class="dn">-23.4%</span></td>
+<td class="num score">-0.15</td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code sticky-code">1514</td>
+<td>亞力<br><span class="badge ind">機電設備</span></td>
+<td class="num">5.90億</td>
+<td class="num">3.84億</td>
+<td class="num"><span class="up">+53.7%</span></td>
+<td class="num"><span class="up">+1.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.4%</td>
+<td class="num">5.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,6.4 12.0,8.8 24.0,19.7 36.0,19.4 48.0,22.0 60.0,0.0 72.0,1.7 84.0,0.7" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.7" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">110.5</td>
+<td class="num"><span class="dn">-20.2%</span></td>
+<td class="num score">-0.38</td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code sticky-code">6603</td>
+<td>富強鑫<br><span class="badge ind">機電設備</span></td>
+<td class="num">5.57億</td>
+<td class="num">2.72億</td>
+<td class="num"><span class="up">+104.8%</span></td>
+<td class="num"><span class="up">+9.1%</span> </td>
+<td class="num">6.5%</td>
+<td class="num">11.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,19.4 24.0,19.8 36.0,16.5 48.0,5.6 60.0,2.8 72.0,2.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-2.0%</span></td>
+<td class="num">25.95</td>
+<td class="num"><span class="dn">-5.1%</span></td>
+<td class="num score">-0.55</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="建設工程"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">2527<span class="badge new">🆕</span></td>
+<td>宏璟<br><span class="badge ind">建設工程</span></td>
+<td class="num">7.95億</td>
+<td class="num">2903萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.4%</td>
+<td class="num">117.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.3 12.0,19.1 24.0,18.2 36.0,21.2 48.0,22.0 60.0,18.9 72.0,22.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.2%</span></td>
+<td class="num">34.4</td>
+<td class="num"><span class="up">+15.4%</span></td>
+<td class="num score">+1.70</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">5515<span class="badge new">🆕</span></td>
+<td>建國<br><span class="badge ind">建設工程</span></td>
+<td class="num">25.07億</td>
+<td class="num">9.27億</td>
+<td class="num"><span class="up">+170.3%</span></td>
+<td class="num"><span class="up">+93.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">22.7%</td>
+<td class="num">34.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,21.7 24.0,16.6 36.0,21.3 48.0,16.9 60.0,16.7 72.0,16.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">40.8</td>
+<td class="num"><span class="up">+27.1%</span></td>
+<td class="num score">+0.15</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">5314<span class="badge new">🆕</span></td>
+<td>世紀*<br><span class="badge ind">建設工程</span></td>
+<td class="num">1.16億</td>
+<td class="num">6263萬</td>
+<td class="num"><span class="up">+86.0%</span></td>
+<td class="num"><span class="up">+500.0%</span> </td>
+<td class="num">2.3%</td>
+<td class="num">4.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,22.0 24.0,21.1 36.0,10.3 48.0,15.7 60.0,20.1 72.0,19.8 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">74.2</td>
+<td class="num"><span class="dn">-28.0%</span></td>
+<td class="num score">+0.11</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">5533<span class="badge new">🆕</span></td>
+<td>皇鼎<br><span class="badge ind">建設工程</span></td>
+<td class="num">4.02億</td>
+<td class="num">1.40億</td>
+<td class="num"><span class="up">+187.3%</span></td>
+<td class="num"><span class="up">+30.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.4%</td>
+<td class="num">35.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,13.4 24.0,16.7 36.0,17.4 48.0,11.2 60.0,8.1 72.0,6.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">14.35</td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num score">-0.10</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">5548<span class="badge new">🆕</span></td>
+<td>安倉<br><span class="badge ind">建設工程</span></td>
+<td class="num">3.65億</td>
+<td class="num">1.55億</td>
+<td class="num"><span class="up">+135.7%</span></td>
+<td class="num"><span class="up">+33.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">16.2%</td>
+<td class="num">14.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.0 12.0,11.1 24.0,14.2 36.0,17.1 48.0,22.0 60.0,0.2 72.0,7.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">23.5</td>
+<td class="num"><span class="up">+2.6%</span></td>
+<td class="num score">-0.10</td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code sticky-code">8426<span class="badge new">🆕</span></td>
+<td>紅木-KY<br><span class="badge ind">建設工程</span></td>
+<td class="num">3.49億</td>
+<td class="num">1.37億</td>
+<td class="num"><span class="up">+155.1%</span></td>
+<td class="num"><span class="up">+31.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">13.7%</td>
+<td class="num">12.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,18.6 12.0,0.3 24.0,8.3 36.0,22.0 48.0,9.9 60.0,7.3 72.0,8.8 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">23.85</td>
+<td class="num"><span class="dn">-13.6%</span></td>
+<td class="num score">-0.12</td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code sticky-code">2535</td>
+<td>達欣工<br><span class="badge ind">建設工程</span></td>
+<td class="num">42.37億</td>
+<td class="num">24.02億</td>
+<td class="num"><span class="up">+76.4%</span></td>
+<td class="num"><span class="up">+31.9%</span> </td>
+<td class="num">13.9%</td>
+<td class="num">20.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,18.2 12.0,21.1 24.0,22.0 36.0,16.4 48.0,17.3 60.0,10.6 72.0,9.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.7%</span></td>
+<td class="num">75.1</td>
+<td class="num"><span class="up">+9.8%</span></td>
+<td class="num score">-0.21</td>
+</tr>
+<tr>
+<td class="rank">8</td>
+<td class="code sticky-code">2511</td>
+<td>太子<br><span class="badge ind">建設工程</span></td>
+<td class="num">12.43億</td>
+<td class="num">4.95億</td>
+<td class="num"><span class="up">+151.1%</span></td>
+<td class="num"><span class="up">+6.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.6%</td>
+<td class="num">14.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,13.4 12.0,17.6 24.0,17.9 36.0,20.5 48.0,22.0 60.0,2.5 72.0,1.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">8.0</td>
+<td class="num"><span class="dn">-5.7%</span></td>
+<td class="num score">-0.26</td>
+</tr>
+<tr>
+<td class="rank">9</td>
+<td class="code sticky-code">5543</td>
+<td>桓鼎-KY<br><span class="badge ind">建設工程</span></td>
+<td class="num">1.38億</td>
+<td class="num">8532萬</td>
+<td class="num"><span class="up">+62.1%</span></td>
+<td class="num"><span class="up">+92.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.9%</td>
+<td class="num">4.4%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.3 12.0,19.7 24.0,15.1 36.0,15.5 48.0,22.0 60.0,13.6 72.0,19.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">28.8</td>
+<td class="num"><span class="dn">-1.4%</span></td>
+<td class="num score">-0.27</td>
+</tr>
+<tr>
+<td class="rank">10</td>
+<td class="code sticky-code">1456</td>
+<td>怡華<br><span class="badge ind">建設工程</span></td>
+<td class="num">3.78億</td>
+<td class="num">2.18億</td>
+<td class="num"><span class="up">+73.9%</span></td>
+<td class="num"><span class="up">+4.3%</span> </td>
+<td class="num">2.8%</td>
+<td class="num">43.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,19.2 24.0,15.1 36.0,12.1 48.0,6.1 60.0,0.8 72.0,1.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">13.45</td>
+<td class="num"><span class="up">+3.1%</span></td>
+<td class="num score">-0.31</td>
+</tr>
+<tr>
+<td class="rank">11</td>
+<td class="code sticky-code">5512</td>
+<td>力麒<br><span class="badge ind">建設工程</span></td>
+<td class="num">11.09億</td>
+<td class="num">7.12億</td>
+<td class="num"><span class="up">+55.8%</span></td>
+<td class="num"><span class="up">+33.0%</span> </td>
+<td class="num">2.5%</td>
+<td class="num">16.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,17.1 24.0,18.7 36.0,11.4 48.0,6.4 60.0,10.1 72.0,7.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">7.54</td>
+<td class="num"><span class="dn">-5.8%</span></td>
+<td class="num score">-0.41</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="生技醫療"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">1721<span class="badge new">🆕</span></td>
+<td>三晃<br><span class="badge ind">生技醫療</span></td>
+<td class="num">7841萬</td>
+<td class="num">63萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+70.5%</span> </td>
+<td class="num">2.5%</td>
+<td class="num">4.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.8 12.0,20.1 24.0,21.4 36.0,22.0 48.0,11.7 60.0,14.9 72.0,9.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+8.2%</span></td>
+<td class="num">26.1</td>
+<td class="num"><span class="up">+37.4%</span></td>
+<td class="num score">+1.27</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">6589<span class="badge new">🆕</span></td>
+<td>台康生技<br><span class="badge ind">生技醫療</span></td>
+<td class="num">3.83億</td>
+<td class="num">4618萬</td>
+<td class="num"><span class="up">+730.2%</span></td>
+<td class="num"><span class="up">+205.8%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.5%</td>
+<td class="num">38.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.7 24.0,22.0 36.0,21.4 48.0,15.5 60.0,13.4 72.0,16.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num">47.65</td>
+<td class="num"><span class="dn">-25.3%</span></td>
+<td class="num score">+0.67</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">4128<span class="badge new">🆕</span></td>
+<td>中天<br><span class="badge ind">生技醫療</span></td>
+<td class="num">2.74億</td>
+<td class="num">7001萬</td>
+<td class="num"><span class="up">+290.8%</span></td>
+<td class="num"><span class="up">+376.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.2%</td>
+<td class="num">14.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,18.2 36.0,17.3 48.0,18.1 60.0,18.1 72.0,18.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.6%</span></td>
+<td class="num">15.6</td>
+<td class="num"><span class="dn">-25.7%</span></td>
+<td class="num score">+0.27</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">1799<span class="badge new">🆕</span></td>
+<td>易威<br><span class="badge ind">生技醫療</span></td>
+<td class="num">6850萬</td>
+<td class="num">3374萬</td>
+<td class="num"><span class="up">+103.0%</span></td>
+<td class="num"><span class="up">+81.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">5.3%</td>
+<td class="num">11.4%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,18.5 12.0,13.1 24.0,21.2 36.0,21.7 48.0,22.0 60.0,19.9 72.0,19.1 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">38.05</td>
+<td class="num"><span class="up">+10.6%</span></td>
+<td class="num score">-0.20</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">4726</td>
+<td>永昕<br><span class="badge ind">生技醫療</span></td>
+<td class="num">3.62億</td>
+<td class="num">2.31億</td>
+<td class="num"><span class="up">+56.7%</span></td>
+<td class="num"><span class="dn">-6.1%</span> </td>
+<td class="num">11.1%</td>
+<td class="num">54.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,16.7 24.0,20.4 36.0,19.4 48.0,14.1 60.0,10.6 72.0,0.0 84.0,2.9" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="2.9" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="dn">-0.2%</span></td>
+<td class="num">29.1</td>
+<td class="num"><span class="dn">-17.3%</span></td>
+<td class="num score">-0.21</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="傳產內需"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">2101<span class="badge new">🆕</span></td>
+<td>南港<br><span class="badge ind">傳產內需</span></td>
+<td class="num">117.91億</td>
+<td class="num">68.96億</td>
+<td class="num"><span class="up">+71.0%</span></td>
+<td class="num"><span class="up">+36.3%</span> <span class="badge accel">加速</span></td>
+<td class="num">21.7%</td>
+<td class="num">140.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,10.0 12.0,9.1 24.0,22.0 36.0,21.1 48.0,20.5 60.0,20.2 72.0,13.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">33.2</td>
+<td class="num"><span class="dn">-9.4%</span></td>
+<td class="num score">+0.47</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">1337</td>
+<td>再生-KY<br><span class="badge ind">傳產內需</span></td>
+<td class="num">11.14億</td>
+<td class="num">4.96億</td>
+<td class="num"><span class="up">+124.5%</span></td>
+<td class="num"><span class="up">+19.0%</span> </td>
+<td class="num">17.6%</td>
+<td class="num">163.1%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,16.1 24.0,16.1 36.0,12.2 48.0,5.5 60.0,6.2 72.0,3.5 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">5.21</td>
+<td class="num"><span class="dn">-11.2%</span></td>
+<td class="num score">+0.46</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">1449<span class="badge new">🆕</span></td>
+<td>佳和<br><span class="badge ind">傳產內需</span></td>
+<td class="num">3.79億</td>
+<td class="num">9533萬</td>
+<td class="num"><span class="up">+297.8%</span></td>
+<td class="num"><span class="up">+500.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.7%</td>
+<td class="num">15.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.1 12.0,19.8 24.0,20.5 36.0,18.5 48.0,20.0 60.0,20.8 72.0,22.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.1%</span></td>
+<td class="num">13.45</td>
+<td class="num"><span class="up">+15.0%</span></td>
+<td class="num score">+0.41</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">2013</td>
+<td>中鋼構<br><span class="badge ind">傳產內需</span></td>
+<td class="num">23.74億</td>
+<td class="num">13.31億</td>
+<td class="num"><span class="up">+78.4%</span></td>
+<td class="num"><span class="dn">-4.7%</span> <span class="badge accel">加速</span></td>
+<td class="num">15.9%</td>
+<td class="num">11.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,11.9 24.0,15.0 36.0,18.4 48.0,13.3 60.0,7.8 72.0,0.0 84.0,1.9" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="1.9" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">42.9</td>
+<td class="num"><span class="up">+2.6%</span></td>
+<td class="num score">-0.23</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">2616</td>
+<td>山隆<br><span class="badge ind">傳產內需</span></td>
+<td class="num">2.16億</td>
+<td class="num">1.08億</td>
+<td class="num"><span class="up">+99.6%</span></td>
+<td class="num"><span class="up">+84.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.6%</td>
+<td class="num">2.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.5 24.0,18.3 36.0,12.7 48.0,15.6 60.0,17.9 72.0,11.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num">14.2</td>
+<td class="num"><span class="up">+2.5%</span></td>
+<td class="num score">-0.25</td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code sticky-code">1533</td>
+<td>車王電<br><span class="badge ind">傳產內需</span></td>
+<td class="num">2.14億</td>
+<td class="num">6630萬</td>
+<td class="num"><span class="up">+223.4%</span></td>
+<td class="num"><span class="dn">-16.4%</span> </td>
+<td class="num">2.3%</td>
+<td class="num">5.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.6 12.0,22.0 24.0,21.4 36.0,18.2 48.0,22.0 60.0,11.8 72.0,0.0 84.0,4.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="4.0" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="dn">-0.0%</span></td>
+<td class="num">33.3</td>
+<td class="num"><span class="up">+3.9%</span></td>
+<td class="num score">-0.36</td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code sticky-code">1521</td>
+<td>大億<br><span class="badge ind">傳產內需</span></td>
+<td class="num">1.44億</td>
+<td class="num">7458萬</td>
+<td class="num"><span class="up">+92.8%</span></td>
+<td class="num"><span class="dn">-5.1%</span> </td>
+<td class="num">4.8%</td>
+<td class="num">4.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,13.3 12.0,21.3 24.0,22.0 36.0,17.5 48.0,13.1 60.0,8.9 72.0,0.0 84.0,1.7" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="1.7" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="up">+0.5%</span></td>
+<td class="num">24.7</td>
+<td class="num"><span class="dn">-10.2%</span></td>
+<td class="num score">-0.41</td>
+</tr>
+<tr>
+<td class="rank">8</td>
+<td class="code sticky-code">7821</td>
+<td>神數<br><span class="badge ind">傳產內需</span></td>
+<td class="num">2.46億</td>
+<td class="num">7649萬</td>
+<td class="num"><span class="up">+221.6%</span></td>
+<td class="num"><span class="up">+24.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.6%</td>
+<td class="num">—</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,13.9 24.0,11.5 36.0,22.0 60.0,16.3 72.0,6.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-8.4%</span></td>
+<td class="num">47.55</td>
+<td class="num"><span class="dn">-15.1%</span></td>
+<td class="num score">-0.81</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="其他"><table>
+<thead><tr>
+  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
+  <th class="num">本季CL</th><th class="num">去年同期</th>
+  <th class="num">YoY</th><th class="num">QoQ</th>
+  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
+  <th class="center">8季趨勢</th>
+  <th class="num">大戶週變</th>
+  <th class="num">收盤</th><th class="num">近3月</th>
+  <th class="num">分數</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="rank">1</td>
+<td class="code sticky-code">3073<span class="badge new">🆕</span></td>
+<td>天方能源<br><span class="badge ind">其他</span></td>
+<td class="num">9250萬</td>
+<td class="num">8萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+258.4%</span> </td>
+<td class="num">4.1%</td>
+<td class="num">117.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,22.0 36.0,22.0 48.0,22.0 60.0,22.0 72.0,15.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">22.85</td>
+<td class="num"><span class="dn">-30.1%</span></td>
+<td class="num score">+1.31</td>
+</tr>
+<tr>
+<td class="rank">2</td>
+<td class="code sticky-code">7740</td>
+<td>熙特爾-創<br><span class="badge ind">其他</span></td>
+<td class="num">28.47億</td>
+<td class="num">6.12億</td>
+<td class="num"><span class="up">+365.0%</span></td>
+<td class="num"><span class="dn">-10.1%</span> </td>
+<td class="num">32.1%</td>
+<td class="num">199.6%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,19.5 24.0,19.1 36.0,18.4 48.0,16.6 60.0,6.7 72.0,0.0 84.0,2.3" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="2.3" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num">183.5</td>
+<td class="num"><span class="up">+15.0%</span></td>
+<td class="num score">+1.03</td>
+</tr>
+<tr>
+<td class="rank">3</td>
+<td class="code sticky-code">2258</td>
+<td>鴻華先進-創<br><span class="badge ind">其他</span></td>
+<td class="num">6.42億</td>
+<td class="num">2087萬</td>
+<td class="num"><span class="up">+1000.0%</span></td>
+<td class="num"><span class="up">+2.8%</span> </td>
+<td class="num">3.8%</td>
+<td class="num">15.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,19.9 12.0,20.5 24.0,21.6 36.0,22.0 48.0,20.5 60.0,20.6 72.0,0.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">28.45</td>
+<td class="num"><span class="dn">-26.2%</span></td>
+<td class="num score">+0.53</td>
+</tr>
+<tr>
+<td class="rank">4</td>
+<td class="code sticky-code">7792</td>
+<td>安葆<br><span class="badge ind">其他</span></td>
+<td class="num">5.83億</td>
+<td class="num">3.57億</td>
+<td class="num"><span class="up">+63.1%</span></td>
+<td class="num"><span class="up">+23.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">10.9%</td>
+<td class="num">175.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.9 12.0,21.9 24.0,22.0 36.0,17.1 48.0,11.4 60.0,18.6 72.0,8.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">347.0</td>
+<td class="num"><span class="dn">-14.5%</span></td>
+<td class="num score">+0.51</td>
+</tr>
+<tr>
+<td class="rank">5</td>
+<td class="code sticky-code">3498</td>
+<td>陽程<br><span class="badge ind">其他</span></td>
+<td class="num">8.50億</td>
+<td class="num">2.46億</td>
+<td class="num"><span class="up">+245.7%</span></td>
+<td class="num"><span class="up">+81.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">21.0%</td>
+<td class="num">67.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,16.9 24.0,20.6 36.0,20.9 48.0,20.1 60.0,20.6 72.0,13.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+1.1%</span></td>
+<td class="num">80.5</td>
+<td class="num"><span class="up">+58.8%</span></td>
+<td class="num score">+0.45</td>
+</tr>
+<tr>
+<td class="rank">6</td>
+<td class="code sticky-code">2924</td>
+<td>宏太-KY<br><span class="badge ind">其他</span></td>
+<td class="num">9811萬</td>
+<td class="num">3735萬</td>
+<td class="num"><span class="up">+162.7%</span></td>
+<td class="num"><span class="up">+12.0%</span> </td>
+<td class="num">10.2%</td>
+<td class="num">166.2%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,22.0 24.0,21.7 36.0,13.7 48.0,8.7 60.0,6.2 72.0,2.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">22.45</td>
+<td class="num"><span class="up">+17.2%</span></td>
+<td class="num score">+0.44</td>
+</tr>
+<tr>
+<td class="rank">7</td>
+<td class="code sticky-code">5292<span class="badge new">🆕</span></td>
+<td>華懋<br><span class="badge ind">其他</span></td>
+<td class="num">14.97億</td>
+<td class="num">8.65億</td>
+<td class="num"><span class="up">+73.2%</span></td>
+<td class="num"><span class="up">+25.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">34.7%</td>
+<td class="num">53.5%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,19.0 24.0,19.9 36.0,18.5 48.0,13.5 60.0,11.3 72.0,8.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num">244.0</td>
+<td class="num"><span class="up">+22.0%</span></td>
+<td class="num score">+0.21</td>
+</tr>
+<tr>
+<td class="rank">8</td>
+<td class="code sticky-code">6903</td>
+<td>巨漢<br><span class="badge ind">其他</span></td>
+<td class="num">6.27億</td>
+<td class="num">9557萬</td>
+<td class="num"><span class="up">+556.5%</span></td>
+<td class="num"><span class="up">+22.8%</span> </td>
+<td class="num">12.3%</td>
+<td class="num">19.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.9 24.0,20.9 36.0,19.3 48.0,11.4 60.0,8.9 72.0,4.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.7%</span></td>
+<td class="num">425.0</td>
+<td class="num"><span class="up">+54.0%</span></td>
+<td class="num score">+0.14</td>
+</tr>
+<tr>
+<td class="rank">9</td>
+<td class="code sticky-code">8450<span class="badge new">🆕</span></td>
+<td>霹靂<br><span class="badge ind">其他</span></td>
+<td class="num">1.06億</td>
+<td class="num">4350萬</td>
+<td class="num"><span class="up">+143.2%</span></td>
+<td class="num"><span class="up">+68.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">9.8%</td>
+<td class="num">44.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.9 12.0,17.2 24.0,20.1 36.0,22.0 48.0,18.4 60.0,18.7 72.0,15.1 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">16.75</td>
+<td class="num"><span class="dn">-1.5%</span></td>
+<td class="num score">+0.02</td>
+</tr>
+<tr>
+<td class="rank">10</td>
+<td class="code sticky-code">8087<span class="badge new">🆕</span></td>
+<td>麗升能源<br><span class="badge ind">其他</span></td>
+<td class="num">6692萬</td>
+<td class="num">2310萬</td>
+<td class="num"><span class="up">+189.6%</span></td>
+<td class="num"><span class="up">+124.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.5%</td>
+<td class="num">21.0%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.3 12.0,22.0 24.0,21.4 36.0,17.9 48.0,18.6 60.0,0.0 72.0,16.0 84.0,5.3" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="5.3" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.1%</span></td>
+<td class="num">33.0</td>
+<td class="num"><span class="up">+12.1%</span></td>
+<td class="num score">-0.03</td>
+</tr>
+<tr>
+<td class="rank">11</td>
+<td class="code sticky-code">1623<span class="badge new">🆕</span></td>
+<td>大東電<br><span class="badge ind">其他</span></td>
+<td class="num">2.44億</td>
+<td class="num">1.53億</td>
+<td class="num"><span class="up">+59.8%</span></td>
+<td class="num"><span class="up">+66.5%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.4%</td>
+<td class="num">40.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,5.6 24.0,1.9 36.0,20.6 60.0,1.1 72.0,22.0 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.6%</span></td>
+<td class="num">237.5</td>
+<td class="num"><span class="dn">-14.6%</span></td>
+<td class="num score">-0.20</td>
+</tr>
+<tr>
+<td class="rank">12</td>
+<td class="code sticky-code">8473</td>
+<td>山林水<br><span class="badge ind">其他</span></td>
+<td class="num">4.77億</td>
+<td class="num">2.46億</td>
+<td class="num"><span class="up">+93.9%</span></td>
+<td class="num"><span class="up">+111.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.9%</td>
+<td class="num">9.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.4 24.0,21.5 36.0,15.0 48.0,13.1 60.0,14.9 72.0,16.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-0.1%</span></td>
+<td class="num">36.55</td>
+<td class="num"><span class="dn">-6.0%</span></td>
+<td class="num score">-0.22</td>
+</tr>
+<tr>
+<td class="rank">13</td>
+<td class="code sticky-code">2468</td>
+<td>華經<br><span class="badge ind">其他</span></td>
+<td class="num">1.28億</td>
+<td class="num">7852萬</td>
+<td class="num"><span class="up">+63.6%</span></td>
+<td class="num"><span class="up">+83.4%</span> <span class="badge accel">加速</span></td>
+<td class="num">5.4%</td>
+<td class="num">4.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,0.9 12.0,16.3 24.0,14.3 36.0,15.6 48.0,22.0 60.0,19.0 72.0,18.2 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.0%</span></td>
+<td class="num">33.85</td>
+<td class="num"><span class="dn">-16.4%</span></td>
+<td class="num score">-0.27</td>
+</tr>
+<tr>
+<td class="rank">14</td>
+<td class="code sticky-code">6728</td>
+<td>上洋<br><span class="badge ind">其他</span></td>
+<td class="num">1.33億</td>
+<td class="num">5305萬</td>
+<td class="num"><span class="up">+151.2%</span></td>
+<td class="num"><span class="up">+23.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.0%</td>
+<td class="num">2.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,21.2 24.0,18.9 36.0,17.2 48.0,10.2 60.0,8.8 72.0,5.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">117.5</td>
+<td class="num"><span class="dn">-16.7%</span></td>
+<td class="num score">-0.29</td>
+</tr>
+<tr>
+<td class="rank">15</td>
+<td class="code sticky-code">4754</td>
+<td>國碳科<br><span class="badge ind">其他</span></td>
+<td class="num">6138萬</td>
+<td class="num">3815萬</td>
+<td class="num"><span class="up">+60.9%</span></td>
+<td class="num"><span class="up">+36.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">6.8%</td>
+<td class="num">9.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,20.5 24.0,12.9 36.0,10.0 48.0,9.9 60.0,7.8 72.0,7.1 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">37.4</td>
+<td class="num"><span class="dn">-3.1%</span></td>
+<td class="num score">-0.29</td>
+</tr>
+<tr>
+<td class="rank">16</td>
+<td class="code sticky-code">3209</td>
+<td>全科<br><span class="badge ind">其他</span></td>
+<td class="num">5.20億</td>
+<td class="num">3.02億</td>
+<td class="num"><span class="up">+72.3%</span></td>
+<td class="num"><span class="up">+15.1%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.0%</td>
+<td class="num">1.1%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,17.3 12.0,9.1 24.0,21.3 36.0,22.0 48.0,5.3 60.0,11.5 72.0,6.9 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.6%</span></td>
+<td class="num">53.5</td>
+<td class="num"><span class="up">+59.2%</span></td>
+<td class="num score">-0.33</td>
+</tr>
+<tr>
+<td class="rank">17</td>
+<td class="code sticky-code">6741</td>
+<td>91APP*-KY<br><span class="badge ind">其他</span></td>
+<td class="num">2.52億</td>
+<td class="num">1.34億</td>
+<td class="num"><span class="up">+88.5%</span></td>
+<td class="num"><span class="up">+74.0%</span> <span class="badge accel">加速</span></td>
+<td class="num">4.9%</td>
+<td class="num">14.3%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,21.9 24.0,20.8 36.0,20.6 48.0,18.7 60.0,20.2 72.0,18.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.6%</span></td>
+<td class="num">61.8</td>
+<td class="num"><span class="dn">-11.2%</span></td>
+<td class="num score">-0.36</td>
+</tr>
+<tr>
+<td class="rank">18</td>
+<td class="code sticky-code">6874</td>
+<td>倍力<br><span class="badge ind">其他</span></td>
+<td class="num">1.17億</td>
+<td class="num">7245萬</td>
+<td class="num"><span class="up">+61.3%</span></td>
+<td class="num"><span class="up">+2.9%</span> </td>
+<td class="num">7.1%</td>
+<td class="num">8.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,0.3 12.0,22.0 24.0,21.3 36.0,17.3 48.0,20.1 60.0,9.2 72.0,1.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="up">+0.7%</span></td>
+<td class="num">91.8</td>
+<td class="num"><span class="up">+41.9%</span></td>
+<td class="num score">-0.37</td>
+</tr>
+<tr>
+<td class="rank">19</td>
+<td class="code sticky-code">6894</td>
+<td>衛司特<br><span class="badge ind">其他</span></td>
+<td class="num">7712萬</td>
+<td class="num">4930萬</td>
+<td class="num"><span class="up">+56.4%</span></td>
+<td class="num"><span class="up">+11.6%</span> <span class="badge accel">加速</span></td>
+<td class="num">3.6%</td>
+<td class="num">5.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,17.3 24.0,16.5 36.0,15.9 48.0,8.9 60.0,0.0 72.0,8.2 84.0,5.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="5.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="">0.0%</span></td>
+<td class="num">336.0</td>
+<td class="num"><span class="up">+43.6%</span></td>
+<td class="num score">-0.38</td>
+</tr>
+<tr>
+<td class="rank">20</td>
+<td class="code sticky-code">6667</td>
+<td>信紘科<br><span class="badge ind">其他</span></td>
+<td class="num">6.58億</td>
+<td class="num">4.05億</td>
+<td class="num"><span class="up">+62.7%</span></td>
+<td class="num"><span class="dn">-17.4%</span> </td>
+<td class="num">10.3%</td>
+<td class="num">10.8%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,18.2 24.0,21.0 36.0,19.8 48.0,16.7 60.0,17.2 72.0,0.0 84.0,7.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="7.0" r="2" fill="#dc2626"/></svg></td>
+<td class="num"><span class="up">+0.2%</span></td>
+<td class="num">265.0</td>
+<td class="num"><span class="up">+4.7%</span></td>
+<td class="num score">-0.40</td>
+</tr>
+<tr>
+<td class="rank">21</td>
+<td class="code sticky-code">3663</td>
+<td>鑫科<br><span class="badge ind">其他</span></td>
+<td class="num">2.61億</td>
+<td class="num">1.26億</td>
+<td class="num"><span class="up">+107.5%</span></td>
+<td class="num"><span class="up">+36.3%</span> <span class="badge accel">加速</span></td>
+<td class="num">5.9%</td>
+<td class="num">4.7%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,21.3 12.0,17.2 24.0,22.0 36.0,21.9 48.0,21.9 60.0,19.2 72.0,11.3 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-2.4%</span></td>
+<td class="num">67.5</td>
+<td class="num"><span class="up">+6.3%</span></td>
+<td class="num score">-0.49</td>
+</tr>
+<tr>
+<td class="rank">22</td>
+<td class="code sticky-code">3587</td>
+<td>閎康<br><span class="badge ind">其他</span></td>
+<td class="num">2.13億</td>
+<td class="num">1.26億</td>
+<td class="num"><span class="up">+69.4%</span></td>
+<td class="num"><span class="up">+43.2%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.4%</td>
+<td class="num">3.9%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,20.7 12.0,22.0 24.0,19.0 36.0,18.5 48.0,18.9 60.0,21.1 72.0,13.6 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-1.6%</span></td>
+<td class="num">327.5</td>
+<td class="num"><span class="up">+54.5%</span></td>
+<td class="num score">-0.49</td>
+</tr>
+<tr>
+<td class="rank">23</td>
+<td class="code sticky-code">3289</td>
+<td>宜特<br><span class="badge ind">其他</span></td>
+<td class="num">2.08億</td>
+<td class="num">1.35億</td>
+<td class="num"><span class="up">+54.5%</span></td>
+<td class="num"><span class="up">+26.9%</span> <span class="badge accel">加速</span></td>
+<td class="num">2.3%</td>
+<td class="num">4.4%</td>
+<td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="0.0,22.0 12.0,18.2 24.0,19.6 36.0,15.7 48.0,18.0 60.0,16.8 72.0,9.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
+<td class="num"><span class="dn">-3.2%</span></td>
+<td class="num">190.5</td>
+<td class="num"><span class="up">+42.2%</span></td>
+<td class="num score">-0.67</td>
+</tr>
+</tbody></table></div>
+<div class="pane" data-pane="回測"><div class="box bt">
+<b>回測區間</b>：2024Q1 → 2025Q3（每季取前 10 名，
+共 70 筆建倉樣本）
+<br><b>進場規則</b>：每季財報法定截止日 (Q1=5/15, Q2=8/14, Q3=11/14, Q4 次年 3/31) 等權買進
+<br><b>持有規則</b>：固定持有 1/3/6 個月後計算報酬，不停損
+</div>
+<h3 style="font-size:14px;margin:18px 0 10px;color:var(--pp)">📈 績效統計</h3>
+<table>
+<thead><tr><th>持有期</th><th class="num">樣本數</th><th class="num">平均報酬</th>
+<th class="num">中位數</th><th class="num">勝率</th></tr></thead>
+<tbody>
+<tr><td><b>1個月 (~20日)</b></td><td class="num">70</td><td class="num up">+1.17%</td><td class="num">-0.74%</td><td class="num">47%</td></tr>
+<tr><td><b>3個月 (~60日)</b></td><td class="num">70</td><td class="num up">+5.95%</td><td class="num">-1.56%</td><td class="num">44%</td></tr>
+<tr><td><b>6個月 (~120日)</b></td><td class="num">70</td><td class="num up">+11.05%</td><td class="num">-1.20%</td><td class="num">41%</td></tr>
+</tbody></table>
+<h3 style="font-size:14px;margin:24px 0 10px;color:var(--pp)">🎯 歷史進場明細（依季度排序）</h3>
+<table>
+<thead><tr><th>季度</th><th>進場日</th><th>代號</th><th>名稱</th>
+<th class="num">當時 YoY</th><th class="num">當時 CL</th>
+<th class="num">+1M</th><th class="num">+3M</th><th class="num">+6M</th>
+</tr></thead><tbody>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">6101</td><td>寬魚國際</td>
+<td class="num"><span class="up">+6587.1%</span></td>
+<td class="num">1.02億</td>
+<td class="num"><span class="up">+2.0%</span></td>
+<td class="num"><span class="dn">-1.1%</span></td>
+<td class="num"><span class="dn">-15.9%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">1589</td><td>永冠-KY</td>
+<td class="num"><span class="up">+3774.7%</span></td>
+<td class="num">6.12億</td>
+<td class="num"><span class="dn">-3.9%</span></td>
+<td class="num"><span class="dn">-12.1%</span></td>
+<td class="num"><span class="dn">-13.5%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">1515</td><td>力山</td>
+<td class="num"><span class="up">+856.3%</span></td>
+<td class="num">3.48億</td>
+<td class="num"><span class="dn">-2.6%</span></td>
+<td class="num"><span class="dn">-20.6%</span></td>
+<td class="num"><span class="dn">-29.0%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">2465</td><td>麗臺</td>
+<td class="num"><span class="up">+2542.1%</span></td>
+<td class="num">11.21億</td>
+<td class="num"><span class="up">+6.6%</span></td>
+<td class="num"><span class="dn">-24.0%</span></td>
+<td class="num"><span class="dn">-35.5%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">8054</td><td>安國</td>
+<td class="num"><span class="up">+1548.4%</span></td>
+<td class="num">1.29億</td>
+<td class="num"><span class="up">+9.3%</span></td>
+<td class="num"><span class="up">+8.4%</span></td>
+<td class="num"><span class="dn">-17.7%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">6739</td><td>竹陞科技</td>
+<td class="num"><span class="up">+1185.2%</span></td>
+<td class="num">8197萬</td>
+<td class="num"><span class="up">+1.6%</span></td>
+<td class="num"><span class="up">+62.0%</span></td>
+<td class="num"><span class="up">+119.0%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">6854</td><td>錼創科技-KY創</td>
+<td class="num"><span class="up">+233.6%</span></td>
+<td class="num">5.27億</td>
+<td class="num"><span class="dn">-3.1%</span></td>
+<td class="num"><span class="dn">-7.9%</span></td>
+<td class="num"><span class="up">+100.1%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">8916</td><td>光隆</td>
+<td class="num"><span class="up">+521.4%</span></td>
+<td class="num">2.37億</td>
+<td class="num"><span class="up">+1.2%</span></td>
+<td class="num"><span class="dn">-7.2%</span></td>
+<td class="num"><span class="dn">-5.2%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">1439</td><td>雋揚</td>
+<td class="num"><span class="up">+5683.4%</span></td>
+<td class="num">1.93億</td>
+<td class="num"><span class="dn">-1.2%</span></td>
+<td class="num"><span class="up">+9.3%</span></td>
+<td class="num"><span class="up">+8.9%</span></td>
+</tr>
+<tr>
+<td>2024Q1</td><td>2024-05-15</td>
+<td class="code">6796</td><td>晉弘</td>
+<td class="num"><span class="up">+2210.4%</span></td>
+<td class="num">6312萬</td>
+<td class="num"><span class="up">+2.9%</span></td>
+<td class="num"><span class="up">+6.8%</span></td>
+<td class="num"><span class="up">+8.3%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">7740</td><td>熙特爾-創</td>
+<td class="num"><span class="up">+3394.3%</span></td>
+<td class="num">4.58億</td>
+<td class="num"><span class="dn">-0.7%</span></td>
+<td class="num"><span class="up">+47.8%</span></td>
+<td class="num"><span class="up">+83.8%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">6933</td><td>AMAX-KY</td>
+<td class="num"><span class="up">+832.6%</span></td>
+<td class="num">11.70億</td>
+<td class="num"><span class="dn">-14.1%</span></td>
+<td class="num"><span class="up">+8.1%</span></td>
+<td class="num"><span class="dn">-11.7%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">6531</td><td>愛普*</td>
+<td class="num"><span class="up">+2745.7%</span></td>
+<td class="num">4.15億</td>
+<td class="num"><span class="up">+0.3%</span></td>
+<td class="num"><span class="up">+3.9%</span></td>
+<td class="num"><span class="up">+8.4%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">1337</td><td>再生-KY</td>
+<td class="num"><span class="up">+41708.3%</span></td>
+<td class="num">2.98億</td>
+<td class="num"><span class="dn">-1.3%</span></td>
+<td class="num"><span class="dn">-1.6%</span></td>
+<td class="num"><span class="dn">-5.8%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">2718</td><td>全心投控</td>
+<td class="num"><span class="up">+1142.9%</span></td>
+<td class="num">12.34億</td>
+<td class="num"><span class="dn">-25.2%</span></td>
+<td class="num"><span class="dn">-33.5%</span></td>
+<td class="num"><span class="dn">-44.0%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">8487</td><td>愛爾達-創</td>
+<td class="num"><span class="up">+397.8%</span></td>
+<td class="num">4.56億</td>
+<td class="num"><span class="up">+2.0%</span></td>
+<td class="num"><span class="dn">-8.6%</span></td>
+<td class="num"><span class="dn">-0.7%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">5521</td><td>工信</td>
+<td class="num"><span class="up">+4280.0%</span></td>
+<td class="num">16.75億</td>
+<td class="num"><span class="dn">-0.4%</span></td>
+<td class="num"><span class="dn">-1.3%</span></td>
+<td class="num"><span class="">0.0%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">7731</td><td>火星生技*</td>
+<td class="num"><span class="up">+195387.8%</span></td>
+<td class="num">9579萬</td>
+<td class="num"><span class="dn">-4.9%</span></td>
+<td class="num"><span class="dn">-23.0%</span></td>
+<td class="num"><span class="dn">-28.1%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">1472</td><td>三洋實業</td>
+<td class="num"><span class="up">+875.5%</span></td>
+<td class="num">8.03億</td>
+<td class="num"><span class="up">+5.2%</span></td>
+<td class="num"><span class="up">+5.2%</span></td>
+<td class="num"><span class="up">+27.5%</span></td>
+</tr>
+<tr>
+<td>2024Q2</td><td>2024-08-14</td>
+<td class="code">3596</td><td>智易</td>
+<td class="num"><span class="up">+605.1%</span></td>
+<td class="num">27.39億</td>
+<td class="num"><span class="dn">-4.8%</span></td>
+<td class="num"><span class="up">+25.2%</span></td>
+<td class="num"><span class="up">+32.1%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">3521</td><td>台鋼建設</td>
+<td class="num"><span class="up">+13378.5%</span></td>
+<td class="num">5445萬</td>
+<td class="num"><span class="up">+11.8%</span></td>
+<td class="num"><span class="dn">-4.9%</span></td>
+<td class="num"><span class="dn">-31.4%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">2363</td><td>矽統</td>
+<td class="num"><span class="up">+14548.1%</span></td>
+<td class="num">4.47億</td>
+<td class="num"><span class="dn">-1.0%</span></td>
+<td class="num"><span class="dn">-5.5%</span></td>
+<td class="num"><span class="dn">-31.1%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">2380</td><td>虹光</td>
+<td class="num"><span class="up">+852.0%</span></td>
+<td class="num">1.05億</td>
+<td class="num"><span class="dn">-23.1%</span></td>
+<td class="num"><span class="dn">-21.8%</span></td>
+<td class="num"><span class="dn">-41.0%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">3032</td><td>偉訓</td>
+<td class="num"><span class="up">+1118.0%</span></td>
+<td class="num">4.92億</td>
+<td class="num"><span class="up">+48.6%</span></td>
+<td class="num"><span class="up">+46.5%</span></td>
+<td class="num"><span class="up">+10.9%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">7740</td><td>熙特爾-創</td>
+<td class="num"><span class="up">+1526.5%</span></td>
+<td class="num">5.22億</td>
+<td class="num"><span class="up">+58.7%</span></td>
+<td class="num"><span class="up">+53.3%</span></td>
+<td class="num"><span class="up">+68.8%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">5465</td><td>富驊</td>
+<td class="num"><span class="up">+1692.6%</span></td>
+<td class="num">1.42億</td>
+<td class="num"><span class="up">+20.0%</span></td>
+<td class="num"><span class="up">+17.4%</span></td>
+<td class="num"><span class="up">+21.3%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">8054</td><td>安國</td>
+<td class="num"><span class="up">+1974.8%</span></td>
+<td class="num">3.19億</td>
+<td class="num"><span class="up">+12.8%</span></td>
+<td class="num"><span class="up">+1.6%</span></td>
+<td class="num"><span class="dn">-36.2%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">6933</td><td>AMAX-KY</td>
+<td class="num"><span class="up">+791.4%</span></td>
+<td class="num">10.35億</td>
+<td class="num"><span class="dn">-12.2%</span></td>
+<td class="num"><span class="dn">-18.8%</span></td>
+<td class="num"><span class="dn">-41.6%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">1337</td><td>再生-KY</td>
+<td class="num"><span class="up">+45372.0%</span></td>
+<td class="num">2.99億</td>
+<td class="num"><span class="up">+0.6%</span></td>
+<td class="num"><span class="dn">-3.8%</span></td>
+<td class="num"><span class="dn">-8.0%</span></td>
+</tr>
+<tr>
+<td>2024Q3</td><td>2024-11-14</td>
+<td class="code">3522</td><td>御嵿</td>
+<td class="num"><span class="up">+326.4%</span></td>
+<td class="num">2.35億</td>
+<td class="num"><span class="up">+21.8%</span></td>
+<td class="num"><span class="up">+7.1%</span></td>
+<td class="num"><span class="dn">-27.6%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">5314</td><td>世紀*</td>
+<td class="num"><span class="up">+2980.9%</span></td>
+<td class="num">6263萬</td>
+<td class="num"><span class="dn">-22.7%</span></td>
+<td class="num"><span class="dn">-34.9%</span></td>
+<td class="num"><span class="up">+68.2%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">7740</td><td>熙特爾-創</td>
+<td class="num"><span class="up">+1040.0%</span></td>
+<td class="num">6.12億</td>
+<td class="num"><span class="dn">-2.0%</span></td>
+<td class="num"><span class="dn">-4.8%</span></td>
+<td class="num"><span class="dn">-3.6%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">7758</td><td>睿騰能源</td>
+<td class="num"><span class="up">+1700.5%</span></td>
+<td class="num">1.08億</td>
+<td class="num"><span class="dn">-22.1%</span></td>
+<td class="num"><span class="up">+11.8%</span></td>
+<td class="num"><span class="dn">-31.7%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">1472</td><td>三洋實業</td>
+<td class="num"><span class="up">+560.7%</span></td>
+<td class="num">14.15億</td>
+<td class="num"><span class="up">+0.6%</span></td>
+<td class="num"><span class="dn">-8.1%</span></td>
+<td class="num"><span class="dn">-8.7%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">2028</td><td>威致</td>
+<td class="num"><span class="up">+1162.4%</span></td>
+<td class="num">3.79億</td>
+<td class="num"><span class="dn">-19.2%</span></td>
+<td class="num"><span class="dn">-19.2%</span></td>
+<td class="num"><span class="dn">-25.0%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">6485</td><td>點序</td>
+<td class="num"><span class="up">+1843.0%</span></td>
+<td class="num">5322萬</td>
+<td class="num"><span class="dn">-8.4%</span></td>
+<td class="num"><span class="dn">-10.1%</span></td>
+<td class="num"><span class="up">+18.0%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">2364</td><td>倫飛</td>
+<td class="num"><span class="up">+255.9%</span></td>
+<td class="num">7136萬</td>
+<td class="num"><span class="dn">-5.2%</span></td>
+<td class="num"><span class="up">+9.8%</span></td>
+<td class="num"><span class="dn">-1.4%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">3521</td><td>台鋼建設</td>
+<td class="num"><span class="up">+852.3%</span></td>
+<td class="num">9604萬</td>
+<td class="num"><span class="dn">-15.5%</span></td>
+<td class="num"><span class="dn">-12.3%</span></td>
+<td class="num"><span class="dn">-14.1%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">5521</td><td>工信</td>
+<td class="num"><span class="up">+359.7%</span></td>
+<td class="num">34.24億</td>
+<td class="num"><span class="dn">-1.6%</span></td>
+<td class="num"><span class="dn">-4.0%</span></td>
+<td class="num"><span class="dn">-1.2%</span></td>
+</tr>
+<tr>
+<td>2024Q4</td><td>2025-03-31</td>
+<td class="code">3323</td><td>加百裕</td>
+<td class="num"><span class="up">+849.5%</span></td>
+<td class="num">1.15億</td>
+<td class="num"><span class="dn">-15.1%</span></td>
+<td class="num"><span class="up">+8.1%</span></td>
+<td class="num"><span class="up">+40.2%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">5291</td><td>邑昇</td>
+<td class="num"><span class="up">+3357.8%</span></td>
+<td class="num">7932萬</td>
+<td class="num"><span class="up">+1.4%</span></td>
+<td class="num"><span class="dn">-5.8%</span></td>
+<td class="num"><span class="dn">-1.0%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">6596</td><td>寬宏藝術</td>
+<td class="num"><span class="up">+672.2%</span></td>
+<td class="num">14.21億</td>
+<td class="num"><span class="up">+21.5%</span></td>
+<td class="num"><span class="up">+20.3%</span></td>
+<td class="num"><span class="up">+27.4%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">6674</td><td>鋐寶科技</td>
+<td class="num"><span class="up">+5965.4%</span></td>
+<td class="num">1.12億</td>
+<td class="num"><span class="up">+24.2%</span></td>
+<td class="num"><span class="up">+23.3%</span></td>
+<td class="num"><span class="dn">-6.5%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">6903</td><td>巨漢</td>
+<td class="num"><span class="up">+1437.6%</span></td>
+<td class="num">3.12億</td>
+<td class="num"><span class="up">+0.4%</span></td>
+<td class="num"><span class="dn">-10.0%</span></td>
+<td class="num"><span class="up">+22.2%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">8054</td><td>安國</td>
+<td class="num"><span class="up">+442.2%</span></td>
+<td class="num">6.98億</td>
+<td class="num"><span class="up">+36.8%</span></td>
+<td class="num"><span class="up">+45.5%</span></td>
+<td class="num"><span class="up">+66.2%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">8487</td><td>愛爾達-創</td>
+<td class="num"><span class="up">+617.2%</span></td>
+<td class="num">9859萬</td>
+<td class="num"><span class="dn">-2.8%</span></td>
+<td class="num"><span class="up">+1.4%</span></td>
+<td class="num"><span class="dn">-4.5%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">1337</td><td>再生-KY</td>
+<td class="num"><span class="up">+11918714.3%</span></td>
+<td class="num">8.34億</td>
+<td class="num"><span class="dn">-16.6%</span></td>
+<td class="num"><span class="dn">-14.8%</span></td>
+<td class="num"><span class="dn">-20.2%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">3521</td><td>台鋼建設</td>
+<td class="num"><span class="up">+14552.1%</span></td>
+<td class="num">1.26億</td>
+<td class="num"><span class="up">+0.8%</span></td>
+<td class="num"><span class="up">+3.4%</span></td>
+<td class="num"><span class="up">+0.4%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">2924</td><td>宏太-KY</td>
+<td class="num"><span class="up">+26249.1%</span></td>
+<td class="num">5955萬</td>
+<td class="num"><span class="dn">-7.2%</span></td>
+<td class="num"><span class="dn">-9.5%</span></td>
+<td class="num"><span class="dn">-24.2%</span></td>
+</tr>
+<tr>
+<td>2025Q1</td><td>2025-05-15</td>
+<td class="code">2363</td><td>矽統</td>
+<td class="num"><span class="up">+25006.5%</span></td>
+<td class="num">4.82億</td>
+<td class="num"><span class="dn">-6.6%</span></td>
+<td class="num"><span class="up">+7.8%</span></td>
+<td class="num"><span class="up">+5.5%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">2072</td><td>世紀風電</td>
+<td class="num"><span class="up">+1202.5%</span></td>
+<td class="num">9.76億</td>
+<td class="num"><span class="dn">-9.0%</span></td>
+<td class="num"><span class="dn">-30.0%</span></td>
+<td class="num"><span class="dn">-0.7%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">9958</td><td>世紀鋼</td>
+<td class="num"><span class="up">+920.8%</span></td>
+<td class="num">12.78億</td>
+<td class="num"><span class="dn">-7.9%</span></td>
+<td class="num"><span class="dn">-18.3%</span></td>
+<td class="num"><span class="dn">-31.4%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">6596</td><td>寬宏藝術</td>
+<td class="num"><span class="up">+782.0%</span></td>
+<td class="num">15.91億</td>
+<td class="num"><span class="up">+10.9%</span></td>
+<td class="num"><span class="dn">-3.2%</span></td>
+<td class="num"><span class="dn">-1.1%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">4903</td><td>聯光通</td>
+<td class="num"><span class="up">+1221.0%</span></td>
+<td class="num">3.05億</td>
+<td class="num"><span class="dn">-9.8%</span></td>
+<td class="num"><span class="dn">-10.0%</span></td>
+<td class="num"><span class="up">+13.0%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">3563</td><td>牧德</td>
+<td class="num"><span class="up">+1151.0%</span></td>
+<td class="num">2.23億</td>
+<td class="num"><span class="up">+27.0%</span></td>
+<td class="num"><span class="dn">-1.1%</span></td>
+<td class="num"><span class="up">+2.6%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">2237</td><td>華德動能</td>
+<td class="num"><span class="up">+994.1%</span></td>
+<td class="num">1.20億</td>
+<td class="num"><span class="up">+30.6%</span></td>
+<td class="num"><span class="up">+32.7%</span></td>
+<td class="num"><span class="up">+43.9%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">7752</td><td>世紀樺欣</td>
+<td class="num"><span class="up">+9392.1%</span></td>
+<td class="num">2.97億</td>
+<td class="num"><span class="dn">-6.8%</span></td>
+<td class="num"><span class="dn">-16.9%</span></td>
+<td class="num"><span class="dn">-27.0%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">2924</td><td>宏太-KY</td>
+<td class="num"><span class="up">+32315.6%</span></td>
+<td class="num">7067萬</td>
+<td class="num"><span class="up">+2.3%</span></td>
+<td class="num"><span class="dn">-29.4%</span></td>
+<td class="num"><span class="dn">-27.6%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">2363</td><td>矽統</td>
+<td class="num"><span class="up">+37024.4%</span></td>
+<td class="num">6.73億</td>
+<td class="num"><span class="dn">-4.3%</span></td>
+<td class="num"><span class="dn">-7.3%</span></td>
+<td class="num"><span class="dn">-12.9%</span></td>
+</tr>
+<tr>
+<td>2025Q2</td><td>2025-08-14</td>
+<td class="code">5291</td><td>邑昇</td>
+<td class="num"><span class="up">+4299.2%</span></td>
+<td class="num">8486萬</td>
+<td class="num"><span class="dn">-4.8%</span></td>
+<td class="num"><span class="dn">-3.1%</span></td>
+<td class="num"><span class="up">+39.0%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">2258</td><td>鴻華先進-創</td>
+<td class="num"><span class="up">+1775.6%</span></td>
+<td class="num">6.24億</td>
+<td class="num"><span class="dn">-10.7%</span></td>
+<td class="num"><span class="dn">-10.1%</span></td>
+<td class="num"><span class="dn">-34.6%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">6994</td><td>富威電力</td>
+<td class="num"><span class="up">+82732.9%</span></td>
+<td class="num">7.08億</td>
+<td class="num"><span class="up">+13.8%</span></td>
+<td class="num"><span class="up">+3.9%</span></td>
+<td class="num"><span class="dn">-27.1%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">8096</td><td>擎亞</td>
+<td class="num"><span class="up">+761.5%</span></td>
+<td class="num">5.04億</td>
+<td class="num"><span class="dn">-4.1%</span></td>
+<td class="num"><span class="up">+19.2%</span></td>
+<td class="num"><span class="up">+70.8%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">4530</td><td>宏易</td>
+<td class="num"><span class="up">+11348.0%</span></td>
+<td class="num">6251萬</td>
+<td class="num"><span class="up">+6.1%</span></td>
+<td class="num"><span class="up">+148.3%</span></td>
+<td class="num"><span class="up">+139.1%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">6903</td><td>巨漢</td>
+<td class="num"><span class="up">+933.5%</span></td>
+<td class="num">5.11億</td>
+<td class="num"><span class="up">+9.6%</span></td>
+<td class="num"><span class="up">+65.8%</span></td>
+<td class="num"><span class="up">+143.2%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">2924</td><td>宏太-KY</td>
+<td class="num"><span class="up">+5061.9%</span></td>
+<td class="num">8760萬</td>
+<td class="num"><span class="dn">-30.5%</span></td>
+<td class="num"><span class="dn">-32.9%</span></td>
+<td class="num"><span class="dn">-27.7%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">5291</td><td>邑昇</td>
+<td class="num"><span class="up">+4412.9%</span></td>
+<td class="num">1.08億</td>
+<td class="num"><span class="up">+11.7%</span></td>
+<td class="num"><span class="up">+45.4%</span></td>
+<td class="num"><span class="up">+136.7%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">8076</td><td>伍豐</td>
+<td class="num"><span class="up">+355.7%</span></td>
+<td class="num">1.43億</td>
+<td class="num"><span class="dn">-4.4%</span></td>
+<td class="num"><span class="dn">-4.4%</span></td>
+<td class="num"><span class="dn">-6.1%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">7822</td><td>倍利科</td>
+<td class="num"><span class="up">+527.3%</span></td>
+<td class="num">8.77億</td>
+<td class="num"><span class="up">+13.4%</span></td>
+<td class="num"><span class="up">+149.1%</span></td>
+<td class="num"><span class="up">+156.6%</span></td>
+</tr>
+<tr>
+<td>2025Q3</td><td>2025-11-14</td>
+<td class="code">8091</td><td>翔名</td>
+<td class="num"><span class="up">+362.8%</span></td>
+<td class="num">1.00億</td>
+<td class="num"><span class="up">+0.9%</span></td>
+<td class="num"><span class="up">+14.5%</span></td>
+<td class="num"><span class="up">+53.0%</span></td>
+</tr>
+</tbody></table></div>
+</div>
+<div class="ft">
+  資料源：<a href="https://finmindtrade.com/" target="_blank">FinMind</a>（贊助會員）·
+  備援 <a href="https://mops.twse.com.tw/" target="_blank">MOPS</a> ·
+  <a href="https://goodinfo.tw/" target="_blank">Goodinfo</a><br>
+  生成於 2026-04-28 16:03　·　僅供研究參考，非投資建議
+</div>
+<script>
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    const k = t.dataset.tab;
+    document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x.dataset.tab === k));
+    document.querySelectorAll('.pane').forEach(x => x.classList.toggle('active', x.dataset.pane === k));
+  });
+});
+</script>
+</body></html>
