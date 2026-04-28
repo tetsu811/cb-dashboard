@@ -35,6 +35,11 @@ tr:hover td{background:var(--hover)}
 .center{text-align:center}
 .rank{text-align:center;color:var(--mu);font-size:11px;width:36px}
 .code{font-weight:700;color:var(--bl);font-variant-numeric:tabular-nums}
+.code a, .nm-link{color:inherit;text-decoration:none;border-bottom:1px dashed transparent;transition:border-color .15s, color .15s}
+.code a:hover, .nm-link:hover{border-bottom-color:currentColor;color:#1d4ed8}
+.code a::after{content:'↗';font-size:9px;margin-left:3px;opacity:.5;font-weight:400}
+.nm-link{font-weight:600;color:var(--txt)}
+.nm-link:hover{color:var(--bl)}
 .up{color:var(--gr);font-weight:700}.dn{color:var(--rd);font-weight:700}
 .spark{display:inline-block;vertical-align:middle}
 .score{font-weight:700;color:var(--pp)}
@@ -46,8 +51,11 @@ tr:hover td{background:var(--hover)}
 .hero{padding:24px 28px;background:linear-gradient(180deg,#fafbff 0%,#fff 100%);border-bottom:1px solid var(--brd)}
 .hero-grid{display:grid;grid-template-columns:1fr 280px;gap:20px}
 .hero-left .picks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
-.hero-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;border-top:3px solid var(--bl);transition:transform .15s,box-shadow .15s}
-.hero-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.hero-card-link{text-decoration:none;color:inherit;display:block}
+.hero-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;border-top:3px solid var(--bl);transition:transform .15s,box-shadow .15s;cursor:pointer;position:relative}
+.hero-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08);border-color:var(--bl)}
+.hero-card::after{content:'↗';position:absolute;top:10px;right:14px;color:var(--mu);font-size:14px;opacity:.4;transition:opacity .15s}
+.hero-card:hover::after{opacity:1;color:var(--bl)}
 .hero-card .rk{font-size:11px;color:var(--mu);font-weight:600;letter-spacing:0.4px}
 .hero-card .nm{font-size:16px;font-weight:800;margin:3px 0 2px;color:var(--txt)}
 .hero-card .nm .c{color:var(--bl);font-variant-numeric:tabular-nums;margin-right:6px}
@@ -109,7 +117,8 @@ tr:hover .sticky-code{background:var(--hover)}
     <div class="hero-title">🏆 本季前 3 強 <span class="pill">2025Q4</span>
       <span style="font-size:11px;color:var(--mu);font-weight:500;margin-left:auto">合約負債暴增 + 通過全部篩選 · 依綜合分數排序</span>
     </div>
-    <div class="picks"><div class="hero-card">
+    <div class="picks"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2527" target="_blank" rel="noopener" class="hero-card-link" title="在 Goodinfo 開啟 2527 宏璟">
+<div class="hero-card">
   <div class="rk">第 1 名 · score +1.70</div>
   <div class="nm"><span class="c">2527</span>宏璟<span class="badge new" style="margin-left:6px">🆕 新進榜</span></div>
   <div class="ind">建設工程 · 建材營造</div>
@@ -118,7 +127,9 @@ tr:hover .sticky-code{background:var(--hover)}
     <span>CL <b>7.9億</b></span>
   </div>
   <div class="why">CL 暴增 2638% · 規模 7.9 億 · 連 2 季加速</div>
-</div><div class="hero-card">
+</div>
+</a><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3073" target="_blank" rel="noopener" class="hero-card-link" title="在 Goodinfo 開啟 3073 天方能源">
+<div class="hero-card">
   <div class="rk">第 2 名 · score +1.31</div>
   <div class="nm"><span class="c">3073</span>天方能源<span class="badge new" style="margin-left:6px">🆕 新進榜</span></div>
   <div class="ind">其他 · 綠能環保類</div>
@@ -127,7 +138,9 @@ tr:hover .sticky-code{background:var(--hover)}
     <span>CL <b>0.9億</b></span>
   </div>
   <div class="why">CL 暴增 110021%</div>
-</div><div class="hero-card">
+</div>
+</a><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1721" target="_blank" rel="noopener" class="hero-card-link" title="在 Goodinfo 開啟 1721 三晃">
+<div class="hero-card">
   <div class="rk">第 3 名 · score +1.27</div>
   <div class="nm"><span class="c">1721</span>三晃<span class="badge new" style="margin-left:6px">🆕 新進榜</span></div>
   <div class="ind">生技醫療 · 化學生技醫療</div>
@@ -136,7 +149,8 @@ tr:hover .sticky-code{background:var(--hover)}
     <span>CL <b>0.8億</b></span>
   </div>
   <div class="why">CL 暴增 12326% · 大戶買超 8.2pp</div>
-</div></div>
+</div>
+</a></div>
   </div>
   <div class="hero-right">
     <h4>📅 下次資料更新</h4>
@@ -203,80 +217,80 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr></thead><tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code">7822</td>
-<td>倍利科</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener">7822</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener">倍利科</a></td>
 <td class="num"><span class="up">+13.4%</span></td>
 <td class="num"><span class="up">+149.1%</span></td>
 <td class="num"><b><span class="up">+156.6%</span></b></td>
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code">6903</td>
-<td>巨漢</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener">6903</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener">巨漢</a></td>
 <td class="num"><span class="up">+9.6%</span></td>
 <td class="num"><span class="up">+65.8%</span></td>
 <td class="num"><b><span class="up">+143.2%</span></b></td>
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code">4530</td>
-<td>宏易</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4530" target="_blank" rel="noopener">4530</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4530" target="_blank" rel="noopener">宏易</a></td>
 <td class="num"><span class="up">+6.1%</span></td>
 <td class="num"><span class="up">+148.3%</span></td>
 <td class="num"><b><span class="up">+139.1%</span></b></td>
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code">5291</td>
-<td>邑昇</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">5291</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">邑昇</a></td>
 <td class="num"><span class="up">+11.7%</span></td>
 <td class="num"><span class="up">+45.4%</span></td>
 <td class="num"><b><span class="up">+136.7%</span></b></td>
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code">8096</td>
-<td>擎亞</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8096" target="_blank" rel="noopener">8096</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8096" target="_blank" rel="noopener">擎亞</a></td>
 <td class="num"><span class="dn">-4.1%</span></td>
 <td class="num"><span class="up">+19.2%</span></td>
 <td class="num"><b><span class="up">+70.8%</span></b></td>
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code">8091</td>
-<td>翔名</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener">8091</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener">翔名</a></td>
 <td class="num"><span class="up">+0.9%</span></td>
 <td class="num"><span class="up">+14.5%</span></td>
 <td class="num"><b><span class="up">+53.0%</span></b></td>
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code">8076</td>
-<td>伍豐</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8076" target="_blank" rel="noopener">8076</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8076" target="_blank" rel="noopener">伍豐</a></td>
 <td class="num"><span class="dn">-4.4%</span></td>
 <td class="num"><span class="dn">-4.4%</span></td>
 <td class="num"><b><span class="dn">-6.1%</span></b></td>
 </tr>
 <tr>
 <td class="rank">8</td>
-<td class="code">6994</td>
-<td>富威電力</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6994" target="_blank" rel="noopener">6994</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6994" target="_blank" rel="noopener">富威電力</a></td>
 <td class="num"><span class="up">+13.8%</span></td>
 <td class="num"><span class="up">+3.9%</span></td>
 <td class="num"><b><span class="dn">-27.1%</span></b></td>
 </tr>
 <tr>
 <td class="rank">9</td>
-<td class="code">2924</td>
-<td>宏太-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">2924</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">宏太-KY</a></td>
 <td class="num"><span class="dn">-30.5%</span></td>
 <td class="num"><span class="dn">-32.9%</span></td>
 <td class="num"><b><span class="dn">-27.7%</span></b></td>
 </tr>
 <tr>
 <td class="rank">10</td>
-<td class="code">2258</td>
-<td>鴻華先進-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener">2258</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener">鴻華先進-創</a></td>
 <td class="num"><span class="dn">-10.7%</span></td>
 <td class="num"><span class="dn">-10.1%</span></td>
 <td class="num"><b><span class="dn">-34.6%</span></b></td>
@@ -290,6 +304,7 @@ tr:hover .sticky-code{background:var(--hover)}
     評分權重：YoY 30% / QoQ 15% / CL/TTM營收 20% / CL/總資產 10% / 連續加速 10% / 大戶買超 15%。
     <br><b>資料區間</b>：2024Q1 → 2024Q2 → 2024Q3 → 2024Q4 → 2025Q1 → 2025Q2 → 2025Q3 → 2025Q4（FinMind 為主、MOPS 為備援）
   </div>
+  <div style="font-size:11.5px;color:var(--mu);margin:0 0 8px;text-align:right">💡 點代號或名稱可在 Goodinfo 開啟個股財務資料</div>
   <div class="scroll-hint">← 表格可橫向滑動 →</div>
   <div class="pane active" data-pane="全部"><table>
 <thead><tr>
@@ -305,8 +320,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">2527<span class="badge new">🆕</span></td>
-<td>宏璟<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2527" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2527 宏璟">2527</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2527" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2527 宏璟">宏璟</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">7.95億</td>
 <td class="num">2903萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -321,8 +336,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">3073<span class="badge new">🆕</span></td>
-<td>天方能源<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3073" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3073 天方能源">3073</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3073" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3073 天方能源">天方能源</a><br><span class="badge ind">其他</span></td>
 <td class="num">9250萬</td>
 <td class="num">8萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -337,8 +352,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">1721<span class="badge new">🆕</span></td>
-<td>三晃<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1721" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1721 三晃">1721</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1721" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1721 三晃">三晃</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">7841萬</td>
 <td class="num">63萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -353,8 +368,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">3058<span class="badge new">🆕</span></td>
-<td>立德<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3058" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3058 立德">3058</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3058" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3058 立德">立德</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">4.08億</td>
 <td class="num">466萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -369,8 +384,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">8054</td>
-<td>安國<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8054 安國">8054</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8054 安國">安國</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">16.50億</td>
 <td class="num">3987萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -385,8 +400,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code sticky-code">7740</td>
-<td>熙特爾-創<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7740 熙特爾-創">7740</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7740 熙特爾-創">熙特爾-創</a><br><span class="badge ind">其他</span></td>
 <td class="num">28.47億</td>
 <td class="num">6.12億</td>
 <td class="num"><span class="up">+365.0%</span></td>
@@ -401,8 +416,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code sticky-code">6589<span class="badge new">🆕</span></td>
-<td>台康生技<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6589" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6589 台康生技">6589</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6589" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6589 台康生技">台康生技</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">3.83億</td>
 <td class="num">4618萬</td>
 <td class="num"><span class="up">+730.2%</span></td>
@@ -417,8 +432,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">8</td>
-<td class="code sticky-code">2404</td>
-<td>漢唐<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2404" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2404 漢唐">2404</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2404" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2404 漢唐">漢唐</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">454.34億</td>
 <td class="num">202.11億</td>
 <td class="num"><span class="up">+124.8%</span></td>
@@ -433,8 +448,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">9</td>
-<td class="code sticky-code">3041<span class="badge new">🆕</span></td>
-<td>揚智<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3041" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3041 揚智">3041</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3041" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3041 揚智">揚智</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.47億</td>
 <td class="num">1133萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -449,8 +464,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">10</td>
-<td class="code sticky-code">2258</td>
-<td>鴻華先進-創<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2258 鴻華先進-創">2258</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2258 鴻華先進-創">鴻華先進-創</a><br><span class="badge ind">其他</span></td>
 <td class="num">6.42億</td>
 <td class="num">2087萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -465,8 +480,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">11</td>
-<td class="code sticky-code">3706<span class="badge new">🆕</span></td>
-<td>神達<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3706" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3706 神達">3706</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3706" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3706 神達">神達</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">37.65億</td>
 <td class="num">9.28億</td>
 <td class="num"><span class="up">+305.8%</span></td>
@@ -481,8 +496,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">12</td>
-<td class="code sticky-code">7792</td>
-<td>安葆<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7792" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7792 安葆">7792</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7792" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7792 安葆">安葆</a><br><span class="badge ind">其他</span></td>
 <td class="num">5.83億</td>
 <td class="num">3.57億</td>
 <td class="num"><span class="up">+63.1%</span></td>
@@ -497,8 +512,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">13</td>
-<td class="code sticky-code">5291</td>
-<td>邑昇<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5291 邑昇">5291</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5291 邑昇">邑昇</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.04億</td>
 <td class="num">467萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -513,8 +528,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">14</td>
-<td class="code sticky-code">2101<span class="badge new">🆕</span></td>
-<td>南港<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2101" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2101 南港">2101</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2101" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2101 南港">南港</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">117.91億</td>
 <td class="num">68.96億</td>
 <td class="num"><span class="up">+71.0%</span></td>
@@ -529,8 +544,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">15</td>
-<td class="code sticky-code">1337</td>
-<td>再生-KY<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1337 再生-KY">1337</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1337 再生-KY">再生-KY</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">11.14億</td>
 <td class="num">4.96億</td>
 <td class="num"><span class="up">+124.5%</span></td>
@@ -545,8 +560,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">16</td>
-<td class="code sticky-code">3498</td>
-<td>陽程<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3498" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3498 陽程">3498</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3498" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3498 陽程">陽程</a><br><span class="badge ind">其他</span></td>
 <td class="num">8.50億</td>
 <td class="num">2.46億</td>
 <td class="num"><span class="up">+245.7%</span></td>
@@ -561,8 +576,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">17</td>
-<td class="code sticky-code">2924</td>
-<td>宏太-KY<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2924 宏太-KY">2924</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2924 宏太-KY">宏太-KY</a><br><span class="badge ind">其他</span></td>
 <td class="num">9811萬</td>
 <td class="num">3735萬</td>
 <td class="num"><span class="up">+162.7%</span></td>
@@ -577,8 +592,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">18</td>
-<td class="code sticky-code">1449<span class="badge new">🆕</span></td>
-<td>佳和<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1449" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1449 佳和">1449</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1449" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1449 佳和">佳和</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">3.79億</td>
 <td class="num">9533萬</td>
 <td class="num"><span class="up">+297.8%</span></td>
@@ -593,8 +608,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">19</td>
-<td class="code sticky-code">6531</td>
-<td>愛普*<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6531" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6531 愛普*">6531</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6531" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6531 愛普*">愛普*</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">9.40億</td>
 <td class="num">1.59億</td>
 <td class="num"><span class="up">+491.1%</span></td>
@@ -609,8 +624,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">20</td>
-<td class="code sticky-code">1336<span class="badge new">🆕</span></td>
-<td>台翰<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1336" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1336 台翰">1336</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1336" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1336 台翰">台翰</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">7105萬</td>
 <td class="num">852萬</td>
 <td class="num"><span class="up">+733.9%</span></td>
@@ -625,8 +640,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">21</td>
-<td class="code sticky-code">3661<span class="badge new">🆕</span></td>
-<td>世芯-KY<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3661" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3661 世芯-KY">3661</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3661" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3661 世芯-KY">世芯-KY</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">120.21億</td>
 <td class="num">61.14億</td>
 <td class="num"><span class="up">+96.6%</span></td>
@@ -641,8 +656,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">22</td>
-<td class="code sticky-code">4128<span class="badge new">🆕</span></td>
-<td>中天<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4128" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4128 中天">4128</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4128" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4128 中天">中天</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">2.74億</td>
 <td class="num">7001萬</td>
 <td class="num"><span class="up">+290.8%</span></td>
@@ -657,8 +672,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">23</td>
-<td class="code sticky-code">6462</td>
-<td>神盾<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6462" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6462 神盾">6462</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6462" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6462 神盾">神盾</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">18.28億</td>
 <td class="num">2.42億</td>
 <td class="num"><span class="up">+654.0%</span></td>
@@ -673,8 +688,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">24</td>
-<td class="code sticky-code">8271<span class="badge new">🆕</span></td>
-<td>宇瞻<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8271" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8271 宇瞻">8271</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8271" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8271 宇瞻">宇瞻</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.97億</td>
 <td class="num">4793萬</td>
 <td class="num"><span class="up">+311.5%</span></td>
@@ -689,8 +704,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">25</td>
-<td class="code sticky-code">3167<span class="badge new">🆕</span></td>
-<td>大量<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3167" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3167 大量">3167</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3167" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3167 大量">大量</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">7.50億</td>
 <td class="num">1.58億</td>
 <td class="num"><span class="up">+374.6%</span></td>
@@ -705,8 +720,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">26</td>
-<td class="code sticky-code">5292<span class="badge new">🆕</span></td>
-<td>華懋<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5292" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5292 華懋">5292</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5292" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5292 華懋">華懋</a><br><span class="badge ind">其他</span></td>
 <td class="num">14.97億</td>
 <td class="num">8.65億</td>
 <td class="num"><span class="up">+73.2%</span></td>
@@ -721,8 +736,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">27</td>
-<td class="code sticky-code">8091</td>
-<td>翔名<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8091 翔名">8091</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8091 翔名">翔名</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.22億</td>
 <td class="num">1695萬</td>
 <td class="num"><span class="up">+619.1%</span></td>
@@ -737,8 +752,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">28</td>
-<td class="code sticky-code">5515<span class="badge new">🆕</span></td>
-<td>建國<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5515" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5515 建國">5515</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5515" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5515 建國">建國</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">25.07億</td>
 <td class="num">9.27億</td>
 <td class="num"><span class="up">+170.3%</span></td>
@@ -753,8 +768,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">29</td>
-<td class="code sticky-code">7822</td>
-<td>倍利科<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7822 倍利科">7822</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7822 倍利科">倍利科</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">9.30億</td>
 <td class="num">2.70億</td>
 <td class="num"><span class="up">+244.2%</span></td>
@@ -769,8 +784,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">30</td>
-<td class="code sticky-code">6903</td>
-<td>巨漢<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6903 巨漢">6903</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6903 巨漢">巨漢</a><br><span class="badge ind">其他</span></td>
 <td class="num">6.27億</td>
 <td class="num">9557萬</td>
 <td class="num"><span class="up">+556.5%</span></td>
@@ -785,8 +800,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">31</td>
-<td class="code sticky-code">6196</td>
-<td>帆宣<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6196" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6196 帆宣">6196</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6196" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6196 帆宣">帆宣</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">204.72億</td>
 <td class="num">114.68億</td>
 <td class="num"><span class="up">+78.5%</span></td>
@@ -801,8 +816,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">32</td>
-<td class="code sticky-code">5314<span class="badge new">🆕</span></td>
-<td>世紀*<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5314" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5314 世紀*">5314</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5314" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5314 世紀*">世紀*</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">1.16億</td>
 <td class="num">6263萬</td>
 <td class="num"><span class="up">+86.0%</span></td>
@@ -817,8 +832,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">33</td>
-<td class="code sticky-code">8227</td>
-<td>巨有科技<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8227" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8227 巨有科技">8227</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8227" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8227 巨有科技">巨有科技</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">4.66億</td>
 <td class="num">1.54億</td>
 <td class="num"><span class="up">+202.9%</span></td>
@@ -833,8 +848,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">34</td>
-<td class="code sticky-code">6234<span class="badge new">🆕</span></td>
-<td>高僑<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6234" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6234 高僑">6234</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6234" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6234 高僑">高僑</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">8548萬</td>
 <td class="num">3617萬</td>
 <td class="num"><span class="up">+136.3%</span></td>
@@ -849,8 +864,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">35</td>
-<td class="code sticky-code">7769</td>
-<td>鴻勁<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7769" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7769 鴻勁">7769</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7769" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7769 鴻勁">鴻勁</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">65.91億</td>
 <td class="num">23.98億</td>
 <td class="num"><span class="up">+174.8%</span></td>
@@ -865,8 +880,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">36</td>
-<td class="code sticky-code">8450<span class="badge new">🆕</span></td>
-<td>霹靂<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8450" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8450 霹靂">8450</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8450" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8450 霹靂">霹靂</a><br><span class="badge ind">其他</span></td>
 <td class="num">1.06億</td>
 <td class="num">4350萬</td>
 <td class="num"><span class="up">+143.2%</span></td>
@@ -881,8 +896,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">37</td>
-<td class="code sticky-code">2363<span class="badge new">🆕</span></td>
-<td>矽統<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2363 矽統">2363</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2363 矽統">矽統</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">8.69億</td>
 <td class="num">2.99億</td>
 <td class="num"><span class="up">+191.0%</span></td>
@@ -897,8 +912,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">38</td>
-<td class="code sticky-code">2237<span class="badge new">🆕</span></td>
-<td>華德動能<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2237" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2237 華德動能">2237</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2237" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2237 華德動能">華德動能</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">2.06億</td>
 <td class="num">4988萬</td>
 <td class="num"><span class="up">+313.1%</span></td>
@@ -907,14 +922,14 @@ tr:hover .sticky-code{background:var(--hover)}
 <td class="num">—</td>
 <td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,17.6 60.0,9.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
 <td class="num"><span class="dn">-0.0%</span></td>
-<td class="num">31.2</td>
-<td class="num"><span class="up">+1.0%</span></td>
+<td class="num">35.15</td>
+<td class="num"><span class="up">+13.8%</span></td>
 <td class="num score">+0.01</td>
 </tr>
 <tr>
 <td class="rank">39</td>
-<td class="code sticky-code">4523</td>
-<td>永彰<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4523" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4523 永彰">4523</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4523" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4523 永彰">永彰</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">2.44億</td>
 <td class="num">8922萬</td>
 <td class="num"><span class="up">+173.5%</span></td>
@@ -929,8 +944,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">40</td>
-<td class="code sticky-code">7849<span class="badge new">🆕</span></td>
-<td>旭誼<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7849" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7849 旭誼">7849</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7849" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7849 旭誼">旭誼</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.36億</td>
 <td class="num">5675萬</td>
 <td class="num"><span class="up">+139.4%</span></td>
@@ -939,14 +954,14 @@ tr:hover .sticky-code{background:var(--hover)}
 <td class="num">—</td>
 <td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,21.1 60.0,19.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
 <td class="num"><span class="">0.0%</span></td>
-<td class="num">148.5</td>
-<td class="num"><span class="up">+14.2%</span></td>
+<td class="num">143.0</td>
+<td class="num"><span class="up">+10.0%</span></td>
 <td class="num score">-0.01</td>
 </tr>
 <tr>
 <td class="rank">41</td>
-<td class="code sticky-code">8383<span class="badge new">🆕</span></td>
-<td>千附<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8383" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8383 千附">8383</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8383" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8383 千附">千附</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">2.52億</td>
 <td class="num">1.45億</td>
 <td class="num"><span class="up">+73.3%</span></td>
@@ -961,8 +976,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">42</td>
-<td class="code sticky-code">8087<span class="badge new">🆕</span></td>
-<td>麗升能源<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8087" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8087 麗升能源">8087</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8087" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8087 麗升能源">麗升能源</a><br><span class="badge ind">其他</span></td>
 <td class="num">6692萬</td>
 <td class="num">2310萬</td>
 <td class="num"><span class="up">+189.6%</span></td>
@@ -977,8 +992,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">43</td>
-<td class="code sticky-code">5533<span class="badge new">🆕</span></td>
-<td>皇鼎<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5533" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5533 皇鼎">5533</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5533" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5533 皇鼎">皇鼎</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">4.02億</td>
 <td class="num">1.40億</td>
 <td class="num"><span class="up">+187.3%</span></td>
@@ -993,8 +1008,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">44</td>
-<td class="code sticky-code">3018<span class="badge new">🆕</span></td>
-<td>隆銘綠能<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3018" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3018 隆銘綠能">3018</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3018" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3018 隆銘綠能">隆銘綠能</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">2.01億</td>
 <td class="num">1.26億</td>
 <td class="num"><span class="up">+59.5%</span></td>
@@ -1009,8 +1024,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">45</td>
-<td class="code sticky-code">5548<span class="badge new">🆕</span></td>
-<td>安倉<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5548" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5548 安倉">5548</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5548" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5548 安倉">安倉</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">3.65億</td>
 <td class="num">1.55億</td>
 <td class="num"><span class="up">+135.7%</span></td>
@@ -1025,8 +1040,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">46</td>
-<td class="code sticky-code">1519<span class="badge new">🆕</span></td>
-<td>華城<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1519" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1519 華城">1519</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1519" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1519 華城">華城</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">59.09億</td>
 <td class="num">36.97億</td>
 <td class="num"><span class="up">+59.8%</span></td>
@@ -1041,8 +1056,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">47</td>
-<td class="code sticky-code">8426<span class="badge new">🆕</span></td>
-<td>紅木-KY<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8426" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8426 紅木-KY">8426</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8426" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8426 紅木-KY">紅木-KY</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">3.49億</td>
 <td class="num">1.37億</td>
 <td class="num"><span class="up">+155.1%</span></td>
@@ -1057,8 +1072,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">48</td>
-<td class="code sticky-code">1503</td>
-<td>士電<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1503" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1503 士電">1503</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1503" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1503 士電">士電</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">95.45億</td>
 <td class="num">52.82億</td>
 <td class="num"><span class="up">+80.7%</span></td>
@@ -1073,8 +1088,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">49</td>
-<td class="code sticky-code">1799<span class="badge new">🆕</span></td>
-<td>易威<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1799" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1799 易威">1799</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1799" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1799 易威">易威</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">6850萬</td>
 <td class="num">3374萬</td>
 <td class="num"><span class="up">+103.0%</span></td>
@@ -1089,8 +1104,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">50</td>
-<td class="code sticky-code">1623<span class="badge new">🆕</span></td>
-<td>大東電<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1623" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1623 大東電">1623</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1623" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1623 大東電">大東電</a><br><span class="badge ind">其他</span></td>
 <td class="num">2.44億</td>
 <td class="num">1.53億</td>
 <td class="num"><span class="up">+59.8%</span></td>
@@ -1118,8 +1133,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">3058<span class="badge new">🆕</span></td>
-<td>立德<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3058" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3058 立德">3058</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3058" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3058 立德">立德</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">4.08億</td>
 <td class="num">466萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -1134,8 +1149,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">8054</td>
-<td>安國<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8054 安國">8054</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8054 安國">安國</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">16.50億</td>
 <td class="num">3987萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -1150,8 +1165,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">2404</td>
-<td>漢唐<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2404" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2404 漢唐">2404</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2404" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2404 漢唐">漢唐</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">454.34億</td>
 <td class="num">202.11億</td>
 <td class="num"><span class="up">+124.8%</span></td>
@@ -1166,8 +1181,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">3041<span class="badge new">🆕</span></td>
-<td>揚智<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3041" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3041 揚智">3041</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3041" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3041 揚智">揚智</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.47億</td>
 <td class="num">1133萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -1182,8 +1197,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">3706<span class="badge new">🆕</span></td>
-<td>神達<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3706" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3706 神達">3706</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3706" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3706 神達">神達</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">37.65億</td>
 <td class="num">9.28億</td>
 <td class="num"><span class="up">+305.8%</span></td>
@@ -1198,8 +1213,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code sticky-code">5291</td>
-<td>邑昇<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5291 邑昇">5291</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5291 邑昇">邑昇</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.04億</td>
 <td class="num">467萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -1214,8 +1229,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code sticky-code">6531</td>
-<td>愛普*<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6531" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6531 愛普*">6531</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6531" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6531 愛普*">愛普*</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">9.40億</td>
 <td class="num">1.59億</td>
 <td class="num"><span class="up">+491.1%</span></td>
@@ -1230,8 +1245,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">8</td>
-<td class="code sticky-code">1336<span class="badge new">🆕</span></td>
-<td>台翰<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1336" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1336 台翰">1336</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1336" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1336 台翰">台翰</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">7105萬</td>
 <td class="num">852萬</td>
 <td class="num"><span class="up">+733.9%</span></td>
@@ -1246,8 +1261,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">9</td>
-<td class="code sticky-code">3661<span class="badge new">🆕</span></td>
-<td>世芯-KY<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3661" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3661 世芯-KY">3661</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3661" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3661 世芯-KY">世芯-KY</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">120.21億</td>
 <td class="num">61.14億</td>
 <td class="num"><span class="up">+96.6%</span></td>
@@ -1262,8 +1277,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">10</td>
-<td class="code sticky-code">6462</td>
-<td>神盾<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6462" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6462 神盾">6462</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6462" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6462 神盾">神盾</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">18.28億</td>
 <td class="num">2.42億</td>
 <td class="num"><span class="up">+654.0%</span></td>
@@ -1278,8 +1293,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">11</td>
-<td class="code sticky-code">8271<span class="badge new">🆕</span></td>
-<td>宇瞻<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8271" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8271 宇瞻">8271</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8271" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8271 宇瞻">宇瞻</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.97億</td>
 <td class="num">4793萬</td>
 <td class="num"><span class="up">+311.5%</span></td>
@@ -1294,8 +1309,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">12</td>
-<td class="code sticky-code">8091</td>
-<td>翔名<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8091 翔名">8091</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8091 翔名">翔名</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.22億</td>
 <td class="num">1695萬</td>
 <td class="num"><span class="up">+619.1%</span></td>
@@ -1310,8 +1325,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">13</td>
-<td class="code sticky-code">7822</td>
-<td>倍利科<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7822 倍利科">7822</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7822 倍利科">倍利科</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">9.30億</td>
 <td class="num">2.70億</td>
 <td class="num"><span class="up">+244.2%</span></td>
@@ -1326,8 +1341,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">14</td>
-<td class="code sticky-code">6196</td>
-<td>帆宣<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6196" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6196 帆宣">6196</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6196" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6196 帆宣">帆宣</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">204.72億</td>
 <td class="num">114.68億</td>
 <td class="num"><span class="up">+78.5%</span></td>
@@ -1342,8 +1357,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">15</td>
-<td class="code sticky-code">8227</td>
-<td>巨有科技<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8227" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8227 巨有科技">8227</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8227" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8227 巨有科技">巨有科技</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">4.66億</td>
 <td class="num">1.54億</td>
 <td class="num"><span class="up">+202.9%</span></td>
@@ -1358,8 +1373,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">16</td>
-<td class="code sticky-code">6234<span class="badge new">🆕</span></td>
-<td>高僑<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6234" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6234 高僑">6234</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6234" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6234 高僑">高僑</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">8548萬</td>
 <td class="num">3617萬</td>
 <td class="num"><span class="up">+136.3%</span></td>
@@ -1374,8 +1389,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">17</td>
-<td class="code sticky-code">7769</td>
-<td>鴻勁<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7769" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7769 鴻勁">7769</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7769" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7769 鴻勁">鴻勁</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">65.91億</td>
 <td class="num">23.98億</td>
 <td class="num"><span class="up">+174.8%</span></td>
@@ -1390,8 +1405,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">18</td>
-<td class="code sticky-code">2363<span class="badge new">🆕</span></td>
-<td>矽統<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2363 矽統">2363</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2363 矽統">矽統</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">8.69億</td>
 <td class="num">2.99億</td>
 <td class="num"><span class="up">+191.0%</span></td>
@@ -1406,8 +1421,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">19</td>
-<td class="code sticky-code">7849<span class="badge new">🆕</span></td>
-<td>旭誼<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7849" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7849 旭誼">7849</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7849" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7849 旭誼">旭誼</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.36億</td>
 <td class="num">5675萬</td>
 <td class="num"><span class="up">+139.4%</span></td>
@@ -1416,14 +1431,14 @@ tr:hover .sticky-code{background:var(--hover)}
 <td class="num">—</td>
 <td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,21.1 60.0,19.4 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
 <td class="num"><span class="">0.0%</span></td>
-<td class="num">148.5</td>
-<td class="num"><span class="up">+14.2%</span></td>
+<td class="num">143.0</td>
+<td class="num"><span class="up">+10.0%</span></td>
 <td class="num score">-0.01</td>
 </tr>
 <tr>
 <td class="rank">20</td>
-<td class="code sticky-code">8383<span class="badge new">🆕</span></td>
-<td>千附<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8383" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8383 千附">8383</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8383" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8383 千附">千附</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">2.52億</td>
 <td class="num">1.45億</td>
 <td class="num"><span class="up">+73.3%</span></td>
@@ -1438,8 +1453,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">21</td>
-<td class="code sticky-code">3018<span class="badge new">🆕</span></td>
-<td>隆銘綠能<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3018" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3018 隆銘綠能">3018</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3018" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3018 隆銘綠能">隆銘綠能</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">2.01億</td>
 <td class="num">1.26億</td>
 <td class="num"><span class="up">+59.5%</span></td>
@@ -1454,8 +1469,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">22</td>
-<td class="code sticky-code">6112</td>
-<td>邁達特<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6112" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6112 邁達特">6112</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6112" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6112 邁達特">邁達特</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">13.02億</td>
 <td class="num">5.36億</td>
 <td class="num"><span class="up">+142.8%</span></td>
@@ -1470,8 +1485,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">23</td>
-<td class="code sticky-code">2467</td>
-<td>志聖<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2467" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2467 志聖">2467</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2467" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2467 志聖">志聖</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">13.17億</td>
 <td class="num">5.04億</td>
 <td class="num"><span class="up">+161.2%</span></td>
@@ -1486,8 +1501,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">24</td>
-<td class="code sticky-code">3416</td>
-<td>融程電<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3416" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3416 融程電">3416</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3416" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3416 融程電">融程電</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.28億</td>
 <td class="num">6082萬</td>
 <td class="num"><span class="up">+111.1%</span></td>
@@ -1502,8 +1517,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">25</td>
-<td class="code sticky-code">2493</td>
-<td>揚博<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2493" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2493 揚博">2493</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2493" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2493 揚博">揚博</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">8.26億</td>
 <td class="num">4.15億</td>
 <td class="num"><span class="up">+99.1%</span></td>
@@ -1518,8 +1533,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">26</td>
-<td class="code sticky-code">8076</td>
-<td>伍豐<br><span class="badge ind">半導體鏈</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8076" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8076 伍豐">8076</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8076" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8076 伍豐">伍豐</a><br><span class="badge ind">半導體鏈</span></td>
 <td class="num">1.45億</td>
 <td class="num">3654萬</td>
 <td class="num"><span class="up">+296.1%</span></td>
@@ -1547,8 +1562,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">3167<span class="badge new">🆕</span></td>
-<td>大量<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3167" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3167 大量">3167</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3167" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3167 大量">大量</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">7.50億</td>
 <td class="num">1.58億</td>
 <td class="num"><span class="up">+374.6%</span></td>
@@ -1563,8 +1578,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">2237<span class="badge new">🆕</span></td>
-<td>華德動能<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2237" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2237 華德動能">2237</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2237" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2237 華德動能">華德動能</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">2.06億</td>
 <td class="num">4988萬</td>
 <td class="num"><span class="up">+313.1%</span></td>
@@ -1573,14 +1588,14 @@ tr:hover .sticky-code{background:var(--hover)}
 <td class="num">—</td>
 <td class="center"><svg class="spark" width="84" height="22" viewBox="0 0 84 22"><polyline points="12.0,22.0 36.0,17.6 60.0,9.7 84.0,0.0" fill="none" stroke="#2563eb" stroke-width="1.5"/><circle cx="84.0" cy="0.0" r="2" fill="#16a34a"/></svg></td>
 <td class="num"><span class="dn">-0.0%</span></td>
-<td class="num">31.2</td>
-<td class="num"><span class="up">+1.0%</span></td>
+<td class="num">35.15</td>
+<td class="num"><span class="up">+13.8%</span></td>
 <td class="num score">+0.01</td>
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">4523</td>
-<td>永彰<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4523" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4523 永彰">4523</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4523" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4523 永彰">永彰</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">2.44億</td>
 <td class="num">8922萬</td>
 <td class="num"><span class="up">+173.5%</span></td>
@@ -1595,8 +1610,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">1519<span class="badge new">🆕</span></td>
-<td>華城<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1519" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1519 華城">1519</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1519" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1519 華城">華城</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">59.09億</td>
 <td class="num">36.97億</td>
 <td class="num"><span class="up">+59.8%</span></td>
@@ -1611,8 +1626,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">1503</td>
-<td>士電<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1503" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1503 士電">1503</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1503" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1503 士電">士電</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">95.45億</td>
 <td class="num">52.82億</td>
 <td class="num"><span class="up">+80.7%</span></td>
@@ -1627,8 +1642,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code sticky-code">1514</td>
-<td>亞力<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1514" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1514 亞力">1514</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1514" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1514 亞力">亞力</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">5.90億</td>
 <td class="num">3.84億</td>
 <td class="num"><span class="up">+53.7%</span></td>
@@ -1643,8 +1658,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code sticky-code">6603</td>
-<td>富強鑫<br><span class="badge ind">機電設備</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6603" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6603 富強鑫">6603</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6603" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6603 富強鑫">富強鑫</a><br><span class="badge ind">機電設備</span></td>
 <td class="num">5.57億</td>
 <td class="num">2.72億</td>
 <td class="num"><span class="up">+104.8%</span></td>
@@ -1672,8 +1687,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">2527<span class="badge new">🆕</span></td>
-<td>宏璟<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2527" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2527 宏璟">2527</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2527" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2527 宏璟">宏璟</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">7.95億</td>
 <td class="num">2903萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -1688,8 +1703,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">5515<span class="badge new">🆕</span></td>
-<td>建國<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5515" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5515 建國">5515</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5515" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5515 建國">建國</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">25.07億</td>
 <td class="num">9.27億</td>
 <td class="num"><span class="up">+170.3%</span></td>
@@ -1704,8 +1719,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">5314<span class="badge new">🆕</span></td>
-<td>世紀*<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5314" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5314 世紀*">5314</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5314" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5314 世紀*">世紀*</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">1.16億</td>
 <td class="num">6263萬</td>
 <td class="num"><span class="up">+86.0%</span></td>
@@ -1720,8 +1735,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">5533<span class="badge new">🆕</span></td>
-<td>皇鼎<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5533" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5533 皇鼎">5533</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5533" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5533 皇鼎">皇鼎</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">4.02億</td>
 <td class="num">1.40億</td>
 <td class="num"><span class="up">+187.3%</span></td>
@@ -1736,8 +1751,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">5548<span class="badge new">🆕</span></td>
-<td>安倉<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5548" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5548 安倉">5548</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5548" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5548 安倉">安倉</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">3.65億</td>
 <td class="num">1.55億</td>
 <td class="num"><span class="up">+135.7%</span></td>
@@ -1752,8 +1767,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code sticky-code">8426<span class="badge new">🆕</span></td>
-<td>紅木-KY<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8426" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8426 紅木-KY">8426</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8426" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8426 紅木-KY">紅木-KY</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">3.49億</td>
 <td class="num">1.37億</td>
 <td class="num"><span class="up">+155.1%</span></td>
@@ -1768,8 +1783,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code sticky-code">2535</td>
-<td>達欣工<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2535" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2535 達欣工">2535</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2535" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2535 達欣工">達欣工</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">42.37億</td>
 <td class="num">24.02億</td>
 <td class="num"><span class="up">+76.4%</span></td>
@@ -1784,8 +1799,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">8</td>
-<td class="code sticky-code">2511</td>
-<td>太子<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2511" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2511 太子">2511</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2511" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2511 太子">太子</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">12.43億</td>
 <td class="num">4.95億</td>
 <td class="num"><span class="up">+151.1%</span></td>
@@ -1800,8 +1815,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">9</td>
-<td class="code sticky-code">5543</td>
-<td>桓鼎-KY<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5543" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5543 桓鼎-KY">5543</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5543" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5543 桓鼎-KY">桓鼎-KY</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">1.38億</td>
 <td class="num">8532萬</td>
 <td class="num"><span class="up">+62.1%</span></td>
@@ -1816,8 +1831,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">10</td>
-<td class="code sticky-code">1456</td>
-<td>怡華<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1456" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1456 怡華">1456</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1456" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1456 怡華">怡華</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">3.78億</td>
 <td class="num">2.18億</td>
 <td class="num"><span class="up">+73.9%</span></td>
@@ -1832,8 +1847,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">11</td>
-<td class="code sticky-code">5512</td>
-<td>力麒<br><span class="badge ind">建設工程</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5512" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5512 力麒">5512</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5512" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5512 力麒">力麒</a><br><span class="badge ind">建設工程</span></td>
 <td class="num">11.09億</td>
 <td class="num">7.12億</td>
 <td class="num"><span class="up">+55.8%</span></td>
@@ -1861,8 +1876,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">1721<span class="badge new">🆕</span></td>
-<td>三晃<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1721" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1721 三晃">1721</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1721" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1721 三晃">三晃</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">7841萬</td>
 <td class="num">63萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -1877,8 +1892,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">6589<span class="badge new">🆕</span></td>
-<td>台康生技<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6589" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6589 台康生技">6589</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6589" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6589 台康生技">台康生技</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">3.83億</td>
 <td class="num">4618萬</td>
 <td class="num"><span class="up">+730.2%</span></td>
@@ -1893,8 +1908,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">4128<span class="badge new">🆕</span></td>
-<td>中天<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4128" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4128 中天">4128</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4128" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4128 中天">中天</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">2.74億</td>
 <td class="num">7001萬</td>
 <td class="num"><span class="up">+290.8%</span></td>
@@ -1909,8 +1924,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">1799<span class="badge new">🆕</span></td>
-<td>易威<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1799" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1799 易威">1799</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1799" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1799 易威">易威</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">6850萬</td>
 <td class="num">3374萬</td>
 <td class="num"><span class="up">+103.0%</span></td>
@@ -1925,8 +1940,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">4726</td>
-<td>永昕<br><span class="badge ind">生技醫療</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4726" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4726 永昕">4726</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4726" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4726 永昕">永昕</a><br><span class="badge ind">生技醫療</span></td>
 <td class="num">3.62億</td>
 <td class="num">2.31億</td>
 <td class="num"><span class="up">+56.7%</span></td>
@@ -1954,8 +1969,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">2101<span class="badge new">🆕</span></td>
-<td>南港<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2101" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2101 南港">2101</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2101" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2101 南港">南港</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">117.91億</td>
 <td class="num">68.96億</td>
 <td class="num"><span class="up">+71.0%</span></td>
@@ -1970,8 +1985,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">1337</td>
-<td>再生-KY<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1337 再生-KY">1337</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1337 再生-KY">再生-KY</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">11.14億</td>
 <td class="num">4.96億</td>
 <td class="num"><span class="up">+124.5%</span></td>
@@ -1986,8 +2001,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">1449<span class="badge new">🆕</span></td>
-<td>佳和<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1449" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1449 佳和">1449</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1449" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1449 佳和">佳和</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">3.79億</td>
 <td class="num">9533萬</td>
 <td class="num"><span class="up">+297.8%</span></td>
@@ -2002,8 +2017,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">2013</td>
-<td>中鋼構<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2013" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2013 中鋼構">2013</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2013" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2013 中鋼構">中鋼構</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">23.74億</td>
 <td class="num">13.31億</td>
 <td class="num"><span class="up">+78.4%</span></td>
@@ -2018,8 +2033,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">2616</td>
-<td>山隆<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2616" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2616 山隆">2616</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2616" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2616 山隆">山隆</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">2.16億</td>
 <td class="num">1.08億</td>
 <td class="num"><span class="up">+99.6%</span></td>
@@ -2034,8 +2049,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code sticky-code">1533</td>
-<td>車王電<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1533" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1533 車王電">1533</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1533" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1533 車王電">車王電</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">2.14億</td>
 <td class="num">6630萬</td>
 <td class="num"><span class="up">+223.4%</span></td>
@@ -2050,8 +2065,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code sticky-code">1521</td>
-<td>大億<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1521" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1521 大億">1521</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1521" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1521 大億">大億</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">1.44億</td>
 <td class="num">7458萬</td>
 <td class="num"><span class="up">+92.8%</span></td>
@@ -2066,8 +2081,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">8</td>
-<td class="code sticky-code">7821</td>
-<td>神數<br><span class="badge ind">傳產內需</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7821" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7821 神數">7821</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7821" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7821 神數">神數</a><br><span class="badge ind">傳產內需</span></td>
 <td class="num">2.46億</td>
 <td class="num">7649萬</td>
 <td class="num"><span class="up">+221.6%</span></td>
@@ -2095,8 +2110,8 @@ tr:hover .sticky-code{background:var(--hover)}
 <tbody>
 <tr>
 <td class="rank">1</td>
-<td class="code sticky-code">3073<span class="badge new">🆕</span></td>
-<td>天方能源<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3073" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3073 天方能源">3073</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3073" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3073 天方能源">天方能源</a><br><span class="badge ind">其他</span></td>
 <td class="num">9250萬</td>
 <td class="num">8萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -2111,8 +2126,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">2</td>
-<td class="code sticky-code">7740</td>
-<td>熙特爾-創<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7740 熙特爾-創">7740</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7740 熙特爾-創">熙特爾-創</a><br><span class="badge ind">其他</span></td>
 <td class="num">28.47億</td>
 <td class="num">6.12億</td>
 <td class="num"><span class="up">+365.0%</span></td>
@@ -2127,8 +2142,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">3</td>
-<td class="code sticky-code">2258</td>
-<td>鴻華先進-創<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2258 鴻華先進-創">2258</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2258 鴻華先進-創">鴻華先進-創</a><br><span class="badge ind">其他</span></td>
 <td class="num">6.42億</td>
 <td class="num">2087萬</td>
 <td class="num"><span class="up">+1000.0%</span></td>
@@ -2143,8 +2158,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">4</td>
-<td class="code sticky-code">7792</td>
-<td>安葆<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7792" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7792 安葆">7792</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7792" target="_blank" rel="noopener" title="在 Goodinfo 開啟 7792 安葆">安葆</a><br><span class="badge ind">其他</span></td>
 <td class="num">5.83億</td>
 <td class="num">3.57億</td>
 <td class="num"><span class="up">+63.1%</span></td>
@@ -2159,8 +2174,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">5</td>
-<td class="code sticky-code">3498</td>
-<td>陽程<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3498" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3498 陽程">3498</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3498" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3498 陽程">陽程</a><br><span class="badge ind">其他</span></td>
 <td class="num">8.50億</td>
 <td class="num">2.46億</td>
 <td class="num"><span class="up">+245.7%</span></td>
@@ -2175,8 +2190,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">6</td>
-<td class="code sticky-code">2924</td>
-<td>宏太-KY<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2924 宏太-KY">2924</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2924 宏太-KY">宏太-KY</a><br><span class="badge ind">其他</span></td>
 <td class="num">9811萬</td>
 <td class="num">3735萬</td>
 <td class="num"><span class="up">+162.7%</span></td>
@@ -2191,8 +2206,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">7</td>
-<td class="code sticky-code">5292<span class="badge new">🆕</span></td>
-<td>華懋<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5292" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5292 華懋">5292</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5292" target="_blank" rel="noopener" title="在 Goodinfo 開啟 5292 華懋">華懋</a><br><span class="badge ind">其他</span></td>
 <td class="num">14.97億</td>
 <td class="num">8.65億</td>
 <td class="num"><span class="up">+73.2%</span></td>
@@ -2207,8 +2222,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">8</td>
-<td class="code sticky-code">6903</td>
-<td>巨漢<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6903 巨漢">6903</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6903 巨漢">巨漢</a><br><span class="badge ind">其他</span></td>
 <td class="num">6.27億</td>
 <td class="num">9557萬</td>
 <td class="num"><span class="up">+556.5%</span></td>
@@ -2223,8 +2238,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">9</td>
-<td class="code sticky-code">8450<span class="badge new">🆕</span></td>
-<td>霹靂<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8450" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8450 霹靂">8450</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8450" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8450 霹靂">霹靂</a><br><span class="badge ind">其他</span></td>
 <td class="num">1.06億</td>
 <td class="num">4350萬</td>
 <td class="num"><span class="up">+143.2%</span></td>
@@ -2239,8 +2254,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">10</td>
-<td class="code sticky-code">8087<span class="badge new">🆕</span></td>
-<td>麗升能源<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8087" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8087 麗升能源">8087</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8087" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8087 麗升能源">麗升能源</a><br><span class="badge ind">其他</span></td>
 <td class="num">6692萬</td>
 <td class="num">2310萬</td>
 <td class="num"><span class="up">+189.6%</span></td>
@@ -2255,8 +2270,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">11</td>
-<td class="code sticky-code">1623<span class="badge new">🆕</span></td>
-<td>大東電<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1623" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1623 大東電">1623</a><span class="badge new">🆕</span></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1623" target="_blank" rel="noopener" title="在 Goodinfo 開啟 1623 大東電">大東電</a><br><span class="badge ind">其他</span></td>
 <td class="num">2.44億</td>
 <td class="num">1.53億</td>
 <td class="num"><span class="up">+59.8%</span></td>
@@ -2271,8 +2286,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">12</td>
-<td class="code sticky-code">8473</td>
-<td>山林水<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8473" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8473 山林水">8473</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8473" target="_blank" rel="noopener" title="在 Goodinfo 開啟 8473 山林水">山林水</a><br><span class="badge ind">其他</span></td>
 <td class="num">4.77億</td>
 <td class="num">2.46億</td>
 <td class="num"><span class="up">+93.9%</span></td>
@@ -2287,8 +2302,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">13</td>
-<td class="code sticky-code">2468</td>
-<td>華經<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2468" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2468 華經">2468</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2468" target="_blank" rel="noopener" title="在 Goodinfo 開啟 2468 華經">華經</a><br><span class="badge ind">其他</span></td>
 <td class="num">1.28億</td>
 <td class="num">7852萬</td>
 <td class="num"><span class="up">+63.6%</span></td>
@@ -2303,8 +2318,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">14</td>
-<td class="code sticky-code">6728</td>
-<td>上洋<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6728" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6728 上洋">6728</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6728" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6728 上洋">上洋</a><br><span class="badge ind">其他</span></td>
 <td class="num">1.33億</td>
 <td class="num">5305萬</td>
 <td class="num"><span class="up">+151.2%</span></td>
@@ -2319,8 +2334,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">15</td>
-<td class="code sticky-code">4754</td>
-<td>國碳科<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4754" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4754 國碳科">4754</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4754" target="_blank" rel="noopener" title="在 Goodinfo 開啟 4754 國碳科">國碳科</a><br><span class="badge ind">其他</span></td>
 <td class="num">6138萬</td>
 <td class="num">3815萬</td>
 <td class="num"><span class="up">+60.9%</span></td>
@@ -2335,8 +2350,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">16</td>
-<td class="code sticky-code">3209</td>
-<td>全科<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3209" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3209 全科">3209</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3209" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3209 全科">全科</a><br><span class="badge ind">其他</span></td>
 <td class="num">5.20億</td>
 <td class="num">3.02億</td>
 <td class="num"><span class="up">+72.3%</span></td>
@@ -2351,8 +2366,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">17</td>
-<td class="code sticky-code">6741</td>
-<td>91APP*-KY<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6741" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6741 91APP*-KY">6741</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6741" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6741 91APP*-KY">91APP*-KY</a><br><span class="badge ind">其他</span></td>
 <td class="num">2.52億</td>
 <td class="num">1.34億</td>
 <td class="num"><span class="up">+88.5%</span></td>
@@ -2367,8 +2382,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">18</td>
-<td class="code sticky-code">6874</td>
-<td>倍力<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6874" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6874 倍力">6874</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6874" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6874 倍力">倍力</a><br><span class="badge ind">其他</span></td>
 <td class="num">1.17億</td>
 <td class="num">7245萬</td>
 <td class="num"><span class="up">+61.3%</span></td>
@@ -2383,8 +2398,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">19</td>
-<td class="code sticky-code">6894</td>
-<td>衛司特<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6894" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6894 衛司特">6894</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6894" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6894 衛司特">衛司特</a><br><span class="badge ind">其他</span></td>
 <td class="num">7712萬</td>
 <td class="num">4930萬</td>
 <td class="num"><span class="up">+56.4%</span></td>
@@ -2399,8 +2414,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">20</td>
-<td class="code sticky-code">6667</td>
-<td>信紘科<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6667" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6667 信紘科">6667</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6667" target="_blank" rel="noopener" title="在 Goodinfo 開啟 6667 信紘科">信紘科</a><br><span class="badge ind">其他</span></td>
 <td class="num">6.58億</td>
 <td class="num">4.05億</td>
 <td class="num"><span class="up">+62.7%</span></td>
@@ -2415,8 +2430,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">21</td>
-<td class="code sticky-code">3663</td>
-<td>鑫科<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3663" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3663 鑫科">3663</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3663" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3663 鑫科">鑫科</a><br><span class="badge ind">其他</span></td>
 <td class="num">2.61億</td>
 <td class="num">1.26億</td>
 <td class="num"><span class="up">+107.5%</span></td>
@@ -2431,8 +2446,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">22</td>
-<td class="code sticky-code">3587</td>
-<td>閎康<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3587" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3587 閎康">3587</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3587" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3587 閎康">閎康</a><br><span class="badge ind">其他</span></td>
 <td class="num">2.13億</td>
 <td class="num">1.26億</td>
 <td class="num"><span class="up">+69.4%</span></td>
@@ -2447,8 +2462,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td class="rank">23</td>
-<td class="code sticky-code">3289</td>
-<td>宜特<br><span class="badge ind">其他</span></td>
+<td class="code sticky-code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3289" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3289 宜特">3289</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3289" target="_blank" rel="noopener" title="在 Goodinfo 開啟 3289 宜特">宜特</a><br><span class="badge ind">其他</span></td>
 <td class="num">2.08億</td>
 <td class="num">1.35億</td>
 <td class="num"><span class="up">+54.5%</span></td>
@@ -2485,7 +2500,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr></thead><tbody>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">6101</td><td>寬魚國際</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6101" target="_blank" rel="noopener">6101</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6101" target="_blank" rel="noopener">寬魚國際</a></td>
 <td class="num"><span class="up">+6587.1%</span></td>
 <td class="num">1.02億</td>
 <td class="num"><span class="up">+2.0%</span></td>
@@ -2494,7 +2510,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">1589</td><td>永冠-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1589" target="_blank" rel="noopener">1589</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1589" target="_blank" rel="noopener">永冠-KY</a></td>
 <td class="num"><span class="up">+3774.7%</span></td>
 <td class="num">6.12億</td>
 <td class="num"><span class="dn">-3.9%</span></td>
@@ -2503,7 +2520,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">1515</td><td>力山</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1515" target="_blank" rel="noopener">1515</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1515" target="_blank" rel="noopener">力山</a></td>
 <td class="num"><span class="up">+856.3%</span></td>
 <td class="num">3.48億</td>
 <td class="num"><span class="dn">-2.6%</span></td>
@@ -2512,7 +2530,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">2465</td><td>麗臺</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2465" target="_blank" rel="noopener">2465</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2465" target="_blank" rel="noopener">麗臺</a></td>
 <td class="num"><span class="up">+2542.1%</span></td>
 <td class="num">11.21億</td>
 <td class="num"><span class="up">+6.6%</span></td>
@@ -2521,7 +2540,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">8054</td><td>安國</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener">8054</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener">安國</a></td>
 <td class="num"><span class="up">+1548.4%</span></td>
 <td class="num">1.29億</td>
 <td class="num"><span class="up">+9.3%</span></td>
@@ -2530,7 +2550,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">6739</td><td>竹陞科技</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6739" target="_blank" rel="noopener">6739</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6739" target="_blank" rel="noopener">竹陞科技</a></td>
 <td class="num"><span class="up">+1185.2%</span></td>
 <td class="num">8197萬</td>
 <td class="num"><span class="up">+1.6%</span></td>
@@ -2539,7 +2560,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">6854</td><td>錼創科技-KY創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6854" target="_blank" rel="noopener">6854</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6854" target="_blank" rel="noopener">錼創科技-KY創</a></td>
 <td class="num"><span class="up">+233.6%</span></td>
 <td class="num">5.27億</td>
 <td class="num"><span class="dn">-3.1%</span></td>
@@ -2548,7 +2570,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">8916</td><td>光隆</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8916" target="_blank" rel="noopener">8916</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8916" target="_blank" rel="noopener">光隆</a></td>
 <td class="num"><span class="up">+521.4%</span></td>
 <td class="num">2.37億</td>
 <td class="num"><span class="up">+1.2%</span></td>
@@ -2557,7 +2580,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">1439</td><td>雋揚</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1439" target="_blank" rel="noopener">1439</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1439" target="_blank" rel="noopener">雋揚</a></td>
 <td class="num"><span class="up">+5683.4%</span></td>
 <td class="num">1.93億</td>
 <td class="num"><span class="dn">-1.2%</span></td>
@@ -2566,7 +2590,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q1</td><td>2024-05-15</td>
-<td class="code">6796</td><td>晉弘</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6796" target="_blank" rel="noopener">6796</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6796" target="_blank" rel="noopener">晉弘</a></td>
 <td class="num"><span class="up">+2210.4%</span></td>
 <td class="num">6312萬</td>
 <td class="num"><span class="up">+2.9%</span></td>
@@ -2575,7 +2600,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">7740</td><td>熙特爾-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener">7740</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener">熙特爾-創</a></td>
 <td class="num"><span class="up">+3394.3%</span></td>
 <td class="num">4.58億</td>
 <td class="num"><span class="dn">-0.7%</span></td>
@@ -2584,7 +2610,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">6933</td><td>AMAX-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6933" target="_blank" rel="noopener">6933</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6933" target="_blank" rel="noopener">AMAX-KY</a></td>
 <td class="num"><span class="up">+832.6%</span></td>
 <td class="num">11.70億</td>
 <td class="num"><span class="dn">-14.1%</span></td>
@@ -2593,7 +2620,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">6531</td><td>愛普*</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6531" target="_blank" rel="noopener">6531</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6531" target="_blank" rel="noopener">愛普*</a></td>
 <td class="num"><span class="up">+2745.7%</span></td>
 <td class="num">4.15億</td>
 <td class="num"><span class="up">+0.3%</span></td>
@@ -2602,7 +2630,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">1337</td><td>再生-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener">1337</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener">再生-KY</a></td>
 <td class="num"><span class="up">+41708.3%</span></td>
 <td class="num">2.98億</td>
 <td class="num"><span class="dn">-1.3%</span></td>
@@ -2611,7 +2640,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">2718</td><td>全心投控</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2718" target="_blank" rel="noopener">2718</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2718" target="_blank" rel="noopener">全心投控</a></td>
 <td class="num"><span class="up">+1142.9%</span></td>
 <td class="num">12.34億</td>
 <td class="num"><span class="dn">-25.2%</span></td>
@@ -2620,7 +2650,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">8487</td><td>愛爾達-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8487" target="_blank" rel="noopener">8487</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8487" target="_blank" rel="noopener">愛爾達-創</a></td>
 <td class="num"><span class="up">+397.8%</span></td>
 <td class="num">4.56億</td>
 <td class="num"><span class="up">+2.0%</span></td>
@@ -2629,7 +2660,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">5521</td><td>工信</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5521" target="_blank" rel="noopener">5521</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5521" target="_blank" rel="noopener">工信</a></td>
 <td class="num"><span class="up">+4280.0%</span></td>
 <td class="num">16.75億</td>
 <td class="num"><span class="dn">-0.4%</span></td>
@@ -2638,7 +2670,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">7731</td><td>火星生技*</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7731" target="_blank" rel="noopener">7731</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7731" target="_blank" rel="noopener">火星生技*</a></td>
 <td class="num"><span class="up">+195387.8%</span></td>
 <td class="num">9579萬</td>
 <td class="num"><span class="dn">-4.9%</span></td>
@@ -2647,7 +2680,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">1472</td><td>三洋實業</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1472" target="_blank" rel="noopener">1472</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1472" target="_blank" rel="noopener">三洋實業</a></td>
 <td class="num"><span class="up">+875.5%</span></td>
 <td class="num">8.03億</td>
 <td class="num"><span class="up">+5.2%</span></td>
@@ -2656,7 +2690,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q2</td><td>2024-08-14</td>
-<td class="code">3596</td><td>智易</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3596" target="_blank" rel="noopener">3596</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3596" target="_blank" rel="noopener">智易</a></td>
 <td class="num"><span class="up">+605.1%</span></td>
 <td class="num">27.39億</td>
 <td class="num"><span class="dn">-4.8%</span></td>
@@ -2665,7 +2700,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">3521</td><td>台鋼建設</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3521" target="_blank" rel="noopener">3521</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3521" target="_blank" rel="noopener">台鋼建設</a></td>
 <td class="num"><span class="up">+13378.5%</span></td>
 <td class="num">5445萬</td>
 <td class="num"><span class="up">+11.8%</span></td>
@@ -2674,7 +2710,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">2363</td><td>矽統</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener">2363</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener">矽統</a></td>
 <td class="num"><span class="up">+14548.1%</span></td>
 <td class="num">4.47億</td>
 <td class="num"><span class="dn">-1.0%</span></td>
@@ -2683,7 +2720,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">2380</td><td>虹光</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2380" target="_blank" rel="noopener">2380</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2380" target="_blank" rel="noopener">虹光</a></td>
 <td class="num"><span class="up">+852.0%</span></td>
 <td class="num">1.05億</td>
 <td class="num"><span class="dn">-23.1%</span></td>
@@ -2692,7 +2730,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">3032</td><td>偉訓</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3032" target="_blank" rel="noopener">3032</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3032" target="_blank" rel="noopener">偉訓</a></td>
 <td class="num"><span class="up">+1118.0%</span></td>
 <td class="num">4.92億</td>
 <td class="num"><span class="up">+48.6%</span></td>
@@ -2701,7 +2740,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">7740</td><td>熙特爾-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener">7740</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener">熙特爾-創</a></td>
 <td class="num"><span class="up">+1526.5%</span></td>
 <td class="num">5.22億</td>
 <td class="num"><span class="up">+58.7%</span></td>
@@ -2710,7 +2750,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">5465</td><td>富驊</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5465" target="_blank" rel="noopener">5465</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5465" target="_blank" rel="noopener">富驊</a></td>
 <td class="num"><span class="up">+1692.6%</span></td>
 <td class="num">1.42億</td>
 <td class="num"><span class="up">+20.0%</span></td>
@@ -2719,7 +2760,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">8054</td><td>安國</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener">8054</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener">安國</a></td>
 <td class="num"><span class="up">+1974.8%</span></td>
 <td class="num">3.19億</td>
 <td class="num"><span class="up">+12.8%</span></td>
@@ -2728,7 +2770,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">6933</td><td>AMAX-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6933" target="_blank" rel="noopener">6933</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6933" target="_blank" rel="noopener">AMAX-KY</a></td>
 <td class="num"><span class="up">+791.4%</span></td>
 <td class="num">10.35億</td>
 <td class="num"><span class="dn">-12.2%</span></td>
@@ -2737,7 +2780,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">1337</td><td>再生-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener">1337</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener">再生-KY</a></td>
 <td class="num"><span class="up">+45372.0%</span></td>
 <td class="num">2.99億</td>
 <td class="num"><span class="up">+0.6%</span></td>
@@ -2746,7 +2790,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q3</td><td>2024-11-14</td>
-<td class="code">3522</td><td>御嵿</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3522" target="_blank" rel="noopener">3522</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3522" target="_blank" rel="noopener">御嵿</a></td>
 <td class="num"><span class="up">+326.4%</span></td>
 <td class="num">2.35億</td>
 <td class="num"><span class="up">+21.8%</span></td>
@@ -2755,7 +2800,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">5314</td><td>世紀*</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5314" target="_blank" rel="noopener">5314</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5314" target="_blank" rel="noopener">世紀*</a></td>
 <td class="num"><span class="up">+2980.9%</span></td>
 <td class="num">6263萬</td>
 <td class="num"><span class="dn">-22.7%</span></td>
@@ -2764,7 +2810,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">7740</td><td>熙特爾-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener">7740</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7740" target="_blank" rel="noopener">熙特爾-創</a></td>
 <td class="num"><span class="up">+1040.0%</span></td>
 <td class="num">6.12億</td>
 <td class="num"><span class="dn">-2.0%</span></td>
@@ -2773,7 +2820,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">7758</td><td>睿騰能源</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7758" target="_blank" rel="noopener">7758</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7758" target="_blank" rel="noopener">睿騰能源</a></td>
 <td class="num"><span class="up">+1700.5%</span></td>
 <td class="num">1.08億</td>
 <td class="num"><span class="dn">-22.1%</span></td>
@@ -2782,7 +2830,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">1472</td><td>三洋實業</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1472" target="_blank" rel="noopener">1472</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1472" target="_blank" rel="noopener">三洋實業</a></td>
 <td class="num"><span class="up">+560.7%</span></td>
 <td class="num">14.15億</td>
 <td class="num"><span class="up">+0.6%</span></td>
@@ -2791,7 +2840,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">2028</td><td>威致</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2028" target="_blank" rel="noopener">2028</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2028" target="_blank" rel="noopener">威致</a></td>
 <td class="num"><span class="up">+1162.4%</span></td>
 <td class="num">3.79億</td>
 <td class="num"><span class="dn">-19.2%</span></td>
@@ -2800,7 +2850,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">6485</td><td>點序</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6485" target="_blank" rel="noopener">6485</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6485" target="_blank" rel="noopener">點序</a></td>
 <td class="num"><span class="up">+1843.0%</span></td>
 <td class="num">5322萬</td>
 <td class="num"><span class="dn">-8.4%</span></td>
@@ -2809,7 +2860,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">2364</td><td>倫飛</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2364" target="_blank" rel="noopener">2364</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2364" target="_blank" rel="noopener">倫飛</a></td>
 <td class="num"><span class="up">+255.9%</span></td>
 <td class="num">7136萬</td>
 <td class="num"><span class="dn">-5.2%</span></td>
@@ -2818,7 +2870,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">3521</td><td>台鋼建設</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3521" target="_blank" rel="noopener">3521</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3521" target="_blank" rel="noopener">台鋼建設</a></td>
 <td class="num"><span class="up">+852.3%</span></td>
 <td class="num">9604萬</td>
 <td class="num"><span class="dn">-15.5%</span></td>
@@ -2827,7 +2880,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">5521</td><td>工信</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5521" target="_blank" rel="noopener">5521</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5521" target="_blank" rel="noopener">工信</a></td>
 <td class="num"><span class="up">+359.7%</span></td>
 <td class="num">34.24億</td>
 <td class="num"><span class="dn">-1.6%</span></td>
@@ -2836,7 +2890,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2024Q4</td><td>2025-03-31</td>
-<td class="code">3323</td><td>加百裕</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3323" target="_blank" rel="noopener">3323</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3323" target="_blank" rel="noopener">加百裕</a></td>
 <td class="num"><span class="up">+849.5%</span></td>
 <td class="num">1.15億</td>
 <td class="num"><span class="dn">-15.1%</span></td>
@@ -2845,7 +2900,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">5291</td><td>邑昇</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">5291</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">邑昇</a></td>
 <td class="num"><span class="up">+3357.8%</span></td>
 <td class="num">7932萬</td>
 <td class="num"><span class="up">+1.4%</span></td>
@@ -2854,7 +2910,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">6596</td><td>寬宏藝術</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6596" target="_blank" rel="noopener">6596</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6596" target="_blank" rel="noopener">寬宏藝術</a></td>
 <td class="num"><span class="up">+672.2%</span></td>
 <td class="num">14.21億</td>
 <td class="num"><span class="up">+21.5%</span></td>
@@ -2863,7 +2920,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">6674</td><td>鋐寶科技</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6674" target="_blank" rel="noopener">6674</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6674" target="_blank" rel="noopener">鋐寶科技</a></td>
 <td class="num"><span class="up">+5965.4%</span></td>
 <td class="num">1.12億</td>
 <td class="num"><span class="up">+24.2%</span></td>
@@ -2872,7 +2930,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">6903</td><td>巨漢</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener">6903</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener">巨漢</a></td>
 <td class="num"><span class="up">+1437.6%</span></td>
 <td class="num">3.12億</td>
 <td class="num"><span class="up">+0.4%</span></td>
@@ -2881,7 +2940,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">8054</td><td>安國</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener">8054</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8054" target="_blank" rel="noopener">安國</a></td>
 <td class="num"><span class="up">+442.2%</span></td>
 <td class="num">6.98億</td>
 <td class="num"><span class="up">+36.8%</span></td>
@@ -2890,7 +2950,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">8487</td><td>愛爾達-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8487" target="_blank" rel="noopener">8487</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8487" target="_blank" rel="noopener">愛爾達-創</a></td>
 <td class="num"><span class="up">+617.2%</span></td>
 <td class="num">9859萬</td>
 <td class="num"><span class="dn">-2.8%</span></td>
@@ -2899,7 +2960,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">1337</td><td>再生-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener">1337</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=1337" target="_blank" rel="noopener">再生-KY</a></td>
 <td class="num"><span class="up">+11918714.3%</span></td>
 <td class="num">8.34億</td>
 <td class="num"><span class="dn">-16.6%</span></td>
@@ -2908,7 +2970,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">3521</td><td>台鋼建設</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3521" target="_blank" rel="noopener">3521</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3521" target="_blank" rel="noopener">台鋼建設</a></td>
 <td class="num"><span class="up">+14552.1%</span></td>
 <td class="num">1.26億</td>
 <td class="num"><span class="up">+0.8%</span></td>
@@ -2917,7 +2980,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">2924</td><td>宏太-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">2924</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">宏太-KY</a></td>
 <td class="num"><span class="up">+26249.1%</span></td>
 <td class="num">5955萬</td>
 <td class="num"><span class="dn">-7.2%</span></td>
@@ -2926,7 +2990,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q1</td><td>2025-05-15</td>
-<td class="code">2363</td><td>矽統</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener">2363</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener">矽統</a></td>
 <td class="num"><span class="up">+25006.5%</span></td>
 <td class="num">4.82億</td>
 <td class="num"><span class="dn">-6.6%</span></td>
@@ -2935,7 +3000,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">2072</td><td>世紀風電</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2072" target="_blank" rel="noopener">2072</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2072" target="_blank" rel="noopener">世紀風電</a></td>
 <td class="num"><span class="up">+1202.5%</span></td>
 <td class="num">9.76億</td>
 <td class="num"><span class="dn">-9.0%</span></td>
@@ -2944,7 +3010,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">9958</td><td>世紀鋼</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=9958" target="_blank" rel="noopener">9958</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=9958" target="_blank" rel="noopener">世紀鋼</a></td>
 <td class="num"><span class="up">+920.8%</span></td>
 <td class="num">12.78億</td>
 <td class="num"><span class="dn">-7.9%</span></td>
@@ -2953,7 +3020,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">6596</td><td>寬宏藝術</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6596" target="_blank" rel="noopener">6596</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6596" target="_blank" rel="noopener">寬宏藝術</a></td>
 <td class="num"><span class="up">+782.0%</span></td>
 <td class="num">15.91億</td>
 <td class="num"><span class="up">+10.9%</span></td>
@@ -2962,7 +3030,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">4903</td><td>聯光通</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4903" target="_blank" rel="noopener">4903</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4903" target="_blank" rel="noopener">聯光通</a></td>
 <td class="num"><span class="up">+1221.0%</span></td>
 <td class="num">3.05億</td>
 <td class="num"><span class="dn">-9.8%</span></td>
@@ -2971,7 +3040,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">3563</td><td>牧德</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3563" target="_blank" rel="noopener">3563</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=3563" target="_blank" rel="noopener">牧德</a></td>
 <td class="num"><span class="up">+1151.0%</span></td>
 <td class="num">2.23億</td>
 <td class="num"><span class="up">+27.0%</span></td>
@@ -2980,7 +3050,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">2237</td><td>華德動能</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2237" target="_blank" rel="noopener">2237</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2237" target="_blank" rel="noopener">華德動能</a></td>
 <td class="num"><span class="up">+994.1%</span></td>
 <td class="num">1.20億</td>
 <td class="num"><span class="up">+30.6%</span></td>
@@ -2989,7 +3060,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">7752</td><td>世紀樺欣</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7752" target="_blank" rel="noopener">7752</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7752" target="_blank" rel="noopener">世紀樺欣</a></td>
 <td class="num"><span class="up">+9392.1%</span></td>
 <td class="num">2.97億</td>
 <td class="num"><span class="dn">-6.8%</span></td>
@@ -2998,7 +3070,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">2924</td><td>宏太-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">2924</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">宏太-KY</a></td>
 <td class="num"><span class="up">+32315.6%</span></td>
 <td class="num">7067萬</td>
 <td class="num"><span class="up">+2.3%</span></td>
@@ -3007,7 +3080,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">2363</td><td>矽統</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener">2363</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2363" target="_blank" rel="noopener">矽統</a></td>
 <td class="num"><span class="up">+37024.4%</span></td>
 <td class="num">6.73億</td>
 <td class="num"><span class="dn">-4.3%</span></td>
@@ -3016,7 +3090,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q2</td><td>2025-08-14</td>
-<td class="code">5291</td><td>邑昇</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">5291</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">邑昇</a></td>
 <td class="num"><span class="up">+4299.2%</span></td>
 <td class="num">8486萬</td>
 <td class="num"><span class="dn">-4.8%</span></td>
@@ -3025,7 +3100,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">2258</td><td>鴻華先進-創</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener">2258</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2258" target="_blank" rel="noopener">鴻華先進-創</a></td>
 <td class="num"><span class="up">+1775.6%</span></td>
 <td class="num">6.24億</td>
 <td class="num"><span class="dn">-10.7%</span></td>
@@ -3034,7 +3110,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">6994</td><td>富威電力</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6994" target="_blank" rel="noopener">6994</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6994" target="_blank" rel="noopener">富威電力</a></td>
 <td class="num"><span class="up">+82732.9%</span></td>
 <td class="num">7.08億</td>
 <td class="num"><span class="up">+13.8%</span></td>
@@ -3043,7 +3120,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">8096</td><td>擎亞</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8096" target="_blank" rel="noopener">8096</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8096" target="_blank" rel="noopener">擎亞</a></td>
 <td class="num"><span class="up">+761.5%</span></td>
 <td class="num">5.04億</td>
 <td class="num"><span class="dn">-4.1%</span></td>
@@ -3052,7 +3130,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">4530</td><td>宏易</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4530" target="_blank" rel="noopener">4530</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=4530" target="_blank" rel="noopener">宏易</a></td>
 <td class="num"><span class="up">+11348.0%</span></td>
 <td class="num">6251萬</td>
 <td class="num"><span class="up">+6.1%</span></td>
@@ -3061,7 +3140,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">6903</td><td>巨漢</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener">6903</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=6903" target="_blank" rel="noopener">巨漢</a></td>
 <td class="num"><span class="up">+933.5%</span></td>
 <td class="num">5.11億</td>
 <td class="num"><span class="up">+9.6%</span></td>
@@ -3070,7 +3150,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">2924</td><td>宏太-KY</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">2924</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=2924" target="_blank" rel="noopener">宏太-KY</a></td>
 <td class="num"><span class="up">+5061.9%</span></td>
 <td class="num">8760萬</td>
 <td class="num"><span class="dn">-30.5%</span></td>
@@ -3079,7 +3160,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">5291</td><td>邑昇</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">5291</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=5291" target="_blank" rel="noopener">邑昇</a></td>
 <td class="num"><span class="up">+4412.9%</span></td>
 <td class="num">1.08億</td>
 <td class="num"><span class="up">+11.7%</span></td>
@@ -3088,7 +3170,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">8076</td><td>伍豐</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8076" target="_blank" rel="noopener">8076</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8076" target="_blank" rel="noopener">伍豐</a></td>
 <td class="num"><span class="up">+355.7%</span></td>
 <td class="num">1.43億</td>
 <td class="num"><span class="dn">-4.4%</span></td>
@@ -3097,7 +3180,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">7822</td><td>倍利科</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener">7822</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=7822" target="_blank" rel="noopener">倍利科</a></td>
 <td class="num"><span class="up">+527.3%</span></td>
 <td class="num">8.77億</td>
 <td class="num"><span class="up">+13.4%</span></td>
@@ -3106,7 +3190,8 @@ tr:hover .sticky-code{background:var(--hover)}
 </tr>
 <tr>
 <td>2025Q3</td><td>2025-11-14</td>
-<td class="code">8091</td><td>翔名</td>
+<td class="code"><a href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener">8091</a></td>
+<td><a class="nm-link" href="https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID=8091" target="_blank" rel="noopener">翔名</a></td>
 <td class="num"><span class="up">+362.8%</span></td>
 <td class="num">1.00億</td>
 <td class="num"><span class="up">+0.9%</span></td>
@@ -3119,7 +3204,7 @@ tr:hover .sticky-code{background:var(--hover)}
   資料源：<a href="https://finmindtrade.com/" target="_blank">FinMind</a>（贊助會員）·
   備援 <a href="https://mops.twse.com.tw/" target="_blank">MOPS</a> ·
   <a href="https://goodinfo.tw/" target="_blank">Goodinfo</a><br>
-  生成於 2026-04-28 16:03　·　僅供研究參考，非投資建議
+  生成於 2026-04-28 17:38　·　僅供研究參考，非投資建議
 </div>
 <script>
 document.querySelectorAll('.tab').forEach(t => {

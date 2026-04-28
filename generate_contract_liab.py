@@ -615,6 +615,11 @@ tr:hover td{background:var(--hover)}
 .center{text-align:center}
 .rank{text-align:center;color:var(--mu);font-size:11px;width:36px}
 .code{font-weight:700;color:var(--bl);font-variant-numeric:tabular-nums}
+.code a, .nm-link{color:inherit;text-decoration:none;border-bottom:1px dashed transparent;transition:border-color .15s, color .15s}
+.code a:hover, .nm-link:hover{border-bottom-color:currentColor;color:#1d4ed8}
+.code a::after{content:'↗';font-size:9px;margin-left:3px;opacity:.5;font-weight:400}
+.nm-link{font-weight:600;color:var(--txt)}
+.nm-link:hover{color:var(--bl)}
 .up{color:var(--gr);font-weight:700}.dn{color:var(--rd);font-weight:700}
 .spark{display:inline-block;vertical-align:middle}
 .score{font-weight:700;color:var(--pp)}
@@ -626,8 +631,11 @@ tr:hover td{background:var(--hover)}
 .hero{padding:24px 28px;background:linear-gradient(180deg,#fafbff 0%,#fff 100%);border-bottom:1px solid var(--brd)}
 .hero-grid{display:grid;grid-template-columns:1fr 280px;gap:20px}
 .hero-left .picks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
-.hero-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;border-top:3px solid var(--bl);transition:transform .15s,box-shadow .15s}
-.hero-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.hero-card-link{text-decoration:none;color:inherit;display:block}
+.hero-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px 16px;border-top:3px solid var(--bl);transition:transform .15s,box-shadow .15s;cursor:pointer;position:relative}
+.hero-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08);border-color:var(--bl)}
+.hero-card::after{content:'↗';position:absolute;top:10px;right:14px;color:var(--mu);font-size:14px;opacity:.4;transition:opacity .15s}
+.hero-card:hover::after{opacity:1;color:var(--bl)}
 .hero-card .rk{font-size:11px;color:var(--mu);font-weight:600;letter-spacing:0.4px}
 .hero-card .nm{font-size:16px;font-weight:800;margin:3px 0 2px;color:var(--txt)}
 .hero-card .nm .c{color:var(--bl);font-variant-numeric:tabular-nums;margin-right:6px}
@@ -721,6 +729,10 @@ def sparkline(values, w=84, h=22):
             f'</svg>')
 
 
+def goodinfo_url(code):
+    return f'https://goodinfo.tw/tw/StockDetail.asp?STOCK_ID={code}'
+
+
 def _render_row(i, it):
     accel = '<span class="badge accel">加速</span>' if it['cl_2q_accel'] else ''
     new_badge = '<span class="badge new">🆕</span>' if it.get('_new') else ''
@@ -728,10 +740,13 @@ def _render_row(i, it):
                  if it.get('group') else '')
     bh = it.get('bh_delta_400')
     bh_html = fmt_chg(bh / 100) if bh is not None else '—'
+    code = it['code']
+    name = it.get('name', '')
+    gi = goodinfo_url(code)
     return f'''<tr>
 <td class="rank">{i}</td>
-<td class="code sticky-code">{it['code']}{new_badge}</td>
-<td>{it.get('name', '')}<br>{ind_badge}</td>
+<td class="code sticky-code"><a href="{gi}" target="_blank" rel="noopener" title="在 Goodinfo 開啟 {code} {name}">{code}</a>{new_badge}</td>
+<td><a class="nm-link" href="{gi}" target="_blank" rel="noopener" title="在 Goodinfo 開啟 {code} {name}">{name}</a><br>{ind_badge}</td>
 <td class="num">{fmt_twd(it['cl'])}</td>
 <td class="num">{fmt_twd(it.get('cl_yoy_base'))}</td>
 <td class="num">{fmt_chg(it['cl_yoy'])}</td>
@@ -797,9 +812,11 @@ def _render_backtest_panel():
     picks = bt.get('picks', [])
     pick_rows = []
     for p in picks:
+        gi = goodinfo_url(p['code'])
         pick_rows.append(f'''<tr>
 <td>{p['quarter']}</td><td>{p['entry_date']}</td>
-<td class="code">{p['code']}</td><td>{p.get('name', '')}</td>
+<td class="code"><a href="{gi}" target="_blank" rel="noopener">{p['code']}</a></td>
+<td><a class="nm-link" href="{gi}" target="_blank" rel="noopener">{p.get('name', '')}</a></td>
 <td class="num">{fmt_chg(p.get('cl_yoy_raw') or p.get('cl_yoy'))}</td>
 <td class="num">{fmt_twd(p.get('cl'))}</td>
 <td class="num">{fmt_chg(p.get('ret_1m'))}</td>
@@ -912,7 +929,9 @@ def _hero_card(rank, item, is_new=False):
         why.append(f'大戶買超 {bh:.1f}pp')
     why_text = ' · '.join(why[:3])
 
-    return f'''<div class="hero-card">
+    gi = goodinfo_url(code)
+    return f'''<a href="{gi}" target="_blank" rel="noopener" class="hero-card-link" title="在 Goodinfo 開啟 {code} {name}">
+<div class="hero-card">
   <div class="rk">第 {rank} 名 · score {item['score']:+.2f}</div>
   <div class="nm"><span class="c">{code}</span>{name}{new_badge}</div>
   <div class="ind">{grp} · {item.get('industry', '')}</div>
@@ -921,7 +940,8 @@ def _hero_card(rank, item, is_new=False):
     <span>CL <b>{cl_b:.1f}億</b></span>
   </div>
   <div class="why">{why_text or '訊號齊全，建議觀察'}</div>
-</div>'''
+</div>
+</a>'''
 
 
 def _render_hero(latest, new_codes):
@@ -1048,10 +1068,11 @@ def _render_tracking_panel():
         r6 = fmt_chg(p.get('ret_6m'))
         r3 = fmt_chg(p.get('ret_3m'))
         r1 = fmt_chg(p.get('ret_1m'))
+        gi = goodinfo_url(p['code'])
         rows.append(f'''<tr>
 <td class="rank">{i}</td>
-<td class="code">{p['code']}</td>
-<td>{p.get('name', '')}</td>
+<td class="code"><a href="{gi}" target="_blank" rel="noopener">{p['code']}</a></td>
+<td><a class="nm-link" href="{gi}" target="_blank" rel="noopener">{p.get('name', '')}</a></td>
 <td class="num">{r1}</td>
 <td class="num">{r3}</td>
 <td class="num"><b>{r6}</b></td>
@@ -1160,6 +1181,7 @@ def render_html(latest):
     評分權重：YoY {W_YOY * 100:.0f}% / QoQ {W_QOQ * 100:.0f}% / CL/TTM營收 {W_TO_REV * 100:.0f}% / CL/總資產 {W_TO_ASSETS * 100:.0f}% / 連續加速 {W_ACCEL * 100:.0f}% / 大戶買超 {W_BIGHOLDER * 100:.0f}%。
     <br><b>資料區間</b>：{quarter_str}（FinMind 為主、MOPS 為備援）
   </div>
+  <div style="font-size:11.5px;color:var(--mu);margin:0 0 8px;text-align:right">💡 點代號或名稱可在 Goodinfo 開啟個股財務資料</div>
   <div class="scroll-hint">← 表格可橫向滑動 →</div>
   {chr(10).join(pane_html)}
 </div>
