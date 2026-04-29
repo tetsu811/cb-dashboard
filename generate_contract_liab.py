@@ -686,6 +686,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sa
 .box.bt{background:#faf5ff;border-color:#ddd6fe;color:#6b21a8}
 table{width:100%;border-collapse:collapse;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:16px}
 th{background:#edf2f7;font-weight:700;color:var(--mu);font-size:11px;text-transform:uppercase;padding:10px 8px;text-align:left;border-bottom:2px solid var(--brd);white-space:nowrap;letter-spacing:0.3px}
+th.sortable-th{cursor:pointer;user-select:none;transition:background .12s}
+th.sortable-th:hover{background:#dbeafe;color:var(--bl)}
+th.sortable-th .sort-hint{display:inline-block;margin-left:3px;font-size:9px;opacity:0.4}
+th.sortable-th.sort-asc,th.sortable-th.sort-desc{background:#dbeafe;color:var(--bl)}
+th.sortable-th.sort-asc .sort-hint,th.sortable-th.sort-desc .sort-hint{opacity:1;color:var(--bl)}
+th[title]{cursor:help;border-bottom:2px dotted var(--brd)}
+th.sortable-th[title]{cursor:pointer}
 td{padding:8px 8px;border-bottom:1px solid var(--brd);vertical-align:middle;font-size:13px}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--hover)}
@@ -822,14 +829,13 @@ def goodinfo_url(code):
 def _render_q1_cell(q1):
     """Q+1 月營收驗證 cell。"""
     if not q1:
-        return '<td class="num">—</td>'
+        return '<td class="num" data-sort="-99">—</td>'
     cyoy = q1.get('cum_yoy')
     cyoy_str = f'{cyoy * 100:+.0f}%' if cyoy is not None else '—'
     color_class = 'up' if cyoy and cyoy > 0 else ('dn' if cyoy and cyoy < 0 else '')
     months = q1.get('monthly') or []
     pub = q1.get('published', 0)
     nq = q1.get('next_quarter', '')
-    # 月份明細 tooltip
     detail_lines = []
     for m in months:
         if m['rev'] is None:
@@ -841,7 +847,8 @@ def _render_q1_cell(q1):
     tooltip = ' / '.join(detail_lines)
     badge = (f'<span class="badge {q1["status_key"]}" title="{tooltip}">'
              f'{q1["status_label"]}</span>')
-    return (f'<td class="q1cell">'
+    sort_val = cyoy * 100 if cyoy is not None else -99
+    return (f'<td class="q1cell" data-sort="{sort_val:.2f}">'
             f'{badge}<br>'
             f'<span class="yoy {color_class}">{cyoy_str}</span> '
             f'<span class="pub">({pub}/3 月 · {nq})</span>'
@@ -858,22 +865,35 @@ def _render_row(i, it):
     code = it['code']
     name = it.get('name', '')
     gi = goodinfo_url(code)
+    # 排序用 numeric 值
+    cl_v = it['cl'] or 0
+    yoy_base_v = it.get('cl_yoy_base') or 0
+    yoy_v = (it.get('cl_yoy_raw') if it.get('cl_yoy_raw') is not None else it.get('cl_yoy')) or 0
+    qoq_v = (it.get('cl_qoq_raw') if it.get('cl_qoq_raw') is not None else it.get('cl_qoq')) or 0
+    cl_ta_v = it.get('cl_to_assets') or 0
+    cl_ttm_v = it.get('cl_to_ttm_rev')
+    cl_ttm_sort = cl_ttm_v if cl_ttm_v is not None else -1
+    bh_v = it.get('bh_delta_400')
+    bh_sort = bh_v if bh_v is not None else -99
+    px_v = it.get('price') or 0
+    p3m_v = it.get('price_3m_chg')
+    p3m_sort = p3m_v if p3m_v is not None else -99
     return f'''<tr>
 <td class="rank">{i}</td>
-<td class="code sticky-code"><a href="{gi}" target="_blank" rel="noopener" title="在 Goodinfo 開啟 {code} {name}">{code}</a>{new_badge}</td>
-<td><a class="nm-link" href="{gi}" target="_blank" rel="noopener" title="在 Goodinfo 開啟 {code} {name}">{name}</a><br>{ind_badge}</td>
-<td class="num">{fmt_twd(it['cl'])}</td>
-<td class="num">{fmt_twd(it.get('cl_yoy_base'))}</td>
-<td class="num">{fmt_chg(it['cl_yoy'])}</td>
-<td class="num">{fmt_chg(it['cl_qoq'])} {accel}</td>
-<td class="num">{fmt_pct(it['cl_to_assets'])}</td>
-<td class="num">{fmt_pct(it.get('cl_to_ttm_rev'))}</td>
-<td class="center">{sparkline(it['cl_history'])}</td>
+<td class="code sticky-code" data-sort="{code}"><a href="{gi}" target="_blank" rel="noopener">{code}</a>{new_badge}</td>
+<td data-sort="{name}"><a class="nm-link" href="{gi}" target="_blank" rel="noopener">{name}</a><br>{ind_badge}</td>
+<td class="num" data-sort="{cl_v:.0f}">{fmt_twd(it['cl'])}</td>
+<td class="num" data-sort="{yoy_base_v:.0f}">{fmt_twd(it.get('cl_yoy_base'))}</td>
+<td class="num" data-sort="{yoy_v:.4f}">{fmt_chg(it['cl_yoy'])}</td>
+<td class="num" data-sort="{qoq_v:.4f}">{fmt_chg(it['cl_qoq'])} {accel}</td>
+<td class="num" data-sort="{cl_ta_v:.4f}">{fmt_pct(it['cl_to_assets'])}</td>
+<td class="num" data-sort="{cl_ttm_sort:.4f}">{fmt_pct(it.get('cl_to_ttm_rev'))}</td>
+<td class="center" data-sort="{cl_v:.0f}">{sparkline(it['cl_history'])}</td>
 {_render_q1_cell(it.get('q1_progress'))}
-<td class="num">{bh_html}</td>
-<td class="num">{it.get('price') or '—'}</td>
-<td class="num">{fmt_chg(it.get('price_3m_chg'))}</td>
-<td class="num score">{it['score']:+.2f}</td>
+<td class="num" data-sort="{bh_sort:.4f}">{bh_html}</td>
+<td class="num" data-sort="{px_v}">{it.get('price') or '—'}</td>
+<td class="num" data-sort="{p3m_sort:.4f}">{fmt_chg(it.get('price_3m_chg'))}</td>
+<td class="num score" data-sort="{it['score']:.4f}">{it['score']:+.2f}</td>
 </tr>'''
 
 
@@ -881,17 +901,24 @@ def _render_table(items, empty_msg='本分組無符合條件個股'):
     if not items:
         return f'<div style="text-align:center;color:var(--mu);padding:30px;background:var(--card);border-radius:10px">{empty_msg}</div>'
     rows = [_render_row(i, it) for i, it in enumerate(items, 1)]
-    return f'''<table>
+    # 預設依「分數」由高到低排序（col 14）
+    return f'''<table class="sortable">
 <thead><tr>
-  <th class="rank">#</th><th>代號</th><th>名稱／產業</th>
-  <th class="num">本季CL</th><th class="num">去年同期</th>
-  <th class="num">YoY</th><th class="num">QoQ</th>
-  <th class="num">CL/總資產</th><th class="num">CL/TTM營收</th>
-  <th class="center">8季趨勢</th>
-  <th title="次季月營收 YoY 驗證 — 看合約負債是否真的轉化為營收">Q+1月營收</th>
-  <th class="num">大戶週變</th>
-  <th class="num">收盤</th><th class="num">近3月</th>
-  <th class="num">分數</th>
+  <th class="rank">#</th>
+  <th class="sortable-th" data-sort-type="str" data-col="1" title="股票代號（點代號開 Goodinfo）">代號 <span class="sort-hint">⇅</span></th>
+  <th class="sortable-th" data-sort-type="str" data-col="2" title="股票名稱與產業分組（點名稱開 Goodinfo）">名稱／產業 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="3" title="本季合約負債絕對金額（IFRS 15 科目，新台幣）">本季CL <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="4" title="去年同季合約負債（YoY 比較基期）">去年同期 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="5" title="合約負債年增率（已封頂 1000% 避免極小基期拉爆 z-score）">YoY <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="6" title="合約負債季增率（已封頂 500%）；若連 2 季 YoY 加速則標『加速』徽章">QoQ <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="7" title="合約負債 ÷ 總資產，反映商業模式體質。建設業常 >20%、設備業 5-30%、軟體業 10-50%">CL/總資產 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="8" title="合約負債 ÷ 近 12 月營收，數值代表訂單能見度（>1 = 帳上訂單夠做超過一年）">CL/TTM營收 <span class="sort-hint">⇅</span></th>
+  <th class="center sortable-th" data-sort-type="num" data-col="9" title="過去 8 季合約負債走勢縮圖">8季趨勢 <span class="sort-hint">⇅</span></th>
+  <th class="sortable-th" data-sort-type="num" data-col="10" title="次季月營收 YoY 累計（驗證合約負債是否真的轉化為營收）。✅驗證 / 🟢溫和 / ⏳等待 / 🚨警訊">Q+1月營收 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="11" title="400 張以上大戶持股佔比的週變化（百分點）">大戶週變 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="12" title="最近交易日收盤價（新台幣）">收盤 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th" data-sort-type="num" data-col="13" title="近 3 個月股價漲跌幅">近3月 <span class="sort-hint">⇅</span></th>
+  <th class="num sortable-th sort-desc" data-sort-type="num" data-col="14" title="綜合分數 = z(YoY)×30% + z(QoQ)×15% + z(CL/TTM營收)×20% + z(CL/總資產)×10% + 連2季加速×10% + z(大戶週變)×15%。z = (值 − 平均) / 標準差。預設由高到低排序。">分數 <span class="sort-hint">▼</span></th>
 </tr></thead>
 <tbody>
 {chr(10).join(rows)}
@@ -1310,7 +1337,6 @@ def render_html(latest):
   {chr(10).join(tab_html)}
 </div>
 <div style="padding:14px 28px 20px">
-  <div style="font-size:11.5px;color:var(--mu);margin:0 0 8px;text-align:right">💡 點代號或名稱可在 Goodinfo 開啟個股財務資料</div>
   <div class="scroll-hint">← 表格可橫向滑動 →</div>
   {chr(10).join(pane_html)}
 </div>
@@ -1326,9 +1352,49 @@ document.querySelectorAll('.tab').forEach(t => {{
     const k = t.dataset.tab;
     document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x.dataset.tab === k));
     document.querySelectorAll('.pane').forEach(x => x.classList.toggle('active', x.dataset.pane === k));
-    // 切換後捲到 tabs 列頂部，確保使用者看到變動的 pane
     const sec = document.getElementById('rank-section');
     if (sec) sec.scrollIntoView({{behavior: 'smooth', block: 'start'}});
+  }});
+}});
+// 表格排序：點 th 切 asc/desc
+document.querySelectorAll('table.sortable').forEach(table => {{
+  table.querySelectorAll('th.sortable-th').forEach(th => {{
+    th.addEventListener('click', () => {{
+      const col = parseInt(th.dataset.col, 10);
+      const type = th.dataset.sortType;
+      const wasAsc = th.classList.contains('sort-asc');
+      // 清除其他 th 的排序狀態
+      table.querySelectorAll('th.sortable-th').forEach(x => {{
+        x.classList.remove('sort-asc', 'sort-desc');
+        const h = x.querySelector('.sort-hint');
+        if (h) h.textContent = '⇅';
+      }});
+      const newDir = wasAsc ? 'desc' : 'asc';
+      th.classList.add('sort-' + newDir);
+      const hint = th.querySelector('.sort-hint');
+      if (hint) hint.textContent = newDir === 'asc' ? '▲' : '▼';
+
+      const tbody = table.querySelector('tbody');
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {{
+        const av = a.children[col]?.dataset.sort ?? a.children[col]?.textContent.trim() ?? '';
+        const bv = b.children[col]?.dataset.sort ?? b.children[col]?.textContent.trim() ?? '';
+        let cmp;
+        if (type === 'num') {{
+          cmp = parseFloat(av) - parseFloat(bv);
+          if (isNaN(cmp)) cmp = 0;
+        }} else {{
+          cmp = String(av).localeCompare(String(bv), 'zh-Hant');
+        }}
+        return newDir === 'asc' ? cmp : -cmp;
+      }});
+      // 重排並更新 # 欄
+      rows.forEach((row, i) => {{
+        const rk = row.querySelector('td.rank');
+        if (rk) rk.textContent = i + 1;
+        tbody.appendChild(row);
+      }});
+    }});
   }});
 }});
 </script>
