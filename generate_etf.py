@@ -704,6 +704,7 @@ def _index_prev_etf(prev_data):
             continue
         out[code] = {
             "aum_billion": etf.get('aum_billion'),
+            "status": etf.get('status'),
             "holdings": {h['stock_code']: h for h in etf.get('holdings', [])},
         }
     return out
@@ -1266,6 +1267,52 @@ def _compute_fund_actions(etf, etf_code, prev_snap_etf, threshold, first_seen, b
     return material_buys, material_sells, first_buys
 
 
+def _compute_weight_ranking(etf, prev_snap_etf, n=5):
+    """Return top-n stocks by weight change (percentage points) for one ETF.
+    Uses weight_pct — not capital — to capture true manager intent independent
+    of AUM growth. Partial baselines are skipped (no reliable weights).
+    Returns (weight_adds, weight_trims) each sorted by |dw| descending."""
+    if not prev_snap_etf or prev_snap_etf.get('status') == 'partial':
+        return [], []
+
+    aum_new  = etf.get('aum_billion') or 0
+    prev_aum = prev_snap_etf.get('aum_billion') or 0
+    prev_holdings = prev_snap_etf.get('holdings', {})
+
+    today_idx = {h['stock_code']: h for h in etf.get('holdings', [])
+                 if not h.get('weight_na')}
+
+    all_codes = set(today_idx) | set(prev_holdings)
+    rows = []
+    for sc in all_codes:
+        nh = today_idx.get(sc)
+        ph = prev_holdings.get(sc)
+        if ph and ph.get('weight_na'):
+            continue  # partial-era holding — no weight
+        w_new = (nh.get('weight_pct') or 0) if nh else 0
+        w_old = (ph.get('weight_pct') or 0) if ph else 0
+        dw = round(w_new - w_old, 3)
+        if abs(dw) < 0.05:          # < 0.05pp — negligible drift
+            continue
+        name = (nh or ph).get('stock_name', sc)
+        rows.append({
+            'stock_code': sc,
+            'stock_name': name,
+            'weight':      w_new,
+            'prev_weight': w_old,
+            'dw':          dw,
+            'cap_new':     round(aum_new  * w_new / 100, 2),
+            'cap_old':     round(prev_aum * w_old / 100, 2),
+            'dcap':        round(aum_new * w_new / 100 - prev_aum * w_old / 100, 2),
+            'is_new':      w_old == 0,
+            'is_exit':     w_new == 0,
+        })
+
+    adds  = sorted([r for r in rows if r['dw'] > 0], key=lambda x: -x['dw'])[:n]
+    trims = sorted([r for r in rows if r['dw'] < 0], key=lambda x:  x['dw'])[:n]
+    return adds, trims
+
+
 def build_fund_view(today_data, snap_1d, snap_5d, first_seen, baseline_date):
     """Per-fund summary: AUM, day/week deltas, recent material moves and first-time buys.
 
@@ -1291,6 +1338,10 @@ def build_fund_view(today_data, snap_1d, snap_5d, first_seen, baseline_date):
         buys_1d, sells_1d, firsts_1d = _compute_fund_actions(etf, etf_code, prev_1d, threshold, first_seen, baseline_date)
         buys_5d, sells_5d, firsts_5d = _compute_fund_actions(etf, etf_code, prev_5d, threshold, first_seen, baseline_date)
 
+        # Weight-based ranking: true manager intent (AUM-growth-neutral)
+        w_adds_5d, w_trims_5d = _compute_weight_ranking(etf, prev_5d)
+        w_adds_1d, w_trims_1d = _compute_weight_ranking(etf, prev_1d)
+
         result[etf_code] = {
             'name': etf.get('name'),
             'aum': aum,
@@ -1305,6 +1356,10 @@ def build_fund_view(today_data, snap_1d, snap_5d, first_seen, baseline_date):
             'material_sells_5d': sells_5d,
             'first_buys_5d': firsts_5d,
             'action_count_5d': len(buys_5d) + len(sells_5d) + len(firsts_5d),
+            'weight_adds_5d': w_adds_5d,
+            'weight_trims_5d': w_trims_5d,
+            'weight_adds_1d': w_adds_1d,
+            'weight_trims_1d': w_trims_1d,
         }
     return result
 
@@ -1902,6 +1957,51 @@ def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_d
 
         if action_count == 0:
             html += f'<div class="empty-msg" style="text-align:left;padding:8px 0;color:#64748b">{window_label}內無重大動作（門檻：AUM × 3%）</div>'
+
+        # ── Weight-based ranking (AUM-growth-neutral) ──
+        w_adds  = info.get(f'weight_adds{suffix}',  [])
+        w_trims = info.get(f'weight_trims{suffix}', [])
+        if w_adds or w_trims:
+            html += f'<div style="margin-top:16px;border-top:1px solid #e2e8f0;padding-top:14px">'
+            html += f'<div style="font-weight:700;font-size:12.5px;color:#475569;margin-bottom:10px">📊 {window_label}持股權重排行（扣除 AUM 成長效果，反映真實加減碼意圖）</div>'
+            html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">'
+
+            # Adds
+            html += '<div>'
+            html += '<div style="font-size:11.5px;font-weight:600;color:#15803d;margin-bottom:6px">▲ 加碼最多（權重↑ pp）</div>'
+            if w_adds:
+                html += '<table><tr><th>股票</th><th class="num">權重變化</th><th class="num">資金變化</th></tr>'
+                for r in w_adds:
+                    tag = ' <span style="font-size:10px;background:#fef3c7;color:#92400e;padding:1px 4px;border-radius:3px">新進</span>' if r['is_new'] else ''
+                    dw_str  = f'+{r["dw"]:.2f}pp'
+                    dcap_str = f'+{_fmt_capital(r["dcap"])}' if r['dcap'] >= 0 else _fmt_capital(r['dcap'])
+                    dcap_cls = 'delta-up' if r['dcap'] >= 0 else 'delta-down'
+                    html += f'<tr><td><b>{r["stock_code"]}</b> {r["stock_name"]}{tag}</td>'
+                    html += f'<td class="num" style="color:#15803d;font-weight:600">{dw_str}</td>'
+                    html += f'<td class="num"><span class="{dcap_cls}">{dcap_str}</span></td></tr>'
+                html += '</table>'
+            else:
+                html += '<div style="color:#94a3b8;font-size:12px">無顯著加碼</div>'
+            html += '</div>'
+
+            # Trims
+            html += '<div>'
+            html += '<div style="font-size:11.5px;font-weight:600;color:#b91c1c;margin-bottom:6px">▼ 減碼最多（權重↓ pp）</div>'
+            if w_trims:
+                html += '<table><tr><th>股票</th><th class="num">權重變化</th><th class="num">資金變化</th></tr>'
+                for r in w_trims:
+                    tag = ' <span style="font-size:10px;background:#fee2e2;color:#991b1b;padding:1px 4px;border-radius:3px">出清</span>' if r['is_exit'] else ''
+                    dw_str  = f'{r["dw"]:.2f}pp'
+                    dcap_str = _fmt_capital(r['dcap'])
+                    html += f'<tr><td><b>{r["stock_code"]}</b> {r["stock_name"]}{tag}</td>'
+                    html += f'<td class="num" style="color:#b91c1c;font-weight:600">{dw_str}</td>'
+                    html += f'<td class="num"><span class="delta-down">{dcap_str}</span></td></tr>'
+                html += '</table>'
+            else:
+                html += '<div style="color:#94a3b8;font-size:12px">無顯著減碼</div>'
+            html += '</div>'
+
+            html += '</div></div>'  # grid + weight section
 
         html += '</div></div>'
 
