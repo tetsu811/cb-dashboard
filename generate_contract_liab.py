@@ -1127,11 +1127,11 @@ def _render_hero(latest, new_codes):
 
     legend_html = (
         legend_card('verified', '✅', '驗證', '次季累計月營收 YoY ≥ +30%',
-                    'CL 訊號被營收兌現，續抱', '#15803d')
+                    'CL 訊號被營收兌現', '#15803d')
         + legend_card('mild', '🟢', '溫和', '累計 YoY +5% ~ +30%',
-                      '緩和成長，持續觀察', '#3f6212')
+                      '緩和成長', '#3f6212')
         + legend_card('warn', '🚨', '警訊', '任一月 YoY ≤ -10%',
-                      '可能退款風險，建議避開', '#b91c1c')
+                      '可能退款風險', '#b91c1c')
         + legend_card('wait', '⏳', '等待', '尚未公告 / 公司未公布',
                       '太早或無資料', '#64748b')
     )
