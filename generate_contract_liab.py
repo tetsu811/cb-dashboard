@@ -728,6 +728,15 @@ tr:hover td{background:var(--hover)}
 .hero-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08);border-color:var(--bl)}
 .hero-card::after{content:'↗';position:absolute;top:10px;right:14px;color:var(--mu);font-size:14px;opacity:.4;transition:opacity .15s}
 .hero-card:hover::after{opacity:1;color:var(--bl)}
+/* 驗證狀態說明 widget */
+.legend{margin-top:10px;background:var(--card);border:1px solid var(--brd);border-radius:12px;overflow:hidden}
+.legend-row{display:grid;grid-template-columns:140px 1fr 1fr;gap:14px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--brd);font-size:12.5px}
+.legend-row:last-child{border-bottom:none}
+.legend-badge{display:flex;align-items:center;gap:8px}
+.legend-count{font-size:11px;color:var(--mu);font-variant-numeric:tabular-nums}
+.legend-rule{color:var(--txt);font-weight:500}
+.legend-hint{font-size:11.5px;font-weight:600}
+@media(max-width:900px){.legend-row{grid-template-columns:120px 1fr;gap:8px}.legend-hint{grid-column:1/3;font-size:11px;color:var(--mu)!important}}
 .hero-card .rk{font-size:11px;color:var(--mu);font-weight:600;letter-spacing:0.4px}
 .hero-card .nm{font-size:16px;font-weight:800;margin:3px 0 2px;color:var(--txt)}
 .hero-card .nm .c{color:var(--bl);font-variant-numeric:tabular-nums;margin-right:6px}
@@ -1099,31 +1108,48 @@ def _hero_card(rank, item, is_new=False):
 
 
 def _render_hero(latest, new_codes):
-    """頂部 hero：top 3 picks + 下次更新 + 策略一句話。"""
-    items = latest['ranked']
-    top3 = items[:3]
+    """頂部 hero：驗證狀態說明 + 下次更新。"""
     quarter = latest['quarter']
-
     next_date, next_label, days = next_publish_date()
     next_str = next_date.strftime('%Y-%m-%d') if next_date else '—'
 
-    cards_html = ''.join(_hero_card(i + 1, it, is_new=(it['code'] in new_codes))
-                          for i, it in enumerate(top3))
+    # 統計各狀態檔數（給說明 widget 顯示）
+    items = latest['ranked']
+    from collections import Counter
+    cnt = Counter((it.get('q1_progress') or {}).get('status_key') for it in items)
+
+    legend_card = lambda key, icon, label, rule, hint, hint_color: f'''
+<div class="legend-row">
+  <div class="legend-badge"><span class="badge {key}">{icon} {label}</span><span class="legend-count">{cnt.get(key, 0)} 檔</span></div>
+  <div class="legend-rule">{rule}</div>
+  <div class="legend-hint" style="color:{hint_color}">{hint}</div>
+</div>'''
+
+    legend_html = (
+        legend_card('verified', '✅', '驗證', '次季累計月營收 YoY ≥ +30%',
+                    'CL 訊號被營收兌現，續抱', '#15803d')
+        + legend_card('mild', '🟢', '溫和', '累計 YoY +5% ~ +30%',
+                      '緩和成長，持續觀察', '#3f6212')
+        + legend_card('warn', '🚨', '警訊', '任一月 YoY ≤ -10%',
+                      '可能退款風險，建議避開', '#b91c1c')
+        + legend_card('wait', '⏳', '等待', '尚未公告 / 公司未公布',
+                      '太早或無資料', '#64748b')
+    )
 
     return f'''<div class="hero">
 <div class="hero-grid">
   <div class="hero-left">
-    <div class="hero-title">🏆 本季前 3 強 <span class="pill">{quarter}</span>
-      <span style="font-size:11px;color:var(--mu);font-weight:500;margin-left:auto">合約負債暴增 + 通過全部篩選 · 依綜合分數排序</span>
+    <div class="hero-title">🎯 Q+1 月營收驗證狀態說明 <span class="pill">{quarter}</span>
+      <span style="font-size:11px;color:var(--mu);font-weight:500;margin-left:auto">看合約負債是否真的轉化為次季營收</span>
     </div>
-    <div class="picks">{cards_html}</div>
+    <div class="legend">{legend_html}</div>
   </div>
   <div class="hero-right">
     <h4>📅 下次資料更新</h4>
     <div class="next">{next_str}</div>
     <div class="due">{next_label} · 約 {days} 天後</div>
     <ul>
-      <li>· 公布日當週末本頁面會更新</li>
+      <li>· 月營收每月 10 日公告</li>
       <li>· Q1 報 5/15 · Q2 報 8/14</li>
       <li>· Q3 報 11/14 · Q4 次年 3/31</li>
     </ul>
