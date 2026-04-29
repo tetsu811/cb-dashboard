@@ -181,17 +181,7 @@ tr:hover .sticky-code{background:var(--hover)}
   <div class="sc am"><div class="n">262%</div><div class="l">榜單平均 YoY</div></div>
   <div class="sc pp"><div class="n">1000%</div><div class="l">榜首 YoY</div></div>
 </div>
-<div class="tabs">
-  <button class="tab active" data-tab="全部">全部<span class="cnt">80</span></button>
-<button class="tab" data-tab="半導體鏈">半導體鏈<span class="cnt">26</span></button>
-<button class="tab" data-tab="機電設備">機電設備<span class="cnt">7</span></button>
-<button class="tab" data-tab="建設工程">建設工程<span class="cnt">11</span></button>
-<button class="tab" data-tab="生技醫療">生技醫療<span class="cnt">5</span></button>
-<button class="tab" data-tab="傳產內需">傳產內需<span class="cnt">8</span></button>
-<button class="tab" data-tab="其他">其他<span class="cnt">23</span></button>
-<button class="tab" data-tab="回測">回測</button>
-</div>
-<div style="padding:20px 28px">
+<div style="padding:20px 28px 0">
   <div class="case">
 <h3>📚 案例：巨漢 (6903) — 為什麼這個策略有用</h3>
 <div class="sub">2025Q1 財報 (5月公布) 合約負債從 9,557 萬暴增到 <b>3.12 億 (+225% QoQ, +1438% YoY)</b>，
@@ -315,6 +305,18 @@ tr:hover .sticky-code{background:var(--hover)}
     評分權重：YoY 30% / QoQ 15% / CL/TTM營收 20% / CL/總資產 10% / 連續加速 10% / 大戶買超 15%。
     <br><b>資料區間</b>：2024Q1 → 2024Q2 → 2024Q3 → 2024Q4 → 2025Q1 → 2025Q2 → 2025Q3 → 2025Q4（FinMind 為主、MOPS 為備援）
   </div>
+</div>
+<div id="rank-section" class="tabs" style="position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,0.04)">
+  <button class="tab active" data-tab="全部">全部<span class="cnt">80</span></button>
+<button class="tab" data-tab="半導體鏈">半導體鏈<span class="cnt">26</span></button>
+<button class="tab" data-tab="機電設備">機電設備<span class="cnt">7</span></button>
+<button class="tab" data-tab="建設工程">建設工程<span class="cnt">11</span></button>
+<button class="tab" data-tab="生技醫療">生技醫療<span class="cnt">5</span></button>
+<button class="tab" data-tab="傳產內需">傳產內需<span class="cnt">8</span></button>
+<button class="tab" data-tab="其他">其他<span class="cnt">23</span></button>
+<button class="tab" data-tab="回測">回測</button>
+</div>
+<div style="padding:14px 28px 20px">
   <div style="font-size:11.5px;color:var(--mu);margin:0 0 8px;text-align:right">💡 點代號或名稱可在 Goodinfo 開啟個股財務資料</div>
   <div class="scroll-hint">← 表格可橫向滑動 →</div>
   <div class="pane active" data-pane="全部"><table>
@@ -3352,7 +3354,7 @@ tr:hover .sticky-code{background:var(--hover)}
   資料源：<a href="https://finmindtrade.com/" target="_blank">FinMind</a>（贊助會員）·
   備援 <a href="https://mops.twse.com.tw/" target="_blank">MOPS</a> ·
   <a href="https://goodinfo.tw/" target="_blank">Goodinfo</a><br>
-  生成於 2026-04-29 13:18　·　僅供研究參考，非投資建議
+  生成於 2026-04-29 23:21　·　僅供研究參考，非投資建議
 </div>
 <script>
 document.querySelectorAll('.tab').forEach(t => {
@@ -3360,6 +3362,9 @@ document.querySelectorAll('.tab').forEach(t => {
     const k = t.dataset.tab;
     document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x.dataset.tab === k));
     document.querySelectorAll('.pane').forEach(x => x.classList.toggle('active', x.dataset.pane === k));
+    // 切換後捲到 tabs 列頂部，確保使用者看到變動的 pane
+    const sec = document.getElementById('rank-section');
+    if (sec) sec.scrollIntoView({behavior: 'smooth', block: 'start'});
   });
 });
 </script>

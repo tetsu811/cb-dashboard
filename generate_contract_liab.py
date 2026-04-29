@@ -1295,10 +1295,7 @@ def render_html(latest):
   <div class="sc am"><div class="n">{stat_avg_yoy * 100:.0f}%</div><div class="l">榜單平均 YoY</div></div>
   <div class="sc pp"><div class="n">{stat_top_yoy * 100:.0f}%</div><div class="l">榜首 YoY</div></div>
 </div>
-<div class="tabs">
-  {chr(10).join(tab_html)}
-</div>
-<div style="padding:20px 28px">
+<div style="padding:20px 28px 0">
   {case_html}
   {tracking_html}
   <div class="box" style="margin-top:18px">
@@ -1308,6 +1305,11 @@ def render_html(latest):
     評分權重：YoY {W_YOY * 100:.0f}% / QoQ {W_QOQ * 100:.0f}% / CL/TTM營收 {W_TO_REV * 100:.0f}% / CL/總資產 {W_TO_ASSETS * 100:.0f}% / 連續加速 {W_ACCEL * 100:.0f}% / 大戶買超 {W_BIGHOLDER * 100:.0f}%。
     <br><b>資料區間</b>：{quarter_str}（FinMind 為主、MOPS 為備援）
   </div>
+</div>
+<div id="rank-section" class="tabs" style="position:sticky;top:0;z-index:10;box-shadow:0 2px 6px rgba(0,0,0,0.04)">
+  {chr(10).join(tab_html)}
+</div>
+<div style="padding:14px 28px 20px">
   <div style="font-size:11.5px;color:var(--mu);margin:0 0 8px;text-align:right">💡 點代號或名稱可在 Goodinfo 開啟個股財務資料</div>
   <div class="scroll-hint">← 表格可橫向滑動 →</div>
   {chr(10).join(pane_html)}
@@ -1324,6 +1326,9 @@ document.querySelectorAll('.tab').forEach(t => {{
     const k = t.dataset.tab;
     document.querySelectorAll('.tab').forEach(x => x.classList.toggle('active', x.dataset.tab === k));
     document.querySelectorAll('.pane').forEach(x => x.classList.toggle('active', x.dataset.pane === k));
+    // 切換後捲到 tabs 列頂部，確保使用者看到變動的 pane
+    const sec = document.getElementById('rank-section');
+    if (sec) sec.scrollIntoView({{behavior: 'smooth', block: 'start'}});
   }});
 }});
 </script>
