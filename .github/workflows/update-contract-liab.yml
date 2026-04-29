@@ -1,0 +1,53 @@
+name: Update 合約負債策略 Dashboard
+
+on:
+  schedule:
+    # 台灣每日 19:30 = UTC 11:30
+    # 月營收每月 10 號公告，所以每天跑能即時抓到最新驗證；
+    # 若 ranked / 狀態無變化，notify 腳本會自動跳過 LINE 推播。
+    - cron: '30 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 lxml line-bot-sdk
+
+      - name: Generate dashboard
+        env:
+          FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
+        run: python generate_contract_liab.py
+
+      - name: Send LINE notification (only on changes)
+        env:
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
+        run: python notify_contract_liab.py
+        continue-on-error: true   # LINE 失敗不阻擋 commit
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add contract_liab_index.html contract_liab_latest.json \
+                  contract_liab_data/ contract_liab_notify_state.json \
+                  stock_info_cache.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto update 合約負債策略 dashboard $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash origin main
+            git push
+          fi
