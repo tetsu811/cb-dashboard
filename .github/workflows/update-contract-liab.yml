@@ -23,27 +23,29 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 lxml line-bot-sdk
+        run: pip install requests beautifulsoup4 lxml
 
       - name: Generate dashboard
         env:
           FINMIND_TOKEN: ${{ secrets.FINMIND_TOKEN }}
         run: python generate_contract_liab.py
 
-      - name: Send LINE notification (only on changes)
-        env:
-          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
-          LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
-        run: python notify_contract_liab.py
-        continue-on-error: true   # LINE 失敗不阻擋 commit
+      # LINE 通知已停用。如需啟用：
+      # 1) 在 repo secrets 加 LINE_CHANNEL_ACCESS_TOKEN + LINE_CHANNEL_SECRET
+      # 2) 取消下方註解
+      # - name: Send LINE notification (only on changes)
+      #   env:
+      #     LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+      #     LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
+      #   run: pip install line-bot-sdk && python notify_contract_liab.py
+      #   continue-on-error: true
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add contract_liab_index.html contract_liab_latest.json \
-                  contract_liab_data/ contract_liab_notify_state.json \
-                  stock_info_cache.json
+                  contract_liab_data/ stock_info_cache.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
