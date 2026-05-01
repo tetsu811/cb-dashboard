@@ -498,7 +498,7 @@ def render_html(s2_rows, s3_rows, perf, today_str, new_today, lift_tomorrow):
 <div id="pane-s2" class="pane active">
   <div class="ttl">S2 處置期間樣本</div>
   <div class="desc">
-    回測區間 2024-04 ~ 2026-04，N=994，全樣本勝率 59.3%、平均 +3.80%、PF 1.94。
+    N=994，全樣本勝率 59.3%、平均 +3.80%、PF 1.94。
     <span class="tag">還原權息價</span><span class="tag">區間中位數約 8.6 個交易日</span>
   </div>
   <div class="disclaimer">
@@ -545,7 +545,7 @@ def render_html(s2_rows, s3_rows, perf, today_str, new_today, lift_tomorrow):
     <b>處置股機制：</b>個股因連續異常波動觸發 TWSE 處置，期間以「人工管制撮合」（5 或 20 分鐘一次）+
     預收款券，散戶投機行為受限，籌碼換手率歷史上呈現下降，解除後歷史樣本常見回補。<br/><br/>
 
-    <b>S2 處置期間區間樣本</b>（2024-04 ~ 2026-04，1316 處置事件，還原權息價）<br/>
+    <b>S2 處置期間區間樣本</b><br/>
     &nbsp;&nbsp;• 無篩選 N=994，勝率 59.3%，平均 +3.80%，PF 1.94，σ 15.8%<br/>
     &nbsp;&nbsp;• 首次處置 only：N=264，勝率 59.1%，平均 +4.00%，PF 2.05<br/>
     &nbsp;&nbsp;• 重複處置 only：N=730，勝率 59.3%，平均 +3.73%，PF 1.90<br/>
