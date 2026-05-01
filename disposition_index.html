@@ -84,7 +84,6 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
 <div id="pane-s2" class="pane active">
   <div class="ttl">S2 處置期間樣本</div>
   <div class="desc">
-    歷史回測定義：以 period_start 收盤為起算點、period_end 收盤為終點的區間報酬統計。
     回測區間 2024-04 ~ 2026-04，N=994，全樣本勝率 59.3%、平均 +3.80%、PF 1.94。
     <span class="tag">還原權息價</span><span class="tag">區間中位數約 8.6 個交易日</span>
   </div>
@@ -101,12 +100,12 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   </div>
   <div class="box">
     <b>名詞定義：</b><br/>
-    • <b>進場日量比</b> = period_start 當日成交量 ÷ 該股 period_start 前 10 個交易日的平均成交量<br/>
+    • <b>進場日量比</b> = 處置生效當日成交量 ÷ 該股前 10 個交易日的平均成交量<br/>
     &nbsp;&nbsp;&nbsp;例：量比 0.19 表示該日成交量僅為前 10 日均量的 19%（大幅量縮）；2.0 表示翻倍（爆量）<br/>
-    • <b>紅K</b> = period_start 當日收盤價 &gt; 開盤價<br/>
-    • <b>進場日漲幅</b> = (period_start 收盤 − period_start 開盤) ÷ period_start 開盤 × 100%<br/>
-    • <b>區間報酬</b> = (最新收盤 − period_start 收盤) ÷ period_start 收盤 × 100%<br/>
-    • <b>區間最大回撤</b> = (period_start 至今最低收盤 − period_start 收盤) ÷ period_start 收盤 × 100%
+    • <b>紅K</b> = 處置生效當日收盤 &gt; 開盤<br/>
+    • <b>進場日漲幅</b> = (生效日收盤 − 生效日開盤) ÷ 生效日開盤 × 100%<br/>
+    • <b>區間報酬</b> = (最新收盤 − 生效日收盤) ÷ 生效日收盤 × 100%<br/>
+    • <b>區間最大回撤</b> = (生效以來最低收盤 − 生效日收盤) ÷ 生效日收盤 × 100%
   </div>
   <table><thead><tr>
   <th class="center" onclick="sortTable(this)">分組</th>
@@ -116,7 +115,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <th class="center" onclick="sortTable(this)">處置起</th>
   <th class="center" onclick="sortTable(this)">處置迄</th>
   <th class="num" onclick="sortTable(this)">剩餘天數</th>
-  <th class="num" onclick="sortTable(this)">period_start 收盤</th>
+  <th class="num" onclick="sortTable(this)">生效日收盤</th>
   <th class="num" onclick="sortTable(this)">最新價</th>
   <th class="num" onclick="sortTable(this)">區間報酬</th>
   <th class="num" onclick="sortTable(this)">區間最大回撤</th>
@@ -1107,7 +1106,6 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
 <div id="pane-s3" class="pane">
   <div class="ttl">S3 解除後 10 日樣本</div>
   <div class="desc">
-    歷史回測定義：period_end + 1 個交易日開盤為起算點、再 10 個交易日後收盤為終點的區間報酬統計。
     N=904，勝率 48.1%、平均 +3.55%、PF 1.63、σ 20.2%。
     <span class="tag">中位數 -0.62%</span><span class="tag">屬肥尾分布</span>
   </div>
@@ -1120,7 +1118,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <th onclick="sortTable(this)">股名</th>
   <th class="center" onclick="sortTable(this)">解除日</th>
   <th class="num" onclick="sortTable(this)">距解除日</th>
-  <th class="num" onclick="sortTable(this)">period_end+1 開盤</th>
+  <th class="num" onclick="sortTable(this)">解除次日開盤</th>
   <th class="num" onclick="sortTable(this)">最新價</th>
   <th class="num" onclick="sortTable(this)">區間報酬</th>
   <th class="center">區間狀態</th>
@@ -1856,28 +1854,21 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
     <b>處置股機制：</b>個股因連續異常波動觸發 TWSE 處置，期間以「人工管制撮合」（5 或 20 分鐘一次）+
     預收款券，散戶投機行為受限，籌碼換手率歷史上呈現下降，解除後歷史樣本常見回補。<br/><br/>
 
-    <b>S2 處置期間區間樣本</b><br/>
-    回測定義：period_start 收盤 → period_end 收盤<br/>
-    回測（2024-04 ~ 2026-04，1316 處置事件，還原權息價）：<br/>
+    <b>S2 處置期間區間樣本</b>（2024-04 ~ 2026-04，1316 處置事件，還原權息價）<br/>
     &nbsp;&nbsp;• 無篩選 N=994，勝率 59.3%，平均 +3.80%，PF 1.94，σ 15.8%<br/>
     &nbsp;&nbsp;• 首次處置 only：N=264，勝率 59.1%，平均 +4.00%，PF 2.05<br/>
     &nbsp;&nbsp;• 重複處置 only：N=730，勝率 59.3%，平均 +3.73%，PF 1.90<br/>
     &nbsp;&nbsp;• 時間穩定性：2024 PF 1.69 / 2025 PF 2.37 / 2026 PF 1.82<br/><br/>
 
-    <b>S2 子分組（依歷史回測勝率分層）</b><br/>
+    <b>S2 子分組</b><br/>
     &nbsp;&nbsp;• A 量縮&lt;30%：N=350，勝率 68.3%，PF 3.34<br/>
     &nbsp;&nbsp;• B 量縮+紅K+價≥20：N=226，勝率 65.0%，PF 2.93<br/>
     &nbsp;&nbsp;• D 反指標（量增 1~2x / 低於 20 元 / 進場日漲&gt;5%）：歷史勝率 &lt;50%<br/><br/>
 
     <b>S3 解除後 10 日區間樣本</b><br/>
-    回測定義：period_end + 1 開盤 → period_end + 10 收盤<br/>
-    回測：N=904，勝率 48.1%，平均 +3.55%，PF 1.63，σ 20.2%<br/>
-    &nbsp;&nbsp;• 中位數 -0.62%，典型肥尾分布<br/><br/>
+    N=904，勝率 48.1%，平均 +3.55%，PF 1.63，σ 20.2%；中位數 -0.62%，典型肥尾分布<br/><br/>
 
-    <b>歷史回測未顯示 edge 的策略：</b><br/>
-    S1 進處置前動能延續（公告隔日進、處置生效日出）：勝率 37%，平均 -0.97%，PF 0.67<br/><br/>
-
-    <b>方法學注意：</b>所有回測未含手續費及滑價。處置股因人工管制撮合（5 或 20 分鐘一次），
+    <b>方法學注意：</b>所有數據未含手續費及滑價。處置股因人工管制撮合，
     歷史成交量通常低於同股平日，實際買賣價差可能高於一般股票。樣本標準差 σ 15.8%（S2）、
     20.2%（S3），個別事件之變異甚大，平均值不代表單一事件之預期結果。
   </div>
