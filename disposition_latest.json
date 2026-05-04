@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-04T12:14:25",
+  "fetched_at": "2026-05-04T13:07:33",
   "date": "2026-05-04",
   "s2_rows": [
     {
@@ -1401,6 +1401,26 @@
       "tier_reason": "量縮<30%",
       "vol_ratio": 0.23,
       "s_intraday": 0.0
+    },
+    {
+      "stock_id": "8291",
+      "stock_name": "尚茂",
+      "disposition_cnt": 1,
+      "period_start": "2026-05-04",
+      "period_end": "2026-05-15",
+      "days_left": 11,
+      "held_days": 1,
+      "entry_price": 24.25,
+      "last_price": 24.25,
+      "last_date": "2026-05-04",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 60.6,
+      "is_first": true,
+      "tier": "C",
+      "tier_reason": "一般",
+      "vol_ratio": 4.57,
+      "s_intraday": 0.0
     }
   ],
   "s3_rows": [
@@ -2558,9 +2578,9 @@
     "s3_win": 58.2
   },
   "stats": {
-    "s2_active": 70,
+    "s2_active": 71,
     "s3_tracking": 88,
-    "new_today": 0,
+    "new_today": 1,
     "lift_tomorrow": 11
   }
 }
