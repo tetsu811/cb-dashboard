@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-06T11:34:04",
+  "fetched_at": "2026-05-06T12:20:22",
   "date": "2026-05-06",
   "s2_rows": [
     {
@@ -181,6 +181,46 @@
       "tier_reason": "追漲",
       "vol_ratio": 0.6,
       "s_intraday": 9.54
+    },
+    {
+      "stock_id": "2455",
+      "stock_name": "全新",
+      "disposition_cnt": 1,
+      "period_start": "2026-05-06",
+      "period_end": "2026-05-19",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 348.0,
+      "last_price": 348.0,
+      "last_date": "2026-05-06",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 9.43,
+      "is_first": true,
+      "tier": "C",
+      "tier_reason": "一般",
+      "vol_ratio": 0.35,
+      "s_intraday": -6.7
+    },
+    {
+      "stock_id": "8027",
+      "stock_name": "鈦昇",
+      "disposition_cnt": 4,
+      "period_start": "2026-05-06",
+      "period_end": "2026-05-19",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 195.5,
+      "last_price": 195.5,
+      "last_date": "2026-05-06",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 19.94,
+      "is_first": false,
+      "tier": "A",
+      "tier_reason": "量縮<30%",
+      "vol_ratio": 0.23,
+      "s_intraday": -2.25
     },
     {
       "stock_id": "3529",
@@ -723,6 +763,26 @@
       "s_intraday": -0.4
     },
     {
+      "stock_id": "6405",
+      "stock_name": "悅城",
+      "disposition_cnt": 1,
+      "period_start": "2026-05-06",
+      "period_end": "2026-05-19",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 55.6,
+      "last_price": 55.6,
+      "last_date": "2026-05-06",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 32.07,
+      "is_first": true,
+      "tier": "D",
+      "tier_reason": "量增",
+      "vol_ratio": 1.22,
+      "s_intraday": -7.33
+    },
+    {
       "stock_id": "2484",
       "stock_name": "希華",
       "disposition_cnt": 1,
@@ -845,7 +905,7 @@
     {
       "stock_id": "3229",
       "stock_name": "晟鈦",
-      "disposition_cnt": 2,
+      "disposition_cnt": 1,
       "period_start": "2026-04-24",
       "period_end": "2026-05-08",
       "days_left": 2,
@@ -856,7 +916,7 @@
       "ret_pct": 14.78,
       "max_dd_pct": 0.0,
       "pre_5d_ret": 21.17,
-      "is_first": false,
+      "is_first": true,
       "tier": "C",
       "tier_reason": "一般",
       "vol_ratio": 0.56,
@@ -1831,10 +1891,10 @@
       "disposition_cnt": 10,
       "period_end": "2026-04-28",
       "entry_price": 33.46,
-      "last_price": 31.1,
-      "last_date": "2026-05-05",
-      "ret_pct": -7.05,
-      "days_held": 4,
+      "last_price": 29.1,
+      "last_date": "2026-05-06",
+      "ret_pct": -13.03,
+      "days_held": 5,
       "in_window": true,
       "status": "tracking"
     },
@@ -2480,14 +2540,14 @@
     "s2_n": 155,
     "s2_avg": 5.59,
     "s2_win": 64.5,
-    "s3_n": 93,
-    "s3_avg": 8.7,
-    "s3_win": 66.7
+    "s3_n": 94,
+    "s3_avg": 8.47,
+    "s3_win": 66.0
   },
   "stats": {
-    "s2_active": 54,
+    "s2_active": 57,
     "s3_tracking": 107,
-    "new_today": 0,
+    "new_today": 3,
     "lift_tomorrow": 5
   }
 }
