@@ -68,13 +68,13 @@ footer b{color:#fbbf24}
 <div class="wrap">
 <header>
 <h1>台灣預算法案監控 <span style="color:var(--muted);font-weight:400;font-size:14px">Budget Bill Monitor</span></h1>
-<div class="subtitle">每日自動抓取立法院議案提案 API，依關鍵字字典分類到受益產業與代表個股。更新於 2026-05-06 12:11 (UTC+8)</div>
+<div class="subtitle">每日自動抓取立法院議案提案 API，依關鍵字字典分類到受益產業與代表個股。更新於 2026-05-06 20:15 (UTC+8)</div>
 </header>
 
     <div class="kpis">
       <div class="kpi"><div class="kpi-label">預算/撥款類</div><div class="kpi-value">65</div></div>
       <div class="kpi"><div class="kpi-label">產業政策類</div><div class="kpi-value">92</div></div>
-      <div class="kpi kpi-hot"><div class="kpi-label">今日新提案</div><div class="kpi-value">3</div></div>
+      <div class="kpi kpi-hot"><div class="kpi-label">今日新提案</div><div class="kpi-value">0</div></div>
       <div class="kpi kpi-warn"><div class="kpi-label">今日狀態變更</div><div class="kpi-value">0</div></div>
     </div>
     
@@ -530,7 +530,7 @@ footer b{color:#fbbf24}
             <h2>農業/糧食</h2>
             <div class="sector-meta">
               <span class="sector-stat">法案 11</span>
-              <span class="sector-stat new">新提案 1</span>
+              
               
             </div>
           </div>
@@ -541,7 +541,7 @@ footer b{color:#fbbf24}
             
         <div class="bill">
           <div class="bill-head">
-            <span class="badge badge-new">新提案</span>
+            <span class="badge badge-stale">無變化</span>
             <span class="status" style="background:#6b7280">排入院會</span>
             <span class="bill-date">2021-10-21</span>
           </div>
@@ -1014,7 +1014,7 @@ footer b{color:#fbbf24}
             <h2>觀光/文化</h2>
             <div class="sector-meta">
               <span class="sector-stat">法案 53</span>
-              <span class="sector-stat new">新提案 1</span>
+              
               
             </div>
           </div>
@@ -1025,7 +1025,7 @@ footer b{color:#fbbf24}
             
         <div class="bill">
           <div class="bill-head">
-            <span class="badge badge-new">新提案</span>
+            <span class="badge badge-stale">無變化</span>
             <span class="status" style="background:#6b7280">排入院會</span>
             <span class="bill-date">2021-10-21</span>
           </div>
@@ -1981,34 +1981,6 @@ footer b{color:#fbbf24}
         </section>
         
 
-            <section class="sector unmatched" id="sec-general">
-              <div class="sector-head">
-                <h2>一般預算 / 特別條例（未對應特定產業）</h2>
-                <div class="sector-meta"><span class="sector-stat">1</span></div>
-              </div>
-              <div class="bills">
-                
-        <div class="bill">
-          <div class="bill-head">
-            <span class="badge badge-new">新提案</span>
-            <span class="status" style="background:#6b7280">排入院會</span>
-            <span class="bill-date">2021-10-21</span>
-          </div>
-          <div class="bill-name">「因應中東戰事穩定民生經濟發放全民支援金特別條例草案」，請審議案。</div>
-          <div class="bill-meta">
-            <span class="bill-org">本院委員羅明才等23人</span>
-            <span class="bill-proposer">提案人：羅明才 李彥秀 鄭正鈐 游 顥 林沛祥</span>
-          </div>
-          <div class="bill-chips"><span class="chip chip-budget">💰 預算類</span></div>
-          <div class="bill-foot">
-            <span class="bill-no">#202110210240000</span>
-            <a class="pdf" href="https://ppg.ly.gov.tw/ppg/download/agenda1/02/pdf/11/05/09/LCEWA01_110509_00044.pdf" target="_blank" rel="noopener">原文 PDF</a>
-          </div>
-        </div>
-        
-              </div>
-            </section>
-            
 <footer>
 <b>資料來源：</b>立法院開放資料平台 ID20 議案提案 API（data.ly.gov.tw）<br>
 <b>分類方式：</b>以 budget_keywords.json 定義的關鍵字規則比對法案名稱與提案單位，未使用 LLM。<br>
