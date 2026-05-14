@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-14T11:33:53",
+  "fetched_at": "2026-05-14T12:17:23",
   "date": "2026-05-14",
   "s2_rows": [
     {
@@ -103,6 +103,26 @@
       "s_intraday": -2.69
     },
     {
+      "stock_id": "7769",
+      "stock_name": "鴻勁",
+      "disposition_cnt": 1,
+      "period_start": "2026-05-14",
+      "period_end": "2026-05-27",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 7560.0,
+      "last_price": 7560.0,
+      "last_date": "2026-05-14",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 29.56,
+      "is_first": true,
+      "tier": "B",
+      "tier_reason": "量縮+紅K+價≥20",
+      "vol_ratio": 0.45,
+      "s_intraday": 1.61
+    },
+    {
       "stock_id": "4951",
       "stock_name": "精拓科",
       "disposition_cnt": 5,
@@ -125,7 +145,7 @@
     {
       "stock_id": "6658",
       "stock_name": "聯策",
-      "disposition_cnt": 2,
+      "disposition_cnt": 1,
       "period_start": "2026-05-05",
       "period_end": "2026-05-18",
       "days_left": 4,
@@ -136,7 +156,7 @@
       "ret_pct": 22.93,
       "max_dd_pct": -0.96,
       "pre_5d_ret": 29.22,
-      "is_first": false,
+      "is_first": true,
       "tier": "D",
       "tier_reason": "追漲",
       "vol_ratio": 0.26,
@@ -185,22 +205,22 @@
     {
       "stock_id": "5464",
       "stock_name": "霖宏",
-      "disposition_cnt": 8,
-      "period_start": "2026-05-11",
-      "period_end": "2026-05-22",
-      "days_left": 8,
-      "held_days": 4,
-      "entry_price": 57.6,
+      "disposition_cnt": 3,
+      "period_start": "2026-05-14",
+      "period_end": "2026-05-27",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 59.5,
       "last_price": 59.5,
       "last_date": "2026-05-14",
-      "ret_pct": 3.3,
+      "ret_pct": 0.0,
       "max_dd_pct": 0.0,
-      "pre_5d_ret": 60.45,
+      "pre_5d_ret": 24.87,
       "is_first": false,
-      "tier": "D",
-      "tier_reason": "量增",
-      "vol_ratio": 1.21,
-      "s_intraday": 9.51
+      "tier": "C",
+      "tier_reason": "一般",
+      "vol_ratio": 0.48,
+      "s_intraday": -3.25
     },
     {
       "stock_id": "6173",
@@ -365,22 +385,22 @@
     {
       "stock_id": "8042",
       "stock_name": "金山電",
-      "disposition_cnt": 8,
-      "period_start": "2026-05-11",
-      "period_end": "2026-05-22",
-      "days_left": 8,
-      "held_days": 4,
-      "entry_price": 88.9,
+      "disposition_cnt": 3,
+      "period_start": "2026-05-14",
+      "period_end": "2026-05-27",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 109.0,
       "last_price": 109.0,
       "last_date": "2026-05-14",
-      "ret_pct": 22.61,
+      "ret_pct": 0.0,
       "max_dd_pct": 0.0,
-      "pre_5d_ret": 38.04,
+      "pre_5d_ret": 28.24,
       "is_first": false,
-      "tier": "D",
-      "tier_reason": "追漲",
-      "vol_ratio": 0.52,
-      "s_intraday": 6.09
+      "tier": "C",
+      "tier_reason": "一般",
+      "vol_ratio": 0.33,
+      "s_intraday": -6.44
     },
     {
       "stock_id": "6182",
@@ -705,7 +725,7 @@
     {
       "stock_id": "6861",
       "stock_name": "睿生光電",
-      "disposition_cnt": 3,
+      "disposition_cnt": 2,
       "period_start": "2026-05-08",
       "period_end": "2026-05-21",
       "days_left": 7,
@@ -2131,9 +2151,9 @@
     "s3_win": 50.4
   },
   "stats": {
-    "s2_active": 48,
+    "s2_active": 49,
     "s3_tracking": 89,
-    "new_today": 0,
+    "new_today": 3,
     "lift_tomorrow": 0
   }
 }
