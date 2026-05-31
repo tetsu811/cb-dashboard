@@ -33,7 +33,7 @@ import statistics
 import sys
 import time
 from collections import defaultdict
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 
 import requests
@@ -570,7 +570,7 @@ def attach_revenue_and_price(token, items, target_quarter):
     today = date.today()
     rev_end = today.strftime('%Y-%m-%d')
 
-    px_start = (today.replace(month=max(today.month - 3, 1))).strftime('%Y-%m-%d')
+    px_start = (today - timedelta(days=90)).strftime('%Y-%m-%d')
 
     for it in items:
         sid = it['code']
