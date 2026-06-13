@@ -1,13 +1,13 @@
 {
-  "trade_date": "2026-06-12",
+  "trade_date": "2026-06-13",
   "stocks": {
     "AAPL": {
       "symbol": "AAPL",
       "name": "Apple",
       "industry": "Consumer Electronics",
-      "price": 295.6300048828125,
-      "day_pct": 1.3889904990249002,
-      "market_cap": 4342023192576,
+      "price": 291.1300048828125,
+      "day_pct": -1.5221729613622226,
+      "market_cap": 4275929874432,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.09239720270243074,
@@ -96,7 +96,7 @@
         "consensus": 326.47,
         "high": 400,
         "low": 253,
-        "upside_pct": 10.431957043539095
+        "upside_pct": 12.13890513669754
       },
       "grades": {
         "strong_buy": 7,
@@ -112,9 +112,9 @@
       "symbol": "ADBE",
       "name": "ADBE",
       "industry": "Software - Application",
-      "price": 218.8000030517578,
-      "day_pct": -6.247322618051953,
-      "market_cap": 88438964224,
+      "price": 204.02000427246094,
+      "day_pct": -6.755026770178163,
+      "market_cap": 82464882688,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.1600228246952068,
@@ -191,12 +191,19 @@
       },
       "score": 21,
       "score_max": 24,
-      "cross_check": [],
+      "cross_check": [
+        {
+          "field": "current_ratio",
+          "yf": 0.751,
+          "fmp": 0.9963725490196078,
+          "diff_pct": 28.1
+        }
+      ],
       "price_target": {
         "consensus": 301.71,
         "high": 447,
         "low": 220,
-        "upside_pct": 37.8930510931618
+        "upside_pct": 47.88255743641579
       },
       "grades": {
         "strong_buy": 3,
@@ -212,9 +219,9 @@
       "symbol": "AI",
       "name": "AI",
       "industry": "Software - Infrastructure",
-      "price": 11.270000457763672,
-      "day_pct": 4.351854247484299,
-      "market_cap": 1637432064,
+      "price": 10.899999618530273,
+      "day_pct": -3.283059664638366,
+      "market_cap": 1583674240,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.525,
@@ -306,9 +313,9 @@
       "symbol": "AMAT",
       "name": "AMAT",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 552.6400146484375,
-      "day_pct": 11.192934506298169,
-      "market_cap": 438773743616,
+      "price": 567.25,
+      "day_pct": 2.6436712804549067,
+      "market_cap": 450373484544,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.114,
@@ -377,7 +384,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.66,
+          "value": 1.84,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -400,9 +407,9 @@
       "symbol": "AMD",
       "name": "AMD",
       "industry": "Semiconductors",
-      "price": 488.45001220703125,
-      "day_pct": 7.968616002854234,
-      "market_cap": 796466872320,
+      "price": 511.57000732421875,
+      "day_pct": 4.733339039694395,
+      "market_cap": 834166325248,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.3400691202641014,
@@ -491,7 +498,7 @@
         "consensus": 449.64,
         "high": 665,
         "low": 260,
-        "upside_pct": -7.945544321243974
+        "upside_pct": -12.10587142278833
       },
       "grades": {
         "strong_buy": 5,
@@ -507,9 +514,9 @@
       "symbol": "AMZN",
       "name": "Amazon",
       "industry": "Internet Retail",
-      "price": 241.50999450683594,
-      "day_pct": 1.474787607914263,
-      "market_cap": 2597949538304,
+      "price": 238.5500030517578,
+      "day_pct": -1.225618617201507,
+      "market_cap": 2566108479488,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.10447843918744877,
@@ -610,7 +617,7 @@
         "consensus": 307.77,
         "high": 330,
         "low": 175,
-        "upside_pct": 27.43571984607393
+        "upside_pct": 29.016975922328374
       },
       "grades": {
         "strong_buy": 15,
@@ -626,9 +633,9 @@
       "symbol": "ANET",
       "name": "ANET",
       "industry": "Computer Hardware",
-      "price": 156.39999389648438,
-      "day_pct": 3.0574588545069004,
-      "market_cap": 196934090752,
+      "price": 163.24000549316406,
+      "day_pct": 4.37340911995614,
+      "market_cap": 205546815488,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.351,
@@ -814,9 +821,9 @@
       "symbol": "APH",
       "name": "APH",
       "industry": "Electronic Components",
-      "price": 152.4600067138672,
-      "day_pct": 2.1712943751903246,
-      "market_cap": 187561558016,
+      "price": 153.8000030517578,
+      "day_pct": 0.8789166200192433,
+      "market_cap": 189210066944,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.584,
@@ -908,9 +915,9 @@
       "symbol": "ASML",
       "name": "ASML",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 1899.47998046875,
-      "day_pct": 9.53125347552568,
-      "market_cap": 732093153280,
+      "price": 1863.550048828125,
+      "day_pct": -1.8915667451129603,
+      "market_cap": 718245134336,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.132,
@@ -1002,9 +1009,9 @@
       "symbol": "AVGO",
       "name": "Broadcom",
       "industry": "Semiconductors",
-      "price": 385.57000732421875,
-      "day_pct": 3.6199948937802207,
-      "market_cap": 1834380296192,
+      "price": 382.07000732421875,
+      "day_pct": -0.9077469547720596,
+      "market_cap": 1817728778240,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.479,
@@ -1073,7 +1080,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.72,
+          "value": 0.7,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1096,9 +1103,9 @@
       "symbol": "AXTI",
       "name": "AXTI",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 88.33999633789062,
-      "day_pct": 3.5760292995940413,
-      "market_cap": 5779483648,
+      "price": 97.18000030517578,
+      "day_pct": 10.006796845987086,
+      "market_cap": 6357825024,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.391,
@@ -1190,9 +1197,9 @@
       "symbol": "CDNS",
       "name": "CDNS",
       "industry": "Software - Application",
-      "price": 383.739990234375,
-      "day_pct": -0.36092089185844056,
-      "market_cap": 105841631232,
+      "price": 384.9599914550781,
+      "day_pct": 0.31792392029770244,
+      "market_cap": 106178125824,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.187,
@@ -1284,9 +1291,9 @@
       "symbol": "CIEN",
       "name": "CIEN",
       "industry": "Communication Equipment",
-      "price": 445.2200012207031,
-      "day_pct": 2.4318434309551717,
-      "market_cap": 63022194688,
+      "price": 445.9800109863281,
+      "day_pct": 0.17070431776227135,
+      "market_cap": 63129776128,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.395,
@@ -1378,9 +1385,9 @@
       "symbol": "COHR",
       "name": "COHR",
       "industry": "Scientific & Technical Instruments",
-      "price": 363.5799865722656,
-      "day_pct": 2.4832984275494185,
-      "market_cap": 71130546176,
+      "price": 385.0299987792969,
+      "day_pct": 5.899668023329951,
+      "market_cap": 75327012864,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.205,
@@ -1472,9 +1479,9 @@
       "symbol": "CRM",
       "name": "CRM",
       "industry": "Software - Application",
-      "price": 166.4499969482422,
-      "day_pct": -2.6152593427275606,
-      "market_cap": 136322547712,
+      "price": 165.88999938964844,
+      "day_pct": -0.3364359079969681,
+      "market_cap": 135863910400,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.133,
@@ -1543,7 +1550,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.87,
+          "value": 0.82,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1566,9 +1573,9 @@
       "symbol": "CRWD",
       "name": "CRWD",
       "industry": "Software - Infrastructure",
-      "price": 691.530029296875,
-      "day_pct": 6.760434699524298,
-      "market_cap": 176039215104,
+      "price": 682.7999877929688,
+      "day_pct": -1.2624240646183726,
+      "market_cap": 173816856576,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.256,
@@ -1660,9 +1667,9 @@
       "symbol": "CSCO",
       "name": "CSCO",
       "industry": "Communication Equipment",
-      "price": 121.83000183105469,
-      "day_pct": 2.550503957459327,
-      "market_cap": 480184991744,
+      "price": 121.0999984741211,
+      "day_pct": -0.5991983468455642,
+      "market_cap": 477307731968,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.07073365045765924,
@@ -1751,7 +1758,7 @@
         "consensus": 122.3,
         "high": 137,
         "low": 100,
-        "upside_pct": 0.3857819600110244
+        "upside_pct": 0.9909178703543436
       },
       "grades": {
         "strong_buy": 4,
@@ -1767,9 +1774,9 @@
       "symbol": "DDOG",
       "name": "DDOG",
       "industry": "Software - Application",
-      "price": 234.24000549316406,
-      "day_pct": 2.903835376955022,
-      "market_cap": 83380117504,
+      "price": 229.89999389648438,
+      "day_pct": -1.8528054537662375,
+      "market_cap": 81835245568,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.322,
@@ -1861,9 +1868,9 @@
       "symbol": "DELL",
       "name": "DELL",
       "industry": "Computer Hardware",
-      "price": 391.45001220703125,
-      "day_pct": 5.845936354471637,
-      "market_cap": 253701865472,
+      "price": 395.57000732421875,
+      "day_pct": 1.0524958458830058,
+      "market_cap": 256372080640,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.875,
@@ -1955,9 +1962,9 @@
       "symbol": "ENTG",
       "name": "ENTG",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 144.9199981689453,
-      "day_pct": 12.445680228455602,
-      "market_cap": 22071316480,
+      "price": 150.52000427246094,
+      "day_pct": 3.8642051989175696,
+      "market_cap": 22924195840,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.05,
@@ -2026,7 +2033,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.65,
+          "value": 1.77,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -2049,9 +2056,9 @@
       "symbol": "ETN",
       "name": "ETN",
       "industry": "Specialty Industrial Machinery",
-      "price": 393.6400146484375,
-      "day_pct": 4.842066693418801,
-      "market_cap": 152850415616,
+      "price": 391.3900146484375,
+      "day_pct": -0.5715882319559107,
+      "market_cap": 151976738816,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.168,
@@ -2120,7 +2127,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 3.05,
+          "value": 2.97,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -2143,9 +2150,9 @@
       "symbol": "EXTR",
       "name": "EXTR",
       "industry": "Communication Equipment",
-      "price": 31.06999969482422,
-      "day_pct": 8.7123855065262,
-      "market_cap": 4063275264,
+      "price": 31.110000610351562,
+      "day_pct": 0.12874449926050247,
+      "market_cap": 4068506368,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.114,
@@ -2237,9 +2244,9 @@
       "symbol": "FN",
       "name": "FN",
       "industry": "Electronic Components",
-      "price": 582.239990234375,
-      "day_pct": 0.34295393957346487,
-      "market_cap": 20861507584,
+      "price": 611.010009765625,
+      "day_pct": 4.941264772910725,
+      "market_cap": 21892329472,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.393,
@@ -2331,9 +2338,9 @@
       "symbol": "GFS",
       "name": "GFS",
       "industry": "Semiconductors",
-      "price": 80.73999786376953,
-      "day_pct": 7.912320493306324,
-      "market_cap": 44279144448,
+      "price": 81.37999725341797,
+      "day_pct": 0.7926670876661213,
+      "market_cap": 44630130688,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.031,
@@ -2402,7 +2409,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.53,
+          "value": 1.64,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -2425,9 +2432,9 @@
       "symbol": "GOOGL",
       "name": "Alphabet",
       "industry": "Internet Content & Information",
-      "price": 357.7699890136719,
-      "day_pct": 0.3900286525099661,
-      "market_cap": 4362981605376,
+      "price": 359.67999267578125,
+      "day_pct": 0.5338635773713296,
+      "market_cap": 4386274148352,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.1705527315700319,
@@ -2522,7 +2529,7 @@
         "consensus": 411.8,
         "high": 460,
         "low": 360,
-        "upside_pct": 15.10188463131921
+        "upside_pct": 14.490660694380129
       },
       "grades": {
         "strong_buy": 14,
@@ -2538,9 +2545,9 @@
       "symbol": "HPE",
       "name": "HPE",
       "industry": "Communication Equipment",
-      "price": 46.79999923706055,
-      "day_pct": 2.8797483188791606,
-      "market_cap": 61972725760,
+      "price": 48.16999816894531,
+      "day_pct": 2.9273481927749145,
+      "market_cap": 63786881024,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.4,
@@ -2632,9 +2639,9 @@
       "symbol": "IBM",
       "name": "IBM",
       "industry": "Information Technology Services",
-      "price": 274.8500061035156,
-      "day_pct": 0.9142388331160323,
-      "market_cap": 258327478272,
+      "price": 272.239990234375,
+      "day_pct": -0.9496146302276687,
+      "market_cap": 255874367488,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.095,
@@ -2703,7 +2710,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 2.59,
+          "value": 2.57,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -2726,9 +2733,9 @@
       "symbol": "INTC",
       "name": "INTC",
       "industry": "Semiconductors",
-      "price": 116.95999908447266,
-      "day_pct": 9.267561737759955,
-      "market_cap": 587840946176,
+      "price": 124.56999969482422,
+      "day_pct": 6.506498520793724,
+      "market_cap": 626088804352,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.12273251182423896,
@@ -2829,7 +2836,7 @@
         "consensus": 87.42,
         "high": 150,
         "low": 45,
-        "upside_pct": -25.256497362946984
+        "upside_pct": -29.82258953667459
       },
       "grades": {
         "strong_buy": 2,
@@ -2845,9 +2852,9 @@
       "symbol": "KLAC",
       "name": "KLAC",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 2411.639892578125,
-      "day_pct": 1029.2352385980982,
-      "market_cap": 315026538496,
+      "price": 254.5399932861328,
+      "day_pct": 5.546429707602507,
+      "market_cap": 332499288064,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.115,
@@ -2916,7 +2923,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 2.24,
+          "value": 2.53,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -2939,9 +2946,9 @@
       "symbol": "LITE",
       "name": "LITE",
       "industry": "Communication Equipment",
-      "price": 889.5900268554688,
-      "day_pct": 4.257789732794692,
-      "market_cap": 69210103808,
+      "price": 921.5599975585938,
+      "day_pct": 3.5937869960315005,
+      "market_cap": 71697367040,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.901,
@@ -3033,9 +3040,9 @@
       "symbol": "LRCX",
       "name": "LRCX",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 362.5199890136719,
-      "day_pct": 12.653823109185591,
-      "market_cap": 453356978176,
+      "price": 366.80999755859375,
+      "day_pct": 1.1833853787190929,
+      "market_cap": 458721951744,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.238,
@@ -3127,9 +3134,9 @@
       "symbol": "MDB",
       "name": "MDB",
       "industry": "Software - Infrastructure",
-      "price": 354.4100036621094,
-      "day_pct": 1.7600795062300056,
-      "market_cap": 28505880576,
+      "price": 342.79998779296875,
+      "day_pct": -3.2758713775499104,
+      "market_cap": 27572064256,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.252,
@@ -3221,9 +3228,9 @@
       "symbol": "META",
       "name": "Meta",
       "industry": "Internet Content & Information",
-      "price": 568.4299926757812,
-      "day_pct": -0.4465984588242988,
-      "market_cap": 1442915942400,
+      "price": 566.97998046875,
+      "day_pct": -0.2550907280957415,
+      "market_cap": 1439235178496,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.22797015293358164,
@@ -3312,7 +3319,7 @@
         "consensus": 826.11,
         "high": 910,
         "low": 700,
-        "upside_pct": 45.33188090783823
+        "upside_pct": 45.703557172691454
       },
       "grades": {
         "strong_buy": 8,
@@ -3328,9 +3335,9 @@
       "symbol": "MRVL",
       "name": "MRVL",
       "industry": "Semiconductors",
-      "price": 280.7099914550781,
-      "day_pct": 11.132663812850009,
-      "market_cap": 245565095936,
+      "price": 279.70001220703125,
+      "day_pct": -0.35979454910443076,
+      "market_cap": 244681572352,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.276,
@@ -3422,9 +3429,9 @@
       "symbol": "MSFT",
       "name": "Microsoft",
       "industry": "Software - Infrastructure",
-      "price": 390.3399963378906,
-      "day_pct": -1.7666572560045224,
-      "market_cap": 2899615154176,
+      "price": 390.739990234375,
+      "day_pct": 0.10247320290952544,
+      "market_cap": 2902586556416,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.14901231395535355,
@@ -3506,7 +3513,7 @@
         "consensus": 551.96,
         "high": 680,
         "low": 415,
-        "upside_pct": 41.40493036286398
+        "upside_pct": 41.26017653553236
       },
       "grades": {
         "strong_buy": 13,
@@ -3522,9 +3529,9 @@
       "symbol": "MU",
       "name": "MU",
       "industry": "Semiconductors",
-      "price": 995.8699951171875,
-      "day_pct": 11.659639151573842,
-      "market_cap": 1123076407296,
+      "price": 981.6099853515625,
+      "day_pct": -1.4319147916437625,
+      "market_cap": 1106994921472,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.963,
@@ -3593,7 +3600,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.32,
+          "value": 0.34,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3616,9 +3623,9 @@
       "symbol": "NOW",
       "name": "NOW",
       "industry": "Software - Application",
-      "price": 103.08000183105469,
-      "day_pct": -2.80972637765029,
-      "market_cap": 106307231744,
+      "price": 102.1500015258789,
+      "day_pct": -0.9022121543032391,
+      "market_cap": 105348120576,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.221,
@@ -3710,9 +3717,9 @@
       "symbol": "NVDA",
       "name": "NVIDIA",
       "industry": "Semiconductors",
-      "price": 204.8699951171875,
-      "day_pct": 2.220335789291372,
-      "market_cap": 4962156281856,
+      "price": 205.19000244140625,
+      "day_pct": 0.15620019126554308,
+      "market_cap": 4969906831360,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.668049867123354,
@@ -3807,7 +3814,7 @@
         "consensus": 309.46,
         "high": 500,
         "low": 139,
-        "upside_pct": 51.051890162337365
+        "upside_pct": 50.81631479017547
       },
       "grades": {
         "strong_buy": 10,
@@ -3823,9 +3830,9 @@
       "symbol": "ONTO",
       "name": "ONTO",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 303.5299987792969,
-      "day_pct": 12.69818212308671,
-      "market_cap": 15098664960,
+      "price": 323.8800048828125,
+      "day_pct": 6.704446409039311,
+      "market_cap": 16110947328,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.095,
@@ -3894,7 +3901,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.27,
+          "value": 1.41,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -3917,9 +3924,9 @@
       "symbol": "ORCL",
       "name": "ORCL",
       "industry": "Software - Infrastructure",
-      "price": 184.10000610351562,
-      "day_pct": -8.526278878904304,
-      "market_cap": 529480089600,
+      "price": 184.1300048828125,
+      "day_pct": 0.01629482797518289,
+      "market_cap": 529566367744,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.206,
@@ -3970,7 +3977,7 @@
           "source": null
         },
         "fcf_margin": {
-          "value": -0.3733669087322388,
+          "value": -0.301941521157731,
           "color": "red",
           "label": "FCF / 營收",
           "source": "yf"
@@ -3988,7 +3995,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.04,
+          "value": 0.93,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4011,9 +4018,9 @@
       "symbol": "PANW",
       "name": "PANW",
       "industry": "Software - Infrastructure",
-      "price": 279.5299987792969,
-      "day_pct": 6.1963367080597465,
-      "market_cap": 227816947712,
+      "price": 279.6199951171875,
+      "day_pct": 0.03219559198786026,
+      "market_cap": 227890298880,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.311,
@@ -4105,9 +4112,9 @@
       "symbol": "PATH",
       "name": "PATH",
       "industry": "Software - Infrastructure",
-      "price": 10.649999618530273,
-      "day_pct": -0.9302361066951259,
-      "market_cap": 5517980672,
+      "price": 10.550000190734863,
+      "day_pct": -0.9389617969696284,
+      "market_cap": 5466168832,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.173,
@@ -4176,7 +4183,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.39,
+          "value": 0.38,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4199,9 +4206,9 @@
       "symbol": "PLTR",
       "name": "PLTR",
       "industry": "Software - Infrastructure",
-      "price": 131.0800018310547,
-      "day_pct": 0.6681476632585559,
-      "market_cap": 314239647744,
+      "price": 127.98999786376953,
+      "day_pct": -2.3573420232842035,
+      "market_cap": 306831949824,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.4831039321636066,
@@ -4296,7 +4303,7 @@
         "consensus": 187.69,
         "high": 230,
         "low": 138,
-        "upside_pct": 43.18736449356199
+        "upside_pct": 46.64427153110368
       },
       "grades": {
         "strong_buy": 1,
@@ -4312,9 +4319,9 @@
       "symbol": "QCOM",
       "name": "QCOM",
       "industry": "Semiconductors",
-      "price": 202.9600067138672,
-      "day_pct": 6.150632820777946,
-      "market_cap": 213919842304,
+      "price": 211.72000122070312,
+      "day_pct": 4.31611855393057,
+      "market_cap": 223152881664,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.035,
@@ -4383,7 +4390,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.87,
+          "value": 0.86,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4406,9 +4413,9 @@
       "symbol": "SIMO",
       "name": "SIMO",
       "industry": "Semiconductors",
-      "price": 274.3399963378906,
-      "day_pct": 9.003498220575846,
-      "market_cap": 9302276096,
+      "price": 280.489990234375,
+      "day_pct": 2.241741626660132,
+      "market_cap": 9510808576,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.055,
@@ -4500,9 +4507,9 @@
       "symbol": "SMCI",
       "name": "SMCI",
       "industry": "Computer Hardware",
-      "price": 31.969999313354492,
-      "day_pct": 9.22445785228767,
-      "market_cap": 19227348992,
+      "price": 30.459999084472656,
+      "day_pct": -4.72317879672609,
+      "market_cap": 18319206400,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.227,
@@ -4594,9 +4601,9 @@
       "symbol": "SNOW",
       "name": "SNOW",
       "industry": "Software - Application",
-      "price": 240.38999938964844,
-      "day_pct": 0.20425406654054346,
-      "market_cap": 83319177216,
+      "price": 232.77999877929688,
+      "day_pct": -3.1656893505026873,
+      "market_cap": 80681549824,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.335,
@@ -4688,9 +4695,9 @@
       "symbol": "SNPS",
       "name": "SNPS",
       "industry": "Software - Infrastructure",
-      "price": 456.2900085449219,
-      "day_pct": -0.9228297045088207,
-      "market_cap": 87370104832,
+      "price": 453.8900146484375,
+      "day_pct": -0.5259799363430684,
+      "market_cap": 86910558208,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.419,
@@ -4782,9 +4789,9 @@
       "symbol": "STX",
       "name": "STX",
       "industry": "Computer Hardware",
-      "price": 868.0900268554688,
-      "day_pct": 6.384886732020956,
-      "market_cap": 196407197696,
+      "price": 931.0399780273438,
+      "day_pct": 7.251546409293752,
+      "market_cap": 210649759744,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.441,
@@ -4876,9 +4883,9 @@
       "symbol": "TOELY",
       "name": "TOELY",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 190.5,
-      "day_pct": 0.5967180186666976,
-      "market_cap": 173296926720,
+      "price": 217.5,
+      "day_pct": 2.8611979849016977,
+      "market_cap": 197861933056,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.086,
@@ -4970,9 +4977,9 @@
       "symbol": "TSLA",
       "name": "Tesla",
       "industry": "Auto Manufacturers",
-      "price": 399.1499938964844,
-      "day_pct": 4.601797145395992,
-      "market_cap": 1499097071616,
+      "price": 406.42999267578125,
+      "day_pct": 1.8238754580025995,
+      "market_cap": 1526438821888,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.03773471374804494,
@@ -5035,7 +5042,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.0046985573112531456,
+          "value": 0.004585841877390689,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -5051,12 +5058,18 @@
       "score_max": 24,
       "cross_check": [],
       "price_target": {
-        "consensus": null,
-        "high": null,
-        "low": null,
-        "upside_pct": null
+        "consensus": 450.45,
+        "high": 548,
+        "low": 360,
+        "upside_pct": 10.830895386043652
       },
-      "grades": null,
+      "grades": {
+        "strong_buy": 5,
+        "buy": 18,
+        "hold": 18,
+        "sell": 4,
+        "strong_sell": 3
+      },
       "piotroski": 6,
       "altman_z": 16.434610233035137
     },
@@ -5064,9 +5077,9 @@
       "symbol": "TSM",
       "name": "TSMC",
       "industry": "Semiconductors",
-      "price": 421.07000732421875,
-      "day_pct": 3.0140690701452533,
-      "market_cap": 2183868579840,
+      "price": 423.92999267578125,
+      "day_pct": 0.6792184914182986,
+      "market_cap": 2198701867008,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.32964638110085537,
@@ -5129,7 +5142,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.017021578814746474,
+          "value": 0.016984735570558712,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -5155,9 +5168,15 @@
         "consensus": 460,
         "high": 480,
         "low": 450,
-        "upside_pct": 9.245491723138958
+        "upside_pct": 8.50848204830953
       },
-      "grades": null,
+      "grades": {
+        "strong_buy": 5,
+        "buy": 12,
+        "hold": 2,
+        "sell": 0,
+        "strong_sell": 0
+      },
       "piotroski": 8,
       "altman_z": 17.894579135199745
     },
@@ -5165,9 +5184,9 @@
       "symbol": "UMC",
       "name": "UMC",
       "industry": "Semiconductors",
-      "price": 20.68000030517578,
-      "day_pct": 9.417993241123291,
-      "market_cap": 51892047872,
+      "price": 21.6299991607666,
+      "day_pct": 4.593804843189742,
+      "market_cap": 54275866624,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.055,
@@ -5236,7 +5255,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.48,
+          "value": 1.54,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -5259,9 +5278,9 @@
       "symbol": "VIAV",
       "name": "VIAV",
       "industry": "Communication Equipment",
-      "price": 50.2400016784668,
-      "day_pct": 7.3045749806372795,
-      "market_cap": 12393487360,
+      "price": 53.459999084472656,
+      "day_pct": 6.4092302914591,
+      "market_cap": 13187814400,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.428,
@@ -5353,9 +5372,9 @@
       "symbol": "VRT",
       "name": "VRT",
       "industry": "Electrical Equipment & Parts",
-      "price": 297.8800048828125,
-      "day_pct": 6.014660557937934,
-      "market_cap": 114418327552,
+      "price": 302.8699951171875,
+      "day_pct": 1.6751679040485135,
+      "market_cap": 116335034368,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.301,
@@ -5424,7 +5443,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.45,
+          "value": 1.49,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -5447,9 +5466,9 @@
       "symbol": "WDC",
       "name": "WDC",
       "industry": "Computer Hardware",
-      "price": 529.2899780273438,
-      "day_pct": 7.9985272056903645,
-      "market_cap": 182436806656,
+      "price": 562.9249877929688,
+      "day_pct": 6.354741476682069,
+      "market_cap": 194030190592,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.455,
@@ -5518,7 +5537,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.47,
+          "value": 0.44,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
