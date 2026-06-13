@@ -58,18 +58,18 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
 </style></head><body>
 <div class="hdr">
   <h1>可轉債策略儀表板</h1>
-  <div class="sub">更新：2026-06-12（每日晚上六點自動更新一次）<a class="nav-link" href="etf_index.html">→ 主動式 ETF 儀表板</a></div>
+  <div class="sub">更新：2026-06-13（每日晚上六點自動更新一次）<a class="nav-link" href="etf_index.html">→ 主動式 ETF 儀表板</a></div>
 </div>
 <div class="stats">
   <div class="sc"><div class="n">379</div><div class="l">全部CB數</div></div>
   <div class="sc gr"><div class="n">0</div><div class="l">S1全條件買入</div></div>
   <div class="sc am"><div class="n">0</div><div class="l">S1不可放空</div></div>
-  <div class="sc gr"><div class="n">6</div><div class="l">S2套利(4/4)</div></div>
+  <div class="sc gr"><div class="n">16</div><div class="l">S2套利(4/4)</div></div>
   <div class="sc am"><div class="n">1</div><div class="l">S2不可放空</div></div>
 </div>
 <div class="tabs">
   <div class="tab active" onclick="showTab('s1',this)">策略一：CBAS新上市</div>
-  <div class="tab" onclick="showTab('s2',this)">策略二：AI轉換套利（6筆）</div>
+  <div class="tab" onclick="showTab('s2',this)">策略二：AI轉換套利（16筆）</div>
   <div class="tab" onclick="showTab('all',this)">全部可轉債</div>
 </div>
 <div id="pane-s1" class="pane active">
@@ -199,7 +199,7 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
 </tr></tbody></table>
 </div>
 <div id="pane-s2" class="pane">
-  <div class="ttl">策略二：AI 轉換套利（6 支符合條件）</div>
+  <div class="ttl">策略二：AI 轉換套利（16 支符合條件）</div>
   <div class="desc">買CB + 放空股票 → 等待轉換 → 轉成股票回補 → 套利<br>
     <span class="tag">條件1</span>轉換溢價率≤2% <span class="tag">條件2</span>已轉換&lt;60%
     <span class="tag">條件3</span>距到期≥90天 <span class="tag">條件4</span>融券+借券增加
@@ -219,9 +219,31 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">93.7</td>
   <td class="num">60.8</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">515天</td>
+  <td class="num">514天</td>
   <td class="num">1858張</td>
   <td class="num short-up">+2</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>65152</b></td><td>穎崴二</td><td>6515</td>
+  <td class="num">267.0</td>
+  <td class="num prem-neg">-1.4%</td>
+  <td class="num">9590.0</td>
+  <td class="num">3540.4</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">968天</td>
+  <td class="num">192張</td>
+  <td class="num short-up">+8</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>37022</b></td><td>大聯大二</td><td>3702</td>
+  <td class="num">135.0</td>
+  <td class="num prem-neg">-1.1%</td>
+  <td class="num">105.0</td>
+  <td class="num">76.9</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">516天</td>
+  <td class="num">28077張</td>
+  <td class="num short-up">+1305</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>53097</b></td><td>系統電七</td><td>5309</td>
@@ -230,9 +252,42 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">69.7</td>
   <td class="num">54.6</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">917天</td>
+  <td class="num">916天</td>
   <td class="num">12577張</td>
   <td class="num short-up">+57</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>24552</b></td><td>全新二</td><td>2455</td>
+  <td class="num">214.0</td>
+  <td class="num prem-neg">-1.0%</td>
+  <td class="num">352.0</td>
+  <td class="num">162.9</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">955天</td>
+  <td class="num">5895張</td>
+  <td class="num short-up">+64</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>24361</b></td><td>偉詮電一</td><td>2436</td>
+  <td class="num">126.0</td>
+  <td class="num prem-neg">-0.9%</td>
+  <td class="num">67.8</td>
+  <td class="num">53.3</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">90天</td>
+  <td class="num">12879張</td>
+  <td class="num short-up">+21</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>23683</b></td><td>金像電三</td><td>2368</td>
+  <td class="num">292.0</td>
+  <td class="num prem-neg">-0.5%</td>
+  <td class="num">1320.0</td>
+  <td class="num">450.0</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">1625天</td>
+  <td class="num">1475張</td>
+  <td class="num short-up">+82</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>31312</b></td><td>弘塑二</td><td>3131</td>
@@ -241,9 +296,20 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">3230.0</td>
   <td class="num">1626.6</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1515天</td>
+  <td class="num">1514天</td>
   <td class="num">384張</td>
   <td class="num short-up">+6</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>37023</b></td><td>大聯大三</td><td>3702</td>
+  <td class="num">140.5</td>
+  <td class="num prem-neg">-0.2%</td>
+  <td class="num">105.0</td>
+  <td class="num">74.6</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">526天</td>
+  <td class="num">28077張</td>
+  <td class="num short-up">+1305</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>49231</b></td><td>力士一</td><td>4923</td>
@@ -252,9 +318,20 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">47.5</td>
   <td class="num">34.7</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">962天</td>
+  <td class="num">961天</td>
   <td class="num">389張</td>
   <td class="num short-up">+1</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>80212</b></td><td>尖點二</td><td>8021</td>
+  <td class="num">260.0</td>
+  <td class="num ">0.5%</td>
+  <td class="num">522.0</td>
+  <td class="num">201.8</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">1682天</td>
+  <td class="num">2535張</td>
+  <td class="num short-up">+774</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>31311</b></td><td>弘塑一</td><td>3131</td>
@@ -263,9 +340,31 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">3230.0</td>
   <td class="num">1736.5</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">1509天</td>
+  <td class="num">1508天</td>
   <td class="num">384張</td>
   <td class="num short-up">+6</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>24553</b></td><td>全新三</td><td>2455</td>
+  <td class="num">231.0</td>
+  <td class="num ">0.7%</td>
+  <td class="num">352.0</td>
+  <td class="num">153.5</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">959天</td>
+  <td class="num">5895張</td>
+  <td class="num short-up">+64</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>30455</b></td><td>台灣大五</td><td>3045</td>
+  <td class="num">108.2</td>
+  <td class="num ">0.8%</td>
+  <td class="num">119.5</td>
+  <td class="num">111.3</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">1353天</td>
+  <td class="num">54296張</td>
+  <td class="num short-up">+158</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr><tr class="row-buy">
   <td><b>80426</b></td><td>金山電六</td><td>8042</td>
@@ -274,9 +373,20 @@ tr.row-sell td{background:#fff7ed;border-left:3px solid #f97316}
   <td class="num">170.5</td>
   <td class="num">60.0</td>
   <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
-  <td class="num">918天</td>
+  <td class="num">917天</td>
   <td class="num">668張</td>
   <td class="num short-up">+5</td>
+  <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
+</tr><tr class="row-buy">
+  <td><b>34163</b></td><td>融程電三</td><td>3416</td>
+  <td class="num">138.9</td>
+  <td class="num ">1.5%</td>
+  <td class="num">174.0</td>
+  <td class="num">127.1</td>
+  <td class="center cond"><span class="chk chk-y">✓</span> 溢價≤2%<br><span class="chk chk-y">✓</span> 已轉&lt;60%<br><span class="chk chk-y">✓</span> 距到期≥90天<br><span class="chk chk-y">✓</span> 融+借↑</td>
+  <td class="num">226天</td>
+  <td class="num">2390張</td>
+  <td class="num short-up">+3</td>
   <td class="center"><span class="badge buy">★ 套利 (4/4)</span></td>
 </tr></tbody></table>
 </div>
