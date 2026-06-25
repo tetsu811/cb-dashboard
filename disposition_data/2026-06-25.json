@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-06-25T12:12:19",
+  "fetched_at": "2026-06-25T12:40:13",
   "date": "2026-06-25",
   "s2_rows": [
     {
@@ -203,6 +203,26 @@
       "s_intraday": 1.94
     },
     {
+      "stock_id": "6715",
+      "stock_name": "嘉基",
+      "disposition_cnt": 1,
+      "period_start": "2026-06-25",
+      "period_end": "2026-07-08",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 480.0,
+      "last_price": 480.0,
+      "last_date": "2026-06-25",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 1.05,
+      "is_first": true,
+      "tier": "C",
+      "tier_reason": "一般",
+      "vol_ratio": 0.43,
+      "s_intraday": -6.98
+    },
+    {
       "stock_id": "3147",
       "stock_name": "大綜",
       "disposition_cnt": 3,
@@ -361,6 +381,26 @@
       "tier_reason": "一般",
       "vol_ratio": 0.54,
       "s_intraday": -1.63
+    },
+    {
+      "stock_id": "2316",
+      "stock_name": "楠梓電",
+      "disposition_cnt": 1,
+      "period_start": "2026-06-25",
+      "period_end": "2026-07-08",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 234.5,
+      "last_price": 234.5,
+      "last_date": "2026-06-25",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 25.4,
+      "is_first": true,
+      "tier": "D",
+      "tier_reason": "追漲",
+      "vol_ratio": 0.53,
+      "s_intraday": 6.35
     },
     {
       "stock_id": "6890",
@@ -783,6 +823,26 @@
       "s_intraday": 10.82
     },
     {
+      "stock_id": "7712",
+      "stock_name": "博盛半導體",
+      "disposition_cnt": 3,
+      "period_start": "2026-06-25",
+      "period_end": "2026-07-08",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 206.0,
+      "last_price": 206.0,
+      "last_date": "2026-06-25",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 22.62,
+      "is_first": false,
+      "tier": "B",
+      "tier_reason": "量縮+紅K+價≥20",
+      "vol_ratio": 0.53,
+      "s_intraday": 2.23
+    },
+    {
       "stock_id": "5321",
       "stock_name": "美而快",
       "disposition_cnt": 9,
@@ -1041,6 +1101,26 @@
       "tier_reason": "量縮+紅K+價≥20",
       "vol_ratio": 0.31,
       "s_intraday": 0.83
+    },
+    {
+      "stock_id": "3675",
+      "stock_name": "德微",
+      "disposition_cnt": 3,
+      "period_start": "2026-06-25",
+      "period_end": "2026-07-08",
+      "days_left": 13,
+      "held_days": 1,
+      "entry_price": 385.5,
+      "last_price": 385.5,
+      "last_date": "2026-06-25",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 15.07,
+      "is_first": false,
+      "tier": "A",
+      "tier_reason": "量縮<30%",
+      "vol_ratio": 0.26,
+      "s_intraday": -8.43
     }
   ],
   "s3_rows": [
@@ -1912,9 +1992,9 @@
     "s3_win": 46.0
   },
   "stats": {
-    "s2_active": 52,
+    "s2_active": 56,
     "s3_tracking": 66,
-    "new_today": 0,
+    "new_today": 4,
     "lift_tomorrow": 5
   }
 }
