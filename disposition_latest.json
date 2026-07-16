@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-16T11:26:47",
+  "fetched_at": "2026-07-16T12:03:18",
   "date": "2026-07-16",
   "s2_rows": [
     {
@@ -261,6 +261,26 @@
       "tier_reason": "量縮<30%",
       "vol_ratio": 0.23,
       "s_intraday": 2.9
+    },
+    {
+      "stock_id": "6748",
+      "stock_name": "亞果生醫",
+      "disposition_cnt": 1,
+      "period_start": "2026-07-16",
+      "period_end": "2026-07-22",
+      "days_left": 6,
+      "held_days": 1,
+      "entry_price": 282.0,
+      "last_price": 282.0,
+      "last_date": "2026-07-16",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 44.25,
+      "is_first": true,
+      "tier": "D",
+      "tier_reason": "量增",
+      "vol_ratio": 1.47,
+      "s_intraday": 3.79
     },
     {
       "stock_id": "8033",
@@ -993,10 +1013,10 @@
       "disposition_cnt": 1,
       "period_end": "2026-07-02",
       "entry_price": 131.66,
-      "last_price": 113.0,
-      "last_date": "2026-07-15",
-      "ret_pct": -14.17,
-      "days_held": 8,
+      "last_price": 134.5,
+      "last_date": "2026-07-16",
+      "ret_pct": 2.16,
+      "days_held": 9,
       "in_window": true,
       "status": "tracking"
     },
@@ -1452,9 +1472,9 @@
     "s3_win": 26.0
   },
   "stats": {
-    "s2_active": 29,
+    "s2_active": 30,
     "s3_tracking": 66,
-    "new_today": 3,
+    "new_today": 4,
     "lift_tomorrow": 7
   }
 }
