@@ -66,19 +66,19 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
 </style></head><body>
 <div class="hdr">
   <h1>處置股策略儀表板</h1>
-  <div class="sub">更新：2026-07-16（每交易日盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債</a><a class="nav-link" href="etf_index.html">→ 主動式 ETF</a></div>
+  <div class="sub">更新：2026-07-17（每交易日盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債</a><a class="nav-link" href="etf_index.html">→ 主動式 ETF</a></div>
 </div>
 <div class="stats">
-  <div class="sc"><div class="n">30</div><div class="l">處置中股票</div></div>
-  <div class="sc pp"><div class="n">4</div><div class="l">今日新進處置</div></div>
-  <div class="sc am"><div class="n">7</div><div class="l">明日解除</div></div>
-  <div class="sc gr"><div class="n">66</div><div class="l">S3 10 日區間內</div></div>
-  <div class="sc"><div class="n"><span class="gr">+3.63%</span></div><div class="l">近 30 日 S2 樣本均值<br/><span style="font-size:10px">勝 55.0% / N=120</span></div></div>
-  <div class="sc"><div class="n"><span class="rd">-6.1%</span></div><div class="l">近 30 日 S3 樣本均值<br/><span style="font-size:10px">勝 26.0% / N=96</span></div></div>
+  <div class="sc"><div class="n">28</div><div class="l">處置中股票</div></div>
+  <div class="sc pp"><div class="n">3</div><div class="l">今日新進處置</div></div>
+  <div class="sc am"><div class="n">0</div><div class="l">明日解除</div></div>
+  <div class="sc gr"><div class="n">68</div><div class="l">S3 10 日區間內</div></div>
+  <div class="sc"><div class="n"><span class="gr">+2.74%</span></div><div class="l">近 30 日 S2 樣本均值<br/><span style="font-size:10px">勝 52.8% / N=125</span></div></div>
+  <div class="sc"><div class="n"><span class="rd">-7.43%</span></div><div class="l">近 30 日 S3 樣本均值<br/><span style="font-size:10px">勝 24.0% / N=100</span></div></div>
 </div>
 <div class="tabs">
-  <div class="tab active" onclick="showTab('s2',this)">S2 處置期間樣本（30）</div>
-  <div class="tab" onclick="showTab('s3',this)">S3 解除後 10 日樣本（66）</div>
+  <div class="tab active" onclick="showTab('s2',this)">S2 處置期間樣本（28）</div>
+  <div class="tab" onclick="showTab('s3',this)">S3 解除後 10 日樣本（68）</div>
   <div class="tab" onclick="showTab('about',this)">回測說明</div>
 </div>
 <div id="pane-s2" class="pane active">
@@ -128,11 +128,11 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第3次</span></td>
   <td class="center">2026-07-06</td>
   <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">256.0</td>
-  <td class="num">218.0</td>
-  <td class="num dn">-14.84%</td>
-  <td class="num dn">-14.84%</td>
+  <td class="num">196.5</td>
+  <td class="num dn">-23.24%</td>
+  <td class="num dn">-23.24%</td>
   <td class="num up">+9.87%</td>
   <td class="num">0.16x</td>
 </tr><tr class="row-dn">
@@ -142,27 +142,13 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-09</td>
   <td class="center">2026-07-24 </td>
-  <td class="num">8</td>
+  <td class="num">7</td>
   <td class="num">325.0</td>
-  <td class="num">278.5</td>
-  <td class="num dn">-14.31%</td>
-  <td class="num dn">-14.31%</td>
+  <td class="num">251.0</td>
+  <td class="num dn">-22.77%</td>
+  <td class="num dn">-22.77%</td>
   <td class="num up">+0.84%</td>
   <td class="num">0.18x</td>
-</tr><tr class="row-near">
-  <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
-  <td><b>3147</b></td>
-  <td>大綜</td>
-  <td class="center"><span class="badge mu">第3次</span></td>
-  <td class="center">2026-07-06</td>
-  <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
-  <td class="num">244.0</td>
-  <td class="num">232.0</td>
-  <td class="num dn">-4.92%</td>
-  <td class="num dn">-8.81%</td>
-  <td class="num dn">-12.70%</td>
-  <td class="num">0.27x</td>
 </tr><tr class="row-dn">
   <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
   <td><b>6831</b></td>
@@ -170,41 +156,83 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-15</td>
   <td class="center">2026-07-28 </td>
-  <td class="num">12</td>
+  <td class="num">11</td>
   <td class="num">710.0</td>
-  <td class="num">680.0</td>
-  <td class="num dn">-4.23%</td>
-  <td class="num dn">-4.23%</td>
+  <td class="num">612.0</td>
+  <td class="num dn">-13.80%</td>
+  <td class="num dn">-13.80%</td>
   <td class="num dn">-8.39%</td>
   <td class="num">0.23x</td>
-</tr><tr class="">
+</tr><tr class="row-near">
+  <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
+  <td><b>3147</b></td>
+  <td>大綜</td>
+  <td class="center"><span class="badge mu">第3次</span></td>
+  <td class="center">2026-07-06</td>
+  <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
+  <td class="num">0</td>
+  <td class="num">244.0</td>
+  <td class="num">217.0</td>
+  <td class="num dn">-11.07%</td>
+  <td class="num dn">-11.07%</td>
+  <td class="num dn">-12.70%</td>
+  <td class="num">0.27x</td>
+</tr><tr class="row-dn">
   <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
   <td><b>8096</b></td>
   <td>擎亞</td>
   <td class="center"><span class="badge mu">第4次</span></td>
   <td class="center">2026-07-16</td>
   <td class="center">2026-07-29 </td>
-  <td class="num">13</td>
+  <td class="num">12</td>
   <td class="num">142.0</td>
-  <td class="num">142.0</td>
-  <td class="num ">0.00%</td>
-  <td class="num ">0.00%</td>
+  <td class="num">128.0</td>
+  <td class="num dn">-9.86%</td>
+  <td class="num dn">-9.86%</td>
   <td class="num dn">-16.22%</td>
   <td class="num">0.20x</td>
-</tr><tr class="row-up">
+</tr><tr class="row-dn">
   <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
   <td><b>6174</b></td>
   <td>安碁</td>
   <td class="center"><span class="badge mu">第3次</span></td>
   <td class="center">2026-07-09</td>
   <td class="center">2026-07-22 </td>
-  <td class="num">6</td>
+  <td class="num">5</td>
   <td class="num">57.7</td>
-  <td class="num">59.8</td>
-  <td class="num up">+3.64%</td>
-  <td class="num dn">-2.60%</td>
+  <td class="num">53.9</td>
+  <td class="num dn">-6.59%</td>
+  <td class="num dn">-6.59%</td>
   <td class="num up">+2.67%</td>
   <td class="num">0.20x</td>
+</tr><tr class="">
+  <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
+  <td><b>6173</b></td>
+  <td>信昌電</td>
+  <td class="center"><span class="badge mu">第3次</span></td>
+  <td class="center">2026-07-17</td>
+  <td class="center">2026-07-30 </td>
+  <td class="num">13</td>
+  <td class="num">194.0</td>
+  <td class="num">194.0</td>
+  <td class="num ">0.00%</td>
+  <td class="num ">0.00%</td>
+  <td class="num dn">-29.45%</td>
+  <td class="num">0.06x</td>
+</tr><tr class="">
+  <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
+  <td><b>6907</b></td>
+  <td>雅特力-KY</td>
+  <td class="center"><span class="badge mu">第3次</span></td>
+  <td class="center">2026-07-17</td>
+  <td class="center">2026-07-30 </td>
+  <td class="num">13</td>
+  <td class="num">236.0</td>
+  <td class="num">236.0</td>
+  <td class="num ">0.00%</td>
+  <td class="num ">0.00%</td>
+  <td class="num up">+21.03%</td>
+  <td class="num">0.22x</td>
 </tr><tr class="row-up">
   <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
   <td><b>3055</b></td>
@@ -212,10 +240,10 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第2次</span></td>
   <td class="center">2026-07-09</td>
   <td class="center">2026-07-22 </td>
-  <td class="num">6</td>
+  <td class="num">5</td>
   <td class="num">158.0</td>
-  <td class="num">180.0</td>
-  <td class="num up">+13.92%</td>
+  <td class="num">163.0</td>
+  <td class="num up">+3.16%</td>
   <td class="num ">0.00%</td>
   <td class="num up">+12.86%</td>
   <td class="num">0.30x</td>
@@ -226,10 +254,10 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第3次</span></td>
   <td class="center">2026-07-09</td>
   <td class="center">2026-07-22 </td>
-  <td class="num">6</td>
+  <td class="num">5</td>
   <td class="num">36.25</td>
-  <td class="num">45.0</td>
-  <td class="num up">+24.14%</td>
+  <td class="num">40.5</td>
+  <td class="num up">+11.72%</td>
   <td class="num ">0.00%</td>
   <td class="num up">+17.31%</td>
   <td class="num">0.15x</td>
@@ -240,11 +268,11 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-06</td>
   <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">666.0</td>
-  <td class="num">563.0</td>
-  <td class="num dn">-15.47%</td>
-  <td class="num dn">-17.12%</td>
+  <td class="num">507.0</td>
+  <td class="num dn">-23.87%</td>
+  <td class="num dn">-23.87%</td>
   <td class="num up">+31.62%</td>
   <td class="num">0.34x</td>
 </tr><tr class="row-dn">
@@ -254,24 +282,24 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第3次</span></td>
   <td class="center">2026-07-15</td>
   <td class="center">2026-07-28 </td>
-  <td class="num">12</td>
+  <td class="num">11</td>
   <td class="num">127.0</td>
-  <td class="num">116.5</td>
-  <td class="num dn">-8.27%</td>
-  <td class="num dn">-8.27%</td>
+  <td class="num">108.0</td>
+  <td class="num dn">-14.96%</td>
+  <td class="num dn">-14.96%</td>
   <td class="num up">+51.63%</td>
   <td class="num">0.35x</td>
-</tr><tr class="">
+</tr><tr class="row-up">
   <td class="center"><span class="tier tier-B">B</span><span class="tier-note">量縮+紅K+價≥20</span></td>
   <td><b>8291</b></td>
   <td>尚茂</td>
   <td class="center"><span class="badge mu">第4次</span></td>
   <td class="center">2026-07-16</td>
   <td class="center">2026-07-29 </td>
-  <td class="num">13</td>
+  <td class="num">12</td>
   <td class="num">27.35</td>
-  <td class="num">27.35</td>
-  <td class="num ">0.00%</td>
+  <td class="num">30.05</td>
+  <td class="num up">+9.87%</td>
   <td class="num ">0.00%</td>
   <td class="num dn">-17.12%</td>
   <td class="num">0.36x</td>
@@ -282,10 +310,10 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-08</td>
   <td class="center">2026-07-21 </td>
-  <td class="num">5</td>
+  <td class="num">4</td>
   <td class="num">96.9</td>
-  <td class="num">121.0</td>
-  <td class="num up">+24.87%</td>
+  <td class="num">122.0</td>
+  <td class="num up">+25.90%</td>
   <td class="num ">0.00%</td>
   <td class="num up">+35.90%</td>
   <td class="num">0.49x</td>
@@ -296,55 +324,69 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第3次</span></td>
   <td class="center">2026-07-06</td>
   <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">51.0</td>
-  <td class="num">50.5</td>
-  <td class="num dn">-0.98%</td>
-  <td class="num dn">-0.98%</td>
+  <td class="num">45.45</td>
+  <td class="num dn">-10.88%</td>
+  <td class="num dn">-10.88%</td>
   <td class="num up">+16.44%</td>
   <td class="num">0.35x</td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
   <td><b>2492</b></td>
   <td>華新科</td>
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-16</td>
   <td class="center">2026-07-29 </td>
-  <td class="num">13</td>
+  <td class="num">12</td>
   <td class="num">341.5</td>
-  <td class="num">341.5</td>
-  <td class="num ">0.00%</td>
-  <td class="num ">0.00%</td>
+  <td class="num">307.5</td>
+  <td class="num dn">-9.96%</td>
+  <td class="num dn">-9.96%</td>
   <td class="num dn">-27.57%</td>
   <td class="num">0.40x</td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
   <td><b>8027</b></td>
   <td>鈦昇</td>
   <td class="center"><span class="badge mu">第2次</span></td>
   <td class="center">2026-07-14</td>
   <td class="center">2026-07-27 </td>
-  <td class="num">11</td>
+  <td class="num">10</td>
   <td class="num">234.5</td>
-  <td class="num">239.0</td>
-  <td class="num up">+1.92%</td>
-  <td class="num ">0.00%</td>
+  <td class="num">215.5</td>
+  <td class="num dn">-8.10%</td>
+  <td class="num dn">-8.10%</td>
   <td class="num dn">-1.88%</td>
   <td class="num">0.30x</td>
-</tr><tr class="row-near">
+</tr><tr class="">
   <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
-  <td><b>6226</b></td>
-  <td>光鼎</td>
+  <td><b>2434</b></td>
+  <td>統懋</td>
   <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-03</td>
-  <td class="center">2026-07-16 <span class="badge am">明日為解除日</span></td>
-  <td class="num">0</td>
-  <td class="num">24.0</td>
-  <td class="num">25.05</td>
-  <td class="num up">+4.38%</td>
-  <td class="num dn">-3.75%</td>
-  <td class="num up">+31.51%</td>
-  <td class="num">0.66x</td>
+  <td class="center">2026-07-15</td>
+  <td class="center">2026-07-28 </td>
+  <td class="num">11</td>
+  <td class="num">82.6</td>
+  <td class="num">81.8</td>
+  <td class="num dn">-0.97%</td>
+  <td class="num dn">-0.97%</td>
+  <td class="num up">+60.70%</td>
+  <td class="num">0.52x</td>
+</tr><tr class="">
+  <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
+  <td><b>7714</b></td>
+  <td>創泓科技</td>
+  <td class="center"><span class="badge mu">第3次</span></td>
+  <td class="center">2026-07-17</td>
+  <td class="center">2026-07-30 </td>
+  <td class="num">13</td>
+  <td class="num">181.5</td>
+  <td class="num">181.5</td>
+  <td class="num ">0.00%</td>
+  <td class="num ">0.00%</td>
+  <td class="num up">+5.22%</td>
+  <td class="num">0.53x</td>
 </tr><tr class="row-up">
   <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
   <td><b>4169</b></td>
@@ -352,27 +394,13 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-10</td>
   <td class="center">2026-07-23 </td>
-  <td class="num">7</td>
+  <td class="num">6</td>
   <td class="num">243.0</td>
-  <td class="num">266.0</td>
-  <td class="num up">+9.47%</td>
+  <td class="num">252.0</td>
+  <td class="num up">+3.70%</td>
   <td class="num ">0.00%</td>
   <td class="num up">+9.46%</td>
   <td class="num">0.80x</td>
-</tr><tr class="row-up">
-  <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
-  <td><b>2434</b></td>
-  <td>統懋</td>
-  <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-15</td>
-  <td class="center">2026-07-28 </td>
-  <td class="num">12</td>
-  <td class="num">82.6</td>
-  <td class="num">90.8</td>
-  <td class="num up">+9.93%</td>
-  <td class="num ">0.00%</td>
-  <td class="num up">+60.70%</td>
-  <td class="num">0.52x</td>
 </tr><tr class="row-up">
   <td class="center"><span class="tier tier-C">C</span><span class="tier-note">一般</span></td>
   <td><b>1515</b></td>
@@ -380,27 +408,13 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-07</td>
   <td class="center">2026-07-20 </td>
-  <td class="num">4</td>
+  <td class="num">3</td>
   <td class="num">38.75</td>
-  <td class="num">44.85</td>
-  <td class="num up">+15.74%</td>
+  <td class="num">40.95</td>
+  <td class="num up">+5.68%</td>
   <td class="num ">0.00%</td>
   <td class="num up">+20.16%</td>
   <td class="num">0.52x</td>
-</tr><tr class="row-near">
-  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">量增</span></td>
-  <td><b>1435</b></td>
-  <td>中福</td>
-  <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-03</td>
-  <td class="center">2026-07-16 <span class="badge am">明日為解除日</span></td>
-  <td class="num">0</td>
-  <td class="num">29.75</td>
-  <td class="num">25.4</td>
-  <td class="num dn">-14.62%</td>
-  <td class="num dn">-14.62%</td>
-  <td class="num up">+31.35%</td>
-  <td class="num">1.45x</td>
 </tr><tr class="row-near">
   <td class="center"><span class="tier tier-D">D</span><span class="tier-note">量增</span></td>
   <td><b>1617</b></td>
@@ -408,11 +422,11 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-06</td>
   <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">26.7</td>
-  <td class="num">23.9</td>
-  <td class="num dn">-10.49%</td>
-  <td class="num dn">-12.36%</td>
+  <td class="num">21.55</td>
+  <td class="num dn">-19.29%</td>
+  <td class="num dn">-19.29%</td>
   <td class="num up">+40.90%</td>
   <td class="num">1.44x</td>
 </tr><tr class="row-near">
@@ -422,55 +436,13 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-06</td>
   <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">9.51</td>
-  <td class="num">8.62</td>
-  <td class="num dn">-9.36%</td>
+  <td class="num">8.16</td>
+  <td class="num dn">-14.20%</td>
   <td class="num dn">-15.14%</td>
   <td class="num up">+39.04%</td>
   <td class="num">2.00x</td>
-</tr><tr class="row-near">
-  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">追漲</span></td>
-  <td><b>8021</b></td>
-  <td>尖點</td>
-  <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-03</td>
-  <td class="center">2026-07-16 <span class="badge am">明日為解除日</span></td>
-  <td class="num">0</td>
-  <td class="num">555.75</td>
-  <td class="num">505.0</td>
-  <td class="num dn">-9.13%</td>
-  <td class="num dn">-12.63%</td>
-  <td class="num up">+4.30%</td>
-  <td class="num">0.43x</td>
-</tr><tr class="row-near">
-  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">追漲</span></td>
-  <td><b>3189</b></td>
-  <td>景碩</td>
-  <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-03</td>
-  <td class="center">2026-07-16 <span class="badge am">明日為解除日</span></td>
-  <td class="num">0</td>
-  <td class="num">833.0</td>
-  <td class="num">770.0</td>
-  <td class="num dn">-7.56%</td>
-  <td class="num dn">-17.53%</td>
-  <td class="num up">+4.70%</td>
-  <td class="num">0.10x</td>
-</tr><tr class="row-near">
-  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">低價</span></td>
-  <td><b>911608</b></td>
-  <td>明輝-DR</td>
-  <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-06</td>
-  <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
-  <td class="num">2.81</td>
-  <td class="num">2.7</td>
-  <td class="num dn">-3.91%</td>
-  <td class="num dn">-4.27%</td>
-  <td class="num up">+0.36%</td>
-  <td class="num">0.63x</td>
 </tr><tr class="row-dn">
   <td class="center"><span class="tier tier-D">D</span><span class="tier-note">追漲</span></td>
   <td><b>4542</b></td>
@@ -478,13 +450,27 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第3次</span></td>
   <td class="center">2026-07-15</td>
   <td class="center">2026-07-28 </td>
-  <td class="num">12</td>
+  <td class="num">11</td>
   <td class="num">372.0</td>
-  <td class="num">363.5</td>
-  <td class="num dn">-2.28%</td>
-  <td class="num dn">-2.28%</td>
+  <td class="num">327.5</td>
+  <td class="num dn">-11.96%</td>
+  <td class="num dn">-11.96%</td>
   <td class="num dn">-7.81%</td>
   <td class="num">0.15x</td>
+</tr><tr class="row-dn">
+  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">追漲</span></td>
+  <td><b>6617</b></td>
+  <td>共信-KY</td>
+  <td class="center"><span class="badge mu">第2次</span></td>
+  <td class="center">2026-07-08</td>
+  <td class="center">2026-07-21 </td>
+  <td class="num">4</td>
+  <td class="num">117.5</td>
+  <td class="num">105.5</td>
+  <td class="num dn">-10.21%</td>
+  <td class="num dn">-10.64%</td>
+  <td class="num up">+53.39%</td>
+  <td class="num">2.47x</td>
 </tr><tr class="row-dn">
   <td class="center"><span class="tier tier-D">D</span><span class="tier-note">低價</span></td>
   <td><b>1718</b></td>
@@ -492,55 +478,41 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-07</td>
   <td class="center">2026-07-20 </td>
-  <td class="num">4</td>
+  <td class="num">3</td>
   <td class="num">14.95</td>
-  <td class="num">14.65</td>
-  <td class="num dn">-2.01%</td>
-  <td class="num dn">-7.02%</td>
+  <td class="num">13.65</td>
+  <td class="num dn">-8.70%</td>
+  <td class="num dn">-8.70%</td>
   <td class="num up">+11.15%</td>
   <td class="num">0.27x</td>
-</tr><tr class="">
-  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">追漲</span></td>
-  <td><b>6617</b></td>
-  <td>共信-KY</td>
-  <td class="center"><span class="badge mu">第2次</span></td>
-  <td class="center">2026-07-08</td>
-  <td class="center">2026-07-21 </td>
-  <td class="num">5</td>
-  <td class="num">117.5</td>
-  <td class="num">115.5</td>
-  <td class="num dn">-1.70%</td>
-  <td class="num dn">-10.64%</td>
-  <td class="num up">+53.39%</td>
-  <td class="num">2.47x</td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td class="center"><span class="tier tier-D">D</span><span class="tier-note">量增</span></td>
   <td><b>6748</b></td>
   <td>亞果生醫</td>
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-07-16</td>
   <td class="center">2026-07-22 </td>
-  <td class="num">6</td>
+  <td class="num">5</td>
   <td class="num">282.0</td>
-  <td class="num">282.0</td>
-  <td class="num ">0.00%</td>
-  <td class="num ">0.00%</td>
+  <td class="num">261.0</td>
+  <td class="num dn">-7.45%</td>
+  <td class="num dn">-7.45%</td>
   <td class="num up">+44.25%</td>
   <td class="num">1.47x</td>
 </tr><tr class="row-near">
-  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">追漲</span></td>
-  <td><b>8033</b></td>
-  <td>雷虎</td>
+  <td class="center"><span class="tier tier-D">D</span><span class="tier-note">低價</span></td>
+  <td><b>911608</b></td>
+  <td>明輝-DR</td>
   <td class="center"><span class="badge bl">首次</span></td>
-  <td class="center">2026-07-03</td>
-  <td class="center">2026-07-16 <span class="badge am">明日為解除日</span></td>
+  <td class="center">2026-07-06</td>
+  <td class="center">2026-07-17 <span class="badge am">明日為解除日</span></td>
   <td class="num">0</td>
-  <td class="num">204.5</td>
-  <td class="num">243.0</td>
-  <td class="num up">+18.83%</td>
-  <td class="num ">0.00%</td>
-  <td class="num up">+45.55%</td>
-  <td class="num">0.69x</td>
+  <td class="num">2.81</td>
+  <td class="num">2.71</td>
+  <td class="num dn">-3.56%</td>
+  <td class="num dn">-4.27%</td>
+  <td class="num up">+0.36%</td>
+  <td class="num">0.63x</td>
 </tr></tbody></table>
 </div>
 <div id="pane-s3" class="pane">
@@ -562,587 +534,599 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <th class="num" onclick="sortTable(this)">最新價</th>
   <th class="num" onclick="sortTable(this)">區間報酬</th>
   <th class="center">區間狀態</th>
-</tr></thead><tbody><tr class="">
-  <td><b>3167</b></td>
-  <td>大量</td>
-  <td class="center">2026-07-01</td>
-  <td class="num">10 / 10</td>
-  <td class="num">840.92</td>
-  <td class="num">851.0</td>
-  <td class="num up">+1.20%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
-</tr><tr class="row-dn">
-  <td><b>6173</b></td>
-  <td>信昌電</td>
-  <td class="center">2026-07-01</td>
-  <td class="num">10 / 10</td>
-  <td class="num">327.82</td>
-  <td class="num">215.5</td>
-  <td class="num dn">-34.26%</td>
-  <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-up">
-  <td><b>6187</b></td>
-  <td>萬潤</td>
-  <td class="center">2026-07-01</td>
-  <td class="num">10 / 10</td>
-  <td class="num">1025.0</td>
-  <td class="num">1075.0</td>
-  <td class="num up">+4.88%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
-</tr><tr class="row-up">
-  <td><b>6241</b></td>
-  <td>鑫永洋</td>
-  <td class="center">2026-07-01</td>
-  <td class="num">10 / 10</td>
-  <td class="num">14.0</td>
-  <td class="num">17.7</td>
-  <td class="num up">+26.43%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
-</tr><tr class="row-dn">
-  <td><b>8291</b></td>
-  <td>尚茂</td>
-  <td class="center">2026-07-01</td>
-  <td class="num">10 / 10</td>
-  <td class="num">42.0</td>
-  <td class="num">27.35</td>
-  <td class="num dn">-34.88%</td>
-  <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-up">
+</tr></thead><tbody><tr class="row-up">
   <td><b>4556</b></td>
   <td>旭然</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">88.03</td>
-  <td class="num">116.5</td>
-  <td class="num up">+32.35%</td>
+  <td class="num">108.0</td>
+  <td class="num up">+22.69%</td>
   <td class="center"><span class="badge gr">窗內 / 正</span></td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td><b>8027</b></td>
   <td>鈦昇</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">237.0</td>
-  <td class="num">239.0</td>
-  <td class="num up">+0.84%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
+  <td class="num">215.5</td>
+  <td class="num dn">-9.07%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2493</b></td>
   <td>揚博</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">310.33</td>
-  <td class="num">234.5</td>
-  <td class="num dn">-24.44%</td>
+  <td class="num">211.5</td>
+  <td class="num dn">-31.85%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>4991</b></td>
   <td>環宇-KY</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">511.0</td>
-  <td class="num">400.0</td>
-  <td class="num dn">-21.72%</td>
+  <td class="num">360.0</td>
+  <td class="num dn">-29.55%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>8042</b></td>
   <td>金山電</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">195.0</td>
-  <td class="num">143.5</td>
-  <td class="num dn">-26.41%</td>
+  <td class="num">129.5</td>
+  <td class="num dn">-33.59%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-up">
+</tr><tr class="row-dn">
   <td><b>6586</b></td>
   <td>醣基</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">131.66</td>
-  <td class="num">134.5</td>
-  <td class="num up">+2.16%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
+  <td class="num">125.5</td>
+  <td class="num dn">-4.68%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3285</b></td>
   <td>微端</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">46.15</td>
-  <td class="num">39.0</td>
-  <td class="num dn">-15.49%</td>
+  <td class="num">37.4</td>
+  <td class="num dn">-18.96%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td><b>6613</b></td>
   <td>朋億*</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">368.0</td>
-  <td class="num">365.0</td>
-  <td class="num dn">-0.82%</td>
+  <td class="num">328.5</td>
+  <td class="num dn">-10.73%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2383</b></td>
   <td>台光電</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">5535.0</td>
-  <td class="num">4990.0</td>
-  <td class="num dn">-9.85%</td>
+  <td class="num">4495.0</td>
+  <td class="num dn">-18.79%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3026</b></td>
   <td>禾伸堂</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">867.0</td>
-  <td class="num">766.0</td>
-  <td class="num dn">-11.65%</td>
+  <td class="num">690.0</td>
+  <td class="num dn">-20.42%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>7828</b></td>
   <td>創新服務</td>
   <td class="center">2026-07-02</td>
-  <td class="num">9 / 10</td>
+  <td class="num">10 / 10</td>
   <td class="num">2380.0</td>
-  <td class="num">2160.0</td>
-  <td class="num dn">-9.24%</td>
+  <td class="num">1945.0</td>
+  <td class="num dn">-18.28%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2455</b></td>
   <td>全新</td>
   <td class="center">2026-07-03</td>
-  <td class="num">8 / 10</td>
+  <td class="num">9 / 10</td>
   <td class="num">372.5</td>
-  <td class="num">313.0</td>
-  <td class="num dn">-15.97%</td>
+  <td class="num">282.0</td>
+  <td class="num dn">-24.30%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-up">
+</tr><tr class="row-dn">
   <td><b>3532</b></td>
   <td>台勝科</td>
   <td class="center">2026-07-03</td>
-  <td class="num">8 / 10</td>
+  <td class="num">9 / 10</td>
   <td class="num">454.02</td>
-  <td class="num">471.0</td>
-  <td class="num up">+3.74%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
+  <td class="num">424.0</td>
+  <td class="num dn">-6.61%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2478</b></td>
   <td>大毅</td>
   <td class="center">2026-07-03</td>
-  <td class="num">8 / 10</td>
+  <td class="num">9 / 10</td>
   <td class="num">237.84</td>
-  <td class="num">158.0</td>
-  <td class="num dn">-33.57%</td>
+  <td class="num">142.5</td>
+  <td class="num dn">-40.09%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>1714</b></td>
   <td>和桐</td>
   <td class="center">2026-07-03</td>
-  <td class="num">8 / 10</td>
+  <td class="num">9 / 10</td>
   <td class="num">25.0</td>
-  <td class="num">16.2</td>
-  <td class="num dn">-35.20%</td>
+  <td class="num">15.3</td>
+  <td class="num dn">-38.80%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3163</b></td>
   <td>波若威</td>
   <td class="center">2026-07-03</td>
-  <td class="num">8 / 10</td>
+  <td class="num">9 / 10</td>
   <td class="num">830.0</td>
-  <td class="num">724.0</td>
-  <td class="num dn">-12.77%</td>
+  <td class="num">652.0</td>
+  <td class="num dn">-21.45%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-up">
+</tr><tr class="row-dn">
   <td><b>6488</b></td>
   <td>環球晶</td>
   <td class="center">2026-07-03</td>
-  <td class="num">8 / 10</td>
+  <td class="num">9 / 10</td>
   <td class="num">1285.03</td>
-  <td class="num">1370.0</td>
-  <td class="num up">+6.61%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
+  <td class="num">1240.0</td>
+  <td class="num dn">-3.50%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>4551</b></td>
   <td>智伸科</td>
   <td class="center">2026-07-06</td>
-  <td class="num">7 / 10</td>
+  <td class="num">8 / 10</td>
   <td class="num">272.5</td>
-  <td class="num">198.0</td>
-  <td class="num dn">-27.34%</td>
+  <td class="num">188.0</td>
+  <td class="num dn">-31.01%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2243</b></td>
   <td>宏旭-KY</td>
   <td class="center">2026-07-06</td>
-  <td class="num">7 / 10</td>
+  <td class="num">8 / 10</td>
   <td class="num">64.0</td>
-  <td class="num">53.0</td>
-  <td class="num dn">-17.19%</td>
+  <td class="num">52.0</td>
+  <td class="num dn">-18.75%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td><b>3441</b></td>
   <td>聯一光</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">71.0</td>
-  <td class="num">69.7</td>
-  <td class="num dn">-1.83%</td>
+  <td class="num">68.0</td>
+  <td class="num dn">-4.23%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2305</b></td>
   <td>全友</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">37.8</td>
-  <td class="num">34.4</td>
-  <td class="num dn">-8.99%</td>
+  <td class="num">32.15</td>
+  <td class="num dn">-14.95%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-up">
   <td><b>7610</b></td>
   <td>聯友金屬-創</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">1975.26</td>
-  <td class="num">2600.0</td>
-  <td class="num up">+31.63%</td>
+  <td class="num">2410.0</td>
+  <td class="num up">+22.01%</td>
   <td class="center"><span class="badge gr">窗內 / 正</span></td>
 </tr><tr class="row-up">
   <td><b>1303</b></td>
   <td>南亞</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">167.5</td>
-  <td class="num">221.0</td>
-  <td class="num up">+31.94%</td>
+  <td class="num">199.0</td>
+  <td class="num up">+18.81%</td>
   <td class="center"><span class="badge gr">窗內 / 正</span></td>
 </tr><tr class="row-dn">
   <td><b>6415</b></td>
   <td>矽力*-KY</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">555.0</td>
-  <td class="num">473.0</td>
-  <td class="num dn">-14.77%</td>
+  <td class="num">435.0</td>
+  <td class="num dn">-21.62%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>5227</b></td>
   <td>立凱-KY</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">34.0</td>
-  <td class="num">31.25</td>
-  <td class="num dn">-8.09%</td>
+  <td class="num">31.2</td>
+  <td class="num dn">-8.24%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2342</b></td>
   <td>茂矽</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">54.5</td>
-  <td class="num">47.0</td>
-  <td class="num dn">-13.76%</td>
+  <td class="num">42.3</td>
+  <td class="num dn">-22.39%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-up">
+</tr><tr class="">
   <td><b>4764</b></td>
   <td>雙鍵</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">293.0</td>
-  <td class="num">328.5</td>
-  <td class="num up">+12.12%</td>
+  <td class="num">296.0</td>
+  <td class="num up">+1.02%</td>
   <td class="center"><span class="badge gr">窗內 / 正</span></td>
 </tr><tr class="row-dn">
   <td><b>8096</b></td>
   <td>擎亞</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">156.5</td>
-  <td class="num">142.0</td>
-  <td class="num dn">-9.27%</td>
+  <td class="num">128.0</td>
+  <td class="num dn">-18.21%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>8996</b></td>
   <td>高力</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">1335.0</td>
-  <td class="num">1125.0</td>
-  <td class="num dn">-15.73%</td>
+  <td class="num">1015.0</td>
+  <td class="num dn">-23.97%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>6693</b></td>
   <td>廣閎科</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">248.0</td>
-  <td class="num">212.0</td>
-  <td class="num dn">-14.52%</td>
+  <td class="num">191.0</td>
+  <td class="num dn">-22.98%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>5468</b></td>
   <td>凱鈺</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">31.0</td>
-  <td class="num">25.75</td>
-  <td class="num dn">-16.94%</td>
+  <td class="num">23.6</td>
+  <td class="num dn">-23.87%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2061</b></td>
   <td>風青</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">82.7</td>
-  <td class="num">63.0</td>
-  <td class="num dn">-23.82%</td>
+  <td class="num">56.7</td>
+  <td class="num dn">-31.44%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2492</b></td>
   <td>華新科</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">507.31</td>
-  <td class="num">341.5</td>
-  <td class="num dn">-32.68%</td>
+  <td class="num">307.5</td>
+  <td class="num dn">-39.39%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>4923</b></td>
   <td>力士</td>
   <td class="center">2026-07-07</td>
-  <td class="num">6 / 10</td>
+  <td class="num">7 / 10</td>
   <td class="num">60.7</td>
-  <td class="num">53.6</td>
-  <td class="num dn">-11.70%</td>
+  <td class="num">48.9</td>
+  <td class="num dn">-19.44%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>6715</b></td>
   <td>嘉基</td>
   <td class="center">2026-07-08</td>
-  <td class="num">5 / 10</td>
+  <td class="num">6 / 10</td>
   <td class="num">435.5</td>
-  <td class="num">411.0</td>
-  <td class="num dn">-5.63%</td>
+  <td class="num">391.0</td>
+  <td class="num dn">-10.22%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2316</b></td>
   <td>楠梓電</td>
   <td class="center">2026-07-08</td>
-  <td class="num">5 / 10</td>
+  <td class="num">6 / 10</td>
   <td class="num">215.41</td>
-  <td class="num">177.0</td>
-  <td class="num dn">-17.83%</td>
+  <td class="num">159.5</td>
+  <td class="num dn">-25.95%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3090</b></td>
   <td>日電貿</td>
   <td class="center">2026-07-08</td>
-  <td class="num">5 / 10</td>
+  <td class="num">6 / 10</td>
   <td class="num">295.0</td>
-  <td class="num">209.0</td>
-  <td class="num dn">-29.15%</td>
+  <td class="num">194.5</td>
+  <td class="num dn">-34.07%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>7712</b></td>
   <td>博盛半導體</td>
   <td class="center">2026-07-08</td>
-  <td class="num">5 / 10</td>
+  <td class="num">6 / 10</td>
   <td class="num">194.0</td>
-  <td class="num">160.5</td>
-  <td class="num dn">-17.27%</td>
+  <td class="num">144.5</td>
+  <td class="num dn">-25.52%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3675</b></td>
   <td>德微</td>
   <td class="center">2026-07-08</td>
-  <td class="num">5 / 10</td>
+  <td class="num">6 / 10</td>
   <td class="num">418.5</td>
-  <td class="num">317.0</td>
-  <td class="num dn">-24.25%</td>
+  <td class="num">285.5</td>
+  <td class="num dn">-31.78%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>5489</b></td>
   <td>彩富</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">61.0</td>
-  <td class="num">48.6</td>
-  <td class="num dn">-20.33%</td>
+  <td class="num">46.25</td>
+  <td class="num dn">-24.18%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>6834</b></td>
   <td>天二科技</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">143.0</td>
-  <td class="num">107.0</td>
-  <td class="num dn">-25.17%</td>
+  <td class="num">96.3</td>
+  <td class="num dn">-32.66%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3624</b></td>
   <td>光頡</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">142.5</td>
-  <td class="num">108.5</td>
-  <td class="num dn">-23.86%</td>
+  <td class="num">97.7</td>
+  <td class="num dn">-31.44%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2481</b></td>
   <td>強茂</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">218.0</td>
-  <td class="num">167.0</td>
-  <td class="num dn">-23.39%</td>
+  <td class="num">151.5</td>
+  <td class="num dn">-30.50%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>5425</b></td>
   <td>台半</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">129.0</td>
-  <td class="num">102.0</td>
-  <td class="num dn">-20.93%</td>
+  <td class="num">92.5</td>
+  <td class="num dn">-28.29%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-up">
   <td><b>6141</b></td>
   <td>柏承</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">39.2</td>
-  <td class="num">43.75</td>
-  <td class="num up">+11.61%</td>
+  <td class="num">40.7</td>
+  <td class="num up">+3.83%</td>
   <td class="center"><span class="badge gr">窗內 / 正</span></td>
 </tr><tr class="row-dn">
   <td><b>6620</b></td>
   <td>漢達</td>
   <td class="center">2026-07-09</td>
-  <td class="num">4 / 10</td>
+  <td class="num">5 / 10</td>
   <td class="num">98.5</td>
-  <td class="num">89.4</td>
-  <td class="num dn">-9.24%</td>
+  <td class="num">86.5</td>
+  <td class="num dn">-12.18%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-up">
   <td><b>6243</b></td>
   <td>迅杰</td>
   <td class="center">2026-07-10</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">38.0</td>
-  <td class="num">47.95</td>
-  <td class="num up">+26.18%</td>
+  <td class="num">51.6</td>
+  <td class="num up">+35.79%</td>
   <td class="center"><span class="badge gr">窗內 / 正</span></td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td><b>5464</b></td>
   <td>霖宏</td>
   <td class="center">2026-07-10</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">85.0</td>
-  <td class="num">85.4</td>
-  <td class="num up">+0.47%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
+  <td class="num">78.1</td>
+  <td class="num dn">-8.12%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>6683</b></td>
   <td>雍智科技</td>
   <td class="center">2026-07-10</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">1630.0</td>
-  <td class="num">1350.0</td>
-  <td class="num dn">-17.18%</td>
+  <td class="num">1215.0</td>
+  <td class="num dn">-25.46%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2233</b></td>
   <td>宇隆</td>
   <td class="center">2026-07-13</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">242.0</td>
-  <td class="num">229.5</td>
-  <td class="num dn">-5.17%</td>
+  <td class="num">218.5</td>
+  <td class="num dn">-9.71%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>2483</b></td>
   <td>百容</td>
   <td class="center">2026-07-13</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">56.8</td>
-  <td class="num">48.3</td>
-  <td class="num dn">-14.96%</td>
+  <td class="num">43.5</td>
+  <td class="num dn">-23.42%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
   <td><b>3450</b></td>
   <td>聯鈞</td>
   <td class="center">2026-07-13</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">503.0</td>
-  <td class="num">480.0</td>
-  <td class="num dn">-4.57%</td>
+  <td class="num">432.0</td>
+  <td class="num dn">-14.12%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="">
+</tr><tr class="row-dn">
   <td><b>8024</b></td>
   <td>佑華</td>
   <td class="center">2026-07-13</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">17.0</td>
-  <td class="num">17.1</td>
-  <td class="num up">+0.59%</td>
-  <td class="center"><span class="badge gr">窗內 / 正</span></td>
-</tr><tr class="">
+  <td class="num">16.15</td>
+  <td class="num dn">-5.00%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
+</tr><tr class="row-dn">
   <td><b>5321</b></td>
   <td>美而快</td>
   <td class="center">2026-07-10</td>
-  <td class="num">3 / 10</td>
+  <td class="num">4 / 10</td>
   <td class="num">57.9</td>
-  <td class="num">57.6</td>
-  <td class="num dn">-0.52%</td>
+  <td class="num">54.0</td>
+  <td class="num dn">-6.74%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
 </tr><tr class="row-dn">
-  <td><b>3230</b></td>
-  <td>錦明</td>
-  <td class="center">2026-07-14</td>
-  <td class="num">2 / 10</td>
-  <td class="num">55.2</td>
-  <td class="num">50.5</td>
-  <td class="num dn">-8.51%</td>
-  <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="">
   <td><b>2303</b></td>
   <td>聯電</td>
   <td class="center">2026-07-15</td>
-  <td class="num">1 / 10</td>
+  <td class="num">2 / 10</td>
   <td class="num">161.5</td>
-  <td class="num">160.0</td>
-  <td class="num dn">-0.93%</td>
+  <td class="num">144.0</td>
+  <td class="num dn">-10.84%</td>
   <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr>
+</tr><tr class="">
   <td><b>1435</b></td>
   <td>中福</td>
   <td class="center">2026-07-16</td>
-  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
-  <td class="num">-</td>
-  <td class="center"><span class="badge am">尚未開盤</span></td>
-</tr><tr>
+  <td class="num">1 / 10</td>
+  <td class="num">22.95</td>
+  <td class="num">22.9</td>
+  <td class="num dn">-0.22%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
+</tr><tr class="">
   <td><b>6226</b></td>
   <td>光鼎</td>
   <td class="center">2026-07-16</td>
-  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
-  <td class="num">-</td>
-  <td class="center"><span class="badge am">尚未開盤</span></td>
-</tr><tr>
+  <td class="num">1 / 10</td>
+  <td class="num">22.75</td>
+  <td class="num">22.55</td>
+  <td class="num dn">-0.88%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
+</tr><tr class="">
   <td><b>8033</b></td>
   <td>雷虎</td>
   <td class="center">2026-07-16</td>
-  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
-  <td class="num">-</td>
-  <td class="center"><span class="badge am">尚未開盤</span></td>
-</tr><tr>
+  <td class="num">1 / 10</td>
+  <td class="num">219.0</td>
+  <td class="num">219.0</td>
+  <td class="num ">0.00%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
+</tr><tr class="">
   <td><b>3189</b></td>
   <td>景碩</td>
   <td class="center">2026-07-16</td>
+  <td class="num">1 / 10</td>
+  <td class="num">705.0</td>
+  <td class="num">693.0</td>
+  <td class="num dn">-1.70%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
+</tr><tr class="row-dn">
+  <td><b>8021</b></td>
+  <td>尖點</td>
+  <td class="center">2026-07-16</td>
+  <td class="num">1 / 10</td>
+  <td class="num">473.0</td>
+  <td class="num">454.5</td>
+  <td class="num dn">-3.91%</td>
+  <td class="center"><span class="badge am">窗內 / 負</span></td>
+</tr><tr>
+  <td><b>3230</b></td>
+  <td>錦明</td>
+  <td class="center">2026-07-17</td>
   <td class="num">-</td><td class="num">-</td><td class="num">-</td>
   <td class="num">-</td>
   <td class="center"><span class="badge am">尚未開盤</span></td>
 </tr><tr>
-  <td><b>8021</b></td>
-  <td>尖點</td>
-  <td class="center">2026-07-16</td>
+  <td><b>3147</b></td>
+  <td>大綜</td>
+  <td class="center">2026-07-17</td>
+  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
+  <td class="num">-</td>
+  <td class="center"><span class="badge am">尚未開盤</span></td>
+</tr><tr>
+  <td><b>6217</b></td>
+  <td>中探針</td>
+  <td class="center">2026-07-17</td>
+  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
+  <td class="num">-</td>
+  <td class="center"><span class="badge am">尚未開盤</span></td>
+</tr><tr>
+  <td><b>7795</b></td>
+  <td>長廣</td>
+  <td class="center">2026-07-17</td>
+  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
+  <td class="num">-</td>
+  <td class="center"><span class="badge am">尚未開盤</span></td>
+</tr><tr>
+  <td><b>1617</b></td>
+  <td>榮星</td>
+  <td class="center">2026-07-17</td>
+  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
+  <td class="num">-</td>
+  <td class="center"><span class="badge am">尚未開盤</span></td>
+</tr><tr>
+  <td><b>1447</b></td>
+  <td>力鵬</td>
+  <td class="center">2026-07-17</td>
+  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
+  <td class="num">-</td>
+  <td class="center"><span class="badge am">尚未開盤</span></td>
+</tr><tr>
+  <td><b>3055</b></td>
+  <td>蔚華科</td>
+  <td class="center">2026-07-17</td>
+  <td class="num">-</td><td class="num">-</td><td class="num">-</td>
+  <td class="num">-</td>
+  <td class="center"><span class="badge am">尚未開盤</span></td>
+</tr><tr>
+  <td><b>911608</b></td>
+  <td>明輝-DR</td>
+  <td class="center">2026-07-17</td>
   <td class="num">-</td><td class="num">-</td><td class="num">-</td>
   <td class="num">-</td>
   <td class="center"><span class="badge am">尚未開盤</span></td>
