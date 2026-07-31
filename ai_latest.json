@@ -1,13 +1,13 @@
 {
-  "trade_date": "2026-07-30",
+  "trade_date": "2026-07-31",
   "stocks": {
     "AAPL": {
       "symbol": "AAPL",
       "name": "Apple",
       "industry": "Consumer Electronics",
-      "price": 333.42999267578125,
-      "day_pct": -1.4074957069287408,
-      "market_cap": 4897204862976,
+      "price": 308.9100036621094,
+      "day_pct": -7.353864245054432,
+      "market_cap": 4537070911488,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.09239720270243074,
@@ -46,13 +46,13 @@
           "source": "fmp"
         },
         "roe": {
-          "value": 1.4668924498270723,
+          "value": 1.3718365457766524,
           "color": "green",
           "label": "ROE",
           "source": "fmp"
         },
         "roic": {
-          "value": 0.49573922251878827,
+          "value": 0.5186736691216669,
           "color": "green",
           "label": "ROIC",
           "source": "fmp"
@@ -64,13 +64,13 @@
           "source": "fmp"
         },
         "income_quality": {
-          "value": 1.1439689985723027,
+          "value": 1.138012875203599,
           "color": "green",
           "label": "盈餘品質(FCF/NI)",
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.026104632570939697,
+          "value": 0.03162436636116229,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -87,16 +87,16 @@
       "cross_check": [
         {
           "field": "current_ratio",
-          "yf": 1.07,
+          "yf": 1.003,
           "fmp": 0.8932929222186667,
-          "diff_pct": 18.0
+          "diff_pct": 11.6
         }
       ],
       "price_target": {
-        "consensus": 337.26,
+        "consensus": 340.53,
         "high": 400,
-        "low": 250,
-        "upside_pct": 1.1486691084634792
+        "low": 245,
+        "upside_pct": 10.23598975851784
       },
       "grades": {
         "strong_buy": 6,
@@ -112,9 +112,9 @@
       "symbol": "ADBE",
       "name": "ADBE",
       "industry": "Software - Application",
-      "price": 247.89999389648438,
-      "day_pct": -5.895303955920673,
-      "market_cap": 98540249088,
+      "price": 250.41000366210938,
+      "day_pct": 1.0125090066251063,
+      "market_cap": 99537977344,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.1600228246952068,
@@ -177,7 +177,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.11244833310186562,
+          "value": 0.10676327301213431,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -203,12 +203,12 @@
         "consensus": 261.16,
         "high": 379,
         "low": 190,
-        "upside_pct": 5.34893361435605
+        "upside_pct": 4.292958021116502
       },
       "grades": {
         "strong_buy": 3,
         "buy": 10,
-        "hold": 24,
+        "hold": 25,
         "sell": 4,
         "strong_sell": 1
       },
@@ -219,8 +219,8 @@
       "symbol": "AI",
       "name": "AI",
       "industry": "Software - Infrastructure",
-      "price": 9.069999694824219,
-      "day_pct": 2.485867840357736,
+      "price": 9.180000305175781,
+      "day_pct": 1.2127961858072966,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -313,9 +313,9 @@
       "symbol": "AMAT",
       "name": "AMAT",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 501.7699890136719,
-      "day_pct": 14.966198872657133,
-      "market_cap": 398385020928,
+      "price": 507.6700134277344,
+      "day_pct": 1.175842426459206,
+      "market_cap": 403069403136,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.114,
@@ -384,13 +384,13 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.31,
-          "color": "yellow",
+          "value": 1.1,
+          "color": "green",
           "label": "Forward PEG",
           "source": "yf"
         }
       },
-      "score": 15,
+      "score": 16,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -407,8 +407,8 @@
       "symbol": "AMD",
       "name": "AMD",
       "industry": "Semiconductors",
-      "price": 485.3900146484375,
-      "day_pct": 12.997024259045054,
+      "price": 476.1499938964844,
+      "day_pct": -1.9036281079341077,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -472,7 +472,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.01062367344250275,
+          "value": 0.011043131723966683,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -498,7 +498,7 @@
         "consensus": 575.29,
         "high": 1250,
         "low": 260,
-        "upside_pct": 18.52118557005669
+        "upside_pct": 20.821171348175792
       },
       "grades": {
         "strong_buy": 5,
@@ -514,9 +514,9 @@
       "symbol": "AMZN",
       "name": "Amazon",
       "industry": "Internet Retail",
-      "price": 235.5,
-      "day_pct": 3.9047016729934603,
-      "market_cap": 2533299322880,
+      "price": 271.5799865722656,
+      "day_pct": 15.320588778032107,
+      "market_cap": 2921415835648,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.10447843918744877,
@@ -555,13 +555,13 @@
           "source": "fmp"
         },
         "roe": {
-          "value": 0.2333561425996781,
+          "value": 0.3049908974597431,
           "color": "green",
           "label": "ROE",
           "source": "fmp"
         },
         "roic": {
-          "value": 0.09646181360178514,
+          "value": 0.08484086365312504,
           "color": "yellow",
           "label": "ROIC",
           "source": "fmp"
@@ -573,13 +573,13 @@
           "source": "fmp"
         },
         "income_quality": {
-          "value": 1.6358399964756933,
+          "value": 1.193094373932777,
           "color": "green",
           "label": "盈餘品質(FCF/NI)",
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": -0.000993135884685681,
+          "value": -0.003979238516610285,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -596,28 +596,22 @@
       "cross_check": [
         {
           "field": "operating_margin",
-          "yf": 0.1314,
+          "yf": 0.13689,
           "fmp": 0.11155296795755199,
-          "diff_pct": 16.3
+          "diff_pct": 20.4
         },
         {
           "field": "net_margin",
-          "yf": 0.12224,
+          "yf": 0.1744,
           "fmp": 0.10833784334183261,
-          "diff_pct": 12.1
-        },
-        {
-          "field": "current_ratio",
-          "yf": 1.177,
-          "fmp": 1.0508153482718285,
-          "diff_pct": 11.3
+          "diff_pct": 46.7
         }
       ],
       "price_target": {
-        "consensus": 312.79,
-        "high": 360,
+        "consensus": 321.87,
+        "high": 390,
         "low": 175,
-        "upside_pct": 32.81953290870489
+        "upside_pct": 18.517569745277434
       },
       "grades": {
         "strong_buy": 16,
@@ -633,9 +627,9 @@
       "symbol": "ANET",
       "name": "ANET",
       "industry": "Computer Hardware",
-      "price": 171.02000427246094,
-      "day_pct": 8.261064095027383,
-      "market_cap": 215343153152,
+      "price": 180.35000610351562,
+      "day_pct": 5.455503214811386,
+      "market_cap": 227091218432,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.351,
@@ -821,8 +815,8 @@
       "symbol": "APH",
       "name": "APH",
       "industry": "Electronic Components",
-      "price": 159.82000732421875,
-      "day_pct": 6.326930956084809,
+      "price": 160.6999969482422,
+      "day_pct": 0.550612929355121,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -844,7 +838,7 @@
           "source": "yf"
         },
         "gross_margin": {
-          "value": 0.38764998,
+          "value": 0.38952,
           "color": "yellow",
           "label": "毛利率",
           "source": "yf"
@@ -874,7 +868,7 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.1296998514734763,
+          "value": 0.13161545713555586,
           "color": "yellow",
           "label": "FCF / 營收",
           "source": "yf"
@@ -915,9 +909,9 @@
       "symbol": "ASML",
       "name": "ASML",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 1651.43994140625,
-      "day_pct": 6.4971079846325885,
-      "market_cap": 634318094336,
+      "price": 1629.0,
+      "day_pct": -1.3588106260250532,
+      "market_cap": 625698930688,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.213,
@@ -1009,9 +1003,9 @@
       "symbol": "AVGO",
       "name": "Broadcom",
       "industry": "Semiconductors",
-      "price": 387.8399963378906,
-      "day_pct": 4.731040361622418,
-      "market_cap": 1845179973632,
+      "price": 389.2799987792969,
+      "day_pct": 0.37128776170669564,
+      "market_cap": 1852030844928,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.479,
@@ -1103,48 +1097,48 @@
       "symbol": "AXTI",
       "name": "AXTI",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 46.939998626708984,
-      "day_pct": 26.96780383232089,
-      "market_cap": 3070964224,
+      "price": 60.43000030517578,
+      "day_pct": 28.738819925723114,
+      "market_cap": 3953522944,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.391,
+          "value": 1.648,
           "color": "green",
           "label": "營收年增",
           "source": "yf"
         },
         "operating_margin": {
-          "value": -0.058870003,
-          "color": "red",
+          "value": 0.21902001,
+          "color": "green",
           "label": "營業利益率",
           "source": "yf"
         },
         "net_margin": {
-          "value": -0.14685,
+          "value": 0.0323,
           "color": "red",
           "label": "淨利率",
           "source": "yf"
         },
         "gross_margin": {
-          "value": 0.21337,
-          "color": "red",
+          "value": 0.32184,
+          "color": "yellow",
           "label": "毛利率",
           "source": "yf"
         },
         "debt_to_equity": {
-          "value": 0.23021,
+          "value": 0.08972,
           "color": "green",
           "label": "負債/股東權益",
           "source": "yf"
         },
         "current_ratio": {
-          "value": 2.593,
+          "value": 4.765,
           "color": "green",
           "label": "流動比率",
           "source": "yf"
         },
         "roe": {
-          "value": -0.05032,
+          "value": 0.01012,
           "color": "red",
           "label": "ROE",
           "source": "yf"
@@ -1156,10 +1150,10 @@
           "source": null
         },
         "fcf_margin": {
-          "value": -0.26334546478403237,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": null,
@@ -1180,7 +1174,7 @@
           "source": "yf"
         }
       },
-      "score": 6,
+      "score": 9,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1197,9 +1191,9 @@
       "symbol": "CDNS",
       "name": "CDNS",
       "industry": "Software - Application",
-      "price": 332.82000732421875,
-      "day_pct": 0.018030279129988003,
-      "market_cap": 91656298496,
+      "price": 340.0199890136719,
+      "day_pct": 2.1633259813131467,
+      "market_cap": 93639122944,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.242,
@@ -1208,7 +1202,7 @@
           "source": "yf"
         },
         "operating_margin": {
-          "value": 0.28399,
+          "value": 0.28575,
           "color": "green",
           "label": "營業利益率",
           "source": "yf"
@@ -1226,7 +1220,7 @@
           "source": "yf"
         },
         "debt_to_equity": {
-          "value": 0.36194000000000004,
+          "value": 0.38661,
           "color": "green",
           "label": "負債/股東權益",
           "source": "yf"
@@ -1250,7 +1244,7 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.2597327727573841,
+          "value": 0.2757417879777824,
           "color": "green",
           "label": "FCF / 營收",
           "source": "yf"
@@ -1291,9 +1285,9 @@
       "symbol": "CIEN",
       "name": "CIEN",
       "industry": "Communication Equipment",
-      "price": 372.07000732421875,
-      "day_pct": 12.622215341390074,
-      "market_cap": 52667600896,
+      "price": 377.04998779296875,
+      "day_pct": 1.338452541381674,
+      "market_cap": 53372530688,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.395,
@@ -1385,9 +1379,9 @@
       "symbol": "COHR",
       "name": "COHR",
       "industry": "Scientific & Technical Instruments",
-      "price": 249.05999755859375,
-      "day_pct": 12.163924402441983,
-      "market_cap": 48725929984,
+      "price": 262.8900146484375,
+      "day_pct": 5.552885740549374,
+      "market_cap": 51431624704,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.205,
@@ -1479,8 +1473,8 @@
       "symbol": "CRM",
       "name": "CRM",
       "industry": "Software - Application",
-      "price": 180.7100067138672,
-      "day_pct": -4.071556412644039,
+      "price": 184.02000427246094,
+      "day_pct": 1.831662572972359,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -1573,9 +1567,9 @@
       "symbol": "CRWD",
       "name": "CRWD",
       "industry": "Software - Infrastructure",
-      "price": 185.22000122070312,
-      "day_pct": 3.255656248702765,
-      "market_cap": 188601974784,
+      "price": 190.86000061035156,
+      "day_pct": 3.0450271852271227,
+      "market_cap": 194344960000,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.256,
@@ -1667,9 +1661,9 @@
       "symbol": "CSCO",
       "name": "CSCO",
       "industry": "Communication Equipment",
-      "price": 113.55999755859375,
-      "day_pct": 0.9601655133606224,
-      "market_cap": 447589318656,
+      "price": 115.98999786376953,
+      "day_pct": 2.139838285855866,
+      "market_cap": 457166979072,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.07073365045765924,
@@ -1732,7 +1726,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.0279380721982617,
+          "value": 0.027596042173954127,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -1758,7 +1752,7 @@
         "consensus": 126.44,
         "high": 137,
         "low": 110,
-        "upside_pct": 11.342024232397971
+        "upside_pct": 9.009399369507717
       },
       "grades": {
         "strong_buy": 4,
@@ -1774,9 +1768,9 @@
       "symbol": "DDOG",
       "name": "DDOG",
       "industry": "Software - Application",
-      "price": 268.55999755859375,
-      "day_pct": 1.6502593300964596,
-      "market_cap": 95596666880,
+      "price": 267.9700012207031,
+      "day_pct": -0.2196888379706996,
+      "market_cap": 95386656768,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.322,
@@ -1868,9 +1862,9 @@
       "symbol": "DELL",
       "name": "DELL",
       "industry": "Computer Hardware",
-      "price": 404.80999755859375,
-      "day_pct": 9.514657914838098,
-      "market_cap": 261564907520,
+      "price": 405.3699951171875,
+      "day_pct": 0.1383359012798735,
+      "market_cap": 261926748160,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.875,
@@ -1962,9 +1956,9 @@
       "symbol": "ENTG",
       "name": "ENTG",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 117.11000061035156,
-      "day_pct": 9.43836863143237,
-      "market_cap": 17835853824,
+      "price": 119.05000305175781,
+      "day_pct": 1.6565642825509208,
+      "market_cap": 18131314688,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.05,
@@ -2033,7 +2027,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.53,
+          "value": 1.29,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -2056,8 +2050,8 @@
       "symbol": "ETN",
       "name": "ETN",
       "industry": "Specialty Industrial Machinery",
-      "price": 386.8900146484375,
-      "day_pct": 6.911133366908184,
+      "price": 415.20001220703125,
+      "day_pct": 7.3173244298689655,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -2127,7 +2121,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 2.72,
+          "value": 2.91,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -2150,9 +2144,9 @@
       "symbol": "EXTR",
       "name": "EXTR",
       "industry": "Communication Equipment",
-      "price": 29.84000015258789,
-      "day_pct": 2.648780412270746,
-      "market_cap": 3902418176,
+      "price": 30.139999389648438,
+      "day_pct": 1.0053593683863715,
+      "market_cap": 3941651456,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.114,
@@ -2244,8 +2238,8 @@
       "symbol": "FN",
       "name": "FN",
       "industry": "Electronic Components",
-      "price": 439.3299865722656,
-      "day_pct": 5.9903465795574595,
+      "price": 435.4100036621094,
+      "day_pct": -0.8922639086716311,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -2338,9 +2332,9 @@
       "symbol": "GFS",
       "name": "GFS",
       "industry": "Semiconductors",
-      "price": 49.88999938964844,
-      "day_pct": 5.991076509682469,
-      "market_cap": 27374686208,
+      "price": 49.9900016784668,
+      "day_pct": 0.2004455603162647,
+      "market_cap": 27429556224,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.031,
@@ -2409,7 +2403,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.05,
+          "value": 0.93,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -2432,9 +2426,9 @@
       "symbol": "GOOGL",
       "name": "Alphabet",
       "industry": "Internet Content & Information",
-      "price": 333.6600036621094,
-      "day_pct": -0.9058204004545156,
-      "market_cap": 4080640196608,
+      "price": 356.1300048828125,
+      "day_pct": 6.73440057965653,
+      "market_cap": 4355446800384,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.1705527315700319,
@@ -2497,7 +2491,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.01347978684012624,
+          "value": 0.012360540225512116,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -2529,7 +2523,7 @@
         "consensus": 423.44,
         "high": 475,
         "low": 350,
-        "upside_pct": 26.907629129204523
+        "upside_pct": 18.90039990854924
       },
       "grades": {
         "strong_buy": 14,
@@ -2545,9 +2539,9 @@
       "symbol": "HPE",
       "name": "HPE",
       "industry": "Communication Equipment",
-      "price": 47.13999938964844,
-      "day_pct": 6.075609465290843,
-      "market_cap": 62422953984,
+      "price": 47.900001525878906,
+      "day_pct": 1.612223474906016,
+      "market_cap": 63429349376,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.4,
@@ -2639,9 +2633,9 @@
       "symbol": "IBM",
       "name": "IBM",
       "industry": "Information Technology Services",
-      "price": 221.74000549316406,
-      "day_pct": -2.075603646691515,
-      "market_cap": 208908894208,
+      "price": 223.64999389648438,
+      "day_pct": 0.8613639199080758,
+      "market_cap": 210708348928,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.011,
@@ -2710,7 +2704,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 2.18,
+          "value": 2.3,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -2733,9 +2727,9 @@
       "symbol": "INTC",
       "name": "INTC",
       "industry": "Semiconductors",
-      "price": 91.12999725341797,
-      "day_pct": 11.297020408258351,
-      "market_cap": 459659673600,
+      "price": 90.19999694824219,
+      "day_pct": -1.02052050170659,
+      "market_cap": 454968770560,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.12273251182423896,
@@ -2798,7 +2792,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.00614455100739165,
+          "value": 0.006222405104547473,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -2842,7 +2836,7 @@
         "consensus": 110.41,
         "high": 200,
         "low": 60,
-        "upside_pct": 21.156593139103713
+        "upside_pct": 22.405769108123746
       },
       "grades": {
         "strong_buy": 2,
@@ -2858,9 +2852,9 @@
       "symbol": "KLAC",
       "name": "KLAC",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 180.3300018310547,
-      "day_pct": 5.958046444672616,
-      "market_cap": 235560615936,
+      "price": 182.82000732421875,
+      "day_pct": 1.3808048954033092,
+      "market_cap": 238813249536,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.152,
@@ -2952,9 +2946,9 @@
       "symbol": "LITE",
       "name": "LITE",
       "industry": "Communication Equipment",
-      "price": 693.239990234375,
-      "day_pct": 15.089236877618205,
-      "market_cap": 53934071808,
+      "price": 713.9400024414062,
+      "day_pct": 2.985980684702394,
+      "market_cap": 55544532992,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.901,
@@ -3046,48 +3040,48 @@
       "symbol": "LRCX",
       "name": "LRCX",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 297.7200012207031,
-      "day_pct": 17.97899505442311,
-      "market_cap": 372320010240,
+      "price": 293.0199890136719,
+      "day_pct": -1.5786686106947445,
+      "market_cap": 366649442304,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.238,
+          "value": 0.3,
           "color": "green",
           "label": "營收年增",
           "source": "yf"
         },
         "operating_margin": {
-          "value": 0.35042998,
+          "value": 0.37433997,
           "color": "green",
           "label": "營業利益率",
           "source": "yf"
         },
         "net_margin": {
-          "value": 0.30938998,
+          "value": 0.31272,
           "color": "green",
           "label": "淨利率",
           "source": "yf"
         },
         "gross_margin": {
-          "value": 0.49979,
+          "value": 0.50469,
           "color": "green",
           "label": "毛利率",
           "source": "yf"
         },
         "debt_to_equity": {
-          "value": 0.35281999999999997,
+          "value": 0.29946,
           "color": "green",
           "label": "負債/股東權益",
           "source": "yf"
         },
         "current_ratio": {
-          "value": 2.536,
+          "value": 2.629,
           "color": "green",
           "label": "流動比率",
           "source": "yf"
         },
         "roe": {
-          "value": 0.66762,
+          "value": 0.65066004,
           "color": "green",
           "label": "ROE",
           "source": "yf"
@@ -3099,8 +3093,8 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.20073668360656882,
-          "color": "green",
+          "value": 0.14113526721013334,
+          "color": "yellow",
           "label": "FCF / 營收",
           "source": "yf"
         },
@@ -3123,7 +3117,7 @@
           "source": "yf"
         }
       },
-      "score": 17,
+      "score": 16,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3140,9 +3134,9 @@
       "symbol": "MDB",
       "name": "MDB",
       "industry": "Software - Infrastructure",
-      "price": 325.8800048828125,
-      "day_pct": 1.4886324162061593,
-      "market_cap": 26211158016,
+      "price": 337.4800109863281,
+      "day_pct": 3.55959430763082,
+      "market_cap": 27144167424,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.252,
@@ -3234,9 +3228,9 @@
       "symbol": "META",
       "name": "Meta",
       "industry": "Internet Content & Information",
-      "price": 539.030029296875,
-      "day_pct": -7.954091839250976,
-      "market_cap": 1368286429184,
+      "price": 556.7100219726562,
+      "day_pct": 3.279964327561391,
+      "market_cap": 1418222239744,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.22797015293358164,
@@ -3275,13 +3269,13 @@
           "source": "fmp"
         },
         "roe": {
-          "value": 0.33215067171729057,
+          "value": 0.2973026955581193,
           "color": "green",
           "label": "ROE",
           "source": "fmp"
         },
         "roic": {
-          "value": 0.19955653989217054,
+          "value": 0.17079081539682006,
           "color": "green",
           "label": "ROIC",
           "source": "fmp"
@@ -3293,13 +3287,13 @@
           "source": "fmp"
         },
         "income_quality": {
-          "value": 1.7566974088713219,
+          "value": 1.9134335810155951,
           "color": "green",
           "label": "盈餘品質(FCF/NI)",
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.03200876063447086,
+          "value": 0.028944108033890505,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -3315,17 +3309,23 @@
       "score_max": 24,
       "cross_check": [
         {
+          "field": "operating_margin",
+          "yf": 0.30879,
+          "fmp": 0.41437855159579234,
+          "diff_pct": 29.2
+        },
+        {
           "field": "current_ratio",
-          "yf": 2.348,
+          "yf": 2.226,
           "fmp": 2.5987666124868536,
-          "diff_pct": 10.1
+          "diff_pct": 15.5
         }
       ],
       "price_target": {
-        "consensus": 795,
-        "high": 850,
-        "low": 735,
-        "upside_pct": 47.48714483254653
+        "consensus": 723.69,
+        "high": 883,
+        "low": 595,
+        "upside_pct": 29.99406718701847
       },
       "grades": {
         "strong_buy": 8,
@@ -3341,9 +3341,9 @@
       "symbol": "MRVL",
       "name": "MRVL",
       "industry": "Semiconductors",
-      "price": 183.3000030517578,
-      "day_pct": 12.178708628275903,
-      "market_cap": 164519903232,
+      "price": 187.55999755859375,
+      "day_pct": 2.3240558842942516,
+      "market_cap": 168343437312,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.276,
@@ -3435,91 +3435,91 @@
       "symbol": "MSFT",
       "name": "Microsoft",
       "industry": "Software - Infrastructure",
-      "price": 451.1000061035156,
-      "day_pct": 15.506733300956487,
-      "market_cap": 3350967091200,
+      "price": 464.7200012207031,
+      "day_pct": 3.0192850660396786,
+      "market_cap": 3450799652864,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.14901231395535355,
-          "color": "yellow",
+          "value": 0.17852107818449345,
+          "color": "green",
           "label": "營收年增",
           "source": "fmp"
         },
         "operating_margin": {
-          "value": 0.4562195624085985,
+          "value": 0.4678081840892722,
           "color": "green",
           "label": "營業利益率",
           "source": "fmp"
         },
         "net_margin": {
-          "value": 0.3614601524896707,
+          "value": 0.4030538905915218,
           "color": "green",
           "label": "淨利率",
           "source": "fmp"
         },
         "gross_margin": {
-          "value": 0.6882374238616519,
+          "value": 0.6794409337058032,
           "color": "green",
           "label": "毛利率",
           "source": "fmp"
         },
         "debt_to_equity": {
-          "value": 0.326610942735946,
+          "value": 0.12845314170624364,
           "color": "green",
           "label": "負債/股東權益",
           "source": "fmp"
         },
         "current_ratio": {
-          "value": 1.3534464445042416,
+          "value": 1.2303272619576484,
           "color": "yellow",
           "label": "流動比率",
           "source": "fmp"
         },
         "roe": {
-          "value": 0.3313037398539619,
+          "value": 0.3538808451134643,
           "color": "green",
           "label": "ROE",
           "source": "fmp"
         },
         "roic": {
-          "value": 0.20958409773004,
+          "value": 0.21723255146221981,
           "color": "green",
           "label": "ROIC",
           "source": "fmp"
         },
         "fcf_margin": {
-          "value": 0.2541884965427156,
+          "value": 0.21580043334267524,
           "color": "green",
           "label": "FCF / 營收",
           "source": "fmp"
         },
         "income_quality": {
-          "value": 1.3587800281114235,
+          "value": 1.3371238903291696,
           "color": "green",
           "label": "盈餘品質(FCF/NI)",
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.02522693976455725,
+          "value": 0.020751989938513984,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "fmp"
         },
         "forward_peg": {
-          "value": 2.3402422246905754,
-          "color": "red",
+          "value": 0.6602550387596896,
+          "color": "green",
           "label": "Forward PEG",
           "source": "fmp"
         }
       },
-      "score": 19,
+      "score": 22,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
-        "consensus": 537.71,
+        "consensus": 541.88,
         "high": 680,
         "low": 400,
-        "upside_pct": 19.19973237078824
+        "upside_pct": 16.603545915092287
       },
       "grades": {
         "strong_buy": 13,
@@ -3535,8 +3535,8 @@
       "symbol": "MU",
       "name": "MU",
       "industry": "Semiconductors",
-      "price": 874.6599731445312,
-      "day_pct": 18.357235878826963,
+      "price": 823.030029296875,
+      "day_pct": -5.902858874636618,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
@@ -3606,7 +3606,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.13,
+          "value": 0.11,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3629,9 +3629,9 @@
       "symbol": "NOW",
       "name": "NOW",
       "industry": "Software - Application",
-      "price": 110.06999969482422,
-      "day_pct": -4.9153441053932045,
-      "market_cap": 113797193728,
+      "price": 111.2300033569336,
+      "day_pct": 1.0538781369360928,
+      "market_cap": 114996477952,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.24,
@@ -3723,9 +3723,9 @@
       "symbol": "NVDA",
       "name": "NVIDIA",
       "industry": "Semiconductors",
-      "price": 195.0399932861328,
-      "day_pct": 2.6472285272951313,
-      "market_cap": 4724063469568,
+      "price": 200.75,
+      "day_pct": 2.9276081370092744,
+      "market_cap": 4862365925376,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.668049867123354,
@@ -3788,7 +3788,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.025017707587467783,
+          "value": 0.02448931366382712,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -3820,7 +3820,7 @@
         "consensus": 319.48,
         "high": 500,
         "low": 218,
-        "upside_pct": 63.802302603296276
+        "upside_pct": 59.14321295143213
       },
       "grades": {
         "strong_buy": 10,
@@ -3836,9 +3836,9 @@
       "symbol": "ONTO",
       "name": "ONTO",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 250.52000427246094,
-      "day_pct": 14.754251786028316,
-      "market_cap": 12461758464,
+      "price": 258.5799865722656,
+      "day_pct": 3.217300879110163,
+      "market_cap": 12862691328,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.095,
@@ -3907,13 +3907,13 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.22,
-          "color": "yellow",
+          "value": 1.02,
+          "color": "green",
           "label": "Forward PEG",
           "source": "yf"
         }
       },
-      "score": 10,
+      "score": 11,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3930,9 +3930,9 @@
       "symbol": "ORCL",
       "name": "ORCL",
       "industry": "Software - Infrastructure",
-      "price": 127.55999755859375,
-      "day_pct": 8.340410967381185,
-      "market_cap": 367432892416,
+      "price": 129.8699951171875,
+      "day_pct": 1.8109106324909252,
+      "market_cap": 374086762496,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.206,
@@ -4024,9 +4024,9 @@
       "symbol": "PANW",
       "name": "PANW",
       "industry": "Software - Infrastructure",
-      "price": 325.67999267578125,
-      "day_pct": 3.6702209146297626,
-      "market_cap": 265429188608,
+      "price": 331.8299865722656,
+      "day_pct": 1.888354837506645,
+      "market_cap": 270441431040,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.311,
@@ -4118,9 +4118,9 @@
       "symbol": "PATH",
       "name": "PATH",
       "industry": "Software - Infrastructure",
-      "price": 12.369999885559082,
-      "day_pct": -1.7474206859607322,
-      "market_cap": 6409147392,
+      "price": 12.760000228881836,
+      "day_pct": 3.1527918102735475,
+      "market_cap": 6611214336,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.173,
@@ -4189,7 +4189,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.42,
+          "value": 0.45,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4212,9 +4212,9 @@
       "symbol": "PLTR",
       "name": "PLTR",
       "industry": "Software - Infrastructure",
-      "price": 122.26000213623047,
-      "day_pct": -0.6016242794874227,
-      "market_cap": 293095374848,
+      "price": 123.05999755859375,
+      "day_pct": 0.6543394473949693,
+      "market_cap": 295013220352,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.4831039321636066,
@@ -4277,7 +4277,7 @@
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.008904825876615606,
+          "value": 0.009517729136610194,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "fmp"
@@ -4306,10 +4306,10 @@
         }
       ],
       "price_target": {
-        "consensus": 185.36,
+        "consensus": 177.42,
         "high": 230,
-        "low": 138,
-        "upside_pct": 51.611317488330485
+        "low": 90,
+        "upside_pct": 44.17357672668836
       },
       "grades": {
         "strong_buy": 2,
@@ -4325,48 +4325,48 @@
       "symbol": "QCOM",
       "name": "QCOM",
       "industry": "Semiconductors",
-      "price": 151.60000610351562,
-      "day_pct": -2.6207520325123523,
-      "market_cap": 159786401792,
+      "price": 147.61000061035156,
+      "day_pct": -2.631929638867958,
+      "market_cap": 154990493696,
       "lights": {
         "revenue_growth_yoy": {
-          "value": -0.035,
+          "value": -0.04,
           "color": "red",
           "label": "營收年增",
           "source": "yf"
         },
         "operating_margin": {
-          "value": 0.22059,
-          "color": "green",
+          "value": 0.18528,
+          "color": "yellow",
           "label": "營業利益率",
           "source": "yf"
         },
         "net_margin": {
-          "value": 0.22308001,
+          "value": 0.21013,
           "color": "green",
           "label": "淨利率",
           "source": "yf"
         },
         "gross_margin": {
-          "value": 0.54799,
+          "value": 0.54226,
           "color": "green",
           "label": "毛利率",
           "source": "yf"
         },
         "debt_to_equity": {
-          "value": 0.55979,
+          "value": 0.5521,
           "color": "yellow",
           "label": "負債/股東權益",
           "source": "yf"
         },
         "current_ratio": {
-          "value": 2.366,
+          "value": 2.016,
           "color": "green",
           "label": "流動比率",
           "source": "yf"
         },
         "roe": {
-          "value": 0.36083,
+          "value": 0.33754003,
           "color": "green",
           "label": "ROE",
           "source": "yf"
@@ -4378,7 +4378,7 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.21556500233867731,
+          "value": 0.23238559171628156,
           "color": "green",
           "label": "FCF / 營收",
           "source": "yf"
@@ -4396,13 +4396,13 @@
           "source": null
         },
         "forward_peg": {
-          "value": 0.51,
+          "value": 0.49,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
         }
       },
-      "score": 15,
+      "score": 14,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4419,9 +4419,9 @@
       "symbol": "SIMO",
       "name": "SIMO",
       "industry": "Semiconductors",
-      "price": 255.10000610351562,
-      "day_pct": 21.661586710356918,
-      "market_cap": 8649888768,
+      "price": 253.60000610351562,
+      "day_pct": -0.5880046899690461,
+      "market_cap": 8599027712,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.055,
@@ -4513,9 +4513,9 @@
       "symbol": "SMCI",
       "name": "SMCI",
       "industry": "Computer Hardware",
-      "price": 27.729999542236328,
-      "day_pct": 7.8988277005198615,
-      "market_cap": 17937788928,
+      "price": 28.399999618530273,
+      "day_pct": 2.4161561029723444,
+      "market_cap": 18371192832,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.227,
@@ -4607,9 +4607,9 @@
       "symbol": "SNOW",
       "name": "SNOW",
       "industry": "Software - Application",
-      "price": 298.1000061035156,
-      "day_pct": 5.372927725333598,
-      "market_cap": 103321460736,
+      "price": 293.2799987792969,
+      "day_pct": -1.6169095020229562,
+      "market_cap": 101650849792,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.335,
@@ -4701,9 +4701,9 @@
       "symbol": "SNPS",
       "name": "SNPS",
       "industry": "Software - Infrastructure",
-      "price": 372.3299865722656,
-      "day_pct": -0.3639422677233273,
-      "market_cap": 71293493248,
+      "price": 388.760009765625,
+      "day_pct": 4.412758516878279,
+      "market_cap": 74439507968,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.419,
@@ -4795,9 +4795,9 @@
       "symbol": "STX",
       "name": "STX",
       "industry": "Computer Hardware",
-      "price": 851.6799926757812,
-      "day_pct": 11.41373321768726,
-      "market_cap": 193331363840,
+      "price": 856.1300048828125,
+      "day_pct": 0.522498150162054,
+      "market_cap": 194341502976,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.485,
@@ -4848,8 +4848,8 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.14520294428331756,
-          "color": "yellow",
+          "value": 0.16266912373479955,
+          "color": "green",
           "label": "FCF / 營收",
           "source": "yf"
         },
@@ -4872,7 +4872,7 @@
           "source": "yf"
         }
       },
-      "score": 14,
+      "score": 15,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4889,30 +4889,30 @@
       "symbol": "TOELY",
       "name": "TOELY",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 173.5,
-      "day_pct": 15.666666666666673,
-      "market_cap": 157763960832,
+      "price": 167.35000610351562,
+      "day_pct": -3.5446650700198146,
+      "market_cap": 152171757568,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.086,
-          "color": "yellow",
+          "value": 0.333,
+          "color": "green",
           "label": "營收年增",
           "source": "yf"
         },
         "operating_margin": {
-          "value": 0.2889,
+          "value": 0.28866,
           "color": "green",
           "label": "營業利益率",
           "source": "yf"
         },
         "net_margin": {
-          "value": 0.23509,
+          "value": 0.23645,
           "color": "green",
           "label": "淨利率",
           "source": "yf"
         },
         "gross_margin": {
-          "value": 0.45339,
+          "value": 0.45562,
           "color": "green",
           "label": "毛利率",
           "source": "yf"
@@ -4924,13 +4924,13 @@
           "source": null
         },
         "current_ratio": {
-          "value": 2.702,
+          "value": 2.633,
           "color": "green",
           "label": "流動比率",
           "source": "yf"
         },
         "roe": {
-          "value": 0.2927,
+          "value": 0.30929002,
           "color": "green",
           "label": "ROE",
           "source": "yf"
@@ -4942,10 +4942,10 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.0937612141882191,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": null,
@@ -4983,9 +4983,9 @@
       "symbol": "TSLA",
       "name": "Tesla",
       "industry": "Auto Manufacturers",
-      "price": 308.8500061035156,
-      "day_pct": 3.5297661976297467,
-      "market_cap": 1219817766912,
+      "price": 311.2099914550781,
+      "day_pct": 0.7641202217659959,
+      "market_cap": 1229138690048,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.03773471374804494,
@@ -5024,16 +5024,16 @@
           "source": "fmp"
         },
         "roe": {
-          "value": 0.04585112154644448,
+          "value": 0.046669997,
           "color": "red",
           "label": "ROE",
-          "source": "fmp"
+          "source": "yf"
         },
         "roic": {
-          "value": 0.029627306223050907,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROIC",
-          "source": "fmp"
+          "source": null
         },
         "fcf_margin": {
           "value": 0.06559313275754795,
@@ -5042,16 +5042,16 @@
           "source": "fmp"
         },
         "income_quality": {
-          "value": 4.876043841336117,
-          "color": "green",
+          "value": 0.4217807011595579,
+          "color": "red",
           "label": "盈餘品質(FCF/NI)",
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.004745320573017638,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "fmp"
+          "source": null
         },
         "forward_peg": {
           "value": -8.093418396495906,
@@ -5060,7 +5060,7 @@
           "source": "fmp"
         }
       },
-      "score": 9,
+      "score": 7,
       "score_max": 24,
       "cross_check": [
         {
@@ -5077,18 +5077,12 @@
         }
       ],
       "price_target": {
-        "consensus": 431.09,
-        "high": 485,
-        "low": 370,
-        "upside_pct": 39.57908093921611
+        "consensus": null,
+        "high": null,
+        "low": null,
+        "upside_pct": null
       },
-      "grades": {
-        "strong_buy": 6,
-        "buy": 18,
-        "hold": 19,
-        "sell": 4,
-        "strong_sell": 2
-      },
+      "grades": null,
       "piotroski": 4,
       "altman_z": 13.621791549796287
     },
@@ -5096,9 +5090,9 @@
       "symbol": "TSM",
       "name": "TSMC",
       "industry": "Semiconductors",
-      "price": 403.30999755859375,
-      "day_pct": 7.644055596774724,
-      "market_cap": 2091756814336,
+      "price": 404.25,
+      "day_pct": 0.23307194145854027,
+      "market_cap": 2096632168448,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.32964638110085537,
@@ -5137,16 +5131,16 @@
           "source": "fmp"
         },
         "roe": {
-          "value": 0.39348322826206245,
+          "value": 0.39969003,
           "color": "green",
           "label": "ROE",
-          "source": "fmp"
+          "source": "yf"
         },
         "roic": {
-          "value": 0.2714520021377411,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROIC",
-          "source": "fmp"
+          "source": null
         },
         "fcf_margin": {
           "value": 0.2851970594718451,
@@ -5155,16 +5149,16 @@
           "source": "fmp"
         },
         "income_quality": {
-          "value": 1.087374229271338,
-          "color": "green",
+          "value": 0.4605552451023705,
+          "color": "red",
           "label": "盈餘品質(FCF/NI)",
           "source": "fmp"
         },
         "fcf_yield": {
-          "value": 0.018916734504989628,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "fmp"
+          "source": null
         },
         "forward_peg": {
           "value": 0.6453087840314143,
@@ -5173,7 +5167,7 @@
           "source": "fmp"
         }
       },
-      "score": 22,
+      "score": 18,
       "score_max": 24,
       "cross_check": [
         {
@@ -5190,18 +5184,12 @@
         }
       ],
       "price_target": {
-        "consensus": 596,
-        "high": 700,
-        "low": 500,
-        "upside_pct": 47.77714502686282
+        "consensus": null,
+        "high": null,
+        "low": null,
+        "upside_pct": null
       },
-      "grades": {
-        "strong_buy": 6,
-        "buy": 12,
-        "hold": 2,
-        "sell": 0,
-        "strong_sell": 0
-      },
+      "grades": null,
       "piotroski": 8,
       "altman_z": 16.592936394441768
     },
@@ -5209,9 +5197,9 @@
       "symbol": "UMC",
       "name": "UMC",
       "industry": "Semiconductors",
-      "price": 18.940000534057617,
-      "day_pct": 10.69549888033845,
-      "market_cap": 47525892096,
+      "price": 19.030000686645508,
+      "day_pct": 0.47518558632591024,
+      "market_cap": 47725502464,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.17,
@@ -5280,7 +5268,7 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.32,
+          "value": 1.3,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -5303,9 +5291,9 @@
       "symbol": "VIAV",
       "name": "VIAV",
       "industry": "Communication Equipment",
-      "price": 35.04999923706055,
-      "day_pct": 8.749611339983755,
-      "market_cap": 8646331392,
+      "price": 36.95000076293945,
+      "day_pct": 5.420831860874675,
+      "market_cap": 9115034624,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.428,
@@ -5397,9 +5385,9 @@
       "symbol": "VRT",
       "name": "VRT",
       "industry": "Electrical Equipment & Parts",
-      "price": 227.5,
-      "day_pct": 1.9996443902980054,
-      "market_cap": 87573168128,
+      "price": 241.57000732421875,
+      "day_pct": 6.184618604052194,
+      "market_cap": 93001588736,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.241,
@@ -5408,8 +5396,8 @@
           "source": "yf"
         },
         "operating_margin": {
-          "value": 0.19482,
-          "color": "yellow",
+          "value": 0.20362,
+          "color": "green",
           "label": "營業利益率",
           "source": "yf"
         },
@@ -5426,7 +5414,7 @@
           "source": "yf"
         },
         "debt_to_equity": {
-          "value": 0.6844199999999999,
+          "value": 0.70166,
           "color": "yellow",
           "label": "負債/股東權益",
           "source": "yf"
@@ -5450,7 +5438,7 @@
           "source": null
         },
         "fcf_margin": {
-          "value": 0.23811697145554092,
+          "value": 0.2348982168309896,
           "color": "green",
           "label": "FCF / 營收",
           "source": "yf"
@@ -5468,13 +5456,13 @@
           "source": null
         },
         "forward_peg": {
-          "value": 1.35,
-          "color": "yellow",
+          "value": 1.12,
+          "color": "green",
           "label": "Forward PEG",
           "source": "yf"
         }
       },
-      "score": 13,
+      "score": 15,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -5491,8 +5479,8 @@
       "symbol": "WDC",
       "name": "WDC",
       "industry": "Computer Hardware",
-      "price": 533.0399780273438,
-      "day_pct": 15.366628034229834,
+      "price": 544.8400268554688,
+      "day_pct": 2.2137267962140994,
       "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
