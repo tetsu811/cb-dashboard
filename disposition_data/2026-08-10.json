@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-10T11:32:20",
+  "fetched_at": "2026-08-10T12:08:22",
   "date": "2026-08-10",
   "s2_rows": [
     {
@@ -281,6 +281,26 @@
       "tier_reason": "一般",
       "vol_ratio": 0.32,
       "s_intraday": -3.31
+    },
+    {
+      "stock_id": "7898",
+      "stock_name": "乾瞻",
+      "disposition_cnt": 1,
+      "period_start": "2026-08-10",
+      "period_end": "2026-08-14",
+      "days_left": 4,
+      "held_days": 1,
+      "entry_price": 424.0,
+      "last_price": 424.0,
+      "last_date": "2026-08-10",
+      "ret_pct": 0.0,
+      "max_dd_pct": 0.0,
+      "pre_5d_ret": 5.21,
+      "is_first": true,
+      "tier": "D",
+      "tier_reason": "量增",
+      "vol_ratio": 1.14,
+      "s_intraday": -8.29
     },
     {
       "stock_id": "3624",
@@ -796,10 +816,10 @@
       "disposition_cnt": 1,
       "period_end": "2026-07-28",
       "entry_price": 20.26,
-      "last_price": 27.4,
-      "last_date": "2026-08-07",
-      "ret_pct": 35.24,
-      "days_held": 8,
+      "last_price": 26.85,
+      "last_date": "2026-08-10",
+      "ret_pct": 32.53,
+      "days_held": 9,
       "in_window": true,
       "status": "tracking"
     },
@@ -904,9 +924,9 @@
     "s3_win": 33.3
   },
   "stats": {
-    "s2_active": 25,
+    "s2_active": 26,
     "s3_tracking": 30,
-    "new_today": 6,
+    "new_today": 7,
     "lift_tomorrow": 0
   }
 }
