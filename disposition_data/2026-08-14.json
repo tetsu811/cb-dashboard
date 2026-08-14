@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-14T11:16:03",
+  "fetched_at": "2026-08-14T12:10:37",
   "date": "2026-08-14",
   "s2_rows": [
     {
@@ -309,11 +309,11 @@
       "period_start": "2026-08-10",
       "period_end": "2026-08-14",
       "days_left": 0,
-      "held_days": 4,
+      "held_days": 5,
       "entry_price": 424.0,
-      "last_price": 410.0,
-      "last_date": "2026-08-13",
-      "ret_pct": -3.3,
+      "last_price": 413.5,
+      "last_date": "2026-08-14",
+      "ret_pct": -2.48,
       "max_dd_pct": -3.3,
       "pre_5d_ret": 5.21,
       "is_first": true,
@@ -569,11 +569,11 @@
       "period_start": "2026-08-11",
       "period_end": "2026-08-17",
       "days_left": 3,
-      "held_days": 3,
+      "held_days": 4,
       "entry_price": 141.0,
-      "last_price": 179.0,
-      "last_date": "2026-08-13",
-      "ret_pct": 26.95,
+      "last_price": 172.0,
+      "last_date": "2026-08-14",
+      "ret_pct": 21.99,
       "max_dd_pct": 0.0,
       "pre_5d_ret": 15.1,
       "is_first": true,
@@ -1018,6 +1018,19 @@
       "status": "pending_open"
     },
     {
+      "stock_id": "7898",
+      "stock_name": "乾瞻",
+      "disposition_cnt": 1,
+      "period_end": "2026-08-14",
+      "entry_price": null,
+      "last_price": null,
+      "last_date": null,
+      "ret_pct": null,
+      "days_held": 0,
+      "in_window": true,
+      "status": "pending_open"
+    },
+    {
       "stock_id": "2483",
       "stock_name": "百容",
       "disposition_cnt": 1,
@@ -1253,16 +1266,16 @@
     }
   ],
   "perf_30d": {
-    "s2_n": 81,
-    "s2_avg": -0.05,
-    "s2_win": 42.0,
+    "s2_n": 82,
+    "s2_avg": -0.08,
+    "s2_win": 41.5,
     "s3_n": 57,
     "s3_avg": -3.75,
     "s3_win": 42.1
   },
   "stats": {
     "s2_active": 37,
-    "s3_tracking": 37,
+    "s3_tracking": 38,
     "new_today": 4,
     "lift_tomorrow": 0
   }
