@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-08-17T10:58:42",
+  "fetched_at": "2026-08-17T11:48:54",
   "date": "2026-08-17",
   "s2_rows": [
     {
@@ -389,11 +389,11 @@
       "period_start": "2026-08-11",
       "period_end": "2026-08-17",
       "days_left": 0,
-      "held_days": 4,
+      "held_days": 5,
       "entry_price": 141.0,
-      "last_price": 172.0,
-      "last_date": "2026-08-14",
-      "ret_pct": 21.99,
+      "last_price": 183.0,
+      "last_date": "2026-08-17",
+      "ret_pct": 29.79,
       "max_dd_pct": 0.0,
       "pre_5d_ret": 15.1,
       "is_first": true,
@@ -842,13 +842,13 @@
       "stock_name": "乾瞻",
       "disposition_cnt": 1,
       "period_end": "2026-08-14",
-      "entry_price": null,
-      "last_price": null,
-      "last_date": null,
-      "ret_pct": null,
-      "days_held": 0,
+      "entry_price": 407.82,
+      "last_price": 401.5,
+      "last_date": "2026-08-17",
+      "ret_pct": -1.55,
+      "days_held": 1,
       "in_window": true,
-      "status": "pending_open"
+      "status": "tracking"
     },
     {
       "stock_id": "1815",
@@ -996,6 +996,19 @@
     {
       "stock_id": "3450",
       "stock_name": "聯鈞",
+      "disposition_cnt": 1,
+      "period_end": "2026-08-17",
+      "entry_price": null,
+      "last_price": null,
+      "last_date": null,
+      "ret_pct": null,
+      "days_held": 0,
+      "in_window": true,
+      "status": "pending_open"
+    },
+    {
+      "stock_id": "7930",
+      "stock_name": "威世波",
       "disposition_cnt": 1,
       "period_end": "2026-08-17",
       "entry_price": null,
@@ -1164,16 +1177,16 @@
     }
   ],
   "perf_30d": {
-    "s2_n": 83,
-    "s2_avg": 2.67,
-    "s2_win": 51.8,
+    "s2_n": 84,
+    "s2_avg": 2.99,
+    "s2_win": 52.4,
     "s3_n": 46,
     "s3_avg": -1.1,
     "s3_win": 50.0
   },
   "stats": {
     "s2_active": 28,
-    "s3_tracking": 46,
+    "s3_tracking": 47,
     "new_today": 3,
     "lift_tomorrow": 2
   }
