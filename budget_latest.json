@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24T11:16:19.096118+00:00",
+  "generated_at": "2026-08-25T11:15:08.719991+00:00",
   "records": [
     {
       "bill_id": "119-s-3018",
@@ -419,6 +419,34 @@
       },
       "last_action_date": "2026-07-28",
       "fetched_at": "2026-08-08T11:18:33.405714+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-sres-783",
+      "pipeline_version": "v0.2",
+      "title": "A resolution expressing support for the designation of June 11, 2026, as \"Anti-Illicit Trade Awareness Day\".",
+      "congress": 119,
+      "type": "sres",
+      "number": "783",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-resolution/783",
+      "policy_area": "Crime and Law Enforcement",
+      "stage": "introduced",
+      "stage_label": "提案",
+      "passage_baseline": 0.04,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.045,
+      "cosponsors_total": 1,
+      "cosponsors_R": 0,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-06-22",
+        "text": "Submitted in the Senate, considered, and agreed to without amendment and with a preamble by Unanimous Consent. (consideration: CR S3025; text: CR S2987-2988)"
+      },
+      "last_action_date": "2026-06-22",
+      "fetched_at": "2026-07-16T12:13:22.820725+00:00",
       "beneficiaries": []
     },
     {
@@ -2440,6 +2468,34 @@
       "beneficiaries": []
     },
     {
+      "bill_id": "119-hr-8118",
+      "pipeline_version": "v0.2",
+      "title": "Election Infrastructure Integrity Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "8118",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/8118",
+      "policy_area": "Government Operations and Politics",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.065,
+      "cosponsors_total": 3,
+      "cosponsors_R": 3,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-03-26",
+        "text": "Referred to the House Committee on House Administration."
+      },
+      "last_action_date": "2026-03-26",
+      "fetched_at": "2026-04-25T11:30:13.739169+00:00",
+      "beneficiaries": []
+    },
+    {
       "bill_id": "119-s-4802",
       "pipeline_version": "v0.2",
       "title": "Hurricane Hunter Aircraft Recapitalization Act",
@@ -2689,6 +2745,34 @@
       },
       "last_action_date": "2026-07-21",
       "fetched_at": "2026-08-09T11:18:19.755267+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-9334",
+      "pipeline_version": "v0.2",
+      "title": "Workforce for AI Trust Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "9334",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/9334",
+      "policy_area": "Science, Technology, Communications",
+      "stage": "committee",
+      "stage_label": "委員會審議",
+      "passage_baseline": 0.18,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.185,
+      "cosponsors_total": 1,
+      "cosponsors_R": 1,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-06-25",
+        "text": "Ordered to be Reported in the Nature of a Substitute (Amended) by the Yeas and Nays: 35 - 0."
+      },
+      "last_action_date": "2026-06-25",
+      "fetched_at": "2026-07-16T12:13:02.326918+00:00",
       "beneficiaries": []
     },
     {
@@ -4090,15 +4174,15 @@
           "confidence": 0.3,
           "share_usd": 8962500.0,
           "yf_name": "DLH Holdings Corp.",
-          "market_cap": 65653452,
+          "market_cap": 64783864,
           "revenue_ttm": 253543008,
           "sector": "Industrials",
           "industry": "Specialty Business Services",
           "country": "United States",
           "annual_share_usd": 1792500.0,
-          "budget_to_mcap_pct": 2.7302448620675728,
+          "budget_to_mcap_pct": 2.766892694143715,
           "budget_to_revenue_pct": 0.7069806476382895,
-          "expected_alpha_bp": 113.30516177580427
+          "expected_alpha_bp": 114.82604680696416
         },
         {
           "ticker": "ICFI",
@@ -4108,15 +4192,15 @@
           "confidence": 0.55,
           "share_usd": 23900000.0,
           "yf_name": "ICF International, Inc.",
-          "market_cap": 1596295040,
+          "market_cap": 1593246208,
           "revenue_ttm": 1821073024,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 4780000.0,
-          "budget_to_mcap_pct": 0.2994433911164693,
+          "budget_to_mcap_pct": 0.30001640524852263,
           "budget_to_revenue_pct": 0.262482609813235,
-          "expected_alpha_bp": 12.426900731333477
+          "expected_alpha_bp": 12.45068081781369
         },
         {
           "ticker": "MMS",
@@ -4126,15 +4210,15 @@
           "confidence": 0.55,
           "share_usd": 20912500.000000004,
           "yf_name": "Maximus, Inc.",
-          "market_cap": 3048269056,
+          "market_cap": 3049316352,
           "revenue_ttm": 5248398848,
           "sector": "Industrials",
           "industry": "Specialty Business Services",
           "country": "United States",
           "annual_share_usd": 4182500.000000001,
-          "budget_to_mcap_pct": 0.13720901676206895,
+          "budget_to_mcap_pct": 0.13716189195183906,
           "budget_to_revenue_pct": 0.0796909709252341,
-          "expected_alpha_bp": 5.694174195625862
+          "expected_alpha_bp": 5.692218516001322
         },
         {
           "ticker": "BAH",
@@ -4144,15 +4228,15 @@
           "confidence": 0.55,
           "share_usd": 29875000.0,
           "yf_name": "Booz Allen Hamilton Holding Corporation",
-          "market_cap": 9267957760,
+          "market_cap": 9047835648,
           "revenue_ttm": 11093000192,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 5975000.0,
-          "budget_to_mcap_pct": 0.06446943495780455,
+          "budget_to_mcap_pct": 0.06603789273427793,
           "budget_to_revenue_pct": 0.053862795425794946,
-          "expected_alpha_bp": 2.6754815507488896
+          "expected_alpha_bp": 2.740572548472534
         },
         {
           "ticker": "DV",
@@ -4162,15 +4246,15 @@
           "confidence": 0.2,
           "share_usd": 5975000.0,
           "yf_name": "DoubleVerify Holdings, Inc.",
-          "market_cap": 2062884864,
+          "market_cap": 2061334912,
           "revenue_ttm": 768822976,
           "sector": "Communication Services",
           "industry": "Advertising Agencies",
           "country": "United States",
           "annual_share_usd": 1195000.0,
-          "budget_to_mcap_pct": 0.057928584423410645,
+          "budget_to_mcap_pct": 0.05797214188938163,
           "budget_to_revenue_pct": 0.1554323995645,
-          "expected_alpha_bp": 2.404036253571542
+          "expected_alpha_bp": 2.4058438884093376
         },
         {
           "ticker": "SAIC",
@@ -4180,15 +4264,15 @@
           "confidence": 0.4,
           "share_usd": 14937500.0,
           "yf_name": "Science Applications International Corporation",
-          "market_cap": 5413123584,
+          "market_cap": 5362814464,
           "revenue_ttm": 7290999808,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 2987500.0,
-          "budget_to_mcap_pct": 0.055189946315476544,
+          "budget_to_mcap_pct": 0.055707688939357645,
           "budget_to_revenue_pct": 0.04097517595216483,
-          "expected_alpha_bp": 2.290382772092277
+          "expected_alpha_bp": 2.3118690909833424
         },
         {
           "ticker": "PSN",
@@ -4198,15 +4282,15 @@
           "confidence": 0.3,
           "share_usd": 8962500.0,
           "yf_name": "Parsons Corporation",
-          "market_cap": 5238804480,
+          "market_cap": 5213171200,
           "revenue_ttm": 6292604928,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 1792500.0,
-          "budget_to_mcap_pct": 0.03421582169831236,
+          "budget_to_mcap_pct": 0.03438406166288956,
           "budget_to_revenue_pct": 0.028485818202632913,
-          "expected_alpha_bp": 1.419956600479963
+          "expected_alpha_bp": 1.426938559009917
         },
         {
           "ticker": "LDOS",
@@ -4216,15 +4300,15 @@
           "confidence": 0.5,
           "share_usd": 23900000.0,
           "yf_name": "Leidos Holdings, Inc.",
-          "market_cap": 17784807424,
+          "market_cap": 17371885568,
           "revenue_ttm": 17634000896,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 4780000.0,
-          "budget_to_mcap_pct": 0.02687687241161549,
+          "budget_to_mcap_pct": 0.027515723502145508,
           "budget_to_revenue_pct": 0.027106724266325002,
-          "expected_alpha_bp": 1.115390205082043
+          "expected_alpha_bp": 1.1419025253390387
         },
         {
           "ticker": "CACI",
@@ -4234,15 +4318,15 @@
           "confidence": 0.45,
           "share_usd": 17925000.0,
           "yf_name": "CACI International Inc",
-          "market_cap": 14307021824,
+          "market_cap": 14066357248,
           "revenue_ttm": 9567778816,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 3585000.0,
-          "budget_to_mcap_pct": 0.025057625857438544,
+          "budget_to_mcap_pct": 0.02548634260309098,
           "budget_to_revenue_pct": 0.03746951166978148,
-          "expected_alpha_bp": 1.0398914730836997
+          "expected_alpha_bp": 1.0576832180282758
         },
         {
           "ticker": "TRU",
@@ -4252,15 +4336,15 @@
           "confidence": 0.25,
           "share_usd": 8962500.0,
           "yf_name": "TransUnion",
-          "market_cap": 16211275776,
+          "market_cap": 16261092352,
           "revenue_ttm": 4896099840,
           "sector": "Financial Services",
           "industry": "Financial Data & Stock Exchanges",
           "country": "United States",
           "annual_share_usd": 1792500.0,
-          "budget_to_mcap_pct": 0.011057118667080531,
+          "budget_to_mcap_pct": 0.011023244694748536,
           "budget_to_revenue_pct": 0.03661077303521654,
-          "expected_alpha_bp": 0.45887042468384204
+          "expected_alpha_bp": 0.4574646548320643
         },
         {
           "ticker": "VRSK",
@@ -4270,15 +4354,15 @@
           "confidence": 0.3,
           "share_usd": 11950000.0,
           "yf_name": "Verisk Analytics, Inc.",
-          "market_cap": 24566595584,
+          "market_cap": 24671072256,
           "revenue_ttm": 3136000000,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 2390000.0,
-          "budget_to_mcap_pct": 0.009728657728857577,
+          "budget_to_mcap_pct": 0.009687458960843312,
           "budget_to_revenue_pct": 0.07621173469387756,
-          "expected_alpha_bp": 0.40373929574758943
+          "expected_alpha_bp": 0.4020295468749975
         },
         {
           "ticker": "MAXM",
@@ -4306,7 +4390,7 @@
           "confidence": 0.05,
           "share_usd": 0.0,
           "yf_name": "America's Car-Mart, Inc.",
-          "market_cap": 20619114,
+          "market_cap": 19232954,
           "revenue_ttm": 1275602048,
           "sector": "Consumer Cyclical",
           "industry": "Auto & Truck Dealerships",
@@ -4344,6 +4428,34 @@
       },
       "last_action_date": "2026-07-28",
       "fetched_at": "2026-08-09T11:19:08.875709+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-2617",
+      "pipeline_version": "v0.2",
+      "title": "Say No to Indoctrination Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "2617",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/2617",
+      "policy_area": "Education",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.37,
+      "cosponsors_total": 4,
+      "cosponsors_R": 4,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-01-13",
+        "text": "Placed on the Union Calendar, Calendar No. 378."
+      },
+      "last_action_date": "2026-01-13",
+      "fetched_at": "2026-06-21T13:00:58.654478+00:00",
       "beneficiaries": []
     },
     {
@@ -6510,6 +6622,34 @@
       "beneficiaries": []
     },
     {
+      "bill_id": "119-sres-690",
+      "pipeline_version": "v0.2",
+      "title": "An executive resolution authorizing the en bloc consideration in Executive Session of certain nominations on the Executive Calendar.",
+      "congress": 119,
+      "type": "sres",
+      "number": "690",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-resolution/690",
+      "policy_area": "Congress",
+      "stage": "introduced",
+      "stage_label": "提案",
+      "passage_baseline": 0.04,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.04,
+      "cosponsors_total": 0,
+      "cosponsors_R": 0,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-05-11",
+        "text": "Resolution agreed to in Senate without amendment by Yea-Nay Vote. 46 - 45. Record Vote Number: 114. (text: CR 4/27/2026 S2056-2057)"
+      },
+      "last_action_date": "2026-05-11",
+      "fetched_at": "2026-05-25T13:54:09.943044+00:00",
+      "beneficiaries": []
+    },
+    {
       "bill_id": "119-s-3194",
       "pipeline_version": "v0.2",
       "title": "Monterey Bay National Heritage Area Study Act",
@@ -7489,6 +7629,34 @@
       },
       "last_action_date": "2026-07-29",
       "fetched_at": "2026-08-17T11:16:16.792942+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-161",
+      "pipeline_version": "v0.2",
+      "title": "New Source Review Permitting Improvement Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "161",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/161",
+      "policy_area": "Environmental Protection",
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.44999999999999996,
+      "cosponsors_total": 21,
+      "cosponsors_R": 21,
+      "cosponsors_D": 0,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-04-28",
+        "text": "Placed on the Union Calendar, Calendar No. 542."
+      },
+      "last_action_date": "2026-04-28",
+      "fetched_at": "2026-05-16T11:41:38.744008+00:00",
       "beneficiaries": []
     },
     {
@@ -8596,34 +8764,6 @@
       },
       "last_action_date": "2026-02-11",
       "fetched_at": "2026-04-21T11:53:35.982253+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-s-3805",
-      "pipeline_version": "v0.2",
-      "title": "End Sanctuary Cities Act of 2026",
-      "congress": 119,
-      "type": "s",
-      "number": "3805",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3805",
-      "policy_area": "Crime and Law Enforcement",
-      "stage": "introduced",
-      "stage_label": "提案",
-      "passage_baseline": 0.04,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.055,
-      "cosponsors_total": 3,
-      "cosponsors_R": 3,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-02-10",
-        "text": "Read the second time. Placed on Senate Legislative Calendar under General Orders. Calendar No. 318."
-      },
-      "last_action_date": "2026-02-10",
-      "fetched_at": "2026-08-18T11:14:25.514168+00:00",
       "beneficiaries": []
     },
     {
@@ -10518,118 +10658,6 @@
       },
       "last_action_date": "2026-07-21",
       "fetched_at": "2026-08-24T11:16:12.880669+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-8686",
-      "pipeline_version": "v0.2",
-      "title": "To amend the Military Land Withdrawals Act of 2013 to withdraw and reserve certain public land in the vicinity of Yuma Proving Ground, Arizona.",
-      "congress": 119,
-      "type": "hr",
-      "number": "8686",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/8686",
-      "policy_area": "Public Lands and Natural Resources",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.18,
-      "cosponsors_total": 0,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-06-10",
-        "text": "Ordered to be Reported (Amended) by Unanimous Consent."
-      },
-      "last_action_date": "2026-06-10",
-      "fetched_at": "2026-06-24T13:11:02.456290+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-5160",
-      "pipeline_version": "v0.2",
-      "title": "Stem Cell Therapeutic and Research Reauthorization Act of 2025",
-      "congress": 119,
-      "type": "hr",
-      "number": "5160",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/5160",
-      "policy_area": "Health",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.7,
-      "cosponsors_total": 21,
-      "cosponsors_R": 10,
-      "cosponsors_D": 11,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-07-21",
-        "text": "Received in the Senate. Read twice. Placed on Senate Legislative Calendar under General Orders. Calendar No. 464."
-      },
-      "last_action_date": "2026-07-21",
-      "fetched_at": "2026-08-24T11:16:14.527866+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-4541",
-      "pipeline_version": "v0.2",
-      "title": "To reauthorize the Young Women’s Breast Health Education and Awareness Requires Learning Young Act of 2009.",
-      "congress": 119,
-      "type": "hr",
-      "number": "4541",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/4541",
-      "policy_area": "Health",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.5499999999999999,
-      "cosponsors_total": 20,
-      "cosponsors_R": 5,
-      "cosponsors_D": 15,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-07-27",
-        "text": "Read twice and referred to the Committee on Health, Education, Labor, and Pensions."
-      },
-      "last_action_date": "2026-07-27",
-      "fetched_at": "2026-08-24T11:16:16.350441+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-hr-5578",
-      "pipeline_version": "v0.2",
-      "title": "Expanding Whistleblower Protections for Contractors Act of 2026",
-      "congress": 119,
-      "type": "hr",
-      "number": "5578",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/5578",
-      "policy_area": "Government Operations and Politics",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.185,
-      "cosponsors_total": 1,
-      "cosponsors_R": 1,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-07-21",
-        "text": "Received in the Senate. Read twice. Placed on Senate Legislative Calendar under General Orders. Calendar No. 465."
-      },
-      "last_action_date": "2026-07-21",
-      "fetched_at": "2026-08-24T11:16:17.947422+00:00",
       "beneficiaries": []
     }
   ]
