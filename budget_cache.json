@@ -6940,15 +6940,15 @@
         "confidence": 0.5,
         "share_usd": 3000000.0,
         "yf_name": "Oshkosh Corporation",
-        "market_cap": 9698079744,
+        "market_cap": 9794143232,
         "revenue_ttm": 10610299904,
         "sector": "Industrials",
         "industry": "Farm & Heavy Construction Machinery",
         "country": "United States",
         "annual_share_usd": 3000000.0,
-        "budget_to_mcap_pct": 0.030933958878364944,
+        "budget_to_mcap_pct": 0.030630550615169932,
         "budget_to_revenue_pct": 0.028274412854899823,
-        "expected_alpha_bp": 1.0981555401819554
+        "expected_alpha_bp": 1.0873845468385324
       },
       {
         "ticker": "PL",
@@ -6976,15 +6976,15 @@
         "confidence": 0.65,
         "share_usd": 5000000.0,
         "yf_name": "Teledyne Technologies Incorporated",
-        "market_cap": 28307091456,
+        "market_cap": 28290887680,
         "revenue_ttm": 6374400000,
         "sector": "Technology",
         "industry": "Scientific & Technical Instruments",
         "country": "United States",
         "annual_share_usd": 5000000.0,
-        "budget_to_mcap_pct": 0.017663418397371924,
+        "budget_to_mcap_pct": 0.017673535226449284,
         "budget_to_revenue_pct": 0.07843875502008033,
-        "expected_alpha_bp": 0.6270513531067033
+        "expected_alpha_bp": 0.6274105005389495
       },
       {
         "ticker": "MSI",
@@ -51033,6 +51033,35 @@
     },
     "last_action_date": "2025-03-03",
     "fetched_at": "2026-09-03T14:45:56.029440+00:00",
+    "beneficiaries": []
+  },
+  "119-hres-179": {
+    "bill_id": "119-hres-179",
+    "pipeline_version": "v0.2",
+    "title": "Expressing support for the strengthening of United States-Africa partnerships in critical minerals development.",
+    "congress": 119,
+    "type": "hres",
+    "number": "179",
+    "url": "https://www.congress.gov/bill/119th-congress/house-resolution/179",
+    "policy_area": "International Affairs",
+    "stage": "referred",
+    "stage_label": "交付委員會",
+    "passage_baseline": 0.05,
+    "passage_nuance_adj": 0.0,
+    "passage_nuance_reason": "",
+    "passage_prob": 0.055,
+    "cosponsors_total": 1,
+    "cosponsors_R": 0,
+    "cosponsors_D": 1,
+    "budget": null,
+    "companies_raw": null,
+    "latest_action": {
+      "actionDate": "2026-09-02",
+      "actionTime": "16:55:41",
+      "text": "ASSUMING FIRST SPONSORSHIP - Mr. Jackson (IL) asked unanimous consent that he may hereafter be considered as the first sponsor of H. Res. 179, a resolution originally introduced by Representative Cherfilus-McCormick for the purpose of adding cosponsors and requesting reprintings pursuant to clause 7 of rule XII. Agreed to without objection."
+    },
+    "last_action_date": "2026-09-02",
+    "fetched_at": "2026-09-07T16:08:39.611210+00:00",
     "beneficiaries": []
   }
 }
