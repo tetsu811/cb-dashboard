@@ -35,6 +35,17 @@ jobs:
       - name: Generate ETF dashboard
         run: python generate_etf.py
 
+      # Card is rendered here rather than in Python so the PNG comes from a real
+      # browser — same engine that renders the dashboard, so no second layout
+      # engine to keep in sync. Noto CJK is required or every glyph is a box.
+      - name: Render daily card to PNG
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          pip install playwright
+          playwright install --with-deps chromium
+          python render_card.py
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
@@ -42,7 +53,7 @@ jobs:
           # etf_first_seen.json has to be committed as well — it is the only
           # record of when each fund first/last held a stock, and 「新面孔」
           # reads it. Leaving it out froze the registry at 2026-04-30.
-          git add etf_index.html etf_latest.json etf_data/ etf_config.json etf_first_seen.json
+          git add etf_index.html etf_card.html etf_card.png etf_latest.json etf_data/ etf_config.json etf_first_seen.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

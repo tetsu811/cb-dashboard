@@ -286,11 +286,29 @@ def retry_failed_etfs(data, etf_list, max_rounds=2, backoff_seconds=10):
     return data
 
 
+SNAPSHOT_TRUST_UTC_HOUR = 12   # 投信約台北 20:00（12:00 UTC）才全部更新完
+
+
 def snapshot_is_complete(snap, etf_list, required_ok_ratio=0.9):
     """Return True if an existing snapshot already has good coverage — we can
-    skip re-fetching to avoid hammering upstream when a later cron window fires."""
+    skip re-fetching to avoid hammering upstream when a later cron window fires.
+
+    Coverage alone is not enough: a run fired early (manual dispatch, or cron
+    that happened not to be delayed) sees every fund respond "ok" while most of
+    them are still serving yesterday's holdings. That snapshot would then be
+    treated as done and frozen in for the day. So anything fetched before the
+    publication window is refetched regardless of how complete it looks.
+    """
     if not snap or not snap.get('etfs'):
         return False
+    stamp = snap.get('fetched_at_utc')
+    if stamp:
+        try:
+            if datetime.strptime(stamp, '%Y-%m-%dT%H:%M:%S').hour < SNAPSHOT_TRUST_UTC_HOUR:
+                print(f"  ↳ 既有快照抓於 {stamp}Z，早於投信更新完成時間 — 重抓")
+                return False
+        except ValueError:
+            pass
     etfs = snap['etfs']
     total = len(etf_list)
     if total == 0:
@@ -309,6 +327,8 @@ def save_daily_snapshot(data):
     path = os.path.join(DATA_DIR, f"{TODAY.isoformat()}.json")
     payload = {
         "fetched_at": datetime.now().isoformat(timespec='seconds'),
+        # UTC 是唯一能跨 runner（UTC）與本機（台北）比較的時鐘
+        "fetched_at_utc": datetime.utcnow().isoformat(timespec='seconds'),
         "etfs": data,
     }
     with open(path, 'w', encoding='utf-8') as f:
@@ -1330,11 +1350,15 @@ def _daily_deltas(prev_etfs, curr_etfs):
             d_sh = c_sh - p_sh
             if not d_sh:
                 continue
-            # Price from whichever side still holds the position.
-            px = None
+            # Price from whichever side gives a usable number. Trying today
+            # first and *falling back* rather than using elif matters: a fund
+            # that sells down to a sliver (華星光 924,000 -> 1,000 shares) has
+            # its weight rounded to 0.00%, so today's implied price is 0 and the
+            # whole 923,000-share exit used to silently vanish from the flow.
+            px = 0
             if ch and c_sh and aum:
                 px = aum * (ch.get('weight_pct') or 0) / 100 / c_sh
-            elif ph and p_sh and prev_aum:
+            if not px and ph and p_sh and prev_aum:
                 px = prev_aum * (ph.get('weight_pct') or 0) / 100 / p_sh
             if not px:
                 continue
@@ -1343,8 +1367,143 @@ def _daily_deltas(prev_etfs, curr_etfs):
                 continue
             name = (ch or ph).get('stock_name', sc)
             e = out.setdefault(sc, {'name': name, 'rows': []})
-            e['rows'].append((code, round(d_sh / 1000, 1), amt))
+            e['rows'].append((code, round(d_sh / 1000, 1), amt, d_sh))
     return out
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 每日持股異動卡片（給社群分享用的一張圖）
+# ──────────────────────────────────────────────────────────────────────────────
+CARD_ETFS = ['00981A', '00982A', '00991A']   # 只做這三檔的持股增減表
+OUTPUT_CARD = 'etf_card.html'
+
+
+def _fmt_shares(n):
+    """股數用千分位，負號留給呼叫端決定要不要顯示。"""
+    return f'{abs(int(round(n))):,}'
+
+
+def build_card_rows(today_data, prev_data):
+    """CARD_ETFS 每一檔今天的加碼 / 減碼明細（含股數與金額）。
+
+    直接吃 _daily_deltas，所以除權調整、海外持股排除都跟主表同一套邏輯，
+    不會出現「卡片說買了、儀表板說沒買」的矛盾。
+    """
+    deltas = _daily_deltas(prev_data, today_data)
+    prev_codes = {c: {h['stock_code'] for h in (e.get('holdings') or [])}
+                  for c, e in prev_data.items()}
+    curr_codes = {c: {h['stock_code'] for h in (e.get('holdings') or [])}
+                  for c, e in today_data.items()}
+
+    out = {}
+    for etf_code in CARD_ETFS:
+        etf = today_data.get(etf_code)
+        if not etf or etf.get('status') != 'ok':
+            continue
+        buys, sells = [], []
+        for sc, info in deltas.items():
+            for code, lots, amt, d_sh in info['rows']:
+                if code != etf_code:
+                    continue
+                tag = ''
+                if sc not in prev_codes.get(etf_code, set()):
+                    tag = '新進'
+                elif sc not in curr_codes.get(etf_code, set()):
+                    tag = '剔除'
+                row = {'code': sc, 'name': info['name'], 'shares': d_sh,
+                       'amt': amt, 'tag': tag}
+                (buys if d_sh > 0 else sells).append(row)
+        if not buys and not sells:
+            continue
+        buys.sort(key=lambda r: -abs(r['amt']))
+        sells.sort(key=lambda r: -abs(r['amt']))
+        out[etf_code] = {'name': etf.get('name', ''),
+                         'aum': etf.get('aum_billion'),
+                         'buys': buys, 'sells': sells}
+    return out
+
+
+def generate_card_html(cards, prev_date):
+    """Standalone page sized for a screenshot — fixed width so the PNG is stable."""
+    def section(rows, positive):
+        if not rows:
+            return ''
+        label = '加碼' if positive else '減碼'
+        cls = 'buy' if positive else 'sell'
+        sign = '+' if positive else '-'
+        items = ''
+        for r in rows:
+            tag = f'<span class="tag tag-{"new" if r["tag"] == "新進" else "out"}">{r["tag"]}</span>' if r['tag'] else ''
+            items += (f'<div class="row">'
+                      f'<span class="nm">{r["name"]}<span class="sc">({r["code"]})</span>{tag}</span>'
+                      f'<span class="sh">{sign}{_fmt_shares(r["shares"])} 股</span>'
+                      f'<span class="amt">{sign}{_fmt_capital(abs(r["amt"]))}</span>'
+                      f'</div>')
+        wide = ' two-col' if len(rows) > 8 else ''   # 長清單分兩欄，卡片才不會拉成細長條
+        return (f'<div class="sec {cls}{wide}"><div class="sec-h">{label}'
+                f'<span class="sec-n">{len(rows)} 檔</span></div>'
+                f'<div class="rows">{items}</div></div>')
+
+    body = ''
+    for code, c in cards.items():
+        aum = f'{c["aum"]:.0f} 億' if c.get('aum') else ''
+        net = sum(r['amt'] for r in c['buys']) + sum(r['amt'] for r in c['sells'])
+        net_cls = 'up' if net >= 0 else 'down'
+        body += (f'<div class="card"><div class="card-h"><span class="code">{code}</span>'
+                 f'<span class="ename">{c["name"]}</span>'
+                 f'<span class="aum">規模 {aum}</span>'
+                 f'<span class="net {net_cls}">淨額 {"+" if net >= 0 else "-"}{_fmt_capital(abs(net))}</span>'
+                 f'</div>{section(c["buys"], True)}{section(c["sells"], False)}</div>')
+    if not body:
+        body = '<div class="card"><div class="empty">今日這三檔沒有持股異動</div></div>'
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<title>ETF 持股異動通知 {TODAY.isoformat()}</title>
+<style>
+*{{box-sizing:border-box;margin:0;padding:0}}
+body{{width:1040px;font-family:"PingFang TC","Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif;
+background:linear-gradient(160deg,#eff6ff 0%,#e0f2fe 45%,#f0f9ff 100%);padding:26px 26px 18px;color:#0f172a}}
+.hd{{display:flex;align-items:center;gap:14px;margin-bottom:18px}}
+.hd h1{{font-size:34px;letter-spacing:1px;color:#0c4a6e}}
+.hd .date{{background:#0284c7;color:#fff;font-size:17px;font-weight:700;padding:6px 16px;border-radius:999px}}
+.hd .vs{{font-size:13px;color:#475569;margin-left:auto;text-align:right;line-height:1.5}}
+.card{{background:#fff;border:1px solid #cbd5e1;border-radius:14px;padding:14px 16px;margin-bottom:14px;
+box-shadow:0 2px 6px rgba(15,23,42,.06)}}
+.card-h{{display:flex;align-items:baseline;gap:10px;border-bottom:2px solid #e2e8f0;padding-bottom:8px;margin-bottom:10px}}
+.code{{font-size:25px;font-weight:800;color:#0369a1;letter-spacing:.5px}}
+.ename{{font-size:15px;color:#334155;font-weight:600}}
+.aum{{font-size:13px;color:#64748b}}
+.net{{margin-left:auto;font-size:17px;font-weight:800}}
+.net.up{{color:#dc2626}} .net.down{{color:#16a34a}}
+.sec{{border-radius:10px;padding:9px 12px;margin-bottom:8px}}
+.sec.buy{{background:#fef2f2;border:1px solid #fecaca}}
+.sec.sell{{background:#f0fdf4;border:1px solid #bbf7d0}}
+.sec-h{{font-size:15px;font-weight:800;margin-bottom:6px}}
+.sec.buy .sec-h{{color:#b91c1c}} .sec.sell .sec-h{{color:#15803d}}
+.sec-n{{font-size:12px;font-weight:600;color:#64748b;margin-left:7px}}
+.two-col .rows{{column-count:2;column-gap:26px}}
+.row{{display:flex;align-items:center;font-size:14.5px;padding:3px 0;
+border-top:1px dashed rgba(100,116,139,.22);break-inside:avoid}}
+.rows .row:first-child{{border-top:0}}
+.nm{{flex:1;font-weight:600}}
+.sc{{color:#64748b;font-weight:400;margin-left:4px;font-size:13px}}
+.tag{{font-size:11px;font-weight:700;padding:1px 6px;border-radius:5px;margin-left:6px;color:#fff}}
+.tag-new{{background:#f59e0b}} .tag-out{{background:#64748b}}
+.sh{{width:150px;text-align:right;font-variant-numeric:tabular-nums;color:#334155}}
+.amt{{width:100px;text-align:right;font-weight:800;font-variant-numeric:tabular-nums}}
+.two-col .sh{{width:110px}} .two-col .amt{{width:82px}}
+.two-col .row{{font-size:13.5px}}
+.sec.buy .amt{{color:#dc2626}} .sec.sell .amt{{color:#16a34a}}
+.empty{{text-align:center;color:#64748b;padding:22px;font-size:15px}}
+.ft{{font-size:11.5px;color:#64748b;line-height:1.6;margin-top:4px}}
+</style></head><body>
+<div class="hd"><h1>ETF 持股異動通知</h1><span class="date">{TODAY.isoformat()}</span>
+<span class="vs">對比前一交易日 {prev_date or '—'}<br/>紅=加碼　綠=減碼</span></div>
+{body}
+<div class="ft">資料來源：投信公告持股明細，經除權調整後比對前一交易日。金額 = 股數變化 × 當日隱含價，
+僅反映持股增減，不含價格漲跌。本表僅供參考，不構成投資建議。</div>
+</body></html>"""
 
 
 def _positions(etfs):
@@ -1399,7 +1558,7 @@ def build_stock_flow_series(etf_meta, days=FLOW_SERIES_DAYS):
     for i in range(1, len(dates)):
         deltas = _daily_deltas(snaps[dates[i - 1]], snaps[dates[i]])
         for sc, info in deltas.items():
-            for etf_code, lots, amt in info['rows']:
+            for etf_code, lots, amt, _shares in info['rows']:
                 if etf_code not in tracked:
                     continue
                 entry = stocks.setdefault(sc, {'n': info['name'], 's': []})
@@ -2306,12 +2465,16 @@ def _gen_daily_changes(diffs, today_data):
 
 
 def _fmt_capital(v):
-    """Format capital in 億/百萬 for display."""
+    """Format capital in 億/萬.
+
+    「百萬」不是台股慣用的量詞，而且同一頁的資金流表（flFmt）早就在用「萬」，
+    同一個數字換個表格就換個單位，只會讓人看錯一個位數。
+    """
     if v is None:
         return '─'
     if abs(v) >= 1:
         return f'{v:.1f}億'
-    return f'{v*100:.0f}百萬'
+    return f'{v*10000:,.0f}萬'
 
 
 def _fmt_cap_delta(v):
@@ -2381,7 +2544,7 @@ def _gen_consensus(consensus):
             etf_tags += f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
 
         total_cap = item.get('total_capital', 0)
-        cap_display = f'<b>{total_cap:.1f}</b>' if total_cap >= 1 else f'{total_cap*100:.0f}百萬'
+        cap_display = f'<b>{total_cap:.1f}</b>' if total_cap >= 1 else f'{total_cap*10000:,.0f}萬'
         delta_cell = ''
         if has_prev:
             delta_cell = f'<td class="num">{_fmt_cap_delta(cap_delta)}</td>'
@@ -3274,6 +3437,12 @@ def main():
     with open(OUTPUT_HTML, 'w', encoding='utf-8') as f:
         f.write(html)
     print(f"\nDashboard written to {OUTPUT_HTML}")
+
+    # 每日分享卡片：只做 CARD_ETFS 三檔，用全量 today_data（不受 TW-only universe 影響）
+    cards = build_card_rows(today_data, (snap_1d_full or {}).get('etfs', {})) if snap_1d_full else {}
+    with open(OUTPUT_CARD, 'w', encoding='utf-8') as f:
+        f.write(generate_card_html(cards, snap_1d_date))
+    print(f"Card written to {OUTPUT_CARD} ({len(cards)} 檔有異動)")
 
     # Summary
     print(f"\n統計：")
