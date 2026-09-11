@@ -415,8 +415,14 @@ def is_tw_only_ok(etf_entry):
 
 
 def filter_universe(today_data):
-    """Return subset of today_data containing only TW-only ok ETFs."""
-    return {code: e for code, e in today_data.items() if is_tw_only_ok(e)}
+    """Return subset of today_data containing only TW-only ok ETFs we still track.
+
+    Snapshots outlive config changes, so a fund dropped from etf_config.json can
+    still be sitting in today's archive; the config is what defines the universe.
+    """
+    tracked = {e['code'] for e in load_config()['etfs']}
+    return {code: e for code, e in today_data.items()
+            if code in tracked and is_tw_only_ok(e)}
 
 
 def filter_universe_snapshot(snapshot, universe_codes):
@@ -1274,7 +1280,7 @@ def _positions(etfs):
 
 
 def build_stock_flow_series(etf_meta, days=FLOW_SERIES_DAYS):
-    """Per-stock daily active/passive flow over the last `days` trading sessions.
+    """Per-stock daily net flow over the last `days` trading sessions.
 
     Reads the on-disk snapshot archive so the chart survives restarts, and keeps
     only stocks that actually traded — a stock nobody touched has nothing to plot.
@@ -1295,12 +1301,16 @@ def build_stock_flow_series(etf_meta, days=FLOW_SERIES_DAYS):
 
     day_labels = dates[1:]
     stocks = {}
+    # Archived snapshots may hold funds we no longer track, so honour the config.
+    tracked = set(etf_meta)
     used_etfs = set()
     for i in range(1, len(dates)):
         deltas = _daily_deltas(snaps[dates[i - 1]], snaps[dates[i]])
         for sc, info in deltas.items():
-            entry = stocks.setdefault(sc, {'n': info['name'], 's': []})
             for etf_code, lots, amt in info['rows']:
+                if etf_code not in tracked:
+                    continue
+                entry = stocks.setdefault(sc, {'n': info['name'], 's': []})
                 entry['s'].append([i - 1, etf_code, lots, amt])
                 used_etfs.add(etf_code)
 
@@ -1308,7 +1318,7 @@ def build_stock_flow_series(etf_meta, days=FLOW_SERIES_DAYS):
     # breakdown, which is a different question from the daily flow above.
     pos = _positions(snaps[dates[-1]])
     for sc, entry in stocks.items():
-        rows = sorted(pos.get(sc, []), key=lambda x: -x[2])
+        rows = sorted((r for r in pos.get(sc, []) if r[0] in tracked), key=lambda x: -x[2])
         if rows:
             entry['h'] = [[c, lots, amt] for c, lots, amt in rows]
             used_etfs.update(c for c, _, _ in rows)
@@ -1318,7 +1328,6 @@ def build_stock_flow_series(etf_meta, days=FLOW_SERIES_DAYS):
         meta = etf_meta.get(code, {})
         etfs[code] = {
             'n': meta.get('name', code),
-            'k': meta.get('kind', 'active'),
             'a': meta.get('aum_billion'),
         }
     return {'dates': day_labels, 'base': dates[:-1], 'hd': dates[-1],
@@ -1597,9 +1606,23 @@ details.help .help-body{padding:2px 16px 14px;border-top:1px solid var(--brd);co
 .fl-key{display:inline-block;width:10px;height:10px;border-radius:2px;margin-left:8px}
 .fl-key:first-child{margin-left:0}
 .fl-hint{margin-left:10px}
-.fl-chart{width:100%;max-width:760px;display:block;background:var(--card);border:1px solid var(--brd);border-radius:10px;margin-bottom:14px}
+/* touch-action:pan-y 讓手機還能上下捲，但左右拖曳交給圖表自己處理 */
+.fl-chart{width:100%;max-width:760px;display:block;background:var(--card);border:1px solid var(--brd);border-radius:10px;margin-bottom:14px;cursor:ew-resize;touch-action:pan-y;user-select:none}
 .fl-ax{font-size:9px;fill:#94a3b8;font-family:inherit}
 .fl-ax-on{fill:var(--bl);font-weight:700}
+.fl-grip{fill:#2563eb}
+.fl-ctl{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 4px}
+.fl-ctl-lb{font-size:11.5px;color:var(--mu);margin-right:2px}
+.fl-preset{font:inherit;font-size:11.5px;padding:4px 10px;border:1px solid var(--brd);background:var(--card);color:var(--txt);border-radius:999px;cursor:pointer}
+.fl-preset:hover{border-color:var(--bl);color:var(--bl)}
+.fl-preset.on{background:var(--bl);border-color:var(--bl);color:#fff;font-weight:700}
+.fl-selinfo{font-size:11.5px;color:var(--mu);margin-left:4px}
+.fl-drag-hint{font-size:11px;color:var(--bl);background:#eff6ff;border:1px dashed #bfdbfe;border-radius:6px;padding:4px 8px;display:inline-block;margin-bottom:8px}
+.fl-th{cursor:pointer;user-select:none;white-space:nowrap}
+.fl-th:hover{background:#eef2ff}
+.fl-th-d{display:block;font-weight:400;color:var(--mu);font-size:10.5px;margin-top:2px}
+.fl-arrow{margin-left:4px;font-size:9px;color:#cbd5e1}
+.fl-arrow.on{color:var(--bl)}
 .fl-day-ttl{font-size:12.5px;font-weight:700;margin-bottom:8px}
 .fl-day-ttl .fl-sub{font-weight:400;color:var(--mu);font-size:11px}
 /* 持股結構問的是「部位」，跟上面的「當日買賣」是兩件事，要看得出來是兩段 */
@@ -1608,7 +1631,6 @@ details.help .help-body{padding:2px 16px 14px;border-top:1px solid var(--brd);co
 .fl-fn{color:var(--mu);font-size:11px}
 .fl-tag{font-size:10px;padding:1px 7px;border-radius:5px;font-weight:700}
 .fl-act{background:#dbeafe;color:#1d4ed8}
-.fl-pas{background:#f3e8ff;color:#7e22ce}
 .fl-bar-bg{width:100%;min-width:80px;height:7px;background:#e2e8f0;border-radius:4px;overflow:hidden}
 .fl-bar-fill{height:100%;border-radius:4px}
 .fl-tot{font-size:12px;color:var(--mu)}
@@ -1646,8 +1668,9 @@ tr.row-down td{background:#fff7ed;border-left:3px solid #f97316}
 .badge.info{background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe}
 .badge.etf-tag{background:#ede9fe;color:#6d28d9;font-size:10px;padding:2px 7px;margin:1px 2px;border:1px solid #ddd6fe}
 .empty-msg{color:var(--mu);font-size:13px;padding:16px 0;text-align:center}
-.delta-up{color:#16a34a;font-weight:700}
-.delta-down{color:#dc2626;font-weight:700}
+/* 台股慣例：買進/正數紅、賣出/負數綠 */
+.delta-up{color:#dc2626;font-weight:700}
+.delta-down{color:#16a34a;font-weight:700}
 select.etf-select{padding:8px 14px;border:1px solid var(--brd);border-radius:8px;font-size:13px;margin-bottom:14px;background:var(--card);transition:border-color .15s}
 select.etf-select:focus{outline:none;border-color:var(--bl)}
 th.sortable-th{cursor:pointer;user-select:none;transition:background .12s}
@@ -1694,12 +1717,11 @@ th,td{padding:8px 8px}
 .fl-detail{table-layout:fixed;width:100%}
 .fl-detail td,.fl-detail th{padding:5px 4px;font-size:11px;word-break:break-word}
 /* 手機版收起佔比長條，寬度要明確補回其他欄，否則 fixed layout 會留一塊空白 */
-.fl-detail td:nth-child(6),.fl-detail th:nth-child(6){display:none;width:0}
-.fl-detail td:nth-child(1),.fl-detail th:nth-child(1){width:34%}
-.fl-detail td:nth-child(2),.fl-detail th:nth-child(2){width:14%}
-.fl-detail td:nth-child(3),.fl-detail th:nth-child(3){width:16%}
-.fl-detail td:nth-child(4),.fl-detail th:nth-child(4){width:18%}
-.fl-detail td:nth-child(5),.fl-detail th:nth-child(5){width:18%}
+.fl-detail td:nth-child(5),.fl-detail th:nth-child(5){display:none;width:0}
+.fl-detail td:nth-child(1),.fl-detail th:nth-child(1){width:40%}
+.fl-detail td:nth-child(2),.fl-detail th:nth-child(2){width:18%}
+.fl-detail td:nth-child(3),.fl-detail th:nth-child(3){width:21%}
+.fl-detail td:nth-child(4),.fl-detail th:nth-child(4){width:21%}
 .fl-fn{display:block}
 .etf-today td{font-size:11.5px}
 }
@@ -1731,7 +1753,8 @@ function toggleMinor(btn){
   }
 }
 /* ── 個股資金流：10 日長條圖 + 逐日基金明細 ───────────────────────────── */
-var FL = {q:'', sort:'total', open:null, rows:null};
+/* d0/d1 = 選取的交易日區間（含兩端），預設只選最後一天 */
+var FL = {q:'', sort:'today', desc:true, open:null, rows:null, d0:null, d1:null, drag:false, cur:null};
 
 function flFmt(v){
   var a = Math.abs(v);
@@ -1740,31 +1763,33 @@ function flFmt(v){
   return '0';
 }
 function flCls(v){ return v > 0 ? 'delta-up' : (v < 0 ? 'delta-down' : ''); }
+/* 台股慣例：買進/正數紅、賣出/負數綠 */
+var BUY_C = '#dc2626', SELL_C = '#16a34a';
 
 function flBuild(){
   var F = window.FLOW, last = F.dates.length - 1;
   var rows = [];
   Object.keys(F.stocks).forEach(function(sc){
     var st = F.stocks[sc];
-    var byDay = [], act = 0, pas = 0, absToday = 0;
-    for(var i=0;i<F.dates.length;i++) byDay.push({a:0,p:0});
+    var byDay = [], today = 0, absToday = 0;
+    for(var i=0;i<F.dates.length;i++) byDay.push(0);
     st.s.forEach(function(r){
-      var d = r[0], meta = F.etfs[r[1]], amt = r[3];
-      if(!meta) return;
-      if(meta.k === 'passive') byDay[d].p += amt; else byDay[d].a += amt;
-      if(d === last){
-        if(meta.k === 'passive') pas += amt; else act += amt;
-        absToday += Math.abs(amt);
-      }
+      var d = r[0], amt = r[3];
+      if(!F.etfs[r[1]]) return;
+      byDay[d] += amt;
+      if(d === last){ today += amt; absToday += Math.abs(amt); }
     });
-    rows.push({code:sc, name:st.n, byDay:byDay, act:act, pas:pas,
-               total:act+pas, abs:absToday});
+    rows.push({code:sc, name:st.n, byDay:byDay, today:today, abs:absToday});
   });
   FL.rows = rows;
 }
 
 function flSearch(v){ FL.q = v.trim().toLowerCase(); flRender(); }
-function flSort(v){ FL.sort = v; flRender(); }
+/* 點表頭排序：同一欄再點一次就反向，預設由多到少 */
+function flSort(key){
+  if(FL.sort === key) FL.desc = !FL.desc; else { FL.sort = key; FL.desc = true; }
+  flRender();
+}
 
 function flRender(){
   if(!FL.rows) flBuild();
@@ -1772,45 +1797,54 @@ function flRender(){
   var list = FL.rows.filter(function(r){
     return !q || (r.code + ' ' + r.name).toLowerCase().indexOf(q) !== -1;
   });
-  list.sort(function(a,b){ return Math.abs(b[key]) - Math.abs(a[key]); });
+  var sgn = FL.desc ? -1 : 1;
+  list.sort(function(a,b){ return sgn * (a[key] - b[key]); });
 
-  var F0 = window.FLOW, li = F0.dates.length - 1;
+  var F0 = window.FLOW, li = F0.dates.length - 1, td = F0.dates[li];
   var cnt = document.getElementById('fl-count');
-  if(cnt) cnt.textContent = list.length + ' 檔有異動　(今日 = ' + F0.dates[li] +
-                            ' 對比前一交易日 ' + (F0.base[li] || '?') + ')';
+  if(cnt) cnt.textContent = list.length + ' 檔有異動';
 
+  /* 不要在 inline handler 裡嵌引號：Python 的三引號字串會把跳脫吃掉。用 dataset 傳值。 */
+  function th(key, label){
+    var on = FL.sort === key;
+    return '<th class="num fl-th" data-k="' + key +
+           '" onclick="event.stopPropagation();flSort(this.dataset.k)">' +
+           label + '<span class="fl-arrow' + (on?' on':'') + '">' +
+           (on ? (FL.desc ? '▼' : '▲') : '◆') + '</span></th>';
+  }
   var html = '<table class="fl-table"><tr><th>股票</th>' +
-             '<th class="num">今日主動式</th><th class="num">今日被動式</th>' +
-             '<th class="num">今日合計</th><th class="num">近 ' + window.FLOW.dates.length + ' 日走勢</th><th></th></tr>';
+             th('today', '今日買賣<span class="fl-th-d">' + td + ' vs ' + (F0.base[li] || '?') + '</span>') +
+             th('abs', '今日買賣總量') +
+             '<th class="num">近 ' + F0.dates.length + ' 日走勢</th><th></th></tr>';
   list.slice(0, 300).forEach(function(r){
     var open = FL.open === r.code;
     html += '<tr class="fl-row' + (open?' fl-open':'') + '" data-code="' + r.code +
             '" onclick="flToggle(this.dataset.code)">' +
             '<td class="fl-c-stock"><b>' + r.code + '</b> ' + r.name + '</td>' +
-            '<td class="num ' + flCls(r.act) + '" data-l="今日主動式">' + flFmt(r.act) + '</td>' +
-            '<td class="num ' + flCls(r.pas) + '" data-l="今日被動式">' + flFmt(r.pas) + '</td>' +
-            '<td class="num fl-total ' + flCls(r.total) + '" data-l="今日合計">' + flFmt(r.total) + '</td>' +
+            '<td class="num fl-total ' + flCls(r.today) + '" data-l="今日買賣 ' + td + '">' + flFmt(r.today) + '</td>' +
+            '<td class="num" data-l="今日買賣總量">' + flFmt(r.abs) + '</td>' +
             '<td class="num fl-c-spark">' + flSpark(r.byDay) + '</td>' +
             '<td class="fl-caret">' + (open ? '▾' : '▸') + '</td></tr>';
     if(open){
-      html += '<tr class="fl-detail-row"><td colspan="6">' + flPanel(r) + '</td></tr>';
+      html += '<tr class="fl-detail-row"><td colspan="5">' + flPanel(r) + '</td></tr>';
     }
   });
   html += '</table>';
   if(list.length > 300) html += '<div class="fl-more">只顯示前 300 檔，請用搜尋縮小範圍</div>';
   document.getElementById('fl-list').innerHTML = html;
+  flBindChart();
 }
 
 function flSpark(byDay){
   var max = 0;
-  byDay.forEach(function(d){ max = Math.max(max, Math.abs(d.a + d.p)); });
+  byDay.forEach(function(v){ max = Math.max(max, Math.abs(v)); });
   if(!max) return '<span style="color:#cbd5e1">─</span>';
   var w = 6, gap = 2, h = 24, out = '';
-  byDay.forEach(function(d, i){
-    var v = d.a + d.p, bh = Math.max(1, Math.abs(v) / max * (h/2));
+  byDay.forEach(function(v, i){
+    var bh = Math.max(1, Math.abs(v) / max * (h/2));
     var y = v >= 0 ? (h/2 - bh) : (h/2);
     out += '<rect x="' + (i*(w+gap)) + '" y="' + y + '" width="' + w + '" height="' + bh +
-           '" fill="' + (v >= 0 ? '#16a34a' : '#dc2626') + '" opacity="0.75"/>';
+           '" fill="' + (v >= 0 ? BUY_C : SELL_C) + '" opacity="0.8"/>';
   });
   var tw = byDay.length * (w+gap);
   return '<svg class="fl-spark" width="' + tw + '" height="' + h + '">' +
@@ -1819,22 +1853,40 @@ function flSpark(byDay){
 
 function flToggle(code){
   FL.open = (FL.open === code) ? null : code;
-  FL.day = window.FLOW.dates.length - 1;
+  FL.d0 = FL.d1 = window.FLOW.dates.length - 1;
   flRender();
 }
-function flPickDay(i){ FL.day = i; flRender(); }
+/* 天數快捷鍵：往回抓 d 個交易日 */
+function flPreset(d){
+  var n = window.FLOW.dates.length;
+  d = Math.max(1, Math.min(n, parseInt(d, 10) || 1));
+  FL.d1 = n - 1; FL.d0 = n - d;
+  flRender();
+}
+function flRange(){
+  var n = window.FLOW.dates.length;
+  var a = (FL.d0 === null || FL.d0 === undefined) ? n-1 : FL.d0;
+  var b = (FL.d1 === null || FL.d1 === undefined) ? n-1 : FL.d1;
+  a = Math.max(0, Math.min(n-1, a)); b = Math.max(0, Math.min(n-1, b));
+  return a <= b ? [a, b] : [b, a];
+}
+
+/* 圖表幾何常數：SVG 與滑鼠座標換算都靠這組 */
+var FLG = {W:760, H:190, padL:46, padB:34, padT:14};
 
 function flPanel(r){
   var F = window.FLOW;
-  var W = 760, H = 190, padL = 46, padB = 34, padT = 14;
-  var n = F.dates.length, cw = (W - padL - 10) / n, bw = Math.min(16, cw/2 - 3);
+  var W = FLG.W, H = FLG.H, padL = FLG.padL, padB = FLG.padB, padT = FLG.padT;
+  var n = F.dates.length, cw = (W - padL - 10) / n, bw = Math.min(22, cw - 8);
   var max = 0;
-  r.byDay.forEach(function(d){ max = Math.max(max, Math.abs(d.a), Math.abs(d.p)); });
+  r.byDay.forEach(function(v){ max = Math.max(max, Math.abs(v)); });
   if(!max) max = 1;
   var midY = padT + (H - padT - padB)/2, half = (H - padT - padB)/2;
-  var sel = (FL.day === undefined || FL.day === null) ? n-1 : FL.day;
+  var rg = flRange(), d0 = rg[0], d1 = rg[1];
+  FL.cur = r;
 
-  var g = '';
+  var g = '<rect id="fl-sel" x="' + (padL + d0*cw) + '" y="' + padT + '" width="' + ((d1-d0+1)*cw) +
+          '" height="' + (H-padT-padB) + '" fill="#dbeafe" stroke="#60a5fa" stroke-width="1" rx="3"/>';
   [1, 0.5, 0, -0.5, -1].forEach(function(t){
     var y = midY - t*half;
     g += '<line x1="' + padL + '" y1="' + y + '" x2="' + W + '" y2="' + y +
@@ -1843,104 +1895,191 @@ function flPanel(r){
          (t*max).toFixed(max>=1?1:2) + '</text>';
   });
   for(var i=0;i<n;i++){
-    var x0 = padL + i*cw, d = r.byDay[i];
-    if(i === sel) g += '<rect x="' + x0 + '" y="' + padT + '" width="' + cw + '" height="' + (H-padT-padB) + '" fill="#eff6ff"/>';
-    [[d.a, '#2563eb', 0], [d.p, '#a855f7', 1]].forEach(function(p){
-      var v = p[0], bh = Math.abs(v)/max*half;
-      if(bh < 0.5) return;
-      var bx = x0 + cw/2 - bw - 2 + p[2]*(bw+4);
-      var by = v >= 0 ? midY - bh : midY;
-      g += '<rect x="' + bx + '" y="' + by + '" width="' + bw + '" height="' + bh +
-           '" fill="' + p[1] + '" rx="2"/>';
-    });
-    g += '<rect x="' + x0 + '" y="' + padT + '" width="' + cw + '" height="' + (H-padT-padB) +
-         '" fill="transparent" style="cursor:pointer" onclick="event.stopPropagation();flPickDay(' + i + ')"/>';
-    g += '<text x="' + (x0+cw/2) + '" y="' + (H-padB+16) + '" class="fl-ax' + (i===sel?' fl-ax-on':'') +
-         '" text-anchor="middle">' + F.dates[i].slice(5).replace('-','/') + '</text>';
+    var x0 = padL + i*cw, v = r.byDay[i];
+    var bh = Math.abs(v)/max*half;
+    if(bh >= 0.5){
+      g += '<rect x="' + (x0 + cw/2 - bw/2) + '" y="' + (v >= 0 ? midY - bh : midY) +
+           '" width="' + bw + '" height="' + bh + '" fill="' + (v >= 0 ? BUY_C : SELL_C) + '" rx="2"/>';
+    }
+    g += '<text id="fl-lb-' + i + '" x="' + (x0+cw/2) + '" y="' + (H-padB+16) + '" class="fl-ax' +
+         ((i>=d0&&i<=d1)?' fl-ax-on':'') + '" text-anchor="middle">' +
+         F.dates[i].slice(5).replace('-','/') + '</text>';
+  }
+  /* 兩端的把手要畫出來，用戶才知道這條可以拉 */
+  g += '<g id="fl-grips">' +
+       '<rect class="fl-grip" x="' + (padL + d0*cw - 3) + '" y="' + (padT + 4) + '" width="6" height="' + (H-padT-padB-8) + '" rx="3"/>' +
+       '<rect class="fl-grip" x="' + (padL + (d1+1)*cw - 3) + '" y="' + (padT + 4) + '" width="6" height="' + (H-padT-padB-8) + '" rx="3"/>' +
+       '</g>';
+  g += '<rect id="fl-hit" x="' + padL + '" y="' + padT + '" width="' + (W-padL) + '" height="' + (H-padT-padB) +
+       '" fill="transparent"/>';
+
+  var li = n - 1, lastB = F.base[li] || '?';
+  var pre = '';
+  [1, 5, 10, 20].forEach(function(d){
+    if(d > n) return;
+    var on = (d1 === n-1 && d0 === n-d);
+    pre += '<button class="fl-preset' + (on?' on':'') + '" data-d="' + d +
+           '" onclick="event.stopPropagation();flPreset(this.dataset.d)">近 ' + d + ' 日</button>';
+  });
+  if(n > 1 && [1,5,10,20].indexOf(n) === -1){
+    var onAll = (d0 === 0 && d1 === n-1);
+    pre += '<button class="fl-preset' + (onAll?' on':'') + '" data-d="' + n +
+           '" onclick="event.stopPropagation();flPreset(this.dataset.d)">全部 ' + n + ' 日</button>';
   }
 
-  var lastB = F.base[F.dates.length-1] || '?';
-  var head = '<div class="fl-head"><b>' + r.code + ' ' + r.name + '</b>　今日 (' +
-             F.dates[F.dates.length-1] + ' vs ' + lastB + ')：' +
-             '主動式 <span class="' + flCls(r.act) + '">' + flFmt(r.act) + '</span>　' +
-             '被動式 <span class="' + flCls(r.pas) + '">' + flFmt(r.pas) + '</span>　' +
-             '合計 <span class="' + flCls(r.total) + '">' + flFmt(r.total) + '</span></div>' +
-             '<div class="fl-legend"><span class="fl-key" style="background:#2563eb"></span>主動式' +
-             '<span class="fl-key" style="background:#a855f7"></span>被動式' +
-             '<span class="fl-hint">單位：億元　點任一天的長條，看下方是哪些基金在動</span></div>';
+  var head = '<div class="fl-head"><b>' + r.code + ' ' + r.name + '</b>　今日 ' +
+             F.dates[li] + '（對比前一交易日 ' + lastB + '）：' +
+             '<span class="' + flCls(r.today) + '">' + flFmt(r.today) + '</span></div>' +
+             '<div class="fl-ctl"><span class="fl-ctl-lb">選擇天數</span>' + pre +
+             '<span class="fl-selinfo" id="fl-selinfo">' + flSelText(r, d0, d1) + '</span></div>' +
+             '<div class="fl-drag-hint">← 在圖上按住並左右拖曳，可自由選取任意幾個交易日 →</div>' +
+             '<div class="fl-legend"><span class="fl-key" style="background:' + BUY_C + '"></span>買進' +
+             '<span class="fl-key" style="background:' + SELL_C + '"></span>賣出' +
+             '<span class="fl-hint">單位：億元</span></div>';
 
   return head +
-    '<svg viewBox="0 0 ' + W + ' ' + H + '" class="fl-chart" preserveAspectRatio="xMidYMid meet">' + g + '</svg>' +
-    flDayDetail(r, sel) + flHoldings(r);
+    '<svg viewBox="0 0 ' + W + ' ' + H + '" class="fl-chart" id="fl-chart" data-n="' + n +
+    '" preserveAspectRatio="xMidYMid meet">' + g + '</svg>' +
+    flRangeDetail(r, d0, d1) + flHoldings(r);
+}
+
+function flSelText(r, d0, d1){
+  var F = window.FLOW, net = 0;
+  for(var i=d0;i<=d1;i++) net += r.byDay[i];
+  var days = d1 - d0 + 1;
+  var span = days === 1 ? F.dates[d1]
+           : F.dates[d0].slice(5).replace('-','/') + '–' + F.dates[d1].slice(5).replace('-','/');
+  return span + '（' + days + ' 個交易日）淨額 <span class="' + flCls(net) + '">' + flFmt(net) + '</span>';
+}
+
+/* 用 document 層級的拖曳，不在拖曳中重繪整張表，避免游標下的元素被抽掉 */
+function flChartIdx(svg, clientX){
+  var box = svg.getBoundingClientRect();
+  var n = parseInt(svg.dataset.n, 10);
+  var x = (clientX - box.left) / box.width * FLG.W;
+  var cw = (FLG.W - FLG.padL - 10) / n;
+  return Math.max(0, Math.min(n-1, Math.floor((x - FLG.padL) / cw)));
+}
+function flPaintSel(){
+  var svg = document.getElementById('fl-chart');
+  if(!svg || !FL.cur) return;
+  var n = parseInt(svg.dataset.n, 10), cw = (FLG.W - FLG.padL - 10) / n;
+  var rg = flRange(), d0 = rg[0], d1 = rg[1];
+  var sel = document.getElementById('fl-sel');
+  if(sel){ sel.setAttribute('x', FLG.padL + d0*cw); sel.setAttribute('width', (d1-d0+1)*cw); }
+  var grips = document.getElementById('fl-grips');
+  if(grips){
+    var gs = grips.children;
+    if(gs[0]) gs[0].setAttribute('x', FLG.padL + d0*cw - 3);
+    if(gs[1]) gs[1].setAttribute('x', FLG.padL + (d1+1)*cw - 3);
+  }
+  for(var i=0;i<n;i++){
+    var t = document.getElementById('fl-lb-' + i);
+    if(t) t.setAttribute('class', 'fl-ax' + ((i>=d0&&i<=d1)?' fl-ax-on':''));
+  }
+  var info = document.getElementById('fl-selinfo');
+  if(info) info.innerHTML = flSelText(FL.cur, d0, d1);
+}
+function flBindChart(){
+  var svg = document.getElementById('fl-chart');
+  if(!svg) return;
+  function down(e){
+    var cx = e.touches ? e.touches[0].clientX : e.clientX;
+    FL.drag = true; FL.anchor = flChartIdx(svg, cx);
+    FL.d0 = FL.d1 = FL.anchor;
+    flPaintSel();
+    e.preventDefault(); e.stopPropagation();
+  }
+  svg.addEventListener('mousedown', down);
+  svg.addEventListener('touchstart', down, {passive:false});
+  svg.addEventListener('click', function(e){ e.stopPropagation(); });
+  if(!window.__flDragBound){
+    window.__flDragBound = true;
+    function move(e){
+      if(!FL.drag) return;
+      var s = document.getElementById('fl-chart');
+      if(!s) return;
+      var cx = e.touches ? e.touches[0].clientX : e.clientX;
+      var i = flChartIdx(s, cx);
+      FL.d0 = Math.min(FL.anchor, i); FL.d1 = Math.max(FL.anchor, i);
+      flPaintSel();
+      e.preventDefault();
+    }
+    function up(){ if(!FL.drag) return; FL.drag = false; flRender(); }
+    document.addEventListener('mousemove', move);
+    document.addEventListener('touchmove', move, {passive:false});
+    document.addEventListener('mouseup', up);
+    document.addEventListener('touchend', up);
+  }
 }
 
 function flHoldings(r){
   var F = window.FLOW, st = F.stocks[r.code], rows = st.h;
   if(!rows || !rows.length) return '';
-  var tot = 0, actTot = 0, pasTot = 0;
-  rows.forEach(function(x){
-    var meta = F.etfs[x[0]];
-    if(!meta) return;
-    tot += x[2];
-    if(meta.k === 'passive') pasTot += x[2]; else actTot += x[2];
-  });
+  var tot = 0;
+  rows.forEach(function(x){ if(F.etfs[x[0]]) tot += x[2]; });
   if(!tot) return '';
 
   var h = '<div class="fl-hold-sec"><div class="fl-day-ttl">' + (F.hd || '') + ' 持股結構　' +
-          '<span class="fl-sub">佔比 = 該基金持股金額 ÷ 全部主動式＋被動式 ETF 對這檔股票的持股總額 (' +
+          '<span class="fl-sub">佔比 = 該基金持股金額 ÷ 全部 ETF 對這檔股票的持股總額 (' +
           tot.toFixed(2) + ' 億)</span></div>';
-  h += '<table class="fl-detail"><tr><th>基金</th><th class="center">類型</th>' +
+  h += '<table class="fl-detail"><tr><th>基金</th>' +
        '<th class="num">持股(張)</th><th class="num">持股金額(億)</th><th class="num">佔總持股</th><th>佔比</th></tr>';
   rows.forEach(function(x){
     var meta = F.etfs[x[0]];
     if(!meta) return;
-    var pct = x[2]/tot*100, pas = meta.k === 'passive';
+    var pct = x[2]/tot*100;
     h += '<tr><td><b>' + x[0] + '</b> <span class="fl-fn">' + meta.n + '</span></td>' +
-         '<td class="center"><span class="fl-tag ' + (pas?'fl-pas':'fl-act') + '">' +
-           (pas?'被動':'主動') + '</span></td>' +
          '<td class="num">' + x[1].toLocaleString() + '</td>' +
          '<td class="num"><b>' + x[2].toFixed(2) + '</b></td>' +
          '<td class="num">' + pct.toFixed(1) + '%</td>' +
          '<td><div class="fl-bar-bg"><div class="fl-bar-fill" style="width:' + Math.min(100,pct) +
-           '%;background:' + (pas?'#a855f7':'#2563eb') + '"></div></div></td></tr>';
+           '%;background:#2563eb"></div></div></td></tr>';
   });
   h += '</table>';
-  h += '<div class="fl-tot">持股總額 <b>' + tot.toFixed(2) + ' 億</b>　其中主動式 ' +
-       actTot.toFixed(2) + ' 億 (' + (actTot/tot*100).toFixed(1) + '%)　被動式 ' +
-       pasTot.toFixed(2) + ' 億 (' + (pasTot/tot*100).toFixed(1) + '%)</div></div>';
+  h += '<div class="fl-tot">持股總額 <b>' + tot.toFixed(2) + ' 億</b></div></div>';
   return h;
 }
 
-function flDayDetail(r, dayIdx){
-  var F = window.FLOW, st = F.stocks[r.code];
-  var rows = st.s.filter(function(x){ return x[0] === dayIdx && F.etfs[x[1]]; });
-  var date = F.dates[dayIdx];
-  if(!rows.length) return '<div class="fl-empty">' + date + ' 相對前一交易日 ' + (F.base[dayIdx] || '?') +
-                          ' 沒有任何基金申報這檔股票的持股異動。</div>';
+/* 把區間內每檔 ETF 的張數與金額加總起來 */
+function flRangeDetail(r, d0, d1){
+  var F = window.FLOW, st = F.stocks[r.code], days = d1 - d0 + 1;
+  var agg = {};
+  st.s.forEach(function(x){
+    if(x[0] < d0 || x[0] > d1 || !F.etfs[x[1]]) return;
+    var a = agg[x[1]] || (agg[x[1]] = {lots:0, amt:0, days:0});
+    a.lots += x[2]; a.amt += x[3]; a.days++;
+  });
+  var rows = Object.keys(agg).map(function(c){ return {code:c, lots:agg[c].lots, amt:agg[c].amt, days:agg[c].days}; })
+                            .filter(function(x){ return x.lots !== 0 || Math.abs(x.amt) >= 0.005; });
+
+  var span = days === 1 ? F.dates[d1] + '（對比前一交易日 ' + (F.base[d1] || '?') + '）'
+           : F.dates[d0] + ' ～ ' + F.dates[d1] + '　共 ' + days + ' 個交易日';
+  if(!rows.length) return '<div class="fl-empty">' + span + ' 期間，沒有任何基金申報這檔股票的持股異動。</div>';
 
   var buyTotal = 0, sellTotal = 0;
-  rows.forEach(function(x){ if(x[3] > 0) buyTotal += x[3]; else sellTotal += -x[3]; });
-  rows.sort(function(a,b){ return Math.abs(b[3]) - Math.abs(a[3]); });
+  rows.forEach(function(x){ if(x.amt > 0) buyTotal += x.amt; else sellTotal += -x.amt; });
+  rows.sort(function(a,b){ return Math.abs(b.amt) - Math.abs(a.amt); });
 
-  var h = '<div class="fl-day-ttl">' + date + ' 買賣明細（對比前一交易日 ' + (F.base[dayIdx] || '?') + '）　' +
-          '<span class="fl-sub">佔比 = 該基金金額 ÷ 當天所有主／被動 ETF <b>同方向</b>申報總額</span></div>';
-  h += '<table class="fl-detail"><tr><th>基金</th><th class="center">類型</th>' +
-       '<th class="num">張數</th><th class="num">金額(億)</th><th class="num">佔當日同向</th><th>佔比</th></tr>';
+  var h = '<div class="fl-day-ttl">' + span + (days === 1 ? ' 買賣明細' : ' 各基金合計買賣') + '　' +
+          '<span class="fl-sub">佔比 = 該基金金額 ÷ 期間所有 ETF <b>同方向</b>合計</span></div>';
+  h += '<table class="fl-detail"><tr><th>基金</th>' +
+       '<th class="num">張數' + (days > 1 ? '合計' : '') + '</th><th class="num">金額(億)</th>' +
+       '<th class="num">佔同向</th><th>佔比</th></tr>';
   rows.forEach(function(x){
-    var meta = F.etfs[x[1]], amt = x[3], isBuy = amt > 0;
+    var meta = F.etfs[x.code], isBuy = x.amt > 0;
     var denom = isBuy ? buyTotal : sellTotal;
-    var pct = denom ? Math.abs(amt)/denom*100 : 0;
-    h += '<tr><td><b>' + x[1] + '</b> <span class="fl-fn">' + meta.n + '</span></td>' +
-         '<td class="center"><span class="fl-tag ' + (meta.k==='passive'?'fl-pas':'fl-act') + '">' +
-           (meta.k==='passive'?'被動':'主動') + '</span></td>' +
-         '<td class="num ' + flCls(amt) + '">' + (x[2]>0?'+':'') + x[2].toLocaleString() + '</td>' +
-         '<td class="num ' + flCls(amt) + '"><b>' + flFmt(amt) + '</b></td>' +
+    var pct = denom ? Math.abs(x.amt)/denom*100 : 0;
+    h += '<tr><td><b>' + x.code + '</b> <span class="fl-fn">' + meta.n + '</span>' +
+         (days > 1 ? '<span class="fl-fn"> ・' + x.days + ' 天有動</span>' : '') + '</td>' +
+         '<td class="num ' + flCls(x.amt) + '">' + (x.lots>0?'+':'') + x.lots.toLocaleString() + '</td>' +
+         '<td class="num ' + flCls(x.amt) + '"><b>' + flFmt(x.amt) + '</b></td>' +
          '<td class="num">' + pct.toFixed(1) + '%</td>' +
          '<td><div class="fl-bar-bg"><div class="fl-bar-fill" style="width:' + Math.min(100,pct) +
-           '%;background:' + (isBuy?'#16a34a':'#dc2626') + '"></div></div></td></tr>';
+           '%;background:' + (isBuy?BUY_C:SELL_C) + '"></div></div></td></tr>';
   });
   h += '</table>';
-  h += '<div class="fl-tot">當日合計：買進 <span class="delta-up">+' + buyTotal.toFixed(2) +
+  h += '<div class="fl-tot">期間合計：買進 <span class="delta-up">+' + buyTotal.toFixed(2) +
        '億</span>　賣出 <span class="delta-down">-' + sellTotal.toFixed(2) +
        '億</span>　淨額 <span class="' + flCls(buyTotal-sellTotal) + '">' + flFmt(buyTotal-sellTotal) + '</span></div>';
   return h;
@@ -2335,34 +2474,24 @@ def _gen_flow_series_tab(series):
     if not series['dates']:
         return ('<div class="warn-box" style="margin:0 0 14px">目前只有一天的持股快照，還算不出資金流。<br/>'
                 '資金流是拿「今天的持股張數」減「前一個交易日的持股張數」得到的，至少要兩天快照才有第一根長條。'
-                '資料來源（MoneyDJ、投信申購買回清單）都只公布最新一日持股，沒有可回溯的每日歷史，無法一次補齊，'
+                '每日持股只公布最新一日，沒有可回溯的歷史，無法一次補齊，'
                 '只能每天累積一份，滿 10 個交易日後長條圖才會完整。</div>'
                 '<div class="empty-msg">明天跑完就會出現第一根長條。</div>')
 
-    n_active = sum(1 for e in series['etfs'].values() if e['k'] == 'active')
-    n_passive = sum(1 for e in series['etfs'].values() if e['k'] == 'passive')
+    n_active = len(series['etfs'])
+    today = series['dates'][-1]
+    base = series['base'][-1] if series['base'] else '?'
     payload = json.dumps(series, ensure_ascii=False, separators=(',', ':'))
 
-    warn = ''
-    if not n_passive:
-        warn = ('<div class="warn-box" style="margin:0 0 14px">被動式 ETF 是後來才納入追蹤的，'
-                '目前歷史快照裡還沒有它們的持股紀錄，因此「今日被動式」欄位會全部顯示 0。'
-                '資料來源（MoneyDJ、投信申購買回清單）都只公布最新一日持股，沒有可回溯的每日歷史，'
-                '無法補齊；只能由系統每天累積一份快照往前疊，滿 10 個交易日後長條圖才會完整。</div>')
-
-    return f"""{warn}<div class="fl-note">
-  一列 = 一檔股票，直接給結論：<b>今天被主動式 ETF 買了多少、被動式 ETF 買了多少、合計多少</b>。<br/>
+    return f"""<div class="fl-note">
+  一列 = 一檔股票，直接給結論：<b>今天 ({today}) 被 ETF 買了多少、賣了多少</b>，對比前一交易日 {base}。<br/>
   金額 = 張數變化 × 該股均價，只反映真正的持股增減，不受基金規模或股價漲跌影響。
-  目前樣本：<b>{n_active}</b> 檔主動式、<b>{n_passive}</b> 檔被動式（近 {len(series['dates'])} 個交易日內有申報異動者）。
+  正數（紅色）= 買進，負數（綠色）= 賣出。點表頭可由多到少排序，再點一次反向。<br/>
+  點任一列展開，可用「近 N 日」按鈕或直接<b>在圖上左右拖曳</b>選取交易日區間，看每檔 ETF 在這段期間合計買賣了多少張、多少錢。
+  目前樣本：<b>{n_active}</b> 檔 ETF（近 {len(series['dates'])} 個交易日內有申報異動者）。
 </div>
 <div class="fl-bar">
   <input class="searchbar" type="search" placeholder="搜尋股票代號或名稱…" oninput="flSearch(this.value)"/>
-  <select class="etf-select" onchange="flSort(this.value)">
-    <option value="total">依今日合計金額排序</option>
-    <option value="active">依今日主動式金額排序</option>
-    <option value="passive">依今日被動式金額排序</option>
-    <option value="abs">依今日買賣總量排序</option>
-  </select>
   <span class="fl-count" id="fl-count"></span>
 </div>
 <div id="fl-list"></div>
@@ -3018,7 +3147,7 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
   <div class="tab" onclick="showTab('t4',this)">完整持股</div>
 </div>
 <div id="tf" class="pane active">
-  <div class="ttl">個股資金流：今天被主動式、被動式各買了多少</div>
+  <div class="ttl">個股資金流：今天 ETF 買了誰、賣了誰</div>
   {tab_flow}
 </div>
 <div id="t0" class="pane">
@@ -3073,7 +3202,7 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
   <div class="desc">每一檔 ETF 的完整持股，含<b>持股金額（億）</b>、<b>張數</b>，以及與 {snap_1d_str} 相比的<b>今日增減</b>。勾選「只看今日有增減」可直接看今天的進出，點欄位標題可排序。<br/>今日增減（億）＝ 張數變化 × 該股均價，因此<b>股數沒動的個股一律顯示 ─</b>，不會被基金規模或股價漲跌影響。</div>
   {tab_holdings}
 </div>
-<div class="ft">資料來源：MoneyDJ（持股）、Yahoo Finance（基金規模）｜ 僅供研究參考，不構成投資建議 ｜ 主動式 ETF 資金流向監測系統</div>
+<div class="ft">僅供研究參考，不構成投資建議 ｜ 主動式 ETF 資金流向監測系統</div>
 <script>{JS}</script>
 <script>if(window.FLOW) flRender();</script>
 </body></html>"""
@@ -3158,7 +3287,7 @@ def main():
     collective = compute_collective_moves(big_actions)
 
     # ── Render
-    # ── 10-day active/passive flow series (whole config universe, not just TW-only)
+    # ── 10-day net flow series (whole config universe, not just TW-only)
     etf_meta = {e['code']: {'name': e['name'], 'kind': e.get('kind', 'active'),
                             'aum_billion': today_data.get(e['code'], {}).get('aum_billion')}
                 for e in etf_list}
