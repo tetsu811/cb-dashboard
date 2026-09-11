@@ -4,6 +4,7 @@
 """
 import json
 import os
+import statistics
 import re
 import sys
 import time
@@ -1242,6 +1243,56 @@ def build_stock_view(today_data, flows_1d, flows_5d):
     return result
 
 
+SPLIT_DETECT_RATIO = 1.4    # 三根漲停也才 1.33 倍，隱含價跳超過這個倍數只可能是除權
+SPLIT_MIN_WEIGHT = 0.5      # weight_pct 只有兩位小數，權重太低的隱含價噪音太大
+
+
+def _corporate_actions(prev_etfs, curr_etfs):
+    """Detect splits / stock dividends between two snapshots.
+
+    除權當天股數會整批放大、股價等比例縮小，權重幾乎不動。天真的相減會讀成
+    「所有基金同時大買」（緯穎 2026-09-02 就被算成 +172 億）。真實交易不可能讓
+    十幾檔基金同步同倍數，所以先用「隱含價 = 持股市值 / 股數」跨基金比對：
+    漲跌幅上限是 ±10%，跳動遠超過就是除權。
+
+    倍數本身改用「股數比的中位數」而不是價格比 —— 價格比會被權重的四捨五入
+    汙染，而多數基金當天不會交易，中位數就是乾淨的除權倍數。
+    Returns {stock_code: factor}，prev_shares * factor 才能跟今天相比。
+    """
+    px_ratios, sh_ratios = {}, {}
+    for code, curr in curr_etfs.items():
+        prev = prev_etfs.get(code)
+        if not prev or curr.get('status') != 'ok' or prev.get('status') != 'ok':
+            continue
+        aum, p_aum = curr.get('aum_billion'), prev.get('aum_billion')
+        if not aum or not p_aum:
+            continue
+        prev_h = {h['stock_code']: h for h in prev.get('holdings', [])}
+        for h in curr.get('holdings', []):
+            sc = h['stock_code']
+            ph = prev_h.get(sc)
+            if not ph or h.get('weight_na') or ph.get('weight_na'):
+                continue
+            c_sh, p_sh = h.get('shares') or 0, ph.get('shares') or 0
+            c_w, p_w = h.get('weight_pct') or 0, ph.get('weight_pct') or 0
+            if not c_sh or not p_sh or c_w < SPLIT_MIN_WEIGHT or p_w < SPLIT_MIN_WEIGHT:
+                continue
+            c_px = aum * c_w / 100 / c_sh
+            if c_px <= 0:
+                continue
+            px_ratios.setdefault(sc, []).append(p_aum * p_w / 100 / p_sh / c_px)
+            sh_ratios.setdefault(sc, []).append(c_sh / p_sh)
+
+    out = {}
+    for sc, rs in px_ratios.items():
+        m = statistics.median(rs)
+        if m < SPLIT_DETECT_RATIO and m > 1 / SPLIT_DETECT_RATIO:
+            continue
+        shr = sh_ratios[sc]
+        out[sc] = statistics.median(shr) if len(shr) >= 2 else m
+    return out
+
+
 def _daily_deltas(prev_etfs, curr_etfs):
     """Per (stock, etf) share/amount delta between two consecutive snapshots.
 
@@ -1249,6 +1300,7 @@ def _daily_deltas(prev_etfs, curr_etfs):
     so AUM drift and price moves are never mistaken for trading activity.
     Returns {stock_code: {'name': str, 'rows': [(etf_code, lots, amount_billion)]}}.
     """
+    splits = _corporate_actions(prev_etfs, curr_etfs)
     out = {}
     for code, curr in curr_etfs.items():
         if curr.get('status') != 'ok':
@@ -1271,6 +1323,8 @@ def _daily_deltas(prev_etfs, curr_etfs):
                 continue
             c_sh = (ch.get('shares') or 0) if ch else 0
             p_sh = (ph.get('shares') or 0) if ph else 0
+            if sc in splits:
+                p_sh = round(p_sh * splits[sc])   # 把除權前的股數換算成除權後口徑
             d_sh = c_sh - p_sh
             if not d_sh:
                 continue
