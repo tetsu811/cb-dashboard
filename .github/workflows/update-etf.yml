@@ -23,6 +23,12 @@ on:
 permissions:
   contents: write
 
+# 兩個 run 同時跑會各自產生一份 etf_index.html / 快照，push 時必然衝突。
+# 排隊而不是取消，因為每個時段的抓取結果都可能是當天唯一成功的那次。
+concurrency:
+  group: update-etf
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -65,6 +71,13 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Auto update ETF dashboard $(date -u +%Y-%m-%d)"
-            git pull --rebase --autostash origin main
+            # 這些都是產生出來的檔案，衝突時沒有「合併」可言 —— 剛跑完的這份
+            # 才是完整的，所以 rebase 撞到就整檔取用我們這邊的版本。
+            if ! git pull --rebase --autostash origin main; then
+              git checkout --theirs -- etf_index.html etf_card.html etf_card.png \
+                etf_latest.json etf_first_seen.json etf_data/ 2>/dev/null || true
+              git add -A
+              GIT_EDITOR=true git rebase --continue
+            fi
             git push
           fi

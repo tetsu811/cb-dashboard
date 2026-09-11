@@ -310,11 +310,14 @@ def stale_etfs(data, expect_date=None):
 
     抓太早時 MoneyDJ 照樣回 200、欄位齊全，只有「資料日期」會露餡，所以這是
     唯一可靠的判準；沒抓到日期的（Playwright 路徑）不算 stale，以免誤殺。
+
+    只檢查純台股的那批。持有美股的 6 檔結構性就是 T+1（美股收盤晚一輪），
+    對它們要求「今天」永遠等不到，只會讓每晚白白多跑十幾分鐘。
     """
     expect = expect_date or TODAY.isoformat()
     out = []
     for code, e in data.items():
-        if e.get('status') not in ('ok', 'partial'):
+        if not is_tw_only_ok(e):
             continue
         d = e.get('data_date')
         if d and d < expect:
@@ -322,7 +325,7 @@ def stale_etfs(data, expect_date=None):
     return out
 
 
-def refetch_stale_etfs(data, etf_list, max_rounds=3, wait_seconds=300):
+def refetch_stale_etfs(data, etf_list, max_rounds=2, wait_seconds=240):
     """投信不是同一秒全部更新完，所以逐檔重抓落後的，而不是整批重跑。"""
     etfs_by_code = {e['code']: e for e in etf_list}
     for round_idx in range(1, max_rounds + 1):
@@ -3437,9 +3440,8 @@ def main():
         refetch_stale_etfs(today_data, etf_list)
 
     stale = stale_etfs(today_data)
-    dated = sum(1 for e in today_data.values() if e.get('data_date'))
-    print(f"\n資料日期檢查：{dated}/{len(today_data)} 檔有標日期，"
-          f"{len(stale)} 檔落後於 {TODAY.isoformat()}")
+    tw_n = sum(1 for e in today_data.values() if is_tw_only_ok(e))
+    print(f"\n資料日期檢查：純台股 {tw_n} 檔中有 {len(stale)} 檔落後於 {TODAY.isoformat()}")
     if stale:
         print(f"::warning::這些 ETF 仍是舊資料: {stale}")
 
