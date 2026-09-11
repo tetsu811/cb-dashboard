@@ -8,7 +8,7 @@ import statistics
 import re
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 import requests
 from bs4 import BeautifulSoup
@@ -67,6 +67,21 @@ def _parse_num(txt):
     cleaned = txt.strip().replace(",", "").replace("，", "")
     try:
         return float(cleaned)
+    except ValueError:
+        return None
+
+
+DATA_DATE_RE = re.compile(r'(?:資料日期|更新日期|基準日)\s*[:：]?\s*(\d{4})[/-](\d{1,2})[/-](\d{1,2})')
+
+
+def _scrape_data_date(html_text):
+    """MoneyDJ 每頁都標「資料日期」。這是唯一能證明「這份持股真的是最新交易日」
+    的證據 —— 抓太早時頁面會照常回 200、欄位齊全，只是日期還停在昨天。"""
+    m = DATA_DATE_RE.search(BeautifulSoup(html_text, 'lxml').get_text(' ', strip=True))
+    if not m:
+        return None
+    try:
+        return date(int(m.group(1)), int(m.group(2)), int(m.group(3))).isoformat()
     except ValueError:
         return None
 
@@ -130,7 +145,7 @@ def fetch_holdings_http(etf_code):
         if resp.status_code == 200:
             holdings = _scrape_holdings_from_html(resp.text, etf_code)
             if len(holdings) >= 3:
-                return holdings
+                return holdings, _scrape_data_date(resp.text)
 
         url = MONEYDJ_TOP10_URL.format(etf_id=etf_id)
         resp = requests.get(url, headers=HEADERS, timeout=15)
@@ -139,14 +154,14 @@ def fetch_holdings_http(etf_code):
             holdings = _scrape_holdings_from_html(resp.text, etf_code)
             if holdings:
                 print(f"  [HTTP] {etf_code}: got {len(holdings)} holdings from top-10 page")
-                return holdings
+                return holdings, _scrape_data_date(resp.text)
             holdings = _scrape_holdings_from_html(resp.text, etf_code, allow_na=True)
             if holdings:
                 print(f"  [HTTP] {etf_code}: got {len(holdings)} holdings (weights N/A)")
-                return holdings
+                return holdings, _scrape_data_date(resp.text)
 
         print(f"  [HTTP] {etf_code}: no holdings found on either page")
-        return None
+        return None, None
     except Exception as e:
         print(f"  [HTTP] {etf_code}: {e}")
         return None
@@ -207,15 +222,15 @@ def fetch_holdings_playwright(etf_code):
 
 
 def fetch_holdings(etf_code):
-    """Try HTTP first, fallback to Playwright."""
-    result = fetch_holdings_http(etf_code)
+    """Try HTTP first, fallback to Playwright. Returns (holdings, method, data_date)."""
+    result, data_date = fetch_holdings_http(etf_code)
     if result:
-        return result, "http"
+        return result, "http", data_date
     print(f"  HTTP failed for {etf_code}, trying Playwright...")
     result = fetch_holdings_playwright(etf_code)
     if result:
-        return result, "playwright"
-    return None, "failed"
+        return result, "playwright", None
+    return None, "failed", None
 
 
 def fetch_one_etf(etf):
@@ -223,7 +238,7 @@ def fetch_one_etf(etf):
     code = etf['code']
     name = etf['name']
     print(f"Fetching {code} {name}...")
-    holdings, method = fetch_holdings(code)
+    holdings, method, data_date = fetch_holdings(code)
     if holdings:
         has_na = any(h.get('weight_na') for h in holdings)
         aum = fetch_aum_yahoo(code)
@@ -235,11 +250,12 @@ def fetch_one_etf(etf):
             "method": method,
             "holdings_count": len(holdings),
             "aum_billion": aum,
+            "data_date": data_date,
             "holdings": holdings,
         }
         label = f"(partial, weights N/A)" if has_na else ""
         aum_label = f"AUM {aum:.1f}億" if aum else "AUM n/a"
-        print(f"  ✓ {code}: {len(holdings)} holdings via {method} {label} | {aum_label}")
+        print(f"  ✓ {code}: {len(holdings)} holdings via {method} {label} | {aum_label} | 資料日期 {data_date or 'n/a'}")
         return entry
     print(f"  ✗ {code}: fetch failed")
     return {
@@ -289,6 +305,44 @@ def retry_failed_etfs(data, etf_list, max_rounds=2, backoff_seconds=10):
 SNAPSHOT_TRUST_UTC_HOUR = 12   # 投信約台北 20:00（12:00 UTC）才全部更新完
 
 
+def stale_etfs(data, expect_date=None):
+    """Codes whose source page is still serving an older trading day.
+
+    抓太早時 MoneyDJ 照樣回 200、欄位齊全，只有「資料日期」會露餡，所以這是
+    唯一可靠的判準；沒抓到日期的（Playwright 路徑）不算 stale，以免誤殺。
+    """
+    expect = expect_date or TODAY.isoformat()
+    out = []
+    for code, e in data.items():
+        if e.get('status') not in ('ok', 'partial'):
+            continue
+        d = e.get('data_date')
+        if d and d < expect:
+            out.append((code, d))
+    return out
+
+
+def refetch_stale_etfs(data, etf_list, max_rounds=3, wait_seconds=300):
+    """投信不是同一秒全部更新完，所以逐檔重抓落後的，而不是整批重跑。"""
+    etfs_by_code = {e['code']: e for e in etf_list}
+    for round_idx in range(1, max_rounds + 1):
+        stale = stale_etfs(data)
+        if not stale:
+            return data
+        print(f"\n⏳ 第 {round_idx} 輪：{len(stale)} 檔資料日期落後 "
+              f"{[f'{c}({d})' for c, d in stale]} — 等 {wait_seconds}s 後重抓")
+        time.sleep(wait_seconds)
+        for code, _ in stale:
+            etf = etfs_by_code.get(code)
+            if etf:
+                data[code] = fetch_one_etf(etf)
+                time.sleep(FETCH_DELAY)
+    remaining = stale_etfs(data)
+    if remaining:
+        print(f"::warning::資料日期仍落後: {remaining}")
+    return data
+
+
 def snapshot_is_complete(snap, etf_list, required_ok_ratio=0.9):
     """Return True if an existing snapshot already has good coverage — we can
     skip re-fetching to avoid hammering upstream when a later cron window fires.
@@ -310,6 +364,10 @@ def snapshot_is_complete(snap, etf_list, required_ok_ratio=0.9):
         except ValueError:
             pass
     etfs = snap['etfs']
+    stale = stale_etfs(etfs)
+    if stale:
+        print(f"  ↳ 既有快照有 {len(stale)} 檔資料日期落後 {stale[:5]} — 重抓")
+        return False
     total = len(etf_list)
     if total == 0:
         return False
@@ -3376,6 +3434,14 @@ def main():
             print(f"⚠ Today's snapshot exists but coverage is partial — refetching")
         today_data = fetch_all_etf_holdings(etf_list)
         retry_failed_etfs(today_data, etf_list)
+        refetch_stale_etfs(today_data, etf_list)
+
+    stale = stale_etfs(today_data)
+    dated = sum(1 for e in today_data.values() if e.get('data_date'))
+    print(f"\n資料日期檢查：{dated}/{len(today_data)} 檔有標日期，"
+          f"{len(stale)} 檔落後於 {TODAY.isoformat()}")
+    if stale:
+        print(f"::warning::這些 ETF 仍是舊資料: {stale}")
 
     # Persist all 20 ETFs (data collection unaffected by analysis universe)
     save_daily_snapshot(today_data,
