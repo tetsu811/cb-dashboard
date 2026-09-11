@@ -34,7 +34,8 @@ FETCH_DELAY = 1.5
 BIG_ETF_AUM_THRESHOLD = 100         # 億 TWD — 大資金 ETF 的門檻
 CAPITAL_FLOW_THRESHOLD = 1.0        # 億 TWD — 重大資金流入/出的絕對門檻（舊邏輯）
 WEIGHT_RATIO_THRESHOLD = 0.20       # 20% — 權重相對變化門檻
-NEW_BUY_WINDOW_DAYS = 7             # 首見後多少天仍顯示「✦新」
+NEW_BUY_WINDOW_DAYS = 7             # 進場後多少天仍顯示「✦新」
+RE_ENTRY_ABSENCE_DAYS = 183         # 進場前至少空手這麼久，才算「睽違重返」（約 6 個月）
 MATERIAL_RATIO_OF_AUM = 0.03        # 3% — 動作量體 ≥ 該基金 AUM × 3% 視為重大
 TRADING_DAYS_LOOKBACK = 5           # 「最近一週」= 5 個交易日
 NOTABLE_FLOW_BILLION = 0.2          # 億 — 個股視角中，小於此金額的進出視為雜訊，預設收合
@@ -450,6 +451,16 @@ def load_first_seen():
         # Migration: old format without baseline. Treat all existing records as
         # pre-existing by setting baseline to today — only future additions count as new.
         baseline = TODAY.isoformat()
+    today_str = TODAY.isoformat()
+    for sc, etfs in raw.items():
+        if not isinstance(etfs, dict):
+            continue
+        for etf_code, v in etfs.items():
+            if isinstance(v, str):
+                # Old format kept only the first-seen date. We have no absence
+                # history, so assume the position was held continuously — that
+                # under-reports re-entries rather than inventing a flood of them.
+                etfs[etf_code] = {'f': v, 'l': today_str, 'r': v, 'g': None}
     return raw, baseline
 
 
@@ -460,35 +471,60 @@ def save_first_seen(first_seen, baseline_date):
 
 
 def update_first_seen(today_data, first_seen):
-    """Record today's date for any (stock, etf) pair we haven't seen before."""
+    """Record today's holdings, tracking re-entries as well as first buys.
+
+    A pair whose last-seen date predates the previous run was absent in between,
+    so today is a fresh entry; we keep how long the gap was (`g`, in days) to
+    tell "bought again after years" apart from "trimmed and re-added yesterday".
+    Keys: f = first ever seen, l = last seen, r = latest entry, g = gap before r.
+    """
     today_str = TODAY.isoformat()
+    prev_run = first_seen.get('_last_run')
     for etf_code, etf in today_data.items():
         if etf.get('status') not in ('ok', 'partial'):
             continue
         for h in etf.get('holdings', []):
             sc = h['stock_code']
-            if sc not in first_seen:
-                first_seen[sc] = {}
-            if etf_code not in first_seen[sc]:
-                first_seen[sc][etf_code] = today_str
+            rec = first_seen.setdefault(sc, {}).get(etf_code)
+            if rec is None:
+                first_seen[sc][etf_code] = {'f': today_str, 'l': today_str,
+                                            'r': today_str, 'g': None}
+                continue
+            last = rec.get('l')
+            if prev_run and last and last < prev_run:
+                rec['r'] = today_str
+                rec['g'] = (TODAY - datetime.strptime(last, '%Y-%m-%d').date()).days
+            rec['l'] = today_str
+    first_seen['_last_run'] = today_str
     return first_seen
 
 
 def is_recent_first_buy(first_seen, stock_code, etf_code, baseline_date,
-                        window_days=NEW_BUY_WINDOW_DAYS):
-    """Truly-new = first_seen date is strictly AFTER the baseline date AND within window.
-    Anything recorded on or before baseline is treated as pre-existing."""
-    record = first_seen.get(stock_code, {}).get(etf_code)
-    if not record or not baseline_date:
+                        window_days=NEW_BUY_WINDOW_DAYS,
+                        absence_days=RE_ENTRY_ABSENCE_DAYS):
+    """Fresh entry = the ETF started holding this stock within `window_days`,
+    after not holding it for at least `absence_days` (or never holding it).
+
+    Entries dated on or before the registry baseline are positions that already
+    existed when we started watching, so they never count as new.
+    """
+    rec = first_seen.get(stock_code, {}).get(etf_code)
+    if not rec or not baseline_date:
+        return False
+    entry = rec.get('r') or rec.get('f')
+    if not entry:
         return False
     try:
-        first_date = datetime.strptime(record, '%Y-%m-%d').date()
+        entry_date = datetime.strptime(entry, '%Y-%m-%d').date()
         baseline = datetime.strptime(baseline_date, '%Y-%m-%d').date()
     except ValueError:
         return False
-    if first_date <= baseline:
-        return False  # was already known when registry was created
-    return (TODAY - first_date).days <= window_days
+    if entry_date <= baseline:
+        return False  # already held when the registry was created
+    if (TODAY - entry_date).days > window_days:
+        return False
+    gap = rec.get('g')
+    return gap is None or gap >= absence_days
 
 
 # ── Section 4: Change detection engine ───────────────────────────────────────
@@ -1551,8 +1587,6 @@ details.help>summary:hover{color:var(--bl)}
 details.help .help-body{padding:2px 16px 14px;border-top:1px solid var(--brd);color:var(--mu);line-height:1.9}
 .lg-row{display:flex;align-items:center;gap:10px;padding:4px 0;flex-wrap:wrap}
 .lg-row .lg-k{min-width:96px;display:inline-block}
-.toggle-minor{cursor:pointer;font-size:10.5px;font-weight:600;padding:3px 8px;background:#f1f5f9;color:#64748b;border:1px solid var(--brd);border-radius:6px;margin:1px 2px;transition:all .15s}
-.toggle-minor:hover{background:#e2e8f0;color:var(--txt)}
 .minor-holders.expanded{display:inline !important}
 .searchbar{width:100%;max-width:320px;padding:9px 14px;border:1px solid var(--brd);border-radius:8px;font-size:13px;margin-bottom:12px;background:var(--card)}
 .searchbar:focus{outline:none;border-color:var(--bl)}
@@ -1588,7 +1622,13 @@ details.help .help-body{padding:2px 16px 14px;border-top:1px solid var(--brd);co
 .etf-today .mv{display:flex;justify-content:space-between;gap:10px;padding:2px 0;white-space:nowrap}
 .etf-today .mv-s{overflow:hidden;text-overflow:ellipsis}
 .etf-today .mv-v{font-variant-numeric:tabular-nums}
-.etf-today .mv-more{font-size:10.5px;color:var(--mu)}
+/* display:contents 讓展開的項目直接沿用 .mv 的 flex 排版，不會多一層盒子 */
+.etf-today .mv-rest{display:none}
+.etf-today .mv-rest.on{display:contents}
+.etf-today .mv-more{font:inherit;font-size:10.5px;color:var(--bl);background:none;border:0;padding:2px 0;cursor:pointer;text-decoration:underline}
+.etf-today .mv-more:hover{color:#1e40af}
+.ov-date{float:right;font-size:11px;font-weight:600;color:var(--bl);background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:2px 8px}
+.ov-date-b{font-weight:400;color:var(--mu);margin-left:6px}
 .fl-note{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;border-radius:10px;padding:12px 16px;font-size:12.5px;line-height:1.9;margin-bottom:14px}
 .fl-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
 .fl-bar .searchbar,.fl-bar .etf-select{margin-bottom:0}
@@ -1722,6 +1762,15 @@ th,td{padding:8px 8px}
 .fl-detail td:nth-child(2),.fl-detail th:nth-child(2){width:18%}
 .fl-detail td:nth-child(3),.fl-detail th:nth-child(3){width:21%}
 .fl-detail td:nth-child(4),.fl-detail th:nth-child(4){width:21%}
+/* 買賣明細多一欄「佔自身規模」，所以要另一組欄寬 */
+.fl-d6 td:nth-child(5),.fl-d6 th:nth-child(5){display:table-cell;width:16%}
+.fl-d6 td:nth-child(6),.fl-d6 th:nth-child(6){display:none;width:0}
+.fl-d6 td:nth-child(1),.fl-d6 th:nth-child(1){width:34%}
+.fl-d6 td:nth-child(2),.fl-d6 th:nth-child(2){width:15%}
+.fl-d6 td:nth-child(3),.fl-d6 th:nth-child(3){width:18%}
+.fl-d6 td:nth-child(4),.fl-d6 th:nth-child(4){width:17%}
+/* 手機版空間有限，AUM 括註省略 */
+.fl-d6 td:nth-child(4) .fl-fn{display:none}
 .fl-fn{display:block}
 .etf-today td{font-size:11.5px}
 }
@@ -1740,20 +1789,7 @@ function filterETF(sel){
     d.style.display=(v==='all'||d.dataset.code===v)?'block':'none';
   });
 }
-function toggleMinor(btn){
-  var row = btn.closest('tr');
-  var minor = row.querySelector('.minor-holders');
-  var count = btn.dataset.count;
-  if(minor.classList.contains('expanded')){
-    minor.classList.remove('expanded');
-    btn.innerHTML = '另 ' + count + ' 檔沒明顯動作 ▸';
-  } else {
-    minor.classList.add('expanded');
-    btn.innerHTML = '收合 ▾';
-  }
-}
-/* ── 個股資金流：10 日長條圖 + 逐日基金明細 ───────────────────────────── */
-/* d0/d1 = 選取的交易日區間（含兩端），預設只選最後一天 */
+
 var FL = {q:'', sort:'today', desc:true, open:null, rows:null, d0:null, d1:null, drag:false, cur:null};
 
 function flFmt(v){
@@ -1766,20 +1802,25 @@ function flCls(v){ return v > 0 ? 'delta-up' : (v < 0 ? 'delta-down' : ''); }
 /* 台股慣例：買進/正數紅、賣出/負數綠 */
 var BUY_C = '#dc2626', SELL_C = '#16a34a';
 
+/* 表格要能用「近 N 日累計」排序，所以每檔都先把區間淨額算好 */
+function flWin(n){ return Math.min(n, window.FLOW.dates.length); }
 function flBuild(){
   var F = window.FLOW, last = F.dates.length - 1;
+  var w5 = flWin(5), w20 = flWin(20);
   var rows = [];
   Object.keys(F.stocks).forEach(function(sc){
     var st = F.stocks[sc];
-    var byDay = [], today = 0, absToday = 0;
+    var byDay = [], today = 0, s5 = 0, s20 = 0;
     for(var i=0;i<F.dates.length;i++) byDay.push(0);
     st.s.forEach(function(r){
       var d = r[0], amt = r[3];
       if(!F.etfs[r[1]]) return;
       byDay[d] += amt;
-      if(d === last){ today += amt; absToday += Math.abs(amt); }
+      if(d === last) today += amt;
+      if(d > last - w5) s5 += amt;
+      if(d > last - w20) s20 += amt;
     });
-    rows.push({code:sc, name:st.n, byDay:byDay, today:today, abs:absToday});
+    rows.push({code:sc, name:st.n, byDay:byDay, today:today, sum5:s5, sum20:s20});
   });
   FL.rows = rows;
 }
@@ -1812,9 +1853,12 @@ function flRender(){
            label + '<span class="fl-arrow' + (on?' on':'') + '">' +
            (on ? (FL.desc ? '▼' : '▲') : '◆') + '</span></th>';
   }
+  var w5 = flWin(5), w20 = flWin(20);
+  var lb5 = '近 ' + w5 + ' 日累計', lb20 = '近 ' + w20 + ' 日累計';
   var html = '<table class="fl-table"><tr><th>股票</th>' +
              th('today', '今日買賣<span class="fl-th-d">' + td + ' vs ' + (F0.base[li] || '?') + '</span>') +
-             th('abs', '今日買賣總量') +
+             th('sum5', lb5 + '<span class="fl-th-d">' + F0.dates[li-w5+1] + ' 起</span>') +
+             th('sum20', lb20 + '<span class="fl-th-d">' + F0.dates[li-w20+1] + ' 起</span>') +
              '<th class="num">近 ' + F0.dates.length + ' 日走勢</th><th></th></tr>';
   list.slice(0, 300).forEach(function(r){
     var open = FL.open === r.code;
@@ -1822,11 +1866,12 @@ function flRender(){
             '" onclick="flToggle(this.dataset.code)">' +
             '<td class="fl-c-stock"><b>' + r.code + '</b> ' + r.name + '</td>' +
             '<td class="num fl-total ' + flCls(r.today) + '" data-l="今日買賣 ' + td + '">' + flFmt(r.today) + '</td>' +
-            '<td class="num" data-l="今日買賣總量">' + flFmt(r.abs) + '</td>' +
+            '<td class="num ' + flCls(r.sum5) + '" data-l="' + lb5 + '">' + flFmt(r.sum5) + '</td>' +
+            '<td class="num ' + flCls(r.sum20) + '" data-l="' + lb20 + '">' + flFmt(r.sum20) + '</td>' +
             '<td class="num fl-c-spark">' + flSpark(r.byDay) + '</td>' +
             '<td class="fl-caret">' + (open ? '▾' : '▸') + '</td></tr>';
     if(open){
-      html += '<tr class="fl-detail-row"><td colspan="5">' + flPanel(r) + '</td></tr>';
+      html += '<tr class="fl-detail-row"><td colspan="6">' + flPanel(r) + '</td></tr>';
     }
   });
   html += '</table>';
@@ -1849,6 +1894,15 @@ function flSpark(byDay){
   var tw = byDay.length * (w+gap);
   return '<svg class="fl-spark" width="' + tw + '" height="' + h + '">' +
          '<line x1="0" y1="' + (h/2) + '" x2="' + tw + '" y2="' + (h/2) + '" stroke="#e2e8f0"/>' + out + '</svg>';
+}
+
+/* 「+N 檔」展開該 ETF 其餘的買賣標的 */
+function toggleMv(btn){
+  var rest = btn.previousElementSibling;
+  if(!rest) return;
+  var open = !rest.classList.contains('on');
+  rest.classList.toggle('on', open);
+  btn.textContent = open ? '收合 ▾' : ('+' + btn.dataset.n + ' 檔 ▸');
 }
 
 function flToggle(code){
@@ -2062,18 +2116,24 @@ function flRangeDetail(r, d0, d1){
   rows.sort(function(a,b){ return Math.abs(b.amt) - Math.abs(a.amt); });
 
   var h = '<div class="fl-day-ttl">' + span + (days === 1 ? ' 買賣明細' : ' 各基金合計買賣') + '　' +
-          '<span class="fl-sub">佔比 = 該基金金額 ÷ 期間所有 ETF <b>同方向</b>合計</span></div>';
-  h += '<table class="fl-detail"><tr><th>基金</th>' +
+          '<span class="fl-sub">佔自身規模 = 該基金金額 ÷ 它的 AUM，看得出這筆對它是大手筆還是零頭；' +
+          '佔同向 = 該基金金額 ÷ 期間所有 ETF <b>同方向</b>合計</span></div>';
+  h += '<table class="fl-detail fl-d6"><tr><th>基金</th>' +
        '<th class="num">張數' + (days > 1 ? '合計' : '') + '</th><th class="num">金額(億)</th>' +
-       '<th class="num">佔同向</th><th>佔比</th></tr>';
+       '<th class="num">佔自身規模</th><th class="num">佔同向</th><th>佔比</th></tr>';
   rows.forEach(function(x){
     var meta = F.etfs[x.code], isBuy = x.amt > 0;
     var denom = isBuy ? buyTotal : sellTotal;
     var pct = denom ? Math.abs(x.amt)/denom*100 : 0;
+    /* 同樣 3 億，對 500 億的基金是零頭，對 20 億的基金是重押 */
+    var aum = meta.a;
+    var selfStr = aum ? (Math.abs(x.amt)/aum*100).toFixed(2) + '%' : '─';
+    var selfTip = aum ? ' <span class="fl-fn">/ ' + aum.toLocaleString() + '億</span>' : '';
     h += '<tr><td><b>' + x.code + '</b> <span class="fl-fn">' + meta.n + '</span>' +
          (days > 1 ? '<span class="fl-fn"> ・' + x.days + ' 天有動</span>' : '') + '</td>' +
          '<td class="num ' + flCls(x.amt) + '">' + (x.lots>0?'+':'') + x.lots.toLocaleString() + '</td>' +
          '<td class="num ' + flCls(x.amt) + '"><b>' + flFmt(x.amt) + '</b></td>' +
+         '<td class="num">' + selfStr + selfTip + '</td>' +
          '<td class="num">' + pct.toFixed(1) + '%</td>' +
          '<td><div class="fl-bar-bg"><div class="fl-bar-fill" style="width:' + Math.min(100,pct) +
            '%;background:' + (isBuy?BUY_C:SELL_C) + '"></div></div></td></tr>';
@@ -2098,21 +2158,7 @@ function applyHoldingFilters(){
 }
 function filterHoldings(v){ window.__hdQuery = v; applyHoldingFilters(); }
 function onlyMoved(on){ window.__hdMoved = on; applyHoldingFilters(); }
-function filterStocks(input){
-  var q = input.value.trim().toLowerCase();
-  var table = document.getElementById('stock-table');
-  if(!table) return;
-  var rows = Array.from(table.querySelectorAll('tr')).slice(1);
-  var shown = 0;
-  rows.forEach(function(r){
-    var txt = (r.cells[0] ? r.cells[0].innerText : '') + ' ' + (r.cells[1] ? r.cells[1].innerText : '');
-    var hit = !q || txt.toLowerCase().indexOf(q) !== -1;
-    r.style.display = hit ? '' : 'none';
-    if(hit) shown++;
-  });
-  var note = document.getElementById('stock-count');
-  if(note) note.textContent = shown + ' 檔';
-}
+
 function sortTable(th,colIdx,type){
   var table = th.closest('table');
   var rows = Array.from(table.querySelectorAll('tr')).slice(1);
@@ -2486,7 +2532,9 @@ def _gen_flow_series_tab(series):
     return f"""<div class="fl-note">
   一列 = 一檔股票，直接給結論：<b>今天 ({today}) 被 ETF 買了多少、賣了多少</b>，對比前一交易日 {base}。<br/>
   金額 = 張數變化 × 該股均價，只反映真正的持股增減，不受基金規模或股價漲跌影響。
-  正數（紅色）= 買進，負數（綠色）= 賣出。點表頭可由多到少排序，再點一次反向。<br/>
+  正數（紅色）= 買進，負數（綠色）= 賣出。<br/>
+  想找連續被買的股票，<b>點「近 {min(5, len(series['dates']))} 日累計」或「近 {min(20, len(series['dates']))} 日累計」的表頭排序</b>即可；
+  再點一次同一欄會反向（找被連續倒貨的）。<br/>
   點任一列展開，可用「近 N 日」按鈕或直接<b>在圖上左右拖曳</b>選取交易日區間，看每檔 ETF 在這段期間合計買賣了多少張、多少錢。
   目前樣本：<b>{n_active}</b> 檔 ETF（近 {len(series['dates'])} 個交易日內有申報異動者）。
 </div>
@@ -2498,7 +2546,7 @@ def _gen_flow_series_tab(series):
 <script>window.FLOW={payload};</script>"""
 
 
-def _gen_etf_today_table(stock_view, today_data):
+def _gen_etf_today_table(stock_view, today_data, snap_1d_date):
     """One row per ETF: what it bought most today, what it sold most, net amount.
     This is the 'who is buying what' answer, without drilling into any tab."""
     by_etf = {}
@@ -2518,13 +2566,20 @@ def _gen_etf_today_table(stock_view, today_data):
             return '<span style="color:#94a3b8">─</span>'
         items = sorted(items, key=lambda x: -x[0] if positive else x[0])
         cls = 'delta-up' if positive else 'delta-down'
-        out = ''
-        for f1, sc, name, is_first, is_exit in items[:3]:
+
+        def one(item):
+            f1, sc, name, is_first, is_exit = item
             tag = ' ✦新進' if is_first else (' ✕出清' if is_exit else '')
-            out += (f'<span class="mv"><span class="mv-s">{sc} {name}{tag}</span>'
+            return (f'<span class="mv"><span class="mv-s">{sc} {name}{tag}</span>'
                     f'<span class="mv-v {cls}">{"+" if positive else ""}{_fmt_capital(f1)}</span></span>')
+
+        out = ''.join(one(i) for i in items[:3])
         if len(items) > 3:
-            out += f'<span class="mv-more">+{len(items)-3} 檔</span>'
+            rest = ''.join(one(i) for i in items[3:])
+            n = len(items) - 3
+            out += (f'<span class="mv-rest">{rest}</span>'
+                    f'<button class="mv-more" data-n="{n}" onclick="toggleMv(this)">'
+                    f'+{n} 檔 ▸</button>')
         return out
 
     rows = []
@@ -2534,8 +2589,11 @@ def _gen_etf_today_table(stock_view, today_data):
     rows.sort(key=lambda r: -(today_data.get(r[0], {}).get('aum_billion') or 0))
 
     html = ('<div class="ov-card" style="margin-bottom:20px">'
-            '<h4 style="color:#0f172a">▣ 各檔 ETF 今天在買什麼、賣什麼</h4>'
-            '<div class="ov-sub">依基金規模排序，每欄最多列出前 3 大動作；金額為該 ETF 當日持倉市值變化</div>'
+            '<h4 style="color:#0f172a">▣ 各檔 ETF 今天在買什麼、賣什麼'
+            f'<span class="ov-date">籌碼日 {TODAY.isoformat()}'
+            f'<span class="ov-date-b">對比 {snap_1d_date}</span></span></h4>'
+            '<div class="ov-sub">依基金規模排序，預設顯示前 3 大動作，點「+N 檔」看其餘；'
+            '金額為該 ETF 當日持倉市值變化</div>'
             '<table class="etf-today"><tr><th>ETF</th><th class="num">規模<br/>(億)</th>'
             '<th class="num">今日淨額</th><th>買最多</th><th>賣最多</th></tr>')
     for code, e, net in rows:
@@ -2595,7 +2653,20 @@ def _gen_overview(stock_view, collective, today_data, snap_1d_date, baseline_dat
                          f'<span class="ov-val delta-up">{_fmt_capital(cap)}</span></li>')
         new_html += '</ul>'
     else:
-        new_html = '<div class="ov-empty">近期沒有新進場的個股</div>'
+        new_html = '<div class="ov-empty">近期沒有睽違重返的個股</div>'
+
+    # Be honest when the registry is too young to prove a 6-month absence.
+    months = RE_ENTRY_ABSENCE_DAYS // 30
+    new_sub = (f'該 ETF 先前至少 {months} 個月沒有這檔（或從未持有），'
+               f'近 {NEW_BUY_WINDOW_DAYS} 日內重新建倉')
+    if baseline_date:
+        try:
+            age = (TODAY - datetime.strptime(baseline_date, '%Y-%m-%d').date()).days
+        except ValueError:
+            age = None
+        if age is not None and age < RE_ENTRY_ABSENCE_DAYS:
+            new_sub += (f'。系統自 {baseline_date} 起累積，尚未滿 {months} 個月，'
+                        f'目前只認得出「從未持有過」的新進場')
 
     # Collective signals
     col_items = ([('buy', c) for c in collective.get('buys', [])] +
@@ -2619,7 +2690,7 @@ def _gen_overview(stock_view, collective, today_data, snap_1d_date, baseline_dat
   這頁只回答四件事：<b>今天買最多的是誰</b>、<b>賣最多的是誰</b>、<b>誰是新面孔</b>、<b>哪些是多家一起動的</b>。<br/>
   想看細節再切到上方其他分頁。金額單位為新台幣，「億」= 1 億元。{period}。
 </div>
-{_gen_etf_today_table(stock_view, today_data)}
+{_gen_etf_today_table(stock_view, today_data, snap_1d_date)}
 <div class="ov-grid">
   <div class="ov-card">
     <h4 style="color:#15803d">▲ 今日買最多的股票</h4>
@@ -2632,8 +2703,8 @@ def _gen_overview(stock_view, collective, today_data, snap_1d_date, baseline_dat
     {stock_rows(sells, False, 'net_flow_1d')}
   </div>
   <div class="ov-card">
-    <h4 style="color:#b45309">✦ 新面孔：近期才被買進的股票</h4>
-    <div class="ov-sub">系統起算日 {baseline_date or 'n/a'} 之後才首次出現在該 ETF 持股中</div>
+    <h4 style="color:#b45309">✦ 新面孔：睽違半年以上又被買進</h4>
+    <div class="ov-sub">{new_sub}</div>
     {new_html}
   </div>
   <div class="ov-card">
@@ -2643,136 +2714,6 @@ def _gen_overview(stock_view, collective, today_data, snap_1d_date, baseline_dat
   </div>
 </div>"""
 
-
-def _gen_stock_view(stock_view, today_data, snap_5d_date, baseline_date, snap_5d_label='5 日'):
-    """Render stock-perspective table."""
-    if not stock_view:
-        return '<div class="empty-msg">無資料</div>'
-
-    # Filter: only show stocks that actually have movement OR are widely held
-    filtered = [s for s in stock_view if abs(s['net_flow_1d']) >= 0.005 or abs(s['net_flow_5d']) >= 0.005 or s['holder_count'] >= 3]
-    if not filtered:
-        return '<div class="empty-msg">尚無資金流向資料（首次執行或無歷史快照可比較）</div>'
-
-    html = (f'<input class="searchbar" type="search" placeholder="搜尋股票代號或名稱…" oninput="filterStocks(this)"/>'
-            f'<div style="font-size:11.5px;color:#64748b;margin-bottom:10px">'
-            f'共 <span id="stock-count">{len(filtered)}</span> 檔｜點表頭可排序｜滑鼠移到徽章上看完整數字</div>')
-    html += '<table id="stock-table" class="sortable"><tr>'
-    html += '<th>股票代號</th>'
-    html += '<th>股票名稱</th>'
-    html += '<th class="center sortable-th" onclick="sortTable(this,2,\'num\')">幾檔 ETF<br/>持有 <span class="sort-hint">⇅</span></th>'
-    html += '<th class="num sortable-th" onclick="sortTable(this,3,\'num\')">持有總金額<br/>(億) <span class="sort-hint">⇅</span></th>'
-    html += '<th class="num sortable-th" onclick="sortTable(this,4,\'num\')">今日<br/>買賣超 <span class="sort-hint">⇅</span></th>'
-    if snap_5d_date:
-        html += f'<th class="num sortable-th" onclick="sortTable(this,5,\'num\')">{snap_5d_label}<br/>買賣超 <span class="sort-hint">⇅</span></th>'
-    else:
-        html += f'<th class="num" style="color:#94a3b8">{snap_5d_label}<br/>買賣超</th>'
-    html += '<th>今天是哪些 ETF 在動</th></tr>'
-
-    for s in filtered:
-        sc = s['stock_code']
-        name = s['stock_name']
-        net_1d = s['net_flow_1d']
-        net_5d = s['net_flow_5d']
-
-        row_cls = ''
-        # Highlight if material 1d action OR significant 1d net flow
-        if s['material_count_1d'] > 0 and net_1d > 0:
-            row_cls = ' class="row-buy"'
-        elif s['material_count_1d'] > 0 and net_1d < 0:
-            row_cls = ' class="row-sell"'
-
-        first_mark = ' <span class="badge" style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-size:9.5px;padding:1px 6px" title="近期新增持股（系統起算日 ' + (baseline_date or 'n/a') + ' 之後才出現在該 ETF 的持股中）">✦ 近期新增</span>' if s['has_first_buy_5d'] else ''
-
-        net_1d_str = _fmt_cap_delta(net_1d) if abs(net_1d) >= 0.005 else '─'
-        net_5d_str = _fmt_cap_delta(net_5d) if abs(net_5d) >= 0.005 else '─'
-
-        # Build holder badges, sorted by capital desc, color-coded by 1-day flow direction
-        # Split into main vs minor (weight < threshold AND no material/first-buy/exit action)
-        def render_badge(h):
-            # Badge shows only what changed today; position size / weight live in the tooltip
-            # so the cell reads as "who moved", not as a data dump.
-            etf = h['etf']
-            cap = h['capital']
-            f1 = h['flow_1d']
-            f5 = h['flow_5d']
-            is_first = h['is_first_buy']
-            is_exit = h.get('is_exit', False)
-            weight = h['weight']
-
-            if is_exit:
-                style = 'background:#dc2626;color:#fff;border-color:#b91c1c'
-                label = f'{etf} ✕全部賣光 {_fmt_capital(f1)}'
-            elif is_first:
-                style = 'background:#f59e0b;color:#fff;border-color:#d97706'
-                label = f'{etf} ✦新進 {_fmt_capital(cap)}'
-            elif h['is_material_1d'] and f1 > 0:
-                style = 'background:#16a34a;color:#fff;border-color:#15803d'
-                label = f'{etf} ▲{_fmt_capital(abs(f1))}'
-            elif h['is_material_1d'] and f1 < 0:
-                style = 'background:#dc2626;color:#fff;border-color:#b91c1c'
-                label = f'{etf} ▼{_fmt_capital(abs(f1))}'
-            elif f1 > 0:
-                style = 'background:#dcfce7;color:#15803d;border-color:#bbf7d0'
-                label = f'{etf} ▲{_fmt_capital(abs(f1))}'
-            elif f1 < 0:
-                style = 'background:#fee2e2;color:#dc2626;border-color:#fecaca'
-                label = f'{etf} ▼{_fmt_capital(abs(f1))}'
-            else:
-                style = 'background:#f1f5f9;color:#64748b;border-color:#e2e8f0'
-                label = f'{etf} {_fmt_capital(cap)}'
-
-            title = f'{etf}: 持倉 {_fmt_capital(cap)}（佔該 ETF 規模 {weight:.2f}%）'
-            if abs(f1) >= 0.005:
-                title += f' | 今日 {("+" if f1>0 else "")}{_fmt_capital(f1)}'
-            if snap_5d_date and abs(f5) >= 0.005:
-                title += f' | {snap_5d_label} {("+" if f5>0 else "")}{_fmt_capital(f5)}'
-            if is_first:
-                title += f' | 近期新增（系統起算日 {baseline_date or "n/a"} 後首見）'
-
-            return f'<span class="badge etf-tag" style="{style}" title="{title}">{label}</span>'
-
-        # A move only earns its own badge if it is big in absolute terms AND
-        # relevant next to the biggest move on this row. Everything else collapses.
-        row_max_flow = max((abs(h.get('flow_1d') or 0) for h in s['holders']), default=0)
-        badge_cutoff = max(NOTABLE_FLOW_BILLION, row_max_flow * NOTABLE_FLOW_RATIO)
-
-        def is_minor(h):
-            if h.get('is_first_buy') or h.get('is_exit') or h.get('is_material_1d'):
-                return False
-            return abs(h.get('flow_1d') or 0) < badge_cutoff
-
-        main_badges = ''
-        minor_badges = ''
-        minor_count = 0
-        for h in s['holders']:
-            if is_minor(h):
-                minor_badges += render_badge(h)
-                minor_count += 1
-            else:
-                main_badges += render_badge(h)
-
-        if minor_count > 0:
-            toggle_btn = f'<button class="toggle-minor" onclick="toggleMinor(this)" data-count="{minor_count}">另 {minor_count} 檔沒明顯動作 ▸</button>'
-            minor_wrapper = f'<span class="minor-holders" style="display:none">{minor_badges}</span>'
-            badges = main_badges + toggle_btn + minor_wrapper
-        else:
-            badges = main_badges or '<span style="color:#94a3b8;font-size:12px">今日無動作</span>'
-
-        cap_total = f'<b>{s["total_capital"]:.1f}</b>' if s['total_capital'] >= 1 else f'{s["total_capital"]*100:.0f}百萬'
-
-        html += f'<tr{row_cls}><td><b>{sc}</b>{first_mark}</td><td>{name}</td>'
-        html += f'<td class="center" data-sort="{s["holder_count"]}"><b>{s["holder_count"]}</b></td>'
-        html += f'<td class="num" data-sort="{s["total_capital"]}">{cap_total}</td>'
-        html += f'<td class="num" data-sort="{net_1d}">{net_1d_str}</td>'
-        if snap_5d_date:
-            html += f'<td class="num" data-sort="{net_5d}">{net_5d_str}</td>'
-        else:
-            html += '<td class="num" style="color:#94a3b8;font-size:11px">累積資料中</td>'
-        html += f'<td>{badges}</td></tr>'
-
-    html += '</table>'
-    return html
 
 
 def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_date, snap_5d_label='5 日'):
@@ -2869,42 +2810,54 @@ def _gen_fund_view(fund_view, today_data, snap_1d_date, snap_5d_date, baseline_d
         w_trims = info.get(f'weight_trims{suffix}', [])
         if w_adds or w_trims:
             html += f'<div style="margin-top:16px;border-top:1px solid #e2e8f0;padding-top:14px">'
-            html += f'<div style="font-weight:700;font-size:12.5px;color:#475569;margin-bottom:10px">📊 {window_label}持股權重排行（扣除 AUM 成長效果，反映真實加減碼意圖）</div>'
+            html += f'<div style="font-weight:700;font-size:12.5px;color:#475569;margin-bottom:4px">📊 {window_label}「這檔股票佔基金的比例」變化排行</div>'
+            html += ('<div style="font-size:11px;color:#64748b;line-height:1.6;margin-bottom:10px">'
+                     '基金規模本來就會隨行情變大變小，光看金額會誤判。這裡改看<b>「這檔股票佔整個基金多少比例」</b>：'
+                     '比例變高＝經理人真的把錢往這檔股票挪，比例變低＝把錢抽走。'
+                     '例如 <b>2.10% → 2.78%</b> 代表這檔從原本佔基金 2.10% 提高到 2.78%（多佔了 0.68%）。</div>')
             html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">'
+
+            def _w_arrow(r):
+                pw, nw = r.get('prev_weight'), r.get('weight')
+                if r.get('is_new'):
+                    return f'未持有 → {nw:.2f}%'
+                if r.get('is_exit'):
+                    return f'{pw:.2f}% → 未持有'
+                return f'{pw:.2f}% → {nw:.2f}%'
 
             # Adds
             html += '<div>'
-            html += '<div style="font-size:11.5px;font-weight:600;color:#15803d;margin-bottom:6px">▲ 加碼最多（權重↑ pp）</div>'
+            html += '<div style="font-size:11.5px;font-weight:600;color:#b91c1c;margin-bottom:6px">▲ 比例拉最多（往這幾檔加碼）</div>'
             if w_adds:
-                html += '<table><tr><th>股票</th><th class="num">權重變化</th><th class="num">資金變化</th></tr>'
+                html += '<table><tr><th>股票</th><th class="num">佔基金比例</th><th class="num">多／少佔</th><th class="num">金額變化</th></tr>'
                 for r in w_adds:
                     tag = ' <span style="font-size:10px;background:#fef3c7;color:#92400e;padding:1px 4px;border-radius:3px">新進</span>' if r['is_new'] else ''
-                    dw_str  = f'+{r["dw"]:.2f}pp'
                     dcap_str = f'+{_fmt_capital(r["dcap"])}' if r['dcap'] >= 0 else _fmt_capital(r['dcap'])
                     dcap_cls = 'delta-up' if r['dcap'] >= 0 else 'delta-down'
                     html += f'<tr><td><b>{r["stock_code"]}</b> {r["stock_name"]}{tag}</td>'
-                    html += f'<td class="num" style="color:#15803d;font-weight:600">{dw_str}</td>'
+                    html += f'<td class="num" style="color:#475569">{_w_arrow(r)}</td>'
+                    html += f'<td class="num" style="color:#dc2626;font-weight:700">多佔 {r["dw"]:.2f}%</td>'
                     html += f'<td class="num"><span class="{dcap_cls}">{dcap_str}</span></td></tr>'
                 html += '</table>'
             else:
-                html += '<div style="color:#94a3b8;font-size:12px">無顯著加碼</div>'
+                html += '<div style="color:#94a3b8;font-size:12px">沒有明顯往哪檔加碼</div>'
             html += '</div>'
 
             # Trims
             html += '<div>'
-            html += '<div style="font-size:11.5px;font-weight:600;color:#b91c1c;margin-bottom:6px">▼ 減碼最多（權重↓ pp）</div>'
+            html += '<div style="font-size:11.5px;font-weight:600;color:#15803d;margin-bottom:6px">▼ 比例砍最多（把錢從這幾檔抽走）</div>'
             if w_trims:
-                html += '<table><tr><th>股票</th><th class="num">權重變化</th><th class="num">資金變化</th></tr>'
+                html += '<table><tr><th>股票</th><th class="num">佔基金比例</th><th class="num">多／少佔</th><th class="num">金額變化</th></tr>'
                 for r in w_trims:
                     tag = ' <span style="font-size:10px;background:#fee2e2;color:#991b1b;padding:1px 4px;border-radius:3px">出清</span>' if r['is_exit'] else ''
-                    dw_str  = f'{r["dw"]:.2f}pp'
                     dcap_str = _fmt_capital(r['dcap'])
                     html += f'<tr><td><b>{r["stock_code"]}</b> {r["stock_name"]}{tag}</td>'
-                    html += f'<td class="num" style="color:#b91c1c;font-weight:600">{dw_str}</td>'
+                    html += f'<td class="num" style="color:#475569">{_w_arrow(r)}</td>'
+                    html += f'<td class="num" style="color:#16a34a;font-weight:700">少佔 {abs(r["dw"]):.2f}%</td>'
                     html += f'<td class="num"><span class="delta-down">{dcap_str}</span></td></tr>'
                 html += '</table>'
             else:
-                html += '<div style="color:#94a3b8;font-size:12px">無顯著減碼</div>'
+                html += '<div style="color:#94a3b8;font-size:12px">沒有明顯從哪檔抽錢</div>'
             html += '</div>'
 
             html += '</div></div>'  # grid + weight section
@@ -3120,7 +3073,6 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
     tab_flow = _gen_flow_series_tab(flow_series or {'dates': [], 'etfs': {}, 'stocks': {}})
     stats = _gen_v3_stats(today_data_tw, stock_view, collective, snap_1d_date, snap_5d_date, snap_5d_label)
     tab_overview = _gen_overview(stock_view, collective, today_data_tw, snap_1d_date, baseline_date, snap_5d_date, snap_5d_label)
-    tab_stock = _gen_stock_view(stock_view, today_data_tw, snap_5d_date, baseline_date, snap_5d_label)
     tab_fund = _gen_fund_view(fund_view, today_data_tw, snap_1d_date, snap_5d_date, baseline_date, snap_5d_label)
     tab_collective = _gen_collective_moves(collective)
     tab_holdings = _gen_individual_holdings(today_data_tw, snap_1d, snap_1d_date)
@@ -3141,7 +3093,6 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
 <div class="tabs">
   <div class="tab active" onclick="showTab('tf',this)">個股資金流</div>
   <div class="tab" onclick="showTab('t0',this)">今日重點</div>
-  <div class="tab" onclick="showTab('t1',this)">看個股</div>
   <div class="tab" onclick="showTab('t2',this)">看 ETF</div>
   <div class="tab" onclick="showTab('t3',this)">多家同步</div>
   <div class="tab" onclick="showTab('t4',this)">完整持股</div>
@@ -3154,38 +3105,6 @@ def generate_etf_html(today_data_tw, stock_view, fund_view, collective, snap_1d_
   <div class="ttl">今日重點</div>
   <div class="desc">一分鐘看完今天主動式 ETF 的動向。</div>
   {tab_overview}
-</div>
-<div id="t1" class="pane">
-  <div class="ttl">看個股：這檔股票今天被誰買、被誰賣</div>
-  <div class="desc"><b>一列 = 一檔股票</b>。最後一欄只列出<b>今天有明顯動作</b>的 ETF；沒動或動很小的會收合起來，點一下才展開。</div>
-  <details class="help">
-    <summary>徽章顏色怎麼看？（點開）</summary>
-    <div class="help-body">
-      <div class="lg-row"><span class="lg-k">大買</span>
-        <span class="badge etf-tag" style="background:#16a34a;color:#fff;border-color:#15803d">00XXXA ▲5.0億</span>
-        <span class="lg-text">今日買進 ≥ 該 ETF 規模 × {int(MATERIAL_RATIO_OF_AUM*100)}%，大到會改變基金倉位</span></div>
-      <div class="lg-row"><span class="lg-k">小買</span>
-        <span class="badge etf-tag" style="background:#dcfce7;color:#15803d;border-color:#bbf7d0">00XXXA ▲2.5億</span>
-        <span class="lg-text">一般加碼</span></div>
-      <div class="lg-row"><span class="lg-k">小賣</span>
-        <span class="badge etf-tag" style="background:#fee2e2;color:#dc2626;border-color:#fecaca">00XXXA ▼1.8億</span>
-        <span class="lg-text">一般減碼</span></div>
-      <div class="lg-row"><span class="lg-k">大賣</span>
-        <span class="badge etf-tag" style="background:#dc2626;color:#fff;border-color:#b91c1c">00XXXA ▼5.0億</span>
-        <span class="lg-text">今日賣出 ≥ 該 ETF 規模 × {int(MATERIAL_RATIO_OF_AUM*100)}%</span></div>
-      <div class="lg-row"><span class="lg-k">新進場</span>
-        <span class="badge etf-tag" style="background:#f59e0b;color:#fff;border-color:#d97706">00XXXA ✦新進 2.0億</span>
-        <span class="lg-text">系統起算日 {baseline_date} 之後才第一次出現在該 ETF（不等於歷史首次買進）</span></div>
-      <div class="lg-row"><span class="lg-k">出清</span>
-        <span class="badge etf-tag" style="background:#dc2626;color:#fff;border-color:#b91c1c">00XXXA ✕全部賣光 -13.0億</span>
-        <span class="lg-text">今日完全賣出，不再持有</span></div>
-      <div class="lg-row"><span class="lg-k">沒明顯動作</span>
-        <span class="badge etf-tag" style="background:#f1f5f9;color:#64748b;border-color:#e2e8f0">00XXXA 13.0億</span>
-        <span class="lg-text">今天沒進出，或進出金額小於 {NOTABLE_FLOW_BILLION} 億、也不到該列最大進出量的 {int(NOTABLE_FLOW_RATIO*100)}%；預設收合，徽章上的數字是持倉總額</span></div>
-      <div style="margin-top:8px;font-size:11.5px">徽章上的金額是<b>今日進出的量</b>；把滑鼠移到徽章上，會顯示該 ETF 的持倉總額與佔基金規模的權重。</div>
-    </div>
-  </details>
-  {tab_stock}
 </div>
 <div id="t2" class="pane">
   <div class="ttl">看 ETF：每一檔基金最近在做什麼</div>
