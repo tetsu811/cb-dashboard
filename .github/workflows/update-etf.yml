@@ -2,9 +2,14 @@ name: Update ETF Dashboard
 
 on:
   schedule:
-    # Taipei 17:50 / 18:30 / 19:30 on weekdays — 3 attempts to tolerate
-    # GitHub Actions cron drift (commonly 5–60 min). If an earlier window
-    # already produced a complete snapshot, later runs skip the fetch.
+    # Nominally Taipei 17:50 / 18:30 / 19:30 on weekdays, but measured runs land
+    # 3.5–4.2h late every day (queue delay, not jitter), so data actually lands
+    # ~21:30–23:15 Taipei. Do NOT shift the cron earlier to compensate: if the
+    # delay ever disappears we would fetch mid-session and snapshot stale
+    # holdings. Three windows are redundancy — once a day has a complete
+    # snapshot, later runs reuse it and skip the fetch.
+    # UTC date == Taipei date for anything running 08:00–24:00 Taipei, so the
+    # delay never misdates a snapshot.
     - cron: '50 9 * * 1-5'
     - cron: '30 10 * * 1-5'
     - cron: '30 11 * * 1-5'
