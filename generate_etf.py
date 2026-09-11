@@ -322,13 +322,15 @@ def snapshot_is_complete(snap, etf_list, required_ok_ratio=0.9):
 
 # ── Section 3: Persistence ───────────────────────────────────────────────────
 
-def save_daily_snapshot(data):
+def save_daily_snapshot(data, fetched_at_utc=None):
+    """fetched_at_utc 要能由呼叫端指定：沿用快取時如果重新蓋上「現在」，
+    那份早抓到的舊資料就會帶著可信的時戳，鮮度檢查從此永遠放行。"""
     os.makedirs(DATA_DIR, exist_ok=True)
     path = os.path.join(DATA_DIR, f"{TODAY.isoformat()}.json")
     payload = {
         "fetched_at": datetime.now().isoformat(timespec='seconds'),
         # UTC 是唯一能跨 runner（UTC）與本機（台北）比較的時鐘
-        "fetched_at_utc": datetime.utcnow().isoformat(timespec='seconds'),
+        "fetched_at_utc": fetched_at_utc or datetime.utcnow().isoformat(timespec='seconds'),
         "etfs": data,
     }
     with open(path, 'w', encoding='utf-8') as f:
@@ -3362,17 +3364,22 @@ def main():
     # snapshot, reuse it instead of re-hammering upstream. Retries still kick
     # in if coverage is partial.
     cached_today = load_snapshot(TODAY.isoformat())
-    if snapshot_is_complete(cached_today, etf_list):
+    force = os.environ.get('FORCE_REFETCH') == 'true'
+    if force:
+        print("↻ FORCE_REFETCH — 忽略既有快照，重新抓取")
+    reused = not force and snapshot_is_complete(cached_today, etf_list)
+    if reused:
         print(f"✓ Today's snapshot already complete ({len(cached_today['etfs'])} ETFs) — reusing, skipping fetch")
         today_data = cached_today['etfs']
     else:
-        if cached_today:
+        if cached_today and not force:
             print(f"⚠ Today's snapshot exists but coverage is partial — refetching")
         today_data = fetch_all_etf_holdings(etf_list)
         retry_failed_etfs(today_data, etf_list)
 
     # Persist all 20 ETFs (data collection unaffected by analysis universe)
-    save_daily_snapshot(today_data)
+    save_daily_snapshot(today_data,
+                        cached_today.get('fetched_at_utc') if reused else None)
     save_latest_cache(today_data)
     cleanup_old_snapshots()
 

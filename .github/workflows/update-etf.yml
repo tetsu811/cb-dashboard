@@ -14,6 +14,11 @@ on:
     - cron: '30 10 * * 1-5'
     - cron: '30 11 * * 1-5'
   workflow_dispatch:
+    inputs:
+      force_refetch:
+        description: '忽略今天已存在的快照，強制重抓（資料抓早了、內容過期時用）'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -33,6 +38,8 @@ jobs:
         run: pip install requests beautifulsoup4 lxml
 
       - name: Generate ETF dashboard
+        env:
+          FORCE_REFETCH: ${{ inputs.force_refetch }}
         run: python generate_etf.py
 
       # Card is rendered here rather than in Python so the PNG comes from a real
