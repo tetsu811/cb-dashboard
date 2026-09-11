@@ -40,7 +40,7 @@ MATERIAL_RATIO_OF_AUM = 0.03        # 3% — 動作量體 ≥ 該基金 AUM × 3
 TRADING_DAYS_LOOKBACK = 5           # 「最近一週」= 5 個交易日
 NOTABLE_FLOW_BILLION = 0.2          # 億 — 個股視角中，小於此金額的進出視為雜訊，預設收合
 NOTABLE_FLOW_RATIO = 0.10           # 10% — 也需達到該列最大進出量的一成，才值得單獨列出
-FLOW_SERIES_DAYS = 10               # 個股資金流長條圖回看的交易日數
+FLOW_SERIES_DAYS = 20               # 個股資金流回看的交易日數（要撐得起「近 20 日累計」排序）
 
 
 # ── Section 2: Data fetching ─────────────────────────────────────────────────
