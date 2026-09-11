@@ -28,7 +28,9 @@ MONEYDJ_TOP10_URL = 'https://www.moneydj.com/etf/x/basic/basic0007.xdjhtm?etfid=
 YAHOO_PROFILE_URL = 'https://tw.stock.yahoo.com/quote/{etf_code}.TW/profile'
 
 WEIGHT_CHANGE_THRESHOLD = 0.5       # 百分點（用於舊邏輯）
-MAX_HISTORY_DAYS = 30
+# 保留天數要遠大於 FLOW_SERIES_DAYS：30 天只剩約 21 個交易日，遇到農曆年連假
+# 就湊不滿 20 日視窗，「近 20 日累計」會悄悄縮水成十幾天。
+MAX_HISTORY_DAYS = 60
 FETCH_DELAY = 1.5
 
 # ── Flow monitoring thresholds ──
