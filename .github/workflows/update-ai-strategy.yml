@@ -49,7 +49,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add ai_strategy.html ai_latest.json ai_data/
+          git add ai_strategy.html ai_latest.json ai_strategy_health.json ai_data/
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

@@ -73,7 +73,7 @@ BUCKETS = [
     ("equipment", "半導體設備", "最上游",
         ["ASML", "AMAT", "LRCX", "KLAC", "TOELY", "ONTO", "ENTG"]),
     ("eda",       "EDA 工具",   "晶片設計",
-        ["SNPS", "CDNS", "ANSS"]),
+        ["SNPS", "CDNS"]), # ANSS ceased trading after the 2025-07-17 acquisition.
     ("foundry",   "晶圓代工",   "製造核心",
         ["TSM", "GFS", "UMC"]),
     ("ai_chip",   "AI 晶片",    "運算核心",
@@ -256,6 +256,7 @@ def yf_metrics_for_symbol(bars_df, sym):
     vol_vs_yday = (vol_today / vol_yday) if (vol_yday and vol_today) else None
 
     return {
+        "as_of": bars.index[-1].date().isoformat(),
         "price": float(last),
         "day_pct": float(day_pct),
         "pct_5d": pct_over(5),
@@ -333,7 +334,7 @@ SENTIMENT_NEG = {
 # ── Claude LLM 新聞深度分析（可選） ─────────────────────────────────────
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-ANTHROPIC_MODEL = "claude-haiku-4-5"  # 成本低、速度快
+ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001")  # 成本低、速度快
 LLM_CACHE_DIR = "ai_llm_cache"
 LLM_CACHE_TTL_HOURS = 48
 LLM_NEWS_SYSTEM_PROMPT = """你是美股財經新聞分析師。收到新聞標題後，回傳 JSON 評估該新聞對標的股價的即時影響。
@@ -388,7 +389,7 @@ def call_claude_news_analysis(sym, title):
             },
             json={
                 "model": ANTHROPIC_MODEL,
-                "max_tokens": 200,
+                "max_tokens": 600,
                 "system": [{
                     "type": "text",
                     "text": LLM_NEWS_SYSTEM_PROMPT,
@@ -402,6 +403,7 @@ def call_claude_news_analysis(sym, title):
             timeout=20,
         )
         if r.status_code != 200:
+            print(f"[LLM] HTTP {r.status_code}: {r.json().get('error', {}).get('type', 'unknown')}")
             return None
         data = r.json()
         text = data["content"][0]["text"].strip()
@@ -567,9 +569,37 @@ def _parse_news_item(raw, related_sym):
 def yf_fundamentals(sym):
     """從 yfinance .info 抽基本面欄位（當 FMP 失效的備援）。"""
     try:
-        info = yf.Ticker(sym).info or {}
+        ticker = yf.Ticker(sym)
+        info = ticker.info or {}
     except Exception:
         return {}
+    extra = {}
+    try:
+        income = ticker.quarterly_income_stmt
+        cash = ticker.quarterly_cashflow
+        balance = ticker.quarterly_balance_sheet
+        def ttm(frame, key):
+            if key not in frame.index: return None
+            vals = frame.loc[key].dropna().iloc[:4]
+            return float(vals.sum()) if len(vals) == 4 else None
+        fcf = ttm(cash, 'Free Cash Flow')
+        ni = ttm(income, 'Net Income')
+        ebit = ttm(income, 'EBIT')
+        tax = ttm(income, 'Tax Provision')
+        pretax = ttm(income, 'Pretax Income')
+        if fcf is not None:
+            extra['fcf_ttm'] = fcf
+            extra['income_quality'] = fcf / ni if ni and ni > 0 else None
+            extra['fcf_yield'] = fcf / info['marketCap'] if info.get('marketCap') else None
+        if ebit is not None and pretax and tax is not None and 'Invested Capital' in balance.index:
+            capital = balance.loc['Invested Capital'].dropna()
+            if len(capital) >= 5:
+                avg = float((capital.iloc[0] + capital.iloc[4])/2)
+                extra['roic'] = ebit * (1 - max(0, min(1, tax/pretax))) / avg if avg > 0 else None
+        if 'Capital Expenditure' in cash.index:
+            extra['capex_quarterly'] = [{'date':d.date().isoformat(), 'capex':abs(float(v)), 'source':'Yahoo Finance'} for d,v in cash.loc['Capital Expenditure'].dropna().items()]
+    except Exception as exc:
+        print(f'[financial statements {sym}] {type(exc).__name__}')
     return {
         # 利潤率
         "gross_margin": info.get("grossMargins"),
@@ -601,6 +631,7 @@ def yf_fundamentals(sym):
         # 其他
         "industry": info.get("industry"),
         "long_name": info.get("longName") or info.get("shortName"),
+        **extra,
     }
 
 
@@ -687,7 +718,7 @@ def fmp_enrichment(sym, include_estimates):
                     pass
 
         # 九巨頭的季 Capex（8 季足夠算 TTM + YoY）
-        cf = fmp_safe("cash-flow-statement", [], symbol=sym, period="quarter", limit=8)
+        cf = fmp_safe("cash-flow-statement", [], symbol=sym, period="quarter", limit=5)
         if isinstance(cf, list):
             out["capex_quarterly"] = [
                 {
@@ -854,7 +885,7 @@ def _extract_fundamentals(fmp, yf_fund):
     _take("debt_to_equity", r.get("debtToEquityRatio"), yf_fund.get("debt_to_equity"))
     _take("current_ratio", r.get("currentRatio"), yf_fund.get("current_ratio"))
     _take("roe", km.get("returnOnEquityTTM"), yf_fund.get("roe"))
-    _take("roic", km.get("returnOnInvestedCapitalTTM"), None)  # yf 沒 ROIC
+    _take("roic", km.get("returnOnInvestedCapitalTTM"), yf_fund.get("roic"))  # yf 沒 ROIC
 
     # 現金流
     fmp_fcf_margin = None
@@ -867,8 +898,8 @@ def _extract_fundamentals(fmp, yf_fund):
         yf_fcf_margin = yf_fund["fcf_ttm"] / yf_fund["total_revenue"]
     _take("fcf_margin", fmp_fcf_margin, yf_fcf_margin)
 
-    _take("income_quality", km.get("incomeQualityTTM") or fcf_ocf, None)
-    _take("fcf_yield", km.get("freeCashFlowYieldTTM"), None)
+    _take("income_quality", None, yf_fund.get("income_quality"))
+    _take("fcf_yield", km.get("freeCashFlowYieldTTM"), yf_fund.get("fcf_yield"))
 
     # 估值
     fmp_fpeg = r.get("forwardPriceToEarningsGrowthRatio") or r.get("priceToEarningsGrowthRatio")
@@ -1057,7 +1088,7 @@ def compute_capex_groups(fmp_map):
                 prev_total += e["ttm"] / (1 + e["yoy_pct"] / 100)
             else:
                 prev_total += e["ttm"]  # 無歷史資料時視同持平
-        agg_yoy = ((total_ttm - prev_total) / prev_total * 100) if prev_total else None
+        agg_yoy = ((total_ttm - prev_total) / prev_total * 100) if prev_total and len(entries) == len(giants) and all(e.get("yoy_pct") is not None for e in entries) else None
         out.append({
             "key": key,
             "label": label,
@@ -1711,7 +1742,7 @@ def _gen_health_badge(health):
             time_str = f"{int(age_m/1440)} 天前"
     except Exception:
         time_str = "─"
-    parts.append(f'<span class="hb-item hb-ts" title="資料抓取時間 {health.get("fetched_at", "─")}">🕐 更新於 {time_str}</span>')
+    parts.append(f'<span class="hb-item hb-ts">資料抓取：{health.get("fetched_at", "─")}（UTC）</span>')
 
     return f'<div class="health-badge">{ "".join(parts) }</div>'
 
@@ -2560,6 +2591,7 @@ function highlightSankey(el, ev){{
 # ── Main ────────────────────────────────────────────────────────────────
 
 def main():
+    global TODAY
     symbols = collect_all_symbols()
     print(f"=== AI 供應鏈策略 ({TODAY.isoformat()}) ===")
     print(f"追蹤 {len(symbols)} 檔個股（9 巨頭 + {len(symbols)-9} 檔供應鏈）\n")
@@ -2567,6 +2599,9 @@ def main():
     # 1. yfinance 批次 K 線（技術面資料）
     print("yfinance：批次抓 2 年 K 線...")
     bars_df = yf_batch_bars(symbols)
+    valid = bars_df["MSFT"].dropna(subset=["Close"])
+    if valid.empty: raise RuntimeError("No dated market observations")
+    TODAY = valid.index[-1].date()
     print("  完成\n")
 
     # 2. FMP 平行抓（基本面 + 分析師面）
@@ -2593,6 +2628,10 @@ def main():
     # 5. LLM 新聞深度分析（九巨頭 only，gated by ANTHROPIC_API_KEY）
     enrich_news_with_llm(stocks)
 
+    # Use dated cash-flow statements when FMP is unavailable on the current plan.
+    for sym, fund in yf_fund_map.items():
+        if not fmp_map.setdefault(sym, {}).get('capex_quarterly'):
+            fmp_map[sym]['capex_quarterly'] = fund.get('capex_quarterly', [])
     # 6. Capex 週期
     capex_groups = compute_capex_groups(fmp_map)
     if capex_groups:
