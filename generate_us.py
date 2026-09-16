@@ -1919,7 +1919,7 @@ def generate_html(sectors, market, trends, key_stocks=None):
 <style>{CSS}</style></head><body>
 <div class="hdr">
   <h1>美股板塊復盤</h1>
-  <div class="sub">行情交易日：{TODAY.isoformat()} · 產生於 {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}（盤後更新）<a class="nav-link" href="etf_index.html">→ ETF 資金流向</a><a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
+  <div class="sub">行情交易日：{TODAY.isoformat()} · 產生於 {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}（盤後排程；盤中手動更新為未收盤行情）<a class="nav-link" href="etf_index.html">→ ETF 資金流向</a><a class="nav-link" href="index.html">→ 可轉債儀表板</a></div>
 </div>
 <div class="construction">🚧 開發測試中｜新聞／業績／趨勢資料正在累積，連續性訊號需數日歷史 🚧</div>
 <div class="market">{market_row}</div>

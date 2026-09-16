@@ -335,6 +335,7 @@ SENTIMENT_NEG = {
 
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
 ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001")  # 成本低、速度快
+LLM_PROVIDER_ERROR = None
 LLM_CACHE_DIR = "ai_llm_cache"
 LLM_CACHE_TTL_HOURS = 48
 LLM_NEWS_SYSTEM_PROMPT = """你是美股財經新聞分析師。收到新聞標題後，回傳 JSON 評估該新聞對標的股價的即時影響。
@@ -370,6 +371,7 @@ def _llm_cache_fresh(path):
 
 def call_claude_news_analysis(sym, title):
     """回傳 {impact, magnitude, category, zh} 或 None。"""
+    global LLM_PROVIDER_ERROR
     cache_path = _llm_cache_key(sym, title)
     if _llm_cache_fresh(cache_path):
         try:
@@ -377,7 +379,7 @@ def call_claude_news_analysis(sym, title):
                 return json.load(f)
         except Exception:
             pass
-    if not ANTHROPIC_API_KEY:
+    if not ANTHROPIC_API_KEY or LLM_PROVIDER_ERROR:
         return None
     try:
         r = requests.post(
@@ -405,6 +407,7 @@ def call_claude_news_analysis(sym, title):
         if r.status_code != 200:
             error = r.json().get('error', {})
             message = str(error.get('message', 'unknown')).replace(ANTHROPIC_API_KEY, '[redacted]')[:300]
+            LLM_PROVIDER_ERROR = "API 額度不足，暫用關鍵字分類" if "credit balance" in message.lower() else f"來源 HTTP {r.status_code}，暫用關鍵字分類"
             print(f"[LLM] HTTP {r.status_code}: {error.get('type', 'unknown')} {message}")
             return None
         data = r.json()
@@ -1007,6 +1010,7 @@ def build_stock_report(sym, name, bars_df, fmp_map, news_map, yf_fund_map):
 
     return {
         "symbol": sym,
+        "as_of": (yf_tech or {}).get("as_of"),
         "name": display_name,
         "industry": industry,
         "price": price,
@@ -1706,10 +1710,10 @@ def _gen_health_badge(health):
         return ""
     parts = []
 
-    # FMP 基本面
-    fmp_pct = health["fmp_ok_pct"]
+    # Combined primary and fallback field coverage
+    fmp_pct = health.get("fundamental_fields_pct", 0)
     fmp_cls = "hb-ok" if fmp_pct >= 80 else "hb-warn" if fmp_pct >= 40 else "hb-bad"
-    parts.append(f'<span class="hb-item {fmp_cls}" title="紅黃綠燈基本面資料取得率（FMP 主源 / yfinance 備援）">基本面 {health["fmp_ok_count"]}/{health["stock_count"]}</span>')
+    parts.append(f'<span class="hb-item {fmp_cls}" title="紅黃綠燈基本面資料取得率（FMP 主源 / yfinance 備援）">基本面欄位 {health.get("fundamental_fields_ok",0)}/{health.get("fundamental_fields_total",0)}</span>')
 
     # 新聞
     news_age = health.get("avg_news_age_hours", 0)
@@ -1720,7 +1724,7 @@ def _gen_health_badge(health):
     if health.get("llm_enabled"):
         llm_count = health.get("llm_enriched_count", 0)
         llm_cls = "hb-ok" if llm_count > 0 else "hb-warn"
-        parts.append(f'<span class="hb-item {llm_cls}" title="Claude Haiku 深度分析">LLM 分析 {llm_count}</span>')
+        parts.append(f'<span class="hb-item {llm_cls}" title="Claude Haiku 深度分析">LLM 分析 {llm_count} · {health.get("llm_status", "")}</span>')
     else:
         parts.append(f'<span class="hb-item hb-off" title="ANTHROPIC_API_KEY 未設定，使用 keyword classifier">LLM 關閉</span>')
 
@@ -1744,7 +1748,7 @@ def _gen_health_badge(health):
             time_str = f"{int(age_m/1440)} 天前"
     except Exception:
         time_str = "─"
-    parts.append(f'<span class="hb-item hb-ts">資料抓取：{health.get("fetched_at", "─")}（UTC）</span>')
+    parts.append(f'<span class="hb-item hb-ts">資料抓取：{health.get("fetched_at", "─")}（UTC；盤中行情未收盤）</span>')
 
     return f'<div class="health-badge">{ "".join(parts) }</div>'
 
@@ -2732,6 +2736,10 @@ def compute_health_summary(stocks, fmp_map, news_map, capex_groups, signals, alp
         "avg_news_age_hours": round(avg_news_age, 1),
         "llm_enriched_count": llm_enriched_count,
         "llm_enabled": bool(ANTHROPIC_API_KEY),
+        "llm_status": LLM_PROVIDER_ERROR or ("已啟用" if ANTHROPIC_API_KEY else "未設定"),
+        "fundamental_fields_ok": sum(v.get("value") is not None for s in stocks.values() for v in s.get("lights", {}).values()),
+        "fundamental_fields_total": sum(len(s.get("lights", {})) for s in stocks.values()),
+        "fundamental_fields_pct": round(100*sum(v.get("value") is not None for s in stocks.values() for v in s.get("lights", {}).values())/max(1,sum(len(s.get("lights", {})) for s in stocks.values())),1),
         "capex_groups_ok": capex_groups_ok,
         "bench_ok_count": bench_ok,
         "signals_count": len(signals or {}),
