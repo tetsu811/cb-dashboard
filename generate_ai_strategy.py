@@ -403,7 +403,9 @@ def call_claude_news_analysis(sym, title):
             timeout=20,
         )
         if r.status_code != 200:
-            print(f"[LLM] HTTP {r.status_code}: {r.json().get('error', {}).get('type', 'unknown')}")
+            error = r.json().get('error', {})
+            message = str(error.get('message', 'unknown')).replace(ANTHROPIC_API_KEY, '[redacted]')[:300]
+            print(f"[LLM] HTTP {r.status_code}: {error.get('type', 'unknown')} {message}")
             return None
         data = r.json()
         text = data["content"][0]["text"].strip()
