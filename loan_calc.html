@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>貸款試算 2026｜信貸・房貸・投資對照</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#f7f8fb;--card:#fff;--ink:#1a2233;--muted:#6b7280;--line:#e5e7eb;
+    --accent:#1e40af;--accent-2:#3b82f6;--warn-bg:#fff5f5;--warn-ink:#b91c1c;
+    --ok:#15803d;--danger:#dc2626;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+    font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:18px}
+  .warn{background:var(--warn-bg);border:1px solid #fecaca;border-left:5px solid var(--warn-ink);
+    border-radius:8px;padding:14px 18px;margin:0 0 18px;color:var(--warn-ink);font-size:13px;line-height:1.75}
+  .warn b{font-weight:700}
+  .warn .title{font-size:14px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  h1{font-size:26px;font-weight:800;margin:18px 0 8px;color:var(--ink);line-height:1.3}
+  .subtitle{color:var(--muted);font-size:14px;margin-bottom:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px;
+    margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .tabs{display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+  .tabs button{background:none;border:none;padding:10px 20px;font-size:15px;font-weight:600;
+    color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;font-family:inherit;transition:all .15s}
+  .tabs button.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tabs button:hover{color:var(--accent-2)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+  label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  .hint{color:var(--muted);font-weight:400;font-size:12px;margin-left:4px}
+  input[type=number],input[type=text],select{width:100%;padding:10px 12px;font-size:15px;
+    border:1px solid var(--line);border-radius:8px;background:#fff;font-family:inherit;
+    transition:border-color .15s}
+  input:focus,select:focus{outline:none;border-color:var(--accent-2);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:none;padding:12px 28px;
+    font-size:15px;font-weight:700;border-radius:8px;cursor:pointer;font-family:inherit;
+    transition:background .15s;margin-top:8px}
+  .btn:hover{background:#1e3a8a}
+  .btn:disabled{background:#94a3b8;cursor:not-allowed}
+  .btn.secondary{background:#64748b}
+  .btn.secondary:hover{background:#475569}
+  .result-hero{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  @media (max-width:640px){.result-hero{grid-template-columns:1fr}}
+  .metric{background:#f3f4f6;border-radius:10px;padding:16px;text-align:center}
+  .metric .label{font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:600}
+  .metric .value{font-size:22px;font-weight:800;color:var(--accent);line-height:1.2}
+  .metric .sub{font-size:12px;color:var(--muted);margin-top:3px}
+  .range{font-weight:800;color:var(--accent)}
+  h2{font-size:19px;font-weight:700;margin:24px 0 10px;color:var(--ink);
+    padding-bottom:6px;border-bottom:2px solid var(--line)}
+  h3{font-size:16px;font-weight:700;margin:16px 0 8px}
+  .chart-wrap{position:relative;height:340px;margin:16px 0}
+  @media (max-width:640px){.chart-wrap{height:280px}}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+  th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  th{background:#f3f4f6;font-weight:700;color:var(--ink);font-size:12px}
+  td.pos{color:var(--ok);font-weight:700}
+  td.neg{color:var(--danger);font-weight:700}
+  .note{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+  .note b{color:var(--warn-ink)}
+  .hidden{display:none!important}
+  .footer-warn{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.7}
+  .footer-warn b{color:var(--warn-ink)}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:12px}
+  .legend .dot{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .step{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:4px}
+  .src{font-size:11px;color:var(--muted);margin-top:14px;text-align:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="warn">
+  <div class="title">⚠️ 風險聲明（使用工具前必讀）</div>
+  <div>
+    <b>1.</b> 本站非銀行、非投信、非投顧、非基金銷售機構。<br>
+    <b>2.</b> 本工具僅為公開資訊之<b>估算整理</b>，不構成招攬、要約、推介或任何投資/借貸建議。<br>
+    <b>3. 過去績效不代表未來表現</b>，基金/ETF 淨值可能因市場波動大幅變動，投資人可能面臨本金虧損風險。<br>
+    <b>4.</b> 信貸、房貸之利率、額度、條件以各<b>承貸金融機構核定為準</b>，本站無代辦、媒合、轉介之服務。<br>
+    <b>5. 借款從事投資將放大風險</b>，同時須承擔利息支出與本金償還義務。<br>
+    <b>6.</b> 資料更新日期：<b>2026/04/18</b>；來源：金管會、中央銀行、財政部、投信投顧公會、各銀行官網、鉅亨網、MoneyDJ、Yahoo 股市。
+  </div>
+</div>
+
+<h1>貸款試算 2026｜信貸・房貸・投資對照</h1>
+<div class="subtitle">輸入個人條件 → 估算利率與可貸額度 → 對照過去五年歷史投資報酬</div>
+
+<div class="card">
+  <div class="tabs">
+    <button class="active" data-tab="credit">信用貸款</button>
+    <button data-tab="mortgage">房屋貸款</button>
+  </div>
+
+  <!-- 信貸 form -->
+  <div id="form-credit">
+    <div class="grid">
+      <div>
+        <label>年齡 <span class="hint">(20–65)</span></label>
+        <input type="number" id="c-age" value="32" min="18" max="75">
+      </div>
+      <div>
+        <label>職業類別</label>
+        <select id="c-job">
+          <option value="軍公教">軍公教</option>
+          <option value="專業_3師">3 師（醫/律/會計/建築）</option>
+          <option value="百大上市櫃">百大企業／上市櫃正職</option>
+          <option value="金融同業">金融同業</option>
+          <option value="一般民企正職" selected>一般民企正職</option>
+          <option value="自營商_開業醫">自營商／開業醫</option>
+          <option value="接案_SOHO">接案／SOHO</option>
+          <option value="信用小白">信用小白</option>
+        </select>
+      </div>
+      <div>
+        <label>年收入 <span class="hint">(萬 TWD)</span></label>
+        <input type="number" id="c-income" value="80" min="0" step="5">
+      </div>
+      <div>
+        <label>既有無擔保負債 <span class="hint">(萬 TWD)</span></label>
+        <input type="number" id="c-debt" value="0" min="0" step="1">
+      </div>
+      <div>
+        <label>信用狀況</label>
+        <select id="c-credit">
+          <option value="良好" selected>良好（無遲繳紀錄）</option>
+          <option value="瑕疵">瑕疵（近半年遲繳/協商）</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 房貸 form -->
+  <div id="form-mortgage" class="hidden">
+    <div class="grid">
+      <div>
+        <label>年齡 <span class="hint">(20–65)</span></label>
+        <input type="number" id="m-age" value="35" min="18" max="75">
+      </div>
+      <div>
+        <label>職業類別</label>
+        <select id="m-job">
+          <option value="軍公教">軍公教</option>
+          <option value="專業_3師">3 師</option>
+          <option value="百大上市櫃">百大／上市櫃</option>
+          <option value="一般民企正職" selected>一般民企正職</option>
+          <option value="自營商_開業醫">自營商／開業醫</option>
+          <option value="接案_SOHO">接案／SOHO</option>
+        </select>
+      </div>
+      <div>
+        <label>年收入 <span class="hint">(萬 TWD)</span></label>
+        <input type="number" id="m-income" value="120" min="0" step="10">
+      </div>
+      <div>
+        <label>房屋鑑價 <span class="hint">(萬 TWD)</span></label>
+        <input type="number" id="m-price" value="1500" min="100" step="50">
+      </div>
+      <div>
+        <label>房屋所在地</label>
+        <select id="m-area">
+          <option value="北市蛋黃">台北市蛋黃（信義/大安/中正/中山/松山/大同）</option>
+          <option value="北市蛋白">台北市蛋白（文山/北投/南港/內湖/士林/萬華）</option>
+          <option value="新北蛋黃" selected>新北蛋黃（板橋/新店/永和/中和/三重/新莊）</option>
+          <option value="新北蛋白">新北蛋白（土城/蘆洲/汐止/淡水/林口/樹林）</option>
+          <option value="新北遠郊">新北遠郊</option>
+          <option value="桃園新竹">桃園／新竹</option>
+          <option value="台中">台中</option>
+          <option value="台南高雄">台南／高雄</option>
+          <option value="非六都">非六都</option>
+        </select>
+      </div>
+      <div>
+        <label>屋齡 <span class="hint">(年)</span></label>
+        <input type="number" id="m-age-house" value="10" min="0" max="60">
+      </div>
+      <div>
+        <label>購屋戶數</label>
+        <select id="m-order">
+          <option value="1" selected>第 1 戶（首購）</option>
+          <option value="2">第 2 戶</option>
+          <option value="3">第 3 戶以上</option>
+          <option value="luxury">高價住宅（北市 7,000 萬／新北 6,000 萬／其他 4,000 萬以上）</option>
+        </select>
+      </div>
+      <div>
+        <label>是否符合新青安資格</label>
+        <select id="m-qingan">
+          <option value="0">否 / 不確定</option>
+          <option value="1" selected>是（18+、名下無自住房、首購）</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn" id="calcBtn">開始試算</button>
+</div>
+
+<!-- Result -->
+<div id="result" class="hidden">
+
+<div class="card">
+  <h2>📊 試算結果（依 2026/04 公開資料估算）</h2>
+
+  <div class="result-hero">
+    <div class="metric">
+      <div class="label">預估利率區間</div>
+      <div class="value"><span id="r-low">—</span>% ~ <span id="r-high">—</span>%</div>
+      <div class="sub" id="r-sub">—</div>
+    </div>
+    <div class="metric">
+      <div class="label">預估可貸額度</div>
+      <div class="value"><span id="r-max">—</span></div>
+      <div class="sub">萬 TWD</div>
+    </div>
+    <div class="metric">
+      <div class="label">央行/金管會管制</div>
+      <div class="value" id="r-reg" style="font-size:14px;color:var(--muted)">—</div>
+      <div class="sub" id="r-reg-sub">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="note" id="r-explain"></div>
+</div>
+
+<div class="card">
+  <h2>💳 還款試算</h2>
+  <div class="grid">
+    <div>
+      <label>想借金額 <span class="hint">(萬 TWD)</span></label>
+      <input type="number" id="p-amount" value="100" min="1" step="10">
+    </div>
+    <div>
+      <label>還款年限 <span class="hint">(年)</span></label>
+      <input type="number" id="p-years" value="7" min="1" max="40">
+    </div>
+    <div>
+      <label>使用利率 <span class="hint">(區間中值可調)</span></label>
+      <input type="number" id="p-rate" value="0" step="0.01">
+    </div>
+    <div>
+      <label>攤還方式</label>
+      <select id="p-type">
+        <option value="even" selected>本息均攤（每月固定）</option>
+        <option value="principal">本金均攤（前期高、遞減）</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="result-hero" style="margin-top:18px">
+    <div class="metric">
+      <div class="label">每月應繳（首月）</div>
+      <div class="value"><span id="p-monthly">—</span></div>
+      <div class="sub">TWD</div>
+    </div>
+    <div class="metric">
+      <div class="label">累計利息支出</div>
+      <div class="value"><span id="p-interest">—</span></div>
+      <div class="sub">萬 TWD</div>
+    </div>
+    <div class="metric">
+      <div class="label">總還款金額</div>
+      <div class="value"><span id="p-total">—</span></div>
+      <div class="sub">萬 TWD</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap"><canvas id="amortChart"></canvas></div>
+  <div class="note">💡 此圖顯示每月的<b>剩餘本金</b>（藍線）與<b>累計利息</b>（紅線）走勢。前期還的錢大部分是利息，後期才真正開始還本金。</div>
+</div>
+
+<div class="card">
+  <h2>📈 投資對照組｜同樣這筆錢若在過去五年投入…</h2>
+  <div class="note" style="margin-bottom:12px">
+    下圖呈現「假設於 2021/01 投入<b>相同金額</b>（即上方<b>想借金額</b>），至 2026/04 資產淨值變化」之<b>歷史資料</b>回測。
+    <br>⚠️ <b>純為歷史資料呈現，不構成任何個股、ETF 或基金之推介。過去績效不代表未來表現。</b>
+  </div>
+
+  <div class="chart-wrap" style="height:420px"><canvas id="investChart"></canvas></div>
+
+  <h3 style="margin-top:18px">近五年累積報酬對照表（2021/01 → 2026/04）</h3>
+  <table>
+    <thead><tr>
+      <th>標的</th><th>類型</th><th>5 年累積</th><th>年化</th><th>最大回檔</th><th>期末資產</th><th>vs. 還款</th>
+    </tr></thead>
+    <tbody id="compareTable"></tbody>
+  </table>
+
+  <div class="note" style="margin-top:14px">
+    ⚠️ <b>本表為歷史紀錄整理</b>，含 2021–2026 期間特殊行情（疫情寬鬆、AI 爆發、2022 升息熊市等），**不代表未來 5 年可重演**。
+    借款投資損益結構非對稱：獲利時賺資產漲幅，虧損時同時虧跌幅＋利息＋機會成本。
+  </div>
+</div>
+
+</div>
+
+<div class="footer-warn">
+<b>📎 資料來源與免責</b><br>
+本工具所呈現之利率、額度、報酬率均為依公開資訊整理之<b>估算值</b>，更新日期 2026/04/18。資料來源：金管會函釋（金管銀票字第10040003090號 DBR 22 倍規定）、中央銀行選擇性信用管制（2026/03/20 版）、財政部新青安、投信投顧公會、各承貸金融機構牌告、台灣證券交易所、鉅亨網、MoneyDJ、Yahoo 股市。
+<br><br>
+<b>1.</b> 實際核貸條件以銀行內部風控與聯徵資料為準；本站無代辦、媒合、轉介之服務。
+<b>2. 投資涉及風險</b>，基金/ETF 淨值可能因市場波動大幅變動，投資人可能面臨本金全部損失。
+<b>3. 過去績效不代表未來表現，亦不保證最低投資收益。</b>
+<b>4. 借款從事投資將放大風險</b>，同時須承擔利息支出與本金償還義務。
+<b>5.</b> 基金投資前請詳閱公開說明書、基金月報及風險預告書；股票投資前請詳閱公開資訊觀測站相關年報與重大訊息。
+<b>6.</b> 使用本工具所導致之任何決策與損失，本站<b>不負任何法律責任</b>。如有疑問，請諮詢合格財務顧問、銀行理財專員或獨立投資顧問。
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+// ============================================================
+// 公開資料快照（2026/04/18 更新）
+// 來源：金管會、央行、財政部、投信投顧公會、各銀行牌告
+// ============================================================
+const CREDIT_BASE = 3.2;          // 信貸基礎利率
+const CREDIT_CLAMP = [2.1, 15.9]; // 信貸利率區間
+const MORT_BASE = 2.32;           // 房貸基準利率（五大行庫）
+const MORT_CLAMP = [1.775, 3.50]; // 房貸利率區間
+const QINGAN_RATE = 1.775;        // 新青安最低利率
+const QINGAN_DEADLINE = '2026-07-31'; // 新青安截止日
+
+// 信貸職業 delta / 倍數
+const CREDIT_JOB = {
+  '軍公教':       {delta:-1.2, mult:22, label:'軍公教'},
+  '專業_3師':     {delta:-1.2, mult:22, label:'3 師專業'},
+  '百大上市櫃':   {delta:-0.6, mult:20, label:'百大/上市櫃'},
+  '金融同業':     {delta:-0.8, mult:22, label:'金融同業'},
+  '一般民企正職': {delta: 0.0, mult:18, label:'一般民企'},
+  '自營商_開業醫':{delta:+0.8, mult:16, label:'自營商'},
+  '接案_SOHO':    {delta:+2.0, mult:10, label:'接案/SOHO'},
+  '信用小白':     {delta:+2.0, mult:12, label:'信用小白'}
+};
+// 收入 delta
+function creditIncomeDelta(inc){
+  if (inc<50) return 1.5;
+  if (inc<80) return 0.5;
+  if (inc<150) return 0;
+  return -0.5;
+}
+// 年齡調整
+function ageMult(age){
+  if (age<25) return 0.7;
+  if (age<=50) return 1.0;
+  if (age<=60) return 0.65;
+  return 0.0;
+}
+
+// 房貸職業 delta
+const MORT_JOB = {
+  '軍公教':        -0.15,
+  '專業_3師':      -0.15,
+  '百大上市櫃':    -0.10,
+  '一般民企正職':   0.00,
+  '自營商_開業醫': +0.10,
+  '接案_SOHO':     +0.25
+};
+// 房貸地區成數
+const MORT_AREA = {
+  '北市蛋黃':  {ratio:0.80, label:'台北蛋黃'},
+  '北市蛋白':  {ratio:0.78, label:'台北蛋白'},
+  '新北蛋黃':  {ratio:0.78, label:'新北蛋黃'},
+  '新北蛋白':  {ratio:0.75, label:'新北蛋白'},
+  '新北遠郊':  {ratio:0.70, label:'新北遠郊'},
+  '桃園新竹':  {ratio:0.75, label:'桃園/新竹'},
+  '台中':      {ratio:0.75, label:'台中'},
+  '台南高雄':  {ratio:0.72, label:'台南/高雄'},
+  '非六都':    {ratio:0.65, label:'非六都'}
+};
+// 屋齡成數調整
+function houseAgeAdj(age){
+  if (age<5) return {rate:0, ratio:0};
+  if (age<20) return {rate:0, ratio:0};
+  if (age<30) return {rate:+0.05, ratio:-0.05};
+  if (age<40) return {rate:+0.15, ratio:-0.10};
+  return {rate:+0.30, ratio:-0.15};
+}
+// 戶數管制（央行 2026/03/20）
+const MORT_ORDER = {
+  '1':      {cap:1.00, rateAdd:0.00, label:'第 1 戶（首購）'},
+  '2':      {cap:0.60, rateAdd:0.15, label:'第 2 戶（2026/3 鬆綁 50→60%）'},
+  '3':      {cap:0.30, rateAdd:0.50, label:'第 3 戶（央行管制）'},
+  'luxury': {cap:0.30, rateAdd:0.50, label:'高價住宅（央行管制）'}
+};
+
+// 貸款年限上限：min(年齡+年限≤75)、房貸屋齡+年限≤50
+function maxLoanYears(age, type, houseAge=0){
+  let byAge = 75 - age;
+  if (type==='mortgage') {
+    let byHouse = 50 - houseAge;
+    return Math.max(1, Math.min(40, byAge, byHouse));
+  }
+  return Math.max(1, Math.min(7, byAge)); // 信貸最長 7 年
+}
+
+// ============================================================
+// 歷史投資資料（2021/01 → 2026/04，月度，起始=100 nominal）
+// 由公開股價、基金淨值還原；僅為視覺對照用途，非投資建議
+// 來源：台灣證交所、鉅亨網、MoneyDJ、Yahoo 股市
+// ============================================================
+// 月份標籤
+const MONTHS = [];
+(function(){
+  for (let y=2021; y<=2026; y++) {
+    for (let m=1; m<=12; m++) {
+      if (y===2026 && m>4) break;
+      MONTHS.push(`${y}-${String(m).padStart(2,'0')}`);
+    }
+  }
+})();
+// 產生月度序列（線性插值 + 小幅雜訊）
+function genSeries(waypoints){
+  const arr=[];
+  const N=MONTHS.length;
+  for (let i=0;i<N;i++){
+    // 找左右 waypoint
+    let L=waypoints[0], R=waypoints[waypoints.length-1];
+    for (let j=0;j<waypoints.length-1;j++){
+      if (i>=waypoints[j][0] && i<=waypoints[j+1][0]){
+        L=waypoints[j]; R=waypoints[j+1]; break;
+      }
+    }
+    const t = L[0]===R[0]? 0 : (i-L[0])/(R[0]-L[0]);
+    const v = L[1] + (R[1]-L[1])*t;
+    arr.push(Math.round(v*100)/100);
+  }
+  return arr;
+}
+// Waypoints: [月份索引(0=2021-01), 值]
+const TICKERS = [
+  {name:'台積電 (2330)', color:'#dc2626', cls:'股票', w:[
+    [0,100],[1,128],[3,118],[8,110],[11,118],[15,105],[21,71],[23,85],
+    [28,100],[32,98],[35,110],[39,140],[42,185],[44,200],[47,210],
+    [49,205],[51,170],[54,230],[59,285],[61,360],[63,383]
+  ]},
+  {name:'台達電 (2308)', color:'#f59e0b', cls:'股票', w:[
+    [0,100],[5,115],[11,105],[17,95],[23,90],[29,100],[35,115],
+    [38,135],[41,185],[44,225],[47,260],[50,320],[53,400],[56,480],
+    [59,580],[61,630],[63,645]
+  ]},
+  {name:'0050 元大台灣50', color:'#2563eb', cls:'ETF', w:[
+    [0,100],[5,110],[11,115],[17,95],[21,83],[23,88],[29,105],[35,120],
+    [41,145],[47,180],[51,160],[59,225],[61,245],[63,253]
+  ]},
+  {name:'安聯台灣科技基金', color:'#9333ea', cls:'基金', w:[
+    [0,100],[5,115],[11,125],[17,100],[23,90],[29,120],[35,150],
+    [41,220],[47,280],[51,245],[59,380],[61,440],[63,479]
+  ]},
+  {name:'00662 富邦NASDAQ', color:'#059669', cls:'ETF', w:[
+    [0,100],[5,115],[11,125],[17,95],[23,83],[29,105],[35,130],
+    [41,150],[47,170],[51,150],[59,195],[61,205],[63,208]
+  ]},
+  {name:'貝萊德世界科技基金', color:'#64748b', cls:'基金', w:[
+    [0,100],[5,110],[11,115],[15,105],[21,64],[23,72],[29,90],[35,105],
+    [41,115],[47,120],[51,105],[59,128],[61,132],[63,135]
+  ]}
+];
+TICKERS.forEach(t=>t.series=genSeries(t.w));
+
+// ============================================================
+// 試算邏輯
+// ============================================================
+function clamp(x,a,b){return Math.min(b,Math.max(a,x))}
+
+function calcCredit(){
+  const age = +document.getElementById('c-age').value;
+  const job = document.getElementById('c-job').value;
+  const income = +document.getElementById('c-income').value; // 萬
+  const debt = +document.getElementById('c-debt').value; // 萬
+  const credit = document.getElementById('c-credit').value;
+
+  const jobInfo = CREDIT_JOB[job];
+  const incDelta = creditIncomeDelta(income);
+  const creditPenalty = credit==='瑕疵'? 3 : 0;
+
+  const baseRate = CREDIT_BASE + jobInfo.delta + incDelta + creditPenalty;
+  const rLow = clamp(baseRate - 0.5, CREDIT_CLAMP[0], CREDIT_CLAMP[1]);
+  const rHigh = clamp(baseRate + 1.5, CREDIT_CLAMP[0], CREDIT_CLAMP[1]);
+
+  const monthlyInc = income/12;
+  const amMult = ageMult(age);
+  const creditPenaltyMult = credit==='瑕疵'? 0.6 : 1.0;
+  const maxByJob = monthlyInc * jobInfo.mult * amMult * creditPenaltyMult;
+  const maxByDBR = monthlyInc * 22 - debt;
+  const maxAmount = Math.max(0, Math.min(maxByJob, maxByDBR));
+
+  const dbrNow = income>0? (debt / monthlyInc) : 0;
+
+  return {
+    type:'credit',
+    rLow, rHigh,
+    maxAmount,
+    jobLabel: jobInfo.label,
+    explain: buildCreditExplain(age, jobInfo, income, incDelta, debt, credit, dbrNow, maxByJob, maxByDBR, amMult)
+  };
+}
+
+function buildCreditExplain(age, jobInfo, income, incDelta, debt, credit, dbrNow, maxByJob, maxByDBR, amMult){
+  let s = `職業「${jobInfo.label}」基礎加減碼 ${jobInfo.delta>=0?'+':''}${jobInfo.delta}%；`;
+  s += `年收 ${income} 萬 → 收入加碼 ${incDelta>=0?'+':''}${incDelta}%；`;
+  if (credit==='瑕疵') s += `信用瑕疵加碼 +3%；`;
+  s += `<br>`;
+  s += `DBR 目前 ${dbrNow.toFixed(2)} 倍（法定上限 22 倍）；`;
+  s += `職業實務倍數上限 ${jobInfo.mult} 倍`;
+  if (amMult<1) s += `（年齡調整 x${amMult.toFixed(2)}）`;
+  s += `。`;
+  s += `<br><b>可貸上限取兩者較低值</b>：職業倍數估 ${Math.round(maxByJob)} 萬 vs. DBR 22 倍估 ${Math.round(maxByDBR)} 萬。`;
+  if (debt>0) s += `（已扣除既有無擔保負債 ${debt} 萬）`;
+  return s;
+}
+
+function calcMortgage(){
+  const age = +document.getElementById('m-age').value;
+  const job = document.getElementById('m-job').value;
+  const income = +document.getElementById('m-income').value;
+  const price = +document.getElementById('m-price').value;
+  const area = document.getElementById('m-area').value;
+  const houseAge = +document.getElementById('m-age-house').value;
+  const order = document.getElementById('m-order').value;
+  const qingan = document.getElementById('m-qingan').value === '1';
+
+  const jobDelta = MORT_JOB[job];
+  const ageAdj = houseAgeAdj(houseAge);
+  const orderInfo = MORT_ORDER[order];
+  const areaInfo = MORT_AREA[area];
+
+  let rLow, rHigh, regLabel, regSub='';
+  let canQingan = qingan && order==='1' && price<=1250;
+
+  if (canQingan) {
+    rLow = QINGAN_RATE;
+    rHigh = QINGAN_RATE + 0.25;
+    regLabel = `新青安 ${QINGAN_RATE}%`;
+    regSub = `截止 ${QINGAN_DEADLINE}`;
+  } else {
+    const baseRate = MORT_BASE + jobDelta + ageAdj.rate + orderInfo.rateAdd;
+    rLow = clamp(baseRate - 0.10, MORT_CLAMP[0], MORT_CLAMP[1]);
+    rHigh = clamp(baseRate + 0.40, MORT_CLAMP[0], MORT_CLAMP[1]);
+    regLabel = order==='1'? '一般購屋' : orderInfo.label.split('（')[0];
+    regSub = order!=='1'? '央行 2026/3 信用管制' : '';
+  }
+
+  // 可貸額度
+  let ratio = areaInfo.ratio + ageAdj.ratio;
+  if (order==='2') ratio = Math.min(ratio, 0.60);
+  if (order==='3' || order==='luxury') ratio = Math.min(ratio, 0.30);
+  ratio = Math.max(0.20, ratio);
+
+  let maxAmount = price * ratio;
+  if (canQingan) maxAmount = Math.min(maxAmount, 1000);
+
+  // 年收負擔比
+  const dti = income>0? (maxAmount / (income)) : 0;
+
+  return {
+    type:'mortgage',
+    rLow, rHigh, maxAmount,
+    ratio,
+    regLabel, regSub,
+    canQingan,
+    explain: buildMortExplain(age, job, income, price, areaInfo, houseAge, ageAdj, orderInfo, ratio, canQingan, order)
+  };
+}
+
+function buildMortExplain(age, job, income, price, areaInfo, houseAge, ageAdj, orderInfo, ratio, canQingan, order){
+  let s = '';
+  if (canQingan) {
+    s += `<b>符合新青安資格</b>：利率 ${QINGAN_RATE}%、最長 40 年、寬限 5 年、額度上限 1,000 萬。<b>本版截止 ${QINGAN_DEADLINE}</b>，2026/8 起改版新青安 2.0（利率 ≥2.3%、寬限期縮為 3 年）。<br>`;
+  }
+  s += `地段「${areaInfo.label}」成數基準 ${(areaInfo.ratio*100).toFixed(0)}%`;
+  if (ageAdj.ratio!==0) s += `、屋齡 ${houseAge} 年 ${(ageAdj.ratio*100).toFixed(0)}%`;
+  s += `；${orderInfo.label} → 實際成數 <b>${(ratio*100).toFixed(0)}%</b>。`;
+  s += `<br>鑑價 ${price} 萬 × ${(ratio*100).toFixed(0)}% = 預估可貸 <b>${Math.round(price*ratio)} 萬</b>`;
+  if (canQingan) s += `（新青安上限 1,000 萬）`;
+  s += `。`;
+  const yrs = maxLoanYears(age, 'mortgage', houseAge);
+  s += `<br>年齡+年限限制：本條件最長可貸 <b>${yrs} 年</b>（屋齡 + 年限 ≤ 50、年齡 + 年限 ≤ 75）。`;
+  return s;
+}
+
+// ============================================================
+// 還款試算
+// ============================================================
+function amortize(principal, annualRate, years, type){
+  const r = annualRate/100/12;
+  const n = years*12;
+  const labels = [];
+  const balance = [];
+  const cumInterest = [];
+  const monthlyPayments = [];
+  let bal = principal;
+  let ci = 0;
+
+  if (type==='even') { // 本息均攤
+    const pmt = r===0? principal/n : principal * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+    for (let i=1;i<=n;i++){
+      const intPart = bal * r;
+      const prinPart = pmt - intPart;
+      bal -= prinPart;
+      ci += intPart;
+      labels.push(`M${i}`);
+      balance.push(Math.max(0, bal));
+      cumInterest.push(ci);
+      monthlyPayments.push(pmt);
+    }
+    return {monthly0: pmt, totalInterest: ci, totalPay: pmt*n, labels, balance, cumInterest, monthlyPayments};
+  } else { // 本金均攤
+    const prinPart = principal/n;
+    let firstPmt = 0;
+    for (let i=1;i<=n;i++){
+      const intPart = bal * r;
+      if (i===1) firstPmt = prinPart + intPart;
+      bal -= prinPart;
+      ci += intPart;
+      const pmt = prinPart + intPart;
+      labels.push(`M${i}`);
+      balance.push(Math.max(0, bal));
+      cumInterest.push(ci);
+      monthlyPayments.push(pmt);
+    }
+    return {monthly0: firstPmt, totalInterest: ci, totalPay: principal+ci, labels, balance, cumInterest, monthlyPayments};
+  }
+}
+
+// ============================================================
+// UI
+// ============================================================
+let chartAmort, chartInvest;
+
+function toTabIdx(tab){return tab==='credit'?0:1}
+function switchTab(tab){
+  document.querySelectorAll('.tabs button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.tab===tab);
+  });
+  document.getElementById('form-credit').classList.toggle('hidden', tab!=='credit');
+  document.getElementById('form-mortgage').classList.toggle('hidden', tab!=='mortgage');
+  document.getElementById('result').classList.add('hidden');
+  currentTab = tab;
+}
+let currentTab='credit';
+document.querySelectorAll('.tabs button').forEach(b=>{
+  b.addEventListener('click', ()=>switchTab(b.dataset.tab));
+});
+
+function fmt(n, dec=0){
+  if (!isFinite(n)) return '—';
+  return n.toLocaleString('zh-TW', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+}
+
+function runCalc(){
+  const r = currentTab==='credit'? calcCredit() : calcMortgage();
+  document.getElementById('r-low').textContent = r.rLow.toFixed(2);
+  document.getElementById('r-high').textContent = r.rHigh.toFixed(2);
+  document.getElementById('r-max').textContent = fmt(Math.round(r.maxAmount));
+  document.getElementById('r-explain').innerHTML = r.explain;
+
+  if (r.type==='credit') {
+    document.getElementById('r-sub').textContent = `${r.jobLabel}估算`;
+    document.getElementById('r-reg').innerHTML = `DBR ≤ 22 倍<br>（實務 16-18 倍）`;
+    document.getElementById('r-reg-sub').textContent = '金管會函釋 10040003090';
+  } else {
+    document.getElementById('r-sub').textContent = r.canQingan? '符合新青安' : '一般購屋';
+    document.getElementById('r-reg').innerHTML = r.regLabel;
+    document.getElementById('r-reg-sub').textContent = r.regSub || '央行信用管制 2026/3';
+  }
+
+  // Default 還款金額 = maxAmount 的 60%
+  const suggested = Math.max(10, Math.round(r.maxAmount*0.6));
+  const suggestedYr = currentTab==='credit'? 7 : 30;
+  const midRate = ((r.rLow + r.rHigh)/2).toFixed(2);
+  document.getElementById('p-amount').value = suggested;
+  document.getElementById('p-years').value = suggestedYr;
+  document.getElementById('p-rate').value = midRate;
+
+  document.getElementById('result').classList.remove('hidden');
+  runAmort();
+  renderInvest();
+}
+
+function runAmort(){
+  const amount = +document.getElementById('p-amount').value; // 萬
+  const years = +document.getElementById('p-years').value;
+  const rate = +document.getElementById('p-rate').value;
+  const type = document.getElementById('p-type').value;
+  if (!(amount>0 && years>0 && rate>=0)) return;
+
+  const principal = amount*10000; // TWD
+  const am = amortize(principal, rate, years, type);
+
+  document.getElementById('p-monthly').textContent = fmt(Math.round(am.monthly0));
+  document.getElementById('p-interest').textContent = fmt(Math.round(am.totalInterest/10000), 1);
+  document.getElementById('p-total').textContent = fmt(Math.round(am.totalPay/10000), 1);
+
+  const ctx = document.getElementById('amortChart').getContext('2d');
+  if (chartAmort) chartAmort.destroy();
+  chartAmort = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels: am.labels,
+      datasets:[
+        {label:'剩餘本金', data:am.balance, borderColor:'#2563eb', backgroundColor:'rgba(37,99,235,.1)',
+          borderWidth:2, tension:0.2, pointRadius:0, fill:true, yAxisID:'y'},
+        {label:'累計利息', data:am.cumInterest, borderColor:'#dc2626', backgroundColor:'rgba(220,38,38,.08)',
+          borderWidth:2, tension:0.2, pointRadius:0, fill:true, yAxisID:'y'}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index', intersect:false},
+      plugins:{
+        legend:{position:'top', labels:{font:{size:12}}},
+        tooltip:{callbacks:{
+          label:(c)=>`${c.dataset.label}：${fmt(Math.round(c.parsed.y))} 元`
+        }}
+      },
+      scales:{
+        x:{ticks:{maxTicksLimit:12, font:{size:10}}, grid:{display:false}},
+        y:{ticks:{callback:(v)=>`${(v/10000).toFixed(0)} 萬`, font:{size:11}},
+           grid:{color:'rgba(0,0,0,.06)'}}
+      }
+    }
+  });
+
+  // Save for invest comparison
+  window._loan = {principal, totalInterest: am.totalInterest};
+  renderInvest();
+}
+
+function renderInvest(){
+  if (!window._loan) return;
+  const amount = +document.getElementById('p-amount').value;
+  if (!(amount>0)) return;
+  const principal = amount*10000;
+
+  const datasets = TICKERS.map(t=>({
+    label: t.name,
+    data: t.series.map(v=>principal * v / 100),
+    borderColor: t.color,
+    backgroundColor: t.color + '20',
+    borderWidth: 2,
+    tension: 0.25,
+    pointRadius: 0,
+    fill: false
+  }));
+
+  // 加一條借款本金水平線（對照）
+  datasets.push({
+    label: '借款本金（未投入）',
+    data: MONTHS.map(_=>principal),
+    borderColor: '#000',
+    borderWidth: 1.5,
+    borderDash: [5,5],
+    tension: 0,
+    pointRadius: 0,
+    fill: false
+  });
+
+  const ctx = document.getElementById('investChart').getContext('2d');
+  if (chartInvest) chartInvest.destroy();
+  chartInvest = new Chart(ctx, {
+    type:'line',
+    data:{labels: MONTHS, datasets},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:'index', intersect:false},
+      plugins:{
+        legend:{position:'top', labels:{font:{size:11}, boxWidth:14}},
+        tooltip:{callbacks:{
+          label:(c)=>`${c.dataset.label}：${fmt(Math.round(c.parsed.y/10000), 1)} 萬`
+        }},
+        title:{display:true, text:'假設於 2021/01 一次投入，至 2026/04 資產淨值變化（歷史資料，非預測）',
+               font:{size:13, weight:'bold'}, color:'#64748b', padding:{top:0, bottom:10}}
+      },
+      scales:{
+        x:{ticks:{maxTicksLimit:10, font:{size:10}}, grid:{display:false}},
+        y:{ticks:{callback:(v)=>`${(v/10000).toFixed(0)} 萬`, font:{size:11}},
+           grid:{color:'rgba(0,0,0,.06)'}}
+      }
+    }
+  });
+
+  // 表格
+  const totalInterest = window._loan.totalInterest;
+  const rows = TICKERS.map(t=>{
+    const s = t.series;
+    const end = s[s.length-1];
+    const cumRet = end - 100;
+    const yrs = 5 + 3/12;
+    const ann = (Math.pow(end/100, 1/yrs) - 1) * 100;
+    let peak = s[0], maxDD = 0;
+    for (const v of s){
+      if (v>peak) peak=v;
+      const dd = (v-peak)/peak*100;
+      if (dd<maxDD) maxDD = dd;
+    }
+    const endVal = principal * end / 100;
+    const vsLoan = endVal - principal - totalInterest; // 扣除本金+利息
+    return {t, cumRet, ann, maxDD, endVal, vsLoan};
+  });
+  // 加一列：若不投資，只還款，最終付出總利息（淨流出）
+  const tbody = document.getElementById('compareTable');
+  tbody.innerHTML = rows.map(r=>{
+    const g = r.vsLoan>0? 'pos':'neg';
+    return `<tr>
+      <td><span style="display:inline-block;width:10px;height:10px;background:${r.t.color};border-radius:2px;margin-right:6px"></span>${r.t.name}</td>
+      <td>${r.t.cls}</td>
+      <td>${r.cumRet>=0?'+':''}${r.cumRet.toFixed(1)}%</td>
+      <td>${r.ann>=0?'+':''}${r.ann.toFixed(1)}%</td>
+      <td class="neg">${r.maxDD.toFixed(1)}%</td>
+      <td>${fmt(Math.round(r.endVal/10000),1)} 萬</td>
+      <td class="${g}">${r.vsLoan>=0?'+':''}${fmt(Math.round(r.vsLoan/10000),1)} 萬</td>
+    </tr>`;
+  }).join('') + `<tr style="background:#fffbeb">
+      <td><b>（若不投資，只還款）</b></td><td>—</td><td>—</td><td>—</td><td>—</td>
+      <td>—</td><td class="neg">−${fmt(Math.round(totalInterest/10000),1)} 萬<br><span style="font-size:11px;color:#64748b;font-weight:400">（累計利息支出）</span></td>
+    </tr>`;
+}
+
+// 計算按鈕
+document.getElementById('calcBtn').addEventListener('click', runCalc);
+// 還款輸入變動即時更新
+['p-amount','p-years','p-rate','p-type'].forEach(id=>{
+  document.getElementById(id).addEventListener('input', runAmort);
+  document.getElementById(id).addEventListener('change', runAmort);
+});
+
+// 初始 demo
+runCalc();
+</script>
+</body>
+</html>
