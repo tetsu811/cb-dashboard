@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "python3 scripts/export_vercel.py public",
+  "outputDirectory": "public",
+  "cleanUrls": false,
+  "trailingSlash": false
+}
