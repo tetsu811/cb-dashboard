@@ -1,14 +1,14 @@
 {
-  "trade_date": "2026-09-29",
-  "fetched_at": "2026-09-30T01:34:17.720728+00:00",
+  "trade_date": "2026-09-30",
+  "fetched_at": "2026-10-01T01:34:25.384127+00:00",
   "stock_count": 56,
   "fmp_ok_count": 13,
   "fmp_ok_pct": 23.2,
-  "news_total": 0,
-  "avg_news_age_hours": 0,
+  "news_total": 150,
+  "avg_news_age_hours": 10.3,
   "llm_enriched_count": 0,
   "llm_enabled": true,
-  "llm_status": "已啟用",
+  "llm_status": "API 額度不足，暫用關鍵字分類",
   "fundamental_fields_ok": 657,
   "fundamental_fields_total": 672,
   "fundamental_fields_pct": 97.8,
@@ -17,9 +17,9 @@
   "signals_count": 56,
   "alpha_tiers": {
     "strong_buy": 1,
-    "buy": 9,
-    "neutral": 29,
-    "weak": 17
+    "buy": 10,
+    "neutral": 31,
+    "weak": 14
   },
   "history_days": 40
 }
