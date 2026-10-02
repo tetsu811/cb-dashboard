@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-01T17:10:20.390272+00:00",
+  "generated_at": "2026-10-02T16:24:18.957157+00:00",
   "records": [
     {
       "bill_id": "119-s-4005",
@@ -372,34 +372,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-s-3050",
-      "pipeline_version": "v0.2",
-      "title": "PAID OFF Act of 2025",
-      "congress": 119,
-      "type": "s",
-      "number": "3050",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3050",
-      "policy_area": "International Affairs",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.48999999999999994,
-      "cosponsors_total": 8,
-      "cosponsors_R": 6,
-      "cosponsors_D": 2,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-07-27",
-        "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 500."
-      },
-      "last_action_date": "2026-07-27",
-      "fetched_at": "2026-08-08T11:18:31.555158+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-s-5026",
       "pipeline_version": "v0.2",
       "title": "Childhood Diabetes Reduction Act of 2026",
@@ -733,6 +705,34 @@
       },
       "last_action_date": "2025-09-30",
       "fetched_at": "2026-08-11T11:34:48.877516+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-sres-393",
+      "pipeline_version": "v0.2",
+      "title": "A resolution designating September 25, 2025, as \"National Lobster Day\".",
+      "congress": 119,
+      "type": "sres",
+      "number": "393",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-resolution/393",
+      "policy_area": "Public Lands and Natural Resources",
+      "stage": "introduced",
+      "stage_label": "提案",
+      "passage_baseline": 0.04,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.185,
+      "cosponsors_total": 9,
+      "cosponsors_R": 2,
+      "cosponsors_D": 7,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-09-16",
+        "text": "Submitted in the Senate, considered, and agreed to without amendment and with a preamble by Unanimous Consent. (consideration: CR S6637; text: CR S6652)"
+      },
+      "last_action_date": "2025-09-16",
+      "fetched_at": "2026-10-02T16:24:15.681344+00:00",
       "beneficiaries": []
     },
     {
@@ -1179,15 +1179,15 @@
           "confidence": 0.7,
           "share_usd": 40000000.0,
           "yf_name": "Granite Construction Incorporated",
-          "market_cap": 5172178432,
+          "market_cap": 5247704576,
           "revenue_ttm": 4967204864,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 8000000.0,
-          "budget_to_mcap_pct": 0.15467370480694198,
+          "budget_to_mcap_pct": 0.15244760607499563,
           "budget_to_revenue_pct": 0.16105637313210683,
-          "expected_alpha_bp": 5.800263930260325
+          "expected_alpha_bp": 5.716785227812336
         },
         {
           "ticker": "ACM",
@@ -1197,15 +1197,15 @@
           "confidence": 0.75,
           "share_usd": 35000000.0,
           "yf_name": "AECOM",
-          "market_cap": 7711489536,
+          "market_cap": 7640706560,
           "revenue_ttm": 15393461248,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 7000000.0,
-          "budget_to_mcap_pct": 0.09077364324131529,
+          "budget_to_mcap_pct": 0.09161456398084734,
           "budget_to_revenue_pct": 0.045473853392845466,
-          "expected_alpha_bp": 3.4040116215493232
+          "expected_alpha_bp": 3.4355461492817754
         },
         {
           "ticker": "TTEK",
@@ -1215,15 +1215,15 @@
           "confidence": 0.75,
           "share_usd": 30000000.0,
           "yf_name": "Tetra Tech, Inc.",
-          "market_cap": 8585169408,
+          "market_cap": 8519878656,
           "revenue_ttm": 4358675968,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.06988796277460714,
+          "budget_to_mcap_pct": 0.07042353820115252,
           "budget_to_revenue_pct": 0.1376564820154119,
-          "expected_alpha_bp": 2.6207986040477675
+          "expected_alpha_bp": 2.6408826825432197
         },
         {
           "ticker": "MYRG",
@@ -1233,15 +1233,15 @@
           "confidence": 0.35,
           "share_usd": 10000000.0,
           "yf_name": "MYR Group Inc.",
-          "market_cap": 4609509888,
+          "market_cap": 4733907968,
           "revenue_ttm": 4006051072,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 2000000.0,
-          "budget_to_mcap_pct": 0.04338856079269137,
+          "budget_to_mcap_pct": 0.042248392100553825,
           "budget_to_revenue_pct": 0.04992447585051656,
-          "expected_alpha_bp": 1.6270710297259263
+          "expected_alpha_bp": 1.5843147037707683
         },
         {
           "ticker": "ROAD",
@@ -1251,15 +1251,15 @@
           "confidence": 0.45,
           "share_usd": 10000000.0,
           "yf_name": "Construction Partners, Inc.",
-          "market_cap": 5193133568,
+          "market_cap": 5204484096,
           "revenue_ttm": 3477932032,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 2000000.0,
-          "budget_to_mcap_pct": 0.038512392832026614,
+          "budget_to_mcap_pct": 0.03842840064661041,
           "budget_to_revenue_pct": 0.05750543660998146,
-          "expected_alpha_bp": 1.444214731200998
+          "expected_alpha_bp": 1.4410650242478904
         },
         {
           "ticker": "EXP",
@@ -1269,33 +1269,15 @@
           "confidence": 0.3,
           "share_usd": 10000000.0,
           "yf_name": "Eagle Materials Inc.",
-          "market_cap": 5284898304,
+          "market_cap": 5303150080,
           "revenue_ttm": 2324933888,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 2000000.0,
-          "budget_to_mcap_pct": 0.037843679952862155,
+          "budget_to_mcap_pct": 0.03771343389927219,
           "budget_to_revenue_pct": 0.08602395149052944,
-          "expected_alpha_bp": 1.4191379982323309
-        },
-        {
-          "ticker": "STRL",
-          "name": "Sterling Infrastructure",
-          "estimated_share_pct": 5.0,
-          "rationale": "專注於公路與基礎建設工程，可望承接州級野生動物廊道專案。",
-          "confidence": 0.55,
-          "share_usd": 25000000.0,
-          "yf_name": "Sterling Infrastructure, Inc.",
-          "market_cap": 15187810304,
-          "revenue_ttm": 3438486016,
-          "sector": "Industrials",
-          "industry": "Engineering & Construction",
-          "country": "United States",
-          "annual_share_usd": 5000000.0,
-          "budget_to_mcap_pct": 0.03292113807006896,
-          "budget_to_revenue_pct": 0.14541283508887184,
-          "expected_alpha_bp": 1.234542677627586
+          "expected_alpha_bp": 1.414253771222707
         },
         {
           "ticker": "USLM",
@@ -1305,15 +1287,15 @@
           "confidence": 0.25,
           "share_usd": 5000000.0,
           "yf_name": "United States Lime & Minerals, Inc.",
-          "market_cap": 3208291328,
+          "market_cap": 3219551488,
           "revenue_ttm": 376915008,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 1000000.0,
-          "budget_to_mcap_pct": 0.031169239254322478,
+          "budget_to_mcap_pct": 0.031060226982771583,
           "budget_to_revenue_pct": 0.2653118020707735,
-          "expected_alpha_bp": 1.1688464720370928
+          "expected_alpha_bp": 1.1647585118539343
         },
         {
           "ticker": "J",
@@ -1323,15 +1305,33 @@
           "confidence": 0.65,
           "share_usd": 25000000.0,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 16526601216,
+          "market_cap": 16131431424,
           "revenue_ttm": 14219215872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 5000000.0,
-          "budget_to_mcap_pct": 0.030254254547869886,
+          "budget_to_mcap_pct": 0.030995389488877638,
           "budget_to_revenue_pct": 0.03516368303997572,
-          "expected_alpha_bp": 1.1345345455451208
+          "expected_alpha_bp": 1.1623271058329114
+        },
+        {
+          "ticker": "STRL",
+          "name": "Sterling Infrastructure",
+          "estimated_share_pct": 5.0,
+          "rationale": "專注於公路與基礎建設工程，可望承接州級野生動物廊道專案。",
+          "confidence": 0.55,
+          "share_usd": 25000000.0,
+          "yf_name": "Sterling Infrastructure, Inc.",
+          "market_cap": 16275080192,
+          "revenue_ttm": 3438486016,
+          "sector": "Industrials",
+          "industry": "Engineering & Construction",
+          "country": "United States",
+          "annual_share_usd": 5000000.0,
+          "budget_to_mcap_pct": 0.03072181482987559,
+          "budget_to_revenue_pct": 0.14541283508887184,
+          "expected_alpha_bp": 1.1520680561203345
         },
         {
           "ticker": "MTZ",
@@ -1341,15 +1341,15 @@
           "confidence": 0.4,
           "share_usd": 15000000.0,
           "yf_name": "MasTec, Inc.",
-          "market_cap": 16819870720,
+          "market_cap": 17491621888,
           "revenue_ttm": 16109103104,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 3000000.0,
-          "budget_to_mcap_pct": 0.0178360467208157,
+          "budget_to_mcap_pct": 0.017151068204019022,
           "budget_to_revenue_pct": 0.018623010732702304,
-          "expected_alpha_bp": 0.6688517520305888
+          "expected_alpha_bp": 0.6431650576507134
         },
         {
           "ticker": "VMC",
@@ -1359,15 +1359,15 @@
           "confidence": 0.5,
           "share_usd": 15000000.0,
           "yf_name": "Vulcan Materials Company",
-          "market_cap": 31181826048,
+          "market_cap": 31647662080,
           "revenue_ttm": 8115800064,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 3000000.0,
-          "budget_to_mcap_pct": 0.009620988826574573,
+          "budget_to_mcap_pct": 0.009479373207463166,
           "budget_to_revenue_pct": 0.03696493230910623,
-          "expected_alpha_bp": 0.3607870809965465
+          "expected_alpha_bp": 0.35547649527986874
         },
         {
           "ticker": "MLM",
@@ -1377,15 +1377,15 @@
           "confidence": 0.5,
           "share_usd": 15000000.0,
           "yf_name": "Martin Marietta Materials, Inc.",
-          "market_cap": 33928800256,
+          "market_cap": 34310885376,
           "revenue_ttm": 6688000000,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 3000000.0,
-          "budget_to_mcap_pct": 0.008842045628977044,
+          "budget_to_mcap_pct": 0.008743580840669472,
           "budget_to_revenue_pct": 0.04485645933014354,
-          "expected_alpha_bp": 0.33157671108663916
+          "expected_alpha_bp": 0.32788428152510524
         },
         {
           "ticker": "PWR",
@@ -1395,15 +1395,15 @@
           "confidence": 0.3,
           "share_usd": 10000000.0,
           "yf_name": "Quanta Services, Inc.",
-          "market_cap": 98554609664,
+          "market_cap": 101426913280,
           "revenue_ttm": 32905140224,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 2000000.0,
-          "budget_to_mcap_pct": 0.002029331765219866,
+          "budget_to_mcap_pct": 0.001971863221824352,
           "budget_to_revenue_pct": 0.006078077730060125,
-          "expected_alpha_bp": 0.07609994119574498
+          "expected_alpha_bp": 0.07394487081841321
         },
         {
           "ticker": "WSP",
@@ -1442,6 +1442,34 @@
           "expected_alpha_bp": 0.0
         }
       ]
+    },
+    {
+      "bill_id": "119-s-3140",
+      "pipeline_version": "v0.2",
+      "title": "Flood Protection and Infrastructure Resilience Act of 2025",
+      "congress": 119,
+      "type": "s",
+      "number": "3140",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3140",
+      "policy_area": "Agriculture and Food",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.055,
+      "cosponsors_total": 1,
+      "cosponsors_R": 0,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2025-11-06",
+        "text": "Read twice and referred to the Committee on Agriculture, Nutrition, and Forestry."
+      },
+      "last_action_date": "2025-11-06",
+      "fetched_at": "2026-10-02T16:24:17.664988+00:00",
+      "beneficiaries": []
     },
     {
       "bill_id": "119-hr-9603",
@@ -1693,34 +1721,6 @@
       },
       "last_action_date": "2026-06-10",
       "fetched_at": "2026-06-22T15:50:22.011680+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-s-3172",
-      "pipeline_version": "v0.2",
-      "title": "A bill to repeal certain Acts that impose sanctions upon Syria.",
-      "congress": 119,
-      "type": "s",
-      "number": "3172",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3172",
-      "policy_area": "International Affairs",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.36,
-      "cosponsors_total": 2,
-      "cosponsors_R": 2,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-07-27",
-        "text": "Placed on Senate Legislative Calendar under General Orders. Calendar No. 501."
-      },
-      "last_action_date": "2026-07-27",
-      "fetched_at": "2026-08-08T11:19:48.609524+00:00",
       "beneficiaries": []
     },
     {
@@ -4364,34 +4364,6 @@
       "beneficiaries": []
     },
     {
-      "bill_id": "119-hr-7028",
-      "pipeline_version": "v0.2",
-      "title": "To require the Secretary of State to submit a notification to Congress prior to obligating funds for certain art-related purchases, and for other purposes.",
-      "congress": 119,
-      "type": "hr",
-      "number": "7028",
-      "url": "https://www.congress.gov/bill/119th-congress/house-bill/7028",
-      "policy_area": "International Affairs",
-      "stage": "reported",
-      "stage_label": "委員會通過",
-      "passage_baseline": 0.35,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.355,
-      "cosponsors_total": 1,
-      "cosponsors_R": 1,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-01-21",
-        "text": "Ordered to be Reported by the Yeas and Nays: 46 - 1."
-      },
-      "last_action_date": "2026-01-21",
-      "fetched_at": "2026-07-09T13:40:06.190081+00:00",
-      "beneficiaries": []
-    },
-    {
       "bill_id": "119-hres-1156",
       "pipeline_version": "v0.2",
       "title": "Expressing support for tax policies that support working families.",
@@ -5256,15 +5228,15 @@
           "confidence": 0.35,
           "share_usd": 12959000.0,
           "yf_name": "Matrix Service Company",
-          "market_cap": 285182560,
+          "market_cap": 292255520,
           "revenue_ttm": 873632000,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 2591800.0,
-          "budget_to_mcap_pct": 0.9088213528905835,
+          "budget_to_mcap_pct": 0.8868267056170572,
           "budget_to_revenue_pct": 0.29666953591443534,
-          "expected_alpha_bp": 34.080800733396885
+          "expected_alpha_bp": 33.256001460639645
         },
         {
           "ticker": "GVA",
@@ -5274,15 +5246,15 @@
           "confidence": 0.8,
           "share_usd": 80993750.0,
           "yf_name": "Granite Construction Incorporated",
-          "market_cap": 5172178432,
+          "market_cap": 5247704576,
           "revenue_ttm": 4967204864,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 16198750.0,
-          "budget_to_mcap_pct": 0.31319008446768143,
+          "budget_to_mcap_pct": 0.30868258236341695,
           "budget_to_revenue_pct": 0.32611399053421447,
-          "expected_alpha_bp": 11.744628167538053
+          "expected_alpha_bp": 11.575596838628137
         },
         {
           "ticker": "ROAD",
@@ -5292,15 +5264,15 @@
           "confidence": 0.6,
           "share_usd": 32397500.0,
           "yf_name": "Construction Partners, Inc.",
-          "market_cap": 5193133568,
+          "market_cap": 5204484096,
           "revenue_ttm": 3477932032,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6479500.0,
-          "budget_to_mcap_pct": 0.12477052467755821,
+          "budget_to_mcap_pct": 0.12449841099485609,
           "budget_to_revenue_pct": 0.18630323825718742,
-          "expected_alpha_bp": 4.678894675408433
+          "expected_alpha_bp": 4.668690412307103
         },
         {
           "ticker": "PRIM",
@@ -5310,15 +5282,15 @@
           "confidence": 0.45,
           "share_usd": 19438500.0,
           "yf_name": "Primoris Services Corporation",
-          "market_cap": 4002385152,
+          "market_cap": 4237310464,
           "revenue_ttm": 7284199936,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 3887700.0,
-          "budget_to_mcap_pct": 0.09713457981567088,
+          "budget_to_mcap_pct": 0.09174923652703112,
           "budget_to_revenue_pct": 0.053371681641880726,
-          "expected_alpha_bp": 3.642546743087658
+          "expected_alpha_bp": 3.4405963697636675
         },
         {
           "ticker": "ACM",
@@ -5328,15 +5300,15 @@
           "confidence": 0.65,
           "share_usd": 32397500.0,
           "yf_name": "AECOM",
-          "market_cap": 7711489536,
+          "market_cap": 7640706560,
           "revenue_ttm": 15393461248,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6479500.0,
-          "budget_to_mcap_pct": 0.08402397448315749,
+          "budget_to_mcap_pct": 0.08480236675912863,
           "budget_to_revenue_pct": 0.042092547579848885,
-          "expected_alpha_bp": 3.1508990431184056
+          "expected_alpha_bp": 3.1800887534673232
         },
         {
           "ticker": "EXP",
@@ -5346,15 +5318,15 @@
           "confidence": 0.5,
           "share_usd": 16198750.0,
           "yf_name": "Eagle Materials Inc.",
-          "market_cap": 5284898304,
+          "market_cap": 5303150080,
           "revenue_ttm": 2324933888,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 3239750.0,
-          "budget_to_mcap_pct": 0.06130203106364258,
+          "budget_to_mcap_pct": 0.06109104873758353,
           "budget_to_revenue_pct": 0.13934804842072138,
-          "expected_alpha_bp": 2.298826164886597
+          "expected_alpha_bp": 2.2909143276593826
         },
         {
           "ticker": "STRL",
@@ -5364,15 +5336,15 @@
           "confidence": 0.55,
           "share_usd": 40496875.0,
           "yf_name": "Sterling Infrastructure, Inc.",
-          "market_cap": 15187810304,
+          "market_cap": 16275080192,
           "revenue_ttm": 3438486016,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 8099375.0,
-          "budget_to_mcap_pct": 0.05332812853125295,
+          "budget_to_mcap_pct": 0.04976549979754471,
           "budget_to_revenue_pct": 0.2355506162395863,
-          "expected_alpha_bp": 1.9998048199219856
+          "expected_alpha_bp": 1.8662062424079267
         },
         {
           "ticker": "VMC",
@@ -5382,15 +5354,15 @@
           "confidence": 0.7,
           "share_usd": 64795000.0,
           "yf_name": "Vulcan Materials Company",
-          "market_cap": 31181826048,
+          "market_cap": 31647662080,
           "revenue_ttm": 8115800064,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 12959000.0,
-          "budget_to_mcap_pct": 0.04155946473452663,
+          "budget_to_mcap_pct": 0.04094773246517172,
           "budget_to_revenue_pct": 0.1596761859312359,
-          "expected_alpha_bp": 1.5584799275447487
+          "expected_alpha_bp": 1.5355399674439396
         },
         {
           "ticker": "MLM",
@@ -5400,15 +5372,15 @@
           "confidence": 0.7,
           "share_usd": 56695625.00000001,
           "yf_name": "Martin Marietta Materials, Inc.",
-          "market_cap": 33928800256,
+          "market_cap": 34310885376,
           "revenue_ttm": 6688000000,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 11339125.000000002,
-          "budget_to_mcap_pct": 0.03342035354755811,
+          "budget_to_mcap_pct": 0.033048185366652084,
           "budget_to_revenue_pct": 0.16954433313397133,
-          "expected_alpha_bp": 1.2532632580334293
+          "expected_alpha_bp": 1.2393069512494532
         },
         {
           "ticker": "J",
@@ -5418,15 +5390,15 @@
           "confidence": 0.55,
           "share_usd": 24298125.0,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 16526601216,
+          "market_cap": 16131431424,
           "revenue_ttm": 14219215872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 4859625.0,
-          "budget_to_mcap_pct": 0.029404866351438436,
+          "budget_to_mcap_pct": 0.0301251939289774,
           "budget_to_revenue_pct": 0.034176462638628405,
-          "expected_alpha_bp": 1.1026824881789414
+          "expected_alpha_bp": 1.1296947723366524
         },
         {
           "ticker": "CRH",
@@ -5436,15 +5408,15 @@
           "confidence": 0.75,
           "share_usd": 64795000.0,
           "yf_name": "CRH plc",
-          "market_cap": 54307168256,
+          "market_cap": 54633164800,
           "revenue_ttm": 38632001536,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "Ireland",
           "annual_share_usd": 12959000.0,
-          "budget_to_mcap_pct": 0.023862411567681503,
+          "budget_to_mcap_pct": 0.02372002436146624,
           "budget_to_revenue_pct": 0.03354472842398264,
-          "expected_alpha_bp": 0.8948404337880563
+          "expected_alpha_bp": 0.8895009135549841
         },
         {
           "ticker": "URI",
@@ -5454,15 +5426,15 @@
           "confidence": 0.5,
           "share_usd": 24298125.0,
           "yf_name": "United Rentals, Inc.",
-          "market_cap": 63453106176,
+          "market_cap": 66564603904,
           "revenue_ttm": 16832000000,
           "sector": "Industrials",
           "industry": "Rental & Leasing Services",
           "country": "United States",
           "annual_share_usd": 4859625.0,
-          "budget_to_mcap_pct": 0.007658608526619405,
+          "budget_to_mcap_pct": 0.007300614312989212,
           "budget_to_revenue_pct": 0.028871346245247145,
-          "expected_alpha_bp": 0.28719781974822767
+          "expected_alpha_bp": 0.2737730367370954
         },
         {
           "ticker": "PWR",
@@ -5472,15 +5444,15 @@
           "confidence": 0.45,
           "share_usd": 24298125.0,
           "yf_name": "Quanta Services, Inc.",
-          "market_cap": 98554609664,
+          "market_cap": 101426913280,
           "revenue_ttm": 32905140224,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 4859625.0,
-          "budget_to_mcap_pct": 0.0049308956897782955,
+          "budget_to_mcap_pct": 0.004791257904679084,
           "budget_to_revenue_pct": 0.014768589244471716,
-          "expected_alpha_bp": 0.18490858836668608
+          "expected_alpha_bp": 0.17967217142546568
         },
         {
           "ticker": "CAT",
@@ -5490,15 +5462,15 @@
           "confidence": 0.55,
           "share_usd": 32397500.0,
           "yf_name": "Caterpillar Inc.",
-          "market_cap": 379303034880,
+          "market_cap": 388747067392,
           "revenue_ttm": 74728996864,
           "sector": "Industrials",
           "industry": "Farm & Heavy Construction Machinery",
           "country": "United States",
           "annual_share_usd": 6479500.0,
-          "budget_to_mcap_pct": 0.0017082647393132295,
+          "budget_to_mcap_pct": 0.0016667649851275356,
           "budget_to_revenue_pct": 0.008670663694030448,
-          "expected_alpha_bp": 0.06405992772424611
+          "expected_alpha_bp": 0.06250368694228259
         },
         {
           "ticker": "SUM",
@@ -5575,6 +5547,433 @@
       "last_action_date": "2025-08-02",
       "fetched_at": "2026-08-20T11:14:55.810336+00:00",
       "beneficiaries": []
+    },
+    {
+      "bill_id": "119-s-4011",
+      "pipeline_version": "v0.2",
+      "title": "Tropical Forest and Coral Reef Conservation Reauthorization Act of 2026",
+      "congress": 119,
+      "type": "s",
+      "number": "4011",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/4011",
+      "policy_area": "Public Lands and Natural Resources",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.04,
+      "passage_nuance_reason": "再授權類法案屬例行性立法且具兩黨共同提案人（2R+1D），略高於基準；但目前僅處於提交委員會初期階段，尚無 markup 或領袖表態，上調幅度有限。",
+      "passage_prob": 0.35500000000000004,
+      "cosponsors_total": 3,
+      "cosponsors_R": 2,
+      "cosponsors_D": 1,
+      "budget": {
+        "total_amount_usd": 100000000.0,
+        "period_years": 5,
+        "programs": [
+          {
+            "name": "Tropical Forest and Coral Reef Conservation Fund (FY2028-FY2032)",
+            "amount_usd": 100000000.0,
+            "industry_hint": "環境保育/熱帶森林與珊瑚礁保護"
+          }
+        ],
+        "is_appropriation": false,
+        "confidence": 0.9,
+        "notes": "本法案為授權法案，授權FY2028至FY2032每年2,000萬美元，共計1億美元，用於熱帶森林與珊瑚礁保育，授權金額非實際撥款。"
+      },
+      "companies_raw": {
+        "industries": [
+          "環境保育",
+          "熱帶森林保護",
+          "珊瑚礁保育",
+          "債務換自然(Debt-for-Nature Swap)",
+          "環境顧問服務"
+        ],
+        "companies": [
+          {
+            "ticker": "TTEK",
+            "name": "Tetra Tech Inc.",
+            "estimated_share_pct": 5.0,
+            "rationale": "環境顧問龍頭，長期承接USAID與國務院環境保育技術服務合約。",
+            "confidence": 0.5
+          },
+          {
+            "ticker": "CDR",
+            "name": "Cadre Holdings",
+            "estimated_share_pct": 0.5,
+            "rationale": "雖主業為安全裝備，關聯度低，僅供參考。",
+            "confidence": 0.1
+          },
+          {
+            "ticker": "ICFI",
+            "name": "ICF International",
+            "estimated_share_pct": 4.0,
+            "rationale": "承接美國聯邦環境與氣候保育顧問合約，具熱帶生態評估經驗。",
+            "confidence": 0.45
+          },
+          {
+            "ticker": "CRAI",
+            "name": "CRA International",
+            "estimated_share_pct": 1.0,
+            "rationale": "提供環境經濟與政策顧問服務，可能參與債務換自然評估。",
+            "confidence": 0.2
+          },
+          {
+            "ticker": "ERII",
+            "name": "Energy Recovery Inc.",
+            "estimated_share_pct": 0.5,
+            "rationale": "珊瑚礁相關海洋技術間接關聯，受惠有限。",
+            "confidence": 0.1
+          },
+          {
+            "ticker": "KBR",
+            "name": "KBR Inc.",
+            "estimated_share_pct": 2.0,
+            "rationale": "具聯邦國際開發服務合約經驗，可能承接相關監測與管理子項目。",
+            "confidence": 0.25
+          },
+          {
+            "ticker": "LDOS",
+            "name": "Leidos Holdings",
+            "estimated_share_pct": 1.5,
+            "rationale": "聯邦技術服務商，具環境資料與遙測分析能力。",
+            "confidence": 0.2
+          },
+          {
+            "ticker": "BAH",
+            "name": "Booz Allen Hamilton",
+            "estimated_share_pct": 1.5,
+            "rationale": "聯邦顧問大廠，可能承接方案管理子合約。",
+            "confidence": 0.2
+          },
+          {
+            "ticker": "MAXR",
+            "name": "Maxar Technologies",
+            "estimated_share_pct": 0.0,
+            "rationale": "原衛星遙測供應商已被私有化，保留僅供參考(已下市)。",
+            "confidence": 0.05
+          },
+          {
+            "ticker": "PLNT",
+            "name": "Planet Labs PBC",
+            "estimated_share_pct": 2.0,
+            "rationale": "衛星影像用於熱帶森林砍伐與珊瑚礁監測，NGO與政府採購常用供應商。",
+            "confidence": 0.4
+          },
+          {
+            "ticker": "BWXT",
+            "name": "BWX Technologies",
+            "estimated_share_pct": 0.2,
+            "rationale": "關聯度低，僅列作聯邦承包參考。",
+            "confidence": 0.05
+          },
+          {
+            "ticker": "CLH",
+            "name": "Clean Harbors",
+            "estimated_share_pct": 0.5,
+            "rationale": "環境服務商，與海洋保育關聯有限。",
+            "confidence": 0.1
+          },
+          {
+            "ticker": "MTZ",
+            "name": "MasTec Inc.",
+            "estimated_share_pct": 0.3,
+            "rationale": "基礎設施商可能參與保育區相關工程，關聯低。",
+            "confidence": 0.08
+          },
+          {
+            "ticker": "AGX",
+            "name": "Argan Inc.",
+            "estimated_share_pct": 0.2,
+            "rationale": "工程服務商，關聯度低。",
+            "confidence": 0.05
+          },
+          {
+            "ticker": "MBIO",
+            "name": "Mustang Bio",
+            "estimated_share_pct": 0.0,
+            "rationale": "不相關，僅為提示移除項。",
+            "confidence": 0.02
+          }
+        ]
+      },
+      "latest_action": {
+        "actionDate": "2026-03-05",
+        "text": "Read twice and referred to the Committee on Foreign Relations."
+      },
+      "last_action_date": "2026-03-05",
+      "fetched_at": "2026-04-19T07:53:00.956844+00:00",
+      "beneficiaries": [
+        {
+          "ticker": "ICFI",
+          "name": "ICF International",
+          "estimated_share_pct": 4.0,
+          "rationale": "承接美國聯邦環境與氣候保育顧問合約，具熱帶生態評估經驗。",
+          "confidence": 0.45,
+          "share_usd": 4000000.0,
+          "yf_name": "ICF International, Inc.",
+          "market_cap": 1485194624,
+          "revenue_ttm": 1821073024,
+          "sector": "Industrials",
+          "industry": "Consulting Services",
+          "country": "United States",
+          "annual_share_usd": 800000.0,
+          "budget_to_mcap_pct": 0.05386499432952431,
+          "budget_to_revenue_pct": 0.043930143901796656,
+          "expected_alpha_bp": 1.9122072986981131
+        },
+        {
+          "ticker": "ERII",
+          "name": "Energy Recovery Inc.",
+          "estimated_share_pct": 0.5,
+          "rationale": "珊瑚礁相關海洋技術間接關聯，受惠有限。",
+          "confidence": 0.1,
+          "share_usd": 500000.0,
+          "yf_name": "Energy Recovery, Inc.",
+          "market_cap": 346594720,
+          "revenue_ttm": 120573000,
+          "sector": "Industrials",
+          "industry": "Pollution & Treatment Controls",
+          "country": "United States",
+          "annual_share_usd": 100000.0,
+          "budget_to_mcap_pct": 0.028852141775269975,
+          "budget_to_revenue_pct": 0.0829373076891178,
+          "expected_alpha_bp": 1.0242510330220842
+        },
+        {
+          "ticker": "CRAI",
+          "name": "CRA International",
+          "estimated_share_pct": 1.0,
+          "rationale": "提供環境經濟與政策顧問服務，可能參與債務換自然評估。",
+          "confidence": 0.2,
+          "share_usd": 1000000.0,
+          "yf_name": "CRA International, Inc.",
+          "market_cap": 1071271680,
+          "revenue_ttm": 794643968,
+          "sector": "Industrials",
+          "industry": "Consulting Services",
+          "country": "United States",
+          "annual_share_usd": 200000.0,
+          "budget_to_mcap_pct": 0.018669400464315457,
+          "budget_to_revenue_pct": 0.025168504141970662,
+          "expected_alpha_bp": 0.6627637164831988
+        },
+        {
+          "ticker": "PLNT",
+          "name": "Planet Labs PBC",
+          "estimated_share_pct": 2.0,
+          "rationale": "衛星影像用於熱帶森林砍伐與珊瑚礁監測，NGO與政府採購常用供應商。",
+          "confidence": 0.4,
+          "share_usd": 2000000.0,
+          "yf_name": "Planet Fitness, Inc.",
+          "market_cap": 3197044992,
+          "revenue_ttm": 1301656064,
+          "sector": "Consumer Cyclical",
+          "industry": "Leisure",
+          "country": "United States",
+          "annual_share_usd": 400000.0,
+          "budget_to_mcap_pct": 0.01251155366912021,
+          "budget_to_revenue_pct": 0.030730083857236194,
+          "expected_alpha_bp": 0.44416015525376756
+        },
+        {
+          "ticker": "TTEK",
+          "name": "Tetra Tech Inc.",
+          "estimated_share_pct": 5.0,
+          "rationale": "環境顧問龍頭，長期承接USAID與國務院環境保育技術服務合約。",
+          "confidence": 0.5,
+          "share_usd": 5000000.0,
+          "yf_name": "Tetra Tech, Inc.",
+          "market_cap": 8519878656,
+          "revenue_ttm": 4358675968,
+          "sector": "Industrials",
+          "industry": "Engineering & Construction",
+          "country": "United States",
+          "annual_share_usd": 1000000.0,
+          "budget_to_mcap_pct": 0.011737256366858755,
+          "budget_to_revenue_pct": 0.02294274700256865,
+          "expected_alpha_bp": 0.4166726010234858
+        },
+        {
+          "ticker": "KBR",
+          "name": "KBR Inc.",
+          "estimated_share_pct": 2.0,
+          "rationale": "具聯邦國際開發服務合約經驗，可能承接相關監測與管理子項目。",
+          "confidence": 0.25,
+          "share_usd": 2000000.0,
+          "yf_name": "KBR, Inc.",
+          "market_cap": 4291976448,
+          "revenue_ttm": 7722999808,
+          "sector": "Industrials",
+          "industry": "Engineering & Construction",
+          "country": "United States",
+          "annual_share_usd": 400000.0,
+          "budget_to_mcap_pct": 0.009319715633257827,
+          "budget_to_revenue_pct": 0.005179334584284895,
+          "expected_alpha_bp": 0.33084990498065286
+        },
+        {
+          "ticker": "BAH",
+          "name": "Booz Allen Hamilton",
+          "estimated_share_pct": 1.5,
+          "rationale": "聯邦顧問大廠，可能承接方案管理子合約。",
+          "confidence": 0.2,
+          "share_usd": 1500000.0,
+          "yf_name": "Booz Allen Hamilton Holding Corporation",
+          "market_cap": 8068716544,
+          "revenue_ttm": 11093000192,
+          "sector": "Industrials",
+          "industry": "Consulting Services",
+          "country": "United States",
+          "annual_share_usd": 300000.0,
+          "budget_to_mcap_pct": 0.003718063441243128,
+          "budget_to_revenue_pct": 0.002704408138533637,
+          "expected_alpha_bp": 0.13199125216413105
+        },
+        {
+          "ticker": "LDOS",
+          "name": "Leidos Holdings",
+          "estimated_share_pct": 1.5,
+          "rationale": "聯邦技術服務商，具環境資料與遙測分析能力。",
+          "confidence": 0.2,
+          "share_usd": 1500000.0,
+          "yf_name": "Leidos Holdings, Inc.",
+          "market_cap": 14869571584,
+          "revenue_ttm": 17634000896,
+          "sector": "Technology",
+          "industry": "Information Technology Services",
+          "country": "United States",
+          "annual_share_usd": 300000.0,
+          "budget_to_mcap_pct": 0.0020175429958103628,
+          "budget_to_revenue_pct": 0.001701258845166841,
+          "expected_alpha_bp": 0.07162277635126789
+        },
+        {
+          "ticker": "AGX",
+          "name": "Argan Inc.",
+          "estimated_share_pct": 0.2,
+          "rationale": "工程服務商，關聯度低。",
+          "confidence": 0.05,
+          "share_usd": 200000.0,
+          "yf_name": "Argan, Inc.",
+          "market_cap": 5440632320,
+          "revenue_ttm": 1188132992,
+          "sector": "Industrials",
+          "industry": "Engineering & Construction",
+          "country": "United States",
+          "annual_share_usd": 40000.0,
+          "budget_to_mcap_pct": 0.0007352086604521733,
+          "budget_to_revenue_pct": 0.003366626486203995,
+          "expected_alpha_bp": 0.026099907446052156
+        },
+        {
+          "ticker": "CLH",
+          "name": "Clean Harbors",
+          "estimated_share_pct": 0.5,
+          "rationale": "環境服務商，與海洋保育關聯有限。",
+          "confidence": 0.1,
+          "share_usd": 500000.0,
+          "yf_name": "Clean Harbors, Inc.",
+          "market_cap": 16828837888,
+          "revenue_ttm": 6243574784,
+          "sector": "Industrials",
+          "industry": "Waste Management",
+          "country": "United States",
+          "annual_share_usd": 100000.0,
+          "budget_to_mcap_pct": 0.0005942180955424509,
+          "budget_to_revenue_pct": 0.0016016465480042533,
+          "expected_alpha_bp": 0.021094742391757005
+        },
+        {
+          "ticker": "MTZ",
+          "name": "MasTec Inc.",
+          "estimated_share_pct": 0.3,
+          "rationale": "基礎設施商可能參與保育區相關工程，關聯低。",
+          "confidence": 0.08,
+          "share_usd": 300000.0,
+          "yf_name": "MasTec, Inc.",
+          "market_cap": 17491621888,
+          "revenue_ttm": 16109103104,
+          "sector": "Industrials",
+          "industry": "Engineering & Construction",
+          "country": "United States",
+          "annual_share_usd": 60000.0,
+          "budget_to_mcap_pct": 0.0003430213640803805,
+          "budget_to_revenue_pct": 0.0003724602146540461,
+          "expected_alpha_bp": 0.012177258424853508
+        },
+        {
+          "ticker": "BWXT",
+          "name": "BWX Technologies",
+          "estimated_share_pct": 0.2,
+          "rationale": "關聯度低，僅列作聯邦承包參考。",
+          "confidence": 0.05,
+          "share_usd": 200000.0,
+          "yf_name": "BWX Technologies, Inc.",
+          "market_cap": 12313078784,
+          "revenue_ttm": 3513969920,
+          "sector": "Industrials",
+          "industry": "Aerospace & Defense",
+          "country": "United States",
+          "annual_share_usd": 40000.0,
+          "budget_to_mcap_pct": 0.0003248578255828043,
+          "budget_to_revenue_pct": 0.0011383136711654038,
+          "expected_alpha_bp": 0.011532452808189554
+        },
+        {
+          "ticker": "CDR",
+          "name": "Cadre Holdings",
+          "estimated_share_pct": 0.5,
+          "rationale": "雖主業為安全裝備，關聯度低，僅供參考。",
+          "confidence": 0.1,
+          "share_usd": 500000.0,
+          "yf_name": "",
+          "market_cap": null,
+          "revenue_ttm": null,
+          "sector": null,
+          "industry": null,
+          "country": null,
+          "annual_share_usd": 100000.0,
+          "budget_to_mcap_pct": 0,
+          "budget_to_revenue_pct": 0,
+          "expected_alpha_bp": 0.0
+        },
+        {
+          "ticker": "MAXR",
+          "name": "Maxar Technologies",
+          "estimated_share_pct": 0.0,
+          "rationale": "原衛星遙測供應商已被私有化，保留僅供參考(已下市)。",
+          "confidence": 0.05,
+          "share_usd": 0.0,
+          "yf_name": "",
+          "market_cap": null,
+          "revenue_ttm": null,
+          "sector": null,
+          "industry": null,
+          "country": null,
+          "annual_share_usd": 0.0,
+          "budget_to_mcap_pct": 0,
+          "budget_to_revenue_pct": 0,
+          "expected_alpha_bp": 0.0
+        },
+        {
+          "ticker": "MBIO",
+          "name": "Mustang Bio",
+          "estimated_share_pct": 0.0,
+          "rationale": "不相關，僅為提示移除項。",
+          "confidence": 0.02,
+          "share_usd": 0.0,
+          "yf_name": "Mustang Bio, Inc.",
+          "market_cap": 3512931,
+          "revenue_ttm": null,
+          "sector": "Healthcare",
+          "industry": "Biotechnology",
+          "country": "United States",
+          "annual_share_usd": 0.0,
+          "budget_to_mcap_pct": 0.0,
+          "budget_to_revenue_pct": 0,
+          "expected_alpha_bp": 0.0
+        }
+      ]
     },
     {
       "bill_id": "119-hr-7828",
@@ -6573,34 +6972,6 @@
       },
       "last_action_date": "2026-02-02",
       "fetched_at": "2026-04-21T11:55:57.080120+00:00",
-      "beneficiaries": []
-    },
-    {
-      "bill_id": "119-sres-444",
-      "pipeline_version": "v0.2",
-      "title": "A resolution condemning the dictator of the People's Republic of China, Xi Jinping, for deceit, undermining prospects for peace and security, and orchestrating crimes against humanity.",
-      "congress": 119,
-      "type": "sres",
-      "number": "444",
-      "url": "https://www.congress.gov/bill/119th-congress/senate-resolution/444",
-      "policy_area": "International Affairs",
-      "stage": "referred",
-      "stage_label": "交付委員會",
-      "passage_baseline": 0.05,
-      "passage_nuance_adj": 0.0,
-      "passage_nuance_reason": "",
-      "passage_prob": 0.05,
-      "cosponsors_total": 0,
-      "cosponsors_R": 0,
-      "cosponsors_D": 0,
-      "budget": null,
-      "companies_raw": null,
-      "latest_action": {
-        "actionDate": "2026-06-16",
-        "text": "Resolution agreed to in Senate without amendment and with a preamble by Voice Vote. (consideration: CR S2813)"
-      },
-      "last_action_date": "2026-06-16",
-      "fetched_at": "2026-07-12T11:49:32.168643+00:00",
       "beneficiaries": []
     },
     {
