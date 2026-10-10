@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T17:14:07.092007+00:00",
+  "generated_at": "2026-10-10T15:58:43.939859+00:00",
   "records": [
     {
       "bill_id": "119-s-91",
@@ -2114,23 +2114,23 @@
       "number": "9718",
       "url": "https://www.congress.gov/bill/119th-congress/house-bill/9718",
       "policy_area": "Commerce",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
       "passage_nuance_adj": 0.0,
       "passage_nuance_reason": "",
-      "passage_prob": 0.31000000000000005,
+      "passage_prob": 0.48,
       "cosponsors_total": 6,
       "cosponsors_R": 5,
       "cosponsors_D": 1,
       "budget": null,
       "companies_raw": null,
       "latest_action": {
-        "actionDate": "2026-09-16",
-        "text": "Ordered to be Reported in the Nature of a Substitute by the Yeas and Nays: 23 - 0."
+        "actionDate": "2026-10-09",
+        "text": "Placed on the Union Calendar, Calendar No. 740."
       },
-      "last_action_date": "2026-09-16",
-      "fetched_at": "2026-09-17T15:21:15.988244+00:00",
+      "last_action_date": "2026-10-09",
+      "fetched_at": "2026-10-10T15:58:40.889709+00:00",
       "beneficiaries": []
     },
     {
@@ -2468,6 +2468,34 @@
       },
       "last_action_date": "2026-08-05",
       "fetched_at": "2026-08-09T11:18:50.095173+00:00",
+      "beneficiaries": []
+    },
+    {
+      "bill_id": "119-hr-9521",
+      "pipeline_version": "v0.2",
+      "title": "Broadband Infrastructure Extension Act",
+      "congress": 119,
+      "type": "hr",
+      "number": "9521",
+      "url": "https://www.congress.gov/bill/119th-congress/house-bill/9521",
+      "policy_area": "Science, Technology, Communications",
+      "stage": "referred",
+      "stage_label": "交付委員會",
+      "passage_baseline": 0.05,
+      "passage_nuance_adj": 0.0,
+      "passage_nuance_reason": "",
+      "passage_prob": 0.17,
+      "cosponsors_total": 4,
+      "cosponsors_R": 3,
+      "cosponsors_D": 1,
+      "budget": null,
+      "companies_raw": null,
+      "latest_action": {
+        "actionDate": "2026-06-29",
+        "text": "Referred to the House Committee on Oversight and Government Reform."
+      },
+      "last_action_date": "2026-06-29",
+      "fetched_at": "2026-07-17T12:02:04.445779+00:00",
       "beneficiaries": []
     },
     {
@@ -3533,15 +3561,15 @@
           "confidence": 0.45,
           "share_usd": 4000000.0,
           "yf_name": "ICF International, Inc.",
-          "market_cap": 1575491712,
+          "market_cap": 1570111616,
           "revenue_ttm": 1821073024,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 800000.0,
-          "budget_to_mcap_pct": 0.05077779806181551,
+          "budget_to_mcap_pct": 0.05095179169733625,
           "budget_to_revenue_pct": 0.043930143901796656,
-          "expected_alpha_bp": 1.8026118311944506
+          "expected_alpha_bp": 1.8087886052554372
         },
         {
           "ticker": "ERII",
@@ -3551,15 +3579,15 @@
           "confidence": 0.1,
           "share_usd": 500000.0,
           "yf_name": "Energy Recovery, Inc.",
-          "market_cap": 348891744,
+          "market_cap": 349146944,
           "revenue_ttm": 120573000,
           "sector": "Industrials",
           "industry": "Pollution & Treatment Controls",
           "country": "United States",
           "annual_share_usd": 100000.0,
-          "budget_to_mcap_pct": 0.02866218582690223,
+          "budget_to_mcap_pct": 0.028641235937611413,
           "budget_to_revenue_pct": 0.0829373076891178,
-          "expected_alpha_bp": 1.0175075968550291
+          "expected_alpha_bp": 1.0167638757852053
         },
         {
           "ticker": "CRAI",
@@ -3569,15 +3597,15 @@
           "confidence": 0.2,
           "share_usd": 1000000.0,
           "yf_name": "CRA International, Inc.",
-          "market_cap": 1096944000,
+          "market_cap": 1109309440,
           "revenue_ttm": 794643968,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 200000.0,
-          "budget_to_mcap_pct": 0.01823247130209017,
+          "budget_to_mcap_pct": 0.01802923447581948,
           "budget_to_revenue_pct": 0.025168504141970662,
-          "expected_alpha_bp": 0.6472527312242011
+          "expected_alpha_bp": 0.6400378238915916
         },
         {
           "ticker": "TTEK",
@@ -3587,15 +3615,15 @@
           "confidence": 0.5,
           "share_usd": 5000000.0,
           "yf_name": "Tetra Tech, Inc.",
-          "market_cap": 8566094848,
+          "market_cap": 8536521216,
           "revenue_ttm": 4358675968,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 1000000.0,
-          "budget_to_mcap_pct": 0.01167393097723496,
+          "budget_to_mcap_pct": 0.01171437374425662,
           "budget_to_revenue_pct": 0.02294274700256865,
-          "expected_alpha_bp": 0.4144245496918411
+          "expected_alpha_bp": 0.4158602679211101
         },
         {
           "ticker": "PLNT",
@@ -3605,15 +3633,15 @@
           "confidence": 0.4,
           "share_usd": 2000000.0,
           "yf_name": "Planet Fitness, Inc.",
-          "market_cap": 3623317504,
+          "market_cap": 3639245824,
           "revenue_ttm": 1301656064,
           "sector": "Consumer Cyclical",
           "industry": "Leisure",
           "country": "United States",
           "annual_share_usd": 400000.0,
-          "budget_to_mcap_pct": 0.011039606646627455,
+          "budget_to_mcap_pct": 0.010991288287317411,
           "budget_to_revenue_pct": 0.030730083857236194,
-          "expected_alpha_bp": 0.39190603595527473
+          "expected_alpha_bp": 0.39019073419976813
         },
         {
           "ticker": "KBR",
@@ -3623,15 +3651,15 @@
           "confidence": 0.25,
           "share_usd": 2000000.0,
           "yf_name": "KBR, Inc.",
-          "market_cap": 4472883712,
+          "market_cap": 4455234560,
           "revenue_ttm": 7722999808,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 400000.0,
-          "budget_to_mcap_pct": 0.008942776646011763,
+          "budget_to_mcap_pct": 0.008978202934392752,
           "budget_to_revenue_pct": 0.005179334584284895,
-          "expected_alpha_bp": 0.31746857093341757
+          "expected_alpha_bp": 0.3187262041709428
         },
         {
           "ticker": "BAH",
@@ -3641,15 +3669,15 @@
           "confidence": 0.2,
           "share_usd": 1500000.0,
           "yf_name": "Booz Allen Hamilton Holding Corporation",
-          "market_cap": 8867408896,
+          "market_cap": 8893871104,
           "revenue_ttm": 11093000192,
           "sector": "Industrials",
           "industry": "Consulting Services",
           "country": "United States",
           "annual_share_usd": 300000.0,
-          "budget_to_mcap_pct": 0.003383175440746022,
+          "budget_to_mcap_pct": 0.00337310937489386,
           "budget_to_revenue_pct": 0.002704408138533637,
-          "expected_alpha_bp": 0.1201027281464838
+          "expected_alpha_bp": 0.11974538280873204
         },
         {
           "ticker": "LDOS",
@@ -3659,15 +3687,15 @@
           "confidence": 0.2,
           "share_usd": 1500000.0,
           "yf_name": "Leidos Holdings, Inc.",
-          "market_cap": 15290480640,
+          "market_cap": 15269892096,
           "revenue_ttm": 17634000896,
           "sector": "Technology",
           "industry": "Information Technology Services",
           "country": "United States",
           "annual_share_usd": 300000.0,
-          "budget_to_mcap_pct": 0.001962005034787448,
+          "budget_to_mcap_pct": 0.0019646504252547143,
           "budget_to_revenue_pct": 0.001701258845166841,
-          "expected_alpha_bp": 0.06965117873495441
+          "expected_alpha_bp": 0.06974509009654237
         },
         {
           "ticker": "AGX",
@@ -3677,15 +3705,15 @@
           "confidence": 0.05,
           "share_usd": 200000.0,
           "yf_name": "Argan, Inc.",
-          "market_cap": 5561710080,
+          "market_cap": 5508256256,
           "revenue_ttm": 1188132992,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 40000.0,
-          "budget_to_mcap_pct": 0.0007192032562761704,
+          "budget_to_mcap_pct": 0.000726182627331999,
           "budget_to_revenue_pct": 0.003366626486203995,
-          "expected_alpha_bp": 0.025531715597804053
+          "expected_alpha_bp": 0.025779483270285966
         },
         {
           "ticker": "CLH",
@@ -3695,15 +3723,15 @@
           "confidence": 0.1,
           "share_usd": 500000.0,
           "yf_name": "Clean Harbors, Inc.",
-          "market_cap": 16699246592,
+          "market_cap": 16729862144,
           "revenue_ttm": 6243574784,
           "sector": "Industrials",
           "industry": "Waste Management",
           "country": "United States",
           "annual_share_usd": 100000.0,
-          "budget_to_mcap_pct": 0.0005988294109502303,
+          "budget_to_mcap_pct": 0.0005977335565545231,
           "budget_to_revenue_pct": 0.0016016465480042533,
-          "expected_alpha_bp": 0.02125844408873318
+          "expected_alpha_bp": 0.021219541257685576
         },
         {
           "ticker": "MTZ",
@@ -3713,15 +3741,15 @@
           "confidence": 0.08,
           "share_usd": 300000.0,
           "yf_name": "MasTec, Inc.",
-          "market_cap": 17083270144,
+          "market_cap": 17076845568,
           "revenue_ttm": 16109103104,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 60000.0,
-          "budget_to_mcap_pct": 0.00035122081132149774,
+          "budget_to_mcap_pct": 0.0003513529460759014,
           "budget_to_revenue_pct": 0.0003724602146540461,
-          "expected_alpha_bp": 0.012468338801913172
+          "expected_alpha_bp": 0.012473029585694502
         },
         {
           "ticker": "BWXT",
@@ -3731,15 +3759,15 @@
           "confidence": 0.05,
           "share_usd": 200000.0,
           "yf_name": "BWX Technologies, Inc.",
-          "market_cap": 13037808640,
+          "market_cap": 13177990144,
           "revenue_ttm": 3513969920,
           "sector": "Industrials",
           "industry": "Aerospace & Defense",
           "country": "United States",
           "annual_share_usd": 40000.0,
-          "budget_to_mcap_pct": 0.00030680002371932347,
+          "budget_to_mcap_pct": 0.00030353642371035,
           "budget_to_revenue_pct": 0.0011383136711654038,
-          "expected_alpha_bp": 0.010891400842035983
+          "expected_alpha_bp": 0.010775543041717427
         },
         {
           "ticker": "CDR",
@@ -3785,7 +3813,7 @@
           "confidence": 0.02,
           "share_usd": 0.0,
           "yf_name": "Mustang Bio, Inc.",
-          "market_cap": 3259843,
+          "market_cap": 3031760,
           "revenue_ttm": null,
           "sector": "Healthcare",
           "industry": "Biotechnology",
@@ -6423,29 +6451,29 @@
     {
       "bill_id": "119-hr-4615",
       "pipeline_version": "v0.2",
-      "title": "Small Business Payment for Performance Act of 2025",
+      "title": "Small Business Payment for Performance Act of 2026",
       "congress": 119,
       "type": "hr",
       "number": "4615",
       "url": "https://www.congress.gov/bill/119th-congress/house-bill/4615",
       "policy_area": "Commerce",
-      "stage": "committee",
-      "stage_label": "委員會審議",
-      "passage_baseline": 0.18,
+      "stage": "reported",
+      "stage_label": "委員會通過",
+      "passage_baseline": 0.35,
       "passage_nuance_adj": 0.0,
       "passage_nuance_reason": "",
-      "passage_prob": 0.35500000000000004,
+      "passage_prob": 0.5249999999999999,
       "cosponsors_total": 15,
       "cosponsors_R": 3,
       "cosponsors_D": 12,
       "budget": null,
       "companies_raw": null,
       "latest_action": {
-        "actionDate": "2026-09-16",
-        "text": "Ordered to be Reported in the Nature of a Substitute by the Yeas and Nays: 23 - 0."
+        "actionDate": "2026-10-09",
+        "text": "Placed on the Union Calendar, Calendar No. 746."
       },
-      "last_action_date": "2026-09-16",
-      "fetched_at": "2026-09-17T15:21:32.560109+00:00",
+      "last_action_date": "2026-10-09",
+      "fetched_at": "2026-10-10T15:58:42.853043+00:00",
       "beneficiaries": []
     },
     {
@@ -8526,15 +8554,15 @@
           "confidence": 0.75,
           "share_usd": 96000000.0,
           "yf_name": "Granite Construction Incorporated",
-          "market_cap": 5014019072,
+          "market_cap": 4998025216,
           "revenue_ttm": 4967204864,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 16000000.0,
-          "budget_to_mcap_pct": 0.319105287998394,
+          "budget_to_mcap_pct": 0.3201264361128025,
           "budget_to_revenue_pct": 0.32211274626421366,
-          "expected_alpha_bp": 11.328237723942985
+          "expected_alpha_bp": 11.36448848200449
         },
         {
           "ticker": "ACM",
@@ -8544,15 +8572,15 @@
           "confidence": 0.75,
           "share_usd": 84000000.00000001,
           "yf_name": "AECOM",
-          "market_cap": 7564775424,
+          "market_cap": 7629124096,
           "revenue_ttm": 15393461248,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 14000000.000000002,
-          "budget_to_mcap_pct": 0.18506828313215504,
+          "budget_to_mcap_pct": 0.18350730468967327,
           "budget_to_revenue_pct": 0.09094770678569095,
-          "expected_alpha_bp": 6.569924051191504
+          "expected_alpha_bp": 6.514509316483401
         },
         {
           "ticker": "PRIM",
@@ -8562,15 +8590,15 @@
           "confidence": 0.5,
           "share_usd": 36000000.0,
           "yf_name": "Primoris Services Corporation",
-          "market_cap": 4507918848,
+          "market_cap": 4535712768,
           "revenue_ttm": 7284199936,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.13309911296788277,
+          "budget_to_mcap_pct": 0.1322835088308661,
           "budget_to_revenue_pct": 0.08237006195212707,
-          "expected_alpha_bp": 4.725018510359838
+          "expected_alpha_bp": 4.696064563495746
         },
         {
           "ticker": "ROAD",
@@ -8580,15 +8608,15 @@
           "confidence": 0.55,
           "share_usd": 36000000.0,
           "yf_name": "Construction Partners, Inc.",
-          "market_cap": 4866221056,
+          "market_cap": 4926949888,
           "revenue_ttm": 3477932032,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.12329896095866962,
+          "budget_to_mcap_pct": 0.12177919679299974,
           "budget_to_revenue_pct": 0.17251630982994437,
-          "expected_alpha_bp": 4.377113114032771
+          "expected_alpha_bp": 4.32316148615149
         },
         {
           "ticker": "TTEK",
@@ -8598,15 +8626,15 @@
           "confidence": 0.7,
           "share_usd": 60000000.0,
           "yf_name": "Tetra Tech, Inc.",
-          "market_cap": 8566094848,
+          "market_cap": 8536521216,
           "revenue_ttm": 4358675968,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 10000000.0,
-          "budget_to_mcap_pct": 0.1167393097723496,
+          "budget_to_mcap_pct": 0.11714373744256622,
           "budget_to_revenue_pct": 0.22942747002568648,
-          "expected_alpha_bp": 4.144245496918411
+          "expected_alpha_bp": 4.158602679211101
         },
         {
           "ticker": "EXP",
@@ -8616,15 +8644,15 @@
           "confidence": 0.4,
           "share_usd": 24000000.0,
           "yf_name": "Eagle Materials Inc.",
-          "market_cap": 5039648768,
+          "market_cap": 5052225536,
           "revenue_ttm": 2324933888,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 4000000.0,
-          "budget_to_mcap_pct": 0.07937061061474354,
+          "budget_to_mcap_pct": 0.07917302922242306,
           "budget_to_revenue_pct": 0.17204790298105888,
-          "expected_alpha_bp": 2.8176566768233955
+          "expected_alpha_bp": 2.8106425373960184
         },
         {
           "ticker": "USLM",
@@ -8634,15 +8662,15 @@
           "confidence": 0.3,
           "share_usd": 12000000.0,
           "yf_name": "United States Lime & Minerals, Inc.",
-          "market_cap": 3124880128,
+          "market_cap": 3114982656,
           "revenue_ttm": 376915008,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 2000000.0,
-          "budget_to_mcap_pct": 0.06400245507273424,
+          "budget_to_mcap_pct": 0.06420581495526631,
           "budget_to_revenue_pct": 0.530623604141547,
-          "expected_alpha_bp": 2.272087155082065
+          "expected_alpha_bp": 2.279306430911954
         },
         {
           "ticker": "STRL",
@@ -8652,15 +8680,15 @@
           "confidence": 0.6,
           "share_usd": 60000000.0,
           "yf_name": "Sterling Infrastructure, Inc.",
-          "market_cap": 15862900736,
+          "market_cap": 15691910144,
           "revenue_ttm": 3438486016,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 10000000.0,
-          "budget_to_mcap_pct": 0.06304017257893783,
+          "budget_to_mcap_pct": 0.06372710465604868,
           "budget_to_revenue_pct": 0.2908256701777437,
-          "expected_alpha_bp": 2.237926126552293
+          "expected_alpha_bp": 2.2623122152897284
         },
         {
           "ticker": "J",
@@ -8670,15 +8698,15 @@
           "confidence": 0.65,
           "share_usd": 60000000.0,
           "yf_name": "Jacobs Solutions Inc.",
-          "market_cap": 16429773824,
+          "market_cap": 16285921280,
           "revenue_ttm": 14219215872,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 10000000.0,
-          "budget_to_mcap_pct": 0.06086511054335011,
+          "budget_to_mcap_pct": 0.06140272833248031,
           "budget_to_revenue_pct": 0.07032736607995144,
-          "expected_alpha_bp": 2.1607114242889285
+          "expected_alpha_bp": 2.179796855803051
         },
         {
           "ticker": "MTZ",
@@ -8688,15 +8716,15 @@
           "confidence": 0.5,
           "share_usd": 36000000.0,
           "yf_name": "MasTec, Inc.",
-          "market_cap": 17083270144,
+          "market_cap": 17076845568,
           "revenue_ttm": 16109103104,
           "sector": "Industrials",
           "industry": "Engineering & Construction",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.03512208113214978,
+          "budget_to_mcap_pct": 0.03513529460759014,
           "budget_to_revenue_pct": 0.03724602146540461,
-          "expected_alpha_bp": 1.2468338801913172
+          "expected_alpha_bp": 1.24730295856945
         },
         {
           "ticker": "VMC",
@@ -8706,15 +8734,15 @@
           "confidence": 0.55,
           "share_usd": 36000000.0,
           "yf_name": "Vulcan Materials Company",
-          "market_cap": 31756509184,
+          "market_cap": 31692367872,
           "revenue_ttm": 8115800064,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.01889376431532658,
+          "budget_to_mcap_pct": 0.018932002885467453,
           "budget_to_revenue_pct": 0.07392986461821247,
-          "expected_alpha_bp": 0.6707286331940935
+          "expected_alpha_bp": 0.6720861024340945
         },
         {
           "ticker": "MLM",
@@ -8724,15 +8752,15 @@
           "confidence": 0.55,
           "share_usd": 36000000.0,
           "yf_name": "Martin Marietta Materials, Inc.",
-          "market_cap": 33947265024,
+          "market_cap": 33972123648,
           "revenue_ttm": 6688000000,
           "sector": "Basic Materials",
           "industry": "Building Materials",
           "country": "United States",
           "annual_share_usd": 6000000.0,
-          "budget_to_mcap_pct": 0.01767447243764152,
+          "budget_to_mcap_pct": 0.017661539390850623,
           "budget_to_revenue_pct": 0.08971291866028708,
-          "expected_alpha_bp": 0.6274437715362741
+          "expected_alpha_bp": 0.6269846483751972
         },
         {
           "ticker": "WSP",
