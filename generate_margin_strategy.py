@@ -33,6 +33,9 @@ trend=get('https://wwwc.twse.com.tw/rwd/marginTrading/BFIJ3U_TREND?response=json
 credit=get('https://wwwc.twse.com.tw/rwd/marginTrading/MI_MARGN_TREND?response=json&days=6')['data'][-1]
 otc=get('https://www.tpex.org.tw/www/zh-tw/dashboardOtc/margin?lang=zh-tw')
 asof=datetime.strptime(trend[-1]['date'],'%Y%m%d').strftime('%Y-%m-%d')
+if old.get('as_of') == asof:
+    print(json.dumps({'as_of':asof,'status':'unchanged','reason':'official data has not advanced'},ensure_ascii=False))
+    raise SystemExit(0)
 twse_p=get(f'https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date={trend[-1]["date"]}&type=ALLBUT0999&response=json')
 twse_m=get(f'https://www.twse.com.tw/rwd/zh/marginTrading/MI_MARGN?date={trend[-1]["date"]}&selectType=STOCK&response=json')
 tpex_p=get(f'https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date={asof.replace("-","/")}&id=&response=json')
