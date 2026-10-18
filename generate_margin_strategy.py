@@ -52,12 +52,13 @@ for market,mrows,pmap,isotc in [('上市',mt['data'],prices,False),('上櫃',tpe
     cost=pc if same_day else (pc*oldbal+close*(buy or 0))/bal
     if same_day and hist:hist[-1]=[asof,bal]
     else:hist.append([asof,bal])
-    hist=hist[-21:]; b20=hist[0][1] if len(hist)>1 else None
+    hist=hist[-21:]; b20=hist[0][1] if len(hist)>=21 else None
     ph=list(prev.get('price_history') or [])
     if same_day and ph:ph[-1]=[asof,high or close]
     else:ph.append([asof,high or close])
     ph=ph[-20:]; h20=max(x[1] for x in ph)
-    x={'id':sid,'name':str(r[1]).strip(),'market':market,'close':close,'high20':h20,'drawdown':close/h20-1,'margin_balance':bal,'short_balance':short or 0,'margin_change_20d':bal/b20-1 if b20 else None,'cost':cost,'maintenance':close/(cost*.6)*100,'quality':prev.get('quality','低'),'balance_history':hist,'price_history':ph,'as_of':asof,'volume':n(p[8] if isotc else p[2]) or 0}
+    change20=bal/b20-1 if b20 else prev.get('margin_change_20d')
+    x={'id':sid,'name':str(r[1]).strip(),'market':market,'close':close,'high20':h20,'drawdown':close/h20-1,'margin_balance':bal,'short_balance':short or 0,'margin_change_20d':change20,'cost':cost,'maintenance':close/(cost*.6)*100,'quality':prev.get('quality','低'),'balance_history':hist,'price_history':ph,'as_of':asof,'volume':n(p[8] if isotc else p[2]) or 0}
     x['band']=band(x['maintenance']);x['strategy']=strategy(x);updates.append(x)
 updates.sort(key=lambda x:x['maintenance'])
 payload={'as_of':asof,'generated_at':datetime.now().isoformat(timespec='seconds'),'market':{'keep_rate':trend[-1]['keepRate'],'prev_keep_rate':trend[-2]['keepRate'],'twse_margin_amount_100m':credit['marginAmt']/10000,'twse_margin_shares':credit['marginShr'],'twse_short_shares':credit['shortShr'],'tpex_margin_amount_100m':otc['marginBalance'],'tpex_short_shares':otc['shortBalance']},'stocks':updates}
