@@ -39,6 +39,8 @@ tpex_p=get(f'https://www.tpex.org.tw/www/zh-tw/afterTrading/dailyQuotes?date={as
 tpex_m=get(f'https://www.tpex.org.tw/www/zh-tw/margin/balance?date={asof.replace("-","/")}&id=&response=json')
 pt=next(t for t in twse_p['tables'] if '每日收盤行情' in (t.get('title') or ''));mt=next(t for t in twse_m['tables'] if '融資融券彙總' in (t.get('title') or ''))
 prices={r[0]:r for r in pt['data']};updates=[]
+taiex_table=twse_p['tables'][0]
+taiex=n(next(r for r in taiex_table['data'] if '發行量加權股價指數' in str(r[0]))[1])
 for market,mrows,pmap,isotc in [('上市',mt['data'],prices,False),('上櫃',tpex_m['tables'][0]['data'],{r[0]:r for r in tpex_p['tables'][0]['data']},True)]:
   for r in mrows:
     sid=str(r[0]).strip()
@@ -55,9 +57,21 @@ for market,mrows,pmap,isotc in [('上市',mt['data'],prices,False),('上櫃',tpe
     if same_day and ph:ph[-1]=[asof,high or close]
     else:ph.append([asof,high or close])
     ph=ph[-20:]; h20=max(x[1] for x in ph)
-    x={'id':sid,'name':str(r[1]).strip(),'market':market,'close':close,'high20':h20,'drawdown':close/h20-1,'margin_balance':bal,'short_balance':short or 0,'margin_change_20d':bal/b20-1 if b20 else None,'cost':cost,'maintenance':close/(cost*.6)*100,'quality':prev.get('quality','低'),'balance_history':hist,'price_history':ph,'as_of':asof}
+    x={'id':sid,'name':str(r[1]).strip(),'market':market,'close':close,'high20':h20,'drawdown':close/h20-1,'margin_balance':bal,'short_balance':short or 0,'margin_change_20d':bal/b20-1 if b20 else None,'cost':cost,'maintenance':close/(cost*.6)*100,'quality':prev.get('quality','低'),'balance_history':hist,'price_history':ph,'as_of':asof,'volume':n(p[8] if isotc else p[2]) or 0}
     x['band']=band(x['maintenance']);x['strategy']=strategy(x);updates.append(x)
 updates.sort(key=lambda x:x['maintenance'])
 payload={'as_of':asof,'generated_at':datetime.now().isoformat(timespec='seconds'),'market':{'keep_rate':trend[-1]['keepRate'],'prev_keep_rate':trend[-2]['keepRate'],'twse_margin_amount_100m':credit['marginAmt']/10000,'twse_margin_shares':credit['marginShr'],'twse_short_shares':credit['shortShr'],'tpex_margin_amount_100m':otc['marginBalance'],'tpex_short_shares':otc['shortBalance']},'stocks':updates}
 OUT.write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':')))
+cutoff=(datetime.strptime(asof,'%Y-%m-%d').date().replace(day=1))
+for digit in sorted(set(x['id'][0] for x in updates)):
+    hp=BASE/f'margin_history_{digit}.json'
+    shard=json.loads(hp.read_text()) if hp.exists() else {'as_of':asof,'index_name':'發行量加權股價指數','stocks':{}}
+    shard['as_of']=asof
+    for x in (z for z in updates if z['id'][0]==digit):
+        item=shard['stocks'].setdefault(x['id'],{'name':x['name'],'market':x['market'],'h':[]})
+        row=[asof,x['close'],x['volume'],round(x['maintenance'],2),taiex,x['margin_balance']]
+        if item['h'] and item['h'][-1][0]==asof:item['h'][-1]=row
+        else:item['h'].append(row)
+        item['h']=item['h'][-135:]
+    hp.write_text(json.dumps(shard,ensure_ascii=False,separators=(',',':')))
 print(json.dumps({'as_of':asof,'stocks':len(updates),'keep_rate':trend[-1]['keepRate']},ensure_ascii=False))
