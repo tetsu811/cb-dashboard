@@ -3,6 +3,7 @@ const originalOpenStock=openStock;
 detail.style.display='none';
 const extraStyle=document.createElement('style');
 extraStyle.textContent=`
+html,body{width:100%;max-width:none;overflow-x:hidden}.wrap{width:100%;max-width:none;margin:0;padding:clamp(12px,1.6vw,24px)}
 .maint-compare{margin:0 0 14px;border:1px solid var(--line);border-radius:11px;background:#f8fafc;overflow:hidden}
 .maint-compare summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;cursor:pointer;font-weight:800;list-style:none}
 .maint-compare summary::-webkit-details-marker{display:none}.maint-compare summary::after{content:'收合 ▲';color:var(--muted);font-size:12px;font-weight:600}.maint-compare:not([open]) summary::after{content:'展開 ▼'}
@@ -53,3 +54,19 @@ watchInput.addEventListener('input',showWatchSuggestions);
 watchInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const first=watchSuggestions.querySelector('[data-watch-id]');first?addWatch(first.dataset.watchId):addWatch()}});
 document.addEventListener('click',e=>{if(!e.target.closest('.watch-search'))watchSuggestions.classList.remove('show')});
 const waitForRows=setInterval(()=>{if(rows.length){clearInterval(waitForRows);renderRanking()}},50);
+
+// Keep the WordPress wrapper the same height as this dashboard so visitors
+// scroll the page once instead of fighting a second scrollbar inside an iframe.
+if(window.parent!==window){
+  let lastEmbedHeight=0;
+  const reportEmbedHeight=()=>{
+    const height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+    if(Math.abs(height-lastEmbedHeight)>2){
+      lastEmbedHeight=height;
+      window.parent.postMessage({type:'tetsu-margin-height',height},'https://tetsu811.com');
+    }
+  };
+  new ResizeObserver(reportEmbedHeight).observe(document.documentElement);
+  window.addEventListener('load',reportEmbedHeight);
+  setTimeout(reportEmbedHeight,300);
+}
