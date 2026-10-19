@@ -63,10 +63,14 @@ if(window.parent!==window){
     const height=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
     if(Math.abs(height-lastEmbedHeight)>2){
       lastEmbedHeight=height;
-      window.parent.postMessage({type:'tetsu-margin-height',height},'https://tetsu811.com');
+      window.parent.postMessage({type:'tetsu-margin-height',height},'*');
     }
   };
   new ResizeObserver(reportEmbedHeight).observe(document.documentElement);
   window.addEventListener('load',reportEmbedHeight);
   setTimeout(reportEmbedHeight,300);
+  [800,1600,3000,5000].forEach(delay=>setTimeout(()=>{
+    lastEmbedHeight=0;
+    reportEmbedHeight();
+  },delay));
 }
