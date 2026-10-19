@@ -6,6 +6,7 @@ from datetime import datetime
 BASE=Path(__file__).resolve().parent
 OUT=BASE/'margin_strategy_latest.json'
 HEAD={'User-Agent':'Mozilla/5.0'}
+SHORT_MARGIN_RATE=.9
 def n(x):
     try:return float(str(x).replace(',','').replace('+','').strip())
     except:return None
@@ -33,7 +34,7 @@ trend=get('https://wwwc.twse.com.tw/rwd/marginTrading/BFIJ3U_TREND?response=json
 credit=get('https://wwwc.twse.com.tw/rwd/marginTrading/MI_MARGN_TREND?response=json&days=6')['data'][-1]
 otc=get('https://www.tpex.org.tw/www/zh-tw/dashboardOtc/margin?lang=zh-tw')
 asof=datetime.strptime(trend[-1]['date'],'%Y%m%d').strftime('%Y-%m-%d')
-if old.get('as_of') == asof:
+if old.get('as_of') == asof and old.get('stocks') and 'short_maintenance' in old['stocks'][0]:
     print(json.dumps({'as_of':asof,'status':'unchanged','reason':'official data has not advanced'},ensure_ascii=False))
     raise SystemExit(0)
 twse_p=get(f'https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date={trend[-1]["date"]}&type=ALLBUT0999&response=json')
@@ -48,7 +49,7 @@ for market,mrows,pmap,isotc in [('上市',mt['data'],prices,False),('上櫃',tpe
   for r in mrows:
     sid=str(r[0]).strip()
     if not re.fullmatch(r'[1-9]\d{3}',sid) or sid not in pmap:continue
-    p=pmap[sid]; close=n(p[2] if isotc else p[8]); high=n(p[5] if isotc else p[6]); bal=n(r[6]); buy=n(r[3] if isotc else r[2]); short=n(r[14] if isotc else r[12])
+    p=pmap[sid]; close=n(p[2] if isotc else p[8]); high=n(p[5] if isotc else p[6]); bal=n(r[6]); buy=n(r[3] if isotc else r[2]); short=n(r[14] if isotc else r[12]); short_sell=n(r[11] if isotc else r[9])
     if not close or not bal or bal<=0:continue
     prev=state.get(sid,{}); pc=prev.get('cost') or close; oldbal=max(0,bal-(buy or 0))
     hist=list(prev.get('balance_history') or []); same_day=prev.get('as_of')==asof or (hist and hist[-1][0]==asof)
@@ -56,12 +57,17 @@ for market,mrows,pmap,isotc in [('上市',mt['data'],prices,False),('上櫃',tpe
     if same_day and hist:hist[-1]=[asof,bal]
     else:hist.append([asof,bal])
     hist=hist[-21:]; b20=hist[0][1] if len(hist)>=21 else None
+    shist=list(prev.get('short_balance_history') or []); prev_short_cost=prev.get('short_cost') or close; oldshort=max(0,(short or 0)-(short_sell or 0))
+    short_cost=None if not short else prev_short_cost if same_day else (prev_short_cost*oldshort+close*(short_sell or 0))/short
+    if same_day and shist:shist[-1]=[asof,short or 0]
+    else:shist.append([asof,short or 0])
+    shist=shist[-21:]; s20=shist[0][1] if len(shist)>=21 else None
     ph=list(prev.get('price_history') or [])
     if same_day and ph:ph[-1]=[asof,high or close]
     else:ph.append([asof,high or close])
     ph=ph[-20:]; h20=max(x[1] for x in ph)
-    change20=bal/b20-1 if b20 else prev.get('margin_change_20d')
-    x={'id':sid,'name':str(r[1]).strip(),'market':market,'close':close,'high20':h20,'drawdown':close/h20-1,'margin_balance':bal,'short_balance':short or 0,'margin_change_20d':change20,'cost':cost,'maintenance':close/(cost*.6)*100,'quality':prev.get('quality','低'),'balance_history':hist,'price_history':ph,'as_of':asof,'volume':n(p[8] if isotc else p[2]) or 0}
+    change20=bal/b20-1 if b20 else prev.get('margin_change_20d'); short_change20=(short/s20-1) if short and s20 else prev.get('short_change_20d')
+    x={'id':sid,'name':str(r[1]).strip(),'market':market,'close':close,'high20':h20,'drawdown':close/h20-1,'margin_balance':bal,'short_balance':short or 0,'margin_change_20d':change20,'short_change_20d':short_change20,'cost':cost,'maintenance':close/(cost*.6)*100,'short_cost':short_cost,'short_maintenance':(short_cost*(1+SHORT_MARGIN_RATE)/close*100) if short_cost else None,'quality':prev.get('quality','低'),'balance_history':hist,'short_balance_history':shist,'price_history':ph,'as_of':asof,'volume':n(p[8] if isotc else p[2]) or 0}
     x['band']=band(x['maintenance']);x['strategy']=strategy(x);updates.append(x)
 updates.sort(key=lambda x:x['maintenance'])
 payload={'as_of':asof,'generated_at':datetime.now().isoformat(timespec='seconds'),'market':{'keep_rate':trend[-1]['keepRate'],'prev_keep_rate':trend[-2]['keepRate'],'twse_margin_amount_100m':credit['marginAmt']/10000,'twse_margin_shares':credit['marginShr'],'twse_short_shares':credit['shortShr'],'tpex_margin_amount_100m':otc['marginBalance'],'tpex_short_shares':otc['shortBalance']},'stocks':updates}
@@ -73,7 +79,7 @@ for digit in sorted(set(x['id'][0] for x in updates)):
     shard['as_of']=asof
     for x in (z for z in updates if z['id'][0]==digit):
         item=shard['stocks'].setdefault(x['id'],{'name':x['name'],'market':x['market'],'h':[]})
-        row=[asof,x['close'],x['volume'],round(x['maintenance'],2),taiex,x['margin_balance']]
+        row=[asof,x['close'],x['volume'],round(x['maintenance'],2),taiex,x['margin_balance'],round(x['short_maintenance'],2) if x['short_maintenance'] is not None else None,x['short_balance']]
         if item['h'] and item['h'][-1][0]==asof:item['h'][-1]=row
         else:item['h'].append(row)
         item['h']=item['h'][-135:]
