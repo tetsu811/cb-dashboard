@@ -47,6 +47,18 @@ def classify(rows):
     trapped=closes[-1]<vwap60 and overhead is not None and overhead>=.60 and drawdown<=-.10 and m20<m60
     return {'short_bull':short_bull,'short_bear':short_bear,'long_bull':long_bull,'long_bear':long_bear,'rising':rising,'trapped':trapped,'vwap60':vwap60,'overhead':overhead,'drawdown':drawdown}
 
+def aggregate_industries(rows,total_market_cap):
+    result={}
+    for zone in ('上漲結構','套牢壓力','其他整理'):
+        zone_rows=[x for x in rows if x['zone']==zone];zone_cap=sum(x['market_cap'] for x in zone_rows);zone_volume=sum(x['volume'] for x in zone_rows);zone_turnover=sum(x['turnover'] for x in zone_rows);groups={}
+        for x in zone_rows:
+            g=groups.setdefault(x['industry'],{'industry':x['industry'],'count':0,'market_cap':0,'volume':0,'turnover':0})
+            g['count']+=1;g['market_cap']+=x['market_cap'];g['volume']+=x['volume'];g['turnover']+=x['turnover']
+        result[zone]=sorted([{**g,'count_pct':round(g['count']/len(zone_rows)*100,2) if zone_rows else 0,
+            'zone_cap_pct':round(g['market_cap']/zone_cap*100,2) if zone_cap else 0,'market_cap_pct':round(g['market_cap']/total_market_cap*100,2) if total_market_cap else 0,
+            'zone_volume_pct':round(g['volume']/zone_volume*100,2) if zone_volume else 0,'zone_turnover_pct':round(g['turnover']/zone_turnover*100,2) if zone_turnover else 0} for g in groups.values()],key=lambda x:x['turnover'],reverse=True)
+    return result
+
 companies=company_data();stocks={}
 for digit in '123456789':
     path=BASE/f'margin_history_{digit}.json'
@@ -60,21 +72,24 @@ for digit in '123456789':
 dates=sorted(set(r[0] for s in stocks.values() for r in s['rows']))
 series=[]
 for date in dates:
-    metrics={k:0 for k in ('short_bull','short_bear','long_bull','long_bear')};weights={k:0.0 for k in metrics};total=0;cap_total=0;taiex=[]
+    metrics={k:0 for k in ('short_bull','short_bear','long_bull','long_bear')};weights={k:0.0 for k in metrics};total=0;cap_total=0;taiex=[];date_rows=[]
     for s in stocks.values():
         upto=[r for r in s['rows'] if r[0]<=date]
         if len(upto)<60 or upto[-1][0]!=date:continue
         c=classify(upto);cap=upto[-1][1]*s['company']['shares']
         total+=1;cap_total+=cap;taiex.append(upto[-1][4])
+        zone='上漲結構' if c['rising'] else '套牢壓力' if c['trapped'] else '其他整理'
+        date_rows.append({'industry':s['company']['industry'],'zone':zone,'market_cap':round(cap),'volume':round(upto[-1][2]),'turnover':round(upto[-1][1]*upto[-1][2])})
         for key in metrics:
             if c[key]:metrics[key]+=1;weights[key]+=cap
     if total>=100 and cap_total:
-        series.append({'date':date,'taiex':round(statistics.median(taiex),2),'coverage':total,
+        series.append({'date':date,'taiex':round(statistics.median(taiex),2),'coverage':total,'zones':aggregate_industries(date_rows,cap_total),
             **{f'{k}_count_pct':round(metrics[k]/total*100,2) for k in metrics},
             **{f'{k}_cap_pct':round(weights[k]/cap_total*100,2) for k in metrics}})
 
 latest=[]
 for sid,s in stocks.items():
+    if s['rows'][-1][0]!=series[-1]['date']:continue
     c=classify(s['rows']);last=s['rows'][-1];cap=last[1]*s['company']['shares']
     zone='上漲結構' if c['rising'] else '套牢壓力' if c['trapped'] else '其他整理'
     latest.append({'id':sid,'name':s['name'],'market':s['market'],'industry':s['company']['industry'],'industry_code':s['company']['industry_code'],'close':last[1],
@@ -83,16 +98,8 @@ for sid,s in stocks.items():
         'overhead_volume_pct':round(c['overhead']*100,2) if c['overhead'] is not None else None,'vwap60':round(c['vwap60'],2),
         'volume':round(last[2]),'turnover':round(last[1]*last[2])})
 latest.sort(key=lambda x:x['market_cap'],reverse=True)
-industries={}
 total_market_cap=sum(x['market_cap'] for x in latest)
-for zone in ('上漲結構','套牢壓力','其他整理'):
-    zone_rows=[x for x in latest if x['zone']==zone];zone_cap=sum(x['market_cap'] for x in zone_rows);zone_volume=sum(x['volume'] for x in zone_rows);zone_turnover=sum(x['turnover'] for x in zone_rows);groups={}
-    for x in zone_rows:
-        g=groups.setdefault(x['industry'],{'industry':x['industry'],'count':0,'market_cap':0,'volume':0,'turnover':0})
-        g['count']+=1;g['market_cap']+=x['market_cap'];g['volume']+=x['volume'];g['turnover']+=x['turnover']
-    industries[zone]=sorted([{**g,'count_pct':round(g['count']/len(zone_rows)*100,2) if zone_rows else 0,
-        'zone_cap_pct':round(g['market_cap']/zone_cap*100,2) if zone_cap else 0,'market_cap_pct':round(g['market_cap']/total_market_cap*100,2) if total_market_cap else 0,
-        'zone_volume_pct':round(g['volume']/zone_volume*100,2) if zone_volume else 0,'zone_turnover_pct':round(g['turnover']/zone_turnover*100,2) if zone_turnover else 0} for g in groups.values()],key=lambda x:x['turnover'],reverse=True)
+industries=aggregate_industries(latest,total_market_cap)
 payload={'as_of':series[-1]['date'],'generated_at':datetime.now().isoformat(timespec='seconds'),'universe':{
     'stocks':len(stocks),'description':'具至少120個交易日行情的上市櫃普通股樣本','weight_method':'當日收盤價 × 最新官方已發行普通股數（市值近似權重）'},
     'series':series,'industries':industries,'stocks':latest,'disclaimer':'本工具為市場結構統計與歷史分類，不構成投資建議；分類與權重皆為估算。'}
