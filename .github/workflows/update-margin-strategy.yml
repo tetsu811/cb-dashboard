@@ -19,10 +19,11 @@ jobs:
         with: {python-version: '3.12'}
       - run: pip install requests
       - run: python generate_margin_strategy.py
+      - run: python generate_market_breadth.py
       - name: Check whether official data advanced
         id: changes
         run: |
-          if git diff --quiet -- margin_strategy_latest.json margin_history_*.json; then
+          if git diff --quiet -- margin_strategy_latest.json margin_history_*.json market_breadth_latest.json; then
             echo "updated=false" >> "$GITHUB_OUTPUT"
             echo "Official data has not advanced; nothing to publish."
           else
@@ -33,10 +34,12 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add margin_strategy_latest.json margin_history_*.json
+          git add margin_strategy_latest.json margin_history_*.json market_breadth_latest.json
           git commit -m "Update margin strategy data"
           git pull --rebase --autostash origin main
           git push
       - name: Verify public data date
         if: steps.changes.outputs.updated == 'true'
-        run: python verify_margin_publish.py --url https://tetsu811.github.io/cb-dashboard/margin_strategy_latest.json
+        run: |
+          python verify_margin_publish.py --url https://tetsu811.github.io/cb-dashboard/margin_strategy_latest.json
+          python verify_margin_publish.py --url https://tetsu811.github.io/cb-dashboard/market_breadth_latest.json
