@@ -83,5 +83,11 @@ latest.sort(key=lambda x:x['market_cap'],reverse=True)
 payload={'as_of':series[-1]['date'],'generated_at':datetime.now().isoformat(timespec='seconds'),'universe':{
     'stocks':len(stocks),'description':'具至少120個交易日行情的上市櫃普通股樣本','weight_method':'當日收盤價 × 最新官方已發行普通股數（市值近似權重）'},
     'series':series,'stocks':latest,'disclaimer':'本工具為市場結構統計與歷史分類，不構成投資建議；分類與權重皆為估算。'}
+if OUT.exists():
+    previous=json.loads(OUT.read_text())
+    comparable_previous={k:v for k,v in previous.items() if k!='generated_at'}
+    comparable_current={k:v for k,v in payload.items() if k!='generated_at'}
+    if comparable_previous==comparable_current:
+        payload['generated_at']=previous.get('generated_at',payload['generated_at'])
 OUT.write_text(json.dumps(payload,ensure_ascii=False,separators=(',',':')))
 print(json.dumps({'as_of':payload['as_of'],'stocks':len(stocks),'series':len(series)},ensure_ascii=False))
