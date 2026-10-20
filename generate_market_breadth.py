@@ -6,6 +6,7 @@ from datetime import datetime
 BASE=Path(__file__).resolve().parent
 OUT=BASE/'market_breadth_latest.json'
 HEAD={'User-Agent':'Mozilla/5.0'}
+INDUSTRIES={'01':'水泥工業','02':'食品工業','03':'塑膠工業','04':'紡織纖維','05':'電機機械','06':'電器電纜','08':'玻璃陶瓷','09':'造紙工業','10':'鋼鐵工業','11':'橡膠工業','12':'汽車工業','14':'建材營造','15':'航運業','16':'觀光餐旅','17':'金融保險','18':'貿易百貨','20':'其他業','21':'化學工業','22':'生技醫療','23':'油電燃氣','24':'半導體','25':'電腦及週邊','26':'光電業','27':'通信網路','28':'電子零組件','29':'電子通路','30':'資訊服務','31':'其他電子','32':'文化創意','33':'農業科技','34':'電子商務','35':'綠能環保','36':'數位雲端','37':'運動休閒','38':'居家生活'}
 
 def number(value):
     try:return float(str(value).replace(',','').strip())
@@ -24,7 +25,8 @@ def company_data():
         for row in rows:
             sid=str(row.get(id_key,'')).strip();shares=number(row.get(shares_key))
             if len(sid)==4 and sid.isdigit() and shares and shares>0:
-                result[sid]={'shares':shares,'industry':str(row.get(industry_key,'')).strip(),'market':market}
+                code=str(row.get(industry_key,'')).strip()
+                result[sid]={'shares':shares,'industry_code':code,'industry':INDUSTRIES.get(code,f'其他（{code or "未分類"}）'),'market':market}
     return result
 
 def classify(rows):
@@ -75,14 +77,25 @@ latest=[]
 for sid,s in stocks.items():
     c=classify(s['rows']);last=s['rows'][-1];cap=last[1]*s['company']['shares']
     zone='上漲結構' if c['rising'] else '套牢壓力' if c['trapped'] else '其他整理'
-    latest.append({'id':sid,'name':s['name'],'market':s['market'],'industry':s['company']['industry'],'close':last[1],
+    latest.append({'id':sid,'name':s['name'],'market':s['market'],'industry':s['company']['industry'],'industry_code':s['company']['industry_code'],'close':last[1],
         'market_cap':round(cap),'zone':zone,'short_state':'多頭排列' if c['short_bull'] else '空頭排列' if c['short_bear'] else '整理',
         'long_state':'多頭排列' if c['long_bull'] else '空頭排列' if c['long_bear'] else '整理','drawdown120':round(c['drawdown'],4),
-        'overhead_volume_pct':round(c['overhead']*100,2) if c['overhead'] is not None else None,'vwap60':round(c['vwap60'],2)})
+        'overhead_volume_pct':round(c['overhead']*100,2) if c['overhead'] is not None else None,'vwap60':round(c['vwap60'],2),
+        'volume':round(last[2]),'turnover':round(last[1]*last[2])})
 latest.sort(key=lambda x:x['market_cap'],reverse=True)
+industries={}
+total_market_cap=sum(x['market_cap'] for x in latest)
+for zone in ('上漲結構','套牢壓力','其他整理'):
+    zone_rows=[x for x in latest if x['zone']==zone];zone_cap=sum(x['market_cap'] for x in zone_rows);zone_volume=sum(x['volume'] for x in zone_rows);zone_turnover=sum(x['turnover'] for x in zone_rows);groups={}
+    for x in zone_rows:
+        g=groups.setdefault(x['industry'],{'industry':x['industry'],'count':0,'market_cap':0,'volume':0,'turnover':0})
+        g['count']+=1;g['market_cap']+=x['market_cap'];g['volume']+=x['volume'];g['turnover']+=x['turnover']
+    industries[zone]=sorted([{**g,'count_pct':round(g['count']/len(zone_rows)*100,2) if zone_rows else 0,
+        'zone_cap_pct':round(g['market_cap']/zone_cap*100,2) if zone_cap else 0,'market_cap_pct':round(g['market_cap']/total_market_cap*100,2) if total_market_cap else 0,
+        'zone_volume_pct':round(g['volume']/zone_volume*100,2) if zone_volume else 0,'zone_turnover_pct':round(g['turnover']/zone_turnover*100,2) if zone_turnover else 0} for g in groups.values()],key=lambda x:x['turnover'],reverse=True)
 payload={'as_of':series[-1]['date'],'generated_at':datetime.now().isoformat(timespec='seconds'),'universe':{
     'stocks':len(stocks),'description':'具至少120個交易日行情的上市櫃普通股樣本','weight_method':'當日收盤價 × 最新官方已發行普通股數（市值近似權重）'},
-    'series':series,'stocks':latest,'disclaimer':'本工具為市場結構統計與歷史分類，不構成投資建議；分類與權重皆為估算。'}
+    'series':series,'industries':industries,'stocks':latest,'disclaimer':'本工具為市場結構統計與歷史分類，不構成投資建議；分類與權重皆為估算。'}
 if OUT.exists():
     previous=json.loads(OUT.read_text())
     comparable_previous={k:v for k,v in previous.items() if k!='generated_at'}
