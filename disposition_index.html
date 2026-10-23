@@ -66,19 +66,19 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
 </style></head><body>
 <div class="hdr">
   <h1>處置股策略儀表板</h1>
-  <div class="sub">更新：2026-10-22（每交易日盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債</a><a class="nav-link" href="etf_index.html">→ 主動式 ETF</a></div>
+  <div class="sub">更新：2026-10-23（每交易日盤後自動更新）<a class="nav-link" href="index.html">→ 可轉債</a><a class="nav-link" href="etf_index.html">→ 主動式 ETF</a></div>
 </div>
 <div class="stats">
-  <div class="sc"><div class="n">13</div><div class="l">處置中股票</div></div>
-  <div class="sc pp"><div class="n">2</div><div class="l">今日新進處置</div></div>
-  <div class="sc am"><div class="n">6</div><div class="l">明日解除</div></div>
-  <div class="sc gr"><div class="n">39</div><div class="l">S3 10 日區間內</div></div>
+  <div class="sc"><div class="n">12</div><div class="l">處置中股票</div></div>
+  <div class="sc pp"><div class="n">0</div><div class="l">今日新進處置</div></div>
+  <div class="sc am"><div class="n">0</div><div class="l">明日解除</div></div>
+  <div class="sc gr"><div class="n">38</div><div class="l">S3 10 日區間內</div></div>
   <div class="sc"><div class="n"><span class="rd">-1.97%</span></div><div class="l">近 30 日 S2 樣本均值<br/><span style="font-size:10px">勝 44.3% / N=70</span></div></div>
   <div class="sc"><div class="n"><span class="rd">-3.81%</span></div><div class="l">近 30 日 S3 樣本均值<br/><span style="font-size:10px">勝 24.5% / N=53</span></div></div>
 </div>
 <div class="tabs">
-  <div class="tab active" onclick="showTab('s2',this)">S2 處置期間樣本（13）</div>
-  <div class="tab" onclick="showTab('s3',this)">S3 解除後 10 日樣本（39）</div>
+  <div class="tab active" onclick="showTab('s2',this)">S2 處置期間樣本（12）</div>
+  <div class="tab" onclick="showTab('s3',this)">S3 解除後 10 日樣本（38）</div>
   <div class="tab" onclick="showTab('about',this)">回測說明</div>
 </div>
 <div id="pane-s2" class="pane active">
@@ -121,28 +121,14 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <th class="num" onclick="sortTable(this)">區間最大回撤</th>
   <th class="num" onclick="sortTable(this)">前5日漲跌</th>
   <th class="num" onclick="sortTable(this)">進場日量比</th>
-</tr></thead><tbody><tr class="row-near">
-  <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
-  <td><b>8111</b></td>
-  <td>立碁</td>
-  <td class="center"><span class="badge mu">第2次</span></td>
-  <td class="center">2026-10-16</td>
-  <td class="center">2026-10-22 <span class="badge am">明日為解除日</span></td>
-  <td class="num">0</td>
-  <td class="num">83.2</td>
-  <td class="num">77.4</td>
-  <td class="num dn">-6.97%</td>
-  <td class="num dn">-6.97%</td>
-  <td class="num dn">-11.21%</td>
-  <td class="num">0.09x</td>
-</tr><tr class="row-dn">
+</tr></thead><tbody><tr class="row-dn">
   <td class="center"><span class="tier tier-A">A</span><span class="tier-note">量縮<30%</span></td>
   <td><b>3167</b></td>
   <td>大量</td>
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-20</td>
   <td class="center">2026-10-27 </td>
-  <td class="num">5</td>
+  <td class="num">4</td>
   <td class="num">971.0</td>
   <td class="num">924.0</td>
   <td class="num dn">-4.84%</td>
@@ -156,7 +142,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-21</td>
   <td class="center">2026-10-28 </td>
-  <td class="num">6</td>
+  <td class="num">5</td>
   <td class="num">55.5</td>
   <td class="num">49.95</td>
   <td class="num dn">-10.00%</td>
@@ -170,7 +156,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-20</td>
   <td class="center">2026-10-27 </td>
-  <td class="num">5</td>
+  <td class="num">4</td>
   <td class="num">95.7</td>
   <td class="num">93.0</td>
   <td class="num dn">-2.82%</td>
@@ -184,7 +170,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第8次</span></td>
   <td class="center">2026-10-19</td>
   <td class="center">2026-10-23 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">480.0</td>
   <td class="num">450.0</td>
   <td class="num dn">-6.25%</td>
@@ -198,7 +184,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-22</td>
   <td class="center">2026-10-29 </td>
-  <td class="num">7</td>
+  <td class="num">6</td>
   <td class="num">63.1</td>
   <td class="num">63.1</td>
   <td class="num ">0.00%</td>
@@ -212,7 +198,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第8次</span></td>
   <td class="center">2026-10-19</td>
   <td class="center">2026-10-23 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">46.1</td>
   <td class="num">47.1</td>
   <td class="num up">+2.17%</td>
@@ -226,7 +212,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第8次</span></td>
   <td class="center">2026-10-19</td>
   <td class="center">2026-10-23 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">21.35</td>
   <td class="num">27.15</td>
   <td class="num up">+27.17%</td>
@@ -237,10 +223,10 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="tier tier-D">D</span><span class="tier-note">低價</span></td>
   <td><b>2424</b></td>
   <td>隴華</td>
-  <td class="center"><span class="badge mu">第2次</span></td>
+  <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-21</td>
   <td class="center">2026-10-28 </td>
-  <td class="num">6</td>
+  <td class="num">5</td>
   <td class="num">14.9</td>
   <td class="num">13.45</td>
   <td class="num dn">-9.73%</td>
@@ -254,7 +240,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-19</td>
   <td class="center">2026-10-23 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">2.77</td>
   <td class="num">2.66</td>
   <td class="num dn">-3.97%</td>
@@ -268,7 +254,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-19</td>
   <td class="center">2026-10-23 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">146.5</td>
   <td class="num">143.0</td>
   <td class="num dn">-2.39%</td>
@@ -282,7 +268,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge bl">首次</span></td>
   <td class="center">2026-10-22</td>
   <td class="center">2026-10-29 </td>
-  <td class="num">7</td>
+  <td class="num">6</td>
   <td class="num">16.5</td>
   <td class="num">16.5</td>
   <td class="num ">0.00%</td>
@@ -296,7 +282,7 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <td class="center"><span class="badge mu">第8次</span></td>
   <td class="center">2026-10-19</td>
   <td class="center">2026-10-23 <span class="badge am">明日為解除日</span></td>
-  <td class="num">1</td>
+  <td class="num">0</td>
   <td class="num">117.5</td>
   <td class="num">129.0</td>
   <td class="num up">+9.79%</td>
@@ -325,15 +311,6 @@ tr.row-near td{background:#fef9c3;border-left:3px solid var(--am)}
   <th class="num" onclick="sortTable(this)">區間報酬</th>
   <th class="center">區間狀態</th>
 </tr></thead><tbody><tr class="row-dn">
-  <td><b>3219</b></td>
-  <td>倚強科</td>
-  <td class="center">2026-10-07</td>
-  <td class="num">10 / 10</td>
-  <td class="num">130.0</td>
-  <td class="num">105.5</td>
-  <td class="num dn">-18.85%</td>
-  <td class="center"><span class="badge am">窗內 / 負</span></td>
-</tr><tr class="row-dn">
   <td><b>2030</b></td>
   <td>彰源</td>
   <td class="center">2026-10-08</td>
