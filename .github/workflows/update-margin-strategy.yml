@@ -2,10 +2,10 @@ name: Update Margin Strategy
 on:
   workflow_dispatch:
   schedule:
-    # 22:15 and 23:15 Asia/Taipei after the official margin release.
-    - cron: '15 14,15 * * 1-5'
-    # 00:15 Asia/Taipei fallback for the preceding trading day.
-    - cron: '15 16 * * 2-6'
+    # One daily attempt at 23:20 Asia/Taipei, after the official margin release.
+    # A separate conditional verifier handles genuine misses without running an
+    # unconditional second or third Actions job.
+    - cron: '20 15 * * 1-5'
 permissions:
   contents: write
 concurrency:

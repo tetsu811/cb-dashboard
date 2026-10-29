@@ -2,9 +2,9 @@ name: Check Margin Update Trigger
 
 on:
   workflow_dispatch:
-  schedule:
-    # 00:45 Asia/Taipei, after all three update attempts.
-    - cron: '45 16 * * 2-6'
+
+# Manual diagnostic only. The former scheduled watchdog consumed an additional
+# Actions run every trading day even when the public data was already current.
 
 permissions:
   actions: read
