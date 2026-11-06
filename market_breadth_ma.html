@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <title>市場廣度｜台股</title>
+  <meta name="description" content="台股上市與上櫃市場廣度：站上20、60、200日均線比例、大型與中小型股差異及60日淨新高。">
+  <link rel="stylesheet" href="market_breadth_ma.css?v=1">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">TAIWAN MARKET BREADTH</p>
+        <h1>市場廣度</h1>
+        <p class="subtitle">指數走多遠，不如先看有多少股票一起走。</p>
+      </div>
+      <div class="asof"><span class="pulse"></span><div><small>資料日期</small><strong id="asof">讀取中</strong></div></div>
+    </header>
+
+    <section class="source-note" id="statusNote">
+      <strong>正式盤後資料</strong><span>上市與上櫃分開計算；等待最新資料載入。</span>
+    </section>
+
+    <section class="summary-grid" aria-label="市場摘要">
+      <article class="summary-card hero-card"><span>加權指數</span><strong id="indexValue">—</strong><small id="indexChange">近 60 日 —</small></article>
+      <article class="summary-card"><div class="card-label"><i class="market-dot listed"></i>上市｜站上 60MA</div><strong id="listed60">—</strong><small id="listedN">有效分母 —</small></article>
+      <article class="summary-card"><div class="card-label"><i class="market-dot otc"></i>上櫃｜站上 60MA</div><strong id="otc60">—</strong><small id="otcN">有效分母 —</small></article>
+      <article class="summary-card signal-card"><span>廣度觀察</span><strong id="breadthState">—</strong><small id="breadthDetail">讀取中</small></article>
+    </section>
+
+    <section class="toolbar" aria-label="圖表控制">
+      <div class="control-group"><span>期間</span><div class="segmented" id="rangeControl"><button data-range="63">3M</button><button class="active" data-range="126">6M</button><button data-range="253">1Y</button></div></div>
+      <div class="control-group"><span>均線市場</span><div class="segmented" id="marketControl"><button class="active" data-market="all">雙市場</button><button data-market="listed">上市</button><button data-market="otc">上櫃</button></div></div>
+    </section>
+
+    <section class="chart-stack">
+      <article class="chart-card" data-chart="index">
+        <div class="chart-heading"><div><span class="chart-no">01</span><h2>加權指數</h2></div><p>紅點為 250 日新高</p></div>
+        <div class="chart-wrap"><svg role="img" aria-label="加權指數走勢圖"></svg></div>
+      </article>
+      <article class="chart-card featured" data-chart="breadth">
+        <div class="chart-heading"><div><span class="chart-no">02</span><h2>站上均線的股票比例</h2></div><p>上市與上櫃分開計算，50% 為多數分界</p></div>
+        <div class="legend"><span><i style="--c:#f59e0b"></i>20MA</span><span><i style="--c:#34d399"></i>60MA</span><span><i style="--c:#60a5fa"></i>200MA</span><span class="line-key solid-key">上市</span><span class="line-key dash-key">上櫃</span></div>
+        <div class="chart-wrap tall"><svg role="img" aria-label="上市與上櫃站上均線比例"></svg></div>
+      </article>
+      <article class="chart-card" data-chart="size">
+        <div class="chart-heading"><div><span class="chart-no">03</span><h2>大型股 vs 中小型股</h2></div><p>站上 60MA 比例；大型股為每日市值前 100</p></div>
+        <div class="legend"><span><i style="--c:#c084fc"></i>大型股</span><span><i style="--c:#f472b6"></i>中小型股</span></div>
+        <div class="chart-wrap"><svg role="img" aria-label="大型股與中小型股站上60日均線比例"></svg></div>
+      </article>
+      <article class="chart-card" data-chart="highs">
+        <div class="chart-heading"><div><span class="chart-no">04</span><h2>60 日淨新高家數</h2></div><p>創新高家數 − 創新低家數；白線為 10 日平均</p></div>
+        <div class="chart-wrap"><svg role="img" aria-label="60日淨新高家數"></svg></div>
+      </article>
+    </section>
+
+    <section class="method">
+      <div><p class="eyebrow">METHODOLOGY</p><h2>母體與計算方式</h2></div>
+      <div class="method-grid">
+        <article><strong>01</strong><h3>上市、上櫃分開</h3><p>普通股分市場計算，排除 ETF、ETN、權證、特別股與 TDR；各均線揭露自己的有效分母。</p></article>
+        <article><strong>02</strong><h3>流動性門檻</h3><p>使用前 20 個交易日、且不含當日的平均成交金額；超過新台幣 2,000 萬元才納入。</p></article>
+        <article><strong>03</strong><h3>價格與限制</h3><p>採交易所每日收盤價，目前未還原權息。歷史以目前公司名單回推，可能有存活偏誤；本頁不構成投資建議。</p></article>
+      </div>
+      <details><summary>資料來源與公式</summary><p>資料來源：臺灣證券交易所 MI_INDEX、櫃買中心 dailyQuotes，以及兩市場公開資訊觀測站公司基本資料。站上 N 日均線比例＝收盤價高於 N 日簡單移動平均的合格股票家數 ÷ 具備足夠歷史資料的合格股票家數。</p></details>
+    </section>
+    <footer><span>市場廣度｜台股</span><span id="generatedAt">每日盤後更新</span></footer>
+  </main>
+  <div class="tooltip" id="tooltip" hidden></div>
+  <script src="market_breadth_ma.js?v=1"></script>
+</body>
+</html>

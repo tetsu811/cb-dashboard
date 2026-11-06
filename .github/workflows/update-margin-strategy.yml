@@ -25,6 +25,8 @@ jobs:
         run: |
           test -f generate_market_breadth.py
           python generate_market_breadth.py
+          test -f generate_market_breadth_ma.py
+          python generate_market_breadth_ma.py
       - name: Check expected Taiwan trading date
         run: |
           python - <<'PY'
@@ -39,6 +41,7 @@ jobs:
           dates = {
               'margin_strategy_latest.json': json.load(open('margin_strategy_latest.json'))['as_of'],
               'market_breadth_latest.json': json.load(open('market_breadth_latest.json'))['as_of'],
+              'market_breadth_ma_latest.json': json.load(open('market_breadth_ma_latest.json'))['as_of'],
           }
           print(f'Taipei time={now.isoformat(timespec="seconds")} expected={expected} actual={dates}')
           stale = [name for name, value in dates.items() if value != expected.isoformat()]
@@ -48,7 +51,7 @@ jobs:
       - name: Check whether official data advanced
         id: changes
         run: |
-          if git diff --quiet -- margin_strategy_latest.json margin_history_*.json market_breadth_latest.json; then
+          if git diff --quiet -- margin_strategy_latest.json margin_history_*.json market_breadth_latest.json market_breadth_ma_latest.json market_breadth_ma_state.json.gz; then
             echo "updated=false" >> "$GITHUB_OUTPUT"
             echo "Official data has not advanced; nothing to publish."
           else
@@ -59,7 +62,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add margin_strategy_latest.json margin_history_*.json market_breadth_latest.json
+          git add margin_strategy_latest.json margin_history_*.json market_breadth_latest.json market_breadth_ma_latest.json market_breadth_ma_state.json.gz
           git commit -m "Update margin strategy data"
           git pull --rebase --autostash origin main
           git push
@@ -67,3 +70,4 @@ jobs:
         run: |
           python verify_margin_publish.py --url https://tetsu811.github.io/cb-dashboard/margin_strategy_latest.json
           python verify_margin_publish.py --url https://tetsu811.github.io/cb-dashboard/market_breadth_latest.json
+          python verify_margin_publish.py --url https://tetsu811.github.io/cb-dashboard/market_breadth_ma_latest.json
