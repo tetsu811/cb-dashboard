@@ -1,0 +1,74 @@
+name: Update Market Breadth MA
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 16:20 Asia/Taipei on weekdays. The official-date probe makes exchange
+    # holidays a no-op, so data changes only after an actual trading session.
+    - cron: '20 8 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-market-breadth-ma
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install requests
+
+      - name: Generate latest official market breadth data
+        run: |
+          for attempt in 1 2 3; do
+            python generate_market_breadth_ma.py
+            if python - <<'PY'
+          import json
+          from generate_market_breadth_ma import latest_official_date
+
+          expected = latest_official_date().isoformat()
+          actual = json.load(open('market_breadth_ma_latest.json'))['as_of']
+          print(f'expected={expected} actual={actual}')
+          if actual != expected:
+              raise SystemExit('TWSE or TPEx closing data is not complete yet')
+          PY
+            then
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              exit 1
+            fi
+            echo "Official closing files are incomplete; retrying in 10 minutes."
+            sleep 600
+          done
+
+      - name: Check whether official data advanced
+        id: changes
+        run: |
+          if git diff --quiet -- market_breadth_ma_latest.json market_breadth_ma_state.json.gz; then
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            echo "No newer official trading session; nothing to publish."
+          else
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit data
+        if: steps.changes.outputs.updated == 'true'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add market_breadth_ma_latest.json market_breadth_ma_state.json.gz
+          git commit -m "Update market breadth MA data"
+          git pull --rebase --autostash origin main
+          git push
+
+      - name: Verify public market breadth date
+        run: |
+          python verify_margin_publish.py \
+            --local market_breadth_ma_latest.json \
+            --url https://tetsu811.github.io/cb-dashboard/market_breadth_ma_latest.json

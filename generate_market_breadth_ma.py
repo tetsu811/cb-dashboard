@@ -16,6 +16,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -156,10 +157,32 @@ def fetch_day(day, companies):
 
 
 def latest_official_date():
-    payload = request_json(
-        "https://wwwc.twse.com.tw/rwd/marginTrading/BFIJ3U_TREND?response=json&days=10"
-    )
-    return datetime.strptime(payload["data"][-1]["date"], "%Y%m%d").date()
+    """Return the latest date with an official TWSE closing-price file.
+
+    Market breadth must not wait for the later margin-data publication. Probe
+    the official daily close directly so the dashboard can update after the
+    cash market closes, while weekends and exchange holidays naturally resolve
+    to the most recent trading day.
+    """
+    today = datetime.now(ZoneInfo("Asia/Taipei")).date()
+    for offset in range(11):
+        candidate = today - timedelta(days=offset)
+        if candidate.weekday() >= 5:
+            continue
+        payload = request_json(
+            "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX"
+            f"?date={candidate:%Y%m%d}&type=ALLBUT0999&response=json"
+        )
+        if payload.get("stat") != "OK":
+            continue
+        tables = payload.get("tables", [])
+        has_close_table = any(
+            "每日收盤行情" in str(table.get("title")) and table.get("data")
+            for table in tables
+        )
+        if has_close_table:
+            return candidate
+    raise SystemExit("No official TWSE closing-price date found in the last 11 calendar days")
 
 
 def blank_state(companies):
