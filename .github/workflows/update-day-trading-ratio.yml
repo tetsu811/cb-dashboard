@@ -1,0 +1,55 @@
+name: Update Day Trading Ratio
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 23:15 Asia/Taipei on weekdays, after the official evening publication.
+    - cron: '15 15 * * 1-5'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-day-trading-ratio
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+
+      - name: Generate official day-trading ratio data
+        run: python generate_day_trading_ratio.py
+
+      - name: Validate dataset
+        run: python -m unittest test_day_trading_ratio.py
+
+      - name: Check whether official data changed
+        id: changes
+        run: |
+          if git diff --quiet -- day_trading_ratio_latest.json day_trading_ratio_state.json.gz; then
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            echo "No official changes to publish."
+          else
+            echo "updated=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit data
+        if: steps.changes.outputs.updated == 'true'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add day_trading_ratio_latest.json day_trading_ratio_state.json.gz
+          git commit -m "Update day trading ratio data"
+          git pull --rebase --autostash origin main
+          git push
+
+      - name: Verify public dataset date
+        if: steps.changes.outputs.updated == 'true'
+        run: |
+          python verify_margin_publish.py \
+            --local day_trading_ratio_latest.json \
+            --url https://tetsu811.github.io/cb-dashboard/day_trading_ratio_latest.json

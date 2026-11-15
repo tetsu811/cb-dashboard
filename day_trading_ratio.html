@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="追蹤台股上市、上櫃及個股當沖成交值占比、當沖金額與20日平均。">
+  <title>台股當沖熱度儀表板｜Tetsu 投資工具</title>
+  <link rel="stylesheet" href="day_trading_ratio.css?v=1">
+  <style>.pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 2px}.pagination button{border:1px solid var(--line);background:#0b1a2b;color:#b8c8db;border-radius:9px;padding:7px 12px;cursor:pointer}.pagination button:hover:not(:disabled){border-color:rgba(34,211,238,.35);color:#fff}.pagination button:disabled{opacity:.35;cursor:not-allowed}.pagination span{color:var(--muted);font-size:11px;min-width:70px;text-align:center}</style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">DAY-TRADING HEAT</p>
+        <h1>當沖熱度</h1>
+        <p class="subtitle">今天的成交額，有多少正在同一天進出？</p>
+      </div>
+      <div class="asof"><span class="pulse"></span><div><small>資料日期</small><strong id="asof">讀取中</strong></div></div>
+    </header>
+
+    <section class="status-note" id="statusNote">
+      <strong>正式盤後資料</strong><span>正在讀取證交所與櫃買中心資料。</span>
+    </section>
+
+    <section class="market-grid" aria-label="市場當沖摘要">
+      <article class="market-card primary" data-market-card="combined">
+        <span class="card-kicker">上市＋上櫃</span><div class="ratio" id="combinedRatio">—</div>
+        <div class="delta" id="combinedDelta">近20日平均 —</div>
+        <div class="amounts"><span>當沖 <b id="combinedDaytrade">—</b></span><span>成交 <b id="combinedTurnover">—</b></span></div>
+      </article>
+      <article class="market-card" data-market-card="twse">
+        <span class="card-kicker"><i class="dot twse"></i>上市市場</span><div class="ratio" id="twseRatio">—</div>
+        <div class="delta" id="twseDelta">近20日平均 —</div>
+        <div class="amounts"><span>當沖 <b id="twseDaytrade">—</b></span><span>成交 <b id="twseTurnover">—</b></span></div>
+      </article>
+      <article class="market-card" data-market-card="tpex">
+        <span class="card-kicker"><i class="dot tpex"></i>上櫃市場</span><div class="ratio" id="tpexRatio">—</div>
+        <div class="delta" id="tpexDelta">近20日平均 —</div>
+        <div class="amounts"><span>當沖 <b id="tpexDaytrade">—</b></span><span>成交 <b id="tpexTurnover">—</b></span></div>
+      </article>
+    </section>
+
+    <section class="chart-card">
+      <div class="section-heading">
+        <div><span class="section-no">01</span><h2>市場當沖占比趨勢</h2></div>
+        <div class="segmented" id="rangeControl"><button data-range="20">1M</button><button data-range="60">3M</button><button class="active" data-range="250">1Y</button></div>
+      </div>
+      <div class="legend"><span><i style="--c:#22d3ee"></i>全市場</span><span><i style="--c:#60a5fa"></i>上市</span><span><i style="--c:#f472b6"></i>上櫃</span></div>
+      <div class="chart-wrap"><svg id="marketChart" role="img" aria-label="上市、上櫃及全市場當沖占比歷史趨勢"></svg></div>
+      <p class="chart-note">近一年均回填交易所官方歷史報表；遇休市或來源未公布時保留缺值，不以零補算。</p>
+    </section>
+
+    <section class="stocks-section">
+      <div class="section-heading stack-mobile">
+        <div><span class="section-no">02</span><h2>個股當沖排行</h2></div>
+        <p id="resultCount">—</p>
+      </div>
+      <div class="filters">
+        <label class="search"><span>搜尋</span><input id="searchInput" type="search" placeholder="輸入代號或名稱" autocomplete="off"></label>
+        <label><span>市場</span><select id="marketFilter"><option value="all">全部</option><option value="TWSE">上市</option><option value="TPEX">上櫃</option></select></label>
+        <label><span>最低成交值</span><select id="turnoverFilter"><option value="0">不限</option><option value="100000000">1 億</option><option value="500000000" selected>5 億</option><option value="1000000000">10 億</option><option value="5000000000">50 億</option></select></label>
+        <label class="check"><input id="etfFilter" type="checkbox"><span>包含 ETF</span></label>
+      </div>
+
+      <article class="stock-detail" id="stockDetail" hidden>
+        <div class="stock-identity"><span id="detailMarket">—</span><h3><b id="detailCode">—</b> <span id="detailName">—</span></h3><p id="detailPrice">—</p></div>
+        <div class="detail-stat hero-stat"><span>今日當沖占比</span><strong id="detailRatio">—</strong><small id="detailVsAvg">—</small></div>
+        <div class="detail-stat"><span>當沖成交值</span><strong id="detailDaytrade">—</strong><small>買賣金額平均</small></div>
+        <div class="detail-stat"><span>總成交值</span><strong id="detailTurnover">—</strong><small>官方成交金額</small></div>
+        <div class="spark"><span>近20個交易日</span><svg id="stockSpark" role="img" aria-label="個股近20日當沖占比"></svg></div>
+      </article>
+
+      <div class="table-shell">
+        <table>
+          <thead><tr><th>#</th><th>個股</th><th>市場</th><th class="num">當沖占比</th><th class="num">當沖成交值</th><th class="num">總成交值</th><th class="num">20日平均</th><th class="num">偏離平均</th></tr></thead>
+          <tbody id="stockRows"></tbody>
+        </table>
+      </div>
+      <div class="pagination"><button id="prevPage" type="button">← 上一頁</button><span id="pageLabel">第 1 頁</span><button id="nextPage" type="button">下一頁 →</button></div>
+      <p class="table-note">預設排除 ETF 並設定最低成交值 5 億元，避免低流動性個股以極高占比占據排行。點選任一列查看近20日變化。</p>
+    </section>
+
+    <section class="method">
+      <div><p class="eyebrow">METHODOLOGY</p><h2>口徑與限制</h2></div>
+      <div class="method-grid">
+        <article><strong>01</strong><h3>成交值不重複計算</h3><p>當沖成交值＝（當沖買進金額＋當沖賣出金額）÷ 2；占比再除以該市場或個股總成交金額。</p></article>
+        <article><strong>02</strong><h3>兩市場以金額加權</h3><p>全市場占比使用上市、上櫃金額加總後重算，不直接平均兩個百分比。</p></article>
+        <article><strong>03</strong><h3>T+2 才是最終值</h3><p>券商可在成交日後調整申報；最近三個交易日會重抓。最新數字是觀察值，不代表買賣方向或獲利。</p></article>
+      </div>
+      <details><summary>資料來源與母體</summary><p>資料來源：臺灣證券交易所 TWTB4U、TWTB4U2、MI_INDEX，以及證券櫃檯買賣中心現股當沖交易統計與每日收盤行情。個股預設為上市、上櫃普通股；ETF 可另行開啟。權證、TDR 與其他商品不列入個股排行。</p></details>
+    </section>
+
+    <footer><span>台股當沖熱度儀表板</span><span id="generatedAt">每日盤後更新｜僅供研究，不構成投資建議</span></footer>
+  </main>
+  <div class="tooltip" id="tooltip" hidden></div>
+  <script src="day_trading_ratio.js?v=1"></script>
+</body>
+</html>
