@@ -7,7 +7,7 @@
   <meta name="description" content="追蹤台股上市、上櫃及個股當沖成交值占比、當沖金額與20日平均。">
   <title>台股當沖熱度儀表板｜Tetsu 投資工具</title>
   <link rel="stylesheet" href="day_trading_ratio.css?v=1">
-  <style>.pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 2px}.pagination button{border:1px solid var(--line);background:#0b1a2b;color:#b8c8db;border-radius:9px;padding:7px 12px;cursor:pointer}.pagination button:hover:not(:disabled){border-color:rgba(34,211,238,.35);color:#fff}.pagination button:disabled{opacity:.35;cursor:not-allowed}.pagination span{color:var(--muted);font-size:11px;min-width:70px;text-align:center}</style>
+  <style>.pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 2px}.pagination button{border:1px solid var(--line);background:#0b1a2b;color:#b8c8db;border-radius:9px;padding:7px 12px;cursor:pointer}.pagination button:hover:not(:disabled){border-color:rgba(34,211,238,.35);color:#fff}.pagination button:disabled{opacity:.35;cursor:not-allowed}.pagination span{color:var(--muted);font-size:11px;min-width:70px;text-align:center}.legend{gap:8px}.legend button{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#091523;color:#d5e0ed;cursor:pointer;transition:opacity .15s,border-color .15s,background .15s}.legend button:hover,.legend button:focus-visible{border-color:rgba(34,211,238,.42);outline:0}.legend button[aria-pressed="false"]{opacity:.38;background:transparent;text-decoration:line-through}</style>
 </head>
 <body>
   <main class="shell">
@@ -47,7 +47,11 @@
         <div><span class="section-no">01</span><h2>市場當沖占比趨勢</h2></div>
         <div class="segmented" id="rangeControl"><button data-range="20">1M</button><button data-range="60">3M</button><button class="active" data-range="250">1Y</button></div>
       </div>
-      <div class="legend"><span><i style="--c:#22d3ee"></i>全市場</span><span><i style="--c:#60a5fa"></i>上市</span><span><i style="--c:#f472b6"></i>上櫃</span></div>
+      <div class="legend" id="legendControl" aria-label="切換市場線圖">
+        <button type="button" data-series="combined" aria-pressed="true"><i style="--c:#22d3ee"></i>全市場</button>
+        <button type="button" data-series="twse" aria-pressed="true"><i style="--c:#60a5fa"></i>上市</button>
+        <button type="button" data-series="tpex" aria-pressed="true"><i style="--c:#f472b6"></i>上櫃</button>
+      </div>
       <div class="chart-wrap"><svg id="marketChart" role="img" aria-label="上市、上櫃及全市場當沖占比歷史趨勢"></svg></div>
       <p class="chart-note">近一年均回填交易所官方歷史報表；遇休市或來源未公布時保留缺值，不以零補算。</p>
     </section>
@@ -95,6 +99,6 @@
     <footer><span>台股當沖熱度儀表板</span><span id="generatedAt">每日盤後更新｜僅供研究，不構成投資建議</span></footer>
   </main>
   <div class="tooltip" id="tooltip" hidden></div>
-  <script src="day_trading_ratio.js?v=1"></script>
+  <script src="day_trading_ratio.js?v=2"></script>
 </body>
 </html>

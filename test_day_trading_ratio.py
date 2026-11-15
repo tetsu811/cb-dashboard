@@ -41,5 +41,18 @@ class DatasetTests(unittest.TestCase):
         self.assertEqual(latest["combined_ratio"], self.data["markets"]["combined"]["ratio"])
 
 
+class UIContractTests(unittest.TestCase):
+    def test_market_legend_has_three_toggle_buttons(self):
+        with open("day_trading_ratio.html", encoding="utf-8") as handle:
+            html = handle.read()
+        for series in ("combined", "twse", "tpex"):
+            self.assertIn(f'data-series="{series}" aria-pressed="true"', html)
+
+    def test_market_chart_keeps_at_least_one_visible_series(self):
+        with open("day_trading_ratio.js", encoding="utf-8") as handle:
+            script = handle.read()
+        self.assertIn("if(visibleSeries.size===1)return", script)
+
+
 if __name__ == "__main__":
     unittest.main()
