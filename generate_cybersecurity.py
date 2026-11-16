@@ -251,7 +251,11 @@ def main() -> None:
         auto_adjust=False,
         progress=False,
         group_by="ticker",
-        threads=True,
+        # yfinance shares a local SQLite cookie cache. Parallel downloads can
+        # collide on fresh GitHub runners ("database is locked") and silently
+        # drop an otherwise valid ticker, so keep this small 18-name universe
+        # sequential for deterministic daily coverage.
+        threads=False,
     )
 
     completed_closes: dict[str, dict] = {}
