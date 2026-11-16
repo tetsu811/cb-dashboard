@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-16T10:28:43.984277",
+  "fetched_at": "2026-11-16T02:57:31.886713",
   "trade_date": "2026-11-13",
   "sectors": [
     {
@@ -45,6 +45,18 @@
           "news": [
             {
               "symbol": "AAPL",
+              "title": "Why Did AAPL, ZETA, FROG Stocks Jump To 52-Week Highs Last Week?c",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-did-aapl-zeta-frog-024109115.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-16T02:41:09+00:00",
+              "ts_epoch": 1794796869.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "AAPL",
               "title": "‘Bond King’ Jeffrey Gundlach Is “Not Interested in Buying Stocks.” His Warning Points to 10 Years of Losses",
               "url": "https://finance.yahoo.com/markets/stocks/articles/bond-king-jeffrey-gundlach-not-171251503.html",
               "provider": "24/7 Wall St.",
@@ -66,20 +78,6 @@
               "category_label": "一般新聞",
               "sentiment": "positive",
               "matched_keywords": []
-            },
-            {
-              "symbol": "AAPL",
-              "title": "5 big analyst AI moves: Nvidia hit with downgrades after Huang’s exit",
-              "url": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-093002830.html",
-              "provider": "Investing.com",
-              "timestamp": "2026-11-15T09:30:02+00:00",
-              "ts_epoch": 1794735002.0,
-              "category": "guidance",
-              "category_label": "指引修訂",
-              "sentiment": "negative",
-              "matched_keywords": [
-                "downgrades"
-              ]
             }
           ],
           "chip": {
@@ -219,8 +217,8 @@
               "title": "Jensen Huang Reportedly Considers Returning To Nvidia: FT",
               "url": "https://www.investors.com/news/technology/jensen-huang-considers-returning-to-nvidia-stock/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-16T02:15:58+00:00",
-              "ts_epoch": 1794795358.0,
+              "timestamp": "2026-11-16T02:35:46+00:00",
+              "ts_epoch": 1794796546.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -366,8 +364,8 @@
               "title": "Jensen Huang Reportedly Considers Returning To Nvidia: FT",
               "url": "https://www.investors.com/news/technology/jensen-huang-considers-returning-to-nvidia-stock/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-16T02:15:58+00:00",
-              "ts_epoch": 1794795358.0,
+              "timestamp": "2026-11-16T02:35:46+00:00",
+              "ts_epoch": 1794796546.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -710,8 +708,56 @@
           "title": "Dow Jones Futures Waver As Jensen Huang Mulls Nvidia Return",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-rally-nvidia-earnings-anthropic-ipo-spacex-starship-flight-15/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-16T02:16:19+00:00",
-          "ts_epoch": 1794795379.0,
+          "timestamp": "2026-11-16T02:49:49+00:00",
+          "ts_epoch": 1794797389.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Nvidia Stock Is Down About a Third From Its October Peak. Here's My Estimate for 2030.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-stock-down-third-october-024302210.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-16T02:43:02+00:00",
+          "ts_epoch": 1794796982.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "AAPL",
+          "title": "Why Did AAPL, ZETA, FROG Stocks Jump To 52-Week Highs Last Week?c",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/why-did-aapl-zeta-frog-024109115.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-16T02:41:09+00:00",
+          "ts_epoch": 1794796869.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "AMD",
+          "title": "Jensen Huang Reportedly Considers Returning To Nvidia: FT",
+          "url": "https://www.investors.com/news/technology/jensen-huang-considers-returning-to-nvidia-stock/?src=A00220&yptr=yahoo",
+          "provider": "Investor's Business Daily",
+          "timestamp": "2026-11-16T02:35:46+00:00",
+          "ts_epoch": 1794796546.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "NVDA Stock Dips Again After Worst Week In 19 Months: Why Michael Burry Sees ‘Mild Manipulation’ In AI Chipmaker’s China Sales?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nvda-stock-dips-again-worst-023023113.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-16T02:30:23+00:00",
+          "ts_epoch": 1794796223.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
@@ -727,54 +773,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "AMD",
-          "title": "Jensen Huang Reportedly Considers Returning To Nvidia: FT",
-          "url": "https://www.investors.com/news/technology/jensen-huang-considers-returning-to-nvidia-stock/?src=A00220&yptr=yahoo",
-          "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-16T02:15:58+00:00",
-          "ts_epoch": 1794795358.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "dotdigital Group And 2 Other British AI Stocks To Watch",
-          "url": "https://finance.yahoo.com/technology/ai/articles/dotdigital-group-2-other-british-020827887.html",
-          "provider": "Simply Wall St.",
-          "timestamp": "2026-11-16T02:08:27+00:00",
-          "ts_epoch": 1794794907.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "U.S. stock futures little changed as investors await Nvidia earnings",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/u-stock-futures-little-changed-020537465.html",
-          "provider": "Investing.com",
-          "timestamp": "2026-11-16T02:05:37+00:00",
-          "ts_epoch": 1794794737.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Nvidia stock steady as Jensen Huang reportedly weighs CEO comeback, Musk backs return",
-          "url": "https://finance.yahoo.com/markets/article/nvidia-stock-steady-as-jensen-huang-reportedly-weighs-ceo-comeback-musk-backs-return-015644730.html",
-          "provider": "Yahoo Finance",
-          "timestamp": "2026-11-16T01:56:44+00:00",
-          "ts_epoch": 1794794204.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -863,6 +861,18 @@
           "news": [
             {
               "symbol": "V",
+              "title": "Visa And Mastercard Stocks Face A Stablecoin Test Investors Should Watch",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/visa-mastercard-stocks-face-stablecoin-020920234.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-16T02:09:20+00:00",
+              "ts_epoch": 1794794960.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "V",
               "title": "Prediction: Visa Stock Hits $500 in 2028",
               "url": "https://finance.yahoo.com/markets/stocks/articles/prediction-visa-stock-hits-500-145001590.html",
               "provider": "Motley Fool",
@@ -884,20 +894,6 @@
               "category_label": "一般新聞",
               "sentiment": "neutral",
               "matched_keywords": []
-            },
-            {
-              "symbol": "V",
-              "title": "What Is Next For Global Payments (GPN) After Elliott Pressure And Authentication Upgrade?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/next-global-payments-gpn-elliott-120827361.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-15T12:08:27+00:00",
-              "ts_epoch": 1794744507.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "deal"
-              ]
             }
           ],
           "chip": {
@@ -1005,6 +1001,18 @@
           "news": [
             {
               "symbol": "MA",
+              "title": "Visa And Mastercard Stocks Face A Stablecoin Test Investors Should Watch",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/visa-mastercard-stocks-face-stablecoin-020920234.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-16T02:09:20+00:00",
+              "ts_epoch": 1794794960.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MA",
               "title": "American Express vs. Mastercard: Which Financial Stock Is a Better Buy for 2027?",
               "url": "https://finance.yahoo.com/markets/stocks/articles/american-express-vs-mastercard-financial-203201337.html",
               "provider": "Motley Fool",
@@ -1022,18 +1030,6 @@
               "provider": "Motley Fool",
               "timestamp": "2026-11-14T15:32:02+00:00",
               "ts_epoch": 1794670322.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MA",
-              "title": "Card Networks Like Visa and Mastercard Don't Take Credit Losses. American Express Does. Here's Why That Matters for the Stock.",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/card-networks-visa-mastercard-dont-135500020.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-14T13:55:00+00:00",
-              "ts_epoch": 1794664500.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -1316,6 +1312,18 @@
       ],
       "news": [
         {
+          "symbol": "V",
+          "title": "Visa And Mastercard Stocks Face A Stablecoin Test Investors Should Watch",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/visa-mastercard-stocks-face-stablecoin-020920234.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-16T02:09:20+00:00",
+          "ts_epoch": 1794794960.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
           "symbol": "JPM",
           "title": "Michael Saylor’s Strategy Just Lost Its MSCI Index Spot as Bitcoin Plunges. Is MSTR Stock a Sell?",
           "url": "https://finance.yahoo.com/markets/stocks/articles/michael-saylor-strategy-just-lost-172850606.html",
@@ -1374,20 +1382,6 @@
           "category_label": "一般新聞",
           "sentiment": "neutral",
           "matched_keywords": []
-        },
-        {
-          "symbol": "V",
-          "title": "What Is Next For Global Payments (GPN) After Elliott Pressure And Authentication Upgrade?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/next-global-payments-gpn-elliott-120827361.html",
-          "provider": "Simply Wall St.",
-          "timestamp": "2026-11-15T12:08:27+00:00",
-          "ts_epoch": 1794744507.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "deal"
-          ]
         }
       ],
       "earnings": []
@@ -1435,6 +1429,18 @@
           "news": [
             {
               "symbol": "LLY",
+              "title": "Three FDA Decisions Loom After Summit’s Rejection — Capricor, Savara, Alzheimer’s Data Top Biotech’s Watchlist",
+              "url": "https://finance.yahoo.com/healthcare/articles/three-fda-decisions-loom-summit-022530752.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-16T02:25:30+00:00",
+              "ts_epoch": 1794795930.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "LLY",
               "title": "Prediction: $10,000 Equally Split Between Eli Lilly and Novo Nordisk Will Be Worth This Much by the End of 2027",
               "url": "https://finance.yahoo.com/markets/stocks/articles/prediction-10-000-equally-split-235001525.html",
               "provider": "Motley Fool",
@@ -1455,18 +1461,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "LLY",
-              "title": "LifeMD: 3 Key Takeaways for Long-Term Investors",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/lifemd-3-key-takeaways-long-030604678.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-15T03:06:04+00:00",
-              "ts_epoch": 1794711964.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -1504,6 +1498,20 @@
           "news": [
             {
               "symbol": "JNJ",
+              "title": "J&J looks to buy Ollin Biosciences for up to $3.4 billion, FT says",
+              "url": "https://finance.yahoo.com/healthcare/articles/j-j-looks-buy-ollin-004930607.html",
+              "provider": "Reuters",
+              "timestamp": "2026-11-16T02:32:52+00:00",
+              "ts_epoch": 1794796372.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "deal"
+              ]
+            },
+            {
+              "symbol": "JNJ",
               "title": "J&J in talks to buy eye disease biotech Ollin for $3.4 bln, FT reports",
               "url": "https://finance.yahoo.com/healthcare/articles/j-j-talks-buy-eye-012354715.html",
               "provider": "Investing.com",
@@ -1524,18 +1532,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "JNJ",
-              "title": "Coca-Cola and J&J Just Hit Record Highs. A 62-Year-Old Put $300,000 Into Them and Procter & Gamble in 2016. Here’s How Much the Now 72-Year-Old Gets Paid Every Single Month",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/coca-cola-j-j-just-214700342.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-14T21:47:00+00:00",
-              "ts_epoch": 1794692820.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
               "matched_keywords": []
             }
           ],
@@ -1646,6 +1642,32 @@
       "news": [
         {
           "symbol": "JNJ",
+          "title": "J&J looks to buy Ollin Biosciences for up to $3.4 billion, FT says",
+          "url": "https://finance.yahoo.com/healthcare/articles/j-j-looks-buy-ollin-004930607.html",
+          "provider": "Reuters",
+          "timestamp": "2026-11-16T02:32:52+00:00",
+          "ts_epoch": 1794796372.0,
+          "category": "order",
+          "category_label": "訂單 / 合約",
+          "sentiment": "positive",
+          "matched_keywords": [
+            "deal"
+          ]
+        },
+        {
+          "symbol": "LLY",
+          "title": "Three FDA Decisions Loom After Summit’s Rejection — Capricor, Savara, Alzheimer’s Data Top Biotech’s Watchlist",
+          "url": "https://finance.yahoo.com/healthcare/articles/three-fda-decisions-loom-summit-022530752.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-16T02:25:30+00:00",
+          "ts_epoch": 1794795930.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "JNJ",
           "title": "J&J in talks to buy eye disease biotech Ollin for $3.4 bln, FT reports",
           "url": "https://finance.yahoo.com/healthcare/articles/j-j-talks-buy-eye-012354715.html",
           "provider": "Investing.com",
@@ -1690,30 +1712,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "JNJ",
-          "title": "4 Durable Dividend Stocks Retirees Can Count On for Passive Income",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/4-durable-dividend-stocks-retirees-150050363.html",
-          "provider": "24/7 Wall St.",
-          "timestamp": "2026-11-15T15:00:50+00:00",
-          "ts_epoch": 1794754850.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "LLY",
-          "title": "LifeMD: 3 Key Takeaways for Long-Term Investors",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/lifemd-3-key-takeaways-long-030604678.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-15T03:06:04+00:00",
-          "ts_epoch": 1794711964.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -1765,8 +1763,8 @@
               "title": "Dow Jones Futures Waver As Jensen Huang Mulls Nvidia Return",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-rally-nvidia-earnings-anthropic-ipo-spacex-starship-flight-15/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-16T02:16:19+00:00",
-              "ts_epoch": 1794795379.0,
+              "timestamp": "2026-11-16T02:49:49+00:00",
+              "ts_epoch": 1794797389.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -1989,14 +1987,14 @@
             },
             {
               "symbol": "TSLA",
-              "title": "Jensen Huang weighs Nvidia CEO comeback as ally plans ‘war room’: report",
-              "url": "https://finance.yahoo.com/technology/articles/jensen-huang-weighs-nvidia-ceo-225714478.html",
-              "provider": "Fox Business",
-              "timestamp": "2026-11-15T22:57:14+00:00",
-              "ts_epoch": 1794783434.0,
+              "title": "Jensen Huang may return as Nvidia chief executive - report",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/jensen-huang-may-return-nvidia-210940404.html",
+              "provider": "Investing.com",
+              "timestamp": "2026-11-15T21:09:40+00:00",
+              "ts_epoch": 1794776980.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "neutral",
+              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -2360,8 +2358,8 @@
           "title": "Dow Jones Futures Waver As Jensen Huang Mulls Nvidia Return",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-rally-nvidia-earnings-anthropic-ipo-spacex-starship-flight-15/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-16T02:16:19+00:00",
-          "ts_epoch": 1794795379.0,
+          "timestamp": "2026-11-16T02:49:49+00:00",
+          "ts_epoch": 1794797389.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
@@ -2417,14 +2415,14 @@
         },
         {
           "symbol": "TSLA",
-          "title": "Jensen Huang weighs Nvidia CEO comeback as ally plans ‘war room’: report",
-          "url": "https://finance.yahoo.com/technology/articles/jensen-huang-weighs-nvidia-ceo-225714478.html",
-          "provider": "Fox Business",
-          "timestamp": "2026-11-15T22:57:14+00:00",
-          "ts_epoch": 1794783434.0,
+          "title": "Jensen Huang may return as Nvidia chief executive - report",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/jensen-huang-may-return-nvidia-210940404.html",
+          "provider": "Investing.com",
+          "timestamp": "2026-11-15T21:09:40+00:00",
+          "ts_epoch": 1794776980.0,
           "category": "general",
           "category_label": "一般新聞",
-          "sentiment": "neutral",
+          "sentiment": "negative",
           "matched_keywords": []
         }
       ],
@@ -3335,18 +3333,6 @@
             },
             {
               "symbol": "UBER",
-              "title": "Jensen Huang weighs Nvidia CEO comeback as ally plans ‘war room’: report",
-              "url": "https://finance.yahoo.com/technology/articles/jensen-huang-weighs-nvidia-ceo-225714478.html",
-              "provider": "Fox Business",
-              "timestamp": "2026-11-15T22:57:14+00:00",
-              "ts_epoch": 1794783434.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "UBER",
               "title": "Google Could Buy Uber to Win the Robotaxi Wars, Reuters Columnist Argues",
               "url": "https://finance.yahoo.com/technology/articles/google-could-buy-uber-win-033038440.html",
               "provider": "Benzinga",
@@ -3358,6 +3344,18 @@
               "matched_keywords": [
                 "deal"
               ]
+            },
+            {
+              "symbol": "UBER",
+              "title": "Alibaba vs. Uber Technologies: Which Tech Platform Stock Is a Better Buy for 2027?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/alibaba-vs-uber-technologies-tech-180202552.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-14T18:02:02+00:00",
+              "ts_epoch": 1794679322.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
             }
           ],
           "chip": {
@@ -3670,18 +3668,6 @@
           "matched_keywords": []
         },
         {
-          "symbol": "UBER",
-          "title": "Jensen Huang weighs Nvidia CEO comeback as ally plans ‘war room’: report",
-          "url": "https://finance.yahoo.com/technology/articles/jensen-huang-weighs-nvidia-ceo-225714478.html",
-          "provider": "Fox Business",
-          "timestamp": "2026-11-15T22:57:14+00:00",
-          "ts_epoch": 1794783434.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
           "symbol": "RTX",
           "title": "Can RTX (RTX) Justify Its Valuation As Raised 2026 Guidance Lifts Confidence?",
           "url": "https://finance.yahoo.com/markets/stocks/articles/rtx-rtx-justify-valuation-raised-081120833.html",
@@ -3731,6 +3717,18 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "UBER",
+          "title": "Lower Oil Prices Could Lift Uber Stock And Other Travel Names",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/lower-oil-prices-could-lift-160815118.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-14T16:08:15+00:00",
+          "ts_epoch": 1794672495.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -3782,8 +3780,8 @@
               "title": "Dow Jones Futures Waver As Jensen Huang Mulls Nvidia Return",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-rally-nvidia-earnings-anthropic-ipo-spacex-starship-flight-15/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-16T02:16:19+00:00",
-              "ts_epoch": 1794795379.0,
+              "timestamp": "2026-11-16T02:49:49+00:00",
+              "ts_epoch": 1794797389.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -4167,8 +4165,8 @@
           "title": "Dow Jones Futures Waver As Jensen Huang Mulls Nvidia Return",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-rally-nvidia-earnings-anthropic-ipo-spacex-starship-flight-15/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-16T02:16:19+00:00",
-          "ts_epoch": 1794795379.0,
+          "timestamp": "2026-11-16T02:49:49+00:00",
+          "ts_epoch": 1794797389.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
@@ -6005,20 +6003,7 @@
     {
       "code": "IWM",
       "label": "Russell 2000",
-      "status": "ok",
-      "as_of": "2026-11-13",
-      "close": 277.5400085449219,
-      "day_pct": -0.3232272261862845,
-      "pct_5d": 1.4141100329976064,
-      "pct_20d": 2.6253535125795313,
-      "volume": 17667200,
-      "vol_ratio": 0.7301044954620554,
-      "ma20": 278.3760025024414,
-      "ma50": 280.7630029296875,
-      "ma200": 279.41105102539063,
-      "above_ma20": false,
-      "above_ma50": false,
-      "above_ma200": false
+      "status": "error"
     },
     {
       "code": "^VIX",
@@ -6054,7 +6039,7 @@
       "vol_vs_avg5": 1.2994153180217722,
       "vol_ratio": 0.6805525831171325,
       "dollar_vol": 196866038.47579956,
-      "rsi": 54.45526924984043,
+      "rsi": 54.45526924984044,
       "rsi_5d_ago": 54.00809415738445,
       "ma20": 48.890499687194826,
       "ma50": 48.047000045776365,
@@ -6094,7 +6079,7 @@
         "above_ma20": true,
         "above_ma50": true,
         "above_ma200": true,
-        "rsi": 54.45526924984043
+        "rsi": 54.45526924984044
       },
       "weight": 0.0,
       "attribution": {
@@ -6291,8 +6276,8 @@
       "vol_vs_avg5": 1.7296100960632887,
       "vol_ratio": 1.129528261270681,
       "dollar_vol": 138126837.10327148,
-      "rsi": 60.87298617165111,
-      "rsi_5d_ago": 61.06468848611715,
+      "rsi": 60.87298617165109,
+      "rsi_5d_ago": 61.06468848611714,
       "ma20": 184.552498626709,
       "ma50": 176.17579895019531,
       "ma60": 176.48649927775065,
@@ -6331,7 +6316,7 @@
         "above_ma20": true,
         "above_ma50": true,
         "above_ma200": true,
-        "rsi": 60.87298617165111
+        "rsi": 60.87298617165109
       },
       "weight": 0.0,
       "attribution": {
@@ -6566,8 +6551,8 @@
       "vol_vs_avg5": 1.2214297907854554,
       "vol_ratio": 0.911974847933381,
       "dollar_vol": 573012485.2935791,
-      "rsi": 53.37762228350137,
-      "rsi_5d_ago": 53.7203892692737,
+      "rsi": 53.37762228350136,
+      "rsi_5d_ago": 53.720389269273696,
       "ma20": 220.9099998474121,
       "ma50": 213.6494006347656,
       "ma60": 213.74200032552082,
@@ -6619,7 +6604,7 @@
         "above_ma20": true,
         "above_ma50": true,
         "above_ma200": false,
-        "rsi": 53.37762228350137
+        "rsi": 53.37762228350136
       },
       "weight": 0.0,
       "attribution": {
@@ -6658,7 +6643,7 @@
       "vol_vs_avg5": 1.1845055743296593,
       "vol_ratio": 1.0934482029752404,
       "dollar_vol": 256324172.9156494,
-      "rsi": 66.07289463907085,
+      "rsi": 66.07289463907087,
       "rsi_5d_ago": 63.39597678641002,
       "ma20": 322.72650146484375,
       "ma50": 312.11919921875,
@@ -6698,7 +6683,7 @@
         "above_ma20": true,
         "above_ma50": true,
         "above_ma200": true,
-        "rsi": 66.07289463907085
+        "rsi": 66.07289463907087
       },
       "weight": 0.0,
       "attribution": {
