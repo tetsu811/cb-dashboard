@@ -53,6 +53,12 @@ class UIContractTests(unittest.TestCase):
             script = handle.read()
         self.assertIn("if(visibleSeries.size===1)return", script)
 
+    def test_stock_detail_links_to_existing_atlas_page(self):
+        with open("day_trading_ratio.js", encoding="utf-8") as handle:
+            script = handle.read()
+        self.assertIn("/investment-tools/atlas/stocks/tw-", script)
+        self.assertIn("link.hidden=stock.asset_type!=='stock'", script)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -8,6 +8,7 @@
   <title>台股當沖熱度儀表板｜Tetsu 投資工具</title>
   <link rel="stylesheet" href="day_trading_ratio.css?v=1">
   <style>.pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin:14px 0 2px}.pagination button{border:1px solid var(--line);background:#0b1a2b;color:#b8c8db;border-radius:9px;padding:7px 12px;cursor:pointer}.pagination button:hover:not(:disabled){border-color:rgba(34,211,238,.35);color:#fff}.pagination button:disabled{opacity:.35;cursor:not-allowed}.pagination span{color:var(--muted);font-size:11px;min-width:70px;text-align:center}.legend{gap:8px}.legend button{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:6px 10px;background:#091523;color:#d5e0ed;cursor:pointer;transition:opacity .15s,border-color .15s,background .15s}.legend button:hover,.legend button:focus-visible{border-color:rgba(34,211,238,.42);outline:0}.legend button[aria-pressed="false"]{opacity:.38;background:transparent;text-decoration:line-through}</style>
+  <style>.detail-link{display:inline-flex;margin-top:10px;color:#a5f3fc;font-size:11px;font-weight:700;text-decoration:none}.detail-link:hover{text-decoration:underline}</style>
 </head>
 <body>
   <main class="shell">
@@ -69,7 +70,7 @@
       </div>
 
       <article class="stock-detail" id="stockDetail" hidden>
-        <div class="stock-identity"><span id="detailMarket">—</span><h3><b id="detailCode">—</b> <span id="detailName">—</span></h3><p id="detailPrice">—</p></div>
+        <div class="stock-identity"><span id="detailMarket">—</span><h3><b id="detailCode">—</b> <span id="detailName">—</span></h3><p id="detailPrice">—</p><a id="detailLink" class="detail-link" href="#" target="_blank" rel="noopener">查看完整個股研究 →</a></div>
         <div class="detail-stat hero-stat"><span>今日當沖占比</span><strong id="detailRatio">—</strong><small id="detailVsAvg">—</small></div>
         <div class="detail-stat"><span>當沖成交值</span><strong id="detailDaytrade">—</strong><small>買賣金額平均</small></div>
         <div class="detail-stat"><span>總成交值</span><strong id="detailTurnover">—</strong><small>官方成交金額</small></div>
@@ -83,7 +84,7 @@
         </table>
       </div>
       <div class="pagination"><button id="prevPage" type="button">← 上一頁</button><span id="pageLabel">第 1 頁</span><button id="nextPage" type="button">下一頁 →</button></div>
-      <p class="table-note">預設排除 ETF 並設定最低成交值 5 億元，避免低流動性個股以極高占比占據排行。點選任一列查看近20日變化。</p>
+      <p class="table-note">預設排除 ETF 並設定最低成交值 5 億元，避免低流動性個股以極高占比占據排行。點選任一列查看近20日變化；普通股可繼續前往完整個股研究頁。</p>
     </section>
 
     <section class="method">
@@ -99,6 +100,6 @@
     <footer><span>台股當沖熱度儀表板</span><span id="generatedAt">每日盤後更新｜僅供研究，不構成投資建議</span></footer>
   </main>
   <div class="tooltip" id="tooltip" hidden></div>
-  <script src="day_trading_ratio.js?v=2"></script>
+  <script src="day_trading_ratio.js?v=3"></script>
 </body>
 </html>
