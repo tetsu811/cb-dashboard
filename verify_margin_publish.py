@@ -11,7 +11,10 @@ def main():
     parser = argparse.ArgumentParser(description='Verify the public margin JSON has the newly generated trading date.')
     parser.add_argument('--local', default='margin_strategy_latest.json')
     parser.add_argument('--url', required=True)
-    parser.add_argument('--attempts', type=int, default=30)
+    # Several update workflows can enqueue Pages builds together after the
+    # close. Give the deployment queue up to 15 minutes before declaring a
+    # publish failure; successful builds still exit on the first matching poll.
+    parser.add_argument('--attempts', type=int, default=90)
     parser.add_argument('--interval', type=int, default=10)
     args = parser.parse_args()
 
