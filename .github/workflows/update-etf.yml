@@ -1,0 +1,83 @@
+name: Update ETF Dashboard
+
+on:
+  schedule:
+    # Nominally Taipei 17:50 / 18:30 / 19:30 on weekdays, but measured runs land
+    # 3.5–4.2h late every day (queue delay, not jitter), so data actually lands
+    # ~21:30–23:15 Taipei. Do NOT shift the cron earlier to compensate: if the
+    # delay ever disappears we would fetch mid-session and snapshot stale
+    # holdings. Three windows are redundancy — once a day has a complete
+    # snapshot, later runs reuse it and skip the fetch.
+    # UTC date == Taipei date for anything running 08:00–24:00 Taipei, so the
+    # delay never misdates a snapshot.
+    - cron: '50 9 * * 1-5'
+    - cron: '30 10 * * 1-5'
+    - cron: '30 11 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force_refetch:
+        description: '忽略今天已存在的快照，強制重抓（資料抓早了、內容過期時用）'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# 兩個 run 同時跑會各自產生一份 etf_index.html / 快照，push 時必然衝突。
+# 排隊而不是取消，因為每個時段的抓取結果都可能是當天唯一成功的那次。
+concurrency:
+  group: update-etf
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Generate ETF dashboard
+        env:
+          FORCE_REFETCH: ${{ inputs.force_refetch }}
+        run: python generate_etf.py
+
+      # Card is rendered here rather than in Python so the PNG comes from a real
+      # browser — same engine that renders the dashboard, so no second layout
+      # engine to keep in sync. Noto CJK is required or every glyph is a box.
+      - name: Render daily card to PNG
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          pip install playwright
+          playwright install --with-deps chromium
+          python render_card.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # etf_first_seen.json has to be committed as well — it is the only
+          # record of when each fund first/last held a stock, and 「新面孔」
+          # reads it. Leaving it out froze the registry at 2026-04-30.
+          git add etf_index.html etf_card.html etf_card.png etf_latest.json etf_data/ etf_config.json etf_first_seen.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Auto update ETF dashboard $(date -u +%Y-%m-%d)"
+            # 這些都是產生出來的檔案，衝突時沒有「合併」可言 —— 剛跑完的這份
+            # 才是完整的，所以 rebase 撞到就整檔取用我們這邊的版本。
+            if ! git pull --rebase --autostash origin main; then
+              git checkout --theirs -- etf_index.html etf_card.html etf_card.png \
+                etf_latest.json etf_first_seen.json etf_data/ 2>/dev/null || true
+              git add -A
+              GIT_EDITOR=true git rebase --continue
+            fi
+            git push
+          fi
