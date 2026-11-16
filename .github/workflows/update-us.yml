@@ -5,6 +5,8 @@ on:
     # 美股收盤後執行。22:30 UTC 涵蓋 EDT（16:00 ET = 20:00 UTC）與 EST（16:00 ET = 21:00 UTC）
     # 兩種時區，並讓 yfinance 資料有時間更新。
     - cron: '30 22 * * 1-5'
+    - cron: '30 23 * * 1-5'
+    - cron: '30 0 * * 2-6'
   workflow_dispatch:
 
 permissions:

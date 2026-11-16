@@ -4,6 +4,8 @@ on:
   schedule:
     # 美股收盤後，待日線資料完成再刷新。
     - cron: '50 22 * * 1-5'
+    - cron: '50 23 * * 1-5'
+    - cron: '50 0 * * 2-6'
   workflow_dispatch:
 
 permissions:

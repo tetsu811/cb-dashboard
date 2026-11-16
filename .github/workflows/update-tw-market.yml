@@ -2,8 +2,12 @@ name: Update TW Market Dashboard
 
 on:
   schedule:
-    # 台股收盤後執行：台灣時間 14:30 = UTC 06:30（EDT 夏令無影響）
+    # Staggered close-window retries make a delayed Yahoo/TWSE publication or
+    # one missed GitHub schedule harmless.
     - cron: '30 6 * * 1-5'
+    - cron: '17 8 * * 1-5'
+    - cron: '17 10 * * 1-5'
+    - cron: '17 12 * * 1-5'
   workflow_dispatch:
 
 permissions:

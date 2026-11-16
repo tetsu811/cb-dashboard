@@ -2,10 +2,12 @@ name: Update Margin Strategy
 on:
   workflow_dispatch:
   schedule:
-    # One daily attempt at 23:20 Asia/Taipei, after the official margin release.
-    # A separate conditional verifier handles genuine misses without running an
-    # unconditional second or third Actions job.
+    # Retry across the official publication window. Each run is idempotent and
+    # publishes only when the exchange date advances.
+    - cron: '43 12 * * 1-5'
+    - cron: '13 14 * * 1-5'
     - cron: '20 15 * * 1-5'
+    - cron: '43 16 * * 1-5'
 permissions:
   contents: write
 concurrency:

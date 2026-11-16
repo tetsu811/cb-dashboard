@@ -5,6 +5,8 @@ on:
   schedule:
     # TDCC 是週資料；每日 18:00 台北時間檢查一次，資料沒變就不提交。
     - cron: '0 10 * * *'
+    - cron: '11 12 * * *'
+    - cron: '11 15 * * *'
 
 permissions:
   contents: write

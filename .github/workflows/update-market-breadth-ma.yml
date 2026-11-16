@@ -3,9 +3,12 @@ name: Update Market Breadth MA
 on:
   workflow_dispatch:
   schedule:
-    # 16:20 Asia/Taipei on weekdays. The official-date probe makes exchange
-    # holidays a no-op, so data changes only after an actual trading session.
+    # Several staggered attempts absorb delayed official files and GitHub cron
+    # jitter. The official-date probe keeps holidays as no-ops.
     - cron: '20 8 * * 1-5'
+    - cron: '37 8 * * 1-5'
+    - cron: '7 9 * * 1-5'
+    - cron: '7 10 * * 1-5'
 
 permissions:
   contents: write

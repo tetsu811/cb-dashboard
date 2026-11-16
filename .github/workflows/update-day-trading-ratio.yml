@@ -3,7 +3,10 @@ name: Update Day Trading Ratio
 on:
   workflow_dispatch:
   schedule:
-    # 23:15 Asia/Taipei on weekdays, after the official evening publication.
+    # Multiple non-round windows keep the dashboard current even when GitHub's
+    # scheduled-event queue drops or delays one occurrence.
+    - cron: '17 9 * * 1-5'
+    - cron: '47 11 * * 1-5'
     - cron: '15 15 * * 1-5'
 
 permissions:
