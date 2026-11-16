@@ -12,6 +12,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 import requests
+from bs4 import BeautifulSoup
 
 
 ROOT = Path(__file__).resolve().parent
@@ -19,6 +20,8 @@ OUTPUT = ROOT / "txo_map.html"
 LATEST = ROOT / "txo_map_latest.json"
 OPTION_API = "https://openapi.taifex.com.tw/v1/DailyMarketReportOpt"
 FUTURES_API = "https://openapi.taifex.com.tw/v1/DailyMarketReportFut"
+OPTION_REPORT = "https://www.taifex.com.tw/cht/3/optDailyMarketReport"
+FUTURES_REPORT = "https://www.taifex.com.tw/cht/3/futDailyMarketReport"
 TZ = ZoneInfo("Asia/Taipei")
 RISK_FREE = 0.015
 
@@ -33,32 +36,39 @@ def _iso_date(value: str) -> str:
     return f"{text[:4]}-{text[4:6]}-{text[6:8]}"
 
 
+def _response_records(response: requests.Response) -> list[dict]:
+    """TAIFEX may serve the same endpoint as JSON or downloadable CSV."""
+    text = response.content.decode("utf-8-sig").lstrip()
+    if text.startswith("["):
+        return response.json()
+    return list(csv.DictReader(StringIO(text)))
+
+
 def api_rows(dataset: str, data_id: str, start: date, end: date) -> list[dict]:
     """Read the latest official TAIFEX daily files and normalize their fields."""
     if dataset == "TaiwanOptionDaily":
         response = requests.get(OPTION_API, timeout=75)
         response.raise_for_status()
-        reader = csv.DictReader(StringIO(response.content.decode("utf-8-sig")))
         rows = []
-        for row in reader:
-            if row.get("契約") != data_id:
+        for row in _response_records(response):
+            if (row.get("契約") or row.get("Contract")) != data_id:
                 continue
             rows.append({
-                "date": _iso_date(row["日期"]),
-                "contract_date": row["到期月份(週別)"],
-                "strike_price": _number(row["履約價"]),
-                "call_put": "call" if row["買賣權"] == "買權" else "put",
-                "open_interest": int(_number(row["未沖銷契約量"])),
-                "volume": int(_number(row["成交量"])),
-                "settlement_price": _number(row["結算價"]),
-                "close": _number(row["最後成交價"]),
-                "trading_session": "position" if row.get("交易時段") == "一般" else "afterhours",
+                "date": _iso_date(row.get("日期") or row.get("Date")),
+                "contract_date": row.get("到期月份(週別)") or row.get("ContractMonth(Week)"),
+                "strike_price": _number(row.get("履約價") or row.get("StrikePrice")),
+                "call_put": "call" if (row.get("買賣權") or row.get("CallPut")) in {"買權", "Call"} else "put",
+                "open_interest": int(_number(row.get("未沖銷契約量") or row.get("OpenInterest"))),
+                "volume": int(_number(row.get("成交量") or row.get("Volume"))),
+                "settlement_price": _number(row.get("結算價") or row.get("SettlementPrice")),
+                "close": _number(row.get("最後成交價") or row.get("Close")),
+                "trading_session": "position" if (row.get("交易時段") or row.get("TradingSession")) == "一般" else "afterhours",
             })
         return rows
     response = requests.get(FUTURES_API, timeout=75)
     response.raise_for_status()
     rows = []
-    for row in response.json():
+    for row in _response_records(response):
         if row.get("Contract") != data_id or "/" in str(row.get("ContractMonth(Week)", "")):
             continue
         rows.append({
@@ -69,6 +79,65 @@ def api_rows(dataset: str, data_id: str, start: date, end: date) -> list[dict]:
             "trading_session": "position" if row.get("TradingSession") == "一般" else "afterhours",
         })
     return rows
+
+
+def report_rows(dataset: str, data_id: str, trade_date: date) -> list[dict]:
+    """Fallback to the official daily-report page when OpenAPI lags or is empty."""
+    is_option = dataset == "TaiwanOptionDaily"
+    url = OPTION_REPORT if is_option else FUTURES_REPORT
+    response = requests.get(
+        url,
+        params={
+            "queryDate": trade_date.strftime("%Y/%m/%d"),
+            "commodity_id": data_id,
+            "marketCode": "0",
+            "MarketCode": "0",
+        },
+        timeout=90,
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    response.raise_for_status()
+    soup = BeautifulSoup(response.text, "html.parser")
+    marker = "履約價" if is_option else "結算價"
+    table = next((table for table in soup.find_all("table") if marker in table.get_text()), None)
+    if table is None:
+        return []
+    rows = []
+    for tr in table.find_all("tr")[1:]:
+        cells = [cell.get_text(" ", strip=True) for cell in tr.find_all(["th", "td"])]
+        if is_option:
+            if len(cells) < 20 or cells[0] != data_id:
+                continue
+            rows.append({
+                "date": trade_date.isoformat(),
+                "contract_date": cells[1],
+                "strike_price": _number(cells[3]),
+                "call_put": cells[4].lower(),
+                "open_interest": int(_number(cells[15])),
+                "volume": int(_number(cells[13])),
+                "settlement_price": _number(cells[9]),
+                "close": _number(cells[8]),
+                "trading_session": "position",
+            })
+        else:
+            if len(cells) < 17 or cells[0] != data_id or "/" in cells[1]:
+                continue
+            rows.append({
+                "date": trade_date.isoformat(),
+                "contract_date": cells[1],
+                "close": _number(cells[5] or cells[11]),
+                "volume": int(_number(cells[9])),
+                "trading_session": "position",
+            })
+    return rows
+
+
+def expected_report_date() -> date:
+    now = datetime.now(TZ)
+    candidate = now.date() if now.time() >= time(16, 30) else now.date() - timedelta(days=1)
+    while candidate.weekday() >= 5:
+        candidate -= timedelta(days=1)
+    return candidate
 
 
 def snapshot_rows() -> list[dict]:
@@ -299,12 +368,21 @@ def build() -> dict:
     today = datetime.now(TZ).date()
     start = today - timedelta(days=10)
     options = api_rows("TaiwanOptionDaily", "TXO", start, today + timedelta(days=1))
+    expected = expected_report_date()
+    if not options or max(str(r["date"]) for r in options) < expected.isoformat():
+        fallback = report_rows("TaiwanOptionDaily", "TXO", expected)
+        if fallback:
+            options = fallback
     if not options:
         raise RuntimeError("TAIFEX returned no TXO daily rows")
     option_date = max(str(r["date"]) for r in options)
     option_day = date.fromisoformat(option_date)
     options = [r for r in options if r.get("date") == option_date]
     futures = api_rows("TaiwanFuturesDaily", "TX", start, today + timedelta(days=1))
+    if not futures or max(str(r["date"]) for r in futures) < option_date:
+        fallback = report_rows("TaiwanFuturesDaily", "TX", option_day)
+        if fallback:
+            futures = fallback
     spot, futures_contract = current_price(futures, option_date)
     snapshots = snapshot_rows()
     _, quote_time = live_price(snapshots)

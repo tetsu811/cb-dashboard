@@ -25,7 +25,7 @@ jobs:
         with: {python-version: '3.12'}
 
       - name: Install dependency
-        run: pip install requests
+        run: pip install requests beautifulsoup4
 
       - name: Generate from official TAIFEX OpenAPI
         run: python generate_txo_map.py

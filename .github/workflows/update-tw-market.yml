@@ -34,6 +34,19 @@ jobs:
       - name: Generate TW market dashboard
         run: python generate_tw_market.py
 
+      - name: Validate official TWSE date
+        run: |
+          python - <<'PY'
+          import json
+          from generate_tw_market import fetch_latest_twse_close
+
+          expected, _ = fetch_latest_twse_close()
+          actual = json.load(open('tw_market_latest.json'))['date']
+          print(f'expected={expected} actual={actual}')
+          if not expected or actual != expected:
+              raise SystemExit('TW market dashboard did not reach the latest official TWSE date')
+          PY
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

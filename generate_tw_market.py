@@ -15,6 +15,7 @@ import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, time, timedelta, timezone
+from functools import lru_cache
 from io import StringIO
 from zoneinfo import ZoneInfo
 
@@ -65,10 +66,116 @@ def completed_daily_bars(bars):
         return bars.iloc[:-1]
     return bars
 
+
+def _twse_number(value):
+    text = str(value or "").replace(",", "").strip()
+    return float(text) if text not in {"", "--", "---"} else 0.0
+
+
+def _signed_change(direction, value):
+    amount = _twse_number(value)
+    return -amount if "-" in str(direction) or "green" in str(direction).lower() else amount
+
+
+@lru_cache(maxsize=1)
+def fetch_latest_twse_close():
+    """Return the newest completed official TWSE MI_INDEX payload."""
+    candidate = NOW_TAIPEI.date()
+    if NOW_TAIPEI.time() < TW_CLOSE_READY:
+        candidate -= timedelta(days=1)
+    for offset in range(10):
+        probe_date = candidate - timedelta(days=offset)
+        if probe_date.weekday() >= 5:
+            continue
+        try:
+            response = requests.get(
+                "https://www.twse.com.tw/exchangeReport/MI_INDEX",
+                params={
+                    "response": "json",
+                    "date": probe_date.strftime("%Y%m%d"),
+                    "type": "ALLBUT0999",
+                },
+                timeout=30,
+                headers=HEADERS,
+            )
+            response.raise_for_status()
+            payload = response.json()
+            if payload.get("stat") == "OK" and payload.get("tables"):
+                return probe_date.isoformat(), payload
+        except Exception as exc:
+            print(f"  [TWSE {probe_date}] {exc}")
+    return None, None
+
+
+def fetch_official_taiex():
+    trade_date, payload = fetch_latest_twse_close()
+    if not payload:
+        return None
+    for table in payload.get("tables", []):
+        fields = table.get("fields") or []
+        if fields[:2] != ["指數", "收盤指數"]:
+            continue
+        for row in table.get("data") or []:
+            if row and row[0] == "發行量加權股價指數":
+                close = _twse_number(row[1])
+                change = _signed_change(row[2], row[3])
+                pct = _twse_number(row[4])
+                return {
+                    "code": "^TWII",
+                    "zh": "加權指數",
+                    "en": "TAIEX",
+                    "status": "ok",
+                    "close": close,
+                    "day_pct": pct,
+                    "day_chg": change,
+                    "volume": None,
+                    "date": trade_date,
+                    "source": "TWSE",
+                }
+    return None
+
+
+def fetch_official_etfs():
+    trade_date, payload = fetch_latest_twse_close()
+    if not payload:
+        return []
+    wanted = {code.replace(".TW", ""): (name, sector) for code, name, sector in TW_ETFS}
+    found = {}
+    for table in payload.get("tables", []):
+        fields = table.get("fields") or []
+        if not fields or fields[0] != "證券代號" or "收盤價" not in fields:
+            continue
+        index = {name: pos for pos, name in enumerate(fields)}
+        for row in table.get("data") or []:
+            code = str(row[index["證券代號"]]).strip()
+            if code not in wanted:
+                continue
+            close = _twse_number(row[index["收盤價"]])
+            change = _signed_change(row[index["漲跌(+/-)"]], row[index["漲跌價差"]])
+            previous = close - change
+            name, sector = wanted[code]
+            found[code] = {
+                "code": code,
+                "name": name,
+                "sector": sector,
+                "close": close,
+                "day_pct": (change / previous * 100) if previous else 0,
+                "volume": _twse_number(row[index["成交股數"]]),
+                "vol_ratio": None,
+                "date": trade_date,
+                "source": "TWSE",
+            }
+    return [found[code.replace(".TW", "")] for code, _, _ in TW_ETFS if code.replace(".TW", "") in found]
+
 def fetch_market_indices():
     """抓 TAIEX 近 5 日資料，算今日漲跌。每個 ticker 單獨抓以避免多層欄問題。"""
     results = []
     for code, zh, en in TW_MARKET_TICKERS:
+        if code == "^TWII":
+            official = fetch_official_taiex()
+            if official:
+                results.append(official)
+                continue
         try:
             bars = yf.download(
                 code, period="5d", interval="1d",
@@ -103,6 +210,9 @@ def fetch_market_indices():
 
 def fetch_tw_etfs():
     """批次抓台股ETF當日行情。"""
+    official = fetch_official_etfs()
+    if official:
+        return official
     codes = [e[0] for e in TW_ETFS]
     try:
         df = yf.download(
