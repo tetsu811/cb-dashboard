@@ -22,6 +22,8 @@ OPTION_API = "https://openapi.taifex.com.tw/v1/DailyMarketReportOpt"
 FUTURES_API = "https://openapi.taifex.com.tw/v1/DailyMarketReportFut"
 OPTION_REPORT = "https://www.taifex.com.tw/cht/3/optDailyMarketReport"
 FUTURES_REPORT = "https://www.taifex.com.tw/cht/3/futDailyMarketReport"
+OPTION_DOWNLOAD = "https://www.taifex.com.tw/cht/3/optDataDown"
+FUTURES_DOWNLOAD = "https://www.taifex.com.tw/cht/3/futDataDown"
 TZ = ZoneInfo("Asia/Taipei")
 RISK_FREE = 0.015
 
@@ -93,7 +95,7 @@ def report_rows(dataset: str, data_id: str, trade_date: date) -> list[dict]:
             "marketCode": "0",
             "MarketCode": "0",
         },
-        timeout=90,
+        timeout=30,
         headers={"User-Agent": "Mozilla/5.0"},
     )
     response.raise_for_status()
@@ -130,6 +132,65 @@ def report_rows(dataset: str, data_id: str, trade_date: date) -> list[dict]:
                 "trading_session": "position",
             })
     return rows
+
+
+def download_rows(dataset: str, data_id: str, trade_date: date) -> list[dict]:
+    """Use TAIFEX's compact official daily CSV download as the primary fallback."""
+    is_option = dataset == "TaiwanOptionDaily"
+    response = requests.post(
+        OPTION_DOWNLOAD if is_option else FUTURES_DOWNLOAD,
+        data={
+            "queryStartDate": trade_date.strftime("%Y/%m/%d"),
+            "queryEndDate": trade_date.strftime("%Y/%m/%d"),
+            "commodity_id": data_id,
+            "commodity_id2": "",
+            "down_type": "1",
+        },
+        timeout=45,
+        headers={"User-Agent": "Mozilla/5.0"},
+    )
+    response.raise_for_status()
+    records = csv.reader(StringIO(response.content.decode("cp950", errors="replace")))
+    next(records, None)
+    rows = []
+    for cells in records:
+        cells = [cell.strip() for cell in cells]
+        if is_option:
+            if len(cells) < 18 or cells[1] != data_id:
+                continue
+            rows.append({
+                "date": cells[0].replace("/", "-"),
+                "contract_date": cells[2],
+                "strike_price": _number(cells[3]),
+                "call_put": "call" if cells[4] == "買權" else "put",
+                "open_interest": int(_number(cells[11])),
+                "volume": int(_number(cells[9])),
+                "settlement_price": _number(cells[10]),
+                "close": _number(cells[8]),
+                "trading_session": "position" if cells[17] == "一般" else "afterhours",
+            })
+        else:
+            if len(cells) < 18 or cells[1] != data_id or "/" in cells[2]:
+                continue
+            rows.append({
+                "date": cells[0].replace("/", "-"),
+                "contract_date": cells[2],
+                "close": _number(cells[6] or cells[10]),
+                "volume": int(_number(cells[9])),
+                "trading_session": "position" if cells[17] == "一般" else "afterhours",
+            })
+    return rows
+
+
+def fallback_rows(dataset: str, data_id: str, trade_date: date) -> list[dict]:
+    for fetcher in (download_rows, report_rows):
+        try:
+            rows = fetcher(dataset, data_id, trade_date)
+            if rows:
+                return rows
+        except requests.RequestException as exc:
+            print(f"  [{fetcher.__name__}] {data_id} {trade_date}: {exc}")
+    return []
 
 
 def expected_report_date() -> date:
@@ -370,7 +431,7 @@ def build() -> dict:
     options = api_rows("TaiwanOptionDaily", "TXO", start, today + timedelta(days=1))
     expected = expected_report_date()
     if not options or max(str(r["date"]) for r in options) < expected.isoformat():
-        fallback = report_rows("TaiwanOptionDaily", "TXO", expected)
+        fallback = fallback_rows("TaiwanOptionDaily", "TXO", expected)
         if fallback:
             options = fallback
     if not options:
@@ -380,7 +441,7 @@ def build() -> dict:
     options = [r for r in options if r.get("date") == option_date]
     futures = api_rows("TaiwanFuturesDaily", "TX", start, today + timedelta(days=1))
     if not futures or max(str(r["date"]) for r in futures) < option_date:
-        fallback = report_rows("TaiwanFuturesDaily", "TX", option_day)
+        fallback = fallback_rows("TaiwanFuturesDaily", "TX", option_day)
         if fallback:
             futures = fallback
     spot, futures_contract = current_price(futures, option_date)
