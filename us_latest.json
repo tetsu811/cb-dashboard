@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-18T03:47:28.254282",
+  "fetched_at": "2026-11-18T04:38:10.840947",
   "trade_date": "2026-11-17",
   "sectors": [
     {
@@ -60,8 +60,8 @@
               "title": "Dow Jones Futures: Techs Rise After Nvidia Beats, Says This On Jensen Huang; Target, Anthropic IPO Ahead",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-earnings-target-anthropic-ipo/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-18T03:41:52+00:00",
-              "ts_epoch": 1794973312.0,
+              "timestamp": "2026-11-18T04:05:12+00:00",
+              "ts_epoch": 1794974712.0,
               "category": "earnings",
               "category_label": "財報",
               "sentiment": "positive",
@@ -330,6 +330,18 @@
           "news": [
             {
               "symbol": "PLTR",
+              "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
+              "provider": "TheStreet",
+              "timestamp": "2026-11-18T04:33:00+00:00",
+              "ts_epoch": 1794976380.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "PLTR",
               "title": "Phillip Securities Raises Its Palantir Target to $248. Is It Still Too Low?",
               "url": "https://finance.yahoo.com/markets/stocks/articles/phillip-securities-raises-palantir-target-225938628.html",
               "provider": "TIKR",
@@ -350,18 +362,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "PLTR",
-              "title": "Trump Demands a “350 Billion Dollar” Military Bill Before Democrats Take Over. Palantir Has a Stake",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/trump-demands-350-billion-dollar-181345463.html",
-              "provider": "TIKR",
-              "timestamp": "2026-11-17T18:13:45+00:00",
-              "ts_epoch": 1794939225.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -401,6 +401,18 @@
           "news": [
             {
               "symbol": "MU",
+              "title": "Nasdaq Futures Lead Wall Street Rebound After Nvidia’s Blowout Forecast, Anthropic IPO Looms: SLS, NKE, MU In Focus",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-lead-wall-street-034627099.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T03:46:27+00:00",
+              "ts_epoch": 1794973587.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MU",
               "title": "Broadcom vs. Micron Technology: Which Tech Stock Is the Better Buy for 2027?",
               "url": "https://finance.yahoo.com/markets/stocks/articles/broadcom-vs-micron-technology-tech-033002100.html",
               "provider": "Motley Fool",
@@ -421,18 +433,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MU",
-              "title": "Is SK Hynix the Better Artificial Intelligence (AI) Memory Stock Compared With Micron?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/sk-hynix-better-artificial-intelligence-220503860.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-17T22:05:03+00:00",
-              "ts_epoch": 1794953103.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -455,13 +455,7 @@
                 "sentiment": "negative"
               }
             ],
-            "insider_news": [
-              {
-                "title": "Jim Simons’ Fund Just Dumped 99.7% of Its Nvidia, Which Had Been Its No. 1 Holding",
-                "url": "https://finance.yahoo.com/markets/stocks/articles/jim-simons-fund-just-dumped-185334974.html",
-                "sentiment": "negative"
-              }
-            ],
+            "insider_news": [],
             "insider_chip": {
               "buys": 3,
               "sells": 13,
@@ -483,21 +477,58 @@
               "vol_vs_yday": 1.2138815263190879
             },
             "reasons": [
-              "分析師指引",
-              "高管異動"
+              "分析師指引"
             ],
-            "conclusion": "放量跌幅主因疑為：分析師指引 + 高管異動"
+            "conclusion": "放量跌幅主因疑為：分析師指引"
           }
         }
       ],
       "news": [
         {
+          "symbol": "PLTR",
+          "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
+          "provider": "TheStreet",
+          "timestamp": "2026-11-18T04:33:00+00:00",
+          "ts_epoch": 1794976380.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "BE Stock Rises Overnight After Nvidia Earnings: Insiders Report $1.3M In Share Sales, Retail Sees $200 Ahead",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-rises-overnight-nvidia-earnings-042206405.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-18T04:22:06+00:00",
+          "ts_epoch": 1794975726.0,
+          "category": "insider",
+          "category_label": "高管動作",
+          "sentiment": "negative",
+          "matched_keywords": [
+            "sold shares"
+          ]
+        },
+        {
+          "symbol": "MSFT",
+          "title": "Nvidia’s earnings call names two former crypto miners",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/nvidia-earnings-call-names-two-041631384.html",
+          "provider": "TheStreet",
+          "timestamp": "2026-11-18T04:16:31+00:00",
+          "ts_epoch": 1794975391.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
           "symbol": "AVGO",
           "title": "Dow Jones Futures: Techs Rise After Nvidia Beats, Says This On Jensen Huang; Target, Anthropic IPO Ahead",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-earnings-target-anthropic-ipo/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-18T03:41:52+00:00",
-          "ts_epoch": 1794973312.0,
+          "timestamp": "2026-11-18T04:05:12+00:00",
+          "ts_epoch": 1794974712.0,
           "category": "earnings",
           "category_label": "財報",
           "sentiment": "positive",
@@ -528,44 +559,6 @@
           "category_label": "一般新聞",
           "sentiment": "neutral",
           "matched_keywords": []
-        },
-        {
-          "symbol": "MSFT",
-          "title": "Microsoft Stock Hits Seven-Week Low: Is a Bigger Drop Coming?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/microsoft-stock-hits-seven-week-022643923.html",
-          "provider": "BeInCrypto",
-          "timestamp": "2026-11-18T02:26:43+00:00",
-          "ts_epoch": 1794968803.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "MSFT",
-          "title": "Nvidia says 'no' to rehiring Huang and WSJ reports SEC is probing the chipmaker",
-          "url": "https://finance.yahoo.com/news/nvidia-board-forms-committee-national-102208048.html",
-          "provider": "Reuters",
-          "timestamp": "2026-11-18T01:32:47+00:00",
-          "ts_epoch": 1794965567.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "AVGO",
-          "title": "Nvidia earnings spark after-hours rally in chipmakers, neocloud stocks",
-          "url": "https://finance.yahoo.com/technology/articles/nvidia-earnings-spark-hours-rally-010526744.html",
-          "provider": "Investing.com",
-          "timestamp": "2026-11-18T01:05:26+00:00",
-          "ts_epoch": 1794963926.0,
-          "category": "earnings",
-          "category_label": "財報",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "blowout"
-          ]
         }
       ],
       "earnings": [
@@ -652,14 +645,14 @@
             },
             {
               "symbol": "JPM",
-              "title": "America's AI Boom Has a Hidden Cost — Top Economist Warns Inflation Is Rising, Capital Is Being Sucked Away, and the Rest of the Economy Is Falling Behind",
-              "url": "https://finance.yahoo.com/economy/policy/articles/americas-ai-boom-hidden-cost-233027907.html",
-              "provider": "Benzinga",
-              "timestamp": "2026-11-17T23:30:27+00:00",
-              "ts_epoch": 1794958227.0,
+              "title": "Iron Mountain Sees Billion-Dollar Growth in Data Centers and IT Asset Services",
+              "url": "https://finance.yahoo.com/real-estate/articles/iron-mountain-sees-billion-dollar-041206625.html",
+              "provider": "MarketBeat",
+              "timestamp": "2026-11-18T04:12:06+00:00",
+              "ts_epoch": 1794975126.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "negative",
+              "sentiment": "positive",
               "matched_keywords": []
             }
           ],
@@ -978,6 +971,18 @@
           "news": [
             {
               "symbol": "BRK-B",
+              "title": "Warren Buffett Just Gave Away $5.5 Billion of Berkshire Stock Without Selling a Share. Here’s His Rule for a 72-Year-Old With $400,000 in Berkshire Who Gives $20,000 a Year to Her Church",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-just-gave-away-040239167.html",
+              "provider": "24/7 Wall St.",
+              "timestamp": "2026-11-18T04:02:39+00:00",
+              "ts_epoch": 1794974559.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "BRK-B",
               "title": "Warren Buffett Just Gave Away $5.5 Billion of Berkshire Stock. He Says His Confidence in Berkshire Is \"As Strong as Ever.\"",
               "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-just-gave-away-015402100.html",
               "provider": "Motley Fool",
@@ -998,18 +1003,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "BRK-B",
-              "title": "Berkshire’s Only New Stock Owns AOL and Evernote. Is Greg Abel Rewriting Buffett’s Playbook?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-only-stock-owns-aol-202533935.html",
-              "provider": "TIKR",
-              "timestamp": "2026-11-17T20:25:33+00:00",
-              "ts_epoch": 1794947133.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -1139,6 +1132,18 @@
       "news": [
         {
           "symbol": "JPM",
+          "title": "Iron Mountain Sees Billion-Dollar Growth in Data Centers and IT Asset Services",
+          "url": "https://finance.yahoo.com/real-estate/articles/iron-mountain-sees-billion-dollar-041206625.html",
+          "provider": "MarketBeat",
+          "timestamp": "2026-11-18T04:12:06+00:00",
+          "ts_epoch": 1794975126.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "JPM",
           "title": "America's AI Boom Has a Hidden Cost — Top Economist Warns Inflation Is Rising, Capital Is Being Sucked Away, and the Rest of the Economy Is Falling Behind",
           "url": "https://finance.yahoo.com/economy/policy/articles/americas-ai-boom-hidden-cost-233027907.html",
           "provider": "Benzinga",
@@ -1194,18 +1199,6 @@
           "provider": "CorpGov.com",
           "timestamp": "2026-11-17T19:50:33+00:00",
           "ts_epoch": 1794945033.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "JPM",
-          "title": "As tech crashes mount, how can banks respond?",
-          "url": "https://finance.yahoo.com/technology/articles/tech-crashes-mount-banks-respond-194126443.html",
-          "provider": "American Banker",
-          "timestamp": "2026-11-17T19:41:26+00:00",
-          "ts_epoch": 1794944486.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
@@ -2173,6 +2166,18 @@
           "news": [
             {
               "symbol": "LOW",
+              "title": "Nasdaq Futures Lead Wall Street Rebound After Nvidia’s Blowout Forecast, Anthropic IPO Looms: SLS, NKE, MU In Focus",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-lead-wall-street-034627099.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T03:46:27+00:00",
+              "ts_epoch": 1794973587.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "LOW",
               "title": "Lowe's (LOW) Faces Holiday Shipping Costs And Tight Inventory As Drone Deliveries Grow",
               "url": "https://finance.yahoo.com/markets/stocks/articles/lowes-low-faces-holiday-shipping-031213069.html",
               "provider": "Simply Wall St.",
@@ -2190,18 +2195,6 @@
               "provider": "Motley Fool",
               "timestamp": "2026-11-18T00:08:02+00:00",
               "ts_epoch": 1794960482.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "LOW",
-              "title": "Jim Cramer Says Home Depot Beat but Gave a ‘Tepid’ Forecast. Why He Calls It a Rate Stock",
-              "url": "https://finance.yahoo.com/real-estate/articles/jim-cramer-says-home-depot-220736665.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-17T22:07:36+00:00",
-              "ts_epoch": 1794953256.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2455,6 +2448,18 @@
           "news": [
             {
               "symbol": "LOW",
+              "title": "Nasdaq Futures Lead Wall Street Rebound After Nvidia’s Blowout Forecast, Anthropic IPO Looms: SLS, NKE, MU In Focus",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-lead-wall-street-034627099.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T03:46:27+00:00",
+              "ts_epoch": 1794973587.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "LOW",
               "title": "Lowe's (LOW) Faces Holiday Shipping Costs And Tight Inventory As Drone Deliveries Grow",
               "url": "https://finance.yahoo.com/markets/stocks/articles/lowes-low-faces-holiday-shipping-031213069.html",
               "provider": "Simply Wall St.",
@@ -2472,18 +2477,6 @@
               "provider": "Motley Fool",
               "timestamp": "2026-11-18T00:08:02+00:00",
               "ts_epoch": 1794960482.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "LOW",
-              "title": "Jim Cramer Says Home Depot Beat but Gave a ‘Tepid’ Forecast. Why He Calls It a Rate Stock",
-              "url": "https://finance.yahoo.com/real-estate/articles/jim-cramer-says-home-depot-220736665.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-17T22:07:36+00:00",
-              "ts_epoch": 1794953256.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2536,17 +2529,41 @@
       "news": [
         {
           "symbol": "AMZN",
+          "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
+          "provider": "TheStreet",
+          "timestamp": "2026-11-18T04:33:00+00:00",
+          "ts_epoch": 1794976380.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "AMZN",
           "title": "Dow Jones Futures: Techs Rise After Nvidia Beats, Says This On Jensen Huang; Target, Anthropic IPO Ahead",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-earnings-target-anthropic-ipo/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-18T03:41:52+00:00",
-          "ts_epoch": 1794973312.0,
+          "timestamp": "2026-11-18T04:05:12+00:00",
+          "ts_epoch": 1794974712.0,
           "category": "earnings",
           "category_label": "財報",
           "sentiment": "positive",
           "matched_keywords": [
             "beats"
           ]
+        },
+        {
+          "symbol": "LOW",
+          "title": "Nasdaq Futures Lead Wall Street Rebound After Nvidia’s Blowout Forecast, Anthropic IPO Looms: SLS, NKE, MU In Focus",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-lead-wall-street-034627099.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-18T03:46:27+00:00",
+          "ts_epoch": 1794973587.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
         },
         {
           "symbol": "TSLA",
@@ -2582,30 +2599,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "HD",
-          "title": "Home Depot Names New CEO, Carves Out A Sales Gain",
-          "url": "https://finance.yahoo.com/real-estate/articles/home-depot-names-ceo-carves-030013435.html",
-          "provider": "MediaPost",
-          "timestamp": "2026-11-18T03:00:13+00:00",
-          "ts_epoch": 1794970813.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "TSLA",
-          "title": "Coinbase Exec Says AI IPOs Pulling Money From Bitcoin Is ‘A Reasonable Argument’ As Anthropic Debut Nears",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/coinbase-exec-says-ai-ipos-023616274.html",
-          "provider": "Stocktwits",
-          "timestamp": "2026-11-18T02:36:16+00:00",
-          "ts_epoch": 1794969376.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -2695,6 +2688,18 @@
           "news": [
             {
               "symbol": "META",
+              "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
+              "provider": "TheStreet",
+              "timestamp": "2026-11-18T04:33:00+00:00",
+              "ts_epoch": 1794976380.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "META",
               "title": "Non-Tech Stocks Can Still Deliver Huge Gains",
               "url": "https://finance.yahoo.com/markets/stocks/articles/non-tech-stocks-still-deliver-235200453.html",
               "provider": "Zacks",
@@ -2715,18 +2720,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "META",
-              "title": "Bill Ackman’s $14 billion bet beyond the Magnificent 7",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/bill-ackman-14-billion-bet-223300029.html",
-              "provider": "TheStreet",
-              "timestamp": "2026-11-17T22:33:00+00:00",
-              "ts_epoch": 1794954780.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -2996,6 +2989,18 @@
       ],
       "news": [
         {
+          "symbol": "META",
+          "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
+          "provider": "TheStreet",
+          "timestamp": "2026-11-18T04:33:00+00:00",
+          "ts_epoch": 1794976380.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
           "symbol": "GOOGL",
           "title": "Jim Cramer Warns the Anthropic IPO Windfall Is Going to the Super Rich. Here’s the Backlash He Sees Coming",
           "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-warns-anthropic-ipo-000732494.html",
@@ -3050,18 +3055,6 @@
           "provider": "Barrons.com",
           "timestamp": "2026-11-17T22:27:00+00:00",
           "ts_epoch": 1794954420.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "GOOGL",
-          "title": "Can this AI help 'democratize' access to extensive wealth planning?",
-          "url": "https://finance.yahoo.com/video/can-this-ai-help-democratize-access-to-extensive-wealth-planning-221525580.html",
-          "provider": "Yahoo Finance Video",
-          "timestamp": "2026-11-17T22:15:25+00:00",
-          "ts_epoch": 1794953725.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
