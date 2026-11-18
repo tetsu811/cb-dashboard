@@ -1,14 +1,14 @@
 {
-  "trade_date": "2026-11-16",
+  "trade_date": "2026-11-17",
   "stocks": {
     "AAPL": {
       "symbol": "AAPL",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Apple",
       "industry": "Consumer Electronics",
-      "price": 352.7799987792969,
-      "day_pct": -0.9795914171825126,
-      "market_cap": 5126663176192,
+      "price": 351.9100036621094,
+      "day_pct": -0.24661123652074401,
+      "market_cap": 5114019971072,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.117,
@@ -71,13 +71,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02653889973342468,
+          "value": 0.026604510887641285,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 2.88,
+          "value": 2.85,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -98,12 +98,12 @@
     },
     "ADBE": {
       "symbol": "ADBE",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ADBE",
       "industry": "Software - Application",
-      "price": 246.0,
-      "day_pct": 1.201249854759645,
-      "market_cap": 95743197184,
+      "price": 235.5500030517578,
+      "day_pct": -4.247966239122835,
+      "market_cap": 91676057600,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.129,
@@ -166,7 +166,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.1106292698753752,
+          "value": 0.1155372545164944,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -193,12 +193,12 @@
     },
     "AI": {
       "symbol": "AI",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "AI",
       "industry": "Software - Infrastructure",
-      "price": 10.680000305175781,
-      "day_pct": -9.644665136054309,
-      "market_cap": 1717128960,
+      "price": 9.949999809265137,
+      "day_pct": -6.835210440554662,
+      "market_cap": 1599759488,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.255,
@@ -261,7 +261,7 @@
           "source": null
         },
         "fcf_yield": {
-          "value": -0.09071945301068127,
+          "value": -0.0973752624494514,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -288,12 +288,12 @@
     },
     "AMAT": {
       "symbol": "AMAT",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "AMAT",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 350.25,
-      "day_pct": -5.465587044534415,
-      "market_cap": 277957509120,
+      "price": 349.2300109863281,
+      "day_pct": -0.291217420034795,
+      "market_cap": 277148041216,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.531,
@@ -356,13 +356,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.020229710712986834,
+          "value": 0.020288795747315493,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.78,
+          "value": 0.74,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -383,12 +383,12 @@
     },
     "AMD": {
       "symbol": "AMD",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "AMD",
       "industry": "Semiconductors",
-      "price": 504.2799987792969,
-      "day_pct": -5.576152289149794,
-      "market_cap": 827063205888,
+      "price": 503.4100036621094,
+      "day_pct": -0.17252223353959595,
+      "market_cap": 833176600576,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.447,
@@ -451,13 +451,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.008531391494346703,
+          "value": 0.008468792804697077,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.48,
+          "value": 0.45,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -478,12 +478,12 @@
     },
     "AMZN": {
       "symbol": "AMZN",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Amazon",
       "industry": "Internet Retail",
-      "price": 257.75,
-      "day_pct": -3.3413348607762794,
-      "market_cap": 2787086172160,
+      "price": 257.8900146484375,
+      "day_pct": 0.054321881062069366,
+      "market_cap": 2788600315904,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.121,
@@ -546,19 +546,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.013505502763421239,
+          "value": -0.013498169596168053,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.24,
-          "color": "yellow",
+          "value": 1.2,
+          "color": "green",
           "label": "Forward PEG",
           "source": "yf"
         }
       },
-      "score": 13,
+      "score": 14,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -573,12 +573,12 @@
     },
     "ANET": {
       "symbol": "ANET",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ANET",
       "industry": "Computer Hardware",
-      "price": 187.02000427246094,
-      "day_pct": -5.205529607767357,
-      "market_cap": 236281511936,
+      "price": 186.4199981689453,
+      "day_pct": -0.32082455876832894,
+      "market_cap": 235523473408,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.585,
@@ -641,13 +641,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.021234839572886386,
+          "value": 0.02130318446564475,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.43,
+          "value": 1.36,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -668,12 +668,12 @@
     },
     "APH": {
       "symbol": "APH",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "APH",
       "industry": "Electronic Components",
-      "price": 75.43000030517578,
-      "day_pct": -3.5791933166389733,
-      "market_cap": 186256375808,
+      "price": 76.36000061035156,
+      "day_pct": 1.2329315940781793,
+      "market_cap": 188552790016,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.651,
@@ -736,13 +736,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.027560398819805217,
+          "value": 0.027224736369928042,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.71,
+          "value": 0.69,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -763,12 +763,12 @@
     },
     "ASML": {
       "symbol": "ASML",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ASML",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 1406.7900390625,
-      "day_pct": -5.91040377598584,
-      "market_cap": 542201806848,
+      "price": 1383.1099853515625,
+      "day_pct": -1.6832685086907606,
+      "market_cap": 533075099648,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.552,
@@ -831,13 +831,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.038729859869107625,
+          "value": 0.03939294859929927,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.79,
+          "value": 0.75,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -858,12 +858,12 @@
     },
     "AVGO": {
       "symbol": "AVGO",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Broadcom",
       "industry": "Semiconductors",
-      "price": 333.3999938964844,
-      "day_pct": -3.9220816363000566,
-      "market_cap": 1591528259584,
+      "price": 341.6000061035156,
+      "day_pct": 2.459511804783432,
+      "market_cap": 1630671994880,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.855,
@@ -926,13 +926,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.024757964404791225,
+          "value": 0.02416365775810091,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.34,
+          "value": 0.33,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -953,12 +953,12 @@
     },
     "AXTI": {
       "symbol": "AXTI",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "AXTI",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 38.459999084472656,
-      "day_pct": -8.07839640484842,
-      "market_cap": 2527681536,
+      "price": 36.41999816894531,
+      "day_pct": -5.3042146752181,
+      "market_cap": 2393607936,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.626,
@@ -1021,7 +1021,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03143117472216247,
+          "value": 0.03319173487232288,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -1048,12 +1048,12 @@
     },
     "CDNS": {
       "symbol": "CDNS",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "CDNS",
       "industry": "Software - Application",
-      "price": 309.42999267578125,
-      "day_pct": -4.2042093679070085,
-      "market_cap": 84901093376,
+      "price": 306.9700012207031,
+      "day_pct": -0.7950074373222371,
+      "market_cap": 84226121728,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.22,
@@ -1116,13 +1116,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.020690675822280707,
+          "value": 0.02085648684707298,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 2.35,
+          "value": 2.25,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -1143,12 +1143,12 @@
     },
     "CIEN": {
       "symbol": "CIEN",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "CIEN",
       "industry": "Communication Equipment",
-      "price": 257.55999755859375,
-      "day_pct": -8.191348929344745,
-      "market_cap": 36524204032,
+      "price": 264.82000732421875,
+      "day_pct": 2.8187644954350333,
+      "market_cap": 37553733632,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.37,
@@ -1211,13 +1211,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02229650232176208,
+          "value": 0.02168524727741244,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.28,
+          "value": 0.26,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1238,12 +1238,12 @@
     },
     "COHR": {
       "symbol": "COHR",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "COHR",
       "industry": "Scientific & Technical Instruments",
-      "price": 203.42999267578125,
-      "day_pct": -6.747651447420166,
-      "market_cap": 40067301376,
+      "price": 210.86000061035156,
+      "day_pct": 3.652366023731801,
+      "market_cap": 41530703872,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.499,
@@ -1306,13 +1306,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.04594284957515578,
+          "value": -0.044323977885697995,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.46,
+          "value": 0.43,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1333,12 +1333,12 @@
     },
     "CRM": {
       "symbol": "CRM",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "CRM",
       "industry": "Software - Application",
-      "price": 214.8300018310547,
-      "day_pct": -1.3817455735571804,
-      "market_cap": 176805085184,
+      "price": 194.52000427246094,
+      "day_pct": -9.453985656326447,
+      "market_cap": 160089964544,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.108,
@@ -1401,13 +1401,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.08571020445610669,
+          "value": 0.09465927513423236,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.78,
+          "value": 0.77,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1428,12 +1428,12 @@
     },
     "CRWD": {
       "symbol": "CRWD",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "CRWD",
       "industry": "Software - Infrastructure",
-      "price": 223.2100067138672,
-      "day_pct": -1.5003723963315063,
-      "market_cap": 228552507392,
+      "price": 219.5800018310547,
+      "day_pct": -1.6262733630333148,
+      "market_cap": 224835616768,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.258,
@@ -1496,13 +1496,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.006661939601426117,
+          "value": 0.006772072067083218,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 5.85,
+          "value": 5.76,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -1523,12 +1523,12 @@
     },
     "CSCO": {
       "symbol": "CSCO",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "CSCO",
       "industry": "Communication Equipment",
-      "price": 94.5199966430664,
-      "day_pct": -1.1710610139372912,
-      "market_cap": 372123369472,
+      "price": 95.11000061035156,
+      "day_pct": 0.6242107366054794,
+      "market_cap": 374446194688,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.244,
@@ -1591,13 +1591,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03430851445345907,
+          "value": 0.03409568632587615,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.88,
+          "value": 0.87,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1618,12 +1618,12 @@
     },
     "DDOG": {
       "symbol": "DDOG",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "DDOG",
       "industry": "Software - Application",
-      "price": 172.86000061035156,
-      "day_pct": -6.135970257956059,
-      "market_cap": 62409818112,
+      "price": 165.17999267578125,
+      "day_pct": -4.4429063447026245,
+      "market_cap": 59637006336,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.352,
@@ -1686,13 +1686,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.017776866422026593,
+          "value": 0.018603398596992914,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.9,
+          "value": 0.84,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1713,12 +1713,12 @@
     },
     "DELL": {
       "symbol": "DELL",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "DELL",
       "industry": "Computer Hardware",
-      "price": 320.54998779296875,
-      "day_pct": -6.960209871793932,
-      "market_cap": 203809767424,
+      "price": 322.7900085449219,
+      "day_pct": 0.6988054397930155,
+      "market_cap": 205233995776,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.577,
@@ -1781,13 +1781,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.04199994979726374,
+          "value": 0.04170848970529571,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.35,
+          "value": 0.32,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1808,12 +1808,12 @@
     },
     "ENTG": {
       "symbol": "ENTG",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ENTG",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 140.02000427246094,
-      "day_pct": -5.0132278719615675,
-      "market_cap": 21395056640,
+      "price": 140.77999877929688,
+      "day_pct": 0.5427756632238712,
+      "market_cap": 21511184384,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.246,
@@ -1876,13 +1876,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02879169755729144,
+          "value": 0.02863626609319477,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.13,
+          "value": 0.8,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -1903,12 +1903,12 @@
     },
     "ETN": {
       "symbol": "ETN",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ETN",
       "industry": "Specialty Industrial Machinery",
-      "price": 336.8800048828125,
-      "day_pct": -4.5584600057357205,
-      "market_cap": 130877882368,
+      "price": 337.1099853515625,
+      "day_pct": 0.06826777054635969,
+      "market_cap": 130967232512,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.28,
@@ -1971,13 +1971,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.028996496056753803,
+          "value": 0.02897671369555953,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.89,
+          "value": 1.8,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -1998,12 +1998,12 @@
     },
     "EXTR": {
       "symbol": "EXTR",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "EXTR",
       "industry": "Communication Equipment",
-      "price": 26.110000610351562,
-      "day_pct": -2.3925210827978938,
-      "market_cap": 3425394432,
+      "price": 26.190000534057617,
+      "day_pct": 0.30639571748740657,
+      "market_cap": 3435889664,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.099,
@@ -2066,13 +2066,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.04517961451512046,
+          "value": 0.045041609345462384,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.96,
+          "value": 0.94,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -2093,12 +2093,12 @@
     },
     "FN": {
       "symbol": "FN",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "FN",
       "industry": "Electronic Components",
-      "price": 311.010009765625,
-      "day_pct": -5.174096180334153,
-      "market_cap": 11108504576,
+      "price": 314.75,
+      "day_pct": 1.2025305028585453,
+      "market_cap": 11242088448,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.507,
@@ -2161,7 +2161,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.017260829186158854,
+          "value": -0.01705572775796044,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -2188,12 +2188,12 @@
     },
     "GFS": {
       "symbol": "GFS",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "GFS",
       "industry": "Semiconductors",
-      "price": 39.41999816894531,
-      "day_pct": -4.9433397429812125,
-      "market_cap": 21974630400,
+      "price": 39.599998474121094,
+      "day_pct": 0.45662179994108154,
+      "market_cap": 22074970112,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.125,
@@ -2256,13 +2256,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.019568019674178455,
+          "value": 0.019479075070921663,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.62,
+          "value": 0.59,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -2283,12 +2283,12 @@
     },
     "GOOGL": {
       "symbol": "GOOGL",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Alphabet",
       "industry": "Internet Content & Information",
-      "price": 283.7200012207031,
-      "day_pct": -4.074107664930038,
-      "market_cap": 3488053460992,
+      "price": 280.20001220703125,
+      "day_pct": -1.2406559278609675,
+      "market_cap": 3444778729472,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.247,
@@ -2351,13 +2351,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.005661323778673956,
+          "value": 0.005732443663522832,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.04,
+          "value": 1.0,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -2378,12 +2378,12 @@
     },
     "HPE": {
       "symbol": "HPE",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "HPE",
       "industry": "Communication Equipment",
-      "price": 46.56999969482422,
-      "day_pct": -3.5618165005047,
-      "market_cap": 61820035072,
+      "price": 46.09000015258789,
+      "day_pct": -1.0307054871844357,
+      "market_cap": 61182853120,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.337,
@@ -2446,13 +2446,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.06722739634747259,
+          "value": 0.0679275285160157,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.39,
+          "value": 0.37,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -2473,12 +2473,12 @@
     },
     "IBM": {
       "symbol": "IBM",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "IBM",
       "industry": "Information Technology Services",
-      "price": 242.50999450683594,
-      "day_pct": -1.869465578721341,
-      "market_cap": 229201248256,
+      "price": 231.08999633789062,
+      "day_pct": -4.709083513101731,
+      "market_cap": 218407976960,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.047,
@@ -2541,13 +2541,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.06116022537688356,
+          "value": 0.06418263744353671,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 2.33,
+          "value": 2.29,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -2568,12 +2568,12 @@
     },
     "INTC": {
       "symbol": "INTC",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "INTC",
       "industry": "Semiconductors",
-      "price": 55.470001220703125,
-      "day_pct": -7.023128792198174,
-      "market_cap": 294823034880,
+      "price": 55.16999816894531,
+      "day_pct": -0.5408383723738641,
+      "market_cap": 293228544000,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.209,
@@ -2636,7 +2636,7 @@
           "source": null
         },
         "fcf_yield": {
-          "value": 0.012780548173699066,
+          "value": 0.01285004504882035,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -2663,12 +2663,12 @@
     },
     "KLAC": {
       "symbol": "KLAC",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "KLAC",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 143.9600067138672,
-      "day_pct": -5.488445514946038,
-      "market_cap": 187574484992,
+      "price": 144.55999755859375,
+      "day_pct": 0.4167760605340076,
+      "market_cap": 188356247552,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.289,
@@ -2731,13 +2731,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02152542228849624,
+          "value": 0.021436082171287278,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.37,
+          "value": 1.3,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -2758,12 +2758,12 @@
     },
     "LITE": {
       "symbol": "LITE",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "LITE",
       "industry": "Communication Equipment",
-      "price": 546.0,
-      "day_pct": -8.484461722950599,
-      "market_cap": 49513963520,
+      "price": 559.969970703125,
+      "day_pct": 2.558602692880041,
+      "market_cap": 50780827648,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.365,
@@ -2826,7 +2826,7 @@
           "source": null
         },
         "fcf_yield": {
-          "value": 0.007195949883028067,
+          "value": 0.007016427586997646,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -2853,12 +2853,12 @@
     },
     "LRCX": {
       "symbol": "LRCX",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "LRCX",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 210.8300018310547,
-      "day_pct": -6.67935395723851,
-      "market_cap": 263362707456,
+      "price": 210.69000244140625,
+      "day_pct": -0.06640392184819044,
+      "market_cap": 263187824640,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.544,
@@ -2921,13 +2921,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.024822664010211836,
+          "value": 0.024839158152327512,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.98,
+          "value": 0.92,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -2948,12 +2948,12 @@
     },
     "MDB": {
       "symbol": "MDB",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "MDB",
       "industry": "Software - Infrastructure",
-      "price": 316.9200134277344,
-      "day_pct": -5.170555998840665,
-      "market_cap": 25490487296,
+      "price": 298.6300048828125,
+      "day_pct": -5.771174987373417,
+      "market_cap": 24019386368,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.305,
@@ -3016,7 +3016,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.025853566169502545,
+          "value": 0.02743700400598011,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -3043,12 +3043,12 @@
     },
     "META": {
       "symbol": "META",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Meta",
       "industry": "Internet Content & Information",
-      "price": 626.4099731445312,
-      "day_pct": -2.3812166682883995,
-      "market_cap": 1601254981632,
+      "price": 618.8699951171875,
+      "day_pct": -1.2036810316881863,
+      "market_cap": 1581980975104,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.261,
@@ -3111,13 +3111,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.01789159148832182,
+          "value": 0.018109573029547087,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.83,
+          "value": 0.81,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3138,12 +3138,12 @@
     },
     "MRVL": {
       "symbol": "MRVL",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "MRVL",
       "industry": "Semiconductors",
-      "price": 145.36000061035156,
-      "day_pct": -7.272259693774896,
-      "market_cap": 130789974016,
+      "price": 148.74000549316406,
+      "day_pct": 2.325264769276414,
+      "market_cap": 133831180288,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.365,
@@ -3206,13 +3206,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.0131722634931424,
+          "value": 0.012872934366211184,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.39,
+          "value": 0.36,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3233,12 +3233,12 @@
     },
     "MSFT": {
       "symbol": "MSFT",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Microsoft",
       "industry": "Software - Infrastructure",
-      "price": 517.989990234375,
-      "day_pct": -1.1243060612239009,
-      "market_cap": 3846694502400,
+      "price": 506.239990234375,
+      "day_pct": -2.268383602293833,
+      "market_cap": 3759436726272,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.188,
@@ -3301,13 +3301,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.015586628977838529,
+          "value": 0.01594839981771834,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.55,
+          "value": 1.53,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -3328,12 +3328,12 @@
     },
     "MU": {
       "symbol": "MU",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "MU",
       "industry": "Semiconductors",
-      "price": 719.02001953125,
-      "day_pct": -7.617784457777088,
-      "market_cap": 813515931648,
+      "price": 712.4199829101562,
+      "day_pct": -0.9179211206659432,
+      "market_cap": 806048497664,
       "lights": {
         "revenue_growth_yoy": {
           "value": 3.793,
@@ -3396,7 +3396,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.0724792197745338,
+          "value": 0.07315068531345198,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -3423,12 +3423,12 @@
     },
     "NOW": {
       "symbol": "NOW",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "NOW",
       "industry": "Software - Application",
-      "price": 99.37000274658203,
-      "day_pct": -2.8166232307266226,
-      "market_cap": 103137812480,
+      "price": 92.9000015258789,
+      "day_pct": -6.511020470838891,
+      "market_cap": 96422494208,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.205,
@@ -3491,13 +3491,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.04605488409908924,
+          "value": 0.0492623639226074,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.81,
+          "value": 0.78,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3518,12 +3518,12 @@
     },
     "NVDA": {
       "symbol": "NVDA",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "NVIDIA",
       "industry": "Semiconductors",
-      "price": 156.13999938964844,
-      "day_pct": -4.120360124274091,
-      "market_cap": 3770312556544,
+      "price": 155.4600067138672,
+      "day_pct": -0.43550190754408913,
+      "market_cap": 3753892642816,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.059,
@@ -3586,13 +3586,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03368580140114912,
+          "value": 0.03383314657201434,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.2,
+          "value": 0.19,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3613,12 +3613,12 @@
     },
     "ONTO": {
       "symbol": "ONTO",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ONTO",
       "industry": "Semiconductor Equipment & Materials",
-      "price": 196.77000427246094,
-      "day_pct": -3.364105200368095,
-      "market_cap": 9658322944,
+      "price": 199.57000732421875,
+      "day_pct": 1.4229826655290045,
+      "market_cap": 9795760128,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.878,
@@ -3681,13 +3681,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02564037270609617,
+          "value": 0.02528063128987227,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.58,
+          "value": 0.56,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3708,12 +3708,12 @@
     },
     "ORCL": {
       "symbol": "ORCL",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "ORCL",
       "industry": "Software - Infrastructure",
-      "price": 119.08999633789062,
-      "day_pct": -4.994018518095844,
-      "market_cap": 371287851008,
+      "price": 115.0,
+      "day_pct": -3.4343743921917635,
+      "market_cap": 358536413184,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.296,
@@ -3776,13 +3776,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.07735238285343514,
+          "value": -0.08010343982902782,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.68,
+          "value": 0.65,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -3803,12 +3803,12 @@
     },
     "PANW": {
       "symbol": "PANW",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "PANW",
       "industry": "Software - Infrastructure",
-      "price": 316.0899963378906,
-      "day_pct": -1.9085135560025557,
-      "market_cap": 258805530624,
+      "price": 309.2900085449219,
+      "day_pct": -2.151282189171144,
+      "market_cap": 253237886976,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.345,
@@ -3871,13 +3871,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.015892241522363303,
+          "value": 0.01624164554962425,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.65,
+          "value": 1.61,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -3898,12 +3898,12 @@
     },
     "PATH": {
       "symbol": "PATH",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "PATH",
       "industry": "Software - Infrastructure",
-      "price": 13.140000343322754,
-      "day_pct": -0.9796541820378035,
-      "market_cap": 6847982592,
+      "price": 12.390000343322754,
+      "day_pct": -5.70776240794485,
+      "market_cap": 6457115648,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.134,
@@ -3966,7 +3966,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.053002033098626194,
+          "value": 0.05621039172690376,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -3993,12 +3993,12 @@
     },
     "PLTR": {
       "symbol": "PLTR",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "PLTR",
       "industry": "Software - Infrastructure",
-      "price": 160.38999938964844,
-      "day_pct": -4.524082299541854,
-      "market_cap": 386459303936,
+      "price": 156.55999755859375,
+      "day_pct": -2.387930572747343,
+      "market_cap": 377230950400,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.959,
@@ -4061,13 +4061,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.010489994570479689,
+          "value": 0.010746615556600947,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.33,
+          "value": 1.27,
           "color": "yellow",
           "label": "Forward PEG",
           "source": "yf"
@@ -4088,12 +4088,12 @@
     },
     "QCOM": {
       "symbol": "QCOM",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "QCOM",
       "industry": "Semiconductors",
-      "price": 168.52000427246094,
-      "day_pct": -2.290251591746395,
-      "market_cap": 180316405760,
+      "price": 166.6699981689453,
+      "day_pct": -1.0977961408810355,
+      "market_cap": 178336890880,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.084,
@@ -4156,13 +4156,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.04797677706328301,
+          "value": 0.048509312668353725,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 1.02,
+          "value": 1.0,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4183,12 +4183,12 @@
     },
     "SIMO": {
       "symbol": "SIMO",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "SIMO",
       "industry": "Semiconductors",
-      "price": 157.57000732421875,
-      "day_pct": -7.0109116777689495,
-      "market_cap": 5342921216,
+      "price": 152.0399932861328,
+      "day_pct": -3.5095600565069995,
+      "market_cap": 5155407872,
       "lights": {
         "revenue_growth_yoy": {
           "value": 1.315,
@@ -4251,7 +4251,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.07604173514356383,
+          "value": -0.07880753765509245,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -4278,12 +4278,12 @@
     },
     "SMCI": {
       "symbol": "SMCI",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "SMCI",
       "industry": "Computer Hardware",
-      "price": 25.030000686645508,
-      "day_pct": -6.847785988533617,
-      "market_cap": 16497165312,
+      "price": 24.139999389648438,
+      "day_pct": -3.55573820448164,
+      "market_cap": 15913748480,
       "lights": {
         "revenue_growth_yoy": {
           "value": 2.975,
@@ -4346,7 +4346,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.39386772679507476,
+          "value": -0.40830738327717997,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -4373,12 +4373,12 @@
     },
     "SNOW": {
       "symbol": "SNOW",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "SNOW",
       "industry": "Software - Application",
-      "price": 280.5400085449219,
-      "day_pct": -3.594498781813793,
-      "market_cap": 98974515200,
+      "price": 272.94000244140625,
+      "day_pct": -2.709063189573069,
+      "market_cap": 96293232640,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.351,
@@ -4441,13 +4441,13 @@
           "source": null
         },
         "fcf_yield": {
-          "value": 0.012058498064762432,
+          "value": 0.012394266629950372,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 5.22,
+          "value": 5.03,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -4468,12 +4468,12 @@
     },
     "SNPS": {
       "symbol": "SNPS",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "SNPS",
       "industry": "Software - Infrastructure",
-      "price": 441.3299865722656,
-      "day_pct": -3.0470178521122993,
-      "market_cap": 84574994432,
+      "price": 435.510009765625,
+      "day_pct": -1.3187358628955592,
+      "market_cap": 83459678208,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.424,
@@ -4536,13 +4536,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03248839705463074,
+          "value": 0.032922556844181786,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 2.37,
+          "value": 2.3,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -4563,12 +4563,12 @@
     },
     "STX": {
       "symbol": "STX",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "STX",
       "industry": "Computer Hardware",
-      "price": 499.0,
-      "day_pct": -5.54429938964841,
-      "market_cap": 114550988800,
+      "price": 504.3999938964844,
+      "day_pct": 1.0821631055078829,
+      "market_cap": 115790618624,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.61,
@@ -4631,13 +4631,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.036289516516159484,
+          "value": 0.0359010086430126,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.3,
+          "value": 0.28,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4753,12 +4753,12 @@
     },
     "TSLA": {
       "symbol": "TSLA",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "Tesla",
       "industry": "Auto Manufacturers",
-      "price": 379.739990234375,
-      "day_pct": -2.6856673039680423,
-      "market_cap": 1501020291072,
+      "price": 380.1099853515625,
+      "day_pct": 0.09743380384013012,
+      "market_cap": 1502482792448,
       "lights": {
         "revenue_growth_yoy": {
           "value": -0.002,
@@ -4821,13 +4821,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.0021958397362143982,
+          "value": 0.0021937023282841174,
           "color": "red",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 4.55,
+          "value": 4.43,
           "color": "red",
           "label": "Forward PEG",
           "source": "yf"
@@ -4848,12 +4848,12 @@
     },
     "TSM": {
       "symbol": "TSM",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "TSMC",
       "industry": "Semiconductors",
-      "price": 373.45001220703125,
-      "day_pct": -6.340129431632802,
-      "market_cap": 1936888430592,
+      "price": 359.69000244140625,
+      "day_pct": -3.6845653543577384,
+      "market_cap": 1865522479104,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.509,
@@ -4862,7 +4862,7 @@
           "source": "yf"
         },
         "operating_margin": {
-          "value": 0.5796,
+          "value": 0.57961,
           "color": "green",
           "label": "營業利益率",
           "source": "yf"
@@ -4880,19 +4880,19 @@
           "source": "yf"
         },
         "debt_to_equity": {
-          "value": 0.11619,
+          "value": 0.15188000000000001,
           "color": "green",
           "label": "負債/股東權益",
           "source": "yf"
         },
         "current_ratio": {
-          "value": 2.505,
+          "value": 2.584,
           "color": "green",
           "label": "流動比率",
           "source": "yf"
         },
         "roe": {
-          "value": 0.41854998,
+          "value": 0.4186,
           "color": "green",
           "label": "ROE",
           "source": "yf"
@@ -4904,7 +4904,7 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.29477011473150455,
+          "value": 0.29477008347768535,
           "color": "green",
           "label": "FCF / 營收",
           "source": "yf"
@@ -4916,13 +4916,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.7525391034291515,
+          "value": 0.7813276437709127,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.72,
+          "value": 0.68,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -4943,12 +4943,12 @@
     },
     "UMC": {
       "symbol": "UMC",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "UMC",
       "industry": "Semiconductors",
-      "price": 14.34000015258789,
-      "day_pct": -6.883113585710243,
-      "market_cap": 35961765888,
+      "price": 14.140000343322754,
+      "day_pct": -1.3946987945397171,
+      "market_cap": 35460206592,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.256,
@@ -5011,13 +5011,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 1.9038629307924602,
+          "value": 1.9307917121793174,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.75,
+          "value": 0.7,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -5038,12 +5038,12 @@
     },
     "VIAV": {
       "symbol": "VIAV",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "VIAV",
       "industry": "Communication Equipment",
-      "price": 28.729999542236328,
-      "day_pct": -6.477863983066811,
-      "market_cap": 7065342464,
+      "price": 29.770000457763672,
+      "day_pct": 3.619912746599341,
+      "market_cap": 7321101824,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.569,
@@ -5106,7 +5106,7 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02165500126562584,
+          "value": 0.020898493652749938,
           "color": "yellow",
           "label": "FCF 殖利率",
           "source": "yf"
@@ -5133,12 +5133,12 @@
     },
     "VRT": {
       "symbol": "VRT",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "VRT",
       "industry": "Electrical Equipment & Parts",
-      "price": 188.6699981689453,
-      "day_pct": -6.631369658819919,
-      "market_cap": 72649351168,
+      "price": 190.3699951171875,
+      "day_pct": 0.9010425423971791,
+      "market_cap": 73303949312,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.612,
@@ -5201,13 +5201,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.042866177741883504,
+          "value": 0.04248338635542245,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.6,
+          "value": 0.56,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
@@ -5228,12 +5228,12 @@
     },
     "WDC": {
       "symbol": "WDC",
-      "as_of": "2026-11-16",
+      "as_of": "2026-11-17",
       "name": "WDC",
       "industry": "Computer Hardware",
-      "price": 280.92999267578125,
-      "day_pct": -4.978860654350981,
-      "market_cap": 105158631424,
+      "price": 283.3299865722656,
+      "day_pct": 0.8543031926299793,
+      "market_cap": 106057007104,
       "lights": {
         "revenue_growth_yoy": {
           "value": 0.555,
@@ -5296,13 +5296,13 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.040786000558591676,
+          "value": 0.04044051512592833,
           "color": "green",
           "label": "FCF 殖利率",
           "source": "yf"
         },
         "forward_peg": {
-          "value": 0.42,
+          "value": 0.4,
           "color": "green",
           "label": "Forward PEG",
           "source": "yf"
