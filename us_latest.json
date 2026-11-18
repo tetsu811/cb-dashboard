@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-18T04:38:10.840947",
+  "fetched_at": "2026-11-18T07:50:12.192319",
   "trade_date": "2026-11-17",
   "sectors": [
     {
@@ -60,8 +60,8 @@
               "title": "Dow Jones Futures: Techs Rise After Nvidia Beats, Says This On Jensen Huang; Target, Anthropic IPO Ahead",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-earnings-target-anthropic-ipo/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-18T04:05:12+00:00",
-              "ts_epoch": 1794974712.0,
+              "timestamp": "2026-11-18T05:32:31+00:00",
+              "ts_epoch": 1794979951.0,
               "category": "earnings",
               "category_label": "財報",
               "sentiment": "positive",
@@ -485,50 +485,62 @@
       ],
       "news": [
         {
-          "symbol": "PLTR",
-          "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-18T04:33:00+00:00",
-          "ts_epoch": 1794976380.0,
+          "symbol": "NVDA",
+          "title": "Down 36% in a month at 48x P/E: Is Marvell a dip or a trap?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/down-36-month-48x-p-072339117.html",
+          "provider": "Investing.com",
+          "timestamp": "2026-11-18T07:23:39+00:00",
+          "ts_epoch": 1794986619.0,
           "category": "general",
           "category_label": "一般新聞",
-          "sentiment": "neutral",
+          "sentiment": "negative",
           "matched_keywords": []
         },
         {
           "symbol": "NVDA",
-          "title": "BE Stock Rises Overnight After Nvidia Earnings: Insiders Report $1.3M In Share Sales, Retail Sees $200 Ahead",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-rises-overnight-nvidia-earnings-042206405.html",
-          "provider": "Stocktwits",
-          "timestamp": "2026-11-18T04:22:06+00:00",
-          "ts_epoch": 1794975726.0,
-          "category": "insider",
-          "category_label": "高管動作",
+          "title": "UnitedHealth Is Targeting 13% to 16% Long-Term Earnings Growth. Where Will the Stock Be in 5 Years?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/unitedhealth-targeting-13-16-long-072000083.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-18T07:20:00+00:00",
+          "ts_epoch": 1794986400.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Stocks drop as booming Nvidia results drowned by spy scandal",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/stocks-drop-booming-nvidia-results-024500677.html",
+          "provider": "AFP",
+          "timestamp": "2026-11-18T07:14:03+00:00",
+          "ts_epoch": 1794986043.0,
+          "category": "general",
+          "category_label": "一般新聞",
           "sentiment": "negative",
-          "matched_keywords": [
-            "sold shares"
-          ]
+          "matched_keywords": []
         },
         {
           "symbol": "MSFT",
-          "title": "Nvidia’s earnings call names two former crypto miners",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/nvidia-earnings-call-names-two-041631384.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-18T04:16:31+00:00",
-          "ts_epoch": 1794975391.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
+          "title": "Salesforce (CRM) Gets Hammered as Traders Hit Sell Button",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/salesforce-crm-gets-hammered-traders-045611127.html",
+          "provider": "Insider Monkey",
+          "timestamp": "2026-11-18T05:58:11+00:00",
+          "ts_epoch": 1794981491.0,
+          "category": "order",
+          "category_label": "訂單 / 合約",
+          "sentiment": "positive",
+          "matched_keywords": [
+            "partnership"
+          ]
         },
         {
           "symbol": "AVGO",
           "title": "Dow Jones Futures: Techs Rise After Nvidia Beats, Says This On Jensen Huang; Target, Anthropic IPO Ahead",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-earnings-target-anthropic-ipo/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-18T04:05:12+00:00",
-          "ts_epoch": 1794974712.0,
+          "timestamp": "2026-11-18T05:32:31+00:00",
+          "ts_epoch": 1794979951.0,
           "category": "earnings",
           "category_label": "財報",
           "sentiment": "positive",
@@ -537,27 +549,15 @@
           ]
         },
         {
-          "symbol": "AVGO",
-          "title": "Broadcom vs. Micron Technology: Which Tech Stock Is the Better Buy for 2027?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/broadcom-vs-micron-technology-tech-033002100.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-18T03:30:02+00:00",
-          "ts_epoch": 1794972602.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
           "symbol": "MSFT",
-          "title": "Cascade of Outages Triggers Conspiracy Theories—and Finger-Pointing",
-          "url": "https://www.wsj.com/politics/policy/cascade-of-outages-triggers-conspiracy-theoriesand-finger-pointing-4fb3310f?siteid=yhoof2&yptr=yahoo",
-          "provider": "The Wall Street Journal",
-          "timestamp": "2026-11-18T02:38:00+00:00",
-          "ts_epoch": 1794969480.0,
+          "title": "3 Undervalued Stocks With Cash Flow Value Gaps Over 35%",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/3-undervalued-stocks-cash-flow-051544633.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-18T05:15:44+00:00",
+          "ts_epoch": 1794978944.0,
           "category": "general",
           "category_label": "一般新聞",
-          "sentiment": "neutral",
+          "sentiment": "positive",
           "matched_keywords": []
         }
       ],
@@ -633,14 +633,14 @@
             },
             {
               "symbol": "JPM",
-              "title": "JPMorgan CFO Jeremy Barnum to step down as Jamie Dimon's succession plans take shape",
-              "url": "https://finance.yahoo.com/markets/article/jpmorgan-cfo-jeremy-barnum-to-step-down-as-jamie-dimons-succession-plans-take-shape-153110270.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-17T15:31:10+00:00",
-              "ts_epoch": 1794929470.0,
+              "title": "Nextpower (NXT) Just Got Hammered — These 2 Firms Hold The Reason",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/nextpower-nxt-just-got-hammered-060420135.html",
+              "provider": "Insider Monkey",
+              "timestamp": "2026-11-18T06:04:20+00:00",
+              "ts_epoch": 1794981860.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "positive",
+              "sentiment": "negative",
               "matched_keywords": []
             },
             {
@@ -690,6 +690,18 @@
           "news": [
             {
               "symbol": "V",
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "V",
               "title": "Third-Party Vendor Linked to Eli Lilly Is Hit by Data Breach",
               "url": "https://www.barrons.com/articles/eli-lilly-vendor-hack-patient-data-470fcdea?siteid=yhoof2&yptr=yahoo",
               "provider": "Barrons.com",
@@ -707,18 +719,6 @@
               "provider": "TIKR",
               "timestamp": "2026-11-17T19:05:52+00:00",
               "ts_epoch": 1794942352.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "V",
-              "title": "Visa and Mastercard's 21-Year Fight Could Change What Happens at Checkout",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/visa-mastercards-21-fight-could-174503802.html",
-              "provider": "GuruFocus.com",
-              "timestamp": "2026-11-17T17:45:03+00:00",
-              "ts_epoch": 1794937503.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -759,6 +759,18 @@
           "news": [
             {
               "symbol": "MA",
+              "title": "Mastercard enables smartphone payment acceptance for debit cardholders",
+              "url": "https://finance.yahoo.com/news/mastercard-enables-smartphone-payment-acceptance-073100825.html",
+              "provider": "Electronic Payments",
+              "timestamp": "2026-11-18T07:31:00+00:00",
+              "ts_epoch": 1794987060.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MA",
               "title": "What Mastercard Accept Launch Means For Shareholders",
               "url": "https://finance.yahoo.com/markets/stocks/articles/mastercard-accept-launch-means-shareholders-200943373.html",
               "provider": "Simply Wall St.",
@@ -778,18 +790,6 @@
               "provider": "Barrons.com",
               "timestamp": "2026-11-17T20:02:00+00:00",
               "ts_epoch": 1794945720.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MA",
-              "title": "Visa and Mastercard's 21-Year Fight Could Change What Happens at Checkout",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/visa-mastercards-21-fight-could-174503802.html",
-              "provider": "GuruFocus.com",
-              "timestamp": "2026-11-17T17:45:03+00:00",
-              "ts_epoch": 1794937503.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -866,6 +866,18 @@
           "news": [
             {
               "symbol": "MA",
+              "title": "Mastercard enables smartphone payment acceptance for debit cardholders",
+              "url": "https://finance.yahoo.com/news/mastercard-enables-smartphone-payment-acceptance-073100825.html",
+              "provider": "Electronic Payments",
+              "timestamp": "2026-11-18T07:31:00+00:00",
+              "ts_epoch": 1794987060.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MA",
               "title": "What Mastercard Accept Launch Means For Shareholders",
               "url": "https://finance.yahoo.com/markets/stocks/articles/mastercard-accept-launch-means-shareholders-200943373.html",
               "provider": "Simply Wall St.",
@@ -885,18 +897,6 @@
               "provider": "Barrons.com",
               "timestamp": "2026-11-17T20:02:00+00:00",
               "ts_epoch": 1794945720.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MA",
-              "title": "Visa and Mastercard's 21-Year Fight Could Change What Happens at Checkout",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/visa-mastercards-21-fight-could-174503802.html",
-              "provider": "GuruFocus.com",
-              "timestamp": "2026-11-17T17:45:03+00:00",
-              "ts_epoch": 1794937503.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -971,6 +971,18 @@
           "news": [
             {
               "symbol": "BRK-B",
+              "title": "Berkshire Hathaway (BRK.B) Reveals New Stake And Nearly Doubles One Holding",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaway-brk-b-reveals-052028795.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T05:20:28+00:00",
+              "ts_epoch": 1794979228.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "BRK-B",
               "title": "Warren Buffett Just Gave Away $5.5 Billion of Berkshire Stock Without Selling a Share. Here’s His Rule for a 72-Year-Old With $400,000 in Berkshire Who Gives $20,000 a Year to Her Church",
               "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-just-gave-away-040239167.html",
               "provider": "24/7 Wall St.",
@@ -983,23 +995,11 @@
             },
             {
               "symbol": "BRK-B",
-              "title": "Warren Buffett Just Gave Away $5.5 Billion of Berkshire Stock. He Says His Confidence in Berkshire Is \"As Strong as Ever.\"",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-just-gave-away-015402100.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-18T01:54:02+00:00",
-              "ts_epoch": 1794966842.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "BRK-B",
-              "title": "Berkshire Hathaway Slashes This Top 5 Stock; Nvidia Boosts SpaceX",
-              "url": "https://www.investors.com/news/berkshire-hathaway-stock-buys-sells-q3-13f-bac-nvidia-alphabet-spacex/?src=A00220&yptr=yahoo",
-              "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-17T21:11:46+00:00",
-              "ts_epoch": 1794949906.0,
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -1131,12 +1131,48 @@
       ],
       "news": [
         {
+          "symbol": "MA",
+          "title": "Mastercard enables smartphone payment acceptance for debit cardholders",
+          "url": "https://finance.yahoo.com/news/mastercard-enables-smartphone-payment-acceptance-073100825.html",
+          "provider": "Electronic Payments",
+          "timestamp": "2026-11-18T07:31:00+00:00",
+          "ts_epoch": 1794987060.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "JPM",
+          "title": "Nextpower (NXT) Just Got Hammered — These 2 Firms Hold The Reason",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/nextpower-nxt-just-got-hammered-060420135.html",
+          "provider": "Insider Monkey",
+          "timestamp": "2026-11-18T06:04:20+00:00",
+          "ts_epoch": 1794981860.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
           "symbol": "JPM",
           "title": "Iron Mountain Sees Billion-Dollar Growth in Data Centers and IT Asset Services",
           "url": "https://finance.yahoo.com/real-estate/articles/iron-mountain-sees-billion-dollar-041206625.html",
           "provider": "MarketBeat",
           "timestamp": "2026-11-18T04:12:06+00:00",
           "ts_epoch": 1794975126.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "V",
+          "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+          "provider": "Kiplinger",
+          "timestamp": "2026-11-18T03:13:25+00:00",
+          "ts_epoch": 1794971605.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
@@ -1161,44 +1197,6 @@
           "provider": "Barrons.com",
           "timestamp": "2026-11-17T22:23:00+00:00",
           "ts_epoch": 1794954180.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "MA",
-          "title": "What Mastercard Accept Launch Means For Shareholders",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/mastercard-accept-launch-means-shareholders-200943373.html",
-          "provider": "Simply Wall St.",
-          "timestamp": "2026-11-17T20:09:43+00:00",
-          "ts_epoch": 1794946183.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "order"
-          ]
-        },
-        {
-          "symbol": "V",
-          "title": "Third-Party Vendor Linked to Eli Lilly Is Hit by Data Breach",
-          "url": "https://www.barrons.com/articles/eli-lilly-vendor-hack-patient-data-470fcdea?siteid=yhoof2&yptr=yahoo",
-          "provider": "Barrons.com",
-          "timestamp": "2026-11-17T20:02:00+00:00",
-          "ts_epoch": 1794945720.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "JPM",
-          "title": "After IPO Day: Executing as a Public Company, 6th Palm Beach CorpGov Forum",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/ipo-day-executing-public-company-195033529.html",
-          "provider": "CorpGov.com",
-          "timestamp": "2026-11-17T19:50:33+00:00",
-          "ts_epoch": 1794945033.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
@@ -1357,6 +1355,30 @@
           "news": [
             {
               "symbol": "UNH",
+              "title": "UnitedHealth Is Targeting 13% to 16% Long-Term Earnings Growth. Where Will the Stock Be in 5 Years?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/unitedhealth-targeting-13-16-long-072000083.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-18T07:20:00+00:00",
+              "ts_epoch": 1794986400.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "UNH",
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "UNH",
               "title": "UnitedHealth Keeps Raising Guidance. Here's What a $10,000 Investment Could Be Worth if the Turnaround Sticks.",
               "url": "https://finance.yahoo.com/healthcare/articles/unitedhealth-keeps-raising-guidance-heres-030400323.html",
               "provider": "Motley Fool",
@@ -1365,30 +1387,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "UNH",
-              "title": "UnitedHealth (UNH) vs. Humana (HUM): Buy the Dip?",
-              "url": "https://finance.yahoo.com/healthcare/articles/unitedhealth-unh-vs-humana-hum-232100909.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-17T23:21:00+00:00",
-              "ts_epoch": 1794957660.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "UNH",
-              "title": "Stock Market Today, Nov. 17: Stocks Slide on AI Chip and Tech Pressures, Salesforce Plummets 9%",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-17-224356767.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-17T22:43:56+00:00",
-              "ts_epoch": 1794955436.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -1587,6 +1585,30 @@
           "news": [
             {
               "symbol": "UNH",
+              "title": "UnitedHealth Is Targeting 13% to 16% Long-Term Earnings Growth. Where Will the Stock Be in 5 Years?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/unitedhealth-targeting-13-16-long-072000083.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-18T07:20:00+00:00",
+              "ts_epoch": 1794986400.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "UNH",
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "UNH",
               "title": "UnitedHealth Keeps Raising Guidance. Here's What a $10,000 Investment Could Be Worth if the Turnaround Sticks.",
               "url": "https://finance.yahoo.com/healthcare/articles/unitedhealth-keeps-raising-guidance-heres-030400323.html",
               "provider": "Motley Fool",
@@ -1595,30 +1617,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "UNH",
-              "title": "UnitedHealth (UNH) vs. Humana (HUM): Buy the Dip?",
-              "url": "https://finance.yahoo.com/healthcare/articles/unitedhealth-unh-vs-humana-hum-232100909.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-17T23:21:00+00:00",
-              "ts_epoch": 1794957660.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "UNH",
-              "title": "Stock Market Today, Nov. 17: Stocks Slide on AI Chip and Tech Pressures, Salesforce Plummets 9%",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-17-224356767.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-17T22:43:56+00:00",
-              "ts_epoch": 1794955436.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -1763,6 +1761,30 @@
       "news": [
         {
           "symbol": "UNH",
+          "title": "UnitedHealth Is Targeting 13% to 16% Long-Term Earnings Growth. Where Will the Stock Be in 5 Years?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/unitedhealth-targeting-13-16-long-072000083.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-18T07:20:00+00:00",
+          "ts_epoch": 1794986400.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "UNH",
+          "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+          "provider": "Kiplinger",
+          "timestamp": "2026-11-18T03:13:25+00:00",
+          "ts_epoch": 1794971605.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "UNH",
           "title": "UnitedHealth Keeps Raising Guidance. Here's What a $10,000 Investment Could Be Worth if the Turnaround Sticks.",
           "url": "https://finance.yahoo.com/healthcare/articles/unitedhealth-keeps-raising-guidance-heres-030400323.html",
           "provider": "Motley Fool",
@@ -1807,30 +1829,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "LLY",
-          "title": "Eli Lilly Is Up 39% in a Year. Barclays Sees Another 9%",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/eli-lilly-39-barclays-sees-225358490.html",
-          "provider": "TIKR",
-          "timestamp": "2026-11-17T22:53:58+00:00",
-          "ts_epoch": 1794956038.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "UNH",
-          "title": "Stock Market Today, Nov. 17: Stocks Slide on AI Chip and Tech Pressures, Salesforce Plummets 9%",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-17-224356767.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-17T22:43:56+00:00",
-          "ts_epoch": 1794955436.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
           "matched_keywords": []
         }
       ],
@@ -1962,6 +1960,18 @@
             },
             {
               "symbol": "TSLA",
+              "title": "Tesla-SpaceX Merger Is 'Almost Inconceivable' to Avoid, Says Elon Musk Biographer — 'You'll Know More' on Dec. 3",
+              "url": "https://finance.yahoo.com/technology/articles/tesla-spacex-merger-almost-inconceivable-043006339.html",
+              "provider": "Benzinga",
+              "timestamp": "2026-11-18T04:30:06+00:00",
+              "ts_epoch": 1794976206.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "TSLA",
               "title": "“Of Course,” Musk Says When Told Tesla’s $1.6 Trillion Already Prices In Moderate Cybercab Success.",
               "url": "https://finance.yahoo.com/markets/stocks/articles/course-musk-says-told-tesla-031857554.html",
               "provider": "TIKR",
@@ -1970,18 +1980,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "TSLA",
-              "title": "Coinbase Exec Says AI IPOs Pulling Money From Bitcoin Is ‘A Reasonable Argument’ As Anthropic Debut Nears",
-              "url": "https://finance.yahoo.com/markets/crypto/articles/coinbase-exec-says-ai-ipos-023616274.html",
-              "provider": "Stocktwits",
-              "timestamp": "2026-11-18T02:36:16+00:00",
-              "ts_epoch": 1794969376.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -2045,14 +2043,14 @@
             },
             {
               "symbol": "AMZN",
-              "title": "Robert Pattinson is the next James Bond: A closer look at Amazon MGM's decision",
-              "url": "https://finance.yahoo.com/video/robert-pattinson-is-the-next-james-bond-a-closer-look-at-amazon-mgms-decision-144718415.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-17T14:47:18+00:00",
-              "ts_epoch": 1794926838.0,
+              "title": "Kevin O’Leary Warns Anthropic IPO Investors To ‘Understand’ What They’re Betting On: ‘May Not Make Money Until 2030’",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/kevin-o-leary-warns-anthropic-064430752.html",
+              "provider": "Benzinga",
+              "timestamp": "2026-11-18T06:44:30+00:00",
+              "ts_epoch": 1794984270.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "neutral",
+              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -2104,23 +2102,23 @@
             },
             {
               "symbol": "HD",
-              "title": "Stocks slip ahead of Nvidia earnings, Home Depot shares slide: AlphaCheck",
-              "url": "https://finance.yahoo.com/markets/article/copy-copy-tech-rises-coreweave-results-reignite-ai-trade-alphacheck-145755423.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-17T14:57:55+00:00",
-              "ts_epoch": 1794927475.0,
+              "title": "HD Stock On Track To Reverse 6 Weeks Of Gains: Goldman Sachs Trims Home Depot’s Price Target On Margin Pressure But Jim Cramer Is Bullish",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/hd-stock-track-reverse-6-065846624.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T06:58:46+00:00",
+              "ts_epoch": 1794985126.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "negative",
+              "sentiment": "positive",
               "matched_keywords": []
             },
             {
               "symbol": "HD",
-              "title": "Home Depot CFO Richard McPhail to become retailer's next CEO",
-              "url": "https://finance.yahoo.com/video/home-depot-cfo-richard-mcphail-to-become-retailers-next-ceo-144632964.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-17T14:46:32+00:00",
-              "ts_epoch": 1794926792.0,
+              "title": "Home Depot’s Comparable Sales Rose 2.2% Even as Customer Transactions Fell 0.5%. Here’s What’s Behind the Gap.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-comparable-sales-rose-061213739.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-18T06:12:13+00:00",
+              "ts_epoch": 1794982333.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2266,11 +2264,23 @@
           "news": [
             {
               "symbol": "BKNG",
-              "title": "Airbnb vs. Booking: Quarterly Revenue Scale and Historical Growth",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/airbnb-vs-booking-quarterly-revenue-222002222.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-17T22:20:02+00:00",
-              "ts_epoch": 1794954002.0,
+              "title": "Booking Holdings (BKNG) Stock Could Be A Bargain Despite AI Spending",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/booking-holdings-bkng-stock-could-061452344.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T06:14:52+00:00",
+              "ts_epoch": 1794982492.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "BKNG",
+              "title": "What Could Booking Holdings (BKNG) AI Travel Push Mean For Its Stock?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/could-booking-holdings-bkng-ai-051403281.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T05:14:03+00:00",
+              "ts_epoch": 1794978843.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -2278,26 +2288,14 @@
             },
             {
               "symbol": "BKNG",
-              "title": "Should You Buy And Hold Airbnb Stock Now?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/buy-hold-airbnb-stock-now-141343921.html",
-              "provider": "Trefis",
-              "timestamp": "2026-11-17T14:13:43+00:00",
-              "ts_epoch": 1794924823.0,
+              "title": "Why Booking Holdings (BKNG) Is Getting Attention Today",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-booking-holdings-bkng-getting-043246825.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T04:32:46+00:00",
+              "ts_epoch": 1794976366.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "BKNG",
-              "title": "Is There Still A Reason To Own Expedia Stock?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/still-reason-own-expedia-stock-112948463.html",
-              "provider": "Trefis",
-              "timestamp": "2026-11-17T11:29:48+00:00",
-              "ts_epoch": 1794914988.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
+              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -2358,11 +2356,23 @@
           "news": [
             {
               "symbol": "BKNG",
-              "title": "Airbnb vs. Booking: Quarterly Revenue Scale and Historical Growth",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/airbnb-vs-booking-quarterly-revenue-222002222.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-17T22:20:02+00:00",
-              "ts_epoch": 1794954002.0,
+              "title": "Booking Holdings (BKNG) Stock Could Be A Bargain Despite AI Spending",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/booking-holdings-bkng-stock-could-061452344.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T06:14:52+00:00",
+              "ts_epoch": 1794982492.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "BKNG",
+              "title": "What Could Booking Holdings (BKNG) AI Travel Push Mean For Its Stock?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/could-booking-holdings-bkng-ai-051403281.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T05:14:03+00:00",
+              "ts_epoch": 1794978843.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -2370,26 +2380,14 @@
             },
             {
               "symbol": "BKNG",
-              "title": "Should You Buy And Hold Airbnb Stock Now?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/buy-hold-airbnb-stock-now-141343921.html",
-              "provider": "Trefis",
-              "timestamp": "2026-11-17T14:13:43+00:00",
-              "ts_epoch": 1794924823.0,
+              "title": "Why Booking Holdings (BKNG) Is Getting Attention Today",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-booking-holdings-bkng-getting-043246825.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T04:32:46+00:00",
+              "ts_epoch": 1794976366.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "BKNG",
-              "title": "Is There Still A Reason To Own Expedia Stock?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/still-reason-own-expedia-stock-112948463.html",
-              "provider": "Trefis",
-              "timestamp": "2026-11-17T11:29:48+00:00",
-              "ts_epoch": 1794914988.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
+              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -2528,12 +2526,60 @@
       ],
       "news": [
         {
+          "symbol": "HD",
+          "title": "HD Stock On Track To Reverse 6 Weeks Of Gains: Goldman Sachs Trims Home Depot’s Price Target On Margin Pressure But Jim Cramer Is Bullish",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/hd-stock-track-reverse-6-065846624.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-18T06:58:46+00:00",
+          "ts_epoch": 1794985126.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
           "symbol": "AMZN",
-          "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-18T04:33:00+00:00",
-          "ts_epoch": 1794976380.0,
+          "title": "Kevin O’Leary Warns Anthropic IPO Investors To ‘Understand’ What They’re Betting On: ‘May Not Make Money Until 2030’",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/kevin-o-leary-warns-anthropic-064430752.html",
+          "provider": "Benzinga",
+          "timestamp": "2026-11-18T06:44:30+00:00",
+          "ts_epoch": 1794984270.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "AMZN",
+          "title": "Can Anthropic’s IPO Burn NVDA Stock Bears? Jim Cramer Thinks So — Jeff Bezos Weighs In On Jensen Huang’s Successor",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/anthropic-ipo-burn-nvda-stock-061908770.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-18T06:19:08+00:00",
+          "ts_epoch": 1794982748.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "BKNG",
+          "title": "Booking Holdings (BKNG) Stock Could Be A Bargain Despite AI Spending",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/booking-holdings-bkng-stock-could-061452344.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-18T06:14:52+00:00",
+          "ts_epoch": 1794982492.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "HD",
+          "title": "Home Depot’s Comparable Sales Rose 2.2% Even as Customer Transactions Fell 0.5%. Here’s What’s Behind the Gap.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-comparable-sales-rose-061213739.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-18T06:12:13+00:00",
+          "ts_epoch": 1794982333.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
@@ -2541,64 +2587,14 @@
         },
         {
           "symbol": "AMZN",
-          "title": "Dow Jones Futures: Techs Rise After Nvidia Beats, Says This On Jensen Huang; Target, Anthropic IPO Ahead",
-          "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-earnings-target-anthropic-ipo/?src=A00220&yptr=yahoo",
-          "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-18T04:05:12+00:00",
-          "ts_epoch": 1794974712.0,
-          "category": "earnings",
-          "category_label": "財報",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "beats"
-          ]
-        },
-        {
-          "symbol": "LOW",
-          "title": "Nasdaq Futures Lead Wall Street Rebound After Nvidia’s Blowout Forecast, Anthropic IPO Looms: SLS, NKE, MU In Focus",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-futures-lead-wall-street-034627099.html",
+          "title": "Elon Musk Ally Jason Calacanis Wants United Airlines To ‘Wreck’ Delta’s ‘Painfully Slow WiFi’ Amid Starlink Supremacy Debate",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/elon-musk-ally-jason-calacanis-054541967.html",
           "provider": "Stocktwits",
-          "timestamp": "2026-11-18T03:46:27+00:00",
-          "ts_epoch": 1794973587.0,
+          "timestamp": "2026-11-18T05:45:41+00:00",
+          "ts_epoch": 1794980741.0,
           "category": "general",
           "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "TSLA",
-          "title": "“Of Course,” Musk Says When Told Tesla’s $1.6 Trillion Already Prices In Moderate Cybercab Success.",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/course-musk-says-told-tesla-031857554.html",
-          "provider": "TIKR",
-          "timestamp": "2026-11-18T03:18:57+00:00",
-          "ts_epoch": 1794971937.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "LOW",
-          "title": "Lowe's (LOW) Faces Holiday Shipping Costs And Tight Inventory As Drone Deliveries Grow",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/lowes-low-faces-holiday-shipping-031213069.html",
-          "provider": "Simply Wall St.",
-          "timestamp": "2026-11-18T03:12:13+00:00",
-          "ts_epoch": 1794971533.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "AMZN",
-          "title": "A Rocket Failure Just Cost Amazon 40 Internet Satellites. It's Good News for SpaceX, but I'd Still Want a Lower Stock Price.",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/rocket-failure-just-cost-amazon-030602654.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-18T03:06:02+00:00",
-          "ts_epoch": 1794971162.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
+          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -2828,6 +2824,30 @@
           "news": [
             {
               "symbol": "GOOGL",
+              "title": "3 Undervalued Stocks With Cash Flow Value Gaps Over 35%",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/3-undervalued-stocks-cash-flow-051544633.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T05:15:44+00:00",
+              "ts_epoch": 1794978944.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "GOOGL",
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "GOOGL",
               "title": "Jim Cramer Warns the Anthropic IPO Windfall Is Going to the Super Rich. Here’s the Backlash He Sees Coming",
               "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-warns-anthropic-ipo-000732494.html",
               "provider": "24/7 Wall St.",
@@ -2836,30 +2856,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "GOOGL",
-              "title": "Amazon and Google Could Own $400 Billion of Anthropic Stock",
-              "url": "https://www.barrons.com/articles/amazon-google-anthropic-stock-ipo-6713e425?siteid=yhoof2&yptr=yahoo",
-              "provider": "Barrons.com",
-              "timestamp": "2026-11-17T22:27:00+00:00",
-              "ts_epoch": 1794954420.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "GOOGL",
-              "title": "Can this AI help 'democratize' access to extensive wealth planning?",
-              "url": "https://finance.yahoo.com/video/can-this-ai-help-democratize-access-to-extensive-wealth-planning-221525580.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-17T22:15:25+00:00",
-              "ts_epoch": 1794953725.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -2923,17 +2919,15 @@
             },
             {
               "symbol": "DIS",
-              "title": "Disney stock rises after Q4 earnings beat estimates, company sets $3 billion cost savings target",
-              "url": "https://finance.yahoo.com/markets/stocks/article/disney-stock-rises-after-q4-earnings-beat-estimates-company-sets-3-billion-cost-savings-target-152507234.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-16T22:29:53+00:00",
-              "ts_epoch": 1794868193.0,
-              "category": "earnings",
-              "category_label": "財報",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "beat estimates"
-              ]
+              "title": "Morgan Stanley Raises Its Disney Target to $133. Is It Still Too Low?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/morgan-stanley-raises-disney-target-054333808.html",
+              "provider": "TIKR",
+              "timestamp": "2026-11-18T05:43:33+00:00",
+              "ts_epoch": 1794980613.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
             }
           ],
           "chip": {
@@ -2968,13 +2962,7 @@
                 "surprise_pct": 5.43
               },
               "upcoming": null,
-              "news": [
-                {
-                  "title": "Disney stock rises after Q4 earnings beat estimates, company sets $3 billion cost savings target",
-                  "url": "https://finance.yahoo.com/markets/stocks/article/disney-stock-rises-after-q4-earnings-beat-estimates-company-sets-3-billion-cost-savings-target-152507234.html",
-                  "sentiment": "positive"
-                }
-              ]
+              "news": []
             },
             "fundamentals": {
               "day_pct": -1.482724980695127,
@@ -2989,6 +2977,18 @@
       ],
       "news": [
         {
+          "symbol": "GOOGL",
+          "title": "3 Undervalued Stocks With Cash Flow Value Gaps Over 35%",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/3-undervalued-stocks-cash-flow-051544633.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-18T05:15:44+00:00",
+          "ts_epoch": 1794978944.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
           "symbol": "META",
           "title": "Peter Thiel makes new $161 million ETF bet, dethroning Amazon stock",
           "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-makes-161-million-043300842.html",
@@ -2998,6 +2998,18 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "GOOGL",
+          "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+          "provider": "Kiplinger",
+          "timestamp": "2026-11-18T03:13:25+00:00",
+          "ts_epoch": 1794971605.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
           "matched_keywords": []
         },
         {
@@ -3034,30 +3046,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "META",
-          "title": "Bill Ackman’s $14 billion bet beyond the Magnificent 7",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/bill-ackman-14-billion-bet-223300029.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-17T22:33:00+00:00",
-          "ts_epoch": 1794954780.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "GOOGL",
-          "title": "Amazon and Google Could Own $400 Billion of Anthropic Stock",
-          "url": "https://www.barrons.com/articles/amazon-google-anthropic-stock-ipo-6713e425?siteid=yhoof2&yptr=yahoo",
-          "provider": "Barrons.com",
-          "timestamp": "2026-11-17T22:27:00+00:00",
-          "ts_epoch": 1794954420.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -3463,6 +3451,18 @@
           "news": [
             {
               "symbol": "UBER",
+              "title": "Grab vs. Uber Technologies: Which Gig Economy Stock Is a Better Buy for 2027?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/grab-vs-uber-technologies-gig-055052314.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-18T05:50:52+00:00",
+              "ts_epoch": 1794981052.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "UBER",
               "title": "Uber Riders in Vegas Can Now Get Driverless Zoox Robotaxi",
               "url": "https://finance.yahoo.com/technology/articles/uber-riders-vegas-now-driverless-023011406.html",
               "provider": "Benzinga",
@@ -3482,20 +3482,6 @@
               "provider": "Simply Wall St.",
               "timestamp": "2026-11-18T02:13:12+00:00",
               "ts_epoch": 1794967992.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "partnership"
-              ]
-            },
-            {
-              "symbol": "UBER",
-              "title": "Kohl's (KSS) Faces A 17% Premium Following Uber Eats Rollout",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/kohls-kss-faces-17-premium-011302646.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-18T01:13:02+00:00",
-              "ts_epoch": 1794964382.0,
               "category": "order",
               "category_label": "訂單 / 合約",
               "sentiment": "positive",
@@ -3741,6 +3727,18 @@
           "news": [
             {
               "symbol": "UBER",
+              "title": "Grab vs. Uber Technologies: Which Gig Economy Stock Is a Better Buy for 2027?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/grab-vs-uber-technologies-gig-055052314.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-18T05:50:52+00:00",
+              "ts_epoch": 1794981052.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "UBER",
               "title": "Uber Riders in Vegas Can Now Get Driverless Zoox Robotaxi",
               "url": "https://finance.yahoo.com/technology/articles/uber-riders-vegas-now-driverless-023011406.html",
               "provider": "Benzinga",
@@ -3760,20 +3758,6 @@
               "provider": "Simply Wall St.",
               "timestamp": "2026-11-18T02:13:12+00:00",
               "ts_epoch": 1794967992.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "partnership"
-              ]
-            },
-            {
-              "symbol": "UBER",
-              "title": "Kohl's (KSS) Faces A 17% Premium Following Uber Eats Rollout",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/kohls-kss-faces-17-premium-011302646.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-18T01:13:02+00:00",
-              "ts_epoch": 1794964382.0,
               "category": "order",
               "category_label": "訂單 / 合約",
               "sentiment": "positive",
@@ -3936,6 +3920,18 @@
       "news": [
         {
           "symbol": "UBER",
+          "title": "Grab vs. Uber Technologies: Which Gig Economy Stock Is a Better Buy for 2027?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/grab-vs-uber-technologies-gig-055052314.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-18T05:50:52+00:00",
+          "ts_epoch": 1794981052.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "UBER",
           "title": "Uber Riders in Vegas Can Now Get Driverless Zoox Robotaxi",
           "url": "https://finance.yahoo.com/technology/articles/uber-riders-vegas-now-driverless-023011406.html",
           "provider": "Benzinga",
@@ -3999,18 +3995,6 @@
           "category_label": "一般新聞",
           "sentiment": "neutral",
           "matched_keywords": []
-        },
-        {
-          "symbol": "UBER",
-          "title": "Stock Market Today, Nov. 17: Grab Holdings Shares Slip Amid Broader Stock Market Sell-Off",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-17-230632056.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-17T23:06:32+00:00",
-          "ts_epoch": 1794956792.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
         }
       ],
       "earnings": []
@@ -4059,18 +4043,6 @@
           "news": [
             {
               "symbol": "PEP",
-              "title": "Nvidia stock valuation looks 'draconian,' even without Jensen Huang: Analyst",
-              "url": "https://finance.yahoo.com/markets/stocks/article/nvidia-stock-valuation-looks-draconian-even-without-jensen-huang-analyst-220000337.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-16T22:00:00+00:00",
-              "ts_epoch": 1794866400.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "PEP",
               "title": "How PepsiCo Is Targeting GLP-1 Users",
               "url": "https://finance.yahoo.com/video/pepsico-targeting-glp-1-users-231300521.html",
               "provider": "WSJ",
@@ -4091,6 +4063,18 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "PEP",
+              "title": "KFC drops Pepsi in the U.S., but not everywhere",
+              "url": "https://finance.yahoo.com/small-business/articles/kfc-drops-pepsi-u-not-220300704.html",
+              "provider": "TheStreet",
+              "timestamp": "2026-11-17T22:03:00+00:00",
+              "ts_epoch": 1794952980.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -4128,6 +4112,18 @@
           "news": [
             {
               "symbol": "MO",
+              "title": "Is Altria Group (MO) Fully Valued As Higher EPS Guidance, A Dividend Hike, And Buybacks Lift Sentiment?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/altria-group-mo-fully-valued-043135819.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T04:31:35+00:00",
+              "ts_epoch": 1794976295.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MO",
               "title": "Conagra Cut Its Dividend 50%. The Stock Market Was Warning Investors",
               "url": "https://finance.yahoo.com/markets/stocks/articles/conagra-cut-dividend-50-stock-174759528.html",
               "provider": "24/7 Wall St.",
@@ -4145,18 +4141,6 @@
               "provider": "24/7 Wall St.",
               "timestamp": "2026-11-17T16:30:50+00:00",
               "ts_epoch": 1794933050.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MO",
-              "title": "A $300,000 Portfolio in Omega Healthcare, Edison International and Altria Pays $17,064 a Year in Dividends. Here’s What Happens if One Cuts",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/300-000-portfolio-omega-healthcare-152121028.html",
-              "provider": "TIKR",
-              "timestamp": "2026-11-17T15:21:21+00:00",
-              "ts_epoch": 1794928881.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
@@ -4197,6 +4181,18 @@
           "news": [
             {
               "symbol": "WMT",
+              "title": "Goldman trades at 13x P/E—so why did these AI models pass on it?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/goldman-trades-13x-p-e-072349007.html",
+              "provider": "Investing.com",
+              "timestamp": "2026-11-18T07:23:49+00:00",
+              "ts_epoch": 1794986629.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "WMT",
               "title": "Target gives shoppers something Walmart and Kroger can't",
               "url": "https://finance.yahoo.com/small-business/articles/target-gives-shoppers-something-walmart-012158082.html",
               "provider": "TheStreet",
@@ -4217,18 +4213,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "WMT",
-              "title": "2 of the Best Dividend Stocks to Buy With $5,000 in November",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/2-best-dividend-stocks-buy-234602110.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-17T23:46:02+00:00",
-              "ts_epoch": 1794959162.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
               "matched_keywords": []
             }
           ],
@@ -4251,6 +4235,30 @@
       ],
       "surges": [],
       "news": [
+        {
+          "symbol": "WMT",
+          "title": "Goldman trades at 13x P/E—so why did these AI models pass on it?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/goldman-trades-13x-p-e-072349007.html",
+          "provider": "Investing.com",
+          "timestamp": "2026-11-18T07:23:49+00:00",
+          "ts_epoch": 1794986629.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "MO",
+          "title": "Is Altria Group (MO) Fully Valued As Higher EPS Guidance, A Dividend Hike, And Buybacks Lift Sentiment?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/altria-group-mo-fully-valued-043135819.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-18T04:31:35+00:00",
+          "ts_epoch": 1794976295.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
         {
           "symbol": "WMT",
           "title": "Target gives shoppers something Walmart and Kroger can't",
@@ -4297,30 +4305,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "PEP",
-          "title": "How PepsiCo Turns Fandom Into Brand Loyalty | WSJ Leadership Institute",
-          "url": "https://finance.yahoo.com/video/pepsico-turns-fandom-brand-loyalty-230000232.html",
-          "provider": "WSJ",
-          "timestamp": "2026-11-17T23:00:00+00:00",
-          "ts_epoch": 1794956400.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "WMT",
-          "title": "How one all-digital bank is helping customers manage cash",
-          "url": "https://finance.yahoo.com/small-business/articles/one-digital-bank-helping-customers-225921832.html",
-          "provider": "American Banker",
-          "timestamp": "2026-11-17T22:59:21+00:00",
-          "ts_epoch": 1794956361.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
           "matched_keywords": []
         }
       ],
@@ -4396,6 +4380,18 @@
           "news": [
             {
               "symbol": "XOM",
+              "title": "Oil Market Midweek Wrap: Prices Fall Despite Iran Escalation – Here’s What Traders Are Watching",
+              "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-prices-074020976.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T07:40:20+00:00",
+              "ts_epoch": 1794987620.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "XOM",
               "title": "The Bet Behind ExxonMobil's Rally",
               "url": "https://finance.yahoo.com/markets/stocks/articles/bet-behind-exxonmobils-rally-201029387.html",
               "provider": "Simply Wall St.",
@@ -4417,20 +4413,6 @@
               "category_label": "一般新聞",
               "sentiment": "neutral",
               "matched_keywords": []
-            },
-            {
-              "symbol": "XOM",
-              "title": "4 High-Yield Energy Stocks That Pay Roth IRA Investors Tax-Free Income",
-              "url": "https://finance.yahoo.com/energy/articles/4-high-yield-energy-stocks-171556867.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-17T17:15:56+00:00",
-              "ts_epoch": 1794935756.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "partnership"
-              ]
             }
           ],
           "chip": {
@@ -4469,6 +4451,30 @@
           "news": [
             {
               "symbol": "CVX",
+              "title": "Oil Market Midweek Wrap: Prices Fall Despite Iran Escalation – Here’s What Traders Are Watching",
+              "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-prices-074020976.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T07:40:20+00:00",
+              "ts_epoch": 1794987620.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "CVX",
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "CVX",
               "title": "Chevron Says AI Has Already Captured Over $100 Million in Value. Here's Where It Might Find an Even Bigger Payoff.",
               "url": "https://finance.yahoo.com/technology/ai/articles/chevron-says-ai-already-captured-002502768.html",
               "provider": "Motley Fool",
@@ -4477,33 +4483,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "CVX",
-              "title": "Chevron (CVX) Nears $5 Billion Gulf Deal And Iraq Oilfield Takeover",
-              "url": "https://finance.yahoo.com/energy/articles/chevron-cvx-nears-5-billion-001620087.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-18T00:16:20+00:00",
-              "ts_epoch": 1794960980.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "deal",
-                "contract"
-              ]
-            },
-            {
-              "symbol": "CVX",
-              "title": "Sector Update: Energy Stocks Lower in Afternoon Trading",
-              "url": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-lower-afternoon-190033166.html",
-              "provider": "MT Newswires",
-              "timestamp": "2026-11-17T19:00:33+00:00",
-              "ts_epoch": 1794942033.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -4594,20 +4573,6 @@
                 "secures",
                 "deal",
                 "contract"
-              ]
-            },
-            {
-              "symbol": "SLB",
-              "title": "SLB Stock: Analyst Estimates & Ratings",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/slb-stock-analyst-estimates-ratings-074754675.html",
-              "provider": "Barchart",
-              "timestamp": "2026-11-16T07:47:54+00:00",
-              "ts_epoch": 1794815274.0,
-              "category": "guidance",
-              "category_label": "指引修訂",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "outperform"
               ]
             }
           ],
@@ -4745,6 +4710,30 @@
           "news": [
             {
               "symbol": "CVX",
+              "title": "Oil Market Midweek Wrap: Prices Fall Despite Iran Escalation – Here’s What Traders Are Watching",
+              "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-prices-074020976.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-18T07:40:20+00:00",
+              "ts_epoch": 1794987620.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "CVX",
+              "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-18T03:13:25+00:00",
+              "ts_epoch": 1794971605.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "CVX",
               "title": "Chevron Says AI Has Already Captured Over $100 Million in Value. Here's Where It Might Find an Even Bigger Payoff.",
               "url": "https://finance.yahoo.com/technology/ai/articles/chevron-says-ai-already-captured-002502768.html",
               "provider": "Motley Fool",
@@ -4753,33 +4742,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "CVX",
-              "title": "Chevron (CVX) Nears $5 Billion Gulf Deal And Iraq Oilfield Takeover",
-              "url": "https://finance.yahoo.com/energy/articles/chevron-cvx-nears-5-billion-001620087.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-18T00:16:20+00:00",
-              "ts_epoch": 1794960980.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "deal",
-                "contract"
-              ]
-            },
-            {
-              "symbol": "CVX",
-              "title": "Sector Update: Energy Stocks Lower in Afternoon Trading",
-              "url": "https://finance.yahoo.com/energy/articles/sector-energy-stocks-lower-afternoon-190033166.html",
-              "provider": "MT Newswires",
-              "timestamp": "2026-11-17T19:00:33+00:00",
-              "ts_epoch": 1794942033.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -4936,6 +4898,30 @@
       ],
       "news": [
         {
+          "symbol": "XOM",
+          "title": "Oil Market Midweek Wrap: Prices Fall Despite Iran Escalation – Here’s What Traders Are Watching",
+          "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-prices-074020976.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-18T07:40:20+00:00",
+          "ts_epoch": 1794987620.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "CVX",
+          "title": "Here Are the Current Berkshire Hathaway Stock Holdings",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaways-stock-holdings-kiplingers-162613318.html",
+          "provider": "Kiplinger",
+          "timestamp": "2026-11-18T03:13:25+00:00",
+          "ts_epoch": 1794971605.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
           "symbol": "CVX",
           "title": "Chevron Says AI Has Already Captured Over $100 Million in Value. Here's Where It Might Find an Even Bigger Payoff.",
           "url": "https://finance.yahoo.com/technology/ai/articles/chevron-says-ai-already-captured-002502768.html",
@@ -4984,30 +4970,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "XOM",
-          "title": "ExxonMobil makes a bold $3 billion move to clean up its balance sheet",
-          "url": "https://finance.yahoo.com/energy/articles/exxonmobil-makes-bold-3-billion-181700764.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-17T18:17:00+00:00",
-          "ts_epoch": 1794939420.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "CVX",
-          "title": "Chevron's $5 Billion Gulf Oil Bet Has a Head Start",
-          "url": "https://finance.yahoo.com/energy/articles/chevrons-5-billion-gulf-oil-174239048.html",
-          "provider": "GuruFocus.com",
-          "timestamp": "2026-11-17T17:42:39+00:00",
-          "ts_epoch": 1794937359.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
           "matched_keywords": []
         }
       ],
@@ -6108,6 +6070,18 @@
           "news": [
             {
               "symbol": "NEM",
+              "title": "Newmont (NEM) Drew A New Stake From Stanley Druckenmiller’s Family Office",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/newmont-nem-drew-stake-stanley-043156197.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T04:31:56+00:00",
+              "ts_epoch": 1794976316.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "NEM",
               "title": "Stanley Druckenmiller Owned $120 Million of Google in June and Zero by Sept. 30",
               "url": "https://finance.yahoo.com/markets/stocks/articles/stanley-druckenmiller-owned-120-million-174732940.html",
               "provider": "24/7 Wall St.",
@@ -6128,18 +6102,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "NEM",
-              "title": "Here is What to Know Beyond Why Newmont Corporation (NEM) is a Trending Stock",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/know-beyond-why-newmont-corporation-130004543.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-17T13:00:04+00:00",
-              "ts_epoch": 1794920404.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -6660,6 +6622,18 @@
           "news": [
             {
               "symbol": "NEM",
+              "title": "Newmont (NEM) Drew A New Stake From Stanley Druckenmiller’s Family Office",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/newmont-nem-drew-stake-stanley-043156197.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-18T04:31:56+00:00",
+              "ts_epoch": 1794976316.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "NEM",
               "title": "Stanley Druckenmiller Owned $120 Million of Google in June and Zero by Sept. 30",
               "url": "https://finance.yahoo.com/markets/stocks/articles/stanley-druckenmiller-owned-120-million-174732940.html",
               "provider": "24/7 Wall St.",
@@ -6680,18 +6654,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "NEM",
-              "title": "Here is What to Know Beyond Why Newmont Corporation (NEM) is a Trending Stock",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/know-beyond-why-newmont-corporation-130004543.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-17T13:00:04+00:00",
-              "ts_epoch": 1794920404.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -6729,6 +6691,18 @@
         }
       ],
       "news": [
+        {
+          "symbol": "NEM",
+          "title": "Newmont (NEM) Drew A New Stake From Stanley Druckenmiller’s Family Office",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/newmont-nem-drew-stake-stanley-043156197.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-18T04:31:56+00:00",
+          "ts_epoch": 1794976316.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
         {
           "symbol": "NEM",
           "title": "Stanley Druckenmiller Owned $120 Million of Google in June and Zero by Sept. 30",
@@ -6789,18 +6763,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NEM",
-          "title": "Can Newmont Stock Fall 40%?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/newmont-stock-fall-40-112946149.html",
-          "provider": "Trefis",
-          "timestamp": "2026-11-17T11:29:46+00:00",
-          "ts_epoch": 1794914986.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
           "matched_keywords": []
         }
       ],
