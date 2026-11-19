@@ -278,7 +278,35 @@ def latest_trading_date() -> date:
     payload = fetch_json("https://www.tpex.org.tw/openapi/v1/tpex_intraday_trading_statistics")
     if not payload:
         raise RuntimeError("TPEx latest trading-date endpoint returned no rows")
-    return max(roc_date(row["Date"]) for row in payload)
+    latest = max(roc_date(row["Date"]) for row in payload)
+
+    # The TPEx OpenAPI summary can lag the date-specific official report by a
+    # day.  After the market has closed, probe the recent date-specific report
+    # so the dashboard does not remain stale solely because the summary feed is
+    # late.  The date-specific endpoint returns empty tables for unpublished
+    # dates, so it is safe to ignore those candidates.
+    now = datetime.now(ZoneInfo("Asia/Taipei"))
+    if now.time() >= datetime.strptime("15:00", "%H:%M").time():
+        for offset in range(7):
+            candidate = now.date() - timedelta(days=offset)
+            if candidate <= latest or candidate.weekday() >= 5:
+                continue
+            try:
+                report = fetch_json(tpex_intraday_url(candidate))
+                tables = report.get("tables", [])
+                report_date = str(report.get("date", ""))
+                if (
+                    report_date == candidate.strftime("%Y%m%d")
+                    and len(tables) >= 2
+                    and tables[0].get("data")
+                    and tables[1].get("data")
+                ):
+                    print(f"TPEx date-specific report is newer than OpenAPI summary: {candidate}")
+                    latest = candidate
+                    break
+            except Exception as exc:  # noqa: BLE001
+                print(f"skip TPEx latest-date probe {candidate}: {exc}")
+    return latest
 
 
 def load_state():
@@ -394,6 +422,8 @@ def build_output(state, latest: date, twse_history):
         row["TPEX"] = days[key]["TPEX"]["market"]
     series = []
     for key in sorted(market_map):
+        if key > latest_key:
+            continue
         row = market_map[key]
         twse = row.get("TWSE")
         tpex = row.get("TPEX")
