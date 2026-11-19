@@ -4,9 +4,9 @@ on:
   schedule:
     # Retry across the official publication window. Each run is idempotent and
     # publishes only when the exchange date advances.
-    - cron: '43 12 * * 1-5'
-    - cron: '13 14 * * 1-5'
-    - cron: '20 15 * * 1-5'
+    - cron: '43 4 * * 1-5'
+    - cron: '13 6 * * 1-5'
+    - cron: '20 8 * * 1-5'
     - cron: '43 16 * * 1-5'
 permissions:
   contents: write

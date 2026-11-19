@@ -2,18 +2,15 @@ name: Update ETF Dashboard
 
 on:
   schedule:
-    # Nominally Taipei 17:50 / 18:30 / 19:30 on weekdays, but measured runs land
-    # 3.5–4.2h late every day (queue delay, not jitter), so data actually lands
-    # ~21:30–23:15 Taipei. Do NOT shift the cron earlier to compensate: if the
-    # delay ever disappears we would fetch mid-session and snapshot stale
-    # holdings. Three windows are redundancy — once a day has a complete
-    # snapshot, later runs reuse it and skip the fetch.
-    # UTC date == Taipei date for anything running 08:00–24:00 Taipei, so the
-    # delay never misdates a snapshot.
-    - cron: '50 9 * * 1-5'
-    - cron: '30 10 * * 1-5'
-    - cron: '30 11 * * 1-5'
-    - cron: '40 13 * * 1-5'
+    # Measured GitHub starts are currently 7–9 hours late, so early UTC windows
+    # are intentional. The generator refuses to trust a pre-publication cache
+    # and later windows refetch stale source dates. The final late window is a
+    # safety net if scheduler latency returns to normal.
+    - cron: '50 1 * * 1-5'
+    - cron: '30 2 * * 1-5'
+    - cron: '30 3 * * 1-5'
+    - cron: '40 5 * * 1-5'
+    - cron: '40 7 * * 1-5'
     - cron: '40 15 * * 1-5'
   workflow_dispatch:
     inputs:

@@ -5,8 +5,12 @@ on:
   schedule:
     # Multiple non-round windows keep the dashboard current even when GitHub's
     # scheduled-event queue drops or delays one occurrence.
-    - cron: '17 9 * * 1-5'
-    - cron: '47 11 * * 1-5'
+    # GitHub's scheduler currently starts these jobs about 7–9 hours late.
+    # Early UTC windows therefore land in the Taiwan evening; the final late
+    # window remains as insurance if scheduler latency returns to normal.
+    - cron: '17 0 * * 1-5'
+    - cron: '47 3 * * 1-5'
+    - cron: '15 6 * * 1-5'
     - cron: '15 15 * * 1-5'
 
 permissions:
