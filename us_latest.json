@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-19T03:45:28.962270",
+  "fetched_at": "2026-11-19T04:19:45.698516",
   "trade_date": "2026-11-18",
   "sectors": [
     {
@@ -328,6 +328,18 @@
           "news": [
             {
               "symbol": "MU",
+              "title": "Anthropic to debut amid security worries and SpaceX to finance GPU rentals",
+              "url": "https://finance.yahoo.com/video/anthropic-to-debut-amid-security-worries-and-spacex-to-finance-gpu-rentals-225801261.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-18T22:58:01+00:00",
+              "ts_epoch": 1795042681.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MU",
               "title": "Micron President on the AI gap: \"China is far behind in high-bandwidth memory\"",
               "url": "https://finance.yahoo.com/video/micron-president-on-the-ai-gap-china-is-far-behind-in-high-bandwidth-memory-220744101.html",
               "provider": "Yahoo Finance Video",
@@ -345,18 +357,6 @@
               "provider": "Yahoo Finance Video",
               "timestamp": "2026-11-18T21:58:15+00:00",
               "ts_epoch": 1795039095.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MU",
-              "title": "Stock-Split Watch: Is Micron Next?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/stock-split-watch-micron-next-010302134.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-19T01:03:02+00:00",
-              "ts_epoch": 1795050182.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -448,11 +448,47 @@
       "news": [
         {
           "symbol": "NVDA",
-          "title": "Dow Jones Futures Rise; Anthropic IPO Prices High, Palo Alto And Everpure Rally On Earnings",
+          "title": "Anthropic, Nvidia And The Next AI Trade: Michael Burry Explains What Could Break The Bull Case",
+          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-nvidia-next-ai-trade-040745513.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-19T04:07:45+00:00",
+          "ts_epoch": 1795061265.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Dow Jones Futures Rise: Anthropic IPO To Debut After Pricing High; Palo Alto And Everpure Rally On Earnings",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-anthropic-ipo-prices-palo-alto-everpure-nvidia-target-unitedhealth-fed-waller-shock/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-19T03:38:16+00:00",
-          "ts_epoch": 1795059496.0,
+          "timestamp": "2026-11-19T04:02:55+00:00",
+          "ts_epoch": 1795060975.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Peter Thiel’s $85 Million Nvidia Exit Was a Bet the Stock Had Run Far Enough. After Nvidia’s Beat, It Closed Below Every Price He Could Have Sold At",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-85-million-nvidia-035109964.html",
+          "provider": "24/7 Wall St.",
+          "timestamp": "2026-11-19T03:51:09+00:00",
+          "ts_epoch": 1795060269.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Dan Ives Says Nvidia’s AI Dominance Can Survive Without Jensen Huang: ‘Two, Three Years Ahead’ Of Rivals",
+          "url": "https://finance.yahoo.com/technology/ai/articles/dan-ives-says-nvidia-ai-033956725.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-19T03:39:56+00:00",
+          "ts_epoch": 1795059596.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
@@ -468,44 +504,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "SpaceX’s December Lock-Up Frees Another 17% of Its Shares. Here’s What October’s Unlock Did to the Stock.",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-december-lock-frees-another-025502691.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-19T02:55:02+00:00",
-          "ts_epoch": 1795056902.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Asian stocks drop as Anthropic's record IPO fails to reassure",
-          "url": "https://finance.yahoo.com/markets/world-indices/articles/asian-stocks-drop-anthropics-record-025108034.html",
-          "provider": "AFP",
-          "timestamp": "2026-11-19T02:51:08+00:00",
-          "ts_epoch": 1795056668.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "deal"
-          ]
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Japan’s Datasection slumps on big guidance cut amid U.S.-China chip access row",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/japan-datasection-slumps-big-guidance-022320105.html",
-          "provider": "Investing.com",
-          "timestamp": "2026-11-19T02:23:20+00:00",
-          "ts_epoch": 1795055000.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
           "matched_keywords": []
         },
         {
@@ -650,6 +648,20 @@
           "news": [
             {
               "symbol": "JPM",
+              "title": "Fed Chair Kevin Warsh Vowed to Hit the Fed's 2% Inflation Target After October's Rate Hold, Even as JPMorgan Warns Democratic Control of the Senate Could Make Him a One-Term Chair. Here's Why That Political Risk Matters for Markets.",
+              "url": "https://finance.yahoo.com/economy/policy/articles/fed-chair-kevin-warsh-vowed-033502243.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-19T03:35:02+00:00",
+              "ts_epoch": 1795059302.0,
+              "category": "guidance",
+              "category_label": "指引修訂",
+              "sentiment": "negative",
+              "matched_keywords": [
+                "warns"
+              ]
+            },
+            {
+              "symbol": "JPM",
               "title": "JPMorgan taps 20-year company veteran Bregje de Best as its next CFO",
               "url": "https://finance.yahoo.com/markets/stocks/articles/jpmorgan-taps-20-company-veteran-232910777.html",
               "provider": "Fortune",
@@ -667,18 +679,6 @@
               "provider": "TheStreet",
               "timestamp": "2026-11-18T22:21:25+00:00",
               "ts_epoch": 1795040485.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "JPM",
-              "title": "JPMorgan Chase & Co. (JPM) Sees a More Significant Dip Than Broader Market: Some Facts to Know",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/jpmorgan-chase-co-jpm-sees-214502926.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-18T21:45:02+00:00",
-              "ts_epoch": 1795038302.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -978,6 +978,20 @@
       ],
       "news": [
         {
+          "symbol": "JPM",
+          "title": "Fed Chair Kevin Warsh Vowed to Hit the Fed's 2% Inflation Target After October's Rate Hold, Even as JPMorgan Warns Democratic Control of the Senate Could Make Him a One-Term Chair. Here's Why That Political Risk Matters for Markets.",
+          "url": "https://finance.yahoo.com/economy/policy/articles/fed-chair-kevin-warsh-vowed-033502243.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-19T03:35:02+00:00",
+          "ts_epoch": 1795059302.0,
+          "category": "guidance",
+          "category_label": "指引修訂",
+          "sentiment": "negative",
+          "matched_keywords": [
+            "warns"
+          ]
+        },
+        {
           "symbol": "BRK-B",
           "title": "Warren Buffett Expects Berkshire Hathaway (BRKA, BRKB) Stock to Drop About 50% Again Someday. Here's What He Says to Do Then.",
           "url": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-expects-berkshire-hathaway-012500364.html",
@@ -1035,18 +1049,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "JPM",
-          "title": "Popular carmaker taps JPMorgan for agent payments",
-          "url": "https://finance.yahoo.com/technology/ai/articles/popular-carmaker-taps-jpmorgan-agent-222125761.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-18T22:21:25+00:00",
-          "ts_epoch": 1795040485.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -1175,11 +1177,11 @@
             },
             {
               "symbol": "UNH",
-              "title": "Dow Jones Futures Rise; Anthropic IPO Prices High, Palo Alto And Everpure Rally On Earnings",
+              "title": "Dow Jones Futures Rise: Anthropic IPO To Debut After Pricing High; Palo Alto And Everpure Rally On Earnings",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-anthropic-ipo-prices-palo-alto-everpure-nvidia-target-unitedhealth-fed-waller-shock/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-19T03:38:16+00:00",
-              "ts_epoch": 1795059496.0,
+              "timestamp": "2026-11-19T04:02:55+00:00",
+              "ts_epoch": 1795060975.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -1428,11 +1430,11 @@
             },
             {
               "symbol": "UNH",
-              "title": "Dow Jones Futures Rise; Anthropic IPO Prices High, Palo Alto And Everpure Rally On Earnings",
+              "title": "Dow Jones Futures Rise: Anthropic IPO To Debut After Pricing High; Palo Alto And Everpure Rally On Earnings",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-anthropic-ipo-prices-palo-alto-everpure-nvidia-target-unitedhealth-fed-waller-shock/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-19T03:38:16+00:00",
-              "ts_epoch": 1795059496.0,
+              "timestamp": "2026-11-19T04:02:55+00:00",
+              "ts_epoch": 1795060975.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -1643,11 +1645,11 @@
       "news": [
         {
           "symbol": "UNH",
-          "title": "Dow Jones Futures Rise; Anthropic IPO Prices High, Palo Alto And Everpure Rally On Earnings",
+          "title": "Dow Jones Futures Rise: Anthropic IPO To Debut After Pricing High; Palo Alto And Everpure Rally On Earnings",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-anthropic-ipo-prices-palo-alto-everpure-nvidia-target-unitedhealth-fed-waller-shock/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-19T03:38:16+00:00",
-          "ts_epoch": 1795059496.0,
+          "timestamp": "2026-11-19T04:02:55+00:00",
+          "ts_epoch": 1795060975.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
@@ -1854,11 +1856,11 @@
             },
             {
               "symbol": "TJX",
-              "title": "TJX Stock What Changed After An Earnings Beat",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/tjx-stock-changed-earnings-beat-011726728.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-19T01:17:26+00:00",
-              "ts_epoch": 1795051046.0,
+              "title": "Why The TJX Companies (TJX) Is Suddenly Drawing Serious Investor Interest",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-tjx-companies-tjx-suddenly-033638749.html",
+              "provider": "Insider Monkey",
+              "timestamp": "2026-11-19T03:36:38+00:00",
+              "ts_epoch": 1795059398.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -2243,11 +2245,11 @@
             },
             {
               "symbol": "TJX",
-              "title": "TJX Stock What Changed After An Earnings Beat",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/tjx-stock-changed-earnings-beat-011726728.html",
-              "provider": "Simply Wall St.",
-              "timestamp": "2026-11-19T01:17:26+00:00",
-              "ts_epoch": 1795051046.0,
+              "title": "Why The TJX Companies (TJX) Is Suddenly Drawing Serious Investor Interest",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-tjx-companies-tjx-suddenly-033638749.html",
+              "provider": "Insider Monkey",
+              "timestamp": "2026-11-19T03:36:38+00:00",
+              "ts_epoch": 1795059398.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -2300,6 +2302,18 @@
         }
       ],
       "news": [
+        {
+          "symbol": "TJX",
+          "title": "Why The TJX Companies (TJX) Is Suddenly Drawing Serious Investor Interest",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/why-tjx-companies-tjx-suddenly-033638749.html",
+          "provider": "Insider Monkey",
+          "timestamp": "2026-11-19T03:36:38+00:00",
+          "ts_epoch": 1795059398.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
         {
           "symbol": "AMZN",
           "title": "Amazon and Google face a 10-year AI supply chain problem",
@@ -2363,18 +2377,6 @@
           "matched_keywords": [
             "deal"
           ]
-        },
-        {
-          "symbol": "MCD",
-          "title": "Dividend Stocks for 2027: Kimberly-Clark vs. McDonald's",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/dividend-stocks-2027-kimberly-clark-012002831.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-19T01:20:02+00:00",
-          "ts_epoch": 1795051202.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
         }
       ],
       "earnings": [
@@ -2645,6 +2647,18 @@
           "news": [
             {
               "symbol": "GOOGL",
+              "title": "Alphabet (GOOGL) Stock Could Be 47% Undervalued As AI Spending Fears Bite",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/alphabet-googl-stock-could-47-032722505.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-19T03:27:22+00:00",
+              "ts_epoch": 1795058842.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "GOOGL",
               "title": "Amazon and Google face a 10-year AI supply chain problem",
               "url": "https://finance.yahoo.com/technology/ai/articles/amazon-google-face-10-ai-030300550.html",
               "provider": "TheStreet",
@@ -2668,18 +2682,6 @@
               "matched_keywords": [
                 "partnership"
               ]
-            },
-            {
-              "symbol": "GOOGL",
-              "title": "Anthropic's $81.3B haul makes it the largest tech IPO ever",
-              "url": "https://finance.yahoo.com/technology/ai/articles/anthropics-81-3b-haul-makes-000837214.html",
-              "provider": "Pitchbook",
-              "timestamp": "2026-11-19T00:08:37+00:00",
-              "ts_epoch": 1795046917.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
             }
           ],
           "chip": {
@@ -3151,6 +3153,18 @@
       ],
       "news": [
         {
+          "symbol": "GOOGL",
+          "title": "Alphabet (GOOGL) Stock Could Be 47% Undervalued As AI Spending Fears Bite",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/alphabet-googl-stock-could-47-032722505.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-19T03:27:22+00:00",
+          "ts_epoch": 1795058842.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
           "symbol": "TTWO",
           "title": "GTA VI Is Live, Take-Two Stock Is Popping, and Crypto Punters Say Record Sales Are a Lock",
           "url": "https://finance.yahoo.com/markets/stocks/articles/gta-vi-live-two-stock-030752606.html",
@@ -3201,27 +3215,15 @@
           ]
         },
         {
-          "symbol": "DIS",
-          "title": "Disney's Winning Formula: Blockbusters, Packed Parks and Football",
-          "url": "https://finance.yahoo.com/media-advertising/articles/disneys-winning-formula-blockbusters-packed-013007150.html",
-          "provider": "Benzinga",
-          "timestamp": "2026-11-19T01:30:07+00:00",
-          "ts_epoch": 1795051807.0,
+          "symbol": "TTWO",
+          "title": "Take-Two stock jumps over 6% as Rockstar's long-awaited ‘GTA VI’ arrives after 13-year wait",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/two-stock-jumps-over-6-020448465.html",
+          "provider": "Fox Business",
+          "timestamp": "2026-11-19T02:04:48+00:00",
+          "ts_epoch": 1795053888.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "TMUS",
-          "title": "T-Mobile found a way to stop solving customers’ problems",
-          "url": "https://finance.yahoo.com/technology/ai/articles/t-mobile-uber-eats-ai-010300838.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-19T01:03:00+00:00",
-          "ts_epoch": 1795050180.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -4080,6 +4082,18 @@
           "news": [
             {
               "symbol": "COST",
+              "title": "Costco sees surge in panic buying after tech outages, report says",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/costco-sees-surge-panic-buying-143736089.html",
+              "provider": "CBS News",
+              "timestamp": "2026-11-19T03:49:51+00:00",
+              "ts_epoch": 1795060191.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "COST",
               "title": "3 under-the-radar picks Wall Street's sharpest minds like now",
               "url": "https://finance.yahoo.com/markets/stocks/articles/3-under-radar-picks-wall-003700883.html",
               "provider": "TheStreet",
@@ -4100,18 +4114,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "COST",
-              "title": "Costco generators sell out as tech outages spark panic buying",
-              "url": "https://finance.yahoo.com/technology/articles/costco-generators-sell-tech-outages-232548429.html",
-              "provider": "USA TODAY",
-              "timestamp": "2026-11-18T23:25:48+00:00",
-              "ts_epoch": 1795044348.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -4418,11 +4420,11 @@
             },
             {
               "symbol": "WMT",
-              "title": "Dow Jones Futures Rise; Anthropic IPO Prices High, Palo Alto And Everpure Rally On Earnings",
+              "title": "Dow Jones Futures Rise: Anthropic IPO To Debut After Pricing High; Palo Alto And Everpure Rally On Earnings",
               "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-anthropic-ipo-prices-palo-alto-everpure-nvidia-target-unitedhealth-fed-waller-shock/?src=A00220&yptr=yahoo",
               "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-19T03:38:16+00:00",
-              "ts_epoch": 1795059496.0,
+              "timestamp": "2026-11-19T04:02:55+00:00",
+              "ts_epoch": 1795060975.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -4577,11 +4579,23 @@
       "news": [
         {
           "symbol": "TGT",
-          "title": "Dow Jones Futures Rise; Anthropic IPO Prices High, Palo Alto And Everpure Rally On Earnings",
+          "title": "Dow Jones Futures Rise: Anthropic IPO To Debut After Pricing High; Palo Alto And Everpure Rally On Earnings",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-anthropic-ipo-prices-palo-alto-everpure-nvidia-target-unitedhealth-fed-waller-shock/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-19T03:38:16+00:00",
-          "ts_epoch": 1795059496.0,
+          "timestamp": "2026-11-19T04:02:55+00:00",
+          "ts_epoch": 1795060975.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "COST",
+          "title": "Costco sees surge in panic buying after tech outages, report says",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/costco-sees-surge-panic-buying-143736089.html",
+          "provider": "CBS News",
+          "timestamp": "2026-11-19T03:49:51+00:00",
+          "ts_epoch": 1795060191.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
@@ -4633,18 +4647,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "COST",
-          "title": "Costco generators sell out as tech outages spark panic buying",
-          "url": "https://finance.yahoo.com/technology/articles/costco-generators-sell-tech-outages-232548429.html",
-          "provider": "USA TODAY",
-          "timestamp": "2026-11-18T23:25:48+00:00",
-          "ts_epoch": 1795044348.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -7496,6 +7498,18 @@
       "news": [
         {
           "symbol": "OKTA",
+          "title": "Okta (OKTA) Is Turning Heads. Here’s What’s Happening",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/okta-okta-turning-heads-happening-035406782.html",
+          "provider": "Insider Monkey",
+          "timestamp": "2026-11-19T03:54:06+00:00",
+          "ts_epoch": 1795060446.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "OKTA",
           "title": "Tech Stocks Boosted by Cybersecurity Rally",
           "url": "https://www.wsj.com/finance/stocks/tech-stocks-boosted-by-cybersecurity-rally-5f9ff803?siteid=yhoof2&yptr=yahoo",
           "provider": "The Wall Street Journal",
@@ -7516,18 +7530,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "OKTA",
-          "title": "Palo Alto Soars 7%, Okta Up 11% as DHS Chief Warns of “A Severe Cyber Threat”",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/palo-alto-soars-7-okta-194351975.html",
-          "provider": "TIKR",
-          "timestamp": "2026-11-18T19:43:51+00:00",
-          "ts_epoch": 1795031031.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
