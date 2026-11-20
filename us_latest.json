@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-20T03:38:46.322108",
+  "fetched_at": "2026-11-20T04:07:27.376251",
   "trade_date": "2026-11-19",
   "sectors": [
     {
@@ -378,15 +378,29 @@
           "news": [
             {
               "symbol": "MSFT",
-              "title": "GTA VI: Why the 13-year wait could be worth $8 billion",
-              "url": "https://finance.yahoo.com/video/gta-vi-why-13-wait-120000877.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
+              "title": "Microsoft CEO Nadella faces uncomfortable reality after outage",
+              "url": "https://finance.yahoo.com/technology/articles/microsoft-ceo-nadella-faces-uncomfortable-034700949.html",
+              "provider": "TheStreet",
+              "timestamp": "2026-11-20T03:47:00+00:00",
+              "ts_epoch": 1795146420.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "positive",
+              "sentiment": "neutral",
               "matched_keywords": []
+            },
+            {
+              "symbol": "MSFT",
+              "title": "Akamai Technologies (AKAM) Expands Mobile Enterprise Browser Security",
+              "url": "https://finance.yahoo.com/technology/articles/akamai-technologies-akam-expands-mobile-031634349.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-20T03:16:34+00:00",
+              "ts_epoch": 1795144594.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "partnership"
+              ]
             },
             {
               "symbol": "MSFT",
@@ -398,18 +412,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MSFT",
-              "title": "How High Can ANT Stock Go? Wall Street Debut Sparks Valuation Debate – One Analyst Sees Amazon-Google Scale Opportunity In Anthropic",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/high-ant-stock-wall-street-022355679.html",
-              "provider": "Stocktwits",
-              "timestamp": "2026-11-20T02:23:55+00:00",
-              "ts_epoch": 1795141435.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
               "matched_keywords": []
             }
           ],
@@ -708,11 +710,59 @@
       "news": [
         {
           "symbol": "NVDA",
+          "title": "Dan Ives Calls Tech Selloff a Panic Moment but Anthropic IPO Shows Proof of Demand",
+          "url": "https://finance.yahoo.com/technology/ai/articles/dan-ives-calls-tech-selloff-040000322.html",
+          "provider": "BeInCrypto",
+          "timestamp": "2026-11-20T04:00:00+00:00",
+          "ts_epoch": 1795147200.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Why Did NVDA, NIO, ONDS Stocks Tumble To 52-Week Lows Today?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/why-did-nvda-nio-onds-035448393.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-20T03:54:48+00:00",
+          "ts_epoch": 1795146888.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
           "title": "Dow Jones Futures: Techs Slide, Anthropic Retreats After Ugly Market Reversal To New Lows",
           "url": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-market-reversal-anthropic-ipo-debuts-amd-dives/?src=A00220&yptr=yahoo",
           "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-20T03:32:34+00:00",
-          "ts_epoch": 1795145554.0,
+          "timestamp": "2026-11-20T03:53:31+00:00",
+          "ts_epoch": 1795146811.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "MSFT",
+          "title": "Microsoft CEO Nadella faces uncomfortable reality after outage",
+          "url": "https://finance.yahoo.com/technology/articles/microsoft-ceo-nadella-faces-uncomfortable-034700949.html",
+          "provider": "TheStreet",
+          "timestamp": "2026-11-20T03:47:00+00:00",
+          "ts_epoch": 1795146420.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "AMD",
+          "title": "Nikkei 225 Falls 4.5% and SoftBank Plunges 15% as Wall Street’s AI Selloff Puts Asian Stocks on Track for Their Worst Week Since 2020",
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/nikkei-225-falls-4-5-034108190.html",
+          "provider": "24/7 Wall St.",
+          "timestamp": "2026-11-20T03:41:08+00:00",
+          "ts_epoch": 1795146068.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
@@ -728,56 +778,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Tech takes a beating as AI trade comes unstuck despite Anthropic surge",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/tech-takes-beating-ai-trade-030257717.html",
-          "provider": "AFP",
-          "timestamp": "2026-11-20T03:02:57+00:00",
-          "ts_epoch": 1795143777.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "China’s AI Firms Are Addicted to Nvidia Chips. Now They Are Facing Withdrawal.",
-          "url": "https://www.wsj.com/tech/ai/chinas-ai-firms-are-addicted-to-nvidia-chips-now-they-are-facing-withdrawal-ba851ca9?siteid=yhoof2&yptr=yahoo",
-          "provider": "The Wall Street Journal",
-          "timestamp": "2026-11-20T03:00:00+00:00",
-          "ts_epoch": 1795143600.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "deal"
-          ]
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Nasdaq, Dow, S&P 500 Futures Slip As Anthropic’s Record Debut Fails To Lift AI Stocks: SLV, GLD, AMD, NVDA In Focus",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-dow-p-500-futures-024814072.html",
-          "provider": "Stocktwits",
-          "timestamp": "2026-11-20T02:48:14+00:00",
-          "ts_epoch": 1795142894.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "IBM Stock Is Down About 23% in 2026. Here's Where I Think It Will Be in 2030.",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/ibm-stock-down-23-2026-022401616.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-20T02:24:01+00:00",
-          "ts_epoch": 1795141441.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -1085,14 +1085,14 @@
             },
             {
               "symbol": "MS",
-              "title": "GTA VI: Why the 13-year wait could be worth $8 billion",
-              "url": "https://finance.yahoo.com/video/gta-vi-why-13-wait-120000877.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
+              "title": "Morgan Stanley (MS) Debuts Four Active UCITS ETFs In Europe",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/morgan-stanley-ms-debuts-four-031945299.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-20T03:19:45+00:00",
+              "ts_epoch": 1795144785.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "positive",
+              "sentiment": "negative",
               "matched_keywords": []
             },
             {
@@ -2170,18 +2170,6 @@
           "news": [
             {
               "symbol": "AMZN",
-              "title": "GTA VI: Why the 13-year wait could be worth $8 billion",
-              "url": "https://finance.yahoo.com/video/gta-vi-why-13-wait-120000877.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "AMZN",
               "title": "Tech takes a beating as AI trade comes unstuck despite Anthropic surge",
               "url": "https://finance.yahoo.com/markets/stocks/articles/tech-takes-beating-ai-trade-030257717.html",
               "provider": "AFP",
@@ -2199,6 +2187,18 @@
               "provider": "Stocktwits",
               "timestamp": "2026-11-20T02:23:55+00:00",
               "ts_epoch": 1795141435.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "AMZN",
+              "title": "Nvidia Backed AI Data Center Demand Puts Schneider Electric Stock In Focus",
+              "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backed-ai-data-center-021420909.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-20T02:14:20+00:00",
+              "ts_epoch": 1795140860.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2822,35 +2822,35 @@
           "news": [
             {
               "symbol": "GOOG",
-              "title": "GTA VI: Why the 13-year wait could be worth $8 billion",
-              "url": "https://finance.yahoo.com/video/gta-vi-why-13-wait-120000877.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "GOOG",
-              "title": "How Tristan Thompson invested in Anthropic over two years ago",
-              "url": "https://finance.yahoo.com/video/how-tristan-thompson-invested-in-anthropic-over-two-years-ago-151220437.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "GOOG",
               "title": "How High Can ANT Stock Go? Wall Street Debut Sparks Valuation Debate – One Analyst Sees Amazon-Google Scale Opportunity In Anthropic",
               "url": "https://finance.yahoo.com/markets/stocks/articles/high-ant-stock-wall-street-022355679.html",
               "provider": "Stocktwits",
               "timestamp": "2026-11-20T02:23:55+00:00",
               "ts_epoch": 1795141435.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "GOOG",
+              "title": "Nvidia Backed AI Data Center Demand Puts Schneider Electric Stock In Focus",
+              "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backed-ai-data-center-021420909.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-20T02:14:20+00:00",
+              "ts_epoch": 1795140860.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "GOOG",
+              "title": "Is Your VOO Fund Secretly An AI Bet?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/voo-fund-secretly-ai-bet-005820625.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-20T00:58:20+00:00",
+              "ts_epoch": 1795136300.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -3052,18 +3052,6 @@
           "news": [
             {
               "symbol": "NFLX",
-              "title": "GTA VI: Why the 13-year wait could be worth $8 billion",
-              "url": "https://finance.yahoo.com/video/gta-vi-why-13-wait-120000877.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "NFLX",
               "title": "Josh Brown: Netflix Can Clear Wall Street’s 10.6% Growth Bar “Standing on Their Head”",
               "url": "https://finance.yahoo.com/markets/stocks/articles/josh-brown-netflix-clear-wall-200609592.html",
               "provider": "TIKR",
@@ -3084,6 +3072,18 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "NFLX",
+              "title": "Why Netflix's Fall Could Pay Off At Tax Time",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-netflixs-fall-could-pay-184726906.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-19T18:47:26+00:00",
+              "ts_epoch": 1795114046.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -3324,18 +3324,6 @@
           "news": [
             {
               "symbol": "NFLX",
-              "title": "GTA VI: Why the 13-year wait could be worth $8 billion",
-              "url": "https://finance.yahoo.com/video/gta-vi-why-13-wait-120000877.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-19T12:00:00+00:00",
-              "ts_epoch": 1795089600.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "NFLX",
               "title": "Josh Brown: Netflix Can Clear Wall Street’s 10.6% Growth Bar “Standing on Their Head”",
               "url": "https://finance.yahoo.com/markets/stocks/articles/josh-brown-netflix-clear-wall-200609592.html",
               "provider": "TIKR",
@@ -3356,6 +3344,18 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "NFLX",
+              "title": "Why Netflix's Fall Could Pay Off At Tax Time",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-netflixs-fall-could-pay-184726906.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-19T18:47:26+00:00",
+              "ts_epoch": 1795114046.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -5889,354 +5889,9 @@
       "code": "XLRE",
       "name_zh": "房地產",
       "name_en": "Real Estate",
-      "status": "ok",
-      "as_of": "2026-11-18",
-      "close": 43.619998931884766,
-      "day_pct": 0.06882032390884696,
-      "pct_5d": -2.1753783749355438,
-      "pct_20d": 3.708981235517461,
-      "volume": 7722100,
-      "vol_ratio": 0.9795361787547925,
-      "ma20": 43.670999717712405,
-      "ma50": 42.59779983520508,
-      "ma200": 43.528300037384035,
-      "above_ma20": false,
-      "above_ma50": true,
-      "above_ma200": true,
-      "holdings_count": 10,
-      "gainers": [],
-      "losers": [
-        {
-          "symbol": "WELL",
-          "name": "Welltower Inc",
-          "weight": 0.1132914,
-          "day_pct": -1.6420617021612793,
-          "contribution": -0.18603146912423435,
-          "tech": {
-            "close": 243.19000244140625,
-            "pct_5d": -0.7104030892118085,
-            "pct_20d": 2.4389253133033195,
-            "vol_vs_yday": 0.791485380116959,
-            "vol_ratio": 1.0471505565192365,
-            "above_ma20": true,
-            "above_ma50": true,
-            "above_ma200": true,
-            "ma20": 241.54100036621094,
-            "ma50": 235.25239959716797,
-            "ma200": 222.61649971008302,
-            "rsi": 54.076415578273085
-          },
-          "news": [
-            {
-              "symbol": "WELL",
-              "title": "Mizuho names top healthcare REIT stocks for above average growth",
-              "url": "https://finance.yahoo.com/healthcare/articles/mizuho-names-top-healthcare-reit-145222361.html",
-              "provider": "Investing.com",
-              "timestamp": "2026-11-18T14:52:22+00:00",
-              "ts_epoch": 1795013542.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 0,
-            "insider_sells": 0,
-            "insider_net_shares": 0.0,
-            "institutional_pct": 100.27699999999999
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        },
-        {
-          "symbol": "SPG",
-          "name": "Simon Property Group Inc",
-          "weight": 0.0480153,
-          "day_pct": -2.6622886732279416,
-          "contribution": -0.12783058933164157,
-          "tech": {
-            "close": 225.22000122070312,
-            "pct_5d": -3.591455574559277,
-            "pct_20d": 6.215812276877797,
-            "vol_vs_yday": 0.7813814241927436,
-            "vol_ratio": 0.7886047264486888,
-            "above_ma20": true,
-            "above_ma50": true,
-            "above_ma200": true,
-            "ma20": 224.85150070190429,
-            "ma50": 211.920400390625,
-            "ma200": 208.89160049438476,
-            "rsi": 55.058136384944724
-          },
-          "news": [
-            {
-              "symbol": "SPG",
-              "title": "3 REIT Giants Paying Big Dividends, Led by VICI’s 7.6% Yield",
-              "url": "https://finance.yahoo.com/real-estate/articles/3-reit-giants-paying-big-141759980.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-19T14:17:59+00:00",
-              "ts_epoch": 1795097879.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "SPG",
-              "title": "Generate Income From This Mall REIT Navigating A Choppy Stock Market",
-              "url": "https://www.investors.com/research/options/reit-malls-simon-property-group-spg-real-estate-income-options-trade-strategy/?src=A00220&yptr=yahoo",
-              "provider": "Investor's Business Daily",
-              "timestamp": "2026-11-18T17:37:31+00:00",
-              "ts_epoch": 1795023451.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 0,
-            "insider_sells": 0,
-            "insider_net_shares": 0.0,
-            "institutional_pct": 95.62999599999999
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        },
-        {
-          "symbol": "PLD",
-          "name": "Prologis Inc",
-          "weight": 0.0814914,
-          "day_pct": -1.4853861940739566,
-          "contribution": -0.12104620049575843,
-          "tech": {
-            "close": 123.36000061035156,
-            "pct_5d": -4.037341359934943,
-            "pct_20d": -2.6054026183050083,
-            "vol_vs_yday": 0.9653996484877102,
-            "vol_ratio": 1.017579950340373,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": false,
-            "ma20": 127.78450050354004,
-            "ma50": 129.77140075683593,
-            "ma200": 137.7233501434326,
-            "rsi": 35.7020622056116
-          },
-          "news": [],
-          "chip": {
-            "insider_buys": 3,
-            "insider_sells": 2,
-            "insider_net_shares": 0.0,
-            "institutional_pct": 99.468005
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        }
-      ],
-      "surges": [
-        {
-          "symbol": "EQIX",
-          "name": "Equinix Inc",
-          "weight": 0.0670195,
-          "day_pct": -1.7800301212765324,
-          "contribution": -0.11929672871289256,
-          "tech": {
-            "close": 1018.0499877929688,
-            "pct_5d": -5.100816646814133,
-            "pct_20d": 6.868425291422975,
-            "vol_vs_yday": 1.2265625,
-            "vol_ratio": 1.069467421072387,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": false,
-            "ma20": 1024.1945098876954,
-            "ma50": 1018.8888049316406,
-            "ma200": 1026.9500994873047,
-            "rsi": 47.99724050604216
-          },
-          "news": [
-            {
-              "symbol": "EQIX",
-              "title": "Morgan Stanley’s Vintage Values 2027: 5 Stocks Analysts See Climbing Further",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/morgan-stanley-vintage-values-2027-223235273.html",
-              "provider": "Insider Monkey",
-              "timestamp": "2026-11-19T22:32:35+00:00",
-              "ts_epoch": 1795127555.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "EQIX",
-              "title": "Jim Cramer’s AI Hyperscale List: 5 Core Infrastructure Stocks for 2027",
-              "url": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-ai-hyperscale-list-110240248.html",
-              "provider": "Insider Monkey",
-              "timestamp": "2026-11-19T11:02:40+00:00",
-              "ts_epoch": 1795086160.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "contract",
-                "order"
-              ]
-            }
-          ],
-          "chip": {
-            "insider_buys": 11,
-            "insider_sells": 13,
-            "insider_net_shares": -0.019,
-            "institutional_pct": 101.247
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          },
-          "attribution": {
-            "orders": [
-              {
-                "title": "Jim Cramer’s AI Hyperscale List: 5 Core Infrastructure Stocks for 2027",
-                "url": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-ai-hyperscale-list-110240248.html",
-                "sentiment": "positive"
-              }
-            ],
-            "guidance": [],
-            "insider_news": [],
-            "insider_chip": {
-              "buys": 11,
-              "sells": 13,
-              "net_shares": -0.019
-            },
-            "earnings": {
-              "past": null,
-              "upcoming": null,
-              "news": []
-            },
-            "fundamentals": {
-              "day_pct": -1.7800301212765324,
-              "vol_vs_yday": 1.2265625
-            },
-            "reasons": [
-              "訂單/合約"
-            ],
-            "conclusion": "放量跌幅主因疑為：訂單/合約"
-          }
-        },
-        {
-          "symbol": "AMT",
-          "name": "American Tower Corp",
-          "weight": 0.0586266,
-          "day_pct": -1.9857230182316221,
-          "contribution": -0.11641618910065801,
-          "tech": {
-            "close": 181.14999389648438,
-            "pct_5d": -4.552399860525059,
-            "pct_20d": -0.23132313201066346,
-            "vol_vs_yday": 1.2070813397129188,
-            "vol_ratio": 1.2023868532428414,
-            "above_ma20": false,
-            "above_ma50": true,
-            "above_ma200": true,
-            "ma20": 188.13249969482422,
-            "ma50": 179.52659973144532,
-            "ma200": 178.1451499938965,
-            "rsi": 43.93219469907836
-          },
-          "news": [
-            {
-              "symbol": "AMT",
-              "title": "Deutsche Bank Names Top North America Telecom Services Stock",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/deutsche-bank-names-top-north-160620334.html",
-              "provider": "Investing.com",
-              "timestamp": "2026-11-18T16:06:20+00:00",
-              "ts_epoch": 1795017980.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 3,
-            "insider_sells": 3,
-            "insider_net_shares": 0.027999999,
-            "institutional_pct": 98.107004
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          },
-          "attribution": {
-            "orders": [],
-            "guidance": [],
-            "insider_news": [],
-            "insider_chip": {
-              "buys": 3,
-              "sells": 3,
-              "net_shares": 0.027999999
-            },
-            "earnings": {
-              "past": null,
-              "upcoming": null,
-              "news": []
-            },
-            "fundamentals": {
-              "day_pct": -1.9857230182316221,
-              "vol_vs_yday": 1.2070813397129188
-            },
-            "reasons": [],
-            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
-          }
-        }
-      ],
-      "news": [
-        {
-          "symbol": "SPG",
-          "title": "3 REIT Giants Paying Big Dividends, Led by VICI’s 7.6% Yield",
-          "url": "https://finance.yahoo.com/real-estate/articles/3-reit-giants-paying-big-141759980.html",
-          "provider": "24/7 Wall St.",
-          "timestamp": "2026-11-19T14:17:59+00:00",
-          "ts_epoch": 1795097879.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "SPG",
-          "title": "Generate Income From This Mall REIT Navigating A Choppy Stock Market",
-          "url": "https://www.investors.com/research/options/reit-malls-simon-property-group-spg-real-estate-income-options-trade-strategy/?src=A00220&yptr=yahoo",
-          "provider": "Investor's Business Daily",
-          "timestamp": "2026-11-18T17:37:31+00:00",
-          "ts_epoch": 1795023451.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "WELL",
-          "title": "Mizuho names top healthcare REIT stocks for above average growth",
-          "url": "https://finance.yahoo.com/healthcare/articles/mizuho-names-top-healthcare-reit-145222361.html",
-          "provider": "Investing.com",
-          "timestamp": "2026-11-18T14:52:22+00:00",
-          "ts_epoch": 1795013542.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        }
-      ],
-      "earnings": []
+      "status": "error",
+      "day_pct": 0,
+      "holdings": []
     },
     {
       "code": "XLB",
