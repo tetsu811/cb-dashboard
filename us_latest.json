@@ -1,14 +1,536 @@
 {
-  "fetched_at": "2026-11-25T05:33:32.754597",
+  "fetched_at": "2026-11-25T08:59:29.836795",
   "trade_date": "2026-11-24",
   "sectors": [
     {
       "code": "XLK",
       "name_zh": "科技",
       "name_en": "Technology",
-      "status": "error",
-      "day_pct": 0,
-      "holdings": []
+      "status": "ok",
+      "as_of": "2026-11-24",
+      "close": 157.08999633789062,
+      "day_pct": -3.2577955326085872,
+      "pct_5d": -3.779246831156158,
+      "pct_20d": -17.0985319626487,
+      "volume": 17194200,
+      "vol_ratio": 1.0707026676962164,
+      "ma20": 169.6400001525879,
+      "ma50": 183.4432000732422,
+      "ma200": 171.47330017089843,
+      "above_ma20": false,
+      "above_ma50": false,
+      "above_ma200": false,
+      "holdings_count": 10,
+      "gainers": [
+        {
+          "symbol": "AAPL",
+          "name": "Apple Inc",
+          "weight": 0.15312271,
+          "day_pct": 1.4294777540677206,
+          "contribution": 0.2188855075875629,
+          "tech": {
+            "close": 354.07000732421875,
+            "pct_5d": 0.6137943336738338,
+            "pct_20d": 2.0080671559033147,
+            "vol_vs_yday": 0.703449641313086,
+            "vol_ratio": 0.81529665881126,
+            "above_ma20": true,
+            "above_ma50": true,
+            "above_ma200": true,
+            "ma20": 348.084001159668,
+            "ma50": 342.5818017578125,
+            "ma200": 303.9926501464844,
+            "rsi": 56.708894042183836
+          },
+          "news": [
+            {
+              "symbol": "AAPL",
+              "title": "Why the Jensen Huang rally faded so quickly",
+              "url": "https://finance.yahoo.com/video/why-the-jensen-huang-rally-faded-so-quickly-194511286.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T19:45:11+00:00",
+              "ts_epoch": 1795549511.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "AAPL",
+              "title": "Xiaomi shares jump over 8% as premium phone sales cushion rising chip costs",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/xiaomi-shares-jump-over-8-045749074.html",
+              "provider": "Investing.com",
+              "timestamp": "2026-11-25T04:57:49+00:00",
+              "ts_epoch": 1795582669.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "AAPL",
+              "title": "5 Sleeper Blue-Chip Stock Picks for Steady Long-Term Gains",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/5-sleeper-blue-chip-stock-121500278.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-25T00:52:33+00:00",
+              "ts_epoch": 1795567953.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 12,
+            "insider_sells": 21,
+            "insider_net_shares": 0.002,
+            "institutional_pct": 66.494006
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "MSFT",
+          "name": "Microsoft Corp",
+          "weight": 0.117986,
+          "day_pct": 0.7370568289974511,
+          "contribution": 0.08696238702609325,
+          "tech": {
+            "close": 496.1300048828125,
+            "pct_5d": -1.9970736304103287,
+            "pct_20d": -6.6248868076051455,
+            "vol_vs_yday": 0.7593275973214403,
+            "vol_ratio": 0.7550387781969549,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": true,
+            "ma20": 519.1914947509765,
+            "ma50": 519.5585986328125,
+            "ma200": 444.50189880371096,
+            "rsi": 40.98147987886224
+          },
+          "news": [
+            {
+              "symbol": "MSFT",
+              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
+              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T21:45:58+00:00",
+              "ts_epoch": 1795556758.0,
+              "category": "earnings",
+              "category_label": "財報",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "blowout"
+              ]
+            },
+            {
+              "symbol": "MSFT",
+              "title": "Microsoft declares a code red in the middle of a 'Patchpocalypse'",
+              "url": "https://finance.yahoo.com/markets/article/microsoft-declares-a-code-red-in-the-middle-of-a-patchpocalypse-193740712.html",
+              "provider": "Yahoo Finance",
+              "timestamp": "2026-11-24T19:37:40+00:00",
+              "ts_epoch": 1795549060.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MSFT",
+              "title": "Nvidia-Backed Nscale Reportedly Eyes Private Route As AI Market Sell-Off Clouds $35B IPO Plans",
+              "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backed-nscale-reportedly-eyes-001631735.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T00:16:31+00:00",
+              "ts_epoch": 1795565791.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 17,
+            "insider_sells": 11,
+            "insider_net_shares": 0.031,
+            "institutional_pct": 76.92099999999999
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "PLTR",
+          "name": "Palantir Technologies Inc Ordinary Shares - Class A",
+          "weight": 0.0261107,
+          "day_pct": 1.142063289695705,
+          "contribution": 0.029820071938257645,
+          "tech": {
+            "close": 161.17999267578125,
+            "pct_5d": 2.9509422516811323,
+            "pct_20d": -18.89498508480787,
+            "vol_vs_yday": 0.6441455345923716,
+            "vol_ratio": 0.8021013953134427,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": true,
+            "ma20": 167.9734992980957,
+            "ma50": 182.75359924316408,
+            "ma200": 154.1765245437622,
+            "rsi": 43.17017043947967
+          },
+          "news": [
+            {
+              "symbol": "PLTR",
+              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
+              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T21:45:58+00:00",
+              "ts_epoch": 1795556758.0,
+              "category": "earnings",
+              "category_label": "財報",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "blowout"
+              ]
+            },
+            {
+              "symbol": "PLTR",
+              "title": "Can Palantir Technologies (PLTR) Justify Its Price Through Cash Flow?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/palantir-technologies-pltr-justify-price-070848763.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-25T07:08:48+00:00",
+              "ts_epoch": 1795590528.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "contract"
+              ]
+            },
+            {
+              "symbol": "PLTR",
+              "title": "Where Will Palantir Stock Be at the End of 2030?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/where-palantir-stock-end-2030-064702449.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T06:47:02+00:00",
+              "ts_epoch": 1795589222.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 12,
+            "insider_sells": 21,
+            "insider_net_shares": 0.003,
+            "institutional_pct": 66.58500000000001
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        }
+      ],
+      "losers": [
+        {
+          "symbol": "NVDA",
+          "name": "NVIDIA Corp",
+          "weight": 0.15076919,
+          "day_pct": -5.858829439653457,
+          "contribution": -0.8833309689647055,
+          "tech": {
+            "close": 155.3800048828125,
+            "pct_5d": -0.051461358291293724,
+            "pct_20d": -28.70514676414816,
+            "vol_vs_yday": 0.490157786937353,
+            "vol_ratio": 1.190429503435206,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 175.78150177001953,
+            "ma50": 204.9464013671875,
+            "ma200": 203.0703002166748,
+            "rsi": 39.46623053466119
+          },
+          "news": [
+            {
+              "symbol": "NVDA",
+              "title": "Why Trump wanted Jensen Huang back at the helm of Nvidia",
+              "url": "https://finance.yahoo.com/markets/article/why-trump-wanted-jensen-huang-back-at-the-helm-of-nvidia-224325153.html",
+              "provider": "Yahoo Finance",
+              "timestamp": "2026-11-24T22:43:25+00:00",
+              "ts_epoch": 1795560205.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "NVDA",
+              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
+              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T21:45:58+00:00",
+              "ts_epoch": 1795556758.0,
+              "category": "earnings",
+              "category_label": "財報",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "blowout"
+              ]
+            },
+            {
+              "symbol": "NVDA",
+              "title": "Why Nvidia is 'bar none' the 'cheapest growth stock in the market'",
+              "url": "https://finance.yahoo.com/video/why-nvidia-is-bar-none-the-cheapest-growth-stock-in-the-market-213425021.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T21:34:25+00:00",
+              "ts_epoch": 1795556065.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 18,
+            "insider_sells": 10,
+            "insider_net_shares": -0.004,
+            "institutional_pct": 71.595
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "MU",
+          "name": "Micron Technology Inc",
+          "weight": 0.0403578,
+          "day_pct": -11.008906716945999,
+          "contribution": -0.4442952555011632,
+          "tech": {
+            "close": 629.7899780273438,
+            "pct_5d": -11.598496233258103,
+            "pct_20d": -32.190235216278005,
+            "vol_vs_yday": 0.7775778956615353,
+            "vol_ratio": 1.105771447076145,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 761.9005004882813,
+            "ma50": 901.9811999511719,
+            "ma200": 775.3392012023926,
+            "rsi": 37.369147603217115
+          },
+          "news": [
+            {
+              "symbol": "MU",
+              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
+              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T21:45:58+00:00",
+              "ts_epoch": 1795556758.0,
+              "category": "earnings",
+              "category_label": "財報",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "blowout"
+              ]
+            },
+            {
+              "symbol": "MU",
+              "title": "MU, SKHY, SNDK Stocks In Focus After TrendForce Lowers DRAM Pricing Forecast",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/mu-skhy-sndk-stocks-focus-082710611.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T08:27:10+00:00",
+              "ts_epoch": 1795595230.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "order"
+              ]
+            },
+            {
+              "symbol": "MU",
+              "title": "South Korea's chipmakers rally on Huang's return",
+              "url": "https://finance.yahoo.com/technology/articles/south-koreas-chipmakers-rally-huangs-032123850.html",
+              "provider": "IntelliNews",
+              "timestamp": "2026-11-25T03:21:23+00:00",
+              "ts_epoch": 1795576883.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 3,
+            "insider_sells": 13,
+            "insider_net_shares": -0.073,
+            "institutional_pct": 79.785
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "AMD",
+          "name": "Advanced Micro Devices Inc",
+          "weight": 0.045416098,
+          "day_pct": -8.862965465253769,
+          "contribution": -0.4025213081405808,
+          "tech": {
+            "close": 413.2699890136719,
+            "pct_5d": -17.905884665124738,
+            "pct_20d": -26.236036516945738,
+            "vol_vs_yday": 0.8532405195497827,
+            "vol_ratio": 1.042584858302206,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 497.8404998779297,
+            "ma50": 550.4799987792969,
+            "ma200": 431.99755004882815,
+            "rsi": 38.684045259423925
+          },
+          "news": [
+            {
+              "symbol": "AMD",
+              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
+              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
+              "provider": "Yahoo Finance Video",
+              "timestamp": "2026-11-24T21:45:58+00:00",
+              "ts_epoch": 1795556758.0,
+              "category": "earnings",
+              "category_label": "財報",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "blowout"
+              ]
+            },
+            {
+              "symbol": "AMD",
+              "title": "Nvidia, AMD, Broadcom lead chip stocks lower as AI trade comes under pressure",
+              "url": "https://finance.yahoo.com/markets/article/nvidia-amd-broadcom-lead-chip-stocks-lower-as-ai-trade-comes-under-pressure-141635463.html",
+              "provider": "Yahoo Finance",
+              "timestamp": "2026-11-24T14:16:35+00:00",
+              "ts_epoch": 1795529795.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "AMD",
+              "title": "1 Reason to Buy AMD Stock Before 2027",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/1-reason-buy-amd-stock-082602598.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T08:26:02+00:00",
+              "ts_epoch": 1795595162.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 34,
+            "insider_sells": 18,
+            "insider_net_shares": 0.105,
+            "institutional_pct": 75.33
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        }
+      ],
+      "surges": [],
+      "news": [
+        {
+          "symbol": "NVDA",
+          "title": "IREN Selloff Draws Attention: Grant Cardone Joins Retail Bulls Asking Where The Bottom Is",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/iren-selloff-draws-attention-grant-084321965.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T08:43:21+00:00",
+          "ts_epoch": 1795596201.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Home Depot Has Raised Its Dividend 17 Straight Years. Here's What $10,000 Invested Pays Annually.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-raised-dividend-17-083502787.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T08:35:02+00:00",
+          "ts_epoch": 1795595702.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Adobe Stock Is About 67% Below Its 2021 Record. Here's What I Think It Will Be Worth in 2030.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/adobe-stock-67-below-2021-083302039.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T08:33:02+00:00",
+          "ts_epoch": 1795595582.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NVDA",
+          "title": "Tech firms back in crosshairs as Huang rally reverses",
+          "url": "https://finance.yahoo.com/markets/world-indices/articles/tech-firms-back-crosshairs-huang-024219799.html",
+          "provider": "AFP",
+          "timestamp": "2026-11-25T08:31:28+00:00",
+          "ts_epoch": 1795595488.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "MU",
+          "title": "MU, SKHY, SNDK Stocks In Focus After TrendForce Lowers DRAM Pricing Forecast",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/mu-skhy-sndk-stocks-focus-082710611.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T08:27:10+00:00",
+          "ts_epoch": 1795595230.0,
+          "category": "order",
+          "category_label": "訂單 / 合約",
+          "sentiment": "positive",
+          "matched_keywords": [
+            "order"
+          ]
+        },
+        {
+          "symbol": "NVDA",
+          "title": "1 Reason to Buy AMD Stock Before 2027",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/1-reason-buy-amd-stock-082602598.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T08:26:02+00:00",
+          "ts_epoch": 1795595162.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        }
+      ],
+      "earnings": []
     },
     {
       "code": "XLF",
@@ -94,7 +616,7 @@
             "insider_buys": 19,
             "insider_sells": 17,
             "insider_net_shares": 0.004,
-            "institutional_pct": 89.704
+            "institutional_pct": 89.705
           },
           "earnings": {
             "past": null,
@@ -163,7 +685,7 @@
             "insider_buys": 21,
             "insider_sells": 16,
             "insider_net_shares": -0.0139999995,
-            "institutional_pct": 91.487
+            "institutional_pct": 91.49000000000001
           },
           "earnings": {
             "past": null,
@@ -264,6 +786,18 @@
           "news": [
             {
               "symbol": "GS",
+              "title": "Goldman Sachs Sees U.S. Natural Gas Demand Surging on Data Center Boom",
+              "url": "https://finance.yahoo.com/energy/articles/goldman-sachs-sees-u-natural-064500252.html",
+              "provider": "Oilprice.com",
+              "timestamp": "2026-11-25T06:45:00+00:00",
+              "ts_epoch": 1795589100.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "GS",
               "title": "Goldman Sachs closing on $1.5B private credit secondaries deal",
               "url": "https://finance.yahoo.com/markets/stocks/articles/goldman-sachs-closing-1-5b-214735306.html",
               "provider": "Pitchbook",
@@ -289,25 +823,13 @@
               "matched_keywords": [
                 "deal"
               ]
-            },
-            {
-              "symbol": "GS",
-              "title": "Bill Ackman Says the Fed Is “About to Make Another Mistake” on Dec. 9",
-              "url": "https://finance.yahoo.com/economy/policy/articles/bill-ackman-says-fed-another-152805015.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-24T15:28:05+00:00",
-              "ts_epoch": 1795534085.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 6,
             "insider_sells": 6,
             "insider_net_shares": 0.161,
-            "institutional_pct": 75.101995
+            "institutional_pct": 75.102997
           },
           "earnings": {
             "past": null,
@@ -376,7 +898,7 @@
             "insider_buys": 14,
             "insider_sells": 4,
             "insider_net_shares": 0.0,
-            "institutional_pct": 62.817
+            "institutional_pct": 62.821000000000005
           },
           "earnings": {
             "past": null,
@@ -445,7 +967,7 @@
             "insider_buys": 10,
             "insider_sells": 1,
             "insider_net_shares": 0.0,
-            "institutional_pct": 81.422997
+            "institutional_pct": 81.42400400000001
           },
           "earnings": {
             "past": null,
@@ -455,6 +977,18 @@
       ],
       "surges": [],
       "news": [
+        {
+          "symbol": "GS",
+          "title": "Goldman Sachs Sees U.S. Natural Gas Demand Surging on Data Center Boom",
+          "url": "https://finance.yahoo.com/energy/articles/goldman-sachs-sees-u-natural-064500252.html",
+          "provider": "Oilprice.com",
+          "timestamp": "2026-11-25T06:45:00+00:00",
+          "ts_epoch": 1795589100.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
         {
           "symbol": "MS",
           "title": "Starbucks weighs sale of Japan business worth several billion dollars - Bloomberg",
@@ -513,18 +1047,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "MS",
-          "title": "Morgan Stanley sends a strong signal on where stocks are headed",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/morgan-stanley-sends-strong-signal-230700537.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-24T23:07:00+00:00",
-          "ts_epoch": 1795561620.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
           "matched_keywords": []
         }
       ],
@@ -614,7 +1136,7 @@
             "insider_buys": 43,
             "insider_sells": 8,
             "insider_net_shares": -0.13,
-            "institutional_pct": 85.694003
+            "institutional_pct": 85.695
           },
           "earnings": {
             "past": null,
@@ -685,7 +1207,7 @@
             "insider_buys": 4,
             "insider_sells": 2,
             "insider_net_shares": 0.008,
-            "institutional_pct": 77.562
+            "institutional_pct": 77.56600399999999
           },
           "earnings": {
             "past": null,
@@ -756,7 +1278,7 @@
             "insider_buys": 4,
             "insider_sells": 8,
             "insider_net_shares": -0.035,
-            "institutional_pct": 82.372004
+            "institutional_pct": 82.376
           },
           "earnings": {
             "past": null,
@@ -872,7 +1394,7 @@
             "insider_buys": 4,
             "insider_sells": 8,
             "insider_net_shares": -0.035,
-            "institutional_pct": 82.372004
+            "institutional_pct": 82.376
           },
           "earnings": {
             "past": null,
@@ -987,7 +1509,7 @@
             "insider_buys": 18,
             "insider_sells": 19,
             "insider_net_shares": -0.038,
-            "institutional_pct": 91.745
+            "institutional_pct": 91.75
           },
           "earnings": {
             "past": null,
@@ -1160,38 +1682,35 @@
           "news": [
             {
               "symbol": "TJX",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            },
-            {
-              "symbol": "TJX",
-              "title": "Earnings: Late economic cycle anxiety isn't holding retail spending back",
-              "url": "https://finance.yahoo.com/video/earnings-late-economic-cycle-anxiety-isnt-holding-retail-spending-back-150150635.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:01:50+00:00",
-              "ts_epoch": 1795532510.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "TJX",
               "title": "5 Sleeper Blue-Chip Stock Picks for Steady Long-Term Gains",
               "url": "https://finance.yahoo.com/markets/stocks/articles/5-sleeper-blue-chip-stock-121500278.html",
               "provider": "Kiplinger",
               "timestamp": "2026-11-25T00:52:33+00:00",
               "ts_epoch": 1795567953.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "TJX",
+              "title": "TJ Maxx CEO reveals the best time to shop this holiday season",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/tj-maxx-ceo-reveals-best-000000431.html",
+              "provider": "TheStreet",
+              "timestamp": "2026-11-25T00:00:00+00:00",
+              "ts_epoch": 1795564800.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "TJX",
+              "title": "Why Is Ross Stores (ROST) Stock Up Today? Burlington Earnings Lift Off-Price Rivals",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/why-ross-stores-rost-stock-170122810.html",
+              "provider": "GuruFocus.com",
+              "timestamp": "2026-11-24T17:01:22+00:00",
+              "ts_epoch": 1795539682.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
@@ -1202,7 +1721,7 @@
             "insider_buys": 7,
             "insider_sells": 6,
             "insider_net_shares": -0.063,
-            "institutional_pct": 95.085
+            "institutional_pct": 95.081
           },
           "earnings": {
             "past": null,
@@ -1232,6 +1751,18 @@
           "news": [
             {
               "symbol": "HD",
+              "title": "Home Depot Has Raised Its Dividend 17 Straight Years. Here's What $10,000 Invested Pays Annually.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-raised-dividend-17-083502787.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T08:35:02+00:00",
+              "ts_epoch": 1795595702.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "HD",
               "title": "Home Depot and Lowe's copy Kroger's risky cost-cutting move",
               "url": "https://finance.yahoo.com/small-business/articles/home-depot-lowes-copy-krogers-001700875.html",
               "provider": "TheStreet",
@@ -1253,25 +1784,13 @@
               "category_label": "一般新聞",
               "sentiment": "negative",
               "matched_keywords": []
-            },
-            {
-              "symbol": "HD",
-              "title": "The Home Depot, Inc. (HD) is Attracting Investor Attention: Here is What You Should Know",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-inc-hd-attracting-130005617.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-24T13:00:05+00:00",
-              "ts_epoch": 1795525205.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 6,
             "insider_sells": 5,
             "insider_net_shares": 0.002,
-            "institutional_pct": 76.43900500000001
+            "institutional_pct": 76.435
           },
           "earnings": {
             "past": null,
@@ -1422,21 +1941,6 @@
             },
             {
               "symbol": "AMZN",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            },
-            {
-              "symbol": "AMZN",
               "title": "Amazon ‘Trying to Trick’ You With Black Friday Offers That Aren’t Really Deals, Says Elizabeth Warren: E-Commerce Giant Pushes Back",
               "url": "https://finance.yahoo.com/markets/stocks/articles/amazon-trying-trick-black-friday-025557873.html",
               "provider": "Benzinga",
@@ -1448,13 +1952,25 @@
               "matched_keywords": [
                 "deal"
               ]
+            },
+            {
+              "symbol": "AMZN",
+              "title": "e.l.f. Beauty vs. Hershey: Which Consumer Goods Stock Is a Better Buy for 2027?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/e-l-f-beauty-vs-022250265.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T02:22:50+00:00",
+              "ts_epoch": 1795573370.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 60,
             "insider_sells": 65,
             "insider_net_shares": 0.0,
-            "institutional_pct": 69.069
+            "institutional_pct": 69.071
           },
           "earnings": {
             "past": null,
@@ -1484,23 +2000,25 @@
           "news": [
             {
               "symbol": "TSLA",
-              "title": "Have robotaxis hit a tipping point? Wall Street and experts are split.",
-              "url": "https://finance.yahoo.com/markets/stocks/article/have-robotaxis-hit-a-tipping-point-wall-street-and-experts-are-split-150000412.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T15:00:00+00:00",
-              "ts_epoch": 1795532400.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
+              "title": "SpaceX Could Fall Below $100 On A Tesla Bid, Gary Black Says — JPMorgan Sees The Same Deal As A Shortcut To The S&P 500",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-could-fall-below-100-080708394.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T08:07:08+00:00",
+              "ts_epoch": 1795594028.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "deal"
+              ]
             },
             {
               "symbol": "TSLA",
-              "title": "Tesla and SpaceX assemble deal teams for a merger that could give Musk majority control",
-              "url": "https://finance.yahoo.com/technology/article/tesla-and-spacex-assemble-deal-teams-for-a-merger-that-could-give-musk-majority-control-144555932.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T14:45:55+00:00",
-              "ts_epoch": 1795531555.0,
+              "title": "BYD plans car production in France to boost its push into the European market",
+              "url": "https://finance.yahoo.com/economy/policy/articles/byd-plans-car-production-france-074149676.html",
+              "provider": "Euronews",
+              "timestamp": "2026-11-25T07:41:49+00:00",
+              "ts_epoch": 1795592509.0,
               "category": "order",
               "category_label": "訂單 / 合約",
               "sentiment": "positive",
@@ -1557,7 +2075,7 @@
             "insider_buys": 19,
             "insider_sells": 3,
             "insider_net_shares": 0.002,
-            "institutional_pct": 95.844
+            "institutional_pct": 95.848
           },
           "earnings": {
             "past": null,
@@ -1717,7 +2235,7 @@
             "insider_buys": 19,
             "insider_sells": 3,
             "insider_net_shares": 0.002,
-            "institutional_pct": 95.844
+            "institutional_pct": 95.848
           },
           "earnings": {
             "past": null,
@@ -1747,6 +2265,46 @@
         }
       ],
       "news": [
+        {
+          "symbol": "HD",
+          "title": "Home Depot Has Raised Its Dividend 17 Straight Years. Here's What $10,000 Invested Pays Annually.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/home-depot-raised-dividend-17-083502787.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T08:35:02+00:00",
+          "ts_epoch": 1795595702.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "TSLA",
+          "title": "SpaceX Could Fall Below $100 On A Tesla Bid, Gary Black Says — JPMorgan Sees The Same Deal As A Shortcut To The S&P 500",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-could-fall-below-100-080708394.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T08:07:08+00:00",
+          "ts_epoch": 1795594028.0,
+          "category": "order",
+          "category_label": "訂單 / 合約",
+          "sentiment": "positive",
+          "matched_keywords": [
+            "deal"
+          ]
+        },
+        {
+          "symbol": "TSLA",
+          "title": "BYD plans car production in France to boost its push into the European market",
+          "url": "https://finance.yahoo.com/economy/policy/articles/byd-plans-car-production-france-074149676.html",
+          "provider": "Euronews",
+          "timestamp": "2026-11-25T07:41:49+00:00",
+          "ts_epoch": 1795592509.0,
+          "category": "order",
+          "category_label": "訂單 / 合約",
+          "sentiment": "positive",
+          "matched_keywords": [
+            "deal"
+          ]
+        },
         {
           "symbol": "MCD",
           "title": "McDonald's (MCD), What Is Behind The Fresh Attention?",
@@ -1784,42 +2342,6 @@
           "matched_keywords": [
             "deal"
           ]
-        },
-        {
-          "symbol": "TSLA",
-          "title": "Jensen Huang's Return Could Make a Tesla/SpaceX Merger More Likely",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jensen-huangs-return-could-tesla-025002618.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-25T02:50:02+00:00",
-          "ts_epoch": 1795575002.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "TSLA",
-          "title": "TSLA Stock Slips Overnight: Dell And HP See No Quick Relief From The AI-Driven Chip Crunch Behind Tesla’s 25% Memory Cut",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/tsla-stock-slips-overnight-dell-022626579.html",
-          "provider": "Stocktwits",
-          "timestamp": "2026-11-25T02:26:26+00:00",
-          "ts_epoch": 1795573586.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "AMZN",
-          "title": "e.l.f. Beauty vs. Hershey: Which Consumer Goods Stock Is a Better Buy for 2027?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/e-l-f-beauty-vs-022250265.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-25T02:22:50+00:00",
-          "ts_epoch": 1795573370.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
         }
       ],
       "earnings": []
@@ -1906,7 +2428,7 @@
             "insider_buys": 16,
             "insider_sells": 22,
             "insider_net_shares": -0.002,
-            "institutional_pct": 100.468
+            "institutional_pct": 100.47001
           },
           "earnings": {
             "past": null,
@@ -2048,7 +2570,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 68.293
+            "institutional_pct": 68.294996
           },
           "earnings": {
             "past": null,
@@ -2080,21 +2602,6 @@
           "news": [
             {
               "symbol": "META",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            },
-            {
-              "symbol": "META",
               "title": "Your $300,000 in XLC Holds $130,206 in Just Meta and Alphabet",
               "url": "https://finance.yahoo.com/markets/stocks/articles/300-000-xlc-holds-130-010406634.html",
               "provider": "24/7 Wall St.",
@@ -2116,13 +2623,25 @@
               "category_label": "一般新聞",
               "sentiment": "positive",
               "matched_keywords": []
+            },
+            {
+              "symbol": "META",
+              "title": "Intel And 2 More AI Stocks To Watch",
+              "url": "https://finance.yahoo.com/technology/ai/articles/intel-2-more-ai-stocks-221918630.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-24T22:19:18+00:00",
+              "ts_epoch": 1795558758.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 27,
             "insider_sells": 44,
             "insider_net_shares": 0.36099997,
-            "institutional_pct": 78.692
+            "institutional_pct": 78.69500000000001
           },
           "earnings": {
             "past": null,
@@ -2152,29 +2671,26 @@
           "news": [
             {
               "symbol": "GOOGL",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
+              "title": "Alphabet Has $251 Billion Invested In 2 of Its Biggest Artificial Intelligence Partners",
+              "url": "https://finance.yahoo.com/technology/ai/articles/alphabet-251-billion-invested-2-072902299.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T07:29:02+00:00",
+              "ts_epoch": 1795591742.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
             },
             {
               "symbol": "GOOGL",
-              "title": "Have robotaxis hit a tipping point? Wall Street and experts are split.",
-              "url": "https://finance.yahoo.com/markets/stocks/article/have-robotaxis-hit-a-tipping-point-wall-street-and-experts-are-split-150000412.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T15:00:00+00:00",
-              "ts_epoch": 1795532400.0,
+              "title": "AI Concerns Resurface? ORCL, GOOGL, SPCX, CRWV Credit Default Swap Spreads Hit Records As NVDA, ANT Tumble",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/ai-concerns-resurface-orcl-googl-065618202.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T06:56:18+00:00",
+              "ts_epoch": 1795589778.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "neutral",
+              "sentiment": "negative",
               "matched_keywords": []
             },
             {
@@ -2194,7 +2710,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 80.821997
+            "institutional_pct": 80.825996
           },
           "earnings": {
             "past": null,
@@ -2224,26 +2740,26 @@
           "news": [
             {
               "symbol": "GOOG",
-              "title": "Who is holding Jensen Huang accountable? It sure looks like nobody",
-              "url": "https://finance.yahoo.com/video/who-is-holding-jensen-huang-accountable-it-sure-looks-like-nobody-154255467.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:42:55+00:00",
-              "ts_epoch": 1795534975.0,
+              "title": "Alphabet Has $251 Billion Invested In 2 of Its Biggest Artificial Intelligence Partners",
+              "url": "https://finance.yahoo.com/technology/ai/articles/alphabet-251-billion-invested-2-072902299.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T07:29:02+00:00",
+              "ts_epoch": 1795591742.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "neutral",
+              "sentiment": "positive",
               "matched_keywords": []
             },
             {
               "symbol": "GOOG",
-              "title": "Have robotaxis hit a tipping point? Wall Street and experts are split.",
-              "url": "https://finance.yahoo.com/markets/stocks/article/have-robotaxis-hit-a-tipping-point-wall-street-and-experts-are-split-150000412.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T15:00:00+00:00",
-              "ts_epoch": 1795532400.0,
+              "title": "AI Concerns Resurface? ORCL, GOOGL, SPCX, CRWV Credit Default Swap Spreads Hit Records As NVDA, ANT Tumble",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/ai-concerns-resurface-orcl-googl-065618202.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T06:56:18+00:00",
+              "ts_epoch": 1795589778.0,
               "category": "general",
               "category_label": "一般新聞",
-              "sentiment": "neutral",
+              "sentiment": "negative",
               "matched_keywords": []
             },
             {
@@ -2263,7 +2779,7 @@
             "insider_buys": 40,
             "insider_sells": 9,
             "insider_net_shares": 0.035,
-            "institutional_pct": 61.626999999999995
+            "institutional_pct": 61.627995999999996
           },
           "earnings": {
             "past": null,
@@ -2273,6 +2789,30 @@
       ],
       "surges": [],
       "news": [
+        {
+          "symbol": "GOOGL",
+          "title": "Alphabet Has $251 Billion Invested In 2 of Its Biggest Artificial Intelligence Partners",
+          "url": "https://finance.yahoo.com/technology/ai/articles/alphabet-251-billion-invested-2-072902299.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T07:29:02+00:00",
+          "ts_epoch": 1795591742.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "GOOGL",
+          "title": "AI Concerns Resurface? ORCL, GOOGL, SPCX, CRWV Credit Default Swap Spreads Hit Records As NVDA, ANT Tumble",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/ai-concerns-resurface-orcl-googl-065618202.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T06:56:18+00:00",
+          "ts_epoch": 1795589778.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
         {
           "symbol": "TTWO",
           "title": "Your $300,000 in XLC Holds $130,206 in Just Meta and Alphabet",
@@ -2320,32 +2860,6 @@
           "category_label": "一般新聞",
           "sentiment": "neutral",
           "matched_keywords": []
-        },
-        {
-          "symbol": "GOOGL",
-          "title": "Billionaire Charlie Munger’s Protege Li Lu: Himalaya Capital Has 45% of Its $3.78 Billion Portfolio in Alphabet",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/billionaire-charlie-munger-protege-li-215858546.html",
-          "provider": "24/7 Wall St.",
-          "timestamp": "2026-11-24T21:58:58+00:00",
-          "ts_epoch": 1795557538.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "T",
-          "title": "Anthropic falls below IPO price as Nvidia gives back gains",
-          "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
-          "provider": "Yahoo Finance Video",
-          "timestamp": "2026-11-24T21:45:58+00:00",
-          "ts_epoch": 1795556758.0,
-          "category": "earnings",
-          "category_label": "財報",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "blowout"
-          ]
         }
       ],
       "earnings": []
@@ -2432,7 +2946,7 @@
             "insider_buys": 2,
             "insider_sells": 3,
             "insider_net_shares": -0.027,
-            "institutional_pct": 76.38200499999999
+            "institutional_pct": 76.384
           },
           "earnings": {
             "past": null,
@@ -2544,7 +3058,7 @@
             "insider_buys": 27,
             "insider_sells": 2,
             "insider_net_shares": 0.07,
-            "institutional_pct": 84.589
+            "institutional_pct": 84.58200000000001
           },
           "earnings": {
             "past": null,
@@ -2684,7 +3198,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 79.84
+            "institutional_pct": 79.842
           },
           "earnings": {
             "past": null,
@@ -2757,7 +3271,7 @@
             "insider_buys": 9,
             "insider_sells": 2,
             "insider_net_shares": 0.0139999995,
-            "institutional_pct": 88.446
+            "institutional_pct": 88.447
           },
           "earnings": {
             "past": null,
@@ -2787,6 +3301,21 @@
           "news": [
             {
               "symbol": "DE",
+              "title": "How Upcoming Earnings At Deere (DE) Has Changed Its Investment Story",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/upcoming-earnings-deere-changed-investment-081034542.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-25T08:10:34+00:00",
+              "ts_epoch": 1795594234.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "deal",
+                "order"
+              ]
+            },
+            {
+              "symbol": "DE",
               "title": "Earnings Calendar and Analysis for This Week",
               "url": "https://finance.yahoo.com/markets/stocks/articles/earnings-calendar-analysis-week-june-162434561.html",
               "provider": "Kiplinger",
@@ -2804,18 +3333,6 @@
               "provider": "Barrons.com",
               "timestamp": "2026-11-24T22:15:00+00:00",
               "ts_epoch": 1795558500.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "DE",
-              "title": "Deere Has More Than Doubled Its Dividend Since 2020, but the Raises Have Stopped",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/deere-more-doubled-dividend-since-193251709.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-24T19:32:51+00:00",
-              "ts_epoch": 1795548771.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2838,7 +3355,13 @@
             }
           },
           "attribution": {
-            "orders": [],
+            "orders": [
+              {
+                "title": "How Upcoming Earnings At Deere (DE) Has Changed Its Investment Story",
+                "url": "https://finance.yahoo.com/markets/stocks/articles/upcoming-earnings-deere-changed-investment-081034542.html",
+                "sentiment": "positive"
+              }
+            ],
             "guidance": [],
             "insider_news": [],
             "insider_chip": {
@@ -2860,8 +3383,10 @@
               "day_pct": -3.0440924820981707,
               "vol_vs_yday": 1.441630759032151
             },
-            "reasons": [],
-            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+            "reasons": [
+              "訂單/合約"
+            ],
+            "conclusion": "放量跌幅主因疑為：訂單/合約"
           }
         }
       ],
@@ -2928,7 +3453,7 @@
             "insider_buys": 2,
             "insider_sells": 3,
             "insider_net_shares": -0.027,
-            "institutional_pct": 76.38200499999999
+            "institutional_pct": 76.384
           },
           "earnings": {
             "past": null,
@@ -2999,6 +3524,21 @@
           "news": [
             {
               "symbol": "DE",
+              "title": "How Upcoming Earnings At Deere (DE) Has Changed Its Investment Story",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/upcoming-earnings-deere-changed-investment-081034542.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-25T08:10:34+00:00",
+              "ts_epoch": 1795594234.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "deal",
+                "order"
+              ]
+            },
+            {
+              "symbol": "DE",
               "title": "Earnings Calendar and Analysis for This Week",
               "url": "https://finance.yahoo.com/markets/stocks/articles/earnings-calendar-analysis-week-june-162434561.html",
               "provider": "Kiplinger",
@@ -3016,18 +3556,6 @@
               "provider": "Barrons.com",
               "timestamp": "2026-11-24T22:15:00+00:00",
               "ts_epoch": 1795558500.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "DE",
-              "title": "Deere Has More Than Doubled Its Dividend Since 2020, but the Raises Have Stopped",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/deere-more-doubled-dividend-since-193251709.html",
-              "provider": "24/7 Wall St.",
-              "timestamp": "2026-11-24T19:32:51+00:00",
-              "ts_epoch": 1795548771.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -3050,7 +3578,13 @@
             }
           },
           "attribution": {
-            "orders": [],
+            "orders": [
+              {
+                "title": "How Upcoming Earnings At Deere (DE) Has Changed Its Investment Story",
+                "url": "https://finance.yahoo.com/markets/stocks/articles/upcoming-earnings-deere-changed-investment-081034542.html",
+                "sentiment": "positive"
+              }
+            ],
             "guidance": [],
             "insider_news": [],
             "insider_chip": {
@@ -3072,12 +3606,29 @@
               "day_pct": -3.0440924820981707,
               "vol_vs_yday": 1.441630759032151
             },
-            "reasons": [],
-            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+            "reasons": [
+              "訂單/合約"
+            ],
+            "conclusion": "放量跌幅主因疑為：訂單/合約"
           }
         }
       ],
       "news": [
+        {
+          "symbol": "DE",
+          "title": "How Upcoming Earnings At Deere (DE) Has Changed Its Investment Story",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/upcoming-earnings-deere-changed-investment-081034542.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-25T08:10:34+00:00",
+          "ts_epoch": 1795594234.0,
+          "category": "order",
+          "category_label": "訂單 / 合約",
+          "sentiment": "positive",
+          "matched_keywords": [
+            "deal",
+            "order"
+          ]
+        },
         {
           "symbol": "ETN",
           "title": "Dana Targets $250 Million in Savings From Eaton Mobility Deal, Sees 2027 Close",
@@ -3141,18 +3692,6 @@
           "matched_keywords": [
             "deal"
           ]
-        },
-        {
-          "symbol": "GEV",
-          "title": "Billionaire Philippe Laffont’s 10 High-Conviction Stock Bets for 2027",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/billionaire-philippe-laffont-10-high-211840920.html",
-          "provider": "Insider Monkey",
-          "timestamp": "2026-11-24T21:18:40+00:00",
-          "ts_epoch": 1795555120.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
         }
       ],
       "earnings": [
@@ -3214,21 +3753,6 @@
           "news": [
             {
               "symbol": "WMT",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            },
-            {
-              "symbol": "WMT",
               "title": "Symbotic: 3 Key Takeaways for Long-Term Investors",
               "url": "https://finance.yahoo.com/markets/stocks/articles/symbotic-3-key-takeaways-long-051230785.html",
               "provider": "Motley Fool",
@@ -3250,13 +3774,25 @@
               "category_label": "一般新聞",
               "sentiment": "positive",
               "matched_keywords": []
+            },
+            {
+              "symbol": "WMT",
+              "title": "Kraft Heinz vs. On: Which Consumer Goods Stock Is a Better Buy for 2027?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/kraft-heinz-vs-consumer-goods-224307023.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-24T22:43:07+00:00",
+              "ts_epoch": 1795560187.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 21,
             "insider_sells": 20,
             "insider_net_shares": -0.003,
-            "institutional_pct": 37.815
+            "institutional_pct": 37.819
           },
           "earnings": {
             "past": null,
@@ -3325,7 +3861,7 @@
             "insider_buys": 2,
             "insider_sells": 7,
             "insider_net_shares": -0.091000006,
-            "institutional_pct": 89.962
+            "institutional_pct": 89.959997
           },
           "earnings": {
             "past": null,
@@ -3467,7 +4003,7 @@
             "insider_buys": 23,
             "insider_sells": 5,
             "insider_net_shares": 0.16399999,
-            "institutional_pct": 74.531996
+            "institutional_pct": 74.533
           },
           "earnings": {
             "past": null,
@@ -3634,7 +4170,7 @@
             "insider_buys": 20,
             "insider_sells": 10,
             "insider_net_shares": -0.001,
-            "institutional_pct": 72.116
+            "institutional_pct": 72.11699499999999
           },
           "earnings": {
             "past": null,
@@ -3664,6 +4200,18 @@
           "news": [
             {
               "symbol": "XOM",
+              "title": "Oil Market Midweek Wrap: Brent Holds Near $90 Despite Iran Tensions – OPEC Meeting, ConocoPhillips Sale In Focus",
+              "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-brent-054825883.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T05:48:25+00:00",
+              "ts_epoch": 1795585705.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "XOM",
               "title": "Why Venture Global Stock Stays Cheap Despite Big Profits",
               "url": "https://finance.yahoo.com/markets/stocks/articles/why-venture-global-stock-stays-215114042.html",
               "provider": "Trefis",
@@ -3685,25 +4233,13 @@
               "category_label": "一般新聞",
               "sentiment": "neutral",
               "matched_keywords": []
-            },
-            {
-              "symbol": "XOM",
-              "title": "3 Non-AI Stocks to Buy for Long-Term Dividends and Stability",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/3-non-ai-stocks-buy-201202160.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-24T20:12:02+00:00",
-              "ts_epoch": 1795551122.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 251,
             "insider_sells": 49,
             "insider_net_shares": -2.657,
-            "institutional_pct": 67.02799999999999
+            "institutional_pct": 67.202
           },
           "earnings": {
             "past": null,
@@ -3733,6 +4269,18 @@
           "news": [
             {
               "symbol": "COP",
+              "title": "Oil Market Midweek Wrap: Brent Holds Near $90 Despite Iran Tensions – OPEC Meeting, ConocoPhillips Sale In Focus",
+              "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-brent-054825883.html",
+              "provider": "Stocktwits",
+              "timestamp": "2026-11-25T05:48:25+00:00",
+              "ts_epoch": 1795585705.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "COP",
               "title": "What Would It Take For Lower Oil Prices To Break Occidental Stock?",
               "url": "https://finance.yahoo.com/energy/articles/lower-oil-prices-break-occidental-211856773.html",
               "provider": "Trefis",
@@ -3754,25 +4302,13 @@
               "category_label": "一般新聞",
               "sentiment": "neutral",
               "matched_keywords": []
-            },
-            {
-              "symbol": "COP",
-              "title": "Can Elevated Oil Prices Drive Equinor's Upstream Profitability Higher?",
-              "url": "https://finance.yahoo.com/energy/articles/elevated-oil-prices-drive-equinors-162800056.html",
-              "provider": "Zacks",
-              "timestamp": "2026-11-24T16:28:00+00:00",
-              "ts_epoch": 1795537680.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
             }
           ],
           "chip": {
             "insider_buys": 1,
             "insider_sells": 2,
             "insider_net_shares": -0.012,
-            "institutional_pct": 87.555003
+            "institutional_pct": 87.556
           },
           "earnings": {
             "past": null,
@@ -3847,7 +4383,7 @@
             "insider_buys": 3,
             "insider_sells": 2,
             "insider_net_shares": -0.0069999998,
-            "institutional_pct": 86.809
+            "institutional_pct": 86.81199600000001
           },
           "earnings": {
             "past": null,
@@ -3918,7 +4454,7 @@
             "insider_buys": 3,
             "insider_sells": 7,
             "insider_net_shares": -0.0139999995,
-            "institutional_pct": 79.657996
+            "institutional_pct": 79.661006
           },
           "earnings": {
             "past": null,
@@ -3989,7 +4525,7 @@
             "insider_buys": 9,
             "insider_sells": 8,
             "insider_net_shares": -0.008,
-            "institutional_pct": 80.85900000000001
+            "institutional_pct": 80.86
           },
           "earnings": {
             "past": null,
@@ -4062,7 +4598,7 @@
             "insider_buys": 36,
             "insider_sells": 4,
             "insider_net_shares": 0.02,
-            "institutional_pct": 97.29299999999999
+            "institutional_pct": 97.295
           },
           "earnings": {
             "past": null,
@@ -4100,6 +4636,18 @@
         }
       ],
       "news": [
+        {
+          "symbol": "XOM",
+          "title": "Oil Market Midweek Wrap: Brent Holds Near $90 Despite Iran Tensions – OPEC Meeting, ConocoPhillips Sale In Focus",
+          "url": "https://finance.yahoo.com/energy/articles/oil-market-midweek-wrap-brent-054825883.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T05:48:25+00:00",
+          "ts_epoch": 1795585705.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
         {
           "symbol": "CVX",
           "title": "Why Venture Global Stock Stays Cheap Despite Big Profits",
@@ -4155,18 +4703,6 @@
           "provider": "Simply Wall St.",
           "timestamp": "2026-11-24T18:20:53+00:00",
           "ts_epoch": 1795544453.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "CVX",
-          "title": "Best Dividend Stocks to Buy for Dependable Dividend Growth",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/best-dividend-stocks-buy-dependable-212033677.html",
-          "provider": "Kiplinger",
-          "timestamp": "2026-11-24T17:48:39+00:00",
-          "ts_epoch": 1795542519.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
@@ -4257,7 +4793,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 87.846
+            "institutional_pct": 87.847
           },
           "earnings": {
             "past": null,
@@ -4395,7 +4931,7 @@
             "insider_buys": 2,
             "insider_sells": 4,
             "insider_net_shares": -0.023,
-            "institutional_pct": 71.065
+            "institutional_pct": 71.068
           },
           "earnings": {
             "past": null,
@@ -4466,7 +5002,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 85.038
+            "institutional_pct": 85.039
           },
           "earnings": {
             "past": null,
@@ -4523,7 +5059,7 @@
             "insider_buys": 24,
             "insider_sells": 6,
             "insider_net_shares": 0.0,
-            "institutional_pct": 98.369
+            "institutional_pct": 98.372
           },
           "earnings": {
             "past": null,
@@ -4678,7 +5214,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 100.10699999999999
+            "institutional_pct": 100.10600000000001
           },
           "earnings": {
             "past": null,
@@ -4735,7 +5271,7 @@
             "insider_buys": 4,
             "insider_sells": 2,
             "insider_net_shares": 0.002,
-            "institutional_pct": 99.297994
+            "institutional_pct": 99.289
           },
           "earnings": {
             "past": null,
@@ -4944,7 +5480,7 @@
             "insider_buys": 1,
             "insider_sells": 1,
             "insider_net_shares": 0.009,
-            "institutional_pct": 100.325
+            "institutional_pct": 100.33099999999999
           },
           "earnings": {
             "past": null,
@@ -4978,7 +5514,7 @@
             "insider_buys": 0,
             "insider_sells": 0,
             "insider_net_shares": 0.0,
-            "institutional_pct": 104.471
+            "institutional_pct": 104.473
           },
           "earnings": {
             "past": null,
@@ -5222,7 +5758,7 @@
             "insider_buys": 5,
             "insider_sells": 3,
             "insider_net_shares": 0.337,
-            "institutional_pct": 98.310995
+            "institutional_pct": 98.31199600000001
           },
           "earnings": {
             "past": null,
@@ -5371,7 +5907,7 @@
             "insider_buys": 14,
             "insider_sells": 5,
             "insider_net_shares": -0.0,
-            "institutional_pct": 89.106005
+            "institutional_pct": 89.109004
           },
           "earnings": {
             "past": null,
@@ -5442,7 +5978,7 @@
             "insider_buys": 8,
             "insider_sells": 10,
             "insider_net_shares": 0.009,
-            "institutional_pct": 81.76
+            "institutional_pct": 81.761
           },
           "earnings": {
             "past": null,
@@ -5499,7 +6035,7 @@
             "insider_buys": 14,
             "insider_sells": 2,
             "insider_net_shares": -0.006,
-            "institutional_pct": 86.377996
+            "institutional_pct": 86.375
           },
           "earnings": {
             "past": null,
@@ -5657,7 +6193,7 @@
             "insider_buys": 14,
             "insider_sells": 2,
             "insider_net_shares": -0.006,
-            "institutional_pct": 86.377996
+            "institutional_pct": 86.375
           },
           "earnings": {
             "past": null,
@@ -5840,16 +6376,16 @@
       "code": "^VIX",
       "label": "VIX",
       "status": "ok",
-      "as_of": "2026-11-24",
-      "close": 26.360000610351562,
-      "day_pct": -0.9767100701914333,
-      "pct_5d": 3.5349629153277995,
-      "pct_20d": 50.45662055716787,
+      "as_of": "2026-11-25",
+      "close": 27.709999084472656,
+      "day_pct": 5.121390147430227,
+      "pct_5d": 12.825731624703064,
+      "pct_20d": 63.8675300680938,
       "volume": 0,
       "vol_ratio": null,
-      "ma20": 22.552499961853027,
-      "ma50": 18.80880002975464,
-      "ma200": 18.74675003528595,
+      "ma20": 23.092499923706054,
+      "ma50": 19.00880002975464,
+      "ma200": 18.781200032234192,
       "above_ma20": true,
       "above_ma50": true,
       "above_ma200": true
@@ -5929,7 +6465,7 @@
         "insider_buys": 1,
         "insider_sells": 1,
         "insider_net_shares": 0.0,
-        "institutional_pct": 78.883004
+        "institutional_pct": 78.911
       },
       "earnings": {
         "past": null,
@@ -6008,6 +6544,30 @@
       "news": [
         {
           "symbol": "ANF",
+          "title": "DLTR, ANF, KSS, BBY, DKS Stocks In Focus: US Retailers Shine As Cost-Conscious Customers Go Into Holiday Buying Mode",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/dltr-anf-kss-bby-dks-083840169.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T08:38:40+00:00",
+          "ts_epoch": 1795595920.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "ANF",
+          "title": "ANF Stock Ticks Higher Overnight: Abercrombie’s Winning Streak Across Two Brands Has Wall Street Raising Price Targets",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/anf-stock-ticks-higher-overnight-055524229.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T05:55:24+00:00",
+          "ts_epoch": 1795586124.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "ANF",
           "title": "Is Abercrombie & Fitch (ANF) Still Undervalued After Record Q3?",
           "url": "https://finance.yahoo.com/markets/stocks/articles/abercrombie-fitch-anf-still-undervalued-031115863.html",
           "provider": "Simply Wall St.",
@@ -6017,32 +6577,6 @@
           "category_label": "一般新聞",
           "sentiment": "positive",
           "matched_keywords": []
-        },
-        {
-          "symbol": "ANF",
-          "title": "Abercrombie & Fitch (ANF) Has Investors Rushing Back. Here’s Why",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/abercrombie-fitch-anf-investors-rushing-021907432.html",
-          "provider": "Insider Monkey",
-          "timestamp": "2026-11-25T02:19:07+00:00",
-          "ts_epoch": 1795573147.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "ANF",
-          "title": "Sat Out Abercrombie & Fitch's Rally? Here Is What Holders Saw",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/sat-abercrombie-fitchs-rally-holders-010954016.html",
-          "provider": "Simply Wall St.",
-          "timestamp": "2026-11-25T01:09:54+00:00",
-          "ts_epoch": 1795568994.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "partnership"
-          ]
         }
       ],
       "chip": {
@@ -6162,7 +6696,7 @@
         "insider_buys": 10,
         "insider_sells": 2,
         "insider_net_shares": 0.074,
-        "institutional_pct": 104.837
+        "institutional_pct": 104.834
       },
       "earnings": {
         "past": null,
@@ -6240,32 +6774,27 @@
       "news": [
         {
           "symbol": "DLTR",
-          "title": "Stocks give back gains as Anthropic dips below IPO price",
-          "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-          "provider": "Yahoo Finance Video",
-          "timestamp": "2026-11-24T15:44:08+00:00",
-          "ts_epoch": 1795535048.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "neutral",
-          "matched_keywords": [
-            "deal",
-            "loses"
-          ]
+          "title": "DLTR, ANF, KSS, BBY, DKS Stocks In Focus: US Retailers Shine As Cost-Conscious Customers Go Into Holiday Buying Mode",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/dltr-anf-kss-bby-dks-083840169.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T08:38:40+00:00",
+          "ts_epoch": 1795595920.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
         },
         {
           "symbol": "DLTR",
-          "title": "Dollar Tree stock pops as thrifty shoppers power a 6th straight earnings beat",
-          "url": "https://finance.yahoo.com/markets/stocks/article/dollar-tree-stock-pops-as-thrifty-shoppers-power-a-6th-straight-earnings-beat-150530467.html",
-          "provider": "Yahoo Finance",
-          "timestamp": "2026-11-24T15:05:30+00:00",
-          "ts_epoch": 1795532730.0,
-          "category": "earnings",
-          "category_label": "財報",
+          "title": "Dollar Tree's Customer Traffic Jumped 3.8% as Comparable Sales Beat Its Outlook. Here's What's Behind the Gains.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/dollar-trees-customer-traffic-jumped-061549710.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T06:15:49+00:00",
+          "ts_epoch": 1795587349.0,
+          "category": "general",
+          "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": [
-            "beat estimates"
-          ]
+          "matched_keywords": []
         },
         {
           "symbol": "DLTR",
@@ -6311,13 +6840,7 @@
       },
       "weight": 0.0,
       "attribution": {
-        "orders": [
-          {
-            "title": "Stocks give back gains as Anthropic dips below IPO price",
-            "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-            "sentiment": "neutral"
-          }
-        ],
+        "orders": [],
         "guidance": [],
         "insider_news": [],
         "insider_chip": {
@@ -6335,11 +6858,6 @@
           "upcoming": null,
           "news": [
             {
-              "title": "Dollar Tree stock pops as thrifty shoppers power a 6th straight earnings beat",
-              "url": "https://finance.yahoo.com/markets/stocks/article/dollar-tree-stock-pops-as-thrifty-shoppers-power-a-6th-straight-earnings-beat-150530467.html",
-              "sentiment": "positive"
-            },
-            {
               "title": "Stock Market Today, Nov. 24: Tech Sell-Off Drags Nasdaq as Dow Gains on Value Rotation",
               "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-nov-24-221148355.html",
               "sentiment": "positive"
@@ -6351,10 +6869,9 @@
           "vol_vs_yday": 1.7116213106419416
         },
         "reasons": [
-          "訂單/合約",
           "財報 beat"
         ],
-        "conclusion": "放量漲幅主因疑為：訂單/合約 + 財報 beat"
+        "conclusion": "放量漲幅主因疑為：財報 beat"
       }
     },
     {
@@ -6430,7 +6947,7 @@
         "insider_buys": 9,
         "insider_sells": 5,
         "insider_net_shares": 0.001,
-        "institutional_pct": 100.684
+        "institutional_pct": 100.678
       },
       "earnings": {
         "past": null,
@@ -6534,7 +7051,7 @@
         "insider_buys": 0,
         "insider_sells": 0,
         "insider_net_shares": 0.0,
-        "institutional_pct": 117.90499999999999
+        "institutional_pct": 117.89299
       },
       "earnings": {
         "past": null,
@@ -6651,7 +7168,7 @@
         "insider_buys": 0,
         "insider_sells": 0,
         "insider_net_shares": 0.0,
-        "institutional_pct": 103.67199000000001
+        "institutional_pct": 103.661
       },
       "earnings": {
         "past": null,
@@ -6767,7 +7284,7 @@
         "insider_buys": 9,
         "insider_sells": 4,
         "insider_net_shares": 0.0069999998,
-        "institutional_pct": 96.34899999999999
+        "institutional_pct": 96.352
       },
       "earnings": {
         "past": null,
@@ -6846,18 +7363,15 @@
       "news": [
         {
           "symbol": "DKS",
-          "title": "Stocks give back gains as Anthropic dips below IPO price",
-          "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-          "provider": "Yahoo Finance Video",
-          "timestamp": "2026-11-24T15:44:08+00:00",
-          "ts_epoch": 1795535048.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "neutral",
-          "matched_keywords": [
-            "deal",
-            "loses"
-          ]
+          "title": "DLTR, ANF, KSS, BBY, DKS Stocks In Focus: US Retailers Shine As Cost-Conscious Customers Go Into Holiday Buying Mode",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/dltr-anf-kss-bby-dks-083840169.html",
+          "provider": "Stocktwits",
+          "timestamp": "2026-11-25T08:38:40+00:00",
+          "ts_epoch": 1795595920.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
         },
         {
           "symbol": "DKS",
@@ -6915,13 +7429,7 @@
       },
       "weight": 0.0,
       "attribution": {
-        "orders": [
-          {
-            "title": "Stocks give back gains as Anthropic dips below IPO price",
-            "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-            "sentiment": "neutral"
-          }
-        ],
+        "orders": [],
         "guidance": [],
         "insider_news": [],
         "insider_chip": {
@@ -6944,10 +7452,9 @@
           "vol_vs_yday": 1.5353869111063738
         },
         "reasons": [
-          "訂單/合約",
           "財報 beat"
         ],
-        "conclusion": "放量漲幅主因疑為：訂單/合約 + 財報 beat"
+        "conclusion": "放量漲幅主因疑為：財報 beat"
       }
     },
     {
@@ -6986,7 +7493,7 @@
         "insider_buys": 8,
         "insider_sells": 14,
         "insider_net_shares": 0.012,
-        "institutional_pct": 87.402
+        "institutional_pct": 87.41600000000001
       },
       "earnings": {
         "past": null,
@@ -7103,7 +7610,7 @@
         "insider_buys": 5,
         "insider_sells": 23,
         "insider_net_shares": -0.0,
-        "institutional_pct": 54.668000000000006
+        "institutional_pct": 54.683994999999996
       },
       "earnings": {
         "past": {
