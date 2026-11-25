@@ -1,539 +1,14 @@
 {
-  "fetched_at": "2026-11-25T04:59:24.929443",
+  "fetched_at": "2026-11-25T05:33:32.754597",
   "trade_date": "2026-11-24",
   "sectors": [
     {
       "code": "XLK",
       "name_zh": "科技",
       "name_en": "Technology",
-      "status": "ok",
-      "as_of": "2026-11-24",
-      "close": 157.08999633789062,
-      "day_pct": -3.2577955326085872,
-      "pct_5d": -3.779246831156158,
-      "pct_20d": -17.0985319626487,
-      "volume": 17194200,
-      "vol_ratio": 1.0707026676962164,
-      "ma20": 169.6400001525879,
-      "ma50": 183.4432000732422,
-      "ma200": 171.47330017089843,
-      "above_ma20": false,
-      "above_ma50": false,
-      "above_ma200": false,
-      "holdings_count": 10,
-      "gainers": [
-        {
-          "symbol": "AAPL",
-          "name": "Apple Inc",
-          "weight": 0.15312271,
-          "day_pct": 1.4294777540677206,
-          "contribution": 0.2188855075875629,
-          "tech": {
-            "close": 354.07000732421875,
-            "pct_5d": 0.6137943336738338,
-            "pct_20d": 2.0080671559033147,
-            "vol_vs_yday": 0.703449641313086,
-            "vol_ratio": 0.81529665881126,
-            "above_ma20": true,
-            "above_ma50": true,
-            "above_ma200": true,
-            "ma20": 348.084001159668,
-            "ma50": 342.5818017578125,
-            "ma200": 303.9926501464844,
-            "rsi": 56.708894042183836
-          },
-          "news": [
-            {
-              "symbol": "AAPL",
-              "title": "Why the Jensen Huang rally faded so quickly",
-              "url": "https://finance.yahoo.com/video/why-the-jensen-huang-rally-faded-so-quickly-194511286.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T19:45:11+00:00",
-              "ts_epoch": 1795549511.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "AAPL",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            },
-            {
-              "symbol": "AAPL",
-              "title": "Who is holding Jensen Huang accountable? It sure looks like nobody",
-              "url": "https://finance.yahoo.com/video/who-is-holding-jensen-huang-accountable-it-sure-looks-like-nobody-154255467.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:42:55+00:00",
-              "ts_epoch": 1795534975.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 12,
-            "insider_sells": 21,
-            "insider_net_shares": 0.002,
-            "institutional_pct": 66.49199999999999
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        },
-        {
-          "symbol": "MSFT",
-          "name": "Microsoft Corp",
-          "weight": 0.117986,
-          "day_pct": 0.7370568289974511,
-          "contribution": 0.08696238702609325,
-          "tech": {
-            "close": 496.1300048828125,
-            "pct_5d": -1.9970736304103287,
-            "pct_20d": -6.6248868076051455,
-            "vol_vs_yday": 0.7593275973214403,
-            "vol_ratio": 0.7550387781969549,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": true,
-            "ma20": 519.1914947509765,
-            "ma50": 519.5585986328125,
-            "ma200": 444.50189880371096,
-            "rsi": 40.98147987886224
-          },
-          "news": [
-            {
-              "symbol": "MSFT",
-              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
-              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T21:45:58+00:00",
-              "ts_epoch": 1795556758.0,
-              "category": "earnings",
-              "category_label": "財報",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "blowout"
-              ]
-            },
-            {
-              "symbol": "MSFT",
-              "title": "Microsoft declares a code red in the middle of a 'Patchpocalypse'",
-              "url": "https://finance.yahoo.com/markets/article/microsoft-declares-a-code-red-in-the-middle-of-a-patchpocalypse-193740712.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T19:37:40+00:00",
-              "ts_epoch": 1795549060.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MSFT",
-              "title": "Who is holding Jensen Huang accountable? It sure looks like nobody",
-              "url": "https://finance.yahoo.com/video/who-is-holding-jensen-huang-accountable-it-sure-looks-like-nobody-154255467.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:42:55+00:00",
-              "ts_epoch": 1795534975.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 17,
-            "insider_sells": 11,
-            "insider_net_shares": 0.031,
-            "institutional_pct": 76.91799999999999
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        },
-        {
-          "symbol": "PLTR",
-          "name": "Palantir Technologies Inc Ordinary Shares - Class A",
-          "weight": 0.0261107,
-          "day_pct": 1.142063289695705,
-          "contribution": 0.029820071938257645,
-          "tech": {
-            "close": 161.17999267578125,
-            "pct_5d": 2.9509422516811323,
-            "pct_20d": -18.89498508480787,
-            "vol_vs_yday": 0.6441455345923716,
-            "vol_ratio": 0.8021013953134427,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": true,
-            "ma20": 167.9734992980957,
-            "ma50": 182.75359924316408,
-            "ma200": 154.1765245437622,
-            "rsi": 43.17017043947967
-          },
-          "news": [
-            {
-              "symbol": "PLTR",
-              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
-              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T21:45:58+00:00",
-              "ts_epoch": 1795556758.0,
-              "category": "earnings",
-              "category_label": "財報",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "blowout"
-              ]
-            },
-            {
-              "symbol": "PLTR",
-              "title": "Dropbox (DBX) Stock Is Up 5.8% Today Without Company News",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/dropbox-dbx-stock-5-8-203052038.html",
-              "provider": "GuruFocus.com",
-              "timestamp": "2026-11-24T20:30:52+00:00",
-              "ts_epoch": 1795552252.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "PLTR",
-              "title": "Axon Enterprise vs. Palantir Technologies: Which Law Enforcement Stock Is a Better Buy for 2027?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/axon-enterprise-vs-palantir-technologies-202002083.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-24T20:20:02+00:00",
-              "ts_epoch": 1795551602.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 12,
-            "insider_sells": 21,
-            "insider_net_shares": 0.003,
-            "institutional_pct": 66.583997
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        }
-      ],
-      "losers": [
-        {
-          "symbol": "NVDA",
-          "name": "NVIDIA Corp",
-          "weight": 0.15076919,
-          "day_pct": -5.858829439653457,
-          "contribution": -0.8833309689647055,
-          "tech": {
-            "close": 155.3800048828125,
-            "pct_5d": -0.051461358291293724,
-            "pct_20d": -28.70514676414816,
-            "vol_vs_yday": 0.490157786937353,
-            "vol_ratio": 1.190429503435206,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": false,
-            "ma20": 175.78150177001953,
-            "ma50": 204.9464013671875,
-            "ma200": 203.0703002166748,
-            "rsi": 39.46623053466119
-          },
-          "news": [
-            {
-              "symbol": "NVDA",
-              "title": "Why Trump wanted Jensen Huang back at the helm of Nvidia",
-              "url": "https://finance.yahoo.com/markets/article/why-trump-wanted-jensen-huang-back-at-the-helm-of-nvidia-224325153.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T22:43:25+00:00",
-              "ts_epoch": 1795560205.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "NVDA",
-              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
-              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T21:45:58+00:00",
-              "ts_epoch": 1795556758.0,
-              "category": "earnings",
-              "category_label": "財報",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "blowout"
-              ]
-            },
-            {
-              "symbol": "NVDA",
-              "title": "Why Nvidia is 'bar none' the 'cheapest growth stock in the market'",
-              "url": "https://finance.yahoo.com/video/why-nvidia-is-bar-none-the-cheapest-growth-stock-in-the-market-213425021.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T21:34:25+00:00",
-              "ts_epoch": 1795556065.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 18,
-            "insider_sells": 10,
-            "insider_net_shares": -0.004,
-            "institutional_pct": 71.59100000000001
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        },
-        {
-          "symbol": "MU",
-          "name": "Micron Technology Inc",
-          "weight": 0.0403578,
-          "day_pct": -11.008906716945999,
-          "contribution": -0.4442952555011632,
-          "tech": {
-            "close": 629.7899780273438,
-            "pct_5d": -11.598496233258103,
-            "pct_20d": -32.190235216278005,
-            "vol_vs_yday": 0.7775778956615353,
-            "vol_ratio": 1.105771447076145,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": false,
-            "ma20": 761.9005004882813,
-            "ma50": 901.9811999511719,
-            "ma200": 775.3392012023926,
-            "rsi": 37.369147603217115
-          },
-          "news": [
-            {
-              "symbol": "MU",
-              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
-              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T21:45:58+00:00",
-              "ts_epoch": 1795556758.0,
-              "category": "earnings",
-              "category_label": "財報",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "blowout"
-              ]
-            },
-            {
-              "symbol": "MU",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            },
-            {
-              "symbol": "MU",
-              "title": "South Korea's chipmakers rally on Huang's return",
-              "url": "https://finance.yahoo.com/technology/articles/south-koreas-chipmakers-rally-huangs-032123850.html",
-              "provider": "IntelliNews",
-              "timestamp": "2026-11-25T03:21:23+00:00",
-              "ts_epoch": 1795576883.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "positive",
-              "matched_keywords": []
-            }
-          ],
-          "chip": {
-            "insider_buys": 3,
-            "insider_sells": 13,
-            "insider_net_shares": -0.073,
-            "institutional_pct": 79.783
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        },
-        {
-          "symbol": "AMD",
-          "name": "Advanced Micro Devices Inc",
-          "weight": 0.045416098,
-          "day_pct": -8.862965465253769,
-          "contribution": -0.4025213081405808,
-          "tech": {
-            "close": 413.2699890136719,
-            "pct_5d": -17.905884665124738,
-            "pct_20d": -26.236036516945738,
-            "vol_vs_yday": 0.8532405195497827,
-            "vol_ratio": 1.042584858302206,
-            "above_ma20": false,
-            "above_ma50": false,
-            "above_ma200": false,
-            "ma20": 497.8404998779297,
-            "ma50": 550.4799987792969,
-            "ma200": 431.99755004882815,
-            "rsi": 38.684045259423925
-          },
-          "news": [
-            {
-              "symbol": "AMD",
-              "title": "Anthropic falls below IPO price as Nvidia gives back gains",
-              "url": "https://finance.yahoo.com/video/anthropic-falls-below-ipo-price-as-nvidia-gives-back-gains-214558309.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T21:45:58+00:00",
-              "ts_epoch": 1795556758.0,
-              "category": "earnings",
-              "category_label": "財報",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "blowout"
-              ]
-            },
-            {
-              "symbol": "AMD",
-              "title": "Nvidia, AMD, Broadcom lead chip stocks lower as AI trade comes under pressure",
-              "url": "https://finance.yahoo.com/markets/article/nvidia-amd-broadcom-lead-chip-stocks-lower-as-ai-trade-comes-under-pressure-141635463.html",
-              "provider": "Yahoo Finance",
-              "timestamp": "2026-11-24T14:16:35+00:00",
-              "ts_epoch": 1795529795.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "AMD",
-              "title": "Stocks give back gains as Anthropic dips below IPO price",
-              "url": "https://finance.yahoo.com/video/stocks-give-back-gains-as-anthropic-dips-below-ipo-price-154408548.html",
-              "provider": "Yahoo Finance Video",
-              "timestamp": "2026-11-24T15:44:08+00:00",
-              "ts_epoch": 1795535048.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "neutral",
-              "matched_keywords": [
-                "deal",
-                "loses"
-              ]
-            }
-          ],
-          "chip": {
-            "insider_buys": 34,
-            "insider_sells": 18,
-            "insider_net_shares": 0.105,
-            "institutional_pct": 75.33
-          },
-          "earnings": {
-            "past": null,
-            "upcoming": null
-          }
-        }
-      ],
-      "surges": [],
-      "news": [
-        {
-          "symbol": "NVDA",
-          "title": "COHR Stock Swings After Nvidia-Led AI Rally: $15M Insider Buy Draws Attention",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cohr-stock-swings-nvidia-led-044037567.html",
-          "provider": "Stocktwits",
-          "timestamp": "2026-11-25T04:40:37+00:00",
-          "ts_epoch": 1795581637.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Anthropic vs. SpaceX: Here's the Better IPO Stock to Buy With $1,000 Right Now",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/anthropic-vs-spacex-heres-better-043501393.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-25T04:35:01+00:00",
-          "ts_epoch": 1795581301.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Jim Cramer resets Nvidia stock target as Jensen Huang returns as CEO",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-resets-nvidia-stock-043300448.html",
-          "provider": "TheStreet",
-          "timestamp": "2026-11-25T04:33:00+00:00",
-          "ts_epoch": 1795581180.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Le Monde details suspected Nvidia chip diversion network through Southeast Asia",
-          "url": "https://finance.yahoo.com/technology/ai/articles/le-monde-details-suspected-nvidia-042239633.html",
-          "provider": "Investing.com",
-          "timestamp": "2026-11-25T04:22:39+00:00",
-          "ts_epoch": 1795580559.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Asian stocks mostly decline as AI shares fall following a retreat on Wall Street",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/asian-stocks-mostly-decline-ai-040526833.html",
-          "provider": "Associated Press",
-          "timestamp": "2026-11-25T04:05:26+00:00",
-          "ts_epoch": 1795579526.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "NVDA",
-          "title": "Asian stocks slide as AI selloff deepens, U.S. tariff threats weigh on sentiment",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/asian-stocks-slide-ai-selloff-040525614.html",
-          "provider": "Investing.com",
-          "timestamp": "2026-11-25T04:05:25+00:00",
-          "ts_epoch": 1795579525.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
-          "matched_keywords": []
-        }
-      ],
-      "earnings": []
+      "status": "error",
+      "day_pct": 0,
+      "holdings": []
     },
     {
       "code": "XLF",
@@ -1826,6 +1301,18 @@
           "news": [
             {
               "symbol": "MCD",
+              "title": "McDonald's (MCD), What Is Behind The Fresh Attention?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/mcdonalds-mcd-behind-fresh-attention-051044318.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-25T05:10:44+00:00",
+              "ts_epoch": 1795583444.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MCD",
               "title": "Wendy’s has inflated prices for up to 10 years, lawsuit claims — weeks after McDonald's was accused of a similar scheme",
               "url": "https://finance.yahoo.com/markets/stocks/articles/wendy-inflated-prices-10-years-223000770.html",
               "provider": "Moneywise",
@@ -1845,18 +1332,6 @@
               "provider": "Motley Fool",
               "timestamp": "2026-11-24T20:12:02+00:00",
               "ts_epoch": 1795551122.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MCD",
-              "title": "What Could Lift Chipotle Stock Further?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/could-lift-chipotle-stock-further-180936250.html",
-              "provider": "Trefis",
-              "timestamp": "2026-11-24T18:09:36+00:00",
-              "ts_epoch": 1795543776.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2135,6 +1610,18 @@
           "news": [
             {
               "symbol": "MCD",
+              "title": "McDonald's (MCD), What Is Behind The Fresh Attention?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/mcdonalds-mcd-behind-fresh-attention-051044318.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-25T05:10:44+00:00",
+              "ts_epoch": 1795583444.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MCD",
               "title": "Wendy’s has inflated prices for up to 10 years, lawsuit claims — weeks after McDonald's was accused of a similar scheme",
               "url": "https://finance.yahoo.com/markets/stocks/articles/wendy-inflated-prices-10-years-223000770.html",
               "provider": "Moneywise",
@@ -2154,18 +1641,6 @@
               "provider": "Motley Fool",
               "timestamp": "2026-11-24T20:12:02+00:00",
               "ts_epoch": 1795551122.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "neutral",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "MCD",
-              "title": "What Could Lift Chipotle Stock Further?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/could-lift-chipotle-stock-further-180936250.html",
-              "provider": "Trefis",
-              "timestamp": "2026-11-24T18:09:36+00:00",
-              "ts_epoch": 1795543776.0,
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "neutral",
@@ -2273,6 +1748,18 @@
       ],
       "news": [
         {
+          "symbol": "MCD",
+          "title": "McDonald's (MCD), What Is Behind The Fresh Attention?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/mcdonalds-mcd-behind-fresh-attention-051044318.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-25T05:10:44+00:00",
+          "ts_epoch": 1795583444.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "negative",
+          "matched_keywords": []
+        },
+        {
           "symbol": "TSLA",
           "title": "Tesla's $3.5 trillion merger talks have a surprising catch",
           "url": "https://finance.yahoo.com/markets/stocks/articles/teslas-3-5-trillion-merger-033300489.html",
@@ -2332,18 +1819,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "TSLA",
-          "title": "Thinking of Buying SpaceX Stock? Gary Black Says Wait for a Potential Tesla Merger to Send It Below $100",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/thinking-buying-spacex-stock-gary-013135652.html",
-          "provider": "Benzinga",
-          "timestamp": "2026-11-25T01:31:35+00:00",
-          "ts_epoch": 1795570295.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "negative",
           "matched_keywords": []
         }
       ],
@@ -3754,6 +3229,18 @@
             },
             {
               "symbol": "WMT",
+              "title": "Symbotic: 3 Key Takeaways for Long-Term Investors",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/symbotic-3-key-takeaways-long-051230785.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T05:12:30+00:00",
+              "ts_epoch": 1795583550.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "WMT",
               "title": "e.l.f. Beauty vs. Hershey: Which Consumer Goods Stock Is a Better Buy for 2027?",
               "url": "https://finance.yahoo.com/markets/stocks/articles/e-l-f-beauty-vs-022250265.html",
               "provider": "Motley Fool",
@@ -3762,18 +3249,6 @@
               "category": "general",
               "category_label": "一般新聞",
               "sentiment": "positive",
-              "matched_keywords": []
-            },
-            {
-              "symbol": "WMT",
-              "title": "Kraft Heinz vs. On: Which Consumer Goods Stock Is a Better Buy for 2027?",
-              "url": "https://finance.yahoo.com/markets/stocks/articles/kraft-heinz-vs-consumer-goods-224307023.html",
-              "provider": "Motley Fool",
-              "timestamp": "2026-11-24T22:43:07+00:00",
-              "ts_epoch": 1795560187.0,
-              "category": "general",
-              "category_label": "一般新聞",
-              "sentiment": "negative",
               "matched_keywords": []
             }
           ],
@@ -3953,6 +3428,18 @@
           "news": [
             {
               "symbol": "COST",
+              "title": "Costco Hasn't Split Its Stock Since 2000. Here's Why 2027 Could Be the Year.",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/costco-hasnt-split-stock-since-052002304.html",
+              "provider": "Motley Fool",
+              "timestamp": "2026-11-25T05:20:02+00:00",
+              "ts_epoch": 1795584002.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "COST",
               "title": "Costco gives $30 gift for the holidays, but there's a catch",
               "url": "https://finance.yahoo.com/markets/stocks/articles/costco-gives-30-gift-holidays-213300838.html",
               "provider": "TheStreet",
@@ -3974,20 +3461,6 @@
               "category_label": "一般新聞",
               "sentiment": "neutral",
               "matched_keywords": []
-            },
-            {
-              "symbol": "COST",
-              "title": "Sanofi Bets $41 Billion on Insmed to Fuel Growth Beyond Dupixent",
-              "url": "https://finance.yahoo.com/healthcare/articles/sanofi-bets-41-billion-insmed-171606714.html",
-              "provider": "MarketBeat",
-              "timestamp": "2026-11-24T17:16:06+00:00",
-              "ts_epoch": 1795540566.0,
-              "category": "order",
-              "category_label": "訂單 / 合約",
-              "sentiment": "positive",
-              "matched_keywords": [
-                "deal"
-              ]
             }
           ],
           "chip": {
@@ -4004,6 +3477,30 @@
       ],
       "surges": [],
       "news": [
+        {
+          "symbol": "COST",
+          "title": "Costco Hasn't Split Its Stock Since 2000. Here's Why 2027 Could Be the Year.",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/costco-hasnt-split-stock-since-052002304.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T05:20:02+00:00",
+          "ts_epoch": 1795584002.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "WMT",
+          "title": "Symbotic: 3 Key Takeaways for Long-Term Investors",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/symbotic-3-key-takeaways-long-051230785.html",
+          "provider": "Motley Fool",
+          "timestamp": "2026-11-25T05:12:30+00:00",
+          "ts_epoch": 1795583550.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
         {
           "symbol": "TGT",
           "title": "Dow Jones Futures Fall; Trump Says 'Not Too Late' For U.S. To Take Nvidia Stake",
@@ -4050,30 +3547,6 @@
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "negative",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "KO",
-          "title": "Prediction: Here's What $10,000 in Coca-Cola Could Pay You in Dividends by 2036",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/prediction-heres-10-000-coca-223302946.html",
-          "provider": "Motley Fool",
-          "timestamp": "2026-11-24T22:33:02+00:00",
-          "ts_epoch": 1795559582.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "neutral",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "WMT",
-          "title": "Retailers Sanguine for Black Friday",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/retailers-sanguine-black-friday-222426010.html",
-          "provider": "WWD",
-          "timestamp": "2026-11-24T22:24:26+00:00",
-          "ts_epoch": 1795559066.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
           "matched_keywords": []
         }
       ],
@@ -5614,9 +5087,680 @@
       "code": "XLB",
       "name_zh": "原物料",
       "name_en": "Materials",
-      "status": "error",
-      "day_pct": 0,
-      "holdings": []
+      "status": "ok",
+      "as_of": "2026-11-24",
+      "close": 50.16999816894531,
+      "day_pct": 0.5410754204614232,
+      "pct_5d": -1.3178638505737195,
+      "pct_20d": -3.109309865405574,
+      "volume": 11003200,
+      "vol_ratio": 0.8381334255519789,
+      "ma20": 51.777499961853025,
+      "ma50": 50.763199920654294,
+      "ma200": 51.21675001144409,
+      "above_ma20": false,
+      "above_ma50": false,
+      "above_ma200": false,
+      "holdings_count": 10,
+      "gainers": [
+        {
+          "symbol": "APD",
+          "name": "Air Products and Chemicals Inc",
+          "weight": 0.0489068,
+          "day_pct": 1.4465099620060151,
+          "contribution": 0.07074417340983578,
+          "tech": {
+            "close": 308.5799865722656,
+            "pct_5d": 0.5408487788047367,
+            "pct_20d": 0.478656276519418,
+            "vol_vs_yday": 0.8327261687917425,
+            "vol_ratio": 0.7686667195987128,
+            "above_ma20": false,
+            "above_ma50": true,
+            "above_ma200": true,
+            "ma20": 310.5714965820313,
+            "ma50": 297.3653973388672,
+            "ma200": 293.58394927978514,
+            "rsi": 52.62634576581452
+          },
+          "news": [
+            {
+              "symbol": "APD",
+              "title": "Best Dividend Stocks to Buy for Dependable Dividend Growth",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/best-dividend-stocks-buy-dependable-212033677.html",
+              "provider": "Kiplinger",
+              "timestamp": "2026-11-24T17:48:39+00:00",
+              "ts_epoch": 1795542519.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "APD",
+              "title": "Ecovyst (ECVT) Stock Is Up 6.1% Today Without Company News",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/ecovyst-ecvt-stock-6-1-173026851.html",
+              "provider": "GuruFocus.com",
+              "timestamp": "2026-11-24T17:30:26+00:00",
+              "ts_epoch": 1795541426.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "APD",
+              "title": "Are You Looking for a High-Growth Dividend Stock?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/looking-high-growth-dividend-stock-154502169.html",
+              "provider": "Zacks",
+              "timestamp": "2026-11-23T15:45:02+00:00",
+              "ts_epoch": 1795448702.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 0,
+            "insider_sells": 0,
+            "insider_net_shares": 0.0,
+            "institutional_pct": 94.513
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "VMC",
+          "name": "Vulcan Materials Co",
+          "weight": 0.0513588,
+          "day_pct": 0.9433975538097439,
+          "contribution": 0.04845176628660388,
+          "tech": {
+            "close": 284.6199951171875,
+            "pct_5d": 3.4530387353174596,
+            "pct_20d": 8.426664806547613,
+            "vol_vs_yday": 0.8341930729550479,
+            "vol_ratio": 0.8364119994088961,
+            "above_ma20": true,
+            "above_ma50": true,
+            "above_ma200": true,
+            "ma20": 281.4955001831055,
+            "ma50": 262.27120086669925,
+            "ma200": 278.24464988708496,
+            "rsi": 58.17545654745179
+          },
+          "news": [
+            {
+              "symbol": "VMC",
+              "title": "A $16 Billion Hedge Fund Dumps These 3 Stocks",
+              "url": "https://finance.yahoo.com/news/16-billion-hedge-fund-dumps-181715855.html",
+              "provider": "TIKR",
+              "timestamp": "2026-11-23T18:17:15+00:00",
+              "ts_epoch": 1795457835.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "VMC",
+              "title": "Suncrete Stock Jumps 13.8% With No Company News on Nov. 23",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/suncrete-stock-jumps-13-8-170354869.html",
+              "provider": "GuruFocus.com",
+              "timestamp": "2026-11-23T17:03:54+00:00",
+              "ts_epoch": 1795453434.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 5,
+            "insider_sells": 3,
+            "insider_net_shares": 0.337,
+            "institutional_pct": 98.310995
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "MLM",
+          "name": "Martin Marietta Materials Inc",
+          "weight": 0.0486045,
+          "day_pct": 0.9322639838719393,
+          "contribution": 0.04531222480410368,
+          "tech": {
+            "close": 526.1699829101562,
+            "pct_5d": 4.3367034793912795,
+            "pct_20d": 4.463058698760869,
+            "vol_vs_yday": 1.2429042904290428,
+            "vol_ratio": 1.2019212868153555,
+            "above_ma20": true,
+            "above_ma50": true,
+            "above_ma200": false,
+            "ma20": 524.2880004882812,
+            "ma50": 504.1892010498047,
+            "ma200": 564.0392987060546,
+            "rsi": 54.641852047702315
+          },
+          "news": [
+            {
+              "symbol": "MLM",
+              "title": "A $7.5 Billion Fund Dumps These 2 Stocks",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/7-5-billion-fund-dumps-222510631.html",
+              "provider": "TIKR",
+              "timestamp": "2026-11-23T22:25:10+00:00",
+              "ts_epoch": 1795472710.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MLM",
+              "title": "Dycom to Report Q3 Earnings: What Should Investors Expect?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/dycom-report-q3-earnings-investors-150800949.html",
+              "provider": "Zacks",
+              "timestamp": "2026-11-23T15:08:00+00:00",
+              "ts_epoch": 1795446480.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 0,
+            "insider_sells": 0,
+            "insider_net_shares": 0.0,
+            "institutional_pct": 87.53999999999999
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          },
+          "attribution": {
+            "orders": [],
+            "guidance": [],
+            "insider_news": [],
+            "insider_chip": {
+              "buys": 0,
+              "sells": 0,
+              "net_shares": 0.0
+            },
+            "earnings": {
+              "past": null,
+              "upcoming": null,
+              "news": []
+            },
+            "fundamentals": {
+              "day_pct": 0.9322639838719393,
+              "vol_vs_yday": 1.2429042904290428
+            },
+            "reasons": [],
+            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+          }
+        }
+      ],
+      "losers": [
+        {
+          "symbol": "FCX",
+          "name": "Freeport-McMoRan Inc",
+          "weight": 0.0486001,
+          "day_pct": -3.983101144040857,
+          "contribution": -0.19357911391050006,
+          "tech": {
+            "close": 47.72999954223633,
+            "pct_5d": -13.688968895592701,
+            "pct_20d": -27.6269874891806,
+            "vol_vs_yday": 0.8603302097278,
+            "vol_ratio": 1.1993958230169532,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 57.94050006866455,
+            "ma50": 65.46340003967285,
+            "ma200": 64.81675008773804,
+            "rsi": 29.09548491176588
+          },
+          "news": [
+            {
+              "symbol": "FCX",
+              "title": "5 Dirt-Cheap Stocks Positioned to Soar in 2027",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/5-dirt-cheap-stocks-positioned-215028978.html",
+              "provider": "Insider Monkey",
+              "timestamp": "2026-11-24T21:50:28+00:00",
+              "ts_epoch": 1795557028.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "FCX",
+              "title": "Why Copper Producer Chile Is Missing Out on Surging Prices",
+              "url": "https://www.barrons.com/articles/copper-producer-chile-surging-prices-1c700a30?siteid=yhoof2&yptr=yahoo",
+              "provider": "Barrons.com",
+              "timestamp": "2026-11-24T21:13:00+00:00",
+              "ts_epoch": 1795554780.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "FCX",
+              "title": "Bernstein backs these 2 metals and mining stocks amid market volatility",
+              "url": "https://finance.yahoo.com/markets/commodities/articles/bernstein-backs-2-metals-mining-142616541.html",
+              "provider": "Investing.com",
+              "timestamp": "2026-11-24T14:26:16+00:00",
+              "ts_epoch": 1795530376.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 14,
+            "insider_sells": 5,
+            "insider_net_shares": -0.0,
+            "institutional_pct": 89.106005
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "NEM",
+          "name": "Newmont Corp",
+          "weight": 0.0608575,
+          "day_pct": -1.0324638944388176,
+          "contribution": -0.06283317145581034,
+          "tech": {
+            "close": 99.69000244140625,
+            "pct_5d": -10.399064778605272,
+            "pct_20d": -11.496801330267303,
+            "vol_vs_yday": 0.8443081753851055,
+            "vol_ratio": 0.9701204268043595,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 110.91200065612793,
+            "ma50": 114.7788003540039,
+            "ma200": 111.73365013122559,
+            "rsi": 37.54667653917765
+          },
+          "news": [
+            {
+              "symbol": "NEM",
+              "title": "How Much Can Newmont Stock Make You From Here?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/much-newmont-stock-174304738.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-24T17:43:04+00:00",
+              "ts_epoch": 1795542184.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "NEM",
+              "title": "What China’s Critical Minerals Pause Means For Metals And Mining Funds",
+              "url": "https://finance.yahoo.com/markets/commodities/articles/china-critical-minerals-pause-means-141009158.html",
+              "provider": "Simply Wall St.",
+              "timestamp": "2026-11-24T14:10:09+00:00",
+              "ts_epoch": 1795529409.0,
+              "category": "order",
+              "category_label": "訂單 / 合約",
+              "sentiment": "positive",
+              "matched_keywords": [
+                "contract"
+              ]
+            },
+            {
+              "symbol": "NEM",
+              "title": "NEM vs. KGC: Which Gold Mining Stock Should You Bet on Now?",
+              "url": "https://finance.yahoo.com/markets/commodities/articles/nem-vs-kgc-gold-mining-114600587.html",
+              "provider": "Zacks",
+              "timestamp": "2026-11-24T11:46:00+00:00",
+              "ts_epoch": 1795520760.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 8,
+            "insider_sells": 10,
+            "insider_net_shares": 0.009,
+            "institutional_pct": 81.76
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          }
+        },
+        {
+          "symbol": "STLD",
+          "name": "Steel Dynamics Inc",
+          "weight": 0.0475492,
+          "day_pct": -0.1345622397794899,
+          "contribution": -0.006398326851722921,
+          "tech": {
+            "close": 215.22999572753906,
+            "pct_5d": -4.1931887045970395,
+            "pct_20d": -12.79173700723092,
+            "vol_vs_yday": 1.202914798206278,
+            "vol_ratio": 1.1219741726355414,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 231.7989990234375,
+            "ma50": 234.94279907226561,
+            "ma200": 227.66699996948242,
+            "rsi": 38.373741561161324
+          },
+          "news": [
+            {
+              "symbol": "STLD",
+              "title": "How Much Of STLD Stock's Rise Did The Business Earn?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/much-stld-stocks-rise-did-182452617.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-24T18:24:52+00:00",
+              "ts_epoch": 1795544692.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "STLD",
+              "title": "What Just Happened To Steel Dynamics Stock?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/just-happened-steel-dynamics-stock-124829040.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-23T12:48:29+00:00",
+              "ts_epoch": 1795438109.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 14,
+            "insider_sells": 2,
+            "insider_net_shares": -0.006,
+            "institutional_pct": 86.377996
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          },
+          "attribution": {
+            "orders": [],
+            "guidance": [],
+            "insider_news": [],
+            "insider_chip": {
+              "buys": 14,
+              "sells": 2,
+              "net_shares": -0.006
+            },
+            "earnings": {
+              "past": null,
+              "upcoming": null,
+              "news": []
+            },
+            "fundamentals": {
+              "day_pct": -0.1345622397794899,
+              "vol_vs_yday": 1.202914798206278
+            },
+            "reasons": [],
+            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+          }
+        }
+      ],
+      "surges": [
+        {
+          "symbol": "MLM",
+          "name": "Martin Marietta Materials Inc",
+          "weight": 0.0486045,
+          "day_pct": 0.9322639838719393,
+          "contribution": 0.04531222480410368,
+          "tech": {
+            "close": 526.1699829101562,
+            "pct_5d": 4.3367034793912795,
+            "pct_20d": 4.463058698760869,
+            "vol_vs_yday": 1.2429042904290428,
+            "vol_ratio": 1.2019212868153555,
+            "above_ma20": true,
+            "above_ma50": true,
+            "above_ma200": false,
+            "ma20": 524.2880004882812,
+            "ma50": 504.1892010498047,
+            "ma200": 564.0392987060546,
+            "rsi": 54.641852047702315
+          },
+          "news": [
+            {
+              "symbol": "MLM",
+              "title": "A $7.5 Billion Fund Dumps These 2 Stocks",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/7-5-billion-fund-dumps-222510631.html",
+              "provider": "TIKR",
+              "timestamp": "2026-11-23T22:25:10+00:00",
+              "ts_epoch": 1795472710.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "MLM",
+              "title": "Dycom to Report Q3 Earnings: What Should Investors Expect?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/dycom-report-q3-earnings-investors-150800949.html",
+              "provider": "Zacks",
+              "timestamp": "2026-11-23T15:08:00+00:00",
+              "ts_epoch": 1795446480.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "neutral",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 0,
+            "insider_sells": 0,
+            "insider_net_shares": 0.0,
+            "institutional_pct": 87.53999999999999
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          },
+          "attribution": {
+            "orders": [],
+            "guidance": [],
+            "insider_news": [],
+            "insider_chip": {
+              "buys": 0,
+              "sells": 0,
+              "net_shares": 0.0
+            },
+            "earnings": {
+              "past": null,
+              "upcoming": null,
+              "news": []
+            },
+            "fundamentals": {
+              "day_pct": 0.9322639838719393,
+              "vol_vs_yday": 1.2429042904290428
+            },
+            "reasons": [],
+            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+          }
+        },
+        {
+          "symbol": "STLD",
+          "name": "Steel Dynamics Inc",
+          "weight": 0.0475492,
+          "day_pct": -0.1345622397794899,
+          "contribution": -0.006398326851722921,
+          "tech": {
+            "close": 215.22999572753906,
+            "pct_5d": -4.1931887045970395,
+            "pct_20d": -12.79173700723092,
+            "vol_vs_yday": 1.202914798206278,
+            "vol_ratio": 1.1219741726355414,
+            "above_ma20": false,
+            "above_ma50": false,
+            "above_ma200": false,
+            "ma20": 231.7989990234375,
+            "ma50": 234.94279907226561,
+            "ma200": 227.66699996948242,
+            "rsi": 38.373741561161324
+          },
+          "news": [
+            {
+              "symbol": "STLD",
+              "title": "How Much Of STLD Stock's Rise Did The Business Earn?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/much-stld-stocks-rise-did-182452617.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-24T18:24:52+00:00",
+              "ts_epoch": 1795544692.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "positive",
+              "matched_keywords": []
+            },
+            {
+              "symbol": "STLD",
+              "title": "What Just Happened To Steel Dynamics Stock?",
+              "url": "https://finance.yahoo.com/markets/stocks/articles/just-happened-steel-dynamics-stock-124829040.html",
+              "provider": "Trefis",
+              "timestamp": "2026-11-23T12:48:29+00:00",
+              "ts_epoch": 1795438109.0,
+              "category": "general",
+              "category_label": "一般新聞",
+              "sentiment": "negative",
+              "matched_keywords": []
+            }
+          ],
+          "chip": {
+            "insider_buys": 14,
+            "insider_sells": 2,
+            "insider_net_shares": -0.006,
+            "institutional_pct": 86.377996
+          },
+          "earnings": {
+            "past": null,
+            "upcoming": null
+          },
+          "attribution": {
+            "orders": [],
+            "guidance": [],
+            "insider_news": [],
+            "insider_chip": {
+              "buys": 14,
+              "sells": 2,
+              "net_shares": -0.006
+            },
+            "earnings": {
+              "past": null,
+              "upcoming": null,
+              "news": []
+            },
+            "fundamentals": {
+              "day_pct": -0.1345622397794899,
+              "vol_vs_yday": 1.202914798206278
+            },
+            "reasons": [],
+            "conclusion": "公開資訊無明確催化劑（可能為技術面/短線情緒或不在此 48h 新聞窗內）"
+          }
+        }
+      ],
+      "news": [
+        {
+          "symbol": "FCX",
+          "title": "5 Dirt-Cheap Stocks Positioned to Soar in 2027",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/5-dirt-cheap-stocks-positioned-215028978.html",
+          "provider": "Insider Monkey",
+          "timestamp": "2026-11-24T21:50:28+00:00",
+          "ts_epoch": 1795557028.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "FCX",
+          "title": "Why Copper Producer Chile Is Missing Out on Surging Prices",
+          "url": "https://www.barrons.com/articles/copper-producer-chile-surging-prices-1c700a30?siteid=yhoof2&yptr=yahoo",
+          "provider": "Barrons.com",
+          "timestamp": "2026-11-24T21:13:00+00:00",
+          "ts_epoch": 1795554780.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "STLD",
+          "title": "How Much Of STLD Stock's Rise Did The Business Earn?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/much-stld-stocks-rise-did-182452617.html",
+          "provider": "Trefis",
+          "timestamp": "2026-11-24T18:24:52+00:00",
+          "ts_epoch": 1795544692.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "APD",
+          "title": "Best Dividend Stocks to Buy for Dependable Dividend Growth",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/best-dividend-stocks-buy-dependable-212033677.html",
+          "provider": "Kiplinger",
+          "timestamp": "2026-11-24T17:48:39+00:00",
+          "ts_epoch": 1795542519.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "NEM",
+          "title": "How Much Can Newmont Stock Make You From Here?",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/much-newmont-stock-174304738.html",
+          "provider": "Trefis",
+          "timestamp": "2026-11-24T17:43:04+00:00",
+          "ts_epoch": 1795542184.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "APD",
+          "title": "Ecovyst (ECVT) Stock Is Up 6.1% Today Without Company News",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/ecovyst-ecvt-stock-6-1-173026851.html",
+          "provider": "GuruFocus.com",
+          "timestamp": "2026-11-24T17:30:26+00:00",
+          "ts_epoch": 1795541426.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        }
+      ],
+      "earnings": []
     }
   ],
   "market": [
@@ -6125,14 +6269,14 @@
         },
         {
           "symbol": "DLTR",
-          "title": "Dollar Tree (DLTR) is On Fire After Hitting This Big Achievement",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/dollar-tree-dltr-fire-hitting-014249646.html",
-          "provider": "Insider Monkey",
-          "timestamp": "2026-11-25T01:42:49+00:00",
-          "ts_epoch": 1795570969.0,
+          "title": "Cramer Turns Eyes to Retail Stocks and Highlights His 2 Favorites",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/cramer-turns-eyes-retail-stocks-050000697.html",
+          "provider": "BeInCrypto",
+          "timestamp": "2026-11-25T05:00:00+00:00",
+          "ts_epoch": 1795582800.0,
           "category": "general",
           "category_label": "一般新聞",
-          "sentiment": "positive",
+          "sentiment": "neutral",
           "matched_keywords": []
         }
       ],
@@ -6174,13 +6318,7 @@
             "sentiment": "neutral"
           }
         ],
-        "guidance": [
-          {
-            "title": "Why Ollie's (OLLI) Stock Is Up Today: Dollar Tree Earnings Boost Discounters",
-            "url": "https://finance.yahoo.com/markets/stocks/articles/why-ollies-olli-stock-today-210016342.html",
-            "sentiment": "positive"
-          }
-        ],
+        "guidance": [],
         "insider_news": [],
         "insider_chip": {
           "buys": 9,
@@ -6214,10 +6352,9 @@
         },
         "reasons": [
           "訂單/合約",
-          "分析師指引",
           "財報 beat"
         ],
-        "conclusion": "放量漲幅主因疑為：訂單/合約 + 分析師指引 + 財報 beat"
+        "conclusion": "放量漲幅主因疑為：訂單/合約 + 財報 beat"
       }
     },
     {
@@ -6724,23 +6861,23 @@
         },
         {
           "symbol": "DKS",
+          "title": "Cramer Turns Eyes to Retail Stocks and Highlights His 2 Favorites",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/cramer-turns-eyes-retail-stocks-050000697.html",
+          "provider": "BeInCrypto",
+          "timestamp": "2026-11-25T05:00:00+00:00",
+          "ts_epoch": 1795582800.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "neutral",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "DKS",
           "title": "Dick’s Sporting Goods Raised Its Full-Year Earnings Forecast as Foot Locker Returned to Positive Comparable Sales. Here's What Investors Need to Know.",
           "url": "https://finance.yahoo.com/markets/stocks/articles/dick-sporting-goods-raised-full-225101273.html",
           "provider": "Motley Fool",
           "timestamp": "2026-11-24T22:51:01+00:00",
           "ts_epoch": 1795560661.0,
-          "category": "general",
-          "category_label": "一般新聞",
-          "sentiment": "positive",
-          "matched_keywords": []
-        },
-        {
-          "symbol": "DKS",
-          "title": "Morning Movers: Dick’s Sporting and Dollar Tree gain following quarterly reports",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/morning-movers-dick-sporting-dollar-220046732.html",
-          "provider": "TipRanks",
-          "timestamp": "2026-11-24T22:00:46+00:00",
-          "ts_epoch": 1795557646.0,
           "category": "general",
           "category_label": "一般新聞",
           "sentiment": "positive",
@@ -6927,6 +7064,18 @@
       "news": [
         {
           "symbol": "ZS",
+          "title": "November 2026 Growth Stocks With Strong Earnings Potential",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/november-2026-growth-stocks-strong-051356592.html",
+          "provider": "Simply Wall St.",
+          "timestamp": "2026-11-25T05:13:56+00:00",
+          "ts_epoch": 1795583636.0,
+          "category": "general",
+          "category_label": "一般新聞",
+          "sentiment": "positive",
+          "matched_keywords": []
+        },
+        {
+          "symbol": "ZS",
           "title": "CrowdStrike: 3 Key Takeaways for Long-Term Investors",
           "url": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-3-key-takeaways-long-043239171.html",
           "provider": "Motley Fool",
@@ -6948,20 +7097,6 @@
           "category_label": "一般新聞",
           "sentiment": "neutral",
           "matched_keywords": []
-        },
-        {
-          "symbol": "ZS",
-          "title": "7 Firms Downgraded Zscaler After CrowdStrike’s $43.9 Billion Deal. Is There Still Money to Make?",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/7-firms-downgraded-zscaler-crowdstrike-210442923.html",
-          "provider": "TIKR",
-          "timestamp": "2026-11-24T21:04:42+00:00",
-          "ts_epoch": 1795554282.0,
-          "category": "order",
-          "category_label": "訂單 / 合約",
-          "sentiment": "positive",
-          "matched_keywords": [
-            "deal"
-          ]
         }
       ],
       "chip": {
