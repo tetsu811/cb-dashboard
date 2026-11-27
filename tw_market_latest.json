@@ -1,34 +1,29 @@
 {
-  "generated_at": "2026-11-26T21:28:30.744503",
-  "date": "2026-11-26",
+  "generated_at": "2026-11-27T08:58:35.921690",
+  "date": "2026-11-27",
   "indices": [
     {
       "code": "^TWII",
       "zh": "加權指數",
       "en": "TAIEX",
       "status": "ok",
-      "close": 39151.81,
-      "day_pct": 2.5,
-      "day_chg": 956.38,
+      "close": 39308.08,
+      "day_pct": 0.4,
+      "day_chg": 156.27,
       "volume": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     }
   ],
   "fear_greed": {
-    "score": 15.0,
+    "score": 17.9,
     "rating": "extreme fear",
-    "timestamp": "2026-11-26T01:59:59+00:00",
-    "previous_close": 15.2,
-    "previous_1_week": 15.9,
-    "previous_1_month": 29.8,
+    "timestamp": "2026-11-27T08:42:16+00:00",
+    "previous_close": 15.6,
+    "previous_1_week": 18.6,
+    "previous_1_month": 32.9,
     "previous_1_year": 17.7,
     "history": [
-      {
-        "x": 1792368000000.0,
-        "y": 19.5,
-        "r": "extreme fear"
-      },
       {
         "x": 1792454400000.0,
         "y": 28.7,
@@ -161,17 +156,22 @@
       },
       {
         "x": 1795564800000.0,
-        "y": 15.6,
+        "y": 17.9,
         "r": "extreme fear"
       },
       {
         "x": 1795651200000.0,
-        "y": 15.6,
+        "y": 17.9,
         "r": "extreme fear"
       },
       {
-        "x": 1795658399000.0,
-        "y": 15.0,
+        "x": 1795737600000.0,
+        "y": 17.9,
+        "r": "extreme fear"
+      },
+      {
+        "x": 1795768936000.0,
+        "y": 17.9,
         "r": "extreme fear"
       }
     ]
@@ -182,99 +182,99 @@
       "code": "0050",
       "name": "元大台灣50",
       "sector": "大盤",
-      "close": 92.85,
-      "day_pct": 2.8239202657807305,
-      "volume": 242920377.0,
+      "close": 92.4,
+      "day_pct": -0.48465266558966075,
+      "volume": 111385656.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "006208",
       "name": "富邦台50",
       "sector": "大盤",
-      "close": 208.75,
-      "day_pct": 2.7565838050701448,
-      "volume": 4777381.0,
+      "close": 208.0,
+      "day_pct": -0.3592814371257485,
+      "volume": 2205021.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00891",
       "name": "中信關鍵半導體",
       "sector": "半導體",
-      "close": 27.13,
-      "day_pct": 3.8667687595712104,
-      "volume": 21648262.0,
+      "close": 27.02,
+      "day_pct": -0.4054552156284556,
+      "volume": 10519819.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00892",
       "name": "富邦台灣半導體",
       "sector": "半導體",
-      "close": 27.64,
-      "day_pct": 4.301886792452829,
-      "volume": 8315522.0,
+      "close": 27.33,
+      "day_pct": -1.121562952243126,
+      "volume": 5292734.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00881",
       "name": "國泰台灣5G+",
       "sector": "通訊",
-      "close": 40.92,
-      "day_pct": 4.788732394366197,
-      "volume": 19588210.0,
+      "close": 40.64,
+      "day_pct": -0.6842619745845552,
+      "volume": 7894555.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00893",
       "name": "國泰智能電動車",
       "sector": "電動車",
-      "close": 37.31,
-      "day_pct": 2.3593964334705073,
-      "volume": 640097.0,
+      "close": 38.21,
+      "day_pct": 2.412221924417046,
+      "volume": 1643660.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00895",
       "name": "富邦未來車",
       "sector": "電動車",
-      "close": 43.2,
-      "day_pct": 2.127659574468085,
-      "volume": 578687.0,
+      "close": 43.83,
+      "day_pct": 1.4583333333333335,
+      "volume": 702840.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00900",
       "name": "富邦特選高股息",
       "sector": "高息",
-      "close": 16.95,
-      "day_pct": 2.355072463768116,
-      "volume": 5388434.0,
+      "close": 16.79,
+      "day_pct": -0.943952802359882,
+      "volume": 1676730.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     },
     {
       "code": "00919",
       "name": "群益台灣精選高息",
       "sector": "高息",
-      "close": 28.82,
-      "day_pct": 3.4086831718693937,
-      "volume": 52885299.0,
+      "close": 28.72,
+      "day_pct": -0.3469812630117974,
+      "volume": 36825963.0,
       "vol_ratio": null,
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "source": "TWSE"
     }
   ],
