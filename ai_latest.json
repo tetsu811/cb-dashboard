@@ -1,56 +1,56 @@
 {
-  "trade_date": "2026-11-25",
+  "trade_date": "2026-11-27",
   "stocks": {
     "AAPL": {
       "symbol": "AAPL",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Apple",
-      "industry": "Consumer Electronics",
-      "price": 355.5799865722656,
-      "day_pct": 0.4264634724240324,
-      "market_cap": 5167353167872,
+      "industry": null,
+      "price": 358.5400085449219,
+      "day_pct": 0.8324489803800184,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.117,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.33009997,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.27604,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.48786,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.84286,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.023,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 1.42257,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.7197075041315115,
@@ -59,10 +59,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.2841402240366598,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.0293625874787213,
@@ -71,19 +71,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.026329920866630076,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 3.94,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 18,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -98,54 +98,54 @@
     },
     "ADBE": {
       "symbol": "ADBE",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ADBE",
-      "industry": "Software - Application",
-      "price": 232.8300018310547,
-      "day_pct": 0.3231644235102804,
-      "market_cap": 90617438208,
+      "industry": null,
+      "price": 234.7899932861328,
+      "day_pct": 0.841812240546358,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.129,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.36323002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.28048,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.89252996,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.5769299999999999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.77,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.61902,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.4148852036156562,
@@ -154,10 +154,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.4078552195689437,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.4541460735859417,
@@ -166,19 +166,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.11688699448430119,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.53,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 19,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -193,54 +193,54 @@
     },
     "AI": {
       "symbol": "AI",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "AI",
-      "industry": "Software - Infrastructure",
-      "price": 10.0,
-      "day_pct": 1.6260146842582035,
-      "market_cap": 1607798528,
+      "industry": null,
+      "price": 10.220000267028809,
+      "day_pct": 2.2000026702880815,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": -0.255,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": -1.98131,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": -1.9210299,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.29093,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.08557000000000001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 6.155,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": -0.59771997,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": -0.6164756446991404,
@@ -249,10 +249,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": -0.6703488221979327,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": null,
@@ -261,10 +261,10 @@
           "source": null
         },
         "fcf_yield": {
-          "value": -0.09688838326887683,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -273,7 +273,7 @@
           "source": null
         }
       },
-      "score": 5,
+      "score": 0,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -288,54 +288,54 @@
     },
     "AMAT": {
       "symbol": "AMAT",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "AMAT",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 311.17999267578125,
-      "day_pct": -3.8855994287097517,
-      "market_cap": 246951641088,
+      "industry": null,
+      "price": 322.0400085449219,
+      "day_pct": 3.4899466947592828,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.531,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.32944,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.29286,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.49988,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.25021,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.344,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.4337,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.3311420458941139,
@@ -344,10 +344,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.16324101431530946,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.6067767346498327,
@@ -356,19 +356,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02276964014179712,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.89,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 20,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -383,54 +383,54 @@
     },
     "AMD": {
       "symbol": "AMD",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "AMD",
-      "industry": "Semiconductors",
-      "price": 406.0299987792969,
-      "day_pct": -1.7518790202149193,
-      "market_cap": 672006275072,
+      "industry": null,
+      "price": 424.5400085449219,
+      "day_pct": 4.558778863944579,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.447,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.17820999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.16769,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.56,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.13469,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.725,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.1196,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.11285959721485436,
@@ -439,10 +439,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.15529536663195037,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.9261057881611761,
@@ -451,19 +451,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.010499901952915554,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 12.81,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 17,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -478,54 +478,54 @@
     },
     "AMZN": {
       "symbol": "AMZN",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Amazon",
-      "industry": "Internet Retail",
-      "price": 244.42999267578125,
-      "day_pct": -3.1154626895713577,
-      "market_cap": 2643055345664,
+      "industry": null,
+      "price": 254.1199951171875,
+      "day_pct": 3.9643262822739445,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.121,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.13087,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.16900998,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.51374,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.49681,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.989,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.27416,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.16520848524522125,
@@ -534,10 +534,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": -0.04720140805578299,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": -0.40335837289298,
@@ -546,19 +546,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.014241472491959362,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.56,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 14,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -573,36 +573,36 @@
     },
     "ANET": {
       "symbol": "ANET",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ANET",
-      "industry": "Computer Hardware",
-      "price": 163.99000549316406,
-      "day_pct": -2.711196091374579,
-      "market_cap": 207185362944,
+      "industry": null,
+      "price": 174.72999572753906,
+      "day_pct": 6.549173653648488,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.585,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.43827,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.39966,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.62881,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
           "value": null,
@@ -611,16 +611,16 @@
           "source": null
         },
         "current_ratio": {
-          "value": 3.293,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.33519,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.29968176048389744,
@@ -629,10 +629,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.42198130423429475,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.0558501683501684,
@@ -641,19 +641,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02421696170378672,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.1,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 21,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -668,54 +668,54 @@
     },
     "APH": {
       "symbol": "APH",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "APH",
-      "industry": "Electronic Components",
-      "price": 73.08000183105469,
-      "day_pct": -0.5308280701900148,
-      "market_cap": 180453621760,
+      "industry": null,
+      "price": 75.13999938964844,
+      "day_pct": 2.81882526953956,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.651,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.28728,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.17950001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.39209,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 1.0347,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.941,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.40078,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.2162702881403313,
@@ -724,10 +724,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.15533377973953194,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.9491171304428215,
@@ -736,19 +736,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.028446644350686376,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.07,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 20,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -763,54 +763,54 @@
     },
     "ASML": {
       "symbol": "ASML",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ASML",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 1303.0799560546875,
-      "day_pct": -2.468459582107052,
-      "market_cap": 502230122496,
+      "industry": null,
+      "price": 1325.8199462890625,
+      "day_pct": 1.7450955429645587,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.552,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.38551998,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.34135,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.54337,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.08897000000000001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.487,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.65636003,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 5.4117136990277155,
@@ -819,10 +819,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.531987280450987,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.5584779914355478,
@@ -831,19 +831,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.04181230686768942,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.58,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 22,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -858,54 +858,54 @@
     },
     "AVGO": {
       "symbol": "AVGO",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Broadcom",
-      "industry": "Semiconductors",
-      "price": 300.8599853515625,
-      "day_pct": -0.07307068902446812,
-      "market_cap": 1436194177024,
+      "industry": null,
+      "price": 312.3399963378906,
+      "day_pct": 3.815732083119472,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.855,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.48815,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.42944,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.75515,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.59604,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.504,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.44245,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.2778867392939612,
@@ -914,10 +914,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.44221359818668887,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.0297399712531035,
@@ -926,19 +926,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.027435705164637735,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.95,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 22,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -953,54 +953,54 @@
     },
     "AXTI": {
       "symbol": "AXTI",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "AXTI",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 31.979999542236328,
-      "day_pct": 1.266623240964626,
-      "market_cap": 2101800832,
+      "industry": null,
+      "price": 36.369998931884766,
+      "day_pct": 13.727327868940463,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 1.626,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.19555001,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.18531999,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.44024,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.09158,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.796,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.061240003,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.04678658877166945,
@@ -1009,10 +1009,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.4647060199808147,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 2.5075908215762395,
@@ -1021,19 +1021,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03779996600553254,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 8.09,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 16,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1048,54 +1048,54 @@
     },
     "CDNS": {
       "symbol": "CDNS",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "CDNS",
-      "industry": "Software - Application",
-      "price": 294.8900146484375,
-      "day_pct": -0.5765311597739187,
-      "market_cap": 80911630336,
+      "industry": null,
+      "price": 303.9100036621094,
+      "day_pct": 3.058763798572617,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.22,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.29937,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.22514999,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.85678,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.40908,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.36,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.22869,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.17171521375159365,
@@ -1104,10 +1104,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.2864699117561108,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.2723720302270214,
@@ -1116,19 +1116,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02171085902861123,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 3.98,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 20,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1143,54 +1143,54 @@
     },
     "CIEN": {
       "symbol": "CIEN",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "CIEN",
-      "industry": "Communication Equipment",
-      "price": 242.7899932861328,
-      "day_pct": 1.471136770517889,
-      "market_cap": 34429689856,
+      "industry": null,
+      "price": 256.5799865722656,
+      "day_pct": 5.67980298507651,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.37,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.14125,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.10869,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.44072,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 1.07496,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.797,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.22396,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.13541716113762933,
@@ -1199,10 +1199,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.1352559888725419,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.2444216928225424,
@@ -1211,19 +1211,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.023652899674845098,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 6.83,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 16,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1238,54 +1238,54 @@
     },
     "COHR": {
       "symbol": "COHR",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "COHR",
-      "industry": "Scientific & Technical Instruments",
-      "price": 196.19000244140625,
-      "day_pct": -0.0254805597014518,
-      "market_cap": 38641324032,
+      "industry": null,
+      "price": 223.7899932861328,
+      "day_pct": 14.06799046907068,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.499,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.14109999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.121829994,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.38162997,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.37276000000000004,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.292,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.092709996,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.09096071595156646,
@@ -1294,10 +1294,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": -0.23280340005738298,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": -1.9108937613798918,
@@ -1306,19 +1306,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.04763827446687839,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 3.13,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 11,
+      "score": 1,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1333,54 +1333,54 @@
     },
     "CRM": {
       "symbol": "CRM",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "CRM",
-      "industry": "Software - Application",
-      "price": 197.2100067138672,
-      "day_pct": 2.0438850870874603,
-      "market_cap": 162303836160,
+      "industry": null,
+      "price": 198.2100067138672,
+      "day_pct": 0.5070736605424342,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.108,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.21519,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.2199,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.77282,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 1.10417,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.839,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.19381,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.1337438717952292,
@@ -1389,10 +1389,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.3448950723968778,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.5684123369902712,
@@ -1401,19 +1401,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.0933680950403483,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.49,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 19,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1428,54 +1428,54 @@
     },
     "CRWD": {
       "symbol": "CRWD",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "CRWD",
-      "industry": "Software - Infrastructure",
-      "price": 209.3000030517578,
-      "day_pct": -0.7398262136385281,
-      "market_cap": 215703863296,
+      "industry": null,
+      "price": 217.1999969482422,
+      "day_pct": 3.7744834119905812,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.283,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": -0.012560001,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.01682,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.75394,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.13834,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.59,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.02327,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.0201392416352452,
@@ -1484,10 +1484,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.26501622485101584,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 26.045210400273692,
@@ -1496,10 +1496,10 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.007058765553543218,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -1508,7 +1508,7 @@
           "source": null
         }
       },
-      "score": 11,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1523,54 +1523,54 @@
     },
     "CSCO": {
       "symbol": "CSCO",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "CSCO",
-      "industry": "Communication Equipment",
-      "price": 94.19999694824219,
-      "day_pct": 0.22342705526712248,
-      "market_cap": 371378585600,
+      "industry": null,
+      "price": 97.04000091552734,
+      "day_pct": 3.014866304980446,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.244,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.27172002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.22341,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.64074,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.60965,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.961,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.3038,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.2070487047362531,
@@ -1579,10 +1579,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.20509565692263704,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.9180426499097534,
@@ -1591,19 +1591,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.036978437994244974,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 3.72,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 18,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1618,54 +1618,54 @@
     },
     "DDOG": {
       "symbol": "DDOG",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "DDOG",
-      "industry": "Software - Application",
-      "price": 158.25,
-      "day_pct": -4.311285930765807,
-      "market_cap": 57134985216,
+      "industry": null,
+      "price": 165.75,
+      "day_pct": 4.739336492891,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.352,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.02358,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.061240003,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.79609,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.2772,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.508,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.06426,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.054203207992345626,
@@ -1674,10 +1674,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.25932877007485466,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 4.234303379577505,
@@ -1686,19 +1686,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.019418067508124793,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 5.33,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 12,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1713,36 +1713,36 @@
     },
     "DELL": {
       "symbol": "DELL",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "DELL",
-      "industry": "Computer Hardware",
-      "price": 297.05999755859375,
-      "day_pct": 0.6028172536763465,
-      "market_cap": 188874522624,
+      "industry": null,
+      "price": 316.9599914550781,
+      "day_pct": 6.698981370778201,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 1.034,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.11246,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.08655,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.20121,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
           "value": null,
@@ -1751,10 +1751,10 @@
           "source": null
         },
         "current_ratio": {
-          "value": 1.049,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
           "value": null,
@@ -1769,10 +1769,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.047786788356932626,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.7523290560731236,
@@ -1781,19 +1781,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.045321094031516,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.53,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 12,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1808,54 +1808,54 @@
     },
     "ENTG": {
       "symbol": "ENTG",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ENTG",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 128.3699951171875,
-      "day_pct": 0.43028901867971925,
-      "market_cap": 19614935040,
+      "industry": null,
+      "price": 135.99000549316406,
+      "day_pct": 5.935974655931342,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.246,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.18636999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.11144,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.46974,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.77569,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.66,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.09553,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.073207913001908,
@@ -1864,10 +1864,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.17476665156682797,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.5682281059063137,
@@ -1876,19 +1876,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.0314046413482285,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 18.17,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 15,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1903,54 +1903,54 @@
     },
     "ETN": {
       "symbol": "ETN",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ETN",
-      "industry": "Specialty Industrial Machinery",
-      "price": 317.80999755859375,
-      "day_pct": -0.45729053945486875,
-      "market_cap": 123469185024,
+      "industry": null,
+      "price": 325.9200134277344,
+      "day_pct": 2.5518441620595578,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.28,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.17721,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.12184,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.35154998,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.9952,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.234,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.19549999,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.1235374888105724,
@@ -1959,10 +1959,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.11865307273947141,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.9738260200153964,
@@ -1971,19 +1971,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.030736414104153405,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 2.36,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 14,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -1998,54 +1998,54 @@
     },
     "EXTR": {
       "symbol": "EXTR",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "EXTR",
-      "industry": "Communication Equipment",
-      "price": 24.280000686645508,
-      "day_pct": -0.7358888166983268,
-      "market_cap": 3185315072,
+      "industry": null,
+      "price": 25.770000457763672,
+      "day_pct": 6.136736939788046,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.099,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.06295,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.03993,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.61855,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 2.5937099999999997,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.018,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.67057,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.23584345327403597,
@@ -2054,10 +2054,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.11773665318346983,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 2.94850153371311,
@@ -2066,19 +2066,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.04858483274084103,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 4.62,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 13,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2093,54 +2093,54 @@
     },
     "FN": {
       "symbol": "FN",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "FN",
-      "industry": "Electronic Components",
-      "price": 289.70001220703125,
-      "day_pct": -0.14476179416265111,
-      "market_cap": 10347364352,
+      "industry": null,
+      "price": 307.5899963378906,
+      "day_pct": 6.175348076297094,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.507,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.100389995,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.09355,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.119490005,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.03113,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.039,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.21,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.20929663113123761,
@@ -2149,10 +2149,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": -0.03732256708888614,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": -0.3989654555366439,
@@ -2161,19 +2161,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.018530515934034833,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.98,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 14,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2188,54 +2188,54 @@
     },
     "GFS": {
       "symbol": "GFS",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "GFS",
-      "industry": "Semiconductors",
-      "price": 36.20000076293945,
-      "day_pct": -0.6040566091885413,
-      "market_cap": 20179646464,
+      "industry": null,
+      "price": 37.709999084472656,
+      "day_pct": 4.1712659936711916,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.125,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.11736,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.027560001,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.28465998,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.14317,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.575,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.01692,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.03415165072325547,
@@ -2244,10 +2244,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.06014827087026605,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 2.182741116751269,
@@ -2256,10 +2256,10 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02130859927437825,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -2268,7 +2268,7 @@
           "source": null
         }
       },
-      "score": 11,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2283,54 +2283,54 @@
     },
     "GOOGL": {
       "symbol": "GOOGL",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Alphabet",
-      "industry": "Internet Content & Information",
-      "price": 273.1000061035156,
-      "day_pct": -2.1322278981311005,
-      "market_cap": 3357491331072,
+      "industry": null,
+      "price": 274.9599914550781,
+      "day_pct": 0.6810638264348912,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.247,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.33321,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.50031,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.60857,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.22187,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.786,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.44286,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.3993196219036313,
@@ -2339,10 +2339,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.0419169685008785,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.08378236187599175,
@@ -2351,19 +2351,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.005881474604938163,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.49,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 18,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2378,54 +2378,54 @@
     },
     "HPE": {
       "symbol": "HPE",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "HPE",
-      "industry": "Communication Equipment",
-      "price": 40.81999969482422,
-      "day_pct": 1.567556829167338,
-      "market_cap": 53719117824,
+      "industry": null,
+      "price": 42.7599983215332,
+      "day_pct": 4.752568939766477,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.503,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.10578,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.094849996,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.37962002,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.67503,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.05,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.16928,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.0692732009323616,
@@ -2434,10 +2434,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.0889193153574625,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.4890720171981369,
@@ -2446,19 +2446,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.07736538067539209,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.24,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 15,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2473,54 +2473,54 @@
     },
     "IBM": {
       "symbol": "IBM",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "IBM",
-      "industry": "Information Technology Services",
-      "price": 243.47000122070312,
-      "day_pct": 3.331638344025678,
-      "market_cap": 230108577792,
+      "industry": null,
+      "price": 248.0800018310547,
+      "day_pct": 1.8934573406325539,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.047,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.18383,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.15989,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.57965,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 1.85439,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.855,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.34769002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.1306263952724885,
@@ -2529,10 +2529,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.2006354744988427,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.2549686660698298,
@@ -2541,19 +2541,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.060919067574574146,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.79,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 16,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2568,54 +2568,54 @@
     },
     "INTC": {
       "symbol": "INTC",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "INTC",
-      "industry": "Semiconductors",
-      "price": 54.470001220703125,
-      "day_pct": -0.602186169619956,
-      "market_cap": 289508032512,
+      "industry": null,
+      "price": 57.400001525878906,
+      "day_pct": 5.37910820545775,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.209,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.10317001,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": -0.20089,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.40152,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.38108,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.208,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": -0.0962,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": -0.05819917792796334,
@@ -2624,10 +2624,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.06291324518347949,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": null,
@@ -2636,10 +2636,10 @@
           "source": null
         },
         "fcf_yield": {
-          "value": 0.013015182920162389,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -2648,7 +2648,7 @@
           "source": null
         }
       },
-      "score": 10,
+      "score": 0,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2663,54 +2663,54 @@
     },
     "KLAC": {
       "symbol": "KLAC",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "KLAC",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 134.1999969482422,
-      "day_pct": 0.41152493593363815,
-      "market_cap": 174857551872,
+      "industry": null,
+      "price": 140.86000061035156,
+      "day_pct": 4.962745017556136,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.289,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.4264,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.3625,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.61465,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.91864,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.76,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.91382,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.47583979967767753,
@@ -2719,10 +2719,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.278345318024413,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.7678537570657087,
@@ -2731,19 +2731,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02309091003947966,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 2.06,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 19,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2758,54 +2758,54 @@
     },
     "LITE": {
       "symbol": "LITE",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "LITE",
-      "industry": "Communication Equipment",
-      "price": 476.5799865722656,
-      "day_pct": -2.1637396638555684,
-      "market_cap": 43218612224,
+      "industry": null,
+      "price": 514.6300048828125,
+      "day_pct": 7.983973180287385,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 1.365,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.23354,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": -1.75777,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.47974998,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.31278,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.611,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": -2.45788,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": -1.3126837382639869,
@@ -2814,10 +2814,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.09519611311988417,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": null,
@@ -2826,10 +2826,10 @@
           "source": null
         },
         "fcf_yield": {
-          "value": 0.008244133295009894,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -2838,7 +2838,7 @@
           "source": null
         }
       },
-      "score": 10,
+      "score": 0,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2853,54 +2853,54 @@
     },
     "LRCX": {
       "symbol": "LRCX",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "LRCX",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 185.00999450683594,
-      "day_pct": -5.684139960804457,
-      "market_cap": 231109115904,
+      "industry": null,
+      "price": 192.69000244140625,
+      "day_pct": 4.151131378087003,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.544,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.36951,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.3234,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.51054,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.26857,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.479,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.7012,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.5310143302724564,
@@ -2909,10 +2909,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.2502059147766371,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.7736640806714987,
@@ -2921,19 +2921,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02828691535783272,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.76,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 21,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -2948,54 +2948,54 @@
     },
     "MDB": {
       "symbol": "MDB",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "MDB",
-      "industry": "Software - Infrastructure",
-      "price": 313.5299987792969,
-      "day_pct": 1.6304696205176272,
-      "market_cap": 25217822720,
+      "industry": null,
+      "price": 320.1199951171875,
+      "day_pct": 2.1018710692910503,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.305,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": -0.00468,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.02116,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.72688,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.01846,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 4.866,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.01989,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.02051101357726462,
@@ -3004,10 +3004,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.23682159105701417,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 11.189364483759784,
@@ -3016,10 +3016,10 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02613310464258827,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -3028,7 +3028,7 @@
           "source": null
         }
       },
-      "score": 13,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3043,54 +3043,54 @@
     },
     "META": {
       "symbol": "META",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Meta",
-      "industry": "Internet Content & Information",
-      "price": 609.8900146484375,
-      "day_pct": 3.4027342367154434,
-      "market_cap": 1559025942528,
+      "industry": null,
+      "price": 628.9600219726562,
+      "day_pct": 3.1267944819872717,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.261,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.37777,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.31145,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.81034,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.42161000000000004,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.903,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.32264,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.26910448833114137,
@@ -3099,10 +3099,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.11857784340476953,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.3807226674108626,
@@ -3111,19 +3111,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.01837621762313007,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.28,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 17,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3138,54 +3138,54 @@
     },
     "MRVL": {
       "symbol": "MRVL",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "MRVL",
-      "industry": "Semiconductors",
-      "price": 130.92999267578125,
-      "day_pct": -0.48644418393954947,
-      "market_cap": 117806342144,
+      "industry": null,
+      "price": 140.5399932861328,
+      "day_pct": 7.339800769827098,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.365,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.16812,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.27934998,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.52216,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.28525,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.168,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.16523,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.14591530227607838,
@@ -3194,10 +3194,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.1823010829458059,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.6526004772908065,
@@ -3206,19 +3206,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.014624000445529018,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 8.77,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 16,
+      "score": 1,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3233,54 +3233,54 @@
     },
     "MSFT": {
       "symbol": "MSFT",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Microsoft",
-      "industry": "Software - Infrastructure",
-      "price": 489.92999267578125,
-      "day_pct": -1.2496749130292417,
-      "market_cap": 3638315450368,
+      "industry": null,
+      "price": 492.8500061035156,
+      "day_pct": 0.5960062603611149,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.188,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.47104,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.41169998,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.67657,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.28465,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.225,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.34221,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.31836839226258695,
@@ -3289,10 +3289,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.17306355122679842,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.4203644369036184,
@@ -3301,19 +3301,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.01647932973869421,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.56,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 18,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3328,54 +3328,54 @@
     },
     "MU": {
       "symbol": "MU",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "MU",
-      "industry": "Semiconductors",
-      "price": 601.25,
-      "day_pct": -4.531665955806085,
-      "market_cap": 682379247616,
+      "industry": null,
+      "price": 646.9500122070312,
+      "day_pct": 7.600833631107062,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 3.793,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.74586,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.63796,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.80716,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.03743,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.314,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.8826,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.8217829890806558,
@@ -3384,10 +3384,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.44270504254641985,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.6939354352763949,
@@ -3396,19 +3396,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.08640796185698288,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.13,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 22,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3423,54 +3423,54 @@
     },
     "NOW": {
       "symbol": "NOW",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "NOW",
-      "industry": "Software - Application",
-      "price": 92.16000366210938,
-      "day_pct": 0.457821896795263,
-      "market_cap": 95654436864,
+      "industry": null,
+      "price": 92.80000305175781,
+      "day_pct": 0.6944437545759019,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.205,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.12753999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.09364,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.73080003,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.64256,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.719,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.11846,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.09325469636465065,
@@ -3479,10 +3479,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.3078219156437948,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 3.28719723183391,
@@ -3491,19 +3491,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.049657916095972386,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.46,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 16,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3518,54 +3518,54 @@
     },
     "NVDA": {
       "symbol": "NVDA",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "NVIDIA",
-      "industry": "Semiconductors",
-      "price": 149.3000030517578,
-      "day_pct": -3.912988569951603,
-      "market_cap": 3605147156480,
+      "industry": null,
+      "price": 150.49000549316406,
+      "day_pct": 0.7970545325399092,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 1.032,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.66082,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.62535,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.74921,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.14306,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 4.084,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 1.17364,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 1.042023288826889,
@@ -3574,10 +3574,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.35103148333268275,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.6584750024626839,
@@ -3586,19 +3586,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03522907512158431,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.19,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 21,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3613,54 +3613,54 @@
     },
     "ONTO": {
       "symbol": "ONTO",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ONTO",
-      "industry": "Semiconductor Equipment & Materials",
-      "price": 172.14999389648438,
-      "day_pct": -0.7666600552282299,
-      "market_cap": 8449866752,
+      "industry": null,
+      "price": 178.4199981689453,
+      "day_pct": 3.642175134918202,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.878,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.22701,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.11529,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.5639,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.74429,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 6.776,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.07597,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.0648708280279778,
@@ -3669,10 +3669,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.18879660313435526,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.6375581080098132,
@@ -3681,19 +3681,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.02930732605237655,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 11.5,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 15,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3708,54 +3708,54 @@
     },
     "ORCL": {
       "symbol": "ORCL",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "ORCL",
-      "industry": "Software - Infrastructure",
-      "price": 103.87999725341797,
-      "day_pct": -5.132422599618291,
-      "market_cap": 323867508736,
+      "industry": null,
+      "price": 107.12999725341797,
+      "day_pct": 3.128610017260147,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.296,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.34272,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.2636,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.63957,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 2.51716,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.171,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.41192,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.15440389305673327,
@@ -3764,10 +3764,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": -0.4001337380256089,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": -1.517970401691332,
@@ -3776,19 +3776,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.08867823793775823,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 2.83,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 13,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3803,54 +3803,54 @@
     },
     "PANW": {
       "symbol": "PANW",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "PANW",
-      "industry": "Software - Infrastructure",
-      "price": 356.1400146484375,
-      "day_pct": 0.8923834956257481,
-      "market_cap": 292390961152,
+      "industry": null,
+      "price": 366.760009765625,
+      "day_pct": 2.981971887565349,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.392,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.04947,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.03654,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.68958,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.09461,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.656,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.02438,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.011207335710646969,
@@ -3859,10 +3859,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.3427837033418372,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 9.38021978021978,
@@ -3871,19 +3871,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.014596894456601454,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 11.84,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 10,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3898,54 +3898,54 @@
     },
     "PATH": {
       "symbol": "PATH",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "PATH",
-      "industry": "Software - Infrastructure",
-      "price": 12.420000076293945,
-      "day_pct": 3.6727925782164217,
-      "market_cap": 6472750592,
+      "industry": null,
+      "price": 12.649999618530273,
+      "day_pct": 1.8518481547784127,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.134,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.09368,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.21031,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.82583,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.04093,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.387,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.20027,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.08463599957280257,
@@ -3954,10 +3954,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.21091630069108597,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.0028791290772696,
@@ -3966,19 +3966,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.056074615395902465,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.01,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 20,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -3993,54 +3993,54 @@
     },
     "PLTR": {
       "symbol": "PLTR",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "PLTR",
-      "industry": "Software - Infrastructure",
-      "price": 163.58999633789062,
-      "day_pct": 1.4952250723557103,
-      "market_cap": 394169712640,
+      "industry": null,
+      "price": 172.1699981689453,
+      "day_pct": 5.244820602191913,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.959,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.45638,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.50343,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.84744,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.01986,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 7.102,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.40907001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.36826437676194246,
@@ -4049,10 +4049,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.5562309723585365,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.104889612044354,
@@ -4061,19 +4061,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.010284798324173951,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.08,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 22,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4088,54 +4088,54 @@
     },
     "QCOM": {
       "symbol": "QCOM",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "QCOM",
-      "industry": "Semiconductors",
-      "price": 168.66000366210938,
-      "day_pct": 2.242966050953221,
-      "market_cap": 180466204672,
+      "industry": null,
+      "price": 179.27000427246094,
+      "day_pct": 6.290762706022157,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": -0.084,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.20849001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.31605,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.53103,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.52604,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.859,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.52814996,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.24781062185698516,
@@ -4144,10 +4144,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.20062615479032508,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.6348425919131137,
@@ -4156,19 +4156,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.047936953158201116,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.3,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 17,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4183,54 +4183,54 @@
     },
     "SIMO": {
       "symbol": "SIMO",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "SIMO",
-      "industry": "Semiconductors",
-      "price": 137.75,
-      "day_pct": 2.0294834491126013,
-      "market_cap": 4670859264,
+      "industry": null,
+      "price": 150.0399932861328,
+      "day_pct": 8.921955198644515,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 1.315,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.21301001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.19363001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.50538,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.99625,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 5.683,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.32167,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": null,
@@ -4239,10 +4239,10 @@
           "source": null
         },
         "fcf_margin": {
-          "value": -0.2489821054348215,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": -1.285842237188576,
@@ -4251,19 +4251,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.08698292477604395,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.91,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 15,
+      "score": 0,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4278,54 +4278,54 @@
     },
     "SMCI": {
       "symbol": "SMCI",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "SMCI",
-      "industry": "Computer Hardware",
-      "price": 23.309999465942383,
-      "day_pct": 3.0503916936740927,
-      "market_cap": 15366590464,
+      "industry": null,
+      "price": 23.760000228881836,
+      "day_pct": 1.930505247745451,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 2.975,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.08326,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.067719996,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.11378,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.5711999999999999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.024,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.32368,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.24285448008571087,
@@ -4334,10 +4334,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": -0.12034760305131866,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": -1.777089208349367,
@@ -4346,19 +4346,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": -0.4228459797391266,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.06,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 11,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4373,54 +4373,54 @@
     },
     "SNOW": {
       "symbol": "SNOW",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "SNOW",
-      "industry": "Software - Application",
-      "price": 267.7200012207031,
-      "day_pct": -1.2431278035752724,
-      "market_cap": 94451613696,
+      "industry": null,
+      "price": 276.2900085449219,
+      "day_pct": 3.201108353930504,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.351,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": -0.22427,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": -0.20071,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.6703,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 1.2856999999999998,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 0.939,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": -0.48063,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": -0.23485100315779472,
@@ -4429,10 +4429,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.2196065340059324,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": null,
@@ -4441,10 +4441,10 @@
           "source": null
         },
         "fcf_yield": {
-          "value": 0.012635930221809897,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
           "value": null,
@@ -4453,7 +4453,7 @@
           "source": null
         }
       },
-      "score": 7,
+      "score": 0,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4468,54 +4468,54 @@
     },
     "SNPS": {
       "symbol": "SNPS",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "SNPS",
-      "industry": "Software - Infrastructure",
-      "price": 405.0899963378906,
-      "day_pct": -2.34559828709594,
-      "market_cap": 77630087168,
+      "industry": null,
+      "price": 420.07000732421875,
+      "day_pct": 3.6979464123407135,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.424,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.11031,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.11432999,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.82921,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.34804,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.337,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.03661,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.03831015393378923,
@@ -4524,10 +4524,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.2917980240935857,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 2.552304146823351,
@@ -4536,19 +4536,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.03539485913565527,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 22.51,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 14,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4563,54 +4563,54 @@
     },
     "STX": {
       "symbol": "STX",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "STX",
-      "industry": "Computer Hardware",
-      "price": 472.3299865722656,
-      "day_pct": -2.103719155807704,
-      "market_cap": 108428591104,
+      "industry": null,
+      "price": 509.6600036621094,
+      "day_pct": 7.903376484891522,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.61,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.40488,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.31857002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.50351,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.7738200000000001,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.818,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 2.5935102,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.8586742367944973,
@@ -4619,10 +4619,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.30125371264002915,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.9456323930846224,
@@ -4631,19 +4631,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.038338596468645306,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.19,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 21,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4660,34 +4660,34 @@
       "symbol": "TOELY",
       "as_of": null,
       "name": "TOELY",
-      "industry": "Semiconductor Equipment & Materials",
+      "industry": null,
       "price": null,
       "day_pct": null,
-      "market_cap": 156414410752,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.333,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.28866,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.23645,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.45562,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
           "value": null,
@@ -4696,16 +4696,16 @@
           "source": null
         },
         "current_ratio": {
-          "value": 2.633,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.30929002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.2970188512425288,
@@ -4714,10 +4714,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.19159741508333833,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.708973634638334,
@@ -4726,19 +4726,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 3.217088486800861,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.4,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 20,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4753,54 +4753,54 @@
     },
     "TSLA": {
       "symbol": "TSLA",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "Tesla",
-      "industry": "Auto Manufacturers",
-      "price": 380.1400146484375,
-      "day_pct": -1.18019603664965,
-      "market_cap": 1502601543680,
+      "industry": null,
+      "price": 400.0,
+      "day_pct": 5.224386959086513,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": -0.002,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.03403,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.031070001,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.19285999,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.18295000000000003,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.739,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.03844,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.03817240937904196,
@@ -4809,10 +4809,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.031823887894648836,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.024238657551274,
@@ -4821,19 +4821,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.0021935289590664293,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 38.0,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 5,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4848,54 +4848,54 @@
     },
     "TSM": {
       "symbol": "TSM",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "TSMC",
-      "industry": "Semiconductors",
-      "price": 342.3399963378906,
-      "day_pct": -1.9644947392136736,
-      "market_cap": 1775537094656,
+      "industry": null,
+      "price": 353.3399963378906,
+      "day_pct": 3.2131799140241224,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.509,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.57961,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.51116,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.65846,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.15188000000000001,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 2.584,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.4186,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.36199712751858215,
@@ -4904,10 +4904,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.29477008347768535,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.5766738141401125,
@@ -4916,19 +4916,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.8209258411930833,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.68,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 22,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -4943,54 +4943,54 @@
     },
     "UMC": {
       "symbol": "UMC",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "UMC",
-      "industry": "Semiconductors",
-      "price": 13.1899995803833,
-      "day_pct": -1.5671645083972452,
-      "market_cap": 33077800960,
+      "industry": null,
+      "price": 13.4399995803833,
+      "day_pct": 1.895375344604333,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.256,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.21452999,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.31947002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.31715,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.16902999999999999,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 3.274,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.20366,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.17520767835981302,
@@ -4999,10 +4999,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.25756704660313956,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.8193237892811871,
@@ -5011,19 +5011,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 2.0698556437531694,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 1.05,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 22,
+      "score": 3,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -5038,54 +5038,54 @@
     },
     "VIAV": {
       "symbol": "VIAV",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "VIAV",
-      "industry": "Communication Equipment",
-      "price": 27.229999542236328,
-      "day_pct": 1.490867013297481,
-      "market_cap": 6696459264,
+      "industry": null,
+      "price": 28.149999618530273,
+      "day_pct": 3.378626851854838,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.569,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.14883,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.03968,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.61948,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.52601,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.652,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.06542,
-          "color": "red",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.051841086478269904,
@@ -5094,10 +5094,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.09061297180907024,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 2.283582089552239,
@@ -5106,19 +5106,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.022847895278408432,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.58,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 13,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -5133,54 +5133,54 @@
     },
     "VRT": {
       "symbol": "VRT",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "VRT",
-      "industry": "Electrical Equipment & Parts",
-      "price": 173.3699951171875,
-      "day_pct": -0.2588955172414975,
-      "market_cap": 66757922816,
+      "industry": null,
+      "price": 178.7100067138672,
+      "day_pct": 3.080124443142629,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.612,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.21107,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.15995,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.38115,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.61012,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.392,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 0.46567002,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.2862768624878139,
@@ -5189,10 +5189,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.23742432673285876,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 1.4843660629170639,
@@ -5201,19 +5201,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.046649144680301735,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.53,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 21,
+      "score": 4,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
@@ -5228,54 +5228,54 @@
     },
     "WDC": {
       "symbol": "WDC",
-      "as_of": "2026-11-25",
+      "as_of": "2026-11-27",
       "name": "WDC",
-      "industry": "Computer Hardware",
-      "price": 272.45001220703125,
-      "day_pct": -0.5475451480784765,
-      "market_cap": 101984378880,
+      "industry": null,
+      "price": 292.1099853515625,
+      "day_pct": 7.215992755981926,
+      "market_cap": null,
       "lights": {
         "revenue_growth_yoy": {
-          "value": 0.555,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營收年增",
-          "source": "yf"
+          "source": null
         },
         "operating_margin": {
-          "value": 0.40884998,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "營業利益率",
-          "source": "yf"
+          "source": null
         },
         "net_margin": {
-          "value": 0.69196,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "淨利率",
-          "source": "yf"
+          "source": null
         },
         "gross_margin": {
-          "value": 0.52603,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "毛利率",
-          "source": "yf"
+          "source": null
         },
         "debt_to_equity": {
-          "value": 0.09863,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "負債/股東權益",
-          "source": "yf"
+          "source": null
         },
         "current_ratio": {
-          "value": 1.434,
-          "color": "yellow",
+          "value": null,
+          "color": "gray",
           "label": "流動比率",
-          "source": "yf"
+          "source": null
         },
         "roe": {
-          "value": 1.29596,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "ROE",
-          "source": "yf"
+          "source": null
         },
         "roic": {
           "value": 0.9785152189887013,
@@ -5284,10 +5284,10 @@
           "source": "yf"
         },
         "fcf_margin": {
-          "value": 0.29616075389508195,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF / 營收",
-          "source": "yf"
+          "source": null
         },
         "income_quality": {
           "value": 0.4334512379989894,
@@ -5296,19 +5296,19 @@
           "source": "yf"
         },
         "fcf_yield": {
-          "value": 0.042055460327376754,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "FCF 殖利率",
-          "source": "yf"
+          "source": null
         },
         "forward_peg": {
-          "value": 0.24,
-          "color": "green",
+          "value": null,
+          "color": "gray",
           "label": "Forward PEG",
-          "source": "yf"
+          "source": null
         }
       },
-      "score": 21,
+      "score": 2,
       "score_max": 24,
       "cross_check": [],
       "price_target": {
